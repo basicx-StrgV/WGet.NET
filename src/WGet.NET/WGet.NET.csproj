@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Company>-</Company>
+    <Authors>basicx-StrgV</Authors>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/basicx-StrgV/WGet.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/basicx-StrgV/WGet.NET</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>winget, dotnet, library</PackageTags>
+    <PackageReleaseNotes>Version 1.0</PackageReleaseNotes>
+    <Description>A .net library that allows you to use winget in your .net application</Description>
+    <Copyright>basicx-StrgV</Copyright>
+    <SignAssembly>false</SignAssembly>
+    <RootNamespace>WGetNET</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Bjarne\source\repos\WGet.NET\misc\WGet.NET.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\licenses\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WGet.NET</name>
+    </assembly>
+    <members>
+        <member name="T:WGetNET.WinGetConnector">
+            <summary>
+            The WinGetConnector class offers methods to use winget.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetConnector"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.SearchPackage(System.String)">
+            <summary>
+            Uses the winget search function to search for a package that maches the given name
+            </summary>
+            <param name="packageName">The name of the package that you want to search</param>
+            <returns>
+            A List of packages that mached the search criteria
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.SearchPackageAsync(System.String)">
+            <summary>
+            Uses the winget search function to search for a package that maches the given name
+            </summary>
+            <param name="packageName">The name of the package that you want to search</param>
+            <returns>
+            A Task object of the search task
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.InstallPackage(System.String)">
+            <summary>
+            Insatll a package using winget
+            </summary>
+            <param name="package">The id or name of the package that should be installed</param>
+            <returns>
+            True if the installation was successfull
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.InstallPackage(WGetNET.WinGetPackage)">
+            <summary>
+            Insatll a package using winget
+            </summary>
+            <param name="package">The package that should be installed</param>
+            <returns>
+            True if the installation was successfull
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.InstallPackageAsync(System.String)">
+            <summary>
+            Insatll a package using winget
+            </summary>
+            <param name="package">The id or name of the package that should be installed</param>
+            <returns>
+            A Task object of the install task
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.InstallPackageAsync(WGetNET.WinGetPackage)">
+            <summary>
+            Insatll a package using winget
+            </summary>
+            <param name="package">The package that should be installed</param>
+            <returns>
+            A Task object of the install task
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.UninstallPackage(System.String)">
+            <summary>
+            Uninsatll a package using winget
+            </summary>
+            <param name="package">The id or name of the package that should be uninstalled</param>
+            <returns>
+            True if the uninstallation was successfull
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.UninstallPackage(WGetNET.WinGetPackage)">
+            <summary>
+            Uninsatll a package using winget
+            </summary>
+            <param name="package">The package that should be uninstalled</param>
+            <returns>
+            True if the uninstallation was successfull
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.UninstallPackageAsync(System.String)">
+            <summary>
+            Uninsatll a package using winget
+            </summary>
+            <param name="package">The id or name of the package that should be uninstalled</param>
+            <returns>
+            A Task object of the uninstall task
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.UninstallPackageAsync(WGetNET.WinGetPackage)">
+            <summary>
+            Uninsatll a package using winget
+            </summary>
+            <param name="package">The package that should be uninstalled</param>
+            <returns>
+            A Task object of the uninstall task
+            </returns>
+        </member>
+        <member name="T:WGetNET.WinGetNotInstalledException">
+            <summary>
+            Exception that gets thrown if winget is not installed.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetNotInstalledException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="!:WinGetConnector.Exceptions.WinGetNotInstalledException"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetNotInstalledException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="!:WinGetConnector.Exceptions.WinGetNotInstalledException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+        </member>
+        <member name="M:WGetNET.WinGetNotInstalledException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="!:WinGetConnector.Exceptions.WinGetNotInstalledException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="T:WGetNET.WinGetPackage">
+            <summary>
+            Represents a winget package
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.PackageName">
+            <summary>
+            Name of the package
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.PackageId">
+            <summary>
+            Id of the package
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.PackageVersion">
+            <summary>
+            Version of the package
+            </summary>
+        </member>
+    </members>
+</doc>
