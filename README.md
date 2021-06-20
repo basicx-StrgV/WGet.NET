@@ -1,5 +1,8 @@
 # WGet.NET
 
+[![Version](https://img.shields.io/github/v/release/basicx-StrgV/WGet.NET)](https://github.com/basicx-StrgV/WGet.NET/releases)
+[![NuGet](https://img.shields.io/nuget/dt/WGet.NET)](https://www.nuget.org/packages/WGet.NET/)
+
 ## What is WGet.NET
 
 WGet.NET is a .net library that allows you to use WinGet in your .net application.
