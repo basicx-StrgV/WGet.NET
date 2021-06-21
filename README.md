@@ -16,6 +16,8 @@ Therefore the functions are limited at the moment.<br>
 - 🔎 Search packages
 - 💾 Install packages
 - ❌ Uninstall packages
+- 🖥 Check if WinGet is installed
+- 🏷 Get the WinGet version number
 - ⌛ Asynchronous execution
 
 ## NuGet Package
