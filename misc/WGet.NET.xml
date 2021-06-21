@@ -9,6 +9,22 @@
             The WinGetConnector class offers methods to use winget.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetConnector.WinGetInstalled">
+            <summary>
+            Gets if winget is installed on the system
+            </summary>
+            <returns>
+            true if winget is installed
+            </returns>
+        </member>
+        <member name="P:WGetNET.WinGetConnector.WinGetVersion">
+            <summary>
+            Gets the number of the installed winget version
+            </summary>
+            <returns>
+            The number of the installed winget version or a placeholder string if winget is not installed
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGetConnector.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetConnector"/> class.

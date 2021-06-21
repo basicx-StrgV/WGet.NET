@@ -15,12 +15,31 @@ namespace WGetNET
     /// </summary>
     public class WinGetConnector
     {
+        /// <summary>
+        /// Gets if winget is installed on the system
+        /// </summary>
+        /// <returns>
+        /// true if winget is installed
+        /// </returns>
+        public bool WinGetInstalled { get { return _winGetInstalled; } }
+
+        /// <summary>
+        /// Gets the number of the installed winget version
+        /// </summary>
+        /// <returns>
+        /// The number of the installed winget version or a placeholder string if winget is not installed
+        /// </returns>
+        public string WinGetVersion { get { return _winGetVersion; } }
+
         private static ProcessStartInfo _procStartInfo = new ProcessStartInfo()
         {
             WindowStyle = ProcessWindowStyle.Hidden,
             FileName = "winget",
             RedirectStandardOutput = true
         };
+
+        private bool _winGetInstalled;
+        private string _winGetVersion;
 
         private const string _searchCmd = "search {0}";
         private const string _installCmd = "install {0}";
@@ -31,7 +50,15 @@ namespace WGetNET
         /// </summary>
         public WinGetConnector()
         {
-
+            _winGetVersion = CheckWinGetVersion();
+            if (!_winGetVersion.Equals("[MISSING INSTALLATION]"))
+            {
+                _winGetInstalled = true;
+            }
+            else
+            {
+                _winGetInstalled = false;
+            }
         }
 
         /// <summary>
@@ -205,13 +232,14 @@ namespace WGetNET
                 procOutputStream.Dispose();
 
                 //Check if installation was succsessfull
-                bool installSuccessfull = false;
                 if(exitCode == 0)
                 {
-                    installSuccessfull = true;
+                    return true;
                 }
-                
-                return installSuccessfull;
+                else
+                {
+                    return false;
+                }
             }
             catch (System.ComponentModel.Win32Exception)
             {
@@ -263,13 +291,14 @@ namespace WGetNET
                 procOutputStream.Dispose();
 
                 //Check if installation was succsessfull
-                bool installSuccessfull = false;
                 if (exitCode == 0)
                 {
-                    installSuccessfull = true;
+                    return true;
                 }
-
-                return installSuccessfull;
+                else
+                {
+                    return false;
+                }
             }
             catch (System.ComponentModel.Win32Exception)
             {
@@ -348,14 +377,15 @@ namespace WGetNET
                 procOutputStream.Close();
                 procOutputStream.Dispose();
 
-                //Check if installation was succsessfull
-                bool uninstallSuccessfull = false;
+                //Check if uninstallation was succsessfull
                 if (exitCode == 0)
                 {
-                    uninstallSuccessfull = true;
+                    return true;
                 }
-
-                return uninstallSuccessfull;
+                else
+                {
+                    return false;
+                }
             }
             catch (System.ComponentModel.Win32Exception)
             {
@@ -406,14 +436,15 @@ namespace WGetNET
                 procOutputStream.Close();
                 procOutputStream.Dispose();
 
-                //Check if installation was succsessfull
-                bool uninstallSuccessfull = false;
+                //Check if uninstallation was succsessfull
                 if (exitCode == 0)
                 {
-                    uninstallSuccessfull = true;
+                    return true;
                 }
-
-                return uninstallSuccessfull;
+                else
+                {
+                    return false;
+                }
             }
             catch (System.ComponentModel.Win32Exception)
             {
@@ -452,6 +483,60 @@ namespace WGetNET
             await install;
             return install.Result;
         }
+    
+        private string CheckWinGetVersion()
+        {
+            try
+            {
+                //Set Arguments
+                _procStartInfo.Arguments = "-v";
 
+                //Output List
+                List<string> output = new List<string>();
+
+                //Create and run process
+                Process getVersionProc = new Process();
+                getVersionProc.StartInfo = _procStartInfo;
+                getVersionProc.Start();
+
+                //Read output to list
+                StreamReader procOutputStream = getVersionProc.StandardOutput;
+                while (!procOutputStream.EndOfStream)
+                {
+                    output.Add(procOutputStream.ReadLine());
+                }
+
+                //Wait till end and get exit code
+                getVersionProc.WaitForExit();
+                int exitCode = getVersionProc.ExitCode;
+
+                //Close and Dispose the process and output stream
+                getVersionProc.Close();
+                getVersionProc.Dispose();
+                procOutputStream.Close();
+                procOutputStream.Dispose();
+
+                //Check if the process was succsessfull
+                if (exitCode == 0)
+                {
+                    for (int i = 0; i < output.Count; i++)
+                    {
+                        if (output[i].StartsWith("v"))
+                        {
+                            return (output[i]);
+                        }
+                    }
+                    return ("[MISSING INSTALLATION]");
+                }
+                else
+                {
+                    return ("[MISSING INSTALLATION]");
+                }
+            }
+            catch (Exception)
+            {
+                return ("[MISSING INSTALLATION]");
+            }
+        }
     }
 }

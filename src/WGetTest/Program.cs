@@ -17,6 +17,7 @@ namespace WGetTest
         private void Run()
         {
             WinGetConnector connector = new WinGetConnector();
+            Console.WriteLine(connector.WinGetInstalled + " " + connector.WinGetVersion);
 
         }
     }

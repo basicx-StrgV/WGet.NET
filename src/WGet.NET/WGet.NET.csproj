@@ -9,11 +9,13 @@
     <RepositoryUrl>https://github.com/basicx-StrgV/WGet.NET</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>winget, dotnet, library</PackageTags>
-    <PackageReleaseNotes>Version 1.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Added a property to get the installation status
+Added a property to get the installed winget version</PackageReleaseNotes>
     <Description>A .net library that allows you to use winget in your .net application</Description>
     <Copyright>basicx-StrgV</Copyright>
     <SignAssembly>false</SignAssembly>
     <RootNamespace>WGetNET</RootNamespace>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
