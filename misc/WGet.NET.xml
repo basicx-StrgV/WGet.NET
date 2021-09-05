@@ -52,7 +52,7 @@
             <summary>
             Insatll a package using winget
             </summary>
-            <param name="package">The id or name of the package that should be installed</param>
+            <param name="packageId">The id or name of the package that should be installed</param>
             <returns>
             True if the installation was successfull
             </returns>
@@ -70,7 +70,7 @@
             <summary>
             Insatll a package using winget
             </summary>
-            <param name="package">The id or name of the package that should be installed</param>
+            <param name="packageId">The id or name of the package that should be installed</param>
             <returns>
             A Task object of the install task
             </returns>
@@ -88,7 +88,7 @@
             <summary>
             Uninsatll a package using winget
             </summary>
-            <param name="package">The id or name of the package that should be uninstalled</param>
+            <param name="packageId">The id or name of the package that should be uninstalled</param>
             <returns>
             True if the uninstallation was successfull
             </returns>
@@ -106,7 +106,7 @@
             <summary>
             Uninsatll a package using winget
             </summary>
-            <param name="package">The id or name of the package that should be uninstalled</param>
+            <param name="packageId">The id or name of the package that should be uninstalled</param>
             <returns>
             A Task object of the uninstall task
             </returns>
@@ -120,25 +120,82 @@
             A Task object of the uninstall task
             </returns>
         </member>
+        <member name="M:WGetNET.WinGetConnector.GetUpgradeablePackages">
+            <summary>
+            Uses the winget upgrade function to get all upgradeable packages
+            </summary>
+            <returns>
+            A List of upgradeable packages
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.GetUpgradeablePackagesAsync">
+            <summary>
+            Uses the winget upgrade function to get all upgradeable packages
+            </summary>
+            <returns>
+            A List of upgradeable packages
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.UpgradePackage(System.String)">
+            <summary>
+            Upgrades a package using winget
+            </summary>
+            <param name="packageId">The id or name of the package that should be upgradet</param>
+            <returns>
+            True if the upgrade was successfull
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.UpgradePackage(WGetNET.WinGetPackage)">
+            <summary>
+            Upgrades a package using winget
+            </summary>
+            <param name="package">The package that should be upgradet</param>
+            <returns>
+            True if the upgrade was successfull
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.UpgradePackageAsync(System.String)">
+            <summary>
+            Upgrades a package using winget
+            </summary>
+            <param name="packageId">The id or name of the package that should be upgradet</param>
+            <returns>
+            True if the upgrade was successfull
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetConnector.UpgradePackageAsync(WGetNET.WinGetPackage)">
+            <summary>
+            Upgrades a package using winget
+            </summary>
+            <param name="package">The package that should be upgradet</param>
+            <returns>
+            True if the upgrade was successfull
+            </returns>
+        </member>
         <member name="T:WGetNET.WinGetNotInstalledException">
             <summary>
             Exception that gets thrown if winget is not installed.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetNotInstalledException.Message">
+            <summary>
+            Gets a message that describes the current exception.
+            </summary>
+        </member>
         <member name="M:WGetNET.WinGetNotInstalledException.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="!:WinGetConnector.Exceptions.WinGetNotInstalledException"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetNotInstalledException"/> class.
             </summary>
         </member>
         <member name="M:WGetNET.WinGetNotInstalledException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="!:WinGetConnector.Exceptions.WinGetNotInstalledException"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetNotInstalledException"/> class.
             </summary>
             <param name="message">Message of the exception</param>
         </member>
         <member name="M:WGetNET.WinGetNotInstalledException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="!:WinGetConnector.Exceptions.WinGetNotInstalledException"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetNotInstalledException"/> class.
             </summary>
             <param name="message">Message of the exception</param>
             <param name="innerException">The inner exception</param>
