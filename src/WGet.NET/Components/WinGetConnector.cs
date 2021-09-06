@@ -41,6 +41,7 @@ namespace WGetNET
         private readonly bool _winGetInstalled;
         private readonly string _winGetVersion;
 
+        private const string _listCmd = "list";
         private const string _searchCmd = "search {0}";
         private const string _installCmd = "install {0}";
         private const string _upgradeCmd = "upgrade {0}";
@@ -647,6 +648,68 @@ namespace WGetNET
         //---------------------------------------------------------------------------------------------
 
         //---Winget------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a list of all installed packages
+        /// </summary>
+        /// <returns>
+        /// A List of packages that are installed on the system
+        /// </returns>
+        public List<WinGetPackage> GetInstalledPackages()
+        {
+            try
+            {
+                //Set Arguments
+                _procStartInfo.Arguments = _listCmd;
+
+                //Output List
+                List<string> output = new List<string>();
+
+                //Create and run process
+                Process searchProc = new Process()
+                {
+                    StartInfo = _procStartInfo
+                };
+                searchProc.Start();
+
+                //Read output to list
+                StreamReader procOutputStream = searchProc.StandardOutput;
+                while (!procOutputStream.EndOfStream)
+                {
+                    output.Add(procOutputStream.ReadLine());
+                }
+
+                //Wait till end and close process
+                searchProc.WaitForExit();
+                searchProc.Close();
+                searchProc.Dispose();
+                procOutputStream.Close();
+                procOutputStream.Dispose();
+
+                return ToPackageList(output);
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception)
+            {
+                return new List<WinGetPackage>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets a list of all installed packages
+        /// </summary>
+        /// <returns>
+        /// A List of packages that are installed on the system
+        /// </returns>
+        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync()
+        {
+            Task<List<WinGetPackage>> list = Task.Run(() => GetInstalledPackages());
+            await list;
+            return list.Result;
+        }
+
         private string CheckWinGetVersion()
         {
             try
