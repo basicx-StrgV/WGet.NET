@@ -5,14 +5,15 @@
 
 ## ❓ What is WGet.NET
 
-WGet.NET is a .net library that allows you to use WinGet in your .net application.
+WGet.NET is a WinGet wrapper library for .Net.
 
 I created it for another project and then made a library out of it in hope it might be usefull to someone else too.<br>
 Therefore the functions are limited at the moment.<br>
-**If you tried this library, give me some feedback. And if you miss a feature, create an issue to let me know.**
+**If you tried this library, please give me some feedback. And if you miss a feature, you can create an issue to let me know.**
 
 ## ⚡ Features
 
+- Get a list of installed packages
 - Search packages
 - Install packages
 - Uninstall packages
