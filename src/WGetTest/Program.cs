@@ -18,8 +18,10 @@ namespace WGetTest
         private void Run()
         {
             WinGetConnector connector = new WinGetConnector();
-            Console.WriteLine(connector.WinGetInstalled + " " + connector.WinGetVersion);
+            Console.WriteLine("Winget Installed: " + connector.WinGetInstalled + 
+                                "\nWinget Version: " + connector.WinGetVersion + "\n");
 
+            //---Tests-----------------------------------------------------------------------------
             List<WinGetPackage> test = connector.SearchPackage("Git");
             Console.WriteLine(test[12].PackageName);
         }
