@@ -46,6 +46,8 @@ namespace WGetNET
         private const string _installCmd = "install {0}";
         private const string _upgradeCmd = "upgrade {0}";
         private const string _uninstallCmd = "uninstall {0}";
+        private const string _exportCmd = "export -o {0}";
+        private const string _importCmd = "import -i {0} --ignore-unavailable";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetConnector"/> class.
@@ -708,6 +710,158 @@ namespace WGetNET
             Task<List<WinGetPackage>> list = Task.Run(() => GetInstalledPackages());
             await list;
             return list.Result;
+        }
+
+        /// <summary>
+        /// Exports a list of all installed winget packages as json to the given file
+        /// </summary>
+        /// <param name="file">The file for the export</param>
+        /// <returns>
+        /// True if the export was successfull
+        /// </returns>
+        public bool ExportPackageList(string file)
+        {
+            try
+            {
+                //Set Arguments
+                _procStartInfo.Arguments = String.Format(_exportCmd, file);
+
+                //Output List
+                List<string> output = new List<string>();
+
+                //Create and run process
+                Process installProc = new Process
+                {
+                    StartInfo = _procStartInfo
+                };
+                installProc.Start();
+
+                //Read output to list
+                StreamReader procOutputStream = installProc.StandardOutput;
+                while (!procOutputStream.EndOfStream)
+                {
+                    output.Add(procOutputStream.ReadLine());
+                }
+
+                //Wait till end and get exit code
+                installProc.WaitForExit();
+                int exitCode = installProc.ExitCode;
+
+                //Close and Dispose the process and output stream
+                installProc.Close();
+                installProc.Dispose();
+                procOutputStream.Close();
+                procOutputStream.Dispose();
+
+                //Check if installation was succsessfull
+                if (exitCode == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Exports a list of all installed winget packages as json to the given file
+        /// </summary>
+        /// <param name="file">The file for the export</param>
+        /// <returns>
+        /// True if the export was successfull
+        /// </returns>
+        public async Task<bool> ExportPackageListAsync(string file)
+        {
+            Task<bool> export = Task.Run(() => ExportPackageList(file));
+            await export;
+            return export.Result;
+        }
+
+        /// <summary>
+        /// Imports packages and trys to installes/upgrade all pakages in the list, if possible.
+        /// This may take some time and winget might not install/upgrade all packages.
+        /// </summary>
+        /// <param name="file">The file with the package data for the import</param>
+        /// <returns>
+        /// True if the import was compleatly successfull or False if some or all packages failed to install.
+        /// </returns>
+        public bool ImportPackages(string file)
+        {
+            try
+            {
+                //Set Arguments
+                _procStartInfo.Arguments = String.Format(_importCmd, file);
+
+                //Output List
+                List<string> output = new List<string>();
+
+                //Create and run process
+                Process installProc = new Process
+                {
+                    StartInfo = _procStartInfo
+                };
+                installProc.Start();
+
+                //Read output to list
+                StreamReader procOutputStream = installProc.StandardOutput;
+                while (!procOutputStream.EndOfStream)
+                {
+                    output.Add(procOutputStream.ReadLine());
+                }
+
+                //Wait till end and get exit code
+                installProc.WaitForExit();
+                int exitCode = installProc.ExitCode;
+
+                //Close and Dispose the process and output stream
+                installProc.Close();
+                installProc.Dispose();
+                procOutputStream.Close();
+                procOutputStream.Dispose();
+
+                //Check if installation was succsessfull
+                if (exitCode == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Imports packages and installes/updates all pakages, if possible.
+        /// This may take some time.
+        /// </summary>
+        /// <param name="file">The file with the package data for the import</param>
+        /// <returns>
+        /// True if the import was compleatly successfull or False if some or all packages failed to install.
+        /// </returns>
+        public async Task<bool> ImportPackagesAsync(string file)
+        {
+            Task<bool> import = Task.Run(() => ImportPackages(file));
+            await import;
+            return import.Result;
         }
 
         private string CheckWinGetVersion()

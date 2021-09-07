@@ -9,12 +9,14 @@
     <RepositoryUrl>https://github.com/basicx-StrgV/WGet.NET</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>winget, dotnet, library</PackageTags>
-    <PackageReleaseNotes>Added support for package upgrades</PackageReleaseNotes>
-    <Description>A .net library that allows you to use winget in your .net application</Description>
+    <PackageReleaseNotes>Added the option to get a list of all installed packages
+Added the option to export all installed packages
+Added the option to import a exportet package list</PackageReleaseNotes>
+    <Description>A winget wrapper library for .Net</Description>
     <Copyright>basicx-StrgV</Copyright>
     <SignAssembly>false</SignAssembly>
     <RootNamespace>WGetNET</RootNamespace>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

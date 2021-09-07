@@ -19,6 +19,7 @@ Therefore the functions are limited at the moment.<br>
 - Uninstall packages
 - Upgrade packages
 - Get a list of upgradeable packages
+- Export and Import packages
 - Check if WinGet is installed
 - Get the WinGet version number
 - Asynchronous execution
