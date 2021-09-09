@@ -3,6 +3,10 @@
 [![Version](https://img.shields.io/github/v/release/basicx-StrgV/WGet.NET?label=Version)](https://github.com/basicx-StrgV/WGet.NET/releases)
 [![NuGet](https://img.shields.io/nuget/dt/WGet.NET?label=NuGet%20Downloads)](https://www.nuget.org/packages/WGet.NET/)
 
+| Main    | Develop |
+| ------- | ------- |
+[![CodeQL_main](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/basicx-StrgV/BasicxLogger/actions/workflows/codeql-analysis.yml) |  [![CodeQL_develop](https://github.com/basicx-StrgV/BasicxLogger/actions/workflows/codeql-analysis.yml/badge.svg?branch=develop)](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml) |
+
 ## ❓ What is WGet.NET
 
 WGet.NET is a WinGet wrapper library for .Net.
