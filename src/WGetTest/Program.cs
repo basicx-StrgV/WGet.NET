@@ -17,16 +17,19 @@ namespace WGetTest
     
         private void Run()
         {
-            WinGetConnector connector = new WinGetConnector();
-            Console.WriteLine("Winget Installed: " + connector.WinGetInstalled + 
-                                "\nWinget Version: " + connector.WinGetVersion + "\n");
-
+            WinGetPackageManager connector = new WinGetPackageManager();
+            WinGetSourceManager sourceManager = new WinGetSourceManager();
+            WinGetInfo info = new WinGetInfo();
+            Console.WriteLine("Winget Installed: " + info.WinGetInstalled + 
+                                "\nWinget Version: " + info.WinGetVersion + "\n");
+            
             //---Tests-----------------------------------------------------------------------------
             List<WinGetPackage> test = connector.SearchPackage("Git");
-            Console.WriteLine(test[12].PackageName);
+            Console.WriteLine(test[49].PackageName);
+            Console.WriteLine(test[49].PackageId);
 
-            bool test2 = connector.ImportPackages("C:\\Users\\Bjarne\\Downloads\\Test.json");
-            Console.WriteLine(test2);
+            List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
+            bool sourceUpdateStatus = sourceManager.UpdateSources();
         }
     }
 }

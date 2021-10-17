@@ -4,12 +4,12 @@
         <name>WGet.NET</name>
     </assembly>
     <members>
-        <member name="T:WGetNET.WinGetConnector">
+        <member name="T:WGetNET.WinGetInfo">
             <summary>
-            The WinGetConnector class offers methods to use winget.
+            The <see cref="T:WGetNET.WinGetInfo"/> class offers informations about the installed winget version.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetConnector.WinGetInstalled">
+        <member name="P:WGetNET.WinGetInfo.WinGetInstalled">
             <summary>
             Gets if winget is installed on the system
             </summary>
@@ -17,7 +17,7 @@
             true if winget is installed
             </returns>
         </member>
-        <member name="P:WGetNET.WinGetConnector.WinGetVersion">
+        <member name="P:WGetNET.WinGetInfo.WinGetVersion">
             <summary>
             Gets the number of the installed winget version
             </summary>
@@ -25,12 +25,22 @@
             The number of the installed winget version or a placeholder string if winget is not installed
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.#ctor">
+        <member name="M:WGetNET.WinGetInfo.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetConnector"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetConnector.SearchPackage(System.String)">
+        <member name="T:WGetNET.WinGetPackageManager">
+            <summary>
+            The <see cref="T:WGetNET.WinGetPackageManager"/> class offers methods to manage packages with winget.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetPackageManager"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.SearchPackage(System.String)">
             <summary>
             Uses the winget search function to search for a package that maches the given name
             </summary>
@@ -39,7 +49,7 @@
             A List of packages that mached the search criteria
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.SearchPackageAsync(System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.SearchPackageAsync(System.String)">
             <summary>
             Uses the winget search function to search for a package that maches the given name
             </summary>
@@ -48,7 +58,23 @@
             A Task object of the search task
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.InstallPackage(System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages">
+            <summary>
+            Gets a list of all installed packages
+            </summary>
+            <returns>
+            A List of packages that are installed on the system
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync">
+            <summary>
+            Gets a list of all installed packages
+            </summary>
+            <returns>
+            A List of packages that are installed on the system
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackage(System.String)">
             <summary>
             Insatll a package using winget
             </summary>
@@ -57,7 +83,7 @@
             True if the installation was successfull
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.InstallPackage(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage)">
             <summary>
             Insatll a package using winget
             </summary>
@@ -66,7 +92,7 @@
             True if the installation was successfull
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.InstallPackageAsync(System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(System.String)">
             <summary>
             Insatll a package using winget
             </summary>
@@ -75,7 +101,7 @@
             A Task object of the install task
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.InstallPackageAsync(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage)">
             <summary>
             Insatll a package using winget
             </summary>
@@ -84,7 +110,7 @@
             A Task object of the install task
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.UninstallPackage(System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(System.String)">
             <summary>
             Uninsatll a package using winget
             </summary>
@@ -93,7 +119,7 @@
             True if the uninstallation was successfull
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.UninstallPackage(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.WinGetPackage)">
             <summary>
             Uninsatll a package using winget
             </summary>
@@ -102,7 +128,7 @@
             True if the uninstallation was successfull
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.UninstallPackageAsync(System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(System.String)">
             <summary>
             Uninsatll a package using winget
             </summary>
@@ -111,7 +137,7 @@
             A Task object of the uninstall task
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.UninstallPackageAsync(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.WinGetPackage)">
             <summary>
             Uninsatll a package using winget
             </summary>
@@ -120,7 +146,7 @@
             A Task object of the uninstall task
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.GetUpgradeablePackages">
+        <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackages">
             <summary>
             Uses the winget upgrade function to get all upgradeable packages
             </summary>
@@ -128,7 +154,7 @@
             A List of upgradeable packages
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.GetUpgradeablePackagesAsync">
+        <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackagesAsync">
             <summary>
             Uses the winget upgrade function to get all upgradeable packages
             </summary>
@@ -136,7 +162,7 @@
             A List of upgradeable packages
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.UpgradePackage(System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(System.String)">
             <summary>
             Upgrades a package using winget
             </summary>
@@ -145,7 +171,7 @@
             True if the upgrade was successfull
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.UpgradePackage(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(WGetNET.WinGetPackage)">
             <summary>
             Upgrades a package using winget
             </summary>
@@ -154,7 +180,7 @@
             True if the upgrade was successfull
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.UpgradePackageAsync(System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(System.String)">
             <summary>
             Upgrades a package using winget
             </summary>
@@ -163,13 +189,85 @@
             True if the upgrade was successfull
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetConnector.UpgradePackageAsync(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.WinGetPackage)">
             <summary>
             Upgrades a package using winget
             </summary>
             <param name="package">The package that should be upgradet</param>
             <returns>
             True if the upgrade was successfull
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.ExportPackageList(System.String)">
+            <summary>
+            Exports a list of all installed winget packages as json to the given file
+            </summary>
+            <param name="file">The file for the export</param>
+            <returns>
+            True if the export was successfull
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.ExportPackageListAsync(System.String)">
+            <summary>
+            Exports a list of all installed winget packages as json to the given file
+            </summary>
+            <param name="file">The file for the export</param>
+            <returns>
+            True if the export was successfull
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.ImportPackages(System.String)">
+            <summary>
+            Imports packages and trys to installes/upgrade all pakages in the list, if possible.
+            This may take some time and winget might not install/upgrade all packages.
+            </summary>
+            <param name="file">The file with the package data for the import</param>
+            <returns>
+            True if the import was compleatly successfull or False if some or all packages failed to install.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.ImportPackagesAsync(System.String)">
+            <summary>
+            Imports packages and installes/updates all pakages, if possible.
+            This may take some time.
+            </summary>
+            <param name="file">The file with the package data for the import</param>
+            <returns>
+            True if the import was compleatly successfull or False if some or all packages failed to install.
+            </returns>
+        </member>
+        <member name="T:WGetNET.WinGetSourceManager">
+            <summary>
+            The <see cref="T:WGetNET.WinGetSourceManager"/> class offers methods to manage the sources used by winget.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetSourceManager"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.GetInstalledSources">
+            <summary>
+            Gets a list of all installed sources
+            </summary>
+            <returns>
+            A List of sources that are used by winget
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.GetInstalledSourcesAsync">
+            <summary>
+            Gets a list of all installed sources
+            </summary>
+            <returns>
+            A List of sources that are used by winget
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.UpdateSources">
+            <summary>
+            Updates all installed winget sources
+            </summary>
+            <returns>
+            True if the action was successfull
             </returns>
         </member>
         <member name="T:WGetNET.WinGetNotInstalledException">
@@ -218,6 +316,21 @@
         <member name="P:WGetNET.WinGetPackage.PackageVersion">
             <summary>
             Version of the package
+            </summary>
+        </member>
+        <member name="T:WGetNET.WinGetSource">
+            <summary>
+            Represents a winget source
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.SourceName">
+            <summary>
+            Name of the source
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.SourceUrl">
+            <summary>
+            Url of the source
             </summary>
         </member>
     </members>

@@ -5,64 +5,22 @@
 using System;
 using System.IO;
 using System.Diagnostics;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace WGetNET
 {
     /// <summary>
-    /// The WinGetConnector class offers methods to use winget.
+    /// The <see cref="WGetNET.WinGetPackageManager"/> class offers methods to manage packages with winget.
     /// </summary>
-    public class WinGetConnector
+    public class WinGetPackageManager
     {
         /// <summary>
-        /// Gets if winget is installed on the system
+        /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
         /// </summary>
-        /// <returns>
-        /// true if winget is installed
-        /// </returns>
-        public bool WinGetInstalled { get { return _winGetInstalled; } }
-
-        /// <summary>
-        /// Gets the number of the installed winget version
-        /// </summary>
-        /// <returns>
-        /// The number of the installed winget version or a placeholder string if winget is not installed
-        /// </returns>
-        public string WinGetVersion { get { return _winGetVersion; } }
-
-        private static readonly ProcessStartInfo _procStartInfo = new ProcessStartInfo()
+        public WinGetPackageManager()
         {
-            WindowStyle = ProcessWindowStyle.Hidden,
-            FileName = "winget",
-            RedirectStandardOutput = true
-        };
-
-        private readonly bool _winGetInstalled;
-        private readonly string _winGetVersion;
-
-        private const string _listCmd = "list";
-        private const string _searchCmd = "search {0}";
-        private const string _installCmd = "install {0}";
-        private const string _upgradeCmd = "upgrade {0}";
-        private const string _uninstallCmd = "uninstall {0}";
-        private const string _exportCmd = "export -o {0}";
-        private const string _importCmd = "import -i {0} --ignore-unavailable";
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetConnector"/> class.
-        /// </summary>
-        public WinGetConnector()
-        {
-            _winGetVersion = CheckWinGetVersion();
-            if (!_winGetVersion.Equals("[MISSING INSTALLATION]"))
-            {
-                _winGetInstalled = true;
-            }
-            else
-            {
-                _winGetInstalled = false;
-            }
         }
 
         //---Search------------------------------------------------------------------------------------
@@ -78,35 +36,29 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _procStartInfo.Arguments = String.Format(_searchCmd, packageName);
+                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.SearchCmd, packageName);
 
                 //Output List
                 List<string> output = new List<string>();
 
                 //Create and run process
-                Process searchProc= new Process() 
+                using (Process searchProc = new Process() { StartInfo = ExecutionInfo.WinGetStartInfo })
                 {
-                    StartInfo = _procStartInfo
-                };
-                searchProc.Start();
+                    searchProc.Start();
 
-                //Read output to list
-                StreamReader procOutputStream = searchProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
+                    //Read output to list
+                    using StreamReader procOutputStream = searchProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    searchProc.WaitForExit();
                 }
-
-                //Wait till end and close process
-                searchProc.WaitForExit();
-                searchProc.Close();
-                searchProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
 
                 return ToPackageList(output);
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
@@ -133,6 +85,62 @@ namespace WGetNET
 
         //---Install-----------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a list of all installed packages
+        /// </summary>
+        /// <returns>
+        /// A List of packages that are installed on the system
+        /// </returns>
+        public List<WinGetPackage> GetInstalledPackages()
+        {
+            try
+            {
+                //Set Arguments
+                ExecutionInfo.WinGetStartInfo.Arguments = ExecutionInfo.ListCmd;
+
+                //Output List
+                List<string> output = new List<string>();
+
+                //Create and run process
+                using (Process searchProc = new Process() { StartInfo = ExecutionInfo.WinGetStartInfo })
+                {
+                    searchProc.Start();
+
+                    //Read output to list
+                    using StreamReader procOutputStream = searchProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    searchProc.WaitForExit();
+                }
+
+                return ToPackageList(output);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception)
+            {
+                return new List<WinGetPackage>();
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of all installed packages
+        /// </summary>
+        /// <returns>
+        /// A List of packages that are installed on the system
+        /// </returns>
+        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync()
+        {
+            Task<List<WinGetPackage>> list = Task.Run(() => GetInstalledPackages());
+            await list;
+            return list.Result;
+        }
+
+        /// <summary>
         /// Insatll a package using winget
         /// </summary>
         /// <param name="packageId">The id or name of the package that should be installed</param>
@@ -144,37 +152,32 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _procStartInfo.Arguments = String.Format(_installCmd, packageId);
+                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.InstallCmd, packageId);
 
                 //Output List
                 List<string> output = new List<string>();
 
-                //Create and run process
-                Process installProc = new Process
-                {
-                    StartInfo = _procStartInfo
-                };
-                installProc.Start();
+                int exitCode = -1;
 
-                //Read output to list
-                StreamReader procOutputStream = installProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
+                //Create and run process
+                using (Process installProc = new Process{ StartInfo = ExecutionInfo.WinGetStartInfo }) 
                 {
-                    output.Add(procOutputStream.ReadLine());
+                    installProc.Start();
+
+                    //Read output to list
+                    using StreamReader procOutputStream = installProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    //Wait till end and get exit code
+                    installProc.WaitForExit();
+                    exitCode = installProc.ExitCode;
                 }
 
-                //Wait till end and get exit code
-                installProc.WaitForExit();
-                int exitCode = installProc.ExitCode;
-
-                //Close and Dispose the process and output stream
-                installProc.Close();
-                installProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
-
                 //Check if installation was succsessfull
-                if(exitCode == 0)
+                if (exitCode == 0)
                 {
                     return true;
                 }
@@ -183,7 +186,7 @@ namespace WGetNET
                     return false;
                 }
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
@@ -205,34 +208,29 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _procStartInfo.Arguments = String.Format(_installCmd, package.PackageId);
+                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.InstallCmd, package.PackageId);
 
                 //Output List
                 List<string> output = new List<string>();
 
+                int exitCode = -1;
+
                 //Create and run process
-                Process installProc = new Process
-                {
-                    StartInfo = _procStartInfo
-                };
-                installProc.Start();
+                using (Process installProc = new Process{ StartInfo = ExecutionInfo.WinGetStartInfo }) 
+                { 
+                    installProc.Start();
 
-                //Read output to list
-                StreamReader procOutputStream = installProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
+                    //Read output to list
+                    using StreamReader procOutputStream = installProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    //Wait till end and get exit code
+                    installProc.WaitForExit();
+                    exitCode = installProc.ExitCode;
                 }
-
-                //Wait till end and get exit code
-                installProc.WaitForExit();
-                int exitCode = installProc.ExitCode;
-
-                //Close and Dispose the process and output stream
-                installProc.Close();
-                installProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
 
                 //Check if installation was succsessfull
                 if (exitCode == 0)
@@ -244,7 +242,7 @@ namespace WGetNET
                     return false;
                 }
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
@@ -296,34 +294,29 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _procStartInfo.Arguments = String.Format(_uninstallCmd, packageId);
+                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.UninstallCmd, packageId);
 
                 //Output List
                 List<string> output = new List<string>();
 
+                int exitCode = -1;
+
                 //Create and run process
-                Process uninstallProc = new Process
+                using (Process uninstallProc = new Process{ StartInfo = ExecutionInfo.WinGetStartInfo })
                 {
-                    StartInfo = _procStartInfo
-                };
-                uninstallProc.Start();
+                    uninstallProc.Start();
 
-                //Read output to list
-                StreamReader procOutputStream = uninstallProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
+                    //Read output to list
+                    using StreamReader procOutputStream = uninstallProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    //Wait till end and get exit code
+                    uninstallProc.WaitForExit();
+                    exitCode = uninstallProc.ExitCode;
                 }
-
-                //Wait till end and get exit code
-                uninstallProc.WaitForExit();
-                int exitCode = uninstallProc.ExitCode;
-
-                //Close and Dispose the process and output stream
-                uninstallProc.Close();
-                uninstallProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
 
                 //Check if uninstallation was succsessfull
                 if (exitCode == 0)
@@ -335,7 +328,7 @@ namespace WGetNET
                     return false;
                 }
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
@@ -357,34 +350,29 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _procStartInfo.Arguments = String.Format(_uninstallCmd, package.PackageId);
+                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.UninstallCmd, package.PackageId);
 
                 //Output List
                 List<string> output = new List<string>();
 
+                int exitCode = -1;
+
                 //Create and run process
-                Process uninstallProc = new Process
+                using (Process uninstallProc = new Process{ StartInfo = ExecutionInfo.WinGetStartInfo }) 
                 {
-                    StartInfo = _procStartInfo
-                };
-                uninstallProc.Start();
+                    uninstallProc.Start();
 
-                //Read output to list
-                StreamReader procOutputStream = uninstallProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
+                    //Read output to list
+                    using StreamReader procOutputStream = uninstallProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    //Wait till end and get exit code
+                    uninstallProc.WaitForExit();
+                    exitCode = uninstallProc.ExitCode;
                 }
-
-                //Wait till end and get exit code
-                uninstallProc.WaitForExit();
-                int exitCode = uninstallProc.ExitCode;
-
-                //Close and Dispose the process and output stream
-                uninstallProc.Close();
-                uninstallProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
 
                 //Check if uninstallation was succsessfull
                 if (exitCode == 0)
@@ -396,7 +384,7 @@ namespace WGetNET
                     return false;
                 }
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
@@ -447,35 +435,28 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _procStartInfo.Arguments = "upgrade";
+                ExecutionInfo.WinGetStartInfo.Arguments = ExecutionInfo.GetUpgradeableCmd;
 
                 //Output List
                 List<string> output = new List<string>();
 
                 //Create and run process
-                Process searchProc = new Process
+                using (Process searchProc = new Process { StartInfo = ExecutionInfo.WinGetStartInfo })
                 {
-                    StartInfo = _procStartInfo
-                };
-                searchProc.Start();
+                    searchProc.Start();
 
-                //Read output to list
-                StreamReader procOutputStream = searchProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
+                    //Read output to list
+                    using StreamReader procOutputStream = searchProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    searchProc.WaitForExit();
                 }
-
-                //Wait till end and close process
-                searchProc.WaitForExit();
-                searchProc.Close();
-                searchProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
-
                 return ToPackageList(output);
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
@@ -510,34 +491,29 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _procStartInfo.Arguments = String.Format(_upgradeCmd, packageId);
+                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.UpgradeCmd, packageId);
 
                 //Output List
                 List<string> output = new List<string>();
 
+                int exitCode = -1;
+
                 //Create and run process
-                Process installProc = new Process
+                using (Process installProc = new Process { StartInfo = ExecutionInfo.WinGetStartInfo })
                 {
-                    StartInfo = _procStartInfo
-                };
-                installProc.Start();
+                    installProc.Start();
 
-                //Read output to list
-                StreamReader procOutputStream = installProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
+                    //Read output to list
+                    using StreamReader procOutputStream = installProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    //Wait till end and get exit code
+                    installProc.WaitForExit();
+                    exitCode = installProc.ExitCode;
                 }
-
-                //Wait till end and get exit code
-                installProc.WaitForExit();
-                int exitCode = installProc.ExitCode;
-
-                //Close and Dispose the process and output stream
-                installProc.Close();
-                installProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
 
                 //Check if installation was succsessfull
                 if (exitCode == 0)
@@ -549,7 +525,7 @@ namespace WGetNET
                     return false;
                 }
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
@@ -571,34 +547,29 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _procStartInfo.Arguments = String.Format(_upgradeCmd, package.PackageId);
+                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.UpgradeCmd, package.PackageId);
 
                 //Output List
                 List<string> output = new List<string>();
 
+                int exitCode = -1;
+
                 //Create and run process
-                Process installProc = new Process
+                using (Process installProc = new Process { StartInfo = ExecutionInfo.WinGetStartInfo })
                 {
-                    StartInfo = _procStartInfo
-                };
-                installProc.Start();
+                    installProc.Start();
 
-                //Read output to list
-                StreamReader procOutputStream = installProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
+                    //Read output to list
+                    using StreamReader procOutputStream = installProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    //Wait till end and get exit code
+                    installProc.WaitForExit();
+                    exitCode = installProc.ExitCode;
                 }
-
-                //Wait till end and get exit code
-                installProc.WaitForExit();
-                int exitCode = installProc.ExitCode;
-
-                //Close and Dispose the process and output stream
-                installProc.Close();
-                installProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
 
                 //Check if installation was succsessfull
                 if (exitCode == 0)
@@ -610,7 +581,7 @@ namespace WGetNET
                     return false;
                 }
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
@@ -649,69 +620,7 @@ namespace WGetNET
         }
         //---------------------------------------------------------------------------------------------
 
-        //---Winget------------------------------------------------------------------------------------
-        /// <summary>
-        /// Gets a list of all installed packages
-        /// </summary>
-        /// <returns>
-        /// A List of packages that are installed on the system
-        /// </returns>
-        public List<WinGetPackage> GetInstalledPackages()
-        {
-            try
-            {
-                //Set Arguments
-                _procStartInfo.Arguments = _listCmd;
-
-                //Output List
-                List<string> output = new List<string>();
-
-                //Create and run process
-                Process searchProc = new Process()
-                {
-                    StartInfo = _procStartInfo
-                };
-                searchProc.Start();
-
-                //Read output to list
-                StreamReader procOutputStream = searchProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
-                }
-
-                //Wait till end and close process
-                searchProc.WaitForExit();
-                searchProc.Close();
-                searchProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
-
-                return ToPackageList(output);
-            }
-            catch (System.ComponentModel.Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception)
-            {
-                return new List<WinGetPackage>();
-            }
-        }
-        
-        /// <summary>
-        /// Gets a list of all installed packages
-        /// </summary>
-        /// <returns>
-        /// A List of packages that are installed on the system
-        /// </returns>
-        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync()
-        {
-            Task<List<WinGetPackage>> list = Task.Run(() => GetInstalledPackages());
-            await list;
-            return list.Result;
-        }
-
+        //---Other------------------------------------------------------------------------------------
         /// <summary>
         /// Exports a list of all installed winget packages as json to the given file
         /// </summary>
@@ -724,34 +633,29 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _procStartInfo.Arguments = String.Format(_exportCmd, file);
+                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.ExportCmd, file);
 
                 //Output List
                 List<string> output = new List<string>();
 
+                int exitCode = -1;
+
                 //Create and run process
-                Process installProc = new Process
+                using (Process installProc = new Process() { StartInfo = ExecutionInfo.WinGetStartInfo })
                 {
-                    StartInfo = _procStartInfo
-                };
-                installProc.Start();
+                    installProc.Start();
 
-                //Read output to list
-                StreamReader procOutputStream = installProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
+                    //Read output to list
+                    using StreamReader procOutputStream = installProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    //Wait till end and get exit code
+                    installProc.WaitForExit();
+                    exitCode = installProc.ExitCode;
                 }
-
-                //Wait till end and get exit code
-                installProc.WaitForExit();
-                int exitCode = installProc.ExitCode;
-
-                //Close and Dispose the process and output stream
-                installProc.Close();
-                installProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
 
                 //Check if installation was succsessfull
                 if (exitCode == 0)
@@ -763,7 +667,7 @@ namespace WGetNET
                     return false;
                 }
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
@@ -800,34 +704,29 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _procStartInfo.Arguments = String.Format(_importCmd, file);
+                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.ImportCmd, file);
 
                 //Output List
                 List<string> output = new List<string>();
 
+                int exitCode = -1;
+
                 //Create and run process
-                Process installProc = new Process
+                using (Process installProc = new Process(){ StartInfo = ExecutionInfo.WinGetStartInfo })
                 {
-                    StartInfo = _procStartInfo
-                };
-                installProc.Start();
+                    installProc.Start();
 
-                //Read output to list
-                StreamReader procOutputStream = installProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
+                    //Read output to list
+                    using StreamReader procOutputStream = installProc.StandardOutput;
+                    while (!procOutputStream.EndOfStream)
+                    {
+                        output.Add(procOutputStream.ReadLine());
+                    }
+
+                    //Wait till end and get exit code
+                    installProc.WaitForExit();
+                    exitCode = installProc.ExitCode;
                 }
-
-                //Wait till end and get exit code
-                installProc.WaitForExit();
-                int exitCode = installProc.ExitCode;
-
-                //Close and Dispose the process and output stream
-                installProc.Close();
-                installProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
 
                 //Check if installation was succsessfull
                 if (exitCode == 0)
@@ -839,7 +738,7 @@ namespace WGetNET
                     return false;
                 }
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
@@ -862,63 +761,6 @@ namespace WGetNET
             Task<bool> import = Task.Run(() => ImportPackages(file));
             await import;
             return import.Result;
-        }
-
-        private string CheckWinGetVersion()
-        {
-            try
-            {
-                //Set Arguments
-                _procStartInfo.Arguments = "-v";
-
-                //Output List
-                List<string> output = new List<string>();
-
-                //Create and run process
-                Process getVersionProc = new Process
-                {
-                    StartInfo = _procStartInfo
-                };
-                getVersionProc.Start();
-
-                //Read output to list
-                StreamReader procOutputStream = getVersionProc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    output.Add(procOutputStream.ReadLine());
-                }
-
-                //Wait till end and get exit code
-                getVersionProc.WaitForExit();
-                int exitCode = getVersionProc.ExitCode;
-
-                //Close and Dispose the process and output stream
-                getVersionProc.Close();
-                getVersionProc.Dispose();
-                procOutputStream.Close();
-                procOutputStream.Dispose();
-
-                //Check if the process was succsessfull
-                if (exitCode == 0)
-                {
-                    for (int i = 0; i < output.Count; i++)
-                    {
-                        if (output[i].StartsWith("v"))
-                        {
-                            return (output[i]);
-                        }
-                    }
-                    return ("[MISSING INSTALLATION]");
-                }
-                else
-                {
-                    return ("[MISSING INSTALLATION]");
-                }
-            }
-            catch (Exception)
-            {
-                return ("[MISSING INSTALLATION]");
-            }
         }
         //---------------------------------------------------------------------------------------------
 
@@ -985,9 +827,15 @@ namespace WGetNET
 
             foreach (string line in output)
             {
-                string name = line.Substring(nameStartIndex, idStartIndex - 1).Trim();
-                string winGetId = line.Substring(idStartIndex, (versionStartIndex - idStartIndex) - 1).Trim();
-                string version = line.Substring(versionStartIndex, (extraInfoStartIndex - versionStartIndex) - 1).Trim();
+                string name = line
+                    .Substring(nameStartIndex, idStartIndex - 1)
+                    .Trim();
+                string winGetId = line
+                    .Substring(idStartIndex, (versionStartIndex - idStartIndex) - 1)
+                    .Trim();
+                string version = line
+                    .Substring(versionStartIndex, (extraInfoStartIndex - versionStartIndex) - 1)
+                    .Trim();
 
                 resultList.Add(new WinGetPackage() { PackageName = name, PackageId = winGetId, PackageVersion = version });
             }
