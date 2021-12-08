@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace WGetNET
 {
-    internal class ExecutionInfo
+    static internal class ExecutionInfo
     {
         //Package Management
         public const string ListCmd = "list";

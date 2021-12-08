@@ -133,7 +133,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw e;
+                throw new WinGetActionFailedException("Updating sources failed.", e);
             }
         }
 

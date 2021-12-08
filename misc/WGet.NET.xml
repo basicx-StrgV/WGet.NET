@@ -270,6 +270,14 @@
             True if the action was successfull
             </returns>
         </member>
+        <member name="M:WGetNET.WinGetSourceManager.UpdateSourcesAsync">
+            <summary>
+            Updates all installed winget sources
+            </summary>
+            <returns>
+            True if the action was successfull
+            </returns>
+        </member>
         <member name="T:WGetNET.WinGetNotInstalledException">
             <summary>
             Exception that gets thrown if winget is not installed.

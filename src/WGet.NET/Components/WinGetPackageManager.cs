@@ -121,9 +121,9 @@ namespace WGetNET
             {
                 throw new WinGetNotInstalledException();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return new List<WinGetPackage>();
+                throw new WinGetActionFailedException("The search of installed packages failed.", e);
             }
         }
 
@@ -192,7 +192,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw e;
+                throw new WinGetActionFailedException("The package installtion failed.", e);
             }
         }
 
@@ -248,7 +248,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw e;
+                throw new WinGetActionFailedException("The package installtion failed.", e);
             }
         }
 
@@ -334,7 +334,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw e;
+                throw new WinGetActionFailedException("The package uninstalltion failed.", e);
             }
         }
 
@@ -390,7 +390,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw e;
+                throw new WinGetActionFailedException("The package uninstalltion failed.", e);
             }
         }
 
@@ -460,9 +460,9 @@ namespace WGetNET
             {
                 throw new WinGetNotInstalledException();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return new List<WinGetPackage>();
+                throw new WinGetActionFailedException("Getting updateable packages failed.", e);
             }
         }
 
@@ -531,7 +531,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw e;
+                throw new WinGetActionFailedException("Upgrading the package failed.", e);
             }
         }
 
@@ -587,7 +587,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw e;
+                throw new WinGetActionFailedException("Upgrading the package failed.", e);
             }
         }
 
@@ -673,7 +673,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw e;
+                throw new WinGetActionFailedException("Exporting packages failed.", e);
             }
         }
 
@@ -744,7 +744,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw e;
+                throw new WinGetActionFailedException("Importing packages failed.", e);
             }
         }
 
