@@ -813,6 +813,11 @@ namespace WGetNET
                         extraInfoStartIndexSet = true;
                         checkForChar = false;
                     }
+                    else if (idStartIndexSet && versionStartIndexSet && extraInfoStartIndexSet)
+                    {
+                        //Breake the loop if all indexes are set
+                        break;
+                    }
                 }
                 else if (output[labelLine][i] == ' ')
                 {

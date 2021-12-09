@@ -168,7 +168,6 @@ namespace WGetNET
             int nameStartIndex = 0;
 
             int urlStartIndex = 0;
-            bool urlStartIndexSet = false;
 
             int labelLine = topLineIndex - 1;
             bool checkForChar = false;
@@ -176,12 +175,8 @@ namespace WGetNET
             {
                 if (output[labelLine][i] != ' ' && checkForChar)
                 {
-                    if (!urlStartIndexSet)
-                    {
-                        urlStartIndex = i;
-                        urlStartIndexSet = true;
-                        checkForChar = false;
-                    }
+                    urlStartIndex = i;
+                    break;
                 }
                 else if (output[labelLine][i] == ' ')
                 {
@@ -196,14 +191,19 @@ namespace WGetNET
 
             foreach (string line in output)
             {
-                string name = line
-                    .Substring(nameStartIndex, urlStartIndex - 1)
+                string name = 
+                    line[nameStartIndex..urlStartIndex]
                     .Trim();
-                string winGetId = line
-                    .Substring(urlStartIndex)
+                string winGetId = 
+                    line[urlStartIndex..]
                     .Trim();
 
-                resultList.Add(new WinGetSource() { SourceName = name, SourceUrl = winGetId });
+                resultList.Add(
+                    new WinGetSource() 
+                    { 
+                        SourceName = name, 
+                        SourceUrl = winGetId 
+                    });
             }
 
             return resultList;

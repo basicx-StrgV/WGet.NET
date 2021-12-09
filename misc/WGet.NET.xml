@@ -278,6 +278,34 @@
             True if the action was successfull
             </returns>
         </member>
+        <member name="T:WGetNET.WinGetActionFailedException">
+            <summary>
+            Exception that gets thrown if a winget action failed.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetActionFailedException.Message">
+            <summary>
+            Gets a message that describes the current exception.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+        </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+            <param name="innerException">The inner exception</param>
+        </member>
         <member name="T:WGetNET.WinGetNotInstalledException">
             <summary>
             Exception that gets thrown if winget is not installed.

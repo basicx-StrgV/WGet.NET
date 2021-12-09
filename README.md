@@ -26,6 +26,8 @@ Therefore the functions are limited at the moment.<br>
 - Export and Import packages
 - Check if WinGet is installed
 - Get the WinGet version number
+- Get installed sources
+- Update sources
 - Asynchronous execution
 
 ## 📦 NuGet Package
@@ -46,5 +48,10 @@ If WinGet is not installed on your system you can get it here: https://github.co
 
 ### Classes
 
-- WinGetConnector
+- WinGetInfo
+- WinGetPackageManager
 - WinGetPackage
+- WinGetSourceManager
+- WinGetSource
+- WinGetNotInstalledException
+- WinGetActionFailedException
