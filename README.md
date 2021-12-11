@@ -28,6 +28,7 @@ Therefore the functions are limited at the moment.<br>
 - Get the WinGet version number
 - Get installed sources
 - Update sources
+- Export sources
 - Asynchronous execution
 
 ## 📦 NuGet Package
