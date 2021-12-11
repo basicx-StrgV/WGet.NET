@@ -75,9 +75,7 @@ namespace WGetNET
         /// </returns>
         public async Task<List<WinGetSource>> GetInstalledSourcesAsync()
         {
-            Task<List<WinGetSource>> getInstalledSources = Task.Run(() => GetInstalledSources());
-            await getInstalledSources;
-            return getInstalledSources.Result;
+            return await Task.Run(() => GetInstalledSources());
         }
         //---------------------------------------------------------------------------------------------
 
@@ -145,9 +143,7 @@ namespace WGetNET
         /// </returns>
         public async Task<bool> UpdateSourcesAsync()
         {
-            Task<bool> updateSources = Task.Run(() => UpdateSources());
-            await updateSources;
-            return updateSources.Result;
+            return await Task.Run(() => UpdateSources());
         }
         //---------------------------------------------------------------------------------------------
 

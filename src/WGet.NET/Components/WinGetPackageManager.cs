@@ -77,9 +77,7 @@ namespace WGetNET
         /// </returns>
         public async Task<List<WinGetPackage>> SearchPackageAsync(string packageName)
         {
-            Task<List<WinGetPackage>> search = Task.Run(() => SearchPackage(packageName));
-            await search;
-            return search.Result;
+            return await Task.Run(() => SearchPackage(packageName));
         }
         //---------------------------------------------------------------------------------------------
 
@@ -135,9 +133,7 @@ namespace WGetNET
         /// </returns>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync()
         {
-            Task<List<WinGetPackage>> list = Task.Run(() => GetInstalledPackages());
-            await list;
-            return list.Result;
+            return await Task.Run(() => GetInstalledPackages());
         }
 
         /// <summary>
@@ -261,9 +257,7 @@ namespace WGetNET
         /// </returns>
         public async Task<bool> InstallPackageAsync(string packageId)
         {
-            Task<bool> install = Task.Run(() => InstallPackage(packageId));
-            await install;
-            return install.Result;
+            return await Task.Run(() => InstallPackage(packageId));
         }
 
         /// <summary>
@@ -275,9 +269,7 @@ namespace WGetNET
         /// </returns>
         public async Task<bool> InstallPackageAsync(WinGetPackage package)
         {
-            Task<bool> install = Task.Run(() => InstallPackage(package));
-            await install;
-            return install.Result;
+            return await Task.Run(() => InstallPackage(package));
         }
         //---------------------------------------------------------------------------------------------
 
@@ -403,9 +395,7 @@ namespace WGetNET
         /// </returns>
         public async Task<bool> UninstallPackageAsync(string packageId)
         {
-            Task<bool> install = Task.Run(() => UninstallPackage(packageId));
-            await install;
-            return install.Result;
+            return await Task.Run(() => UninstallPackage(packageId));
         }
 
         /// <summary>
@@ -417,9 +407,7 @@ namespace WGetNET
         /// </returns>
         public async Task<bool> UninstallPackageAsync(WinGetPackage package)
         {
-            Task<bool> install = Task.Run(() => UninstallPackage(package));
-            await install;
-            return install.Result;
+            return await Task.Run(() => UninstallPackage(package));
         }
         //---------------------------------------------------------------------------------------------
 
@@ -474,9 +462,7 @@ namespace WGetNET
         /// </returns>
         public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync()
         {
-            Task<List<WinGetPackage>> upgradeList = Task.Run(() => GetUpgradeablePackages());
-            await upgradeList;
-            return upgradeList.Result;
+            return await Task.Run(() => GetUpgradeablePackages());
         }
 
         /// <summary>
@@ -600,9 +586,7 @@ namespace WGetNET
         /// </returns>
         public async Task<bool> UpgradePackageAsync(string packageId)
         {
-            Task<bool> upgrade = Task.Run(() => UpgradePackage(packageId));
-            await upgrade;
-            return upgrade.Result;
+            return await Task.Run(() => UpgradePackage(packageId));
         }
 
         /// <summary>
@@ -614,9 +598,7 @@ namespace WGetNET
         /// </returns>
         public async Task<bool> UpgradePackageAsync(WinGetPackage package)
         {
-            Task<bool> upgrade = Task.Run(() => UpgradePackage(package));
-            await upgrade;
-            return upgrade.Result;
+            return await Task.Run(() => UpgradePackage(package));
         }
         //---------------------------------------------------------------------------------------------
 
@@ -686,9 +668,7 @@ namespace WGetNET
         /// </returns>
         public async Task<bool> ExportPackageListAsync(string file)
         {
-            Task<bool> export = Task.Run(() => ExportPackageList(file));
-            await export;
-            return export.Result;
+            return await Task.Run(() => ExportPackageList(file));
         }
 
         /// <summary>
@@ -758,9 +738,7 @@ namespace WGetNET
         /// </returns>
         public async Task<bool> ImportPackagesAsync(string file)
         {
-            Task<bool> import = Task.Run(() => ImportPackages(file));
-            await import;
-            return import.Result;
+            return await Task.Run(() => ImportPackages(file));
         }
         //---------------------------------------------------------------------------------------------
 
