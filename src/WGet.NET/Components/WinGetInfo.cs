@@ -14,19 +14,23 @@ namespace WGetNET
     /// </summary>
     public class WinGetInfo
     {
+        private const string _versionCmd = "--version";
+
+        private readonly ProcessStartInfo _winGetStartInfo;
+
         /// <summary>
-        /// Gets if winget is installed on the system
+        /// Gets if winget is installed on the system.
         /// </summary>
         /// <returns>
-        /// true if winget is installed
+        /// <see langword="true"/> if winget is installed or <see langword="false"/> if not.
         /// </returns>
         public bool WinGetInstalled { get { return _winGetInstalled; } }
 
         /// <summary>
-        /// Gets the number of the installed winget version
+        /// Gets the version number of the winget installation.
         /// </summary>
         /// <returns>
-        /// The number of the installed winget version or a placeholder string if winget is not installed
+        /// A <see cref="System.String"/> with the version number.
         /// </returns>
         public string WinGetVersion { get { return _winGetVersion; } }
 
@@ -38,14 +42,22 @@ namespace WGetNET
         /// </summary>
         public WinGetInfo()
         {
-            _winGetVersion = CheckWinGetVersion();
-            if (!_winGetVersion.Equals("[MISSING INSTALLATION]"))
+            _winGetStartInfo = new ProcessStartInfo()
             {
-                _winGetInstalled = true;
+                WindowStyle = ProcessWindowStyle.Hidden,
+                FileName = "winget",
+                RedirectStandardOutput = true
+            };
+
+            _winGetVersion = CheckWinGetVersion();
+
+            if (string.IsNullOrEmpty(_winGetVersion))
+            {
+                _winGetInstalled = false;
             }
             else
             {
-                _winGetInstalled = false;
+                _winGetInstalled = true;
             }
         }
 
@@ -54,7 +66,7 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = ExecutionInfo.VersionCmd;
+                _winGetStartInfo.Arguments = _versionCmd;
 
                 //Output List
                 List<string> output = new List<string>();
@@ -62,7 +74,7 @@ namespace WGetNET
                 int exitCode = -1;
 
                 //Create and run process
-                using (Process getVersionProc = new Process { StartInfo = ExecutionInfo.WinGetStartInfo })
+                using (Process getVersionProc = new Process { StartInfo = _winGetStartInfo })
                 {
                     getVersionProc.Start();
 
@@ -88,16 +100,16 @@ namespace WGetNET
                             return (output[i]);
                         }
                     }
-                    return ("[MISSING INSTALLATION]");
+                    return (string.Empty);
                 }
                 else
                 {
-                    return ("[MISSING INSTALLATION]");
+                    return (string.Empty);
                 }
             }
             catch (Exception)
             {
-                return ("[MISSING INSTALLATION]");
+                return (string.Empty);
             }
         }
     }

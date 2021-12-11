@@ -20,7 +20,7 @@ Added the option to import a exportet package list</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\Bjarne\source\repos\WGet.NET\misc\WGet.NET.xml</DocumentationFile>
+    <DocumentationFile>XmlDocumentation\WGet.NET.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +28,10 @@ Added the option to import a exportet package list</PackageReleaseNotes>
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="XmlDocumentation\" />
   </ItemGroup>
 
 </Project>

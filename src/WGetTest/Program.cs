@@ -30,6 +30,11 @@ namespace WGetTest
 
             List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
             bool sourceUpdateStatus = sourceManager.UpdateSources();
+
+            string sorceJson = sourceManager.ExportSources();
+            string sorceJson2 = sourceManager.ExportSources("msstore");
+            bool sorceJson3 = sourceManager.ExportSourcesToFile("C:\\Test\\AllSources.json");
+            bool sorceJson4 = sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
         }
     }
 }

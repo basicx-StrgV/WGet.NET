@@ -16,33 +16,50 @@ namespace WGetNET
     /// </summary>
     public class WinGetPackageManager
     {
+        private const string _listCmd = "list";
+        private const string _searchCmd = "search {0}";
+        private const string _installCmd = "install {0}";
+        private const string _upgradeCmd = "upgrade {0}";
+        private const string _getUpgradeableCmd = "upgrade";
+        private const string _uninstallCmd = "uninstall {0}";
+        private const string _exportCmd = "export -o {0}";
+        private const string _importCmd = "import -i {0} --ignore-unavailable";
+
+        private readonly ProcessStartInfo _winGetStartInfo;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
         /// </summary>
         public WinGetPackageManager()
         {
+            _winGetStartInfo = new ProcessStartInfo()
+            {
+                WindowStyle = ProcessWindowStyle.Hidden,
+                FileName = "winget",
+                RedirectStandardOutput = true
+            };
         }
 
         //---Search------------------------------------------------------------------------------------
         /// <summary>
-        /// Uses the winget search function to search for a package that maches the given name
+        /// Uses the winget search function to search for a package that maches the given name.
         /// </summary>
-        /// <param name="packageName">The name of the package that you want to search</param>
+        /// <param name="packageName">The name of the package for the search.</param>
         /// <returns>
-        /// A List of packages that mached the search criteria
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         public List<WinGetPackage> SearchPackage(string packageName)
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.SearchCmd, packageName);
+                _winGetStartInfo.Arguments = String.Format(_searchCmd, packageName);
 
                 //Output List
                 List<string> output = new List<string>();
 
                 //Create and run process
-                using (Process searchProc = new Process() { StartInfo = ExecutionInfo.WinGetStartInfo })
+                using (Process searchProc = new Process() { StartInfo = _winGetStartInfo })
                 {
                     searchProc.Start();
 
@@ -69,11 +86,11 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Uses the winget search function to search for a package that maches the given name
+        /// Uses the winget search function to search for a package that maches the given name.
         /// </summary>
-        /// <param name="packageName">The name of the package that you want to search</param>
+        /// <param name="packageName">The name of the package for the search.</param>
         /// <returns>
-        /// A Task object of the search task
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         public async Task<List<WinGetPackage>> SearchPackageAsync(string packageName)
         {
@@ -83,23 +100,23 @@ namespace WGetNET
 
         //---Install-----------------------------------------------------------------------------------
         /// <summary>
-        /// Gets a list of all installed packages
+        /// Gets a list of all installed packages.
         /// </summary>
         /// <returns>
-        /// A List of packages that are installed on the system
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         public List<WinGetPackage> GetInstalledPackages()
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = ExecutionInfo.ListCmd;
+                _winGetStartInfo.Arguments = _listCmd;
 
                 //Output List
                 List<string> output = new List<string>();
 
                 //Create and run process
-                using (Process searchProc = new Process() { StartInfo = ExecutionInfo.WinGetStartInfo })
+                using (Process searchProc = new Process() { StartInfo = _winGetStartInfo })
                 {
                     searchProc.Start();
 
@@ -126,10 +143,10 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets a list of all installed packages
+        /// Gets a list of all installed packages.
         /// </summary>
         /// <returns>
-        /// A List of packages that are installed on the system
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync()
         {
@@ -137,35 +154,25 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Insatll a package using winget
+        /// Install a package using winget.
         /// </summary>
-        /// <param name="packageId">The id or name of the package that should be installed</param>
+        /// <param name="packageId">The id or name of the package for the installation.</param>
         /// <returns>
-        /// True if the installation was successfull
+        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public bool InstallPackage(string packageId)
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.InstallCmd, packageId);
-
-                //Output List
-                List<string> output = new List<string>();
+                _winGetStartInfo.Arguments = String.Format(_installCmd, packageId);
 
                 int exitCode = -1;
 
                 //Create and run process
-                using (Process installProc = new Process{ StartInfo = ExecutionInfo.WinGetStartInfo }) 
+                using (Process installProc = new Process{ StartInfo = _winGetStartInfo }) 
                 {
                     installProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = installProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
 
                     //Wait till end and get exit code
                     installProc.WaitForExit();
@@ -193,35 +200,25 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Insatll a package using winget
+        /// Install a package using winget.
         /// </summary>
-        /// <param name="package">The package that should be installed</param>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
         /// <returns>
-        /// True if the installation was successfull
+        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public bool InstallPackage(WinGetPackage package)
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.InstallCmd, package.PackageId);
-
-                //Output List
-                List<string> output = new List<string>();
+                _winGetStartInfo.Arguments = String.Format(_installCmd, package.PackageId);
 
                 int exitCode = -1;
 
                 //Create and run process
-                using (Process installProc = new Process{ StartInfo = ExecutionInfo.WinGetStartInfo }) 
+                using (Process installProc = new Process{ StartInfo = _winGetStartInfo }) 
                 { 
                     installProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = installProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
 
                     //Wait till end and get exit code
                     installProc.WaitForExit();
@@ -249,11 +246,11 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Insatll a package using winget
+        /// Install a package using winget.
         /// </summary>
-        /// <param name="packageId">The id or name of the package that should be installed</param>
+        /// <param name="packageId">The id or name of the package for the installation.</param>
         /// <returns>
-        /// A Task object of the install task
+        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public async Task<bool> InstallPackageAsync(string packageId)
         {
@@ -261,11 +258,11 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Insatll a package using winget
+        /// Install a package using winget.
         /// </summary>
-        /// <param name="package">The package that should be installed</param>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
         /// <returns>
-        /// A Task object of the install task
+        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public async Task<bool> InstallPackageAsync(WinGetPackage package)
         {
@@ -275,35 +272,25 @@ namespace WGetNET
 
         //---Uninstall---------------------------------------------------------------------------------
         /// <summary>
-        /// Uninsatll a package using winget
+        /// Uninsatll a package using winget.
         /// </summary>
-        /// <param name="packageId">The id or name of the package that should be uninstalled</param>
+        /// <param name="packageId">The id or name of the package for uninstallation.</param>
         /// <returns>
-        /// True if the uninstallation was successfull
+        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public bool UninstallPackage(string packageId)
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.UninstallCmd, packageId);
-
-                //Output List
-                List<string> output = new List<string>();
+                _winGetStartInfo.Arguments = String.Format(_uninstallCmd, packageId);
 
                 int exitCode = -1;
 
                 //Create and run process
-                using (Process uninstallProc = new Process{ StartInfo = ExecutionInfo.WinGetStartInfo })
+                using (Process uninstallProc = new Process{ StartInfo = _winGetStartInfo })
                 {
                     uninstallProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = uninstallProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
 
                     //Wait till end and get exit code
                     uninstallProc.WaitForExit();
@@ -331,35 +318,25 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Uninsatll a package using winget
+        /// Uninsatll a package using winget.
         /// </summary>
-        /// <param name="package">The package that should be uninstalled</param>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
         /// <returns>
-        /// True if the uninstallation was successfull
+        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public bool UninstallPackage(WinGetPackage package)
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.UninstallCmd, package.PackageId);
-
-                //Output List
-                List<string> output = new List<string>();
+                _winGetStartInfo.Arguments = String.Format(_uninstallCmd, package.PackageId);
 
                 int exitCode = -1;
 
                 //Create and run process
-                using (Process uninstallProc = new Process{ StartInfo = ExecutionInfo.WinGetStartInfo }) 
+                using (Process uninstallProc = new Process{ StartInfo = _winGetStartInfo }) 
                 {
                     uninstallProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = uninstallProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
 
                     //Wait till end and get exit code
                     uninstallProc.WaitForExit();
@@ -387,11 +364,11 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Uninsatll a package using winget
+        /// Uninsatll a package using winget.
         /// </summary>
-        /// <param name="packageId">The id or name of the package that should be uninstalled</param>
+        /// <param name="packageId">The id or name of the package for uninstallation.</param>
         /// <returns>
-        /// A Task object of the uninstall task
+        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public async Task<bool> UninstallPackageAsync(string packageId)
         {
@@ -399,11 +376,11 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Uninsatll a package using winget
+        /// Uninsatll a package using winget.
         /// </summary>
-        /// <param name="package">The package that should be uninstalled</param>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
         /// <returns>
-        /// A Task object of the uninstall task
+        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public async Task<bool> UninstallPackageAsync(WinGetPackage package)
         {
@@ -413,23 +390,23 @@ namespace WGetNET
 
         //---Upgrade-----------------------------------------------------------------------------------
         /// <summary>
-        /// Uses the winget upgrade function to get all upgradeable packages
+        /// Get all upgradeable packages.
         /// </summary>
         /// <returns>
-        /// A List of upgradeable packages
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         public List<WinGetPackage> GetUpgradeablePackages()
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = ExecutionInfo.GetUpgradeableCmd;
+                _winGetStartInfo.Arguments = _getUpgradeableCmd;
 
                 //Output List
                 List<string> output = new List<string>();
 
                 //Create and run process
-                using (Process searchProc = new Process { StartInfo = ExecutionInfo.WinGetStartInfo })
+                using (Process searchProc = new Process { StartInfo = _winGetStartInfo })
                 {
                     searchProc.Start();
 
@@ -455,10 +432,10 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Uses the winget upgrade function to get all upgradeable packages
+        /// Get all upgradeable packages.
         /// </summary>
         /// <returns>
-        /// A List of upgradeable packages
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync()
         {
@@ -466,35 +443,25 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Upgrades a package using winget
+        /// Upgrades a package using winget.
         /// </summary>
-        /// <param name="packageId">The id or name of the package that should be upgradet</param>
+        /// <param name="packageId">The id or name of the package for upgrade.</param>
         /// <returns>
-        /// True if the upgrade was successfull
+        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public bool UpgradePackage(string packageId)
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.UpgradeCmd, packageId);
-
-                //Output List
-                List<string> output = new List<string>();
+                _winGetStartInfo.Arguments = String.Format(_upgradeCmd, packageId);
 
                 int exitCode = -1;
 
                 //Create and run process
-                using (Process installProc = new Process { StartInfo = ExecutionInfo.WinGetStartInfo })
+                using (Process installProc = new Process { StartInfo = _winGetStartInfo })
                 {
                     installProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = installProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
 
                     //Wait till end and get exit code
                     installProc.WaitForExit();
@@ -522,35 +489,25 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Upgrades a package using winget
+        /// Upgrades a package using winget.
         /// </summary>
-        /// <param name="package">The package that should be upgradet</param>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
         /// <returns>
-        /// True if the upgrade was successfull
+        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public bool UpgradePackage(WinGetPackage package)
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.UpgradeCmd, package.PackageId);
-
-                //Output List
-                List<string> output = new List<string>();
+                _winGetStartInfo.Arguments = String.Format(_upgradeCmd, package.PackageId);
 
                 int exitCode = -1;
 
                 //Create and run process
-                using (Process installProc = new Process { StartInfo = ExecutionInfo.WinGetStartInfo })
+                using (Process installProc = new Process { StartInfo = _winGetStartInfo })
                 {
                     installProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = installProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
 
                     //Wait till end and get exit code
                     installProc.WaitForExit();
@@ -578,11 +535,11 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Upgrades a package using winget
+        /// Upgrades a package using winget.
         /// </summary>
-        /// <param name="packageId">The id or name of the package that should be upgradet</param>
+        /// <param name="packageId">The id or name of the package for upgrade.</param>
         /// <returns>
-        /// True if the upgrade was successfull
+        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public async Task<bool> UpgradePackageAsync(string packageId)
         {
@@ -590,11 +547,11 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Upgrades a package using winget
+        /// Upgrades a package using winget.
         /// </summary>
-        /// <param name="package">The package that should be upgradet</param>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
         /// <returns>
-        /// True if the upgrade was successfull
+        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
         /// </returns>
         public async Task<bool> UpgradePackageAsync(WinGetPackage package)
         {
@@ -604,35 +561,25 @@ namespace WGetNET
 
         //---Other------------------------------------------------------------------------------------
         /// <summary>
-        /// Exports a list of all installed winget packages as json to the given file
+        /// Exports a list of all installed winget packages as json to the given file.
         /// </summary>
-        /// <param name="file">The file for the export</param>
+        /// <param name="file">The file for the export.</param>
         /// <returns>
-        /// True if the export was successfull
+        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
         /// </returns>
-        public bool ExportPackageList(string file)
+        public bool ExportPackagesToFile(string file)
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.ExportCmd, file);
-
-                //Output List
-                List<string> output = new List<string>();
+                _winGetStartInfo.Arguments = String.Format(_exportCmd, file);
 
                 int exitCode = -1;
 
                 //Create and run process
-                using (Process installProc = new Process() { StartInfo = ExecutionInfo.WinGetStartInfo })
+                using (Process installProc = new Process() { StartInfo = _winGetStartInfo })
                 {
                     installProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = installProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
 
                     //Wait till end and get exit code
                     installProc.WaitForExit();
@@ -660,48 +607,41 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Exports a list of all installed winget packages as json to the given file
+        /// Exports a list of all installed winget packages as json to the given file.
         /// </summary>
-        /// <param name="file">The file for the export</param>
+        /// <param name="file">The file for the export.</param>
         /// <returns>
-        /// True if the export was successfull
+        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
         /// </returns>
-        public async Task<bool> ExportPackageListAsync(string file)
+        public async Task<bool> ExportPackagesToFileAsync(string file)
         {
-            return await Task.Run(() => ExportPackageList(file));
+            return await Task.Run(() => ExportPackagesToFile(file));
         }
 
         /// <summary>
         /// Imports packages and trys to installes/upgrade all pakages in the list, if possible.
-        /// This may take some time and winget might not install/upgrade all packages.
         /// </summary>
-        /// <param name="file">The file with the package data for the import</param>
+        /// <remarks>
+        /// This may take some time and winget may not install/upgrade all packages.
+        /// </remarks>
+        /// <param name="file">The file with the package data for the import.</param>
         /// <returns>
-        /// True if the import was compleatly successfull or False if some or all packages failed to install.
+        /// <see langword="true"/> if the import was compleatly successfull or 
+        /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
-        public bool ImportPackages(string file)
+        public bool ImportPackagesFromFile(string file)
         {
             try
             {
                 //Set Arguments
-                ExecutionInfo.WinGetStartInfo.Arguments = String.Format(ExecutionInfo.ImportCmd, file);
-
-                //Output List
-                List<string> output = new List<string>();
+                _winGetStartInfo.Arguments = String.Format(_importCmd, file);
 
                 int exitCode = -1;
 
                 //Create and run process
-                using (Process installProc = new Process(){ StartInfo = ExecutionInfo.WinGetStartInfo })
+                using (Process installProc = new Process(){ StartInfo = _winGetStartInfo })
                 {
                     installProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = installProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
 
                     //Wait till end and get exit code
                     installProc.WaitForExit();
@@ -729,16 +669,19 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Imports packages and installes/updates all pakages, if possible.
-        /// This may take some time.
+        /// Imports packages and trys to installes/upgrade all pakages in the list, if possible.
         /// </summary>
-        /// <param name="file">The file with the package data for the import</param>
+        /// <remarks>
+        /// This may take some time and winget may not install/upgrade all packages.
+        /// </remarks>
+        /// <param name="file">The file with the package data for the import.</param>
         /// <returns>
-        /// True if the import was compleatly successfull or False if some or all packages failed to install.
+        /// <see langword="true"/> if the import was compleatly successfull or 
+        /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
-        public async Task<bool> ImportPackagesAsync(string file)
+        public async Task<bool> ImportPackagesFromFileAsync(string file)
         {
-            return await Task.Run(() => ImportPackages(file));
+            return await Task.Run(() => ImportPackagesFromFile(file));
         }
         //---------------------------------------------------------------------------------------------
 

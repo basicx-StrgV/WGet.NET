@@ -1,0 +1,451 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WGet.NET</name>
+    </assembly>
+    <members>
+        <member name="T:WGetNET.WinGetInfo">
+            <summary>
+            The <see cref="T:WGetNET.WinGetInfo"/> class offers informations about the installed winget version.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.WinGetInstalled">
+            <summary>
+            Gets if winget is installed on the system.
+            </summary>
+            <returns>
+            <see langword="true"/> if winget is installed or <see langword="false"/> if not.
+            </returns>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.WinGetVersion">
+            <summary>
+            Gets the version number of the winget installation.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> with the version number.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetInfo.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.
+            </summary>
+        </member>
+        <member name="T:WGetNET.WinGetPackageManager">
+            <summary>
+            The <see cref="T:WGetNET.WinGetPackageManager"/> class offers methods to manage packages with winget.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetPackageManager"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.SearchPackage(System.String)">
+            <summary>
+            Uses the winget search function to search for a package that maches the given name.
+            </summary>
+            <param name="packageName">The name of the package for the search.</param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.SearchPackageAsync(System.String)">
+            <summary>
+            Uses the winget search function to search for a package that maches the given name.
+            </summary>
+            <param name="packageName">The name of the package for the search.</param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages">
+            <summary>
+            Gets a list of all installed packages.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync">
+            <summary>
+            Gets a list of all installed packages.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackage(System.String)">
+            <summary>
+            Install a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for the installation.</param>
+            <returns>
+            <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage)">
+            <summary>
+            Install a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
+            <returns>
+            <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(System.String)">
+            <summary>
+            Install a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for the installation.</param>
+            <returns>
+            <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage)">
+            <summary>
+            Install a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
+            <returns>
+            <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(System.String)">
+            <summary>
+            Uninsatll a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for uninstallation.</param>
+            <returns>
+            <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.WinGetPackage)">
+            <summary>
+            Uninsatll a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the uninstallation.</param>
+            <returns>
+            <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(System.String)">
+            <summary>
+            Uninsatll a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for uninstallation.</param>
+            <returns>
+            <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.WinGetPackage)">
+            <summary>
+            Uninsatll a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the uninstallation.</param>
+            <returns>
+            <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackages">
+            <summary>
+            Get all upgradeable packages.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackagesAsync">
+            <summary>
+            Get all upgradeable packages.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(System.String)">
+            <summary>
+            Upgrades a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for upgrade.</param>
+            <returns>
+            <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(WGetNET.WinGetPackage)">
+            <summary>
+            Upgrades a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> that for the upgrade</param>
+            <returns>
+            <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(System.String)">
+            <summary>
+            Upgrades a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for upgrade.</param>
+            <returns>
+            <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.WinGetPackage)">
+            <summary>
+            Upgrades a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> that for the upgrade</param>
+            <returns>
+            <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFile(System.String)">
+            <summary>
+            Exports a list of all installed winget packages as json to the given file.
+            </summary>
+            <param name="file">The file for the export.</param>
+            <returns>
+            <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFileAsync(System.String)">
+            <summary>
+            Exports a list of all installed winget packages as json to the given file.
+            </summary>
+            <param name="file">The file for the export.</param>
+            <returns>
+            <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFile(System.String)">
+            <summary>
+            Imports packages and trys to installes/upgrade all pakages in the list, if possible.
+            </summary>
+            <remarks>
+            This may take some time and winget may not install/upgrade all packages.
+            </remarks>
+            <param name="file">The file with the package data for the import.</param>
+            <returns>
+            <see langword="true"/> if the import was compleatly successfull or 
+            <see langword="false"/> if some or all packages failed to install.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFileAsync(System.String)">
+            <summary>
+            Imports packages and trys to installes/upgrade all pakages in the list, if possible.
+            </summary>
+            <remarks>
+            This may take some time and winget may not install/upgrade all packages.
+            </remarks>
+            <param name="file">The file with the package data for the import.</param>
+            <returns>
+            <see langword="true"/> if the import was compleatly successfull or 
+            <see langword="false"/> if some or all packages failed to install.
+            </returns>
+        </member>
+        <member name="T:WGetNET.WinGetSourceManager">
+            <summary>
+            The <see cref="T:WGetNET.WinGetSourceManager"/> class offers methods to manage the sources used by winget.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetSourceManager"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.GetInstalledSources">
+            <summary>
+            Gets a list of all sources that are installed in winget.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.GetInstalledSourcesAsync">
+            <summary>
+            Gets a list of all sources that are installed in winget.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.UpdateSources">
+            <summary>
+            Updates all sources that are installed in winget.
+            </summary>
+            <returns>
+            <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.UpdateSourcesAsync">
+            <summary>
+            Updates all sources that are installed in winget.
+            </summary>
+            <returns>
+            <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSources">
+            <summary>
+            Exports the winget sources as a json string.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that contains the winget sorces in json format.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSources(System.String)">
+            <summary>
+            Exports the winget sources as a json string.
+            </summary>
+            <param name="sourceName">The name of the source for the export.</param>
+            <returns>
+            A <see cref="T:System.String"/> that contains the winget sorces in json format.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesAsync">
+            <summary>
+            Exports the winget sources as a json string.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that contains the winget sorces in json format.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesAsync(System.String)">
+            <summary>
+            Exports the winget sources as a json string.
+            </summary>
+            <param name="sourceName">The name of the source for the export.</param>
+            <returns>
+            A <see cref="T:System.String"/> that contains the winget sorces in json format.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String)">
+            <summary>
+            Exports the winget sources in json format to a file.
+            </summary>
+            <param name="file">The file for the export.</param>
+            <returns>
+            <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,System.String)">
+            <summary>
+            Exports the winget sources in json format to a file.
+            </summary>
+            <param name="file">The file for the export.</param>
+            <param name="sourceName">The name of the source for the export.</param>
+            <returns>
+            <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String)">
+            <summary>
+            Exports the winget sources in json format to a file.
+            </summary>
+            <param name="file">The file for the export.</param>
+            <returns>
+            <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,System.String)">
+            <summary>
+            Exports the winget sources in json format to a file.
+            </summary>
+            <param name="file">The file for the export.</param>
+            <param name="sourceName">The name of the source for the export.</param>
+            <returns>
+            <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+            </returns>
+        </member>
+        <member name="T:WGetNET.WinGetActionFailedException">
+            <summary>
+            Exception that gets thrown if a winget action failed.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetActionFailedException.Message">
+            <summary>
+            Gets a message that describes the current exception.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+        </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="T:WGetNET.WinGetNotInstalledException">
+            <summary>
+            Exception that gets thrown if winget is not installed.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetNotInstalledException.Message">
+            <summary>
+            Gets a message that describes the current exception.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetNotInstalledException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetNotInstalledException"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetNotInstalledException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetNotInstalledException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+        </member>
+        <member name="M:WGetNET.WinGetNotInstalledException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetNotInstalledException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="T:WGetNET.WinGetPackage">
+            <summary>
+            Represents a winget package
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.PackageName">
+            <summary>
+            Name of the package
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.PackageId">
+            <summary>
+            Id of the package
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.PackageVersion">
+            <summary>
+            Version of the package
+            </summary>
+        </member>
+        <member name="T:WGetNET.WinGetSource">
+            <summary>
+            Represents a winget source
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.SourceName">
+            <summary>
+            Name of the source
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.SourceUrl">
+            <summary>
+            Url of the source
+            </summary>
+        </member>
+    </members>
+</doc>
