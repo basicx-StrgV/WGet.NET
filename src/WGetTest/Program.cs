@@ -29,12 +29,13 @@ namespace WGetTest
             Console.WriteLine(test[0].PackageId);
 
             List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
-            bool sourceUpdateStatus = sourceManager.UpdateSources();
+            //bool sourceUpdateStatus = sourceManager.UpdateSources();
 
             string sorceJson = sourceManager.ExportSources();
             string sorceJson2 = sourceManager.ExportSources("msstore");
             bool sorceJson3 = sourceManager.ExportSourcesToFile("C:\\Test\\AllSources.json");
             bool sorceJson4 = sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
+            bool addSuccess = sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
         }
     }
 }

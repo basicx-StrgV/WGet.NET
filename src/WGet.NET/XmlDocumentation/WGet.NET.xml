@@ -4,6 +4,29 @@
         <name>WGet.NET</name>
     </assembly>
     <members>
+        <member name="T:WGetNET.ProcessManager">
+            <summary>
+            The <see langword="internal"/> class <see cref="T:WGetNET.ProcessManager"/> 
+            provides the winget process execution.
+            </summary>
+        </member>
+        <member name="M:WGetNET.ProcessManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.ProcessManager"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.ProcessManager.ExecuteWingetProcess(System.String)">
+            <summary>
+            Executes a winget process with the given command and returns the result.
+            </summary>
+            <param name="cmd">
+            A <see cref="T:System.String"/> representing the command that winget should be executed with.
+            </param>
+            <returns>
+            A <see cref="T:WGetNET.ProcessResult"/> object, 
+            containing the output an exit id of the process.
+            </returns>
+        </member>
         <member name="T:WGetNET.WinGetInfo">
             <summary>
             The <see cref="T:WGetNET.WinGetInfo"/> class offers informations about the installed winget version.
@@ -266,6 +289,43 @@
             </summary>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.AddSource(System.String,System.String)">
+            <summary>
+            Adds a new source to winget (Needs administrator rights).
+            </summary>
+            <remarks>
+            The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+            </remarks>
+            <param name="name">
+            A <see cref="T:System.String"/> representing the name of the source to add.
+            </param>
+            <param name="arg">
+            A <see cref="T:System.String"/> representing the source (eg. URL).
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.AddSource(System.String,System.String,System.String)">
+            <summary>
+            Adds a new source to winget (Needs administrator rights).
+            </summary>
+            <remarks>
+            The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+            </remarks>
+            <param name="name">
+            A <see cref="T:System.String"/> representing the name of the source to add.
+            </param>
+            <param name="arg">
+            A <see cref="T:System.String"/> representing the source (eg. URL).
+            </param>
+            <param name="type">
+            A <see cref="T:System.String"/> representing the source type.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
             </returns>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.UpdateSources">

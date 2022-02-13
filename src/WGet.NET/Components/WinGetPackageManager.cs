@@ -4,7 +4,6 @@
 //--------------------------------------------------//
 using System;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace WGetNET
@@ -15,7 +14,7 @@ namespace WGetNET
     public class WinGetPackageManager
     {
         private const string _listCmd = "list";
-        private const string _searchCmd = "search {0}";
+        private const string _searchCmd = "search {0} --accept-source-agreements";
         private const string _installCmd = "install {0}";
         private const string _upgradeCmd = "upgrade {0}";
         private const string _getUpgradeableCmd = "upgrade";
@@ -60,18 +59,6 @@ namespace WGetNET
                 return new List<WinGetPackage>();
             }
         }
-
-        /// <summary>
-        /// Uses the winget search function to search for a package that maches the given name.
-        /// </summary>
-        /// <param name="packageName">The name of the package for the search.</param>
-        /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
-        /// </returns>
-        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageName)
-        {
-            return await Task.Run(() => SearchPackage(packageName));
-        }
         //---------------------------------------------------------------------------------------------
 
         //---Install-----------------------------------------------------------------------------------
@@ -98,17 +85,6 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("The search of installed packages failed.", e);
             }
-        }
-
-        /// <summary>
-        /// Gets a list of all installed packages.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
-        /// </returns>
-        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync()
-        {
-            return await Task.Run(() => GetInstalledPackages());
         }
 
         /// <summary>
@@ -179,30 +155,6 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("The package installtion failed.", e);
             }
-        }
-
-        /// <summary>
-        /// Install a package using winget.
-        /// </summary>
-        /// <param name="packageId">The id or name of the package for the installation.</param>
-        /// <returns>
-        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
-        /// </returns>
-        public async Task<bool> InstallPackageAsync(string packageId)
-        {
-            return await Task.Run(() => InstallPackage(packageId));
-        }
-
-        /// <summary>
-        /// Install a package using winget.
-        /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
-        /// <returns>
-        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
-        /// </returns>
-        public async Task<bool> InstallPackageAsync(WinGetPackage package)
-        {
-            return await Task.Run(() => InstallPackage(package));
         }
         //---------------------------------------------------------------------------------------------
 
@@ -276,30 +228,6 @@ namespace WGetNET
                 throw new WinGetActionFailedException("The package uninstalltion failed.", e);
             }
         }
-
-        /// <summary>
-        /// Uninsatll a package using winget.
-        /// </summary>
-        /// <param name="packageId">The id or name of the package for uninstallation.</param>
-        /// <returns>
-        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
-        /// </returns>
-        public async Task<bool> UninstallPackageAsync(string packageId)
-        {
-            return await Task.Run(() => UninstallPackage(packageId));
-        }
-
-        /// <summary>
-        /// Uninsatll a package using winget.
-        /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
-        /// <returns>
-        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
-        /// </returns>
-        public async Task<bool> UninstallPackageAsync(WinGetPackage package)
-        {
-            return await Task.Run(() => UninstallPackage(package));
-        }
         //---------------------------------------------------------------------------------------------
 
         //---Upgrade-----------------------------------------------------------------------------------
@@ -326,17 +254,6 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("Getting updateable packages failed.", e);
             }
-        }
-
-        /// <summary>
-        /// Get all upgradeable packages.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
-        /// </returns>
-        public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync()
-        {
-            return await Task.Run(() => GetUpgradeablePackages());
         }
 
         /// <summary>
@@ -408,30 +325,6 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Upgrading the package failed.", e);
             }
         }
-
-        /// <summary>
-        /// Upgrades a package using winget.
-        /// </summary>
-        /// <param name="packageId">The id or name of the package for upgrade.</param>
-        /// <returns>
-        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
-        /// </returns>
-        public async Task<bool> UpgradePackageAsync(string packageId)
-        {
-            return await Task.Run(() => UpgradePackage(packageId));
-        }
-
-        /// <summary>
-        /// Upgrades a package using winget.
-        /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
-        /// <returns>
-        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
-        /// </returns>
-        public async Task<bool> UpgradePackageAsync(WinGetPackage package)
-        {
-            return await Task.Run(() => UpgradePackage(package));
-        }
         //---------------------------------------------------------------------------------------------
 
         //---Other------------------------------------------------------------------------------------
@@ -471,18 +364,6 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Exports a list of all installed winget packages as json to the given file.
-        /// </summary>
-        /// <param name="file">The file for the export.</param>
-        /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
-        /// </returns>
-        public async Task<bool> ExportPackagesToFileAsync(string file)
-        {
-            return await Task.Run(() => ExportPackagesToFile(file));
-        }
-
-        /// <summary>
         /// Imports packages and trys to installes/upgrade all pakages in the list, if possible.
         /// </summary>
         /// <remarks>
@@ -519,22 +400,6 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("Importing packages failed.", e);
             }
-        }
-
-        /// <summary>
-        /// Imports packages and trys to installes/upgrade all pakages in the list, if possible.
-        /// </summary>
-        /// <remarks>
-        /// This may take some time and winget may not install/upgrade all packages.
-        /// </remarks>
-        /// <param name="file">The file with the package data for the import.</param>
-        /// <returns>
-        /// <see langword="true"/> if the import was compleatly successfull or 
-        /// <see langword="false"/> if some or all packages failed to install.
-        /// </returns>
-        public async Task<bool> ImportPackagesFromFileAsync(string file)
-        {
-            return await Task.Run(() => ImportPackagesFromFile(file));
         }
         //---------------------------------------------------------------------------------------------
 

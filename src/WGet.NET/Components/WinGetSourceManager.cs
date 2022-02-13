@@ -6,7 +6,6 @@ using System;
 using System.IO;
 using System.Text;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace WGetNET
@@ -17,6 +16,8 @@ namespace WGetNET
     public class WinGetSourceManager
     {
         private const string _sourceListCmd = "source list";
+        private const string _sourceAddCmd = "source add -n {0} -a {1} --accept-source-agreements";
+        private const string _sourceAddWithTypeCmd = "source add -n {0} -a {1} -t {2} --accept-source-agreements";
         private const string _sourceUpdateCmd = "source update";
         private const string _sourceExportCmd = "source export";
 
@@ -55,16 +56,94 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Getting installed sources failed.", e);
             }
         }
+        //---------------------------------------------------------------------------------------------
+
+        //---Add---------------------------------------------------------------------------------------
+        /// <summary>
+        /// Adds a new source to winget (Needs administrator rights).
+        /// </summary>
+        /// <remarks>
+        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+        /// </remarks>
+        /// <param name="name">
+        /// A <see cref="System.String"/> representing the name of the source to add.
+        /// </param>
+        /// <param name="arg">
+        /// A <see cref="System.String"/> representing the source (eg. URL).
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        public bool AddSource(string name, string arg)
+        {
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_sourceAddCmd, name, arg));
+
+                if (result.ExitCode == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+            }
+        }
 
         /// <summary>
-        /// Gets a list of all sources that are installed in winget.
+        /// Adds a new source to winget (Needs administrator rights).
         /// </summary>
+        /// <remarks>
+        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+        /// </remarks>
+        /// <param name="name">
+        /// A <see cref="System.String"/> representing the name of the source to add.
+        /// </param>
+        /// <param name="arg">
+        /// A <see cref="System.String"/> representing the source (eg. URL).
+        /// </param>
+        /// <param name="type">
+        /// A <see cref="System.String"/> representing the source type.
+        /// </param>
         /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
+        /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        public async Task<List<WinGetSource>> GetInstalledSourcesAsync()
+        public bool AddSource(string name, string arg, string type)
         {
-            return await Task.Run(() => GetInstalledSources());
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_sourceAddWithTypeCmd, name, arg, type));
+
+                if (result.ExitCode == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+            }
         }
         //---------------------------------------------------------------------------------------------
 
@@ -72,6 +151,9 @@ namespace WGetNET
         /// <summary>
         /// Updates all sources that are installed in winget.
         /// </summary>
+        /// <remarks>
+        /// This may take a while depending on the sources.
+        /// </remarks>
         /// <returns>
         /// <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
         /// </returns>
@@ -101,17 +183,6 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Updating sources failed.", e);
             }
         }
-
-        /// <summary>
-        /// Updates all sources that are installed in winget.
-        /// </summary>
-        /// <returns>
-        /// <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
-        /// </returns>
-        public async Task<bool> UpdateSourcesAsync()
-        {
-            return await Task.Run(() => UpdateSources());
-        }
         //---------------------------------------------------------------------------------------------
         
         //---Export------------------------------------------------------------------------------------
@@ -134,7 +205,6 @@ namespace WGetNET
                     outputBuilder.Append(line);
                 }
 
-                //Check if installation was succsessfull
                 if (result.ExitCode == 0)
                 {
                     return outputBuilder.ToString().Trim();
@@ -180,7 +250,6 @@ namespace WGetNET
                     outputBuilder.Append(line);
                 }
 
-                //Check if installation was succsessfull
                 if (result.ExitCode == 0)
                 {
                     return outputBuilder.ToString().Trim();
@@ -198,29 +267,6 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("Exporting sources failed.", e);
             }
-        }
-
-        /// <summary>
-        /// Exports the winget sources as a json string.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String"/> that contains the winget sorces in json format.
-        /// </returns>
-        public async Task<string> ExportSourcesAsync()
-        {
-            return await Task.Run(() => ExportSources());
-        }
-
-        /// <summary>
-        /// Exports the winget sources as a json string.
-        /// </summary>
-        /// <param name="sourceName">The name of the source for the export.</param>
-        /// <returns>
-        /// A <see cref="System.String"/> that contains the winget sorces in json format.
-        /// </returns>
-        public async Task<string> ExportSourcesAsync(string sourceName)
-        {
-            return await Task.Run(() => ExportSources(sourceName));
         }
 
         /// <summary>
@@ -243,7 +289,6 @@ namespace WGetNET
                     outputBuilder.Append(line);
                 }
 
-                //Check if installation was succsessfull
                 if (result.ExitCode == 0 && outputBuilder.ToString().Trim() != string.Empty)
                 {
                     File.WriteAllText(
@@ -295,7 +340,6 @@ namespace WGetNET
                     outputBuilder.Append(line);
                 }
 
-                //Check if installation was succsessfull
                 if (result.ExitCode == 0 && outputBuilder.ToString().Trim() != string.Empty)
                 {
                     File.WriteAllText(
@@ -318,31 +362,6 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("Exporting sources failed.", e);
             }
-        }
-
-        /// <summary>
-        /// Exports the winget sources in json format to a file.
-        /// </summary>
-        /// <param name="file">The file for the export.</param>
-        /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
-        /// </returns>
-        public async Task<bool> ExportSourcesToFileAsync(string file)
-        {
-            return await Task.Run(() => ExportSourcesToFile(file));
-        }
-
-        /// <summary>
-        /// Exports the winget sources in json format to a file.
-        /// </summary>
-        /// <param name="file">The file for the export.</param>
-        /// <param name="sourceName">The name of the source for the export.</param>
-        /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
-        /// </returns>
-        public async Task<bool> ExportSourcesToFileAsync(string file, string sourceName)
-        {
-            return await Task.Run(() => ExportSourcesToFile(file, sourceName));
         }
         //---------------------------------------------------------------------------------------------
 

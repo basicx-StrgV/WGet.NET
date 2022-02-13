@@ -27,9 +27,9 @@ Therefore the functions are limited at the moment.<br>
 - Check if WinGet is installed
 - Get the WinGet version number
 - Get installed sources
+- Add sources
 - Update sources
 - Export sources
-- Asynchronous execution
 
 ## 📦 NuGet Package
 
