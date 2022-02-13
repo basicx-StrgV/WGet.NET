@@ -5,7 +5,6 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -21,19 +20,14 @@ namespace WGetNET
         private const string _sourceUpdateCmd = "source update";
         private const string _sourceExportCmd = "source export";
 
-        private readonly ProcessStartInfo _winGetStartInfo;
+        private readonly ProcessManager _processManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetSourceManager"/> class.
         /// </summary>
         public WinGetSourceManager()
         {
-            _winGetStartInfo = new ProcessStartInfo()
-            {
-                WindowStyle = ProcessWindowStyle.Hidden,
-                FileName = "winget",
-                RedirectStandardOutput = true
-            };
+            _processManager = new ProcessManager();
         }
 
         //---List--------------------------------------------------------------------------------------
@@ -47,36 +41,18 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = _sourceListCmd;
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_sourceListCmd);
 
-                //Output List
-                List<string> output = new List<string>();
-
-                //Create and run process
-                using (Process searchProc = new Process() { StartInfo = _winGetStartInfo })
-                {
-                    searchProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = searchProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
-
-                    searchProc.WaitForExit();
-                }
-
-                return ToSourceList(output);
+                return ToSourceList(result.Output);
             }
             catch (Win32Exception)
             {
                 throw new WinGetNotInstalledException();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return new List<WinGetSource>();
+                throw new WinGetActionFailedException("Getting installed sources failed.", e);
             }
         }
 
@@ -103,23 +79,11 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = _sourceUpdateCmd;
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process updateProc = new Process { StartInfo = _winGetStartInfo })
-                {
-                    updateProc.Start();
-
-                    //Wait till end and get exit code
-                    updateProc.WaitForExit();
-                    exitCode = updateProc.ExitCode;
-                }
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_sourceUpdateCmd);
 
                 //Check if installation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return true;
                 }
@@ -161,32 +125,17 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = _sourceExportCmd;
+                ProcessResult result = 
+                    _processManager.ExecuteWingetProcess(_sourceExportCmd);
 
                 StringBuilder outputBuilder = new StringBuilder();
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process updateProc = new Process { StartInfo = _winGetStartInfo })
+                foreach (string line in result.Output)
                 {
-                    updateProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = updateProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        outputBuilder.Append(procOutputStream.ReadLine());
-                    }
-
-                    //Wait till end and get exit code
-                    updateProc.WaitForExit();
-                    exitCode = updateProc.ExitCode;
+                    outputBuilder.Append(line);
                 }
 
                 //Check if installation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return outputBuilder.ToString().Trim();
                 }
@@ -217,34 +166,22 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _winGetStartInfo.Arguments =
+                string cmd =
                     _sourceExportCmd +
                     " -n " +
                     sourceName;
 
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(cmd);
+
                 StringBuilder outputBuilder = new StringBuilder();
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process updateProc = new Process { StartInfo = _winGetStartInfo })
+                foreach (string line in result.Output)
                 {
-                    updateProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = updateProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        outputBuilder.Append(procOutputStream.ReadLine());
-                    }
-
-                    //Wait till end and get exit code
-                    updateProc.WaitForExit();
-                    exitCode = updateProc.ExitCode;
+                    outputBuilder.Append(line);
                 }
 
                 //Check if installation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return outputBuilder.ToString().Trim();
                 }
@@ -297,32 +234,17 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = _sourceExportCmd;
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_sourceExportCmd);
 
                 StringBuilder outputBuilder = new StringBuilder();
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process updateProc = new Process { StartInfo = _winGetStartInfo })
+                foreach (string line in result.Output)
                 {
-                    updateProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = updateProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        outputBuilder.Append(procOutputStream.ReadLine());
-                    }
-
-                    //Wait till end and get exit code
-                    updateProc.WaitForExit();
-                    exitCode = updateProc.ExitCode;
+                    outputBuilder.Append(line);
                 }
 
                 //Check if installation was succsessfull
-                if (exitCode == 0 && outputBuilder.ToString().Trim() != string.Empty)
+                if (result.ExitCode == 0 && outputBuilder.ToString().Trim() != string.Empty)
                 {
                     File.WriteAllText(
                         file, 
@@ -359,34 +281,22 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                _winGetStartInfo.Arguments =
+                string cmd =
                     _sourceExportCmd +
                     " -n " +
                     sourceName;
 
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(cmd);
+
                 StringBuilder outputBuilder = new StringBuilder();
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process updateProc = new Process { StartInfo = _winGetStartInfo })
+                foreach (string line in result.Output)
                 {
-                    updateProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = updateProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        outputBuilder.Append(procOutputStream.ReadLine());
-                    }
-
-                    //Wait till end and get exit code
-                    updateProc.WaitForExit();
-                    exitCode = updateProc.ExitCode;
+                    outputBuilder.Append(line);
                 }
 
                 //Check if installation was succsessfull
-                if (exitCode == 0 && outputBuilder.ToString().Trim() != string.Empty)
+                if (result.ExitCode == 0 && outputBuilder.ToString().Trim() != string.Empty)
                 {
                     File.WriteAllText(
                         file,

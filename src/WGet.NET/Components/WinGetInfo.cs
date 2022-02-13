@@ -3,9 +3,6 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
-using System.IO;
-using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace WGetNET
 {
@@ -16,7 +13,7 @@ namespace WGetNET
     {
         private const string _versionCmd = "--version";
 
-        private readonly ProcessStartInfo _winGetStartInfo;
+        private readonly ProcessManager _processManager;
 
         /// <summary>
         /// Gets if winget is installed on the system.
@@ -42,12 +39,7 @@ namespace WGetNET
         /// </summary>
         public WinGetInfo()
         {
-            _winGetStartInfo = new ProcessStartInfo()
-            {
-                WindowStyle = ProcessWindowStyle.Hidden,
-                FileName = "winget",
-                RedirectStandardOutput = true
-            };
+            _processManager = new ProcessManager();
 
             _winGetVersion = CheckWinGetVersion();
 
@@ -65,39 +57,17 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = _versionCmd;
-
-                //Output List
-                List<string> output = new List<string>();
-                
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process getVersionProc = new Process { StartInfo = _winGetStartInfo })
-                {
-                    getVersionProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = getVersionProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
-
-                    //Wait till end and get exit code
-                    getVersionProc.WaitForExit();
-                    exitCode = getVersionProc.ExitCode;
-                }
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_versionCmd);
 
                 //Check if the process was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
-                    for (int i = 0; i < output.Count; i++)
+                    for (int i = 0; i < result.Output.Count; i++)
                     {
-                        if (output[i].StartsWith("v"))
+                        if (result.Output[i].StartsWith("v"))
                         {
-                            return (output[i]);
+                            return (result.Output[i]);
                         }
                     }
                     return (string.Empty);

@@ -3,8 +3,6 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
-using System.IO;
-using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -25,19 +23,14 @@ namespace WGetNET
         private const string _exportCmd = "export -o {0}";
         private const string _importCmd = "import -i {0} --ignore-unavailable";
 
-        private readonly ProcessStartInfo _winGetStartInfo;
+        private readonly ProcessManager _processManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
         /// </summary>
         public WinGetPackageManager()
         {
-            _winGetStartInfo = new ProcessStartInfo()
-            {
-                WindowStyle = ProcessWindowStyle.Hidden,
-                FileName = "winget",
-                RedirectStandardOutput = true
-            };
+            _processManager = new ProcessManager();
         }
 
         //---Search------------------------------------------------------------------------------------
@@ -52,28 +45,11 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = String.Format(_searchCmd, packageName);
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_searchCmd, packageName));
 
-                //Output List
-                List<string> output = new List<string>();
-
-                //Create and run process
-                using (Process searchProc = new Process() { StartInfo = _winGetStartInfo })
-                {
-                    searchProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = searchProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
-
-                    searchProc.WaitForExit();
-                }
-
-                return ToPackageList(output);
+                return ToPackageList(result.Output);
             }
             catch (Win32Exception)
             {
@@ -109,28 +85,10 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = _listCmd;
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_listCmd);
 
-                //Output List
-                List<string> output = new List<string>();
-
-                //Create and run process
-                using (Process searchProc = new Process() { StartInfo = _winGetStartInfo })
-                {
-                    searchProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = searchProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
-
-                    searchProc.WaitForExit();
-                }
-
-                return ToPackageList(output);
+                return ToPackageList(result.Output);
             }
             catch (Win32Exception)
             {
@@ -164,23 +122,12 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = String.Format(_installCmd, packageId);
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process installProc = new Process{ StartInfo = _winGetStartInfo }) 
-                {
-                    installProc.Start();
-
-                    //Wait till end and get exit code
-                    installProc.WaitForExit();
-                    exitCode = installProc.ExitCode;
-                }
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_installCmd, packageId));
 
                 //Check if installation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return true;
                 }
@@ -210,23 +157,12 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = String.Format(_installCmd, package.PackageId);
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process installProc = new Process{ StartInfo = _winGetStartInfo }) 
-                { 
-                    installProc.Start();
-
-                    //Wait till end and get exit code
-                    installProc.WaitForExit();
-                    exitCode = installProc.ExitCode;
-                }
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_installCmd, package.PackageId));
 
                 //Check if installation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return true;
                 }
@@ -282,23 +218,12 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = String.Format(_uninstallCmd, packageId);
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process uninstallProc = new Process{ StartInfo = _winGetStartInfo })
-                {
-                    uninstallProc.Start();
-
-                    //Wait till end and get exit code
-                    uninstallProc.WaitForExit();
-                    exitCode = uninstallProc.ExitCode;
-                }
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_uninstallCmd, packageId));
 
                 //Check if uninstallation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return true;
                 }
@@ -328,23 +253,12 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = String.Format(_uninstallCmd, package.PackageId);
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process uninstallProc = new Process{ StartInfo = _winGetStartInfo }) 
-                {
-                    uninstallProc.Start();
-
-                    //Wait till end and get exit code
-                    uninstallProc.WaitForExit();
-                    exitCode = uninstallProc.ExitCode;
-                }
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_uninstallCmd, package.PackageId));
 
                 //Check if uninstallation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return true;
                 }
@@ -399,27 +313,10 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = _getUpgradeableCmd;
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_getUpgradeableCmd);
 
-                //Output List
-                List<string> output = new List<string>();
-
-                //Create and run process
-                using (Process searchProc = new Process { StartInfo = _winGetStartInfo })
-                {
-                    searchProc.Start();
-
-                    //Read output to list
-                    using StreamReader procOutputStream = searchProc.StandardOutput;
-                    while (!procOutputStream.EndOfStream)
-                    {
-                        output.Add(procOutputStream.ReadLine());
-                    }
-
-                    searchProc.WaitForExit();
-                }
-                return ToPackageList(output);
+                return ToPackageList(result.Output);
             }
             catch (Win32Exception)
             {
@@ -453,23 +350,12 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = String.Format(_upgradeCmd, packageId);
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process installProc = new Process { StartInfo = _winGetStartInfo })
-                {
-                    installProc.Start();
-
-                    //Wait till end and get exit code
-                    installProc.WaitForExit();
-                    exitCode = installProc.ExitCode;
-                }
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_upgradeCmd, packageId));
 
                 //Check if installation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return true;
                 }
@@ -499,23 +385,12 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = String.Format(_upgradeCmd, package.PackageId);
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process installProc = new Process { StartInfo = _winGetStartInfo })
-                {
-                    installProc.Start();
-
-                    //Wait till end and get exit code
-                    installProc.WaitForExit();
-                    exitCode = installProc.ExitCode;
-                }
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_upgradeCmd, package.PackageId));
 
                 //Check if installation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return true;
                 }
@@ -571,23 +446,12 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = String.Format(_exportCmd, file);
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process installProc = new Process() { StartInfo = _winGetStartInfo })
-                {
-                    installProc.Start();
-
-                    //Wait till end and get exit code
-                    installProc.WaitForExit();
-                    exitCode = installProc.ExitCode;
-                }
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_exportCmd, file));
 
                 //Check if installation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return true;
                 }
@@ -633,23 +497,12 @@ namespace WGetNET
         {
             try
             {
-                //Set Arguments
-                _winGetStartInfo.Arguments = String.Format(_importCmd, file);
-
-                int exitCode = -1;
-
-                //Create and run process
-                using (Process installProc = new Process(){ StartInfo = _winGetStartInfo })
-                {
-                    installProc.Start();
-
-                    //Wait till end and get exit code
-                    installProc.WaitForExit();
-                    exitCode = installProc.ExitCode;
-                }
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        String.Format(_importCmd, file));
 
                 //Check if installation was succsessfull
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     return true;
                 }

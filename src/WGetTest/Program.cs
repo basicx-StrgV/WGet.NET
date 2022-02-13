@@ -25,8 +25,8 @@ namespace WGetTest
             
             //---Tests-----------------------------------------------------------------------------
             List<WinGetPackage> test = connector.SearchPackage("Git");
-            Console.WriteLine(test[49].PackageName);
-            Console.WriteLine(test[49].PackageId);
+            Console.WriteLine(test[0].PackageName);
+            Console.WriteLine(test[0].PackageId);
 
             List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
             bool sourceUpdateStatus = sourceManager.UpdateSources();
