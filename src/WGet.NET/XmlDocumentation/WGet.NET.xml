@@ -72,24 +72,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.SearchPackageAsync(System.String)">
-            <summary>
-            Uses the winget search function to search for a package that maches the given name.
-            </summary>
-            <param name="packageName">The name of the package for the search.</param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
-            </returns>
-        </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages">
-            <summary>
-            Gets a list of all installed packages.
-            </summary>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync">
             <summary>
             Gets a list of all installed packages.
             </summary>
@@ -107,24 +90,6 @@
             </returns>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage)">
-            <summary>
-            Install a package using winget.
-            </summary>
-            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
-            <returns>
-            <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(System.String)">
-            <summary>
-            Install a package using winget.
-            </summary>
-            <param name="packageId">The id or name of the package for the installation.</param>
-            <returns>
-            <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage)">
             <summary>
             Install a package using winget.
             </summary>
@@ -151,33 +116,7 @@
             <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(System.String)">
-            <summary>
-            Uninsatll a package using winget.
-            </summary>
-            <param name="packageId">The id or name of the package for uninstallation.</param>
-            <returns>
-            <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.WinGetPackage)">
-            <summary>
-            Uninsatll a package using winget.
-            </summary>
-            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the uninstallation.</param>
-            <returns>
-            <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
-            </returns>
-        </member>
         <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackages">
-            <summary>
-            Get all upgradeable packages.
-            </summary>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackagesAsync">
             <summary>
             Get all upgradeable packages.
             </summary>
@@ -203,24 +142,6 @@
             <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(System.String)">
-            <summary>
-            Upgrades a package using winget.
-            </summary>
-            <param name="packageId">The id or name of the package for upgrade.</param>
-            <returns>
-            <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.WinGetPackage)">
-            <summary>
-            Upgrades a package using winget.
-            </summary>
-            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> that for the upgrade</param>
-            <returns>
-            <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
-            </returns>
-        </member>
         <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFile(System.String)">
             <summary>
             Exports a list of all installed winget packages as json to the given file.
@@ -230,29 +151,7 @@
             <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFileAsync(System.String)">
-            <summary>
-            Exports a list of all installed winget packages as json to the given file.
-            </summary>
-            <param name="file">The file for the export.</param>
-            <returns>
-            <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
-            </returns>
-        </member>
         <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFile(System.String)">
-            <summary>
-            Imports packages and trys to installes/upgrade all pakages in the list, if possible.
-            </summary>
-            <remarks>
-            This may take some time and winget may not install/upgrade all packages.
-            </remarks>
-            <param name="file">The file with the package data for the import.</param>
-            <returns>
-            <see langword="true"/> if the import was compleatly successfull or 
-            <see langword="false"/> if some or all packages failed to install.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFileAsync(System.String)">
             <summary>
             Imports packages and trys to installes/upgrade all pakages in the list, if possible.
             </summary>
@@ -276,14 +175,6 @@
             </summary>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.GetInstalledSources">
-            <summary>
-            Gets a list of all sources that are installed in winget.
-            </summary>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetSourceManager.GetInstalledSourcesAsync">
             <summary>
             Gets a list of all sources that are installed in winget.
             </summary>
@@ -332,14 +223,9 @@
             <summary>
             Updates all sources that are installed in winget.
             </summary>
-            <returns>
-            <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetSourceManager.UpdateSourcesAsync">
-            <summary>
-            Updates all sources that are installed in winget.
-            </summary>
+            <remarks>
+            This may take a while depending on the sources.
+            </remarks>
             <returns>
             <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
             </returns>
@@ -361,23 +247,6 @@
             A <see cref="T:System.String"/> that contains the winget sorces in json format.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesAsync">
-            <summary>
-            Exports the winget sources as a json string.
-            </summary>
-            <returns>
-            A <see cref="T:System.String"/> that contains the winget sorces in json format.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesAsync(System.String)">
-            <summary>
-            Exports the winget sources as a json string.
-            </summary>
-            <param name="sourceName">The name of the source for the export.</param>
-            <returns>
-            A <see cref="T:System.String"/> that contains the winget sorces in json format.
-            </returns>
-        </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String)">
             <summary>
             Exports the winget sources in json format to a file.
@@ -388,25 +257,6 @@
             </returns>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,System.String)">
-            <summary>
-            Exports the winget sources in json format to a file.
-            </summary>
-            <param name="file">The file for the export.</param>
-            <param name="sourceName">The name of the source for the export.</param>
-            <returns>
-            <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String)">
-            <summary>
-            Exports the winget sources in json format to a file.
-            </summary>
-            <param name="file">The file for the export.</param>
-            <returns>
-            <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,System.String)">
             <summary>
             Exports the winget sources in json format to a file.
             </summary>
