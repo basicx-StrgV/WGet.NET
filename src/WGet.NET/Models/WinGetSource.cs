@@ -10,12 +10,16 @@ namespace WGetNET
     public class WinGetSource
     {
         /// <summary>
-        /// Name of the source
+        /// Gets or sets the name of the source.
         /// </summary>
         public string SourceName { get; set; }
         /// <summary>
-        /// Url of the source
+        /// Gets or sets the url of the source.
         /// </summary>
         public string SourceUrl { get; set; }
+        /// <summary>
+        /// Gets or sets the type of the source.
+        /// </summary>
+        public string SourceType { get; set; }
     }
 }

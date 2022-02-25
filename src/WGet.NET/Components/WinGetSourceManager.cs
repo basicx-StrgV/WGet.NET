@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using System.ComponentModel;
 using System.Collections.Generic;
+using WGetNET.HelperClasses;
 
 namespace WGetNET
 {
@@ -20,6 +21,8 @@ namespace WGetNET
         private const string _sourceAddWithTypeCmd = "source add -n {0} -a {1} -t {2} --accept-source-agreements";
         private const string _sourceUpdateCmd = "source update";
         private const string _sourceExportCmd = "source export";
+        private const string _sourceResetCmd = "source reset --force";
+        private const string _sourceRemoveCmd = "source remove -n {0}";
 
         private readonly ProcessManager _processManager;
 
@@ -45,7 +48,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_sourceListCmd);
 
-                return ToSourceList(result.Output);
+                return ProcessOutputReader.ToSourceList(result.Output);
             }
             catch (Win32Exception)
             {
@@ -81,6 +84,54 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
                         String.Format(_sourceAddCmd, name, arg));
+
+                if (result.ExitCode == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Adds a new source to winget (Needs administrator rights).
+        /// </summary>
+        /// <remarks>
+        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+        /// </remarks>
+        /// <param name="source">
+        /// The <see cref="WGetNET.WinGetSource"/> to add.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        public bool AddSource(WinGetSource source)
+        {
+            try
+            {
+                ProcessResult result;
+
+                if (string.IsNullOrWhiteSpace(source.SourceType))
+                {
+                    result = _processManager.ExecuteWingetProcess(
+                        string.Format(_sourceAddWithTypeCmd, source.SourceName, source.SourceUrl, source.SourceType));
+                }
+                else
+                {
+                    result = _processManager.ExecuteWingetProcess(
+                        string.Format(_sourceAddCmd, source.SourceName, source.SourceUrl));
+                } 
 
                 if (result.ExitCode == 0)
                 {
@@ -270,6 +321,53 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Exports the winget sources as a json string.
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="WGetNET.WinGetSource"/> for the export.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> that contains the winget sorces in json format.
+        /// </returns>
+        public string ExportSources(WinGetSource source)
+        {
+            try
+            {
+                //Set Arguments
+                string cmd =
+                    _sourceExportCmd +
+                    " -n " +
+                    source.SourceName;
+
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(cmd);
+
+                StringBuilder outputBuilder = new StringBuilder();
+                foreach (string line in result.Output)
+                {
+                    outputBuilder.Append(line);
+                }
+
+                if (result.ExitCode == 0)
+                {
+                    return outputBuilder.ToString().Trim();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Exporting sources failed.", e);
+            }
+        }
+
+        /// <summary>
         /// Exports the winget sources in json format to a file.
         /// </summary>
         /// <param name="file">The file for the export.</param>
@@ -363,64 +461,173 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Exporting sources failed.", e);
             }
         }
+
+        /// <summary>
+        /// Exports the winget sources in json format to a file.
+        /// </summary>
+        /// <param name="file">
+        /// The file for the export.
+        /// </param>
+        /// <param name="source">
+        /// The <see cref="WGetNET.WinGetSource"/> for the export.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// </returns>
+        public bool ExportSourcesToFile(string file, WinGetSource source)
+        {
+            try
+            {
+                //Set Arguments
+                string cmd =
+                    _sourceExportCmd +
+                    " -n " +
+                    source.SourceName;
+
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(cmd);
+
+                StringBuilder outputBuilder = new StringBuilder();
+                foreach (string line in result.Output)
+                {
+                    outputBuilder.Append(line);
+                }
+
+                if (result.ExitCode == 0 && outputBuilder.ToString().Trim() != string.Empty)
+                {
+                    File.WriteAllText(
+                        file,
+                        outputBuilder
+                        .ToString()
+                        .Trim());
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Exporting sources failed.", e);
+            }
+        }
         //---------------------------------------------------------------------------------------------
 
-        private List<WinGetSource> ToSourceList(List<string> output)
+        //---Reset-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Resets all sources that are installed in winget (Needs administrator rights).
+        /// </summary>
+        /// <remarks>
+        /// This may take a while depending on the sources.
+        /// </remarks>
+        /// <returns>
+        /// <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
+        /// </returns>
+        public bool ResetSources()
         {
-            //Get top line index
-            int topLineIndex = 0;
-            for (int i = 0; i < output.Count; i++)
+            try
             {
-                if (output[i].Contains("------"))
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_sourceResetCmd);
+
+                //Check if installation was succsessfull
+                if (result.ExitCode == 0)
                 {
-                    topLineIndex = i;
-                    break;
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
-
-            //Get start indexes of each tabel colum
-            int nameStartIndex = 0;
-
-            int urlStartIndex = 0;
-
-            int labelLine = topLineIndex - 1;
-            bool checkForChar = false;
-            for (int i = 0; i < output[labelLine].Length; i++)
+            catch (Win32Exception)
             {
-                if (output[labelLine][i] != ' ' && checkForChar)
-                {
-                    urlStartIndex = i;
-                    break;
-                }
-                else if (output[labelLine][i] == ' ')
-                {
-                    checkForChar = true;
-                }
+                throw new WinGetNotInstalledException();
             }
-
-            //Remove unneeded output Lines
-            output.RemoveRange(0, topLineIndex + 1);
-
-            List<WinGetSource> resultList = new List<WinGetSource>();
-
-            foreach (string line in output)
+            catch (Exception e)
             {
-                string name = 
-                    line[nameStartIndex..urlStartIndex]
-                    .Trim();
-                string winGetId = 
-                    line[urlStartIndex..]
-                    .Trim();
-
-                resultList.Add(
-                    new WinGetSource() 
-                    { 
-                        SourceName = name, 
-                        SourceUrl = winGetId 
-                    });
+                throw new WinGetActionFailedException("Reset sources failed.", e);
             }
-
-            return resultList;
         }
+        //---------------------------------------------------------------------------------------------
+
+        //---Remove------------------------------------------------------------------------------------
+        /// <summary>
+        /// Removes a source from winget (Needs administrator rights).
+        /// </summary>
+        /// <param name="name">
+        /// A <see cref="System.String"/> representing the name of the source.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+        /// </returns>
+        public bool RemoveSources(string name)
+        {
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(string.Format(_sourceRemoveCmd, name));
+
+                //Check if installation was succsessfull
+                if (result.ExitCode == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Removing source failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Removes a source from winget (Needs administrator rights).
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="WGetNET.WinGetSource"/> to remove.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+        /// </returns>
+        public bool RemoveSources(WinGetSource source)
+        {
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(string.Format(_sourceRemoveCmd, source.SourceName));
+
+                //Check if installation was succsessfull
+                if (result.ExitCode == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Removing source failed.", e);
+            }
+        }
+        //---------------------------------------------------------------------------------------------
     }
 }

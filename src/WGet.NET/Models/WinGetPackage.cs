@@ -10,15 +10,15 @@ namespace WGetNET
     public class WinGetPackage
     {
         /// <summary>
-        /// Name of the package
+        /// Gets or sets the name of the package.
         /// </summary>
         public string PackageName { get; set; }
         /// <summary>
-        /// Id of the package
+        /// Gets or sets the id of the package.
         /// </summary>
         public string PackageId { get; set; }
         /// <summary>
-        /// Version of the package
+        /// Gets or sets the version of the package.
         /// </summary>
         public string PackageVersion { get; set; }
     }

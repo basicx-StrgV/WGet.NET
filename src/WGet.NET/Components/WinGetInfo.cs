@@ -43,7 +43,7 @@ namespace WGetNET
 
             _winGetVersion = CheckWinGetVersion();
 
-            if (string.IsNullOrEmpty(_winGetVersion))
+            if (string.IsNullOrWhiteSpace(_winGetVersion))
             {
                 _winGetInstalled = false;
             }
@@ -63,19 +63,15 @@ namespace WGetNET
                 //Check if the process was succsessfull
                 if (result.ExitCode == 0)
                 {
-                    for (int i = 0; i < result.Output.Count; i++)
+                    for (int i = 0; i < result.Output.Length; i++)
                     {
                         if (result.Output[i].StartsWith("v"))
                         {
-                            return (result.Output[i]);
+                            return result.Output[i].Trim();
                         }
                     }
-                    return (string.Empty);
                 }
-                else
-                {
-                    return (string.Empty);
-                }
+                return (string.Empty);
             }
             catch (Exception)
             {

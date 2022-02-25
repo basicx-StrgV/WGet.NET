@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Collections.Generic;
+using WGetNET.HelperClasses;
 
 namespace WGetNET
 {
@@ -48,7 +49,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         String.Format(_searchCmd, packageName));
 
-                return ToPackageList(result.Output);
+                return ProcessOutputReader.ToPackageList(result.Output);
             }
             catch (Win32Exception)
             {
@@ -75,7 +76,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_listCmd);
 
-                return ToPackageList(result.Output);
+                return ProcessOutputReader.ToPackageList(result.Output);
             }
             catch (Win32Exception)
             {
@@ -244,7 +245,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_getUpgradeableCmd);
 
-                return ToPackageList(result.Output);
+                return ProcessOutputReader.ToPackageList(result.Output);
             }
             catch (Win32Exception)
             {
@@ -402,89 +403,5 @@ namespace WGetNET
             }
         }
         //---------------------------------------------------------------------------------------------
-
-        private List<WinGetPackage> ToPackageList(List<string> output)
-        {
-            //Get top line index
-            int topLineIndex = 0;
-            for (int i = 0; i < output.Count; i++)
-            {
-                if (output[i].Contains("------"))
-                {
-                    topLineIndex = i;
-                    break;
-                }
-            }
-
-            //Get start indexes of each tabel colum
-            int nameStartIndex = 0;
-
-            int idStartIndex = 0;
-            bool idStartIndexSet = false;
-
-            int versionStartIndex = 0;
-            bool versionStartIndexSet = false;
-
-            int extraInfoStartIndex = 0;
-            bool extraInfoStartIndexSet = false;
-
-            int labelLine = topLineIndex - 1;
-            bool checkForChar = false;
-            for (int i = 0; i < output[labelLine].Length; i++)
-            {
-                if (output[labelLine][i] != ' ' && checkForChar)
-                {
-                    if (!idStartIndexSet)
-                    {
-                        idStartIndex = i;
-                        idStartIndexSet = true;
-                        checkForChar = false;
-                    }
-                    else if (!versionStartIndexSet)
-                    {
-                        versionStartIndex = i;
-                        versionStartIndexSet = true;
-                        checkForChar = false;
-                    }
-                    else if (!extraInfoStartIndexSet)
-                    {
-                        extraInfoStartIndex = i;
-                        extraInfoStartIndexSet = true;
-                        checkForChar = false;
-                    }
-                    else if (idStartIndexSet && versionStartIndexSet && extraInfoStartIndexSet)
-                    {
-                        //Breake the loop if all indexes are set
-                        break;
-                    }
-                }
-                else if (output[labelLine][i] == ' ')
-                {
-                    checkForChar = true;
-                }
-            }
-
-            //Remove unneeded output Lines
-            output.RemoveRange(0, topLineIndex + 1);
-
-            List<WinGetPackage> resultList = new List<WinGetPackage>();
-
-            foreach (string line in output)
-            {
-                string name = line
-                    .Substring(nameStartIndex, idStartIndex - 1)
-                    .Trim();
-                string winGetId = line
-                    .Substring(idStartIndex, (versionStartIndex - idStartIndex) - 1)
-                    .Trim();
-                string version = line
-                    .Substring(versionStartIndex, (extraInfoStartIndex - versionStartIndex) - 1)
-                    .Trim();
-
-                resultList.Add(new WinGetPackage() { PackageName = name, PackageId = winGetId, PackageVersion = version });
-            }
-
-            return resultList;
-        }
     }
 }

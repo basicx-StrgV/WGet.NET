@@ -28,8 +28,10 @@ Therefore the functions are limited at the moment.<br>
 - Get the WinGet version number
 - Get installed sources
 - Add sources
+- Remove sources
 - Update sources
 - Export sources
+- Reset sources
 
 ## 📦 NuGet Package
 

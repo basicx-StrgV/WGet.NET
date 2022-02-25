@@ -4,7 +4,7 @@
 //--------------------------------------------------//
 using System.IO;
 using System.Diagnostics;
-using System.Collections.Generic;
+using WGetNET.HelperClasses;
 
 namespace WGetNET
 {
@@ -45,7 +45,7 @@ namespace WGetNET
             _winGetStartInfo.Arguments = cmd;
 
             //Output List
-            List<string> output = new List<string>();
+            string[] output = new string[0];
 
             int exitCode = -1;
 
@@ -53,12 +53,12 @@ namespace WGetNET
             using (Process proc = new Process { StartInfo = _winGetStartInfo })
             {
                 proc.Start();
-
+                
                 //Read output to list
                 using StreamReader procOutputStream = proc.StandardOutput;
                 while (!procOutputStream.EndOfStream)
                 {
-                    output.Add(procOutputStream.ReadLine());
+                    output = ArrayManager.Add(output, procOutputStream.ReadLine());
                 }
 
                 //Wait till end and get exit code

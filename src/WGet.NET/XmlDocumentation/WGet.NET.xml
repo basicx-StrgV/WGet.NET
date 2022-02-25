@@ -266,6 +266,17 @@
             <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
             </returns>
         </member>
+        <member name="M:WGetNET.WinGetSourceManager.ResetSources">
+            <summary>
+            Resets all sources that are installed in winget.
+            </summary>
+            <remarks>
+            This may take a while depending on the sources.
+            </remarks>
+            <returns>
+            <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
+            </returns>
+        </member>
         <member name="T:WGetNET.WinGetActionFailedException">
             <summary>
             Exception that gets thrown if a winget action failed.
@@ -321,6 +332,79 @@
             </summary>
             <param name="message">Message of the exception</param>
             <param name="innerException">The inner exception</param>
+        </member>
+        <member name="T:WGetNET.HelperClasses.ArrayManager">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.ArrayManager"/> class,
+            provieds methods to manage <see langword="array"/>'s.
+            </summary>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ArrayManager.Add``1(``0[],``0)">
+            <summary>
+            Adds a new entry to a <see langword="array"/>.
+            </summary>
+            <typeparam name="T">
+            The type of the <see langword="array"/>.
+            </typeparam>
+            <param name="inputArray">
+            The input <see langword="array"/>.
+            </param>
+            <param name="value">
+            The value to add to the <see langword="array"/>.
+            </param>
+            <returns>
+            The <see langword="array"/> with the added entry.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ArrayManager.RemoveRange``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            Removes a range of entrys from a <see langword="array"/>.
+            </summary>
+            <typeparam name="T">
+            The type of the <see langword="array"/>.
+            </typeparam>
+            <param name="inputArray">
+            The input <see langword="array"/>.
+            </param>
+            <param name="index">
+            A <see cref="T:System.Int32"/> representing the zero based start index.
+            </param>
+            <param name="count">
+            A <see cref="T:System.Int32"/> representing the number of elements to remove.
+            </param>
+            <returns>
+            The <see langword="array"/> with the range of entrys removed.
+            </returns>
+        </member>
+        <member name="T:WGetNET.HelperClasses.ProcessOutputReader">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.ProcessOutputReader"/> class,
+            provieds <see langword="static"/> methodes to process the output of the winget processes.
+            </summary>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToPackageList(System.String[])">
+            <summary>
+            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
+            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPackage"/>'s.
+            </summary>
+            <param name="output">
+            A <see cref="T:System.Collections.Generic.List`1"/> of output lines from a winget process.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToSourceList(System.String[])">
+            <summary>
+            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
+            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetSource"/>'s.
+            </summary>
+            <param name="output">
+            A <see cref="T:System.Collections.Generic.List`1"/> of output lines from a winget process.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
+            </returns>
         </member>
         <member name="T:WGetNET.WinGetPackage">
             <summary>
