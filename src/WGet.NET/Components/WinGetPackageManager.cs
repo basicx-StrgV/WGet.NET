@@ -124,15 +124,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_installCmd, packageId));
 
-                //Check if installation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -166,15 +158,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_installCmd, package.PackageId));
 
-                //Check if installation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -210,15 +194,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_uninstallCmd, packageId));
 
-                //Check if uninstallation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -252,15 +228,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_uninstallCmd, package.PackageId));
 
-                //Check if uninstallation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -328,15 +296,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_upgradeCmd, packageId));
 
-                //Check if installation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -370,15 +330,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_upgradeCmd, package.PackageId));
 
-                //Check if installation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -414,15 +366,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_exportCmd, file));
 
-                //Check if installation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -460,15 +404,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_importCmd, file));
 
-                //Check if installation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {

@@ -101,14 +101,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_sourceAddCmd, name, arg));
 
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -162,16 +155,9 @@ namespace WGetNET
                 {
                     result = _processManager.ExecuteWingetProcess(
                         string.Format(_sourceAddCmd, source.SourceName, source.SourceUrl));
-                } 
+                }
 
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -224,14 +210,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_sourceAddWithTypeCmd, name, arg, type));
 
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -268,15 +247,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_sourceUpdateCmd);
 
-                //Check if installation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -310,20 +281,7 @@ namespace WGetNET
                 ProcessResult result = 
                     _processManager.ExecuteWingetProcess(_sourceExportCmd);
 
-                StringBuilder outputBuilder = new StringBuilder();
-                foreach (string line in result.Output)
-                {
-                    outputBuilder.Append(line);
-                }
-
-                if (result.ExitCode == 0)
-                {
-                    return outputBuilder.ToString().Trim();
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                return ExportOutputToString(result);
             }
             catch (Win32Exception)
             {
@@ -362,20 +320,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
-                StringBuilder outputBuilder = new StringBuilder();
-                foreach (string line in result.Output)
-                {
-                    outputBuilder.Append(line);
-                }
-
-                if (result.ExitCode == 0)
-                {
-                    return outputBuilder.ToString().Trim();
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                return ExportOutputToString(result);
             }
             catch (Win32Exception)
             {
@@ -416,20 +361,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
-                StringBuilder outputBuilder = new StringBuilder();
-                foreach (string line in result.Output)
-                {
-                    outputBuilder.Append(line);
-                }
-
-                if (result.ExitCode == 0)
-                {
-                    return outputBuilder.ToString().Trim();
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                return ExportOutputToString(result);
             }
             catch (Win32Exception)
             {
@@ -462,25 +394,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_sourceExportCmd);
 
-                StringBuilder outputBuilder = new StringBuilder();
-                foreach (string line in result.Output)
-                {
-                    outputBuilder.Append(line);
-                }
-
-                if (result.ExitCode == 0 && outputBuilder.ToString().Trim() != string.Empty)
-                {
-                    File.WriteAllText(
-                        file, 
-                        outputBuilder
-                        .ToString()
-                        .Trim());
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return ExportOutputToFile(result, file);
             }
             catch (Win32Exception)
             {
@@ -520,25 +434,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
-                StringBuilder outputBuilder = new StringBuilder();
-                foreach (string line in result.Output)
-                {
-                    outputBuilder.Append(line);
-                }
-
-                if (result.ExitCode == 0 && outputBuilder.ToString().Trim() != string.Empty)
-                {
-                    File.WriteAllText(
-                        file,
-                        outputBuilder
-                        .ToString()
-                        .Trim());
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return ExportOutputToFile(result, file);
             }
             catch (Win32Exception)
             {
@@ -582,25 +478,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
-                StringBuilder outputBuilder = new StringBuilder();
-                foreach (string line in result.Output)
-                {
-                    outputBuilder.Append(line);
-                }
-
-                if (result.ExitCode == 0 && outputBuilder.ToString().Trim() != string.Empty)
-                {
-                    File.WriteAllText(
-                        file,
-                        outputBuilder
-                        .ToString()
-                        .Trim());
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return ExportOutputToFile(result, file);
             }
             catch (Win32Exception)
             {
@@ -609,6 +487,68 @@ namespace WGetNET
             catch (Exception e)
             {
                 throw new WinGetActionFailedException("Exporting sources failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Writes the export result to a <see cref="System.String"/>.
+        /// </summary>
+        /// <param name="result">
+        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
+        /// </param>
+        /// <returns>
+        /// The <see cref="System.String"/> containing the export result.
+        /// </returns>
+        private string ExportOutputToString(ProcessResult result)
+        {
+            if (result.Success)
+            {
+                StringBuilder outputBuilder = new StringBuilder();
+                foreach (string line in result.Output)
+                {
+                    outputBuilder.Append(line);
+                }
+
+                return outputBuilder.ToString().Trim();
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Writes the export result to a file.
+        /// </summary>
+        /// <param name="result">
+        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
+        /// </param>
+        /// <param name="file">
+        /// A <see cref="System.String"/> containing the file path and name.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// </returns>
+        private bool ExportOutputToFile(ProcessResult result, string file)
+        {
+            if (result.Success)
+            {
+                StringBuilder outputBuilder = new StringBuilder();
+                foreach (string line in result.Output)
+                {
+                    outputBuilder.Append(line);
+                }
+
+                File.WriteAllText(
+                    file,
+                    outputBuilder
+                    .ToString()
+                    .Trim());
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -645,15 +585,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_sourceResetCmd);
 
-                //Check if installation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -698,15 +630,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(string.Format(_sourceRemoveCmd, name));
 
-                //Check if installation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -749,15 +673,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(string.Format(_sourceRemoveCmd, source.SourceName));
 
-                //Check if installation was succsessfull
-                if (result.ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return result.Success;
             }
             catch (Win32Exception)
             {

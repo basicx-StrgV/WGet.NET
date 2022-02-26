@@ -24,51 +24,41 @@ namespace WGetNET.HelperClasses
         /// </returns>
         public static List<WinGetPackage> ToPackageList(string[] output)
         {
-            //Get top line index
-            int labelLine = 0;
-            for (int i = 0; i < output.Length; i++)
-            {
-                if (output[i].Contains("------") && i > 0)
-                {
-                    labelLine = i - 1;
-                    break;
-                }
-            }
+            //Get top line index.
+            //The array should always contain this line.
+            //If it dose not contain this line the resulting out of range exception,
+            //that will be thrown later, will be catched in the calling method.
+            int labelLine = ArrayManager.GetEntry(output, "------") - 1;
 
             //Get start indexes of each tabel colum
-            int nameStartIndex = 0;
-
+            //(The line starts wich the name followed by the id.
+            //The index for the name is always 0 an therfor it is not configured here.)
             int idStartIndex = -1;
-
             int versionStartIndex = -1;
-
             int extraInfoStartIndex = -1;
 
             bool checkForChar = false;
             for (int i = 0; i < output[labelLine].Length; i++)
             {
-                if (output[labelLine][i] != ' ' && checkForChar)
+                if (output[labelLine][i] != ' ' && checkForChar && idStartIndex < 0)
                 {
-                    if (idStartIndex < 0)
-                    {
-                        idStartIndex = i;
-                        checkForChar = false;
-                    }
-                    else if (versionStartIndex < 0)
-                    {
-                        versionStartIndex = i;
-                        checkForChar = false;
-                    }
-                    else if (extraInfoStartIndex < 0)
-                    {
-                        extraInfoStartIndex = i;
-                        checkForChar = false;
-                    }
-                    else if (idStartIndex >= 0 && versionStartIndex >= 0 && extraInfoStartIndex >= 0)
-                    {
-                        //Breake the loop if all indexes are set
-                        break;
-                    }
+                    idStartIndex = i;
+                    checkForChar = false;
+                }
+                else if (output[labelLine][i] != ' ' && checkForChar && versionStartIndex < 0)
+                {
+                    versionStartIndex = i;
+                    checkForChar = false;
+                }
+                else if (output[labelLine][i] != ' ' && checkForChar && extraInfoStartIndex < 0)
+                {
+                    extraInfoStartIndex = i;
+                    checkForChar = false;
+                }
+                else if (idStartIndex >= 0 && versionStartIndex >= 0 && extraInfoStartIndex >= 0)
+                {
+                    //Breake the loop if all indexes are set
+                    break;
                 }
                 else if (output[labelLine][i] == ' ')
                 {
@@ -88,7 +78,7 @@ namespace WGetNET.HelperClasses
                 resultList.Add(
                     new WinGetPackage() 
                     { 
-                        PackageName = output[i][nameStartIndex..idStartIndex].Trim(), 
+                        PackageName = output[i][0..idStartIndex].Trim(), 
                         PackageId = output[i][idStartIndex..versionStartIndex].Trim(), 
                         PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
                     });
@@ -109,20 +99,15 @@ namespace WGetNET.HelperClasses
         /// </returns>
         public static List<WinGetSource> ToSourceList(string[] output)
         {
-            //Get top line index
-            int labelLine = 0;
-            for (int i = 0; i < output.Length; i++)
-            {
-                if (output[i].Contains("------") && i > 0)
-                {
-                    labelLine = i - 1;
-                    break;
-                }
-            }
+            //Get top line index.
+            //The array should always contain this line.
+            //If it dose not contain this line the resulting out of range exception,
+            //that will be thrown later, will be catched in the calling method.
+            int labelLine = ArrayManager.GetEntry(output, "------") - 1;
 
             //Get start indexes of each tabel colum
-            int nameStartIndex = 0;
-
+            //(The line starts wich the name followed by the id.
+            //The index for the name is always 0 an therfor it is not configured here.)
             int urlStartIndex = -1;
 
             bool checkForChar = false;
@@ -153,8 +138,9 @@ namespace WGetNET.HelperClasses
                 resultList.Add(
                     new WinGetSource()
                     {
-                        SourceName = output[i][nameStartIndex..urlStartIndex].Trim(),
-                        SourceUrl = output[i][urlStartIndex..].Trim()
+                        SourceName = output[i][0..urlStartIndex].Trim(),
+                        SourceUrl = output[i][urlStartIndex..].Trim(),
+                        SourceType = string.Empty
                     });
             }
 

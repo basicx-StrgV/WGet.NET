@@ -461,6 +461,31 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportOutputToString(WGetNET.ProcessResult)">
+            <summary>
+            Writes the export result to a <see cref="T:System.String"/>.
+            </summary>
+            <param name="result">
+            The <see cref="T:WGetNET.ProcessResult"/> object containing the export data.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/> containing the export result.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportOutputToFile(WGetNET.ProcessResult,System.String)">
+            <summary>
+            Writes the export result to a file.
+            </summary>
+            <param name="result">
+            The <see cref="T:WGetNET.ProcessResult"/> object containing the export data.
+            </param>
+            <param name="file">
+            A <see cref="T:System.String"/> containing the file path and name.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGetSourceManager.ResetSources">
             <summary>
             Resets all sources that are installed in winget (Needs administrator rights).
@@ -623,6 +648,20 @@
             The <see langword="array"/> with the range of entrys removed.
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.ArrayManager.GetEntry(System.String[],System.String)">
+            <summary>
+            Searches for an entry in a <see langword="array"/> that contains the given string.
+            </summary>
+            <param name="inputArray">
+            The input <see langword="array"/>.
+            </param>
+            <param name="value">
+            A <see cref="T:System.String"/> representing the value to check for.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> representing the index of the entry (-1 if the entry is not found).
+            </returns>
+        </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
@@ -667,6 +706,21 @@
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
             </returns>
+        </member>
+        <member name="P:WGetNET.ProcessResult.ExitCode">
+            <summary>
+            Gets or sets the exit code of the process.
+            </summary>
+        </member>
+        <member name="P:WGetNET.ProcessResult.Output">
+            <summary>
+            Gets or sets the output of the process.
+            </summary>
+        </member>
+        <member name="P:WGetNET.ProcessResult.Success">
+            <summary>
+            Gets if the process finished successfully.
+            </summary>
         </member>
         <member name="T:WGetNET.WinGetPackage">
             <summary>

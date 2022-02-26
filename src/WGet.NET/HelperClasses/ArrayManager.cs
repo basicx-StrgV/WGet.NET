@@ -94,5 +94,33 @@ namespace WGetNET.HelperClasses
 
             return inputArray;
         }
+
+        /// <summary>
+        /// Searches for an entry in a <see langword="array"/> that contains the given string.
+        /// </summary>
+        /// <param name="inputArray">
+        /// The input <see langword="array"/>.
+        /// </param>
+        /// <param name="value">
+        /// A <see cref="System.String"/> representing the value to check for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> representing the index of the entry (-1 if the entry is not found).
+        /// </returns>
+        public static int GetEntry(string[] inputArray, string value)
+        {
+            int index = -1;
+
+            for (int i = 0; i < inputArray.Length; i++)
+            {
+                if (inputArray[i].Contains(value))
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        }
     }
 }
