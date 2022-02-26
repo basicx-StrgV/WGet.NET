@@ -69,6 +69,30 @@ namespace WGetNET.HelperClasses
             //Remove unneeded output Lines
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
 
+            return CreatePackageListFromOutput(output, idStartIndex, versionStartIndex, extraInfoStartIndex);
+        }
+
+        /// <summary>
+        /// Creates a package list from output.
+        /// </summary>
+        /// <param name="output">
+        /// The <see langword="array"/> containing the output.
+        /// </param>
+        /// <param name="idStartIndex">
+        /// The <see cref="System.Int32"/> representing the start index of the id.
+        /// </param>
+        /// <param name="versionStartIndex">
+        /// The <see cref="System.Int32"/> representing the start index of the version.
+        /// </param>
+        /// <param name="extraInfoStartIndex">
+        /// The <see cref="System.Int32"/> representing the start index of the extra information.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
+        /// </returns>
+        private static List<WinGetPackage> CreatePackageListFromOutput(
+            string[] output, int idStartIndex, int versionStartIndex, int extraInfoStartIndex)
+        {
             List<WinGetPackage> resultList = new List<WinGetPackage>();
 
             for (int i = 0; i < output.Length; i++)
@@ -76,10 +100,10 @@ namespace WGetNET.HelperClasses
                 // [var1..var2] : selects the index range from var1 to var2
                 // (eg. if var1 is 2 and var2 is 5, the selectet index range will be [2, 3, 4])
                 resultList.Add(
-                    new WinGetPackage() 
-                    { 
-                        PackageName = output[i][0..idStartIndex].Trim(), 
-                        PackageId = output[i][idStartIndex..versionStartIndex].Trim(), 
+                    new WinGetPackage()
+                    {
+                        PackageName = output[i][0..idStartIndex].Trim(),
+                        PackageId = output[i][idStartIndex..versionStartIndex].Trim(),
                         PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
                     });
             }
@@ -127,6 +151,23 @@ namespace WGetNET.HelperClasses
             //Remove unneeded output Lines
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
 
+            return CreateSourceListFromOutput(output, urlStartIndex);
+        }
+
+        /// <summary>
+        /// Creates a source list from output.
+        /// </summary>
+        /// <param name="output">
+        /// The <see langword="array"/> containing the output.
+        /// </param>
+        /// <param name="urlStartIndex">
+        /// The <see cref="System.Int32"/> representing the start index of the url.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/>'s.
+        /// </returns>
+        private static List<WinGetSource> CreateSourceListFromOutput(string[] output, int urlStartIndex)
+        {
             List<WinGetSource> resultList = new List<WinGetSource>();
 
             for (int i = 0; i < output.Length; i++)
