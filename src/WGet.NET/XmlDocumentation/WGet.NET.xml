@@ -71,6 +71,13 @@
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages">
             <summary>
@@ -79,6 +86,13 @@
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(System.String)">
             <summary>
@@ -88,6 +102,13 @@
             <returns>
             <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage)">
             <summary>
@@ -97,6 +118,13 @@
             <returns>
             <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(System.String)">
             <summary>
@@ -106,6 +134,13 @@
             <returns>
             <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.WinGetPackage)">
             <summary>
@@ -115,6 +150,13 @@
             <returns>
             <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackages">
             <summary>
@@ -123,6 +165,13 @@
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(System.String)">
             <summary>
@@ -132,6 +181,13 @@
             <returns>
             <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(WGetNET.WinGetPackage)">
             <summary>
@@ -141,6 +197,13 @@
             <returns>
             <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFile(System.String)">
             <summary>
@@ -150,6 +213,13 @@
             <returns>
             <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFile(System.String)">
             <summary>
@@ -163,6 +233,13 @@
             <see langword="true"/> if the import was compleatly successfull or 
             <see langword="false"/> if some or all packages failed to install.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="T:WGetNET.WinGetSourceManager">
             <summary>
@@ -198,6 +275,40 @@
             <returns>
             <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.AddSource(WGetNET.WinGetSource)">
+            <summary>
+            Adds a new source to winget (Needs administrator rights).
+            </summary>
+            <remarks>
+            The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+            </remarks>
+            <param name="source">
+            The <see cref="T:WGetNET.WinGetSource"/> to add.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSource(System.String,System.String,System.String)">
             <summary>
@@ -218,6 +329,16 @@
             <returns>
             <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.UpdateSources">
             <summary>
@@ -229,6 +350,13 @@
             <returns>
             <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSources">
             <summary>
@@ -237,6 +365,13 @@
             <returns>
             A <see cref="T:System.String"/> that contains the winget sorces in json format.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSources(System.String)">
             <summary>
@@ -246,6 +381,31 @@
             <returns>
             A <see cref="T:System.String"/> that contains the winget sorces in json format.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSources(WGetNET.WinGetSource)">
+            <summary>
+            Exports the winget sources as a json string.
+            </summary>
+            <param name="source">
+            The <see cref="T:WGetNET.WinGetSource"/> for the export.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> that contains the winget sorces in json format.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String)">
             <summary>
@@ -255,6 +415,13 @@
             <returns>
             <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,System.String)">
             <summary>
@@ -265,10 +432,38 @@
             <returns>
             <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,WGetNET.WinGetSource)">
+            <summary>
+            Exports the winget sources in json format to a file.
+            </summary>
+            <param name="file">
+            The file for the export.
+            </param>
+            <param name="source">
+            The <see cref="T:WGetNET.WinGetSource"/> for the export.
+            </param>
+            <returns>
+            <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ResetSources">
             <summary>
-            Resets all sources that are installed in winget.
+            Resets all sources that are installed in winget (Needs administrator rights).
             </summary>
             <remarks>
             This may take a while depending on the sources.
@@ -276,6 +471,58 @@
             <returns>
             <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.RemoveSources(System.String)">
+            <summary>
+            Removes a source from winget (Needs administrator rights).
+            </summary>
+            <param name="name">
+            A <see cref="T:System.String"/> representing the name of the source.
+            </param>
+            <returns>
+            <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.RemoveSources(WGetNET.WinGetSource)">
+            <summary>
+            Removes a source from winget (Needs administrator rights).
+            </summary>
+            <param name="source">
+            The <see cref="T:WGetNET.WinGetSource"/> to remove.
+            </param>
+            <returns>
+            <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="T:WGetNET.WinGetActionFailedException">
             <summary>
@@ -376,6 +623,21 @@
             The <see langword="array"/> with the range of entrys removed.
             </returns>
         </member>
+        <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
+            provides methods for checking user privileges.
+            </summary>
+        </member>
+        <member name="M:WGetNET.HelperClasses.PrivilegeChecker.CheckAdministratorPrivileges">
+            <summary>
+            Check if the current user has administrator privileges.
+            </summary>
+            <returns>
+            <see langword="true"/> if the current user has administrator privileges and
+            <see langword="false"/> if not.
+            </returns>
+        </member>
         <member name="T:WGetNET.HelperClasses.ProcessOutputReader">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.ProcessOutputReader"/> class,
@@ -413,17 +675,17 @@
         </member>
         <member name="P:WGetNET.WinGetPackage.PackageName">
             <summary>
-            Name of the package
+            Gets or sets the name of the package.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.PackageId">
             <summary>
-            Id of the package
+            Gets or sets the id of the package.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.PackageVersion">
             <summary>
-            Version of the package
+            Gets or sets the version of the package.
             </summary>
         </member>
         <member name="T:WGetNET.WinGetSource">
@@ -433,12 +695,17 @@
         </member>
         <member name="P:WGetNET.WinGetSource.SourceName">
             <summary>
-            Name of the source
+            Gets or sets the name of the source.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.SourceUrl">
             <summary>
-            Url of the source
+            Gets or sets the url of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.SourceType">
+            <summary>
+            Gets or sets the type of the source.
             </summary>
         </member>
     </members>

@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Security;
 using System.ComponentModel;
 using System.Collections.Generic;
 using WGetNET.HelperClasses;
@@ -77,13 +78,28 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public bool AddSource(string name, string arg)
         {
+            if (!PrivilegeChecker.CheckAdministratorPrivileges())
+            {
+                throw new SecurityException("Administrator privileges are missing.");
+            }
+
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_sourceAddCmd, name, arg));
+                        string.Format(_sourceAddCmd, name, arg));
 
                 if (result.ExitCode == 0)
                 {
@@ -116,8 +132,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public bool AddSource(WinGetSource source)
         {
+            if (!PrivilegeChecker.CheckAdministratorPrivileges())
+            {
+                throw new SecurityException("Administrator privileges are missing.");
+            }
+
             try
             {
                 ProcessResult result;
@@ -170,13 +201,28 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public bool AddSource(string name, string arg, string type)
         {
+            if (!PrivilegeChecker.CheckAdministratorPrivileges())
+            {
+                throw new SecurityException("Administrator privileges are missing.");
+            }
+
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_sourceAddWithTypeCmd, name, arg, type));
+                        string.Format(_sourceAddWithTypeCmd, name, arg, type));
 
                 if (result.ExitCode == 0)
                 {
@@ -208,6 +254,13 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool UpdateSources()
         {
             try
@@ -235,7 +288,7 @@ namespace WGetNET
             }
         }
         //---------------------------------------------------------------------------------------------
-        
+
         //---Export------------------------------------------------------------------------------------
         /// <summary>
         /// Exports the winget sources as a json string.
@@ -243,6 +296,13 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> that contains the winget sorces in json format.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public string ExportSources()
         {
             try
@@ -282,6 +342,13 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> that contains the winget sorces in json format.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public string ExportSources(string sourceName)
         {
             try
@@ -329,6 +396,13 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> that contains the winget sorces in json format.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public string ExportSources(WinGetSource source)
         {
             try
@@ -374,6 +448,13 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool ExportSourcesToFile(string file)
         {
             try
@@ -419,6 +500,13 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool ExportSourcesToFile(string file, string sourceName)
         {
             try
@@ -474,6 +562,13 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool ExportSourcesToFile(string file, WinGetSource source)
         {
             try
@@ -528,8 +623,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public bool ResetSources()
         {
+            if (!PrivilegeChecker.CheckAdministratorPrivileges())
+            {
+                throw new SecurityException("Administrator privileges are missing.");
+            }
+
             try
             {
                 ProcessResult result =
@@ -566,8 +676,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public bool RemoveSources(string name)
         {
+            if (!PrivilegeChecker.CheckAdministratorPrivileges())
+            {
+                throw new SecurityException("Administrator privileges are missing.");
+            }
+
             try
             {
                 ProcessResult result =
@@ -602,8 +727,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public bool RemoveSources(WinGetSource source)
         {
+            if (!PrivilegeChecker.CheckAdministratorPrivileges())
+            {
+                throw new SecurityException("Administrator privileges are missing.");
+            }
+
             try
             {
                 ProcessResult result =

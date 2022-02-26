@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security;
 using WGetNET;
 
 namespace WGetTest
@@ -45,6 +46,10 @@ namespace WGetTest
                 Console.WriteLine(e);
             }
             catch (WinGetNotInstalledException e)
+            {
+                Console.WriteLine(e);
+            }
+            catch (SecurityException e)
             {
                 Console.WriteLine(e);
             }

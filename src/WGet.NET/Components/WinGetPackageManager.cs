@@ -41,13 +41,20 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public List<WinGetPackage> SearchPackage(string packageName)
         {
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_searchCmd, packageName));
+                        string.Format(_searchCmd, packageName));
 
                 return ProcessOutputReader.ToPackageList(result.Output);
             }
@@ -55,9 +62,9 @@ namespace WGetNET
             {
                 throw new WinGetNotInstalledException();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return new List<WinGetPackage>();
+                throw new WinGetActionFailedException("The package search failed.", e);
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -69,6 +76,13 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public List<WinGetPackage> GetInstalledPackages()
         {
             try
@@ -95,13 +109,20 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool InstallPackage(string packageId)
         {
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_installCmd, packageId));
+                        string.Format(_installCmd, packageId));
 
                 //Check if installation was succsessfull
                 if (result.ExitCode == 0)
@@ -130,13 +151,20 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool InstallPackage(WinGetPackage package)
         {
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_installCmd, package.PackageId));
+                        string.Format(_installCmd, package.PackageId));
 
                 //Check if installation was succsessfull
                 if (result.ExitCode == 0)
@@ -167,13 +195,20 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool UninstallPackage(string packageId)
         {
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_uninstallCmd, packageId));
+                        string.Format(_uninstallCmd, packageId));
 
                 //Check if uninstallation was succsessfull
                 if (result.ExitCode == 0)
@@ -202,13 +237,20 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool UninstallPackage(WinGetPackage package)
         {
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_uninstallCmd, package.PackageId));
+                        string.Format(_uninstallCmd, package.PackageId));
 
                 //Check if uninstallation was succsessfull
                 if (result.ExitCode == 0)
@@ -238,6 +280,13 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public List<WinGetPackage> GetUpgradeablePackages()
         {
             try
@@ -264,13 +313,20 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool UpgradePackage(string packageId)
         {
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_upgradeCmd, packageId));
+                        string.Format(_upgradeCmd, packageId));
 
                 //Check if installation was succsessfull
                 if (result.ExitCode == 0)
@@ -299,13 +355,20 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool UpgradePackage(WinGetPackage package)
         {
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_upgradeCmd, package.PackageId));
+                        string.Format(_upgradeCmd, package.PackageId));
 
                 //Check if installation was succsessfull
                 if (result.ExitCode == 0)
@@ -336,13 +399,20 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool ExportPackagesToFile(string file)
         {
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_exportCmd, file));
+                        string.Format(_exportCmd, file));
 
                 //Check if installation was succsessfull
                 if (result.ExitCode == 0)
@@ -375,13 +445,20 @@ namespace WGetNET
         /// <see langword="true"/> if the import was compleatly successfull or 
         /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
         public bool ImportPackagesFromFile(string file)
         {
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
-                        String.Format(_importCmd, file));
+                        string.Format(_importCmd, file));
 
                 //Check if installation was succsessfull
                 if (result.ExitCode == 0)
