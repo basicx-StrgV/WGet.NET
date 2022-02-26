@@ -15,6 +15,13 @@ I created it for another project and then made a library out of it in hope it mi
 Therefore the functions are limited at the moment.<br>
 **If you tried this library, please give me some feedback. And if you miss a feature, you can create an issue to let me know.**
 
+## 🎈 Version 2.0
+
+Version 2.0 is out now, with big changes, improvements and new features.  
+But before updating to the new version, read the changelog first, because version 2.0 is not compatible with older versions of this library.
+
+You can finde the changelog here: https://github.com/basicx-StrgV/WGet.NET/releases/tag/2.0.0
+
 ## ⚡ Features
 
 - Get a list of installed packages
