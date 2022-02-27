@@ -23,26 +23,32 @@ namespace WGetNET.HelperClasses
         /// </returns>
         public static bool CheckAdministratorPrivileges()
         {
-            bool isAdministrator = false;
-
             try
             {
-                using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
-                {
-                    isAdministrator = 
-                        new WindowsPrincipal(identity)
-                        .IsInRole(WindowsBuiltInRole.Administrator);
-                }
-
-                return isAdministrator;
+                return CurrentUserIsAdmin();
             }
             catch (SecurityException)
             {
-                return isAdministrator;
+                return false;
             }
             catch (ArgumentException)
             {
-                return isAdministrator;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Checks if the current user is an administrator.
+        /// </summary>
+        /// <returns>
+        /// <see langword="true"/> if the user is a admin and <see langword="false"/> if not.
+        /// </returns>
+        private static bool CurrentUserIsAdmin()
+        {
+            using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
+            {
+                return new WindowsPrincipal(identity)
+                    .IsInRole(WindowsBuiltInRole.Administrator);
             }
         }
     }

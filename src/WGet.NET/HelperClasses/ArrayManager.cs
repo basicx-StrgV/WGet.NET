@@ -28,19 +28,11 @@ namespace WGetNET.HelperClasses
         public static T[] Add<T>(T[] inputArray, T value)
         {
             //Copy the main array to the temp array.
-            T[] tempArray = new T[inputArray.Length];
-            for (int i = 0; i < inputArray.Length; i++)
-            {
-                tempArray[i] = inputArray[i];
-            }
+            T[] tempArray = CopyTo(inputArray);
 
             //Add a entry to the main array
             //and copy the temp array to the main array.
-            inputArray = new T[tempArray.Length + 1];
-            for (int i = 0; i < tempArray.Length; i++)
-            {
-                inputArray[i] = tempArray[i];
-            }
+            inputArray = CopyTo(tempArray, 1);
 
             //Add the new line to the new enty in the main array.
             //[^1] : Selects the last entry from the array.
@@ -72,25 +64,10 @@ namespace WGetNET.HelperClasses
         public static T[] RemoveRange<T>(T[] inputArray, int index, int count)
         {
             //Only copy the needed range of the main array to the temp array.
-            T[] tempArray = new T[inputArray.Length - count];
-            for (int i = 0; i < inputArray.Length; i++)
-            {
-                if (i < index)
-                {
-                    tempArray[i] = inputArray[i];
-                }
-                else if (i + count < inputArray.Length)
-                {
-                    tempArray[i] = inputArray[i + count];
-                }
-            }
+            T[] tempArray = CopyToWithoutRange(inputArray, index, count);
 
             //Copy the temp array to the main array.
-            inputArray = new T[tempArray.Length];
-            for (int i = 0; i < tempArray.Length; i++)
-            {
-                inputArray[i] = tempArray[i];
-            }
+            inputArray = CopyTo(tempArray);
 
             return inputArray;
         }
@@ -121,6 +98,71 @@ namespace WGetNET.HelperClasses
             }
 
             return index;
+        }
+
+        /// <summary>
+        /// Copys a <see langword="array"/> to a new one.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the array.
+        /// </typeparam>
+        /// <param name="inputArray">
+        /// The <see langword="array"/> that should be copyed.
+        /// </param>
+        /// <param name="addLengthOf">
+        /// A <see cref="System.Int32"/> representing a extra length,
+        /// that should be added to the end of the new array. (DEFAULT = 0)
+        /// </param>
+        /// <returns>
+        /// The new <see langword="array"/>.
+        /// </returns>
+        private static T[] CopyTo<T>(T[] inputArray, int addLengthOf = 0)
+        {
+            //Copy the input array to the new array.
+            T[] newArray = new T[inputArray.Length + addLengthOf];
+            for (int i = 0; i < inputArray.Length; i++)
+            {
+                newArray[i] = inputArray[i];
+            }
+
+            return newArray;
+        }
+
+        /// <summary>
+        /// Copys a <see langword="array"/> to a new one, but ignores the given range.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the array.
+        /// </typeparam>
+        /// <param name="inputArray">
+        /// The <see langword="array"/> that should be copyed.
+        /// </param>
+        /// <param name="startIndex">
+        /// A <see cref="System.Int32"/> representing a start index of the range that should be ignored.
+        /// </param>
+        /// <param name="count">
+        /// A <see cref="System.Int32"/> representing the range that should be ignored.
+        /// </param>
+        /// <returns>
+        /// The new <see langword="array"/>.
+        /// </returns>
+        private static T[] CopyToWithoutRange<T>(T[] inputArray, int startIndex, int count)
+        {
+            //Only copy the needed range of the input array to the new array.
+            T[] newArray = new T[inputArray.Length - count];
+            for (int i = 0; i < inputArray.Length; i++)
+            {
+                if (i < startIndex)
+                {
+                    newArray[i] = inputArray[i];
+                }
+                else if (i + count < inputArray.Length)
+                {
+                    newArray[i] = inputArray[i + count];
+                }
+            }
+
+            return newArray;
         }
     }
 }

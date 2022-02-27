@@ -662,6 +662,44 @@
             A <see cref="T:System.String"/> representing the index of the entry (-1 if the entry is not found).
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.ArrayManager.CopyTo``1(``0[],System.Int32)">
+            <summary>
+            Copys a <see langword="array"/> to a new one.
+            </summary>
+            <typeparam name="T">
+            The type of the array.
+            </typeparam>
+            <param name="inputArray">
+            The <see langword="array"/> that should be copyed.
+            </param>
+            <param name="addLengthOf">
+            A <see cref="T:System.Int32"/> representing a extra length,
+            that should be added to the end of the new array. (DEFAULT = 0)
+            </param>
+            <returns>
+            The new <see langword="array"/>.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ArrayManager.CopyToWithoutRange``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            Copys a <see langword="array"/> to a new one, but ignores the given range.
+            </summary>
+            <typeparam name="T">
+            The type of the array.
+            </typeparam>
+            <param name="inputArray">
+            The <see langword="array"/> that should be copyed.
+            </param>
+            <param name="startIndex">
+            A <see cref="T:System.Int32"/> representing a start index of the range that should be ignored.
+            </param>
+            <param name="count">
+            A <see cref="T:System.Int32"/> representing the range that should be ignored.
+            </param>
+            <returns>
+            The new <see langword="array"/>.
+            </returns>
+        </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
@@ -675,6 +713,14 @@
             <returns>
             <see langword="true"/> if the current user has administrator privileges and
             <see langword="false"/> if not.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.PrivilegeChecker.CurrentUserIsAdmin">
+            <summary>
+            Checks if the current user is an administrator.
+            </summary>
+            <returns>
+            <see langword="true"/> if the user is a admin and <see langword="false"/> if not.
             </returns>
         </member>
         <member name="T:WGetNET.HelperClasses.ProcessOutputReader">
@@ -739,6 +785,21 @@
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnStartIndex(System.String,System.Int32)">
+            <summary>
+            Gets the start index of a column in the given line.
+            </summary>
+            <param name="line">
+            A <see cref="T:System.String"/> representing the line that contains the column names.
+            </param>
+            <param name="column">
+            A <see cref="T:System.Int32"/> representing the column to look for.
+            </param>
+            <returns>
+            A <see cref="T:System.Int32"/> representing the start index of the column 
+            or -1 if the column was not found.
             </returns>
         </member>
         <member name="P:WGetNET.ProcessResult.ExitCode">
