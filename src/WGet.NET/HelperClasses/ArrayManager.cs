@@ -84,7 +84,7 @@ namespace WGetNET.HelperClasses
         /// <returns>
         /// A <see cref="System.String"/> representing the index of the entry (-1 if the entry is not found).
         /// </returns>
-        public static int GetEntry(string[] inputArray, string value)
+        public static int GetEntryContains(string[] inputArray, string value)
         {
             int index = -1;
 
