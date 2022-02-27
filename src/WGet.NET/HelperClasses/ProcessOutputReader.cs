@@ -33,38 +33,9 @@ namespace WGetNET.HelperClasses
             //Get start indexes of each tabel colum
             //(The line starts wich the name followed by the id.
             //The index for the name is always 0 an therfor it is not configured here.)
-            int idStartIndex = -1;
-            int versionStartIndex = -1;
-            int extraInfoStartIndex = -1;
-
-            bool checkForChar = false;
-            for (int i = 0; i < output[labelLine].Length; i++)
-            {
-                if (output[labelLine][i] != ' ' && checkForChar && idStartIndex < 0)
-                {
-                    idStartIndex = i;
-                    checkForChar = false;
-                }
-                else if (output[labelLine][i] != ' ' && checkForChar && versionStartIndex < 0)
-                {
-                    versionStartIndex = i;
-                    checkForChar = false;
-                }
-                else if (output[labelLine][i] != ' ' && checkForChar && extraInfoStartIndex < 0)
-                {
-                    extraInfoStartIndex = i;
-                    checkForChar = false;
-                }
-                else if (idStartIndex >= 0 && versionStartIndex >= 0 && extraInfoStartIndex >= 0)
-                {
-                    //Breake the loop if all indexes are set
-                    break;
-                }
-                else if (output[labelLine][i] == ' ')
-                {
-                    checkForChar = true;
-                }
-            }
+            int idStartIndex = GetColumnStartIndex(output[labelLine], 2);
+            int versionStartIndex = GetColumnStartIndex(output[labelLine], 3);
+            int extraInfoStartIndex = GetColumnStartIndex(output[labelLine], 4);
 
             //Remove unneeded output Lines
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
@@ -132,21 +103,7 @@ namespace WGetNET.HelperClasses
             //Get start indexes of each tabel colum
             //(The line starts wich the name followed by the id.
             //The index for the name is always 0 an therfor it is not configured here.)
-            int urlStartIndex = -1;
-
-            bool checkForChar = false;
-            for (int i = 0; i < output[labelLine].Length; i++)
-            {
-                if (output[labelLine][i] != ' ' && checkForChar)
-                {
-                    urlStartIndex = i;
-                    break;
-                }
-                else if (output[labelLine][i] == ' ')
-                {
-                    checkForChar = true;
-                }
-            }
+            int urlStartIndex = GetColumnStartIndex(output[labelLine], 2);
 
             //Remove unneeded output Lines
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
@@ -186,6 +143,42 @@ namespace WGetNET.HelperClasses
             }
 
             return resultList;
+        }
+    
+        /// <summary>
+        /// Gets the start index of a column in the given line.
+        /// </summary>
+        /// <param name="line">
+        /// A <see cref="System.String"/> representing the line that contains the column names.
+        /// </param>
+        /// <param name="column">
+        /// A <see cref="System.Int32"/> representing the column to look for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Int32"/> representing the start index of the column 
+        /// or -1 if the column was not found.
+        /// </returns>
+        private static int GetColumnStartIndex(string line, int column)
+        {
+            int currentColumn = 0;
+            bool checkForColumn = true;
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (line[i] != ((char)32) && checkForColumn)
+                {
+                    currentColumn++;
+                    if (currentColumn == column)
+                    {
+                        return i;
+                    }
+                    checkForColumn = false;
+                }
+                else if (line[i] == ((char)32))
+                {
+                    checkForColumn = true;
+                }
+            }
+            return -1;
         }
     }
 }
