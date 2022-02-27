@@ -648,7 +648,7 @@
             The <see langword="array"/> with the range of entrys removed.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ArrayManager.GetEntry(System.String[],System.String)">
+        <member name="M:WGetNET.HelperClasses.ArrayManager.GetEntryContains(System.String[],System.String)">
             <summary>
             Searches for an entry in a <see langword="array"/> that contains the given string.
             </summary>

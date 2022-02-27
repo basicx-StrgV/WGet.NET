@@ -28,7 +28,7 @@ namespace WGetNET.HelperClasses
             //The array should always contain this line.
             //If it dose not contain this line the resulting out of range exception,
             //that will be thrown later, will be catched in the calling method.
-            int labelLine = ArrayManager.GetEntry(output, "------") - 1;
+            int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
 
             //Get start indexes of each tabel colum
             //(The line starts wich the name followed by the id.
@@ -98,7 +98,7 @@ namespace WGetNET.HelperClasses
             //The array should always contain this line.
             //If it dose not contain this line the resulting out of range exception,
             //that will be thrown later, will be catched in the calling method.
-            int labelLine = ArrayManager.GetEntry(output, "------") - 1;
+            int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
 
             //Get start indexes of each tabel colum
             //(The line starts wich the name followed by the id.

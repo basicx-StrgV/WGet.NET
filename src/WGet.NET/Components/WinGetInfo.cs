@@ -60,15 +60,11 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_versionCmd);
 
-                //Check if the process was succsessfull
-                if (result.ExitCode == 0)
+                for (int i = 0; i < result.Output.Length; i++)
                 {
-                    for (int i = 0; i < result.Output.Length; i++)
+                    if (result.Output[i].StartsWith("v"))
                     {
-                        if (result.Output[i].StartsWith("v"))
-                        {
-                            return result.Output[i].Trim();
-                        }
+                        return result.Output[i].Trim();
                     }
                 }
                 return (string.Empty);
