@@ -27,12 +27,9 @@ namespace WGetNET.HelperClasses
         /// </returns>
         public static T[] Add<T>(T[] inputArray, T value)
         {
-            //Copy the main array to the temp array.
-            T[] tempArray = CopyTo(inputArray);
-
             //Add a entry to the main array
-            //and copy the temp array to the main array.
-            inputArray = CopyTo(tempArray, 1);
+            //and copy the input array to the main array.
+            inputArray = CopyTo(inputArray, 1);
 
             //Add the new line to the new enty in the main array.
             //[^1] : Selects the last entry from the array.
