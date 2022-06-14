@@ -12,7 +12,7 @@ namespace WGetNET
     /// <summary>
     /// The <see cref="WGetNET.WinGetPackageManager"/> class offers methods to manage packages with winget.
     /// </summary>
-    public class WinGetPackageManager
+    public class WinGetPackageManager : WinGetInfo
     {
         private const string _listCmd = "list";
         private const string _searchCmd = "search {0} --accept-source-agreements";

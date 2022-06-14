@@ -15,7 +15,7 @@ namespace WGetNET
     /// <summary>
     /// The <see cref="WGetNET.WinGetSourceManager"/> class offers methods to manage the sources used by winget.
     /// </summary>
-    public class WinGetSourceManager
+    public class WinGetSourceManager : WinGetInfo
     {
         private const string _sourceListCmd = "source list";
         private const string _sourceAddCmd = "source add -n {0} -a {1} --accept-source-agreements";
