@@ -50,7 +50,7 @@ WinGet needs to be installed on the system.
 
 If WinGet is not installed on your system you can get it here: https://github.com/microsoft/winget-cli
 
-## 📍 Quick start guide
+## 💡 Getting started 
 
 The needed namespace is **WGetNET** (`using WGetNET;`).  
 This namespace contains the three classes, that are used to perform actions or get information with winget.
