@@ -50,18 +50,47 @@ WinGet needs to be installed on the system.
 
 If WinGet is not installed on your system you can get it here: https://github.com/microsoft/winget-cli
 
-## 📍 Informations
+## 📍 Quick start guide
 
-### Namespaces
+The needed namespace is **WGetNET** (`using WGetNET;`).  
+This namespace contains the three classes, that are used to perform actions or get information with winget.
 
-- WGetNET
+### WinGetInfo:  
+The ***WinGetInfo*** class can be used to get information about WinGet itself.  
+This class is inherited by the ***WinGetPackageManager*** and ***WinGetSourceManager*** class.
 
-### Classes
+USing this class to check if winget is installed could look like this:
+```csharp
+WinGetInfo wingetInfo = new WinGetInfo();
+if (wingetInfo.WinGetInstalled)
+{
+     Console.WriteLine("WinGet is installed.");
+}
+else
+{
+     Console.WriteLine("WinGet is NOT installed.");
+}
+```
 
-- WinGetInfo
-- WinGetPackageManager
-- WinGetPackage
-- WinGetSourceManager
-- WinGetSource
-- WinGetNotInstalledException
-- WinGetActionFailedException
+### WinGetPackageManager:  
+The ***WinGetPackageManager*** class is used for everything that has to do with packages.  
+It can install, remove, upgrade, search, list, export and import packages.
+
+The code for installing a package could look like this:
+```csharp
+WinGetPackageManager packageManager = new WinGetPackageManager();
+packageManager.InstallPackage("Git.Git");
+```
+
+### WinGetSourceManager:  
+The ***WinGetSourceManager*** class is used for everything that has to do with sources.  
+It can list, add, update, export, reset and remove sources.
+
+***To use the add, remove and reset functions, the process needs to have administrator privileges.  
+(WinGet can’t perform these actions without administrator privileges)***
+
+The code for adding a source could look like this:
+```csharp
+WinGetSourceManager sourceManager = new WinGetSourceManager();
+sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
+```
