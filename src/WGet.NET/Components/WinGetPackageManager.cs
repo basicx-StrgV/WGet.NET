@@ -263,10 +263,10 @@ namespace WGetNET
                 string argument = _getUpgradeableCmd;
 
                 // Checking version to determine if "--include-unknown" is necessary
-                int wingetVersion = 0;
-                bool castSuccessful = int.TryParse(WinGetVersion.Split("-")[0].Replace("v", "").Replace(".", ""), out wingetVersion);
+                int wingetMinorVersion = 0;
+                bool castSuccessful = int.TryParse(WinGetVersion.Split(".")[1], out wingetMinorVersion);
                 
-                if (castSuccessful && wingetVersion >= 142161) 
+                if (castSuccessful && wingetMinorVersion >= 4) 
                 {
                     // Winget version supports new argument, add "--include-unknown" to arguments
                     argument += " " + _includeUnknown;

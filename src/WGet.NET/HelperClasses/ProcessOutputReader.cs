@@ -71,17 +71,22 @@ namespace WGetNET.HelperClasses
             {
                 // [var1..var2] : selects the index range from var1 to var2
                 // (eg. if var1 is 2 and var2 is 5, the selectet index range will be [2, 3, 4])
-                try
-                {
-                    resultList.Add(
-                    new WinGetPackage()
+                if (output[i].Length >= extraInfoStartIndex) {
+                    try
                     {
-                        PackageName = output[i][0..idStartIndex].Trim(),
-                        PackageId = output[i][idStartIndex..versionStartIndex].Trim(),
-                        PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
-                    });
+                        resultList.Add(
+                            new WinGetPackage()
+                            {
+                                PackageName = output[i][0..idStartIndex].Trim(),
+                                PackageId = output[i][idStartIndex..versionStartIndex].Trim(),
+                                PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
+                            });
+                    }
+                    catch
+                    {
+                        continue;
+                    }
                 }
-                catch { continue; }
             }
 
             return resultList;
