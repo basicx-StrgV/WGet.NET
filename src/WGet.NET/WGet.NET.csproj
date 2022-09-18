@@ -9,12 +9,15 @@
     <RepositoryUrl>https://github.com/basicx-StrgV/WGet.NET</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>winget, dotnet, library, windows</PackageTags>
-    <PackageReleaseNotes>Changelog: https://github.com/basicx-StrgV/WGet.NET/releases/tag/2.0.1</PackageReleaseNotes>
+    <PackageReleaseNotes>Changelog: https://github.com/basicx-StrgV/WGet.NET/releases/tag/2.0.2</PackageReleaseNotes>
     <Description>A winget wrapper library for .Net</Description>
     <Copyright>basicx-StrgV</Copyright>
     <SignAssembly>false</SignAssembly>
     <RootNamespace>WGetNET</RootNamespace>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
+    <AssemblyVersion>2.0.2.0</AssemblyVersion>
+    <FileVersion>2.0.2.0</FileVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
