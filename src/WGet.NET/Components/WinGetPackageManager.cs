@@ -19,6 +19,7 @@ namespace WGetNET
         private const string _installCmd = "install {0}";
         private const string _upgradeCmd = "upgrade {0}";
         private const string _getUpgradeableCmd = "upgrade";
+        private const string _includeUnknown = "--include-unknown";
         private const string _uninstallCmd = "uninstall {0}";
         private const string _exportCmd = "export -o {0}";
         private const string _importCmd = "import -i {0} --ignore-unavailable";
@@ -207,7 +208,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Uninsatll a package using winget.
+        /// Uninstall a package using winget.
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
         /// <returns>
@@ -259,8 +260,20 @@ namespace WGetNET
         {
             try
             {
+                string argument = _getUpgradeableCmd;
+
+                // Checking version to determine if "--include-unknown" is necessary
+                int wingetVersion = 0;
+                bool castSuccessful = int.TryParse(WinGetVersion.Split("-")[0].Replace("v", "").Replace(".", ""), out wingetVersion);
+                
+                if (castSuccessful && wingetVersion >= 142161) 
+                {
+                    // Winget version supports new argument, add "--include-unknown" to arguments
+                    argument += " " + _includeUnknown;
+                }
+
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_getUpgradeableCmd);
+                    _processManager.ExecuteWingetProcess(argument);
 
                 return ProcessOutputReader.ToPackageList(result.Output);
             }

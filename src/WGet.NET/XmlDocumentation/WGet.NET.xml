@@ -144,7 +144,7 @@
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.WinGetPackage)">
             <summary>
-            Uninsatll a package using winget.
+            Uninstall a package using winget.
             </summary>
             <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the uninstallation.</param>
             <returns>
