@@ -12,7 +12,6 @@
 WGet.NET is a WinGet wrapper library for .Net.
 
 I created it for another project and then made a library out of it in hope it might be usefull to someone else too.  
-Therefore the functions are limited at the moment.  
 **If you tried this library, please give me some feedback. And if you miss a feature, you can create an issue to let me know.**
 
 ## 🎈 Version 2.0
