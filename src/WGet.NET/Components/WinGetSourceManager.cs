@@ -24,14 +24,12 @@ namespace WGetNET
         private const string _sourceResetCmd = "source reset --force";
         private const string _sourceRemoveCmd = "source remove -n {0}";
 
-        private readonly ProcessManager _processManager;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetSourceManager"/> class.
         /// </summary>
         public WinGetSourceManager()
         {
-            _processManager = new ProcessManager();
+            //Provide empty constructor
         }
 
         //---List--------------------------------------------------------------------------------------

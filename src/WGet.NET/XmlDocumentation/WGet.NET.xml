@@ -10,7 +10,7 @@
             provides the winget process execution.
             </summary>
         </member>
-        <member name="M:WGetNET.ProcessManager.#ctor">
+        <member name="M:WGetNET.ProcessManager.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.ProcessManager"/> class.
             </summary>
