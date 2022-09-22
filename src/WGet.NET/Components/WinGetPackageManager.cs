@@ -236,15 +236,7 @@ namespace WGetNET
         {
             try
             {
-                string argument = _getUpgradeableCmd;
-
-                // Checking version to determine if "--include-unknown" is necessary
-                bool castSuccessful = int.TryParse(WinGetVersion.Split(".")[1], out int wingetMinorVersion);
-                if (castSuccessful && wingetMinorVersion >= 4) 
-                {
-                    // Winget version supports new argument, add "--include-unknown" to arguments
-                    argument += " " + _includeUnknown;
-                }
+                string argument = AddArgumentByVersion(_getUpgradeableCmd);
 
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(argument);
@@ -316,6 +308,18 @@ namespace WGetNET
                 return false;
             }
             return UpgradePackage(package.PackageId);
+        }
+
+        private string AddArgumentByVersion(string argument)
+        {
+            // Checking version to determine if "--include-unknown" is necessary
+            bool castSuccessful = int.TryParse(WinGetVersion.Split(".")[1], out int wingetMinorVersion);
+            if (castSuccessful && wingetMinorVersion >= 4)
+            {
+                // Winget version supports new argument, add "--include-unknown" to arguments
+                argument += " " + _includeUnknown;
+            }
+            return argument;
         }
         //---------------------------------------------------------------------------------------------
 

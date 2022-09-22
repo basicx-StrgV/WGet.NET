@@ -14,6 +14,9 @@
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.ProcessManager"/> class.
             </summary>
+            <param name="processName">
+            The name of the process to execute.
+            </param>
         </member>
         <member name="M:WGetNET.ProcessManager.ExecuteWingetProcess(System.String)">
             <summary>
@@ -25,6 +28,27 @@
             <returns>
             A <see cref="T:WGetNET.ProcessResult"/> object, 
             containing the output an exit id of the process.
+            </returns>
+        </member>
+        <member name="M:WGetNET.ProcessManager.RunProcess">
+            <summary>
+            Runs a process with the current start informations.
+            </summary>
+            <returns>
+            A <see cref="T:WGetNET.ProcessResult"/> object, 
+            containing the output an exit id of the process.
+            </returns>
+        </member>
+        <member name="M:WGetNET.ProcessManager.ReadSreamOutput(System.IO.StreamReader)">
+            <summary>
+            Reads the data from the process output to a string array.
+            </summary>
+            <param name="output">
+            The <see cref="T:System.IO.StreamReader"/> with the process output.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> array 
+            containing the process output stream content by lines.
             </returns>
         </member>
         <member name="T:WGetNET.WinGetInfo">

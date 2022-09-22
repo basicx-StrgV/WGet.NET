@@ -62,8 +62,7 @@ namespace WGetNET.HelperClasses
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
         /// </returns>
-        private static List<WinGetPackage> CreatePackageListFromOutput(
-            string[] output, int idStartIndex, int versionStartIndex, int extraInfoStartIndex)
+        private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int idStartIndex, int versionStartIndex, int extraInfoStartIndex)
         {
             List<WinGetPackage> resultList = new List<WinGetPackage>();
 
@@ -71,21 +70,14 @@ namespace WGetNET.HelperClasses
             {
                 // [var1..var2] : selects the index range from var1 to var2
                 // (eg. if var1 is 2 and var2 is 5, the selectet index range will be [2, 3, 4])
-                if (output[i].Length >= extraInfoStartIndex) {
-                    try
-                    {
-                        resultList.Add(
-                            new WinGetPackage()
-                            {
-                                PackageName = output[i][0..idStartIndex].Trim(),
-                                PackageId = output[i][idStartIndex..versionStartIndex].Trim(),
-                                PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
-                            });
-                    }
-                    catch
-                    {
-                        //Invalid entrys can be skiped
-                    }
+                if (output[i].Length >= extraInfoStartIndex && !string.IsNullOrWhiteSpace(output[i])) {
+                    resultList.Add(
+                        new WinGetPackage()
+                        {
+                            PackageName = output[i][0..idStartIndex].Trim(),
+                            PackageId = output[i][idStartIndex..versionStartIndex].Trim(),
+                            PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
+                        });
                 }
             }
 
