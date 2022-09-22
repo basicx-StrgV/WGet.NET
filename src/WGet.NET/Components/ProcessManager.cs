@@ -19,12 +19,15 @@ namespace WGetNET
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.ProcessManager"/> class.
         /// </summary>
-        public ProcessManager()
+        /// <param name="processName">
+        /// The name of the process to execute.
+        /// </param>
+        public ProcessManager(string processName)
         {
             _winGetStartInfo = new ProcessStartInfo()
             {
                 WindowStyle = ProcessWindowStyle.Hidden,
-                FileName = "winget",
+                FileName = processName,
                 RedirectStandardOutput = true
             };
         }

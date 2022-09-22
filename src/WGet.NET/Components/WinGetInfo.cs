@@ -2,8 +2,6 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-using System;
-
 namespace WGetNET
 {
     /// <summary>
@@ -13,7 +11,7 @@ namespace WGetNET
     {
         private const string _versionCmd = "--version";
 
-        private readonly ProcessManager _processManager;
+        internal readonly ProcessManager _processManager;
 
         /// <summary>
         /// Gets if winget is installed on the system.
@@ -21,7 +19,17 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if winget is installed or <see langword="false"/> if not.
         /// </returns>
-        public bool WinGetInstalled { get { return _winGetInstalled; } }
+        public bool WinGetInstalled 
+        { 
+            get 
+            {
+                if (CheckWinGetVersion() != string.Empty)
+                {
+                    return true;
+                }
+                return false;
+            } 
+        }
 
         /// <summary>
         /// Gets the version number of the winget installation.
@@ -29,28 +37,20 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> with the version number.
         /// </returns>
-        public string WinGetVersion { get { return _winGetVersion; } }
-
-        private readonly bool _winGetInstalled;
-        private readonly string _winGetVersion;
+        public string WinGetVersion 
+        { 
+            get 
+            {
+                return CheckWinGetVersion();
+            } 
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetInfo"/> class.
         /// </summary>
         public WinGetInfo()
         {
-            _processManager = new ProcessManager();
-
-            _winGetVersion = CheckWinGetVersion();
-
-            if (string.IsNullOrWhiteSpace(_winGetVersion))
-            {
-                _winGetInstalled = false;
-            }
-            else
-            {
-                _winGetInstalled = true;
-            }
+            _processManager = new ProcessManager("winget");
         }
 
         private string CheckWinGetVersion()
@@ -67,12 +67,13 @@ namespace WGetNET
                         return result.Output[i].Trim();
                     }
                 }
-                return (string.Empty);
             }
-            catch (Exception)
+            catch
             {
-                return (string.Empty);
+                //No handling needed, winget can not be accessed
             }
+
+            return string.Empty;
         }
     }
 }

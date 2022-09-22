@@ -24,14 +24,12 @@ namespace WGetNET
         private const string _exportCmd = "export -o {0}";
         private const string _importCmd = "import -i {0} --ignore-unavailable";
 
-        private readonly ProcessManager _processManager;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
         /// </summary>
         public WinGetPackageManager()
         {
-            _processManager = new ProcessManager();
+           //Provide empty constructor
         }
 
         //---Search------------------------------------------------------------------------------------
