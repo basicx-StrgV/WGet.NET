@@ -27,12 +27,13 @@ namespace WGetNET.HelperClasses
         /// </returns>
         public static T[] Add<T>(T[] inputArray, T value)
         {
-            //Copy the main array to the temp array.
-            T[] tempArray = CopyTo(inputArray);
+            if (value is null)
+            {
+                return inputArray;
+            }
 
-            //Add a entry to the main array
-            //and copy the temp array to the main array.
-            inputArray = CopyTo(tempArray, 1);
+            //Add a entry to the main array.
+            inputArray = CopyTo(inputArray, 1);
 
             //Add the new line to the new enty in the main array.
             //[^1] : Selects the last entry from the array.
@@ -63,11 +64,8 @@ namespace WGetNET.HelperClasses
         /// </returns>
         public static T[] RemoveRange<T>(T[] inputArray, int index, int count)
         {
-            //Only copy the needed range of the main array to the temp array.
-            T[] tempArray = CopyToWithoutRange(inputArray, index, count);
-
-            //Copy the temp array to the main array.
-            inputArray = CopyTo(tempArray);
+            //Only copy the needed range of the main array.
+            inputArray = CopyToWithoutRange(inputArray, index, count);
 
             return inputArray;
         }
@@ -148,6 +146,11 @@ namespace WGetNET.HelperClasses
         /// </returns>
         private static T[] CopyToWithoutRange<T>(T[] inputArray, int startIndex, int count)
         {
+            if ((inputArray.Length - 1) < startIndex)
+            {
+                return inputArray;
+            }
+
             //Only copy the needed range of the input array to the new array.
             T[] newArray = new T[inputArray.Length - count];
             for (int i = 0; i < inputArray.Length; i++)

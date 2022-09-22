@@ -13,7 +13,24 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the output of the process.
         /// </summary>
-        public string[] Output { get; set; }
+        public string[] Output 
+        { 
+            get
+            {
+                return _output;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    _output = new string[0];
+                }
+                else
+                {
+                    _output = value;
+                }
+            }
+        }
         /// <summary>
         /// Gets if the process finished successfully.
         /// </summary>
@@ -31,5 +48,7 @@ namespace WGetNET
                 }
             }
         }
+
+        private string[] _output = new string[0];
     }
 }

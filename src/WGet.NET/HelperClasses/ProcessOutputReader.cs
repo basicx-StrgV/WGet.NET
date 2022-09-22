@@ -2,8 +2,8 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace WGetNET.HelperClasses
 {
@@ -84,7 +84,7 @@ namespace WGetNET.HelperClasses
                     }
                     catch
                     {
-                        continue;
+                        //Invalid entrys can be skiped
                     }
                 }
             }
@@ -119,6 +119,33 @@ namespace WGetNET.HelperClasses
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
 
             return CreateSourceListFromOutput(output, urlStartIndex);
+        }
+
+        /// <summary>
+        /// Writes the export result to a <see cref="System.String"/>.
+        /// </summary>
+        /// <param name="result">
+        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
+        /// </param>
+        /// <returns>
+        /// The <see cref="System.String"/> containing the export result.
+        /// </returns>
+        public static string ExportOutputToString(ProcessResult result)
+        {
+            if (result.Success)
+            {
+                StringBuilder outputBuilder = new StringBuilder();
+                foreach (string line in result.Output)
+                {
+                    outputBuilder.Append(line);
+                }
+
+                return outputBuilder.ToString().Trim();
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         /// <summary>

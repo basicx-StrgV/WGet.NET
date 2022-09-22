@@ -286,30 +286,6 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSource(WGetNET.WinGetSource)">
-            <summary>
-            Adds a new source to winget (Needs administrator rights).
-            </summary>
-            <remarks>
-            The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-            </remarks>
-            <param name="source">
-            The <see cref="T:WGetNET.WinGetSource"/> to add.
-            </param>
-            <returns>
-            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
-            </returns>
-            <exception cref="T:WGetNET.WinGetNotInstalledException">
-            WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
-            <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
-            </exception>
-        </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSource(System.String,System.String,System.String)">
             <summary>
             Adds a new source to winget (Needs administrator rights).
@@ -325,6 +301,30 @@
             </param>
             <param name="type">
             A <see cref="T:System.String"/> representing the source type.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.AddSource(WGetNET.WinGetSource)">
+            <summary>
+            Adds a new source to winget (Needs administrator rights).
+            </summary>
+            <remarks>
+            The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+            </remarks>
+            <param name="source">
+            The <see cref="T:WGetNET.WinGetSource"/> to add.
             </param>
             <returns>
             <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -461,17 +461,6 @@
             Please see inner exception.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportOutputToString(WGetNET.ProcessResult)">
-            <summary>
-            Writes the export result to a <see cref="T:System.String"/>.
-            </summary>
-            <param name="result">
-            The <see cref="T:WGetNET.ProcessResult"/> object containing the export data.
-            </param>
-            <returns>
-            The <see cref="T:System.String"/> containing the export result.
-            </returns>
-        </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportOutputToFile(WGetNET.ProcessResult,System.String)">
             <summary>
             Writes the export result to a file.
@@ -577,6 +566,19 @@
             <param name="message">Message of the exception</param>
             <param name="innerException">The inner exception</param>
         </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class with serialized data.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> 
+            that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext"/> 
+            that contains contextual information about the source or destination.
+            </param>
+        </member>
         <member name="T:WGetNET.WinGetNotInstalledException">
             <summary>
             Exception that gets thrown if winget is not installed.
@@ -604,6 +606,19 @@
             </summary>
             <param name="message">Message of the exception</param>
             <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:WGetNET.WinGetNotInstalledException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetNotInstalledException"/> class with serialized data.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> 
+            that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext"/> 
+            that contains contextual information about the source or destination.
+            </param>
         </member>
         <member name="T:WGetNET.HelperClasses.ArrayManager">
             <summary>
@@ -773,6 +788,17 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ExportOutputToString(WGetNET.ProcessResult)">
+            <summary>
+            Writes the export result to a <see cref="T:System.String"/>.
+            </summary>
+            <param name="result">
+            The <see cref="T:WGetNET.ProcessResult"/> object containing the export data.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/> containing the export result.
+            </returns>
+        </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateSourceListFromOutput(System.String[],System.Int32)">
             <summary>
             Creates a source list from output.
@@ -837,6 +863,11 @@
             Gets or sets the version of the package.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetPackage.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
         <member name="T:WGetNET.WinGetSource">
             <summary>
             Represents a winget source
@@ -855,6 +886,11 @@
         <member name="P:WGetNET.WinGetSource.SourceType">
             <summary>
             Gets or sets the type of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.IsEmpty">
+            <summary>
+            Gets if the object is empty.
             </summary>
         </member>
     </members>

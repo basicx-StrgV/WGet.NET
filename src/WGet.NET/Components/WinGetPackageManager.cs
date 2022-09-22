@@ -153,22 +153,11 @@ namespace WGetNET
         /// </exception>
         public bool InstallPackage(WinGetPackage package)
         {
-            try
+            if (package.IsEmpty)
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_installCmd, package.PackageId));
-
-                return result.Success;
+                return false;
             }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The package installtion failed.", e);
-            }
+            return InstallPackage(package.PackageId);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -223,22 +212,11 @@ namespace WGetNET
         /// </exception>
         public bool UninstallPackage(WinGetPackage package)
         {
-            try
+            if (package.IsEmpty)
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_uninstallCmd, package.PackageId));
-
-                return result.Success;
+                return false;
             }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The package uninstalltion failed.", e);
-            }
+            return UninstallPackage(package.PackageId);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -263,9 +241,7 @@ namespace WGetNET
                 string argument = _getUpgradeableCmd;
 
                 // Checking version to determine if "--include-unknown" is necessary
-                int wingetMinorVersion = 0;
-                bool castSuccessful = int.TryParse(WinGetVersion.Split(".")[1], out wingetMinorVersion);
-                
+                bool castSuccessful = int.TryParse(WinGetVersion.Split(".")[1], out int wingetMinorVersion);
                 if (castSuccessful && wingetMinorVersion >= 4) 
                 {
                     // Winget version supports new argument, add "--include-unknown" to arguments
@@ -337,22 +313,11 @@ namespace WGetNET
         /// </exception>
         public bool UpgradePackage(WinGetPackage package)
         {
-            try
+            if (package.IsEmpty)
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_upgradeCmd, package.PackageId));
-
-                return result.Success;
+                return false;
             }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Upgrading the package failed.", e);
-            }
+            return UpgradePackage(package.PackageId);
         }
         //---------------------------------------------------------------------------------------------
 

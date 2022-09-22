@@ -45,18 +45,6 @@ namespace WGetTest
                 bool sorceJson4 = sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
                 //bool addSuccess = sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
             }
-            catch (WinGetActionFailedException e)
-            {
-                Console.WriteLine(e);
-            }
-            catch (WinGetNotInstalledException e)
-            {
-                Console.WriteLine(e);
-            }
-            catch (SecurityException e)
-            {
-                Console.WriteLine(e);
-            }
             catch (Exception e)
             {
                 Console.WriteLine(e);
