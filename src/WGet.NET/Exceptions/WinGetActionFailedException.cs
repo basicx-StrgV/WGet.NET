@@ -3,12 +3,14 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
+using System.Runtime.Serialization;
 
 namespace WGetNET
 {
     /// <summary>
     /// Exception that gets thrown if a winget action failed.
     /// </summary>
+    [Serializable]
     public class WinGetActionFailedException : Exception
     {
         /// <summary>
@@ -21,7 +23,6 @@ namespace WGetNET
         /// </summary>
         public WinGetActionFailedException()
         {
-
         }
 
         /// <summary>
@@ -41,6 +42,21 @@ namespace WGetNET
         public WinGetActionFailedException(string message, Exception innerException) : base(message, innerException)
         {
             Message = message;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WGetNET.WinGetActionFailedException"/> class with serialized data.
+        /// </summary>
+        /// <param name="info">
+        /// The <see cref="System.Runtime.Serialization.SerializationInfo"/> 
+        /// that holds the serialized object data about the exception being thrown.
+        /// </param>
+        /// <param name="context">
+        /// The <see cref="System.Runtime.Serialization.StreamingContext"/> 
+        /// that contains contextual information about the source or destination.
+        /// </param>
+        protected WinGetActionFailedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
         }
     }
 }

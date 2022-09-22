@@ -4,7 +4,6 @@
 //--------------------------------------------------//
 using System;
 using System.IO;
-using System.Text;
 using System.Security;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -119,62 +118,6 @@ namespace WGetNET
         /// <remarks>
         /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
         /// </remarks>
-        /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> to add.
-        /// </param>
-        /// <returns>
-        /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public bool AddSource(WinGetSource source)
-        {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
-            try
-            {
-                ProcessResult result;
-
-                if (string.IsNullOrWhiteSpace(source.SourceType))
-                {
-                    result = _processManager.ExecuteWingetProcess(
-                        string.Format(_sourceAddWithTypeCmd, source.SourceName, source.SourceUrl, source.SourceType));
-                }
-                else
-                {
-                    result = _processManager.ExecuteWingetProcess(
-                        string.Format(_sourceAddCmd, source.SourceName, source.SourceUrl));
-                }
-
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
-            }
-        }
-
-        /// <summary>
-        /// Adds a new source to winget (Needs administrator rights).
-        /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
@@ -221,6 +164,44 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Getting installed sources failed.", e);
             }
         }
+
+        /// <summary>
+        /// Adds a new source to winget (Needs administrator rights).
+        /// </summary>
+        /// <remarks>
+        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+        /// </remarks>
+        /// <param name="source">
+        /// The <see cref="WGetNET.WinGetSource"/> to add.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public bool AddSource(WinGetSource source)
+        {
+            if (source.IsEmpty)
+            {
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(source.SourceType))
+            {
+                return AddSource(source.SourceName, source.SourceUrl);
+            }
+
+            return AddSource(source.SourceName, source.SourceUrl, source.SourceType);
+        }
+
         //---------------------------------------------------------------------------------------------
 
         //---Update------------------------------------------------------------------------------------
@@ -281,7 +262,7 @@ namespace WGetNET
                 ProcessResult result = 
                     _processManager.ExecuteWingetProcess(_sourceExportCmd);
 
-                return ExportOutputToString(result);
+                return ProcessOutputReader.ExportOutputToString(result);
             }
             catch (Win32Exception)
             {
@@ -320,7 +301,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
-                return ExportOutputToString(result);
+                return ProcessOutputReader.ExportOutputToString(result);
             }
             catch (Win32Exception)
             {
@@ -350,27 +331,7 @@ namespace WGetNET
         /// </exception>
         public string ExportSources(WinGetSource source)
         {
-            try
-            {
-                //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    source.SourceName;
-
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
-
-                return ExportOutputToString(result);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
-            }
+            return ExportSources(source.SourceName);
         }
 
         /// <summary>
@@ -467,54 +428,7 @@ namespace WGetNET
         /// </exception>
         public bool ExportSourcesToFile(string file, WinGetSource source)
         {
-            try
-            {
-                //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    source.SourceName;
-
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
-
-                return ExportOutputToFile(result, file);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
-            }
-        }
-
-        /// <summary>
-        /// Writes the export result to a <see cref="System.String"/>.
-        /// </summary>
-        /// <param name="result">
-        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
-        /// </param>
-        /// <returns>
-        /// The <see cref="System.String"/> containing the export result.
-        /// </returns>
-        private string ExportOutputToString(ProcessResult result)
-        {
-            if (result.Success)
-            {
-                StringBuilder outputBuilder = new StringBuilder();
-                foreach (string line in result.Output)
-                {
-                    outputBuilder.Append(line);
-                }
-
-                return outputBuilder.ToString().Trim();
-            }
-            else
-            {
-                return string.Empty;
-            }
+            return ExportSourcesToFile(file, source.SourceName);
         }
 
         /// <summary>
@@ -533,17 +447,11 @@ namespace WGetNET
         {
             if (result.Success)
             {
-                StringBuilder outputBuilder = new StringBuilder();
-                foreach (string line in result.Output)
-                {
-                    outputBuilder.Append(line);
-                }
+                string outputString = ProcessOutputReader.ExportOutputToString(result);
 
                 File.WriteAllText(
                     file,
-                    outputBuilder
-                    .ToString()
-                    .Trim());
+                    outputString);
                 return true;
             }
             else
@@ -663,26 +571,7 @@ namespace WGetNET
         /// </exception>
         public bool RemoveSources(WinGetSource source)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(string.Format(_sourceRemoveCmd, source.SourceName));
-
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Removing source failed.", e);
-            }
+            return RemoveSources(source.SourceName);
         }
         //---------------------------------------------------------------------------------------------
     }

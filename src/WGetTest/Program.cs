@@ -31,6 +31,10 @@ namespace WGetTest
                 Console.WriteLine(test[0].PackageName);
                 Console.WriteLine(test[0].PackageId);
 
+                List<WinGetPackage> test2 = connector.GetUpgradeablePackages();
+                Console.WriteLine(test2[0].PackageName);
+                Console.WriteLine(test2[0].PackageId);
+
                 List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
                 bool sourceUpdateStatus = sourceManager.UpdateSources();
                 //bool sourceResetStatus = sourceManager.ResetSources();
@@ -40,18 +44,6 @@ namespace WGetTest
                 bool sorceJson3 = sourceManager.ExportSourcesToFile("C:\\Test\\AllSources.json");
                 bool sorceJson4 = sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
                 //bool addSuccess = sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
-            }
-            catch (WinGetActionFailedException e)
-            {
-                Console.WriteLine(e);
-            }
-            catch (WinGetNotInstalledException e)
-            {
-                Console.WriteLine(e);
-            }
-            catch (SecurityException e)
-            {
-                Console.WriteLine(e);
             }
             catch (Exception e)
             {

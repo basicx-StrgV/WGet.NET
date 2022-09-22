@@ -2,8 +2,8 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace WGetNET.HelperClasses
 {
@@ -71,17 +71,22 @@ namespace WGetNET.HelperClasses
             {
                 // [var1..var2] : selects the index range from var1 to var2
                 // (eg. if var1 is 2 and var2 is 5, the selectet index range will be [2, 3, 4])
-                try
-                {
-                    resultList.Add(
-                    new WinGetPackage()
+                if (output[i].Length >= extraInfoStartIndex) {
+                    try
                     {
-                        PackageName = output[i][0..idStartIndex].Trim(),
-                        PackageId = output[i][idStartIndex..versionStartIndex].Trim(),
-                        PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
-                    });
+                        resultList.Add(
+                            new WinGetPackage()
+                            {
+                                PackageName = output[i][0..idStartIndex].Trim(),
+                                PackageId = output[i][idStartIndex..versionStartIndex].Trim(),
+                                PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
+                            });
+                    }
+                    catch
+                    {
+                        //Invalid entrys can be skiped
+                    }
                 }
-                catch { continue; }
             }
 
             return resultList;
@@ -114,6 +119,33 @@ namespace WGetNET.HelperClasses
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
 
             return CreateSourceListFromOutput(output, urlStartIndex);
+        }
+
+        /// <summary>
+        /// Writes the export result to a <see cref="System.String"/>.
+        /// </summary>
+        /// <param name="result">
+        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
+        /// </param>
+        /// <returns>
+        /// The <see cref="System.String"/> containing the export result.
+        /// </returns>
+        public static string ExportOutputToString(ProcessResult result)
+        {
+            if (result.Success)
+            {
+                StringBuilder outputBuilder = new StringBuilder();
+                foreach (string line in result.Output)
+                {
+                    outputBuilder.Append(line);
+                }
+
+                return outputBuilder.ToString().Trim();
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         /// <summary>

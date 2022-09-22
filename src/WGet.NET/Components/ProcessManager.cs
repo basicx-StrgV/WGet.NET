@@ -58,7 +58,13 @@ namespace WGetNET
                 using StreamReader procOutputStream = proc.StandardOutput;
                 while (!procOutputStream.EndOfStream)
                 {
-                    output = ArrayManager.Add(output, procOutputStream.ReadLine());
+                    string? outputLine = procOutputStream.ReadLine();
+                    if (outputLine is null)
+                    {
+                        continue;
+                    }
+
+                    output = ArrayManager.Add(output, outputLine);
                 }
 
                 //Wait till end and get exit code
