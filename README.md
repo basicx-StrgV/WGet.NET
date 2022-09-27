@@ -5,7 +5,7 @@
 
 | Main    | Develop |
 | ------- | ------- |
-[![CodeQL_main](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml) [![BCH compliance](https://bettercodehub.com/edge/badge/basicx-StrgV/WGet.NET?branch=main)](https://bettercodehub.com/) |  [![CodeQL_develop](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml/badge.svg?branch=develop)](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml) |
+[![CodeQL_main](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml) |  [![CodeQL_develop](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml/badge.svg?branch=develop)](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml) |
 
 ## ❓ What is WGet.NET
 
