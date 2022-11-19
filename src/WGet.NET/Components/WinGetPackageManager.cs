@@ -117,6 +117,11 @@ namespace WGetNET
         /// </exception>
         public bool InstallPackage(string packageId)
         {
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                return false;
+            }
+
             try
             {
                 ProcessResult result =
@@ -151,10 +156,16 @@ namespace WGetNET
         /// </exception>
         public bool InstallPackage(WinGetPackage package)
         {
+            if (package == null)
+            {
+                return false;
+            }
+
             if (package.IsEmpty)
             {
                 return false;
             }
+
             return InstallPackage(package.PackageId);
         }
         //---------------------------------------------------------------------------------------------
@@ -176,6 +187,11 @@ namespace WGetNET
         /// </exception>
         public bool UninstallPackage(string packageId)
         {
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                return false;
+            }
+
             try
             {
                 ProcessResult result =
@@ -210,10 +226,16 @@ namespace WGetNET
         /// </exception>
         public bool UninstallPackage(WinGetPackage package)
         {
+            if (package == null)
+            {
+                return false;
+            }
+
             if (package.IsEmpty)
             {
                 return false;
             }
+
             return UninstallPackage(package.PackageId);
         }
         //---------------------------------------------------------------------------------------------
@@ -269,6 +291,11 @@ namespace WGetNET
         /// </exception>
         public bool UpgradePackage(string packageId)
         {
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                return false;
+            }
+
             try
             {
                 ProcessResult result =
@@ -303,10 +330,16 @@ namespace WGetNET
         /// </exception>
         public bool UpgradePackage(WinGetPackage package)
         {
+            if (package == null)
+            {
+                return false;
+            }
+            
             if (package.IsEmpty)
             {
                 return false;
             }
+
             return UpgradePackage(package.PackageId);
         }
 
@@ -340,6 +373,11 @@ namespace WGetNET
         /// </exception>
         public bool ExportPackagesToFile(string file)
         {
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                return false;
+            }
+
             try
             {
                 ProcessResult result =
@@ -378,6 +416,11 @@ namespace WGetNET
         /// </exception>
         public bool ImportPackagesFromFile(string file)
         {
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                return false;
+            }
+
             try
             {
                 ProcessResult result =

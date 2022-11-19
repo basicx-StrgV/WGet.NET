@@ -92,6 +92,11 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(arg))
+            {
+                return false;
+            }
+
             try
             {
                 ProcessResult result =
@@ -145,6 +150,11 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(arg) || string.IsNullOrWhiteSpace(type))
+            {
+                return false;
+            }
+
             try
             {
                 ProcessResult result =
@@ -187,6 +197,11 @@ namespace WGetNET
         /// </exception>
         public bool AddSource(WinGetSource source)
         {
+            if (source == null)
+            {
+                return false;
+            }
+
             if (source.IsEmpty)
             {
                 return false;
@@ -288,6 +303,11 @@ namespace WGetNET
         /// </exception>
         public string ExportSources(string sourceName)
         {
+            if (string.IsNullOrWhiteSpace(sourceName))
+            {
+                return string.Empty;
+            }
+
             try
             {
                 //Set Arguments
@@ -329,6 +349,16 @@ namespace WGetNET
         /// </exception>
         public string ExportSources(WinGetSource source)
         {
+            if (source == null)
+            {
+                return string.Empty;
+            }
+
+            if (source.IsEmpty)
+            {
+                return string.Empty;
+            }
+
             return ExportSources(source.SourceName);
         }
 
@@ -348,6 +378,11 @@ namespace WGetNET
         /// </exception>
         public bool ExportSourcesToFile(string file)
         {
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                return false;
+            }
+
             try
             {
                 ProcessResult result =
@@ -382,6 +417,11 @@ namespace WGetNET
         /// </exception>
         public bool ExportSourcesToFile(string file, string sourceName)
         {
+            if (string.IsNullOrWhiteSpace(file) || string.IsNullOrWhiteSpace(sourceName))
+            {
+                return false;
+            }
+
             try
             {
                 //Set Arguments
@@ -426,6 +466,16 @@ namespace WGetNET
         /// </exception>
         public bool ExportSourcesToFile(string file, WinGetSource source)
         {
+            if (source == null)
+            {
+                return false;
+            }
+
+            if (source.IsEmpty || string.IsNullOrWhiteSpace(file))
+            {
+                return false;
+            }
+
             return ExportSourcesToFile(file, source.SourceName);
         }
 
@@ -531,6 +581,11 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return false;
+            }
+
             try
             {
                 ProcessResult result =
@@ -569,6 +624,16 @@ namespace WGetNET
         /// </exception>
         public bool RemoveSources(WinGetSource source)
         {
+            if (source == null)
+            {
+                return false;
+            }
+
+            if (source.IsEmpty)
+            {
+                return false;
+            }
+
             return RemoveSources(source.SourceName);
         }
         //---------------------------------------------------------------------------------------------
