@@ -232,7 +232,7 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public List<WinGetPackage> GetUpgradeablePackages()
+        public List<WinGetUpdatePackage> GetUpgradeablePackages()
         {
             try
             {
@@ -249,7 +249,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(argument);
 
-                return ProcessOutputReader.ToPackageList(result.Output);
+                return ProcessOutputReader.ToUpdatePackageList(result.Output);
             }
             catch (Win32Exception)
             {

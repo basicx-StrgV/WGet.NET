@@ -14,6 +14,9 @@
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.ProcessManager"/> class.
             </summary>
+            <param name="processName">
+            The name of the process to execute.
+            </param>
         </member>
         <member name="M:WGetNET.ProcessManager.ExecuteWingetProcess(System.String)">
             <summary>
@@ -715,6 +718,48 @@
             The new <see langword="array"/>.
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfo.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.HelperClasses.ColumnInfoList.Item(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.HelperClasses.ColumnInfoList.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.HelperClasses.ColumnInfoList.IsReadOnly">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfoList.Add(WGetNET.HelperClasses.ColumnInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfoList.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfoList.Contains(WGetNET.HelperClasses.ColumnInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfoList.CopyTo(WGetNET.HelperClasses.ColumnInfo[],System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfoList.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfoList.IndexOf(WGetNET.HelperClasses.ColumnInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfoList.Insert(System.Int32,WGetNET.HelperClasses.ColumnInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfoList.Remove(WGetNET.HelperClasses.ColumnInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfoList.RemoveAt(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ColumnInfoList.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc/>
+        </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
@@ -756,24 +801,44 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePackageListFromOutput(System.String[],System.Int32,System.Int32,System.Int32)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePackageListFromOutput(System.String[],WGetNET.HelperClasses.ColumnInfoList)">
             <summary>
             Creates a package list from output.
             </summary>
             <param name="output">
             The <see langword="array"/> containing the output.
             </param>
-            <param name="idStartIndex">
-            The <see cref="T:System.Int32"/> representing the start index of the id.
-            </param>
-            <param name="versionStartIndex">
-            The <see cref="T:System.Int32"/> representing the start index of the version.
-            </param>
-            <param name="extraInfoStartIndex">
-            The <see cref="T:System.Int32"/> representing the start index of the extra information.
+            <param name="columns">
+            The <see cref="T:WGetNET.HelperClasses.ColumnInfoList"/> representing an IList{<see cref="T:WGetNET.HelperClasses.ColumnInfo"/>}
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToUpdatePackageList(System.String[])">
+            <summary>
+            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
+            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetUpdatePackage"/>'s.
+            </summary>
+            <param name="output">
+            A <see cref="T:System.Collections.Generic.List`1"/> of output lines from a winget process.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetUpdatePackage"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateUpdatePackageListFromOutput(System.String[],WGetNET.HelperClasses.ColumnInfoList)">
+            <summary>
+            Creates an updatable package list from output.
+            </summary>
+            <param name="output">
+            The <see langword="array"/> containing the output.
+            </param>
+            <param name="columns">
+            The <see cref="T:WGetNET.HelperClasses.ColumnInfoList"/> representing an IList{<see cref="T:WGetNET.HelperClasses.ColumnInfo"/>}
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetUpdatePackage"/>'s.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToSourceList(System.String[])">
@@ -807,7 +872,7 @@
             The <see langword="array"/> containing the output.
             </param>
             <param name="urlStartIndex">
-            The <see cref="T:System.Int32"/> representing the start index of the url.
+            The <see cref="T:System.Int32"/> representing the start start of the url.
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
@@ -815,7 +880,7 @@
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnStartIndex(System.String,System.Int32)">
             <summary>
-            Gets the start index of a column in the given line.
+            Gets the start start of a column in the given line.
             </summary>
             <param name="line">
             A <see cref="T:System.String"/> representing the line that contains the column names.
@@ -824,7 +889,7 @@
             A <see cref="T:System.Int32"/> representing the column to look for.
             </param>
             <returns>
-            A <see cref="T:System.Int32"/> representing the start index of the column 
+            A <see cref="T:System.Int32"/> representing the start start of the column 
             or -1 if the column was not found.
             </returns>
         </member>
@@ -863,10 +928,18 @@
             Gets or sets the version of the package.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetPackage.Source">
+            <summary>
+            Gets or sets the updatable version of the package.
+            </summary>
+        </member>
         <member name="P:WGetNET.WinGetPackage.IsEmpty">
             <summary>
             Gets if the object is empty.
             </summary>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.ToString">
+            <inheritdoc/>
         </member>
         <member name="T:WGetNET.WinGetSource">
             <summary>
@@ -892,6 +965,22 @@
             <summary>
             Gets if the object is empty.
             </summary>
+        </member>
+        <member name="T:WGetNET.WinGetUpdatePackage">
+            <summary>
+            Represents an updatable winget package
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetUpdatePackage.IsEmpty">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.WinGetUpdatePackage.UpdateVersion">
+            <summary>
+            Gets or sets the updatable version of the package.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetUpdatePackage.ToString">
+            <inheritdoc/>
         </member>
     </members>
 </doc>

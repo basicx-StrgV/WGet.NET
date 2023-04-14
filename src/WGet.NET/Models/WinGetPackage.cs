@@ -12,83 +12,53 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the name of the package.
         /// </summary>
-        public string PackageName 
-        { 
-            get
-            {
-                return _packageName;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _packageName = string.Empty;
-                }
-                else
-                {
-                    _packageName = value;
-                }
-            }
+        public string PackageName
+        {
+            get => _packageName;
+            set => _packageName = string.IsNullOrWhiteSpace(value) ? string.Empty : value;
         }
         /// <summary>
         /// Gets or sets the id of the package.
         /// </summary>
-        public string PackageId 
+        public string PackageId
         {
-            get
-            {
-                return _packageId;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _packageId = string.Empty;
-                }
-                else
-                {
-                    _packageId = value;
-                }
-            }
+            get => _packageId;
+            set => _packageId = string.IsNullOrWhiteSpace(value) ? string.Empty : value;
         }
         /// <summary>
         /// Gets or sets the version of the package.
         /// </summary>
-        public string PackageVersion 
+        public string PackageVersion
         {
-            get
-            {
-                return _packageVersion;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _packageVersion = string.Empty;
-                }
-                else
-                {
-                    _packageVersion = value;
-                }
-            }
+            get => _packageVersion;
+            set => _packageVersion = string.IsNullOrWhiteSpace(value) ? string.Empty : value;
         }
+        /// <summary>
+        /// Gets or sets the updatable version of the package.
+        /// </summary>
+        public string Source
+        {
+            get => _source;
+            internal set => _source = string.IsNullOrWhiteSpace(value) ? string.Empty : value;
+        }
+
         /// <summary>
         /// Gets if the object is empty.
         /// </summary>
-        public bool IsEmpty
+        public virtual bool IsEmpty
         {
-            get
-            {
-                if ((_packageName.Length + _packageId.Length + _packageVersion.Length) > 0)
-                {
-                    return false;
-                }
-                return true;
-            }
+            get => string.IsNullOrWhiteSpace(_packageName) || string.IsNullOrWhiteSpace(_packageId) || string.IsNullOrWhiteSpace(_packageVersion);
         }
 
         private string _packageName = string.Empty;
         private string _packageId = string.Empty;
         private string _packageVersion = string.Empty;
+        private string _source = string.Empty;
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return $"{_packageName} ({_packageVersion})";
+        }
     }
 }

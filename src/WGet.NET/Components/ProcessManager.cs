@@ -5,6 +5,7 @@
 using System.IO;
 using System.Diagnostics;
 using WGetNET.HelperClasses;
+using System.Text;
 
 namespace WGetNET
 {
@@ -28,7 +29,8 @@ namespace WGetNET
             {
                 WindowStyle = ProcessWindowStyle.Hidden,
                 FileName = processName,
-                RedirectStandardOutput = true
+                RedirectStandardOutput = true,
+                StandardOutputEncoding = Encoding.Default,
             };
         }
     

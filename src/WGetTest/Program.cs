@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using WGetNET;
 
 namespace WGetTest
@@ -22,19 +23,19 @@ namespace WGetTest
                 WinGetPackageManager connector = new WinGetPackageManager();
                 WinGetSourceManager sourceManager = new WinGetSourceManager();
                 WinGetInfo info = new WinGetInfo();
-                Console.WriteLine("Winget Installed: " + info.WinGetInstalled +
+                Output("Winget Installed: " + info.WinGetInstalled +
                                     "\nWinget Version: " + info.WinGetVersion + "\n");
 
                 //---Tests-----------------------------------------------------------------------------
-                List<WinGetPackage> test = connector.SearchPackage("Git");
-                Console.WriteLine(test[0].PackageName);
-                Console.WriteLine(test[0].PackageId);
+                var test = connector.SearchPackage("Git");
+                Output(test[0].PackageName);
+                Output(test[0].PackageId);
 
-                List<WinGetPackage> test2 = connector.GetUpgradeablePackages();
-                Console.WriteLine(test2[0].PackageName);
-                Console.WriteLine(test2[0].PackageId);
+                var test2 = connector.GetUpgradeablePackages();
+                Output(test2[0].PackageName);
+                Output(test2[0].PackageId);
 
-                List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
+                var sourceList = sourceManager.GetInstalledSources();
                 bool sourceUpdateStatus = sourceManager.UpdateSources();
                 //bool sourceResetStatus = sourceManager.ResetSources();
 
@@ -46,8 +47,14 @@ namespace WGetTest
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Output(e);
             }
+        }
+
+        private void Output(object message)
+        {
+            Console.WriteLine(message);
+            Debug.WriteLine(message);
         }
     }
 }
