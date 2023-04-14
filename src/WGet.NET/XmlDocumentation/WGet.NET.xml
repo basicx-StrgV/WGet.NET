@@ -801,20 +801,6 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePackageListFromOutput(System.String[],WGetNET.HelperClasses.ColumnInfoList)">
-            <summary>
-            Creates a package list from output.
-            </summary>
-            <param name="output">
-            The <see langword="array"/> containing the output.
-            </param>
-            <param name="columns">
-            The <see cref="T:WGetNET.HelperClasses.ColumnInfoList"/> representing an IList{<see cref="T:WGetNET.HelperClasses.ColumnInfo"/>}
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
-            </returns>
-        </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToUpdatePackageList(System.String[])">
             <summary>
             Converts a <see cref="T:System.Collections.Generic.List`1"/> 
@@ -822,20 +808,6 @@
             </summary>
             <param name="output">
             A <see cref="T:System.Collections.Generic.List`1"/> of output lines from a winget process.
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetUpdatePackage"/>'s.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateUpdatePackageListFromOutput(System.String[],WGetNET.HelperClasses.ColumnInfoList)">
-            <summary>
-            Creates an updatable package list from output.
-            </summary>
-            <param name="output">
-            The <see langword="array"/> containing the output.
-            </param>
-            <param name="columns">
-            The <see cref="T:WGetNET.HelperClasses.ColumnInfoList"/> representing an IList{<see cref="T:WGetNET.HelperClasses.ColumnInfo"/>}
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetUpdatePackage"/>'s.
@@ -864,34 +836,54 @@
             The <see cref="T:System.String"/> containing the export result.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateSourceListFromOutput(System.String[],System.Int32)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePackageListFromOutput(System.String[],WGetNET.HelperClasses.ColumnInfoList)">
+            <summary>
+            Creates a package list from output.
+            </summary>
+            <param name="output">
+            The <see langword="array"/> containing the output.
+            </param>
+            <param name="columns">
+            The <see cref="T:WGetNET.HelperClasses.ColumnInfoList"/> representing an IList{<see cref="T:WGetNET.HelperClasses.ColumnInfo"/>}
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateUpdatePackageListFromOutput(System.String[],WGetNET.HelperClasses.ColumnInfoList)">
+            <summary>
+            Creates an updatable package list from output.
+            </summary>
+            <param name="output">
+            The <see langword="array"/> containing the output.
+            </param>
+            <param name="columns">
+            The <see cref="T:WGetNET.HelperClasses.ColumnInfoList"/> representing an IList{<see cref="T:WGetNET.HelperClasses.ColumnInfo"/>}
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetUpdatePackage"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateSourceListFromOutput(System.String[],WGetNET.HelperClasses.ColumnInfoList)">
             <summary>
             Creates a source list from output.
             </summary>
             <param name="output">
             The <see langword="array"/> containing the output.
             </param>
-            <param name="urlStartIndex">
-            The <see cref="T:System.Int32"/> representing the start start of the url.
+            <param name="columns">
+            The <see cref="T:WGetNET.HelperClasses.ColumnInfoList"/> representing an IList{<see cref="T:WGetNET.HelperClasses.ColumnInfo"/>}
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnStartIndex(System.String,System.Int32)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnInformation(System.String)">
             <summary>
-            Gets the start start of a column in the given line.
+            Splits a line into columns and returns the columns found in a <see cref="T:WGetNET.HelperClasses.ColumnInfoList"/>
             </summary>
-            <param name="line">
-            A <see cref="T:System.String"/> representing the line that contains the column names.
-            </param>
-            <param name="column">
-            A <see cref="T:System.Int32"/> representing the column to look for.
-            </param>
-            <returns>
-            A <see cref="T:System.Int32"/> representing the start start of the column 
-            or -1 if the column was not found.
-            </returns>
+            <param name="line">the line to analyze</param>
+            <returns>A <see cref="T:WGetNET.HelperClasses.ColumnInfoList"/> representing an <see cref="T:System.Collections.Generic.IList`1"/> where T : <see cref="T:WGetNET.HelperClasses.ColumnInfo"/></returns>
         </member>
         <member name="P:WGetNET.ProcessResult.ExitCode">
             <summary>

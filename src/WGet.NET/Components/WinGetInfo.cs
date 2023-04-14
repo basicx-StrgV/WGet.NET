@@ -19,16 +19,9 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if winget is installed or <see langword="false"/> if not.
         /// </returns>
-        public bool WinGetInstalled 
-        { 
-            get 
-            {
-                if (CheckWinGetVersion() != string.Empty)
-                {
-                    return true;
-                }
-                return false;
-            } 
+        public bool WinGetInstalled
+        {
+            get => CheckWinGetVersion() != string.Empty;
         }
 
         /// <summary>
@@ -37,12 +30,9 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> with the version number.
         /// </returns>
-        public string WinGetVersion 
-        { 
-            get 
-            {
-                return CheckWinGetVersion();
-            } 
+        public string WinGetVersion
+        {
+            get => CheckWinGetVersion();
         }
 
         /// <summary>
@@ -57,14 +47,13 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_versionCmd);
+                var result = _processManager.ExecuteWingetProcess(_versionCmd);
 
-                for (int i = 0; i < result.Output.Length; i++)
+                for (var line = 0; line < result.Output.Length; line++)
                 {
-                    if (result.Output[i].StartsWith("v"))
+                    if (result.Output[line].StartsWith("v"))
                     {
-                        return result.Output[i].Trim();
+                        return result.Output[line].Trim();
                     }
                 }
             }

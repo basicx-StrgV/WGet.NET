@@ -84,9 +84,9 @@ namespace WGetNET.HelperClasses
         /// </returns>
         public static int GetEntryContains(string[] inputArray, string value)
         {
-            int index = -1;
+            var index = -1;
 
-            for (int i = 0; i < inputArray.Length; i++)
+            for (var i = 0; i < inputArray.Length; i++)
             {
                 if (inputArray[i].Contains(value))
                 {
@@ -118,7 +118,7 @@ namespace WGetNET.HelperClasses
         {
             //Copy the input array to the new array.
             T[] newArray = new T[inputArray.Length + addLengthOf];
-            for (int i = 0; i < inputArray.Length; i++)
+            for (var i = 0; i < inputArray.Length; i++)
             {
                 newArray[i] = inputArray[i];
             }
@@ -152,16 +152,16 @@ namespace WGetNET.HelperClasses
             }
 
             //Only copy the needed range of the input array to the new array.
-            T[] newArray = new T[inputArray.Length - count];
-            for (int i = 0; i < inputArray.Length; i++)
+            var newArray = new T[inputArray.Length - count];
+            for (var index = 0; index < inputArray.Length; index++)
             {
-                if (i < startIndex)
+                if (index < startIndex)
                 {
-                    newArray[i] = inputArray[i];
+                    newArray[index] = inputArray[index];
                 }
-                else if (i + count < inputArray.Length)
+                else if (index + count < inputArray.Length)
                 {
-                    newArray[i] = inputArray[i + count];
+                    newArray[index] = inputArray[index + count];
                 }
             }
 

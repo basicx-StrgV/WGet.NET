@@ -13,42 +13,19 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the output of the process.
         /// </summary>
-        public string[] Output 
-        { 
-            get
-            {
-                return _output;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _output = new string[0];
-                }
-                else
-                {
-                    _output = value;
-                }
-            }
+        public string[] Output
+        {
+            get => _output;
+            set => _output = value is null ? Array.Empty<string>() : value;
         }
         /// <summary>
         /// Gets if the process finished successfully.
         /// </summary>
         public bool Success
         {
-            get
-            {
-                if (ExitCode == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+            get => ExitCode == 0;
         }
 
-        private string[] _output = new string[0];
+        private string[] _output = Array.Empty<string>();
     }
 }

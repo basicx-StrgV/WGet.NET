@@ -45,9 +45,8 @@ namespace WGetNET.HelperClasses
         /// </returns>
         private static bool CurrentUserIsAdmin()
         {
-            using WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            return new WindowsPrincipal(identity)
-                .IsInRole(WindowsBuiltInRole.Administrator);
+            using var identity = WindowsIdentity.GetCurrent();
+            return new WindowsPrincipal(identity).IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
 }

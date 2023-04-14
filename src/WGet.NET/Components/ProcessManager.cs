@@ -50,20 +50,19 @@ namespace WGetNET
             _winGetStartInfo.Arguments = cmd;
 
             //Output List
-            string[] output = new string[0];
-
-            int exitCode = -1;
+            var output = new string[0];
+            var exitCode = -1;
 
             //Create and run process
-            using (Process proc = new Process { StartInfo = _winGetStartInfo })
+            using (var proc = new Process { StartInfo = _winGetStartInfo })
             {
-                proc.Start();
+                _ = proc.Start();
                 
                 //Read output to list
-                using StreamReader procOutputStream = proc.StandardOutput;
+                using var procOutputStream = proc.StandardOutput;
                 while (!procOutputStream.EndOfStream)
                 {
-                    string? outputLine = procOutputStream.ReadLine();
+                    var outputLine = procOutputStream.ReadLine();
                     if (outputLine is null)
                     {
                         continue;

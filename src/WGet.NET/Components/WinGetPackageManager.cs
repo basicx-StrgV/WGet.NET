@@ -29,7 +29,7 @@ namespace WGetNET
         /// </summary>
         public WinGetPackageManager()
         {
-           //Provide empty constructor
+            //Provide empty constructor
         }
 
         //---Search------------------------------------------------------------------------------------
@@ -51,10 +51,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_searchCmd, packageName));
-
+                var result = _processManager.ExecuteWingetProcess(string.Format(_searchCmd, packageName));
                 return ProcessOutputReader.ToPackageList(result.Output);
             }
             catch (Win32Exception)
@@ -86,9 +83,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_listCmd);
-
+                var result = _processManager.ExecuteWingetProcess(_listCmd);
                 return ProcessOutputReader.ToPackageList(result.Output);
             }
             catch (Win32Exception)
@@ -119,10 +114,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_installCmd, packageId));
-
+                var result = _processManager.ExecuteWingetProcess(string.Format(_installCmd, packageId));
                 return result.Success;
             }
             catch (Win32Exception)
@@ -151,11 +143,7 @@ namespace WGetNET
         /// </exception>
         public bool InstallPackage(WinGetPackage package)
         {
-            if (package.IsEmpty)
-            {
-                return false;
-            }
-            return InstallPackage(package.PackageId);
+            return package.IsEmpty ? false : InstallPackage(package.PackageId);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -178,10 +166,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_uninstallCmd, packageId));
-
+                var result = _processManager.ExecuteWingetProcess(string.Format(_uninstallCmd, packageId));
                 return result.Success;
             }
             catch (Win32Exception)
@@ -210,11 +195,7 @@ namespace WGetNET
         /// </exception>
         public bool UninstallPackage(WinGetPackage package)
         {
-            if (package.IsEmpty)
-            {
-                return false;
-            }
-            return UninstallPackage(package.PackageId);
+            return package.IsEmpty ? false : UninstallPackage(package.PackageId);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -236,19 +217,17 @@ namespace WGetNET
         {
             try
             {
-                string argument = _getUpgradeableCmd;
+                var argument = _getUpgradeableCmd;
 
                 // Checking version to determine if "--include-unknown" is necessary
-                bool castSuccessful = int.TryParse(WinGetVersion.Split(".")[1], out int wingetMinorVersion);
-                if (castSuccessful && wingetMinorVersion >= 4) 
+                var castSuccessful = int.TryParse(WinGetVersion.Split(".")[1], out var wingetMinorVersion);
+                if (castSuccessful && wingetMinorVersion >= 4)
                 {
                     // Winget version supports new argument, add "--include-unknown" to arguments
                     argument += " " + _includeUnknown;
                 }
 
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(argument);
-
+                var result = _processManager.ExecuteWingetProcess(argument);
                 return ProcessOutputReader.ToUpdatePackageList(result.Output);
             }
             catch (Win32Exception)
@@ -279,10 +258,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_upgradeCmd, packageId));
-
+                var result = _processManager.ExecuteWingetProcess(string.Format(_upgradeCmd, packageId));
                 return result.Success;
             }
             catch (Win32Exception)
@@ -311,11 +287,7 @@ namespace WGetNET
         /// </exception>
         public bool UpgradePackage(WinGetPackage package)
         {
-            if (package.IsEmpty)
-            {
-                return false;
-            }
-            return UpgradePackage(package.PackageId);
+            return package.IsEmpty ? false : UpgradePackage(package.PackageId);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -338,10 +310,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_exportCmd, file));
-
+                var result = _processManager.ExecuteWingetProcess(string.Format(_exportCmd, file));
                 return result.Success;
             }
             catch (Win32Exception)
@@ -376,10 +345,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_importCmd, file));
-
+                var result = _processManager.ExecuteWingetProcess(string.Format(_importCmd, file));
                 return result.Success;
             }
             catch (Win32Exception)

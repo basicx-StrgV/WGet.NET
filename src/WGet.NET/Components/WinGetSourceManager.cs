@@ -43,9 +43,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceListCmd);
-
+                var result = _processManager.ExecuteWingetProcess(_sourceListCmd);
                 return ProcessOutputReader.ToSourceList(result.Output);
             }
             catch (Win32Exception)
@@ -94,10 +92,7 @@ namespace WGetNET
 
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_sourceAddCmd, name, arg));
-
+                var result = _processManager.ExecuteWingetProcess(string.Format(_sourceAddCmd, name, arg));
                 return result.Success;
             }
             catch (Win32Exception)
@@ -147,10 +142,7 @@ namespace WGetNET
 
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_sourceAddWithTypeCmd, name, arg, type));
-
+                var result = _processManager.ExecuteWingetProcess(string.Format(_sourceAddWithTypeCmd, name, arg, type));
                 return result.Success;
             }
             catch (Win32Exception)
@@ -187,17 +179,11 @@ namespace WGetNET
         /// </exception>
         public bool AddSource(WinGetSource source)
         {
-            if (source.IsEmpty)
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(source.SourceType))
-            {
-                return AddSource(source.SourceName, source.SourceUrl);
-            }
-
-            return AddSource(source.SourceName, source.SourceUrl, source.SourceType);
+            return source.IsEmpty
+                ? false
+                : string.IsNullOrWhiteSpace(source.SourceType)
+                ? AddSource(source.SourceName, source.SourceUrl)
+                : AddSource(source.SourceName, source.SourceUrl, source.SourceType);
         }
 
         //---------------------------------------------------------------------------------------------
@@ -223,9 +209,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceUpdateCmd);
-
+                var result = _processManager.ExecuteWingetProcess(_sourceUpdateCmd);
                 return result.Success;
             }
             catch (Win32Exception)
@@ -257,9 +241,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result = 
-                    _processManager.ExecuteWingetProcess(_sourceExportCmd);
-
+                var result = _processManager.ExecuteWingetProcess(_sourceExportCmd);
                 return ProcessOutputReader.ExportOutputToString(result);
             }
             catch (Win32Exception)
@@ -291,14 +273,9 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    sourceName;
+                var cmd = _sourceExportCmd + " -n " + sourceName;
 
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
-
+                var result = _processManager.ExecuteWingetProcess(cmd);
                 return ProcessOutputReader.ExportOutputToString(result);
             }
             catch (Win32Exception)
@@ -350,9 +327,7 @@ namespace WGetNET
         {
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceExportCmd);
-
+                var result = _processManager.ExecuteWingetProcess(_sourceExportCmd);
                 return ExportOutputToFile(result, file);
             }
             catch (Win32Exception)
@@ -385,14 +360,9 @@ namespace WGetNET
             try
             {
                 //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    sourceName;
+                var cmd = _sourceExportCmd + " -n " + sourceName;
 
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
-
+                var result = _processManager.ExecuteWingetProcess(cmd);
                 return ExportOutputToFile(result, file);
             }
             catch (Win32Exception)
@@ -443,19 +413,14 @@ namespace WGetNET
         /// </returns>
         private bool ExportOutputToFile(ProcessResult result, string file)
         {
-            if (result.Success)
-            {
-                string outputString = ProcessOutputReader.ExportOutputToString(result);
-
-                File.WriteAllText(
-                    file,
-                    outputString);
-                return true;
-            }
-            else
+            if (!result.Success)
             {
                 return false;
             }
+
+            var outputString = ProcessOutputReader.ExportOutputToString(result);
+            File.WriteAllText(file, outputString);
+            return true;
         }
         //---------------------------------------------------------------------------------------------
 
@@ -488,9 +453,7 @@ namespace WGetNET
 
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceResetCmd);
-
+                var result = _processManager.ExecuteWingetProcess(_sourceResetCmd);
                 return result.Success;
             }
             catch (Win32Exception)
@@ -533,9 +496,7 @@ namespace WGetNET
 
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(string.Format(_sourceRemoveCmd, name));
-
+                var result = _processManager.ExecuteWingetProcess(string.Format(_sourceRemoveCmd, name));
                 return result.Success;
             }
             catch (Win32Exception)

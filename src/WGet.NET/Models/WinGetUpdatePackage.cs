@@ -23,9 +23,7 @@ namespace WGetNET
             internal set => _updateVersion = string.IsNullOrWhiteSpace(value) ? string.Empty : value;
         }
 
-        
         private string _updateVersion = string.Empty;
-        
 
         /// <inheritdoc/>
         public override string ToString()
