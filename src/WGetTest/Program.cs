@@ -26,9 +26,9 @@ namespace WGetTest
                                     "\nWinget Version: " + info.WinGetVersion + "\n");
 
                 //---Tests-----------------------------------------------------------------------------
-                List<WinGetPackage> test = connector.SearchPackage("Git");
-                Console.WriteLine(test[0].PackageName);
-                Console.WriteLine(test[0].PackageId);
+                List<WinGetPackage> test = connector.SearchPackage("visualstudio");
+                Console.WriteLine(test[3].PackageName);
+                Console.WriteLine(test[3].PackageId);
 
                 List<WinGetPackage> test2 = connector.GetUpgradeablePackages();
                 Console.WriteLine(test2[0].PackageName);

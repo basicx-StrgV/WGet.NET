@@ -3,6 +3,7 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System.IO;
+using System.Text;
 using System.Diagnostics;
 using WGetNET.HelperClasses;
 
@@ -28,7 +29,8 @@ namespace WGetNET
             {
                 CreateNoWindow = true,
                 FileName = processName,
-                RedirectStandardOutput = true
+                RedirectStandardOutput = true,
+                StandardOutputEncoding = Encoding.Default
             };
         }
     
