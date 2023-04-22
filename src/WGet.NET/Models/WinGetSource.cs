@@ -2,6 +2,8 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System.Text.Json.Serialization;
+
 namespace WGetNET
 {
     /// <summary>
@@ -12,6 +14,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the name of the source.
         /// </summary>
+        [JsonPropertyName("Name")]
         public string SourceName 
         {
             get
@@ -33,6 +36,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the url of the source.
         /// </summary>
+        [JsonPropertyName("Arg")]
         public string SourceUrl 
         {
             get
@@ -54,6 +58,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the type of the source.
         /// </summary>
+        [JsonPropertyName("Type")]
         public string SourceType 
         {
             get
@@ -73,8 +78,32 @@ namespace WGetNET
             }
         }
         /// <summary>
+        /// Gets or sets the data of the source.
+        /// </summary>
+        [JsonPropertyName("Data")]
+        public string SourceData
+        {
+            get
+            {
+                return _sourceData;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    _sourceData = string.Empty;
+                }
+                else
+                {
+                    _sourceData = value;
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets if the object is empty.
         /// </summary>
+        [JsonIgnore]
         public bool IsEmpty
         {
             get
@@ -90,5 +119,6 @@ namespace WGetNET
         private string _sourceName = string.Empty;
         private string _sourceUrl = string.Empty;
         private string _sourceType = string.Empty;
+        private string _sourceData = string.Empty;
     }
 }

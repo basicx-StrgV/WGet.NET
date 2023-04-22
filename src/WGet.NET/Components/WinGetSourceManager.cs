@@ -4,6 +4,7 @@
 //--------------------------------------------------//
 using System;
 using System.IO;
+using System.Text;
 using System.Security;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -363,6 +364,42 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Exports the winget sources to a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public List<WinGetSource> ExportSourcesToObject()
+        {
+            return ExportStringToSources(ExportSources());
+        }
+
+        /// <summary>
+        /// Exports the winget sources to a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public List<WinGetSource> ExportSourcesToObject(string sourceName)
+        {
+            return ExportStringToSources(ExportSources(sourceName));
+        }
+
+        /// <summary>
         /// Exports the winget sources in json format to a file.
         /// </summary>
         /// <param name="file">The file for the export.</param>
@@ -506,6 +543,117 @@ namespace WGetNET
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Convert the string output from winget source export to a 
+        /// <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
+        /// </summary>
+        /// <param name="exportString">
+        /// A <see cref="System.String"/> containing the winget source export content.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
+        /// </returns>
+        private List<WinGetSource> ExportStringToSources(string exportString)
+        {
+            List<WinGetSource> sourceList = new List<WinGetSource>();
+
+            string[] jsonStrings = exportString.Split("}{");
+            StringBuilder jsonString = new StringBuilder();
+            for (int i = 0; i < jsonStrings.Length; i++)
+            {
+                if (!jsonStrings[i].StartsWith('{'))
+                {
+                    jsonString.Append('{');
+                }
+
+                jsonString.Append(jsonStrings[i]);
+
+                if (!jsonStrings[i].EndsWith('}'))
+                {
+                    jsonString.Append('}');
+                }
+                
+                WinGetSource? source =
+                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString());
+
+                if (source == null)
+                {
+                    throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
+                }
+
+                sourceList.Add(source);
+
+                jsonString.Clear();
+            }
+
+            return sourceList;
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Import------------------------------------------------------------------------------------
+        /// <summary>
+        /// Imports sources into winget.
+        /// </summary>
+        /// <param name="winGetSources">
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if on or more sorces failed.
+        /// </returns>
+        public bool ImportSource(List<WinGetSource> winGetSources)
+        {
+            if (winGetSources == null || winGetSources.Count <= 0)
+            {
+                return false;
+            }
+
+            bool status = true;
+            for (int i = 0; i < winGetSources.Count; i++)
+            {
+                if (!AddSource(winGetSources[i]))
+                {
+                    status = false;
+                }
+            }
+
+            return status;
+        }
+
+        /// <summary>
+        /// Imports a source into winget.
+        /// </summary>
+        /// <param name="winGetSource">
+        /// A <see cref="WGetNET.WinGetSource"/> objects.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// </returns>
+        public bool ImportSource(WinGetSource winGetSource)
+        {
+            return AddSource(winGetSource);
+        }
+
+        /// <summary>
+        /// Imports a source into winget.
+        /// </summary>
+        /// <param name="jsonString">
+        /// A <see cref="System.String"/> containing the json for ONE source.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// </returns>
+        public bool ImportSource(string jsonString)
+        {
+            WinGetSource? source = JsonHandler.StringToObject<WinGetSource>(jsonString);
+
+            if (source == null)
+            {
+                throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
+            }
+
+            return AddSource(source);
         }
         //---------------------------------------------------------------------------------------------
 

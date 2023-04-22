@@ -431,6 +431,36 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToObject">
+            <summary>
+            Exports the winget sources to a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToObject(System.String)">
+            <summary>
+            Exports the winget sources to a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String)">
             <summary>
             Exports the winget sources in json format to a file.
@@ -497,6 +527,18 @@
             </param>
             <returns>
             <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportStringToSources(System.String)">
+            <summary>
+            Convert the string output from winget source export to a 
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </summary>
+            <param name="exportString">
+            A <see cref="T:System.String"/> containing the winget source export content.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </returns>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ResetSources">
@@ -739,6 +781,26 @@
             The new <see langword="array"/>.
             </returns>
         </member>
+        <member name="T:WGetNET.HelperClasses.JsonHandler">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.JsonHandler"/> class,
+            provieds methods handle json actions.
+            </summary>
+        </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObject``1(System.String)">
+            <summary>
+            Deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+            </returns>
+        </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
@@ -910,6 +972,11 @@
         <member name="P:WGetNET.WinGetSource.SourceType">
             <summary>
             Gets or sets the type of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.SourceData">
+            <summary>
+            Gets or sets the data of the source.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.IsEmpty">

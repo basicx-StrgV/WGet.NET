@@ -48,6 +48,8 @@ namespace WGetTest
                 bool sorceJson3 = sourceManager.ExportSourcesToFile("C:\\Test\\AllSources.json");
                 bool sorceJson4 = sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
                 //bool addSuccess = sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
+
+                List<WinGetSource> sorceJson5 = sourceManager.ExportSourcesToObject();
             }
             catch (Exception e)
             {
