@@ -26,7 +26,7 @@ namespace WGetNET
         {
             _winGetStartInfo = new ProcessStartInfo()
             {
-                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true,
                 FileName = processName,
                 RedirectStandardOutput = true
             };
