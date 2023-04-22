@@ -4,6 +4,7 @@ using WGetNET;
 
 namespace WGetTest
 {
+#pragma warning disable
     class Program
     {
         static void Main(string[] args)
@@ -54,4 +55,5 @@ namespace WGetTest
             }
         }
     }
+#pragma warning restore
 }
