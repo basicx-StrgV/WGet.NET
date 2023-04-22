@@ -50,6 +50,9 @@ namespace WGetTest
                 //bool addSuccess = sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
 
                 List<WinGetSource> sorceJson5 = sourceManager.ExportSourcesToObject();
+
+                string hash = connector.Hash("C:\\Test\\HashTest.txt");
+                Console.WriteLine(hash);
             }
             catch (Exception e)
             {

@@ -3,6 +3,7 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
+using System.IO;
 using System.ComponentModel;
 using System.Collections.Generic;
 using WGetNET.HelperClasses;
@@ -23,6 +24,7 @@ namespace WGetNET
         private const string _uninstallCmd = "uninstall {0}";
         private const string _exportCmd = "export -o {0}";
         private const string _importCmd = "import -i {0} --ignore-unavailable";
+        private const string _hashCmd = "hash {0}";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
@@ -356,7 +358,7 @@ namespace WGetNET
         }
         //---------------------------------------------------------------------------------------------
 
-        //---Other------------------------------------------------------------------------------------
+        //---Export and Import-------------------------------------------------------------------------
         /// <summary>
         /// Exports a list of all installed winget packages as json to the given file.
         /// </summary>
@@ -436,6 +438,52 @@ namespace WGetNET
             catch (Exception e)
             {
                 throw new WinGetActionFailedException("Importing packages failed.", e);
+            }
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Other-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Executes the WinGet hash function, to calculate the hash for the given file.
+        /// </summary>
+        /// <param name="file">
+        /// A <see cref="System.String"/> containing the path to the file.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the hash.
+        /// </returns>
+        public string Hash(string file)
+        {
+            if (!File.Exists(file))
+            {
+                throw new WinGetActionFailedException("File does not exist.");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_hashCmd, file));
+
+                string hash = "";
+                if (result.Output.Length > 0 && result.Output[0].Contains(':'))
+                {
+                    string[] splitOutput = result.Output[0].Split(':');
+                    if (splitOutput.Length >= 2)
+                    {
+                        hash = splitOutput[1].Trim();
+                    }
+                }
+
+                return hash;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Hashing failed.", e);
             }
         }
         //---------------------------------------------------------------------------------------------
