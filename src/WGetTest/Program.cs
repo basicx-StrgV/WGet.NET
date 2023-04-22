@@ -34,6 +34,10 @@ namespace WGetTest
                 Console.WriteLine(test2[0].PackageName);
                 Console.WriteLine(test2[0].PackageId);
 
+                List<WinGetPackage> test3 = connector.GetInstalledPackages();
+                Console.WriteLine(test3[0].PackageName);
+                Console.WriteLine(test3[0].PackageId);
+
                 List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
                 bool sourceUpdateStatus = sourceManager.UpdateSources();
                 //bool sourceResetStatus = sourceManager.ResetSources();

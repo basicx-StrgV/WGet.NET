@@ -26,7 +26,7 @@ namespace WGetNET
         {
             _winGetStartInfo = new ProcessStartInfo()
             {
-                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true,
                 FileName = processName,
                 RedirectStandardOutput = true
             };
@@ -47,39 +47,62 @@ namespace WGetNET
             //Set Arguments
             _winGetStartInfo.Arguments = cmd;
 
-            //Output List
-            string[] output = new string[0];
+            return RunProcess();
+        }
 
-            int exitCode = -1;
+        /// <summary>
+        /// Runs a process with the current start informations.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="WGetNET.ProcessResult"/> object, 
+        /// containing the output an exit id of the process.
+        /// </returns>
+        private ProcessResult RunProcess()
+        {
+            ProcessResult result = new ProcessResult();
 
             //Create and run process
             using (Process proc = new Process { StartInfo = _winGetStartInfo })
             {
                 proc.Start();
-                
-                //Read output to list
-                using StreamReader procOutputStream = proc.StandardOutput;
-                while (!procOutputStream.EndOfStream)
-                {
-                    string? outputLine = procOutputStream.ReadLine();
-                    if (outputLine is null)
-                    {
-                        continue;
-                    }
 
-                    output = ArrayManager.Add(output, outputLine);
-                }
+                result.Output = ReadSreamOutput(proc.StandardOutput);
 
                 //Wait till end and get exit code
                 proc.WaitForExit();
-                exitCode = proc.ExitCode;
+                result.ExitCode = proc.ExitCode;
             }
 
-            return new ProcessResult()
+            return result;
+        }
+
+        /// <summary>
+        /// Reads the data from the process output to a string array.
+        /// </summary>
+        /// <param name="output">
+        /// The <see cref="System.IO.StreamReader"/> with the process output.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> array 
+        /// containing the process output stream content by lines.
+        /// </returns>
+        private string[] ReadSreamOutput(StreamReader output)
+        {
+            string[] outputArray = new string[0];
+
+            //Read output to list
+            while (!output.EndOfStream)
             {
-                ExitCode = exitCode,
-                Output = output
-            };
+                string? outputLine = output.ReadLine();
+                if (outputLine is null)
+                {
+                    continue;
+                }
+
+                outputArray = ArrayManager.Add(outputArray, outputLine);
+            }
+
+            return outputArray;
         }
     }
 }
