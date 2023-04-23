@@ -73,6 +73,31 @@ namespace WGetNET
             }
         }
         /// <summary>
+        /// Gets or sets the newest available version of the package.
+        /// </summary>
+        /// <remarks>
+        /// Only works when getting the list of available upgrades.
+        /// </remarks>
+        public string PackageAvailableVersion
+        {
+            get
+            {
+                return _packageAvailableVersion;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    _packageAvailableVersion = string.Empty;
+                }
+                else
+                {
+                    _packageAvailableVersion = value;
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets if the object is empty.
         /// </summary>
         public bool IsEmpty
@@ -90,5 +115,6 @@ namespace WGetNET
         private string _packageName = string.Empty;
         private string _packageId = string.Empty;
         private string _packageVersion = string.Empty;
+        private string _packageAvailableVersion = string.Empty;
     }
 }

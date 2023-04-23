@@ -265,7 +265,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(argument);
 
-                return ProcessOutputReader.ToPackageList(result.Output);
+                return ProcessOutputReader.ToPackageList(result.Output, true);
             }
             catch (Win32Exception)
             {

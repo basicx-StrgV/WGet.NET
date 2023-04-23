@@ -20,10 +20,13 @@ namespace WGetNET.HelperClasses
         /// <param name="output">
         /// A <see cref="System.Collections.Generic.List{T}"/> of output lines from a winget process.
         /// </param>
+        /// <param name="listUpgradeAction">
+        /// Sets if the action is used by the list upgradeable package action.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
         /// </returns>
-        public static List<WinGetPackage> ToPackageList(string[] output)
+        public static List<WinGetPackage> ToPackageList(string[] output, bool listUpgradeAction = false)
         {
             //Get top line index.
             //The array should always contain this line.
@@ -36,7 +39,7 @@ namespace WGetNET.HelperClasses
             //Remove unneeded output Lines
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
 
-            return CreatePackageListFromOutput(output, columnList);
+            return CreatePackageListFromOutput(output, columnList, listUpgradeAction);
         }
 
         /// <summary>
@@ -48,10 +51,13 @@ namespace WGetNET.HelperClasses
         /// <param name="columnList">
         /// A <see cref="System.Int32"/> <see langword="array"/> containing the column start indexes.
         /// </param>
+        /// <param name="listUpgradeAction">
+        /// Sets if the action is used by the list upgradeable package action.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
         /// </returns>
-        private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int[] columnList)
+        private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int[] columnList, bool listUpgradeAction = false)
         {
             List<WinGetPackage> resultList = new List<WinGetPackage>();
 
@@ -70,19 +76,26 @@ namespace WGetNET.HelperClasses
 
                 // [var1..var2] : selects the index range from var1 to var2
                 // (eg. if var1 is 2 and var2 is 5, the selectet index range will be [2, 3, 4])
-                resultList.Add(
-                    new WinGetPackage()
-                    {
-                        PackageName = output[i][columnList[0]..columnList[1]].Trim(),
-                        PackageId = output[i][columnList[1]..columnList[2]].Trim(),
-                        PackageVersion = output[i][columnList[2]..columnList[3]].Trim()
-                    });
+                WinGetPackage package = new WinGetPackage()
+                {
+                    PackageName = output[i][columnList[0]..columnList[1]].Trim(),
+                    PackageId = output[i][columnList[1]..columnList[2]].Trim(),
+                    PackageVersion = output[i][columnList[2]..columnList[3]].Trim(),
+                    PackageAvailableVersion = output[i][columnList[2]..columnList[3]].Trim()
+                };
+
+                if (listUpgradeAction && columnList.Length >= 5)
+                {
+                    package.PackageAvailableVersion = output[i][columnList[3]..columnList[4]].Trim();
+                }
+
+                resultList.Add(package);
             }
 
             // Check for secondery list in output.
             if (ArrayManager.GetEntryContains(output, "------") != -1)
             {
-                List<WinGetPackage> seconderyList = ToPackageList(output);
+                List<WinGetPackage> seconderyList = ToPackageList(output, listUpgradeAction);
                 resultList.AddRange(seconderyList);
             }
 
