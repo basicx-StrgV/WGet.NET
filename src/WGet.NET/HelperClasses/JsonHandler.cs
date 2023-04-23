@@ -1,4 +1,8 @@
-﻿using System;
+﻿//--------------------------------------------------//
+// Created by basicx-StrgV                          //
+// https://github.com/basicx-StrgV/                 //
+//--------------------------------------------------//
+using System;
 using System.Text.Json;
 
 namespace WGetNET.HelperClasses
