@@ -68,17 +68,21 @@ namespace WGetNET.HelperClasses
 
             for (int i = 0; i < output.Length; i++)
             {
+                // Stop parsing the output when the end of the list is reached.
+                if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < extraInfoStartIndex)
+                {
+                    break;
+                }
+
                 // [var1..var2] : selects the index range from var1 to var2
                 // (eg. if var1 is 2 and var2 is 5, the selectet index range will be [2, 3, 4])
-                if (output[i].Length >= extraInfoStartIndex && !string.IsNullOrWhiteSpace(output[i])) {
-                    resultList.Add(
-                        new WinGetPackage()
-                        {
-                            PackageName = output[i][0..idStartIndex].Trim(),
-                            PackageId = output[i][idStartIndex..versionStartIndex].Trim(),
-                            PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
-                        });
-                }
+                resultList.Add(
+                    new WinGetPackage()
+                    {
+                        PackageName = output[i][0..idStartIndex].Trim(),
+                        PackageId = output[i][idStartIndex..versionStartIndex].Trim(),
+                        PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
+                    });
             }
 
             return resultList;
