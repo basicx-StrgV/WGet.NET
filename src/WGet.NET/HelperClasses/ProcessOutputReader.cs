@@ -2,8 +2,8 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-using System.Collections.Generic;
 using System.Text;
+using System.Collections.Generic;
 
 namespace WGetNET.HelperClasses
 {
@@ -31,17 +31,12 @@ namespace WGetNET.HelperClasses
             //that will be thrown later, will be catched in the calling method.
             int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
 
-            //Get start indexes of each tabel colum
-            //(The line starts wich the name followed by the id.
-            //The index for the name is always 0 an therfor it is not configured here.)
-            int idStartIndex = GetColumnStartIndex(output[labelLine], 2);
-            int versionStartIndex = GetColumnStartIndex(output[labelLine], 3);
-            int extraInfoStartIndex = GetColumnStartIndex(output[labelLine], 4);
+            int[] columnList = GetColumnList(output[labelLine]);
 
             //Remove unneeded output Lines
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
 
-            return CreatePackageListFromOutput(output, idStartIndex, versionStartIndex, extraInfoStartIndex);
+            return CreatePackageListFromOutput(output, columnList);
         }
 
         /// <summary>
@@ -50,26 +45,25 @@ namespace WGetNET.HelperClasses
         /// <param name="output">
         /// The <see langword="array"/> containing the output.
         /// </param>
-        /// <param name="idStartIndex">
-        /// The <see cref="System.Int32"/> representing the start index of the id.
-        /// </param>
-        /// <param name="versionStartIndex">
-        /// The <see cref="System.Int32"/> representing the start index of the version.
-        /// </param>
-        /// <param name="extraInfoStartIndex">
-        /// The <see cref="System.Int32"/> representing the start index of the extra information.
+        /// <param name="columnList">
+        /// A <see cref="System.Int32"/> <see langword="array"/> containing the column start indexes.
         /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
         /// </returns>
-        private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int idStartIndex, int versionStartIndex, int extraInfoStartIndex)
+        private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int[] columnList)
         {
             List<WinGetPackage> resultList = new List<WinGetPackage>();
+
+            if (columnList.Length < 4)
+            {
+                return resultList;
+            }
 
             for (int i = 0; i < output.Length; i++)
             {
                 // Stop parsing the output when the end of the list is reached.
-                if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < extraInfoStartIndex)
+                if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[^1])
                 {
                     break;
                 }
@@ -79,9 +73,9 @@ namespace WGetNET.HelperClasses
                 resultList.Add(
                     new WinGetPackage()
                     {
-                        PackageName = output[i][0..idStartIndex].Trim(),
-                        PackageId = output[i][idStartIndex..versionStartIndex].Trim(),
-                        PackageVersion = output[i][versionStartIndex..extraInfoStartIndex].Trim()
+                        PackageName = output[i][columnList[0]..columnList[1]].Trim(),
+                        PackageId = output[i][columnList[1]..columnList[2]].Trim(),
+                        PackageVersion = output[i][columnList[2]..columnList[3]].Trim()
                     });
             }
 
@@ -113,15 +107,12 @@ namespace WGetNET.HelperClasses
             //that will be thrown later, will be catched in the calling method.
             int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
 
-            //Get start indexes of each tabel colum
-            //(The line starts wich the name followed by the id.
-            //The index for the name is always 0 an therfor it is not configured here.)
-            int urlStartIndex = GetColumnStartIndex(output[labelLine], 2);
+            int[] columnList = GetColumnList(output[labelLine]);
 
             //Remove unneeded output Lines
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
 
-            return CreateSourceListFromOutput(output, urlStartIndex);
+            return CreateSourceListFromOutput(output, columnList);
         }
 
         /// <summary>
@@ -157,15 +148,20 @@ namespace WGetNET.HelperClasses
         /// <param name="output">
         /// The <see langword="array"/> containing the output.
         /// </param>
-        /// <param name="urlStartIndex">
-        /// The <see cref="System.Int32"/> representing the start index of the url.
+        /// <param name="columnList">
+        /// A <see cref="System.Int32"/> <see langword="array"/> containing the column start indexes.
         /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/>'s.
         /// </returns>
-        private static List<WinGetSource> CreateSourceListFromOutput(string[] output, int urlStartIndex)
+        private static List<WinGetSource> CreateSourceListFromOutput(string[] output, int[] columnList)
         {
             List<WinGetSource> resultList = new List<WinGetSource>();
+
+            if (columnList.Length < 2)
+            {
+                return resultList;
+            }
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -176,8 +172,8 @@ namespace WGetNET.HelperClasses
                 resultList.Add(
                     new WinGetSource()
                     {
-                        SourceName = output[i][0..urlStartIndex].Trim(),
-                        SourceUrl = output[i][urlStartIndex..].Trim(),
+                        SourceName = output[i][columnList[0]..columnList[1]].Trim(),
+                        SourceUrl = output[i][columnList[1]..].Trim(),
                         SourceType = string.Empty
                     });
             }
@@ -186,31 +182,24 @@ namespace WGetNET.HelperClasses
         }
     
         /// <summary>
-        /// Gets the start index of a column in the given line.
+        /// Gets all column start indexes from the input line.
         /// </summary>
         /// <param name="line">
-        /// A <see cref="System.String"/> representing the line that contains the column names.
-        /// </param>
-        /// <param name="column">
-        /// A <see cref="System.Int32"/> representing the column to look for.
+        /// A <see cref="System.String"/> containing the header, for column calculation.
         /// </param>
         /// <returns>
-        /// A <see cref="System.Int32"/> representing the start index of the column 
-        /// or -1 if the column was not found.
+        /// A <see cref="System.Int32"/> <see langword="array"/> containing the column start indexes.
         /// </returns>
-        private static int GetColumnStartIndex(string line, int column)
+        private static int[] GetColumnList(string line)
         {
-            int currentColumn = 0;
+            int[] columns = new int[0];
+            
             bool checkForColumn = true;
             for (int i = 0; i < line.Length; i++)
             {
                 if (line[i] != ((char)32) && checkForColumn)
                 {
-                    currentColumn++;
-                    if (currentColumn == column)
-                    {
-                        return i;
-                    }
+                    columns = ArrayManager.Add(columns, i);
                     checkForColumn = false;
                 }
                 else if (line[i] == ((char)32))
@@ -218,7 +207,8 @@ namespace WGetNET.HelperClasses
                     checkForColumn = true;
                 }
             }
-            return -1;
+
+            return columns;
         }
     }
 }

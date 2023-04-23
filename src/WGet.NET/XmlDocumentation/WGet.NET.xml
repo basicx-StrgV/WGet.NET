@@ -908,7 +908,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePackageListFromOutput(System.String[],System.Int32,System.Int32,System.Int32)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePackageListFromOutput(System.String[],System.Int32[])">
             <summary>
             Creates a package list from output.
             </summary>
@@ -951,7 +951,7 @@
             The <see cref="T:System.String"/> containing the export result.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateSourceListFromOutput(System.String[],System.Int32)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateSourceListFromOutput(System.String[],System.Int32[])">
             <summary>
             Creates a source list from output.
             </summary>
@@ -965,19 +965,15 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnStartIndex(System.String,System.Int32)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnList(System.String)">
             <summary>
-            Gets the start index of a column in the given line.
+            Gets all column start indexes from the input line.
             </summary>
             <param name="line">
-            A <see cref="T:System.String"/> representing the line that contains the column names.
-            </param>
-            <param name="column">
-            A <see cref="T:System.Int32"/> representing the column to look for.
+            A <see cref="T:System.String"/> containing the header, for column calculation.
             </param>
             <returns>
-            A <see cref="T:System.Int32"/> representing the start index of the column 
-            or -1 if the column was not found.
+            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
             </returns>
         </member>
         <member name="P:WGetNET.ProcessResult.ExitCode">
