@@ -265,6 +265,39 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.Hash(System.String)">
+            <summary>
+            Executes the WinGet hash function, to calculate the hash for the given file.
+            </summary>
+            <param name="file">
+            A <see cref="T:System.String"/> containing the path to the file.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the hash.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.Hash(System.IO.FileInfo)">
+            <summary>
+            Executes the WinGet hash function, to calculate the hash for the given file.
+            </summary>
+            <param name="file">
+            A <see cref="T:System.IO.FileInfo"/> object, of the file the hash should be calculated for.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the hash.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.HashResultToHash(WGetNET.ProcessResult)">
+            <summary>
+            Reads the hash from the WinGet hash action result.
+            </summary>
+            <param name="result">
+            The <see cref="T:WGetNET.ProcessResult"/> object of the action.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the hash value.
+            </returns>
+        </member>
         <member name="T:WGetNET.WinGetSourceManager">
             <summary>
             The <see cref="T:WGetNET.WinGetSourceManager"/> class offers methods to manage the sources used by winget.

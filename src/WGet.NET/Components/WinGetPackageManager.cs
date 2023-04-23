@@ -465,17 +465,12 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_hashCmd, file));
 
-                string hash = "";
-                if (result.Output.Length > 0 && result.Output[0].Contains(':'))
+                if (!result.Success)
                 {
-                    string[] splitOutput = result.Output[0].Split(':');
-                    if (splitOutput.Length >= 2)
-                    {
-                        hash = splitOutput[1].Trim();
-                    }
+                    return string.Empty;
                 }
 
-                return hash;
+                return HashResultToHash(result);
             }
             catch (Win32Exception)
             {
@@ -485,6 +480,69 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("Hashing failed.", e);
             }
+        }
+
+        /// <summary>
+        /// Executes the WinGet hash function, to calculate the hash for the given file.
+        /// </summary>
+        /// <param name="file">
+        /// A <see cref="System.IO.FileInfo"/> object, of the file the hash should be calculated for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the hash.
+        /// </returns>
+        public string Hash(FileInfo file)
+        {
+            if (!file.Exists)
+            {
+                throw new WinGetActionFailedException("File does not exist.");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_hashCmd, file.FullName));
+
+                if (!result.Success)
+                {
+                    return string.Empty;
+                }
+
+                return HashResultToHash(result);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Hashing failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Reads the hash from the WinGet hash action result.
+        /// </summary>
+        /// <param name="result">
+        /// The <see cref="WGetNET.ProcessResult"/> object of the action.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the hash value.
+        /// </returns>
+        private string HashResultToHash(ProcessResult result)
+        {
+            string hash = "";
+            if (result.Output.Length > 0 && result.Output[0].Contains(':'))
+            {
+                string[] splitOutput = result.Output[0].Split(':');
+                if (splitOutput.Length >= 2)
+                {
+                    hash = splitOutput[1].Trim();
+                }
+            }
+
+            return hash;
         }
         //---------------------------------------------------------------------------------------------
     }

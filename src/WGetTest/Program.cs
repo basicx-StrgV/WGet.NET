@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using WGetNET;
 
@@ -51,7 +52,7 @@ namespace WGetTest
 
                 List<WinGetSource> sorceJson5 = sourceManager.ExportSourcesToObject();
 
-                string hash = connector.Hash("C:\\Test\\HashTest.txt");
+                string hash = connector.Hash(new FileInfo("C:\\Test\\HashTest.txt"));
                 Console.WriteLine(hash);
             }
             catch (Exception e)
