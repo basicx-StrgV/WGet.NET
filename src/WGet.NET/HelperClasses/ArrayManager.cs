@@ -80,7 +80,7 @@ namespace WGetNET.HelperClasses
         /// A <see cref="System.String"/> representing the value to check for.
         /// </param>
         /// <returns>
-        /// A <see cref="System.String"/> representing the index of the entry (-1 if the entry is not found).
+        /// A <see cref="System.Int32"/> representing the index of the entry (-1 if the entry is not found).
         /// </returns>
         public static int GetEntryContains(string[] inputArray, string value)
         {

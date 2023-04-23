@@ -85,6 +85,13 @@ namespace WGetNET.HelperClasses
                     });
             }
 
+            // Check for secondery list in output.
+            if (ArrayManager.GetEntryContains(output, "------") != -1)
+            {
+                List<WinGetPackage> seconderyList = ToPackageList(output);
+                resultList.AddRange(seconderyList);
+            }
+
             return resultList;
         }
 
