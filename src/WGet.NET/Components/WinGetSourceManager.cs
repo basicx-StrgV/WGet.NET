@@ -3,7 +3,6 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
-using System.IO;
 using System.Text;
 using System.Security;
 using System.ComponentModel;
@@ -425,7 +424,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_sourceExportCmd);
 
-                return ExportOutputToFile(result, file);
+                return FileHandler.ExportOutputToFile(result, file);
             }
             catch (Win32Exception)
             {
@@ -470,7 +469,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
-                return ExportOutputToFile(result, file);
+                return FileHandler.ExportOutputToFile(result, file);
             }
             catch (Win32Exception)
             {
@@ -514,35 +513,6 @@ namespace WGetNET
             }
 
             return ExportSourcesToFile(file, source.SourceName);
-        }
-
-        /// <summary>
-        /// Writes the export result to a file.
-        /// </summary>
-        /// <param name="result">
-        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
-        /// </param>
-        /// <param name="file">
-        /// A <see cref="System.String"/> containing the file path and name.
-        /// </param>
-        /// <returns>
-        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
-        /// </returns>
-        private bool ExportOutputToFile(ProcessResult result, string file)
-        {
-            if (result.Success)
-            {
-                string outputString = ProcessOutputReader.ExportOutputToString(result);
-
-                File.WriteAllText(
-                    file,
-                    outputString);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         /// <summary>

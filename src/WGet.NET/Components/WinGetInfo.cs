@@ -2,6 +2,10 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System;
+using System.ComponentModel;
+using WGetNET.HelperClasses;
+
 namespace WGetNET
 {
     /// <summary>
@@ -10,6 +14,7 @@ namespace WGetNET
     public class WinGetInfo
     {
         private const string _versionCmd = "--version";
+        private const string _exportSettingsCmd = "settings export";
 
         internal readonly ProcessManager _processManager;
 
@@ -51,6 +56,78 @@ namespace WGetNET
         public WinGetInfo()
         {
             _processManager = new ProcessManager("winget");
+        }
+
+        /// <summary>
+        /// Exports the WinGet settings to a json string.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the settings json.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public string ExportSettings()
+        {
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_exportSettingsCmd);
+
+                return ProcessOutputReader.ExportOutputToString(result);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Exporting sources failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Exports the WinGet settings to a json and writes them to the given file.
+        /// </summary>
+        /// <param name="file">
+        /// The file for the export.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was succesfull, and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public bool ExportSettingsToFile(string file)
+        {
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                return false;
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_exportSettingsCmd);
+
+                return FileHandler.ExportOutputToFile(result, file);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Exporting sources failed.", e);
+            }
         }
 
         private string CheckWinGetVersion()
