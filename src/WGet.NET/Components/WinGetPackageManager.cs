@@ -91,7 +91,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_listCmd);
 
-                return ProcessOutputReader.ToPackageList(result.Output);
+                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
             }
             catch (Win32Exception)
             {
@@ -265,7 +265,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(argument);
 
-                return ProcessOutputReader.ToPackageList(result.Output, true);
+                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
             }
             catch (Win32Exception)
             {

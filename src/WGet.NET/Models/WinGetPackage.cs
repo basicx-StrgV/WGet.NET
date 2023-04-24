@@ -75,9 +75,6 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the newest available version of the package.
         /// </summary>
-        /// <remarks>
-        /// Only works when getting the list of available upgrades.
-        /// </remarks>
         public string PackageAvailableVersion
         {
             get

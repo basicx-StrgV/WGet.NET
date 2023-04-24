@@ -20,13 +20,13 @@ namespace WGetNET.HelperClasses
         /// <param name="output">
         /// A <see cref="System.Collections.Generic.List{T}"/> of output lines from a winget process.
         /// </param>
-        /// <param name="listUpgradeAction">
-        /// Sets if the action is used by the list upgradeable package action.
+        /// <param name="action">
+        /// Sets info about the action that is executet.
         /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
         /// </returns>
-        public static List<WinGetPackage> ToPackageList(string[] output, bool listUpgradeAction = false)
+        public static List<WinGetPackage> ToPackageList(string[] output, PackageAction action = PackageAction.Default)
         {
             //Get top line index.
             //The array should always contain this line.
@@ -39,7 +39,7 @@ namespace WGetNET.HelperClasses
             //Remove unneeded output Lines
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
 
-            return CreatePackageListFromOutput(output, columnList, listUpgradeAction);
+            return CreatePackageListFromOutput(output, columnList, action);
         }
 
         /// <summary>
@@ -51,13 +51,13 @@ namespace WGetNET.HelperClasses
         /// <param name="columnList">
         /// A <see cref="System.Int32"/> <see langword="array"/> containing the column start indexes.
         /// </param>
-        /// <param name="listUpgradeAction">
-        /// Sets if the action is used by the list upgradeable package action.
+        /// <param name="action">
+        /// Sets info about the action that is executet.
         /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
         /// </returns>
-        private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int[] columnList, bool listUpgradeAction = false)
+        private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int[] columnList, PackageAction action = PackageAction.Default)
         {
             List<WinGetPackage> resultList = new List<WinGetPackage>();
 
@@ -84,9 +84,13 @@ namespace WGetNET.HelperClasses
                     PackageAvailableVersion = output[i][columnList[2]..columnList[3]].Trim()
                 };
 
-                if (listUpgradeAction && columnList.Length >= 5)
+                if ((action == PackageAction.UpgradeList || action == PackageAction.InstalledList) && columnList.Length >= 5)
                 {
-                    package.PackageAvailableVersion = output[i][columnList[3]..columnList[4]].Trim();
+                    string availableVersion = output[i][columnList[3]..columnList[4]].Trim();
+                    if (!string.IsNullOrWhiteSpace(availableVersion))
+                    {
+                        package.PackageAvailableVersion = availableVersion;
+                    }
                 }
 
                 resultList.Add(package);
@@ -95,7 +99,7 @@ namespace WGetNET.HelperClasses
             // Check for secondery list in output.
             if (ArrayManager.GetEntryContains(output, "------") != -1)
             {
-                List<WinGetPackage> seconderyList = ToPackageList(output, listUpgradeAction);
+                List<WinGetPackage> seconderyList = ToPackageList(output, action);
                 resultList.AddRange(seconderyList);
             }
 
