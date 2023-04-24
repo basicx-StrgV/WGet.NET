@@ -91,7 +91,9 @@
             <summary>
             Uses the winget search function to search for a package that maches the given name.
             </summary>
-            <param name="packageName">The name of the package for the search.</param>
+            <param name="packageName">
+            The name of the package for the search.
+            </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
@@ -107,6 +109,24 @@
             <summary>
             Gets a list of all installed packages.
             </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages(System.String)">
+            <summary>
+            Gets a list of all installed packages. That match the provided name.
+            </summary>
+            <param name="packageName">
+            The name of the package for the search.
+            </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
@@ -904,8 +924,8 @@
             <param name="output">
             A <see cref="T:System.Collections.Generic.List`1"/> of output lines from a winget process.
             </param>
-            <param name="listUpgradeAction">
-            Sets if the action is used by the list upgradeable package action.
+            <param name="action">
+            Sets info about the action that is executet.
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
@@ -921,8 +941,8 @@
             <param name="columnList">
             A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
             </param>
-            <param name="listUpgradeAction">
-            Sets if the action is used by the list upgradeable package action.
+            <param name="action">
+            Sets info about the action that is executet.
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
@@ -1015,9 +1035,6 @@
             <summary>
             Gets or sets the newest available version of the package.
             </summary>
-            <remarks>
-            Only works when getting the list of available upgrades.
-            </remarks>
         </member>
         <member name="P:WGetNET.WinGetPackage.IsEmpty">
             <summary>

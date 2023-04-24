@@ -16,6 +16,7 @@ namespace WGetNET
     public class WinGetPackageManager : WinGetInfo
     {
         private const string _listCmd = "list";
+        private const string _searchInstalledCmd = "list {0}";
         private const string _searchCmd = "search {0} --accept-source-agreements";
         private const string _installCmd = "install {0}";
         private const string _upgradeCmd = "upgrade {0}";
@@ -38,7 +39,9 @@ namespace WGetNET
         /// <summary>
         /// Uses the winget search function to search for a package that maches the given name.
         /// </summary>
-        /// <param name="packageName">The name of the package for the search.</param>
+        /// <param name="packageName">
+        /// The name of the package for the search.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
@@ -90,6 +93,41 @@ namespace WGetNET
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_listCmd);
+
+                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("The search of installed packages failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of all installed packages. That match the provided name.
+        /// </summary>
+        /// <param name="packageName">
+        /// The name of the package for the search.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public List<WinGetPackage> GetInstalledPackages(string packageName)
+        {
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(string.Format(_searchInstalledCmd, packageName));
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
             }
