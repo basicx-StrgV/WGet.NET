@@ -94,7 +94,7 @@
         </member>
         <member name="M:WGetNET.WinGetInfo.ExportSettingsToFile(System.String)">
             <summary>
-            Exports the WinGet settings to a json string.
+            Exports the WinGet settings to a json and writes them to the given file.
             </summary>
             <param name="file">
             The file for the export.
