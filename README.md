@@ -36,7 +36,7 @@ You can finde the changelog here: https://github.com/basicx-StrgV/WGet.NET/relea
 - Add sources
 - Remove sources
 - Update sources
-- Export sources
+- Export and Import sources
 - Reset sources
 
 ## 📦 NuGet Package
