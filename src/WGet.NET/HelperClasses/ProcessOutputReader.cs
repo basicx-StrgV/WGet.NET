@@ -84,13 +84,19 @@ namespace WGetNET.HelperClasses
                     PackageAvailableVersion = output[i][columnList[2]..columnList[3]].Trim()
                 };
 
-                if ((action == PackageAction.UpgradeList || action == PackageAction.InstalledList) && columnList.Length >= 5)
+                if ((action == PackageAction.UpgradeList || action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length >= 5)
                 {
                     string availableVersion = output[i][columnList[3]..columnList[4]].Trim();
-                    if (!string.IsNullOrWhiteSpace(availableVersion))
+                    if (!string.IsNullOrWhiteSpace(availableVersion) && action != PackageAction.Search)
                     {
                         package.PackageAvailableVersion = availableVersion;
                     }
+
+                    package.PackageSourceName = output[i][columnList[4]..].Trim();
+                }
+                else if((action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length == 4)
+                {
+                    package.PackageSourceName = output[i][columnList[3]..].Trim();
                 }
 
                 resultList.Add(package);

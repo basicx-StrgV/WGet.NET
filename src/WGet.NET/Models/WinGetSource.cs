@@ -58,6 +58,9 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the type of the source.
         /// </summary>
+        /// <remarks>
+        /// Will only be set on source export.
+        /// </remarks>
         [JsonPropertyName("Type")]
         public string SourceType 
         {
@@ -80,6 +83,9 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the data of the source.
         /// </summary>
+        /// <remarks>
+        /// Will only be set on source export.
+        /// </remarks>
         [JsonPropertyName("Data")]
         public string SourceData
         {
@@ -108,7 +114,7 @@ namespace WGetNET
         {
             get
             {
-                if ((_sourceName.Length + _sourceUrl.Length + _sourceType.Length) > 0)
+                if ((_sourceName.Length + _sourceUrl.Length + _sourceType.Length + _sourceData.Length) > 0)
                 {
                     return false;
                 }

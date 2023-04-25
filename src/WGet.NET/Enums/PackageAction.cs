@@ -4,6 +4,7 @@
     {
         Default,
         UpgradeList,
-        InstalledList
+        InstalledList,
+        Search
     }
 }

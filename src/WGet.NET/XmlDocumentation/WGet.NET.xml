@@ -365,6 +365,10 @@
             <summary>
             Gets a list of all sources that are installed in winget.
             </summary>
+            <remarks>
+            Because the list source output is limited it is recommanded to use 
+            <see cref="M:WGetNET.WinGetSourceManager.ExportSourcesToObject"/> instead.
+            </remarks>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
             </returns>
@@ -1069,6 +1073,11 @@
             Gets or sets the newest available version of the package.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetPackage.PackageSourceName">
+            <summary>
+            Gets or sets the source name for the package.
+            </summary>
+        </member>
         <member name="P:WGetNET.WinGetPackage.IsEmpty">
             <summary>
             Gets if the object is empty.
@@ -1093,11 +1102,17 @@
             <summary>
             Gets or sets the type of the source.
             </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
         </member>
         <member name="P:WGetNET.WinGetSource.SourceData">
             <summary>
             Gets or sets the data of the source.
             </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
         </member>
         <member name="P:WGetNET.WinGetSource.IsEmpty">
             <summary>

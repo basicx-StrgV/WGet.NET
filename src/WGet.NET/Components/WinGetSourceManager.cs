@@ -36,6 +36,10 @@ namespace WGetNET
         /// <summary>
         /// Gets a list of all sources that are installed in winget.
         /// </summary>
+        /// <remarks>
+        /// Because the list source output is limited it is recommanded to use 
+        /// <see cref="WGetNET.WinGetSourceManager.ExportSourcesToObject()"/> instead.
+        /// </remarks>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
         /// </returns>

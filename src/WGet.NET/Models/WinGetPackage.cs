@@ -93,6 +93,27 @@ namespace WGetNET
                 }
             }
         }
+        /// <summary>
+        /// Gets or sets the source name for the package.
+        /// </summary>
+        public string PackageSourceName
+        {
+            get
+            {
+                return _packageSourceName;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    _packageSourceName = string.Empty;
+                }
+                else
+                {
+                    _packageSourceName = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets if the object is empty.
@@ -101,7 +122,7 @@ namespace WGetNET
         {
             get
             {
-                if ((_packageName.Length + _packageId.Length + _packageVersion.Length) > 0)
+                if ((_packageName.Length + _packageId.Length + _packageVersion.Length + _packageAvailableVersion.Length + _packageSourceName.Length) > 0)
                 {
                     return false;
                 }
@@ -113,5 +134,6 @@ namespace WGetNET
         private string _packageId = string.Empty;
         private string _packageVersion = string.Empty;
         private string _packageAvailableVersion = string.Empty;
+        private string _packageSourceName = string.Empty;
     }
 }

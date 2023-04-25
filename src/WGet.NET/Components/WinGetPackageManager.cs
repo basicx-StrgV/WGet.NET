@@ -60,7 +60,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_searchCmd, packageName));
 
-                return ProcessOutputReader.ToPackageList(result.Output);
+                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
             }
             catch (Win32Exception)
             {
