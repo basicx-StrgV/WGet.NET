@@ -24,6 +24,7 @@ You can finde the changelog here: https://github.com/basicx-StrgV/WGet.NET/relea
 ## ⚡ Features
 
 - Get a list of installed packages
+- Search installed packages
 - Search packages
 - Install packages
 - Uninstall packages
@@ -39,6 +40,7 @@ You can finde the changelog here: https://github.com/basicx-StrgV/WGet.NET/relea
 - Export and Import sources
 - Reset sources
 - Calculate file hash
+- Export Settings
 
 ## 📦 NuGet Package
 
