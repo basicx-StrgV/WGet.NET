@@ -38,6 +38,7 @@ You can finde the changelog here: https://github.com/basicx-StrgV/WGet.NET/relea
 - Update sources
 - Export and Import sources
 - Reset sources
+- Calculate file hash
 
 ## 📦 NuGet Package
 
