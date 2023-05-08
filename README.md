@@ -17,13 +17,6 @@ I created it for another project and then made a library out of it in hope it mi
 
 https://basicx-strgv.github.io/WGet.NET/
 
-## 🎈 Version 2.0
-
-Version 2.0 is out now, with big changes, improvements and new features.  
-But before updating to the new version, read the changelog first, because version 2.0 is not compatible with older versions of this library.
-
-You can finde the changelog here: https://github.com/basicx-StrgV/WGet.NET/releases/tag/2.0.0
-
 ## ⚡ Features
 
 - Get a list of installed packages
