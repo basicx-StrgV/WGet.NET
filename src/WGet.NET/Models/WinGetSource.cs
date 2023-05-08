@@ -105,6 +105,31 @@ namespace WGetNET
                 }
             }
         }
+        /// <summary>
+        /// Gets or sets the identifier of the source.
+        /// </summary>
+        /// <remarks>
+        /// Will only be set on source export.
+        /// </remarks>
+        [JsonPropertyName("Identifier")]
+        public string SourceIdentifier
+        {
+            get
+            {
+                return _sourceIdentifier;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    _sourceIdentifier = string.Empty;
+                }
+                else
+                {
+                    _sourceIdentifier = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets if the object is empty.
@@ -114,7 +139,7 @@ namespace WGetNET
         {
             get
             {
-                if ((_sourceName.Length + _sourceUrl.Length + _sourceType.Length + _sourceData.Length) > 0)
+                if ((_sourceName.Length + _sourceUrl.Length + _sourceType.Length + _sourceData.Length + _sourceIdentifier.Length) > 0)
                 {
                     return false;
                 }
@@ -126,5 +151,6 @@ namespace WGetNET
         private string _sourceUrl = string.Empty;
         private string _sourceType = string.Empty;
         private string _sourceData = string.Empty;
+        private string _sourceIdentifier = string.Empty;
     }
 }

@@ -141,7 +141,8 @@
             Asynchronous exports the WinGet settings to a json string.
             </summary>
             <returns>
-            A <see cref="T:System.String"/> containing the settings json.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.String"/> containing the settings json.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -177,7 +178,8 @@
             The file for the export.
             </param>
             <returns>
-            <see langword="true"/> if the action was succesfull, and <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was succesfull, and <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -223,7 +225,8 @@
             The name of the package for the search.
             </param>
             <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -271,7 +274,8 @@
             Asynchronously gets a list of all installed packages.
             </summary>
             <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -289,7 +293,8 @@
             The name of the package for the search.
             </param>
             <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -337,7 +342,8 @@
             </summary>
             <param name="packageId">The id or name of the package for the installation.</param>
             <returns>
-            <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -353,7 +359,8 @@
             </summary>
             <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
             <returns>
-            <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -401,7 +408,8 @@
             </summary>
             <param name="packageId">The id or name of the package for uninstallation.</param>
             <returns>
-            <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -417,7 +425,8 @@
             </summary>
             <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the uninstallation.</param>
             <returns>
-            <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -447,7 +456,8 @@
             Asynchronously get all upgradeable packages.
             </summary>
             <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -495,7 +505,8 @@
             </summary>
             <param name="packageId">The id or name of the package for upgrade.</param>
             <returns>
-            <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -511,7 +522,8 @@
             </summary>
             <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> that for the upgrade</param>
             <returns>
-            <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -543,7 +555,8 @@
             </summary>
             <param name="file">The file for the export.</param>
             <returns>
-            <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -582,7 +595,8 @@
             </remarks>
             <param name="file">The file with the package data for the import.</param>
             <returns>
-            <see langword="true"/> if the import was compleatly successfull or 
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the import was compleatly successfull or 
             <see langword="false"/> if some or all packages failed to install.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
@@ -623,7 +637,8 @@
             A <see cref="T:System.String"/> containing the path to the file.
             </param>
             <returns>
-            A <see cref="T:System.String"/> containing the hash.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.String"/> containing the hash.
             </returns>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.HashAsync(System.IO.FileInfo)">
@@ -634,7 +649,8 @@
             A <see cref="T:System.IO.FileInfo"/> object, of the file the hash should be calculated for.
             </param>
             <returns>
-            A <see cref="T:System.String"/> containing the hash.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.String"/> containing the hash.
             </returns>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.HashResultToHash(WGetNET.ProcessResult)">
@@ -679,7 +695,8 @@
             <see cref="M:WGetNET.WinGetSourceManager.ExportSourcesToObject"/> instead.
             </remarks>
             <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
             </returns>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSource(System.String,System.String)">
@@ -777,7 +794,8 @@
             A <see cref="T:System.String"/> representing the source (eg. URL).
             </param>
             <returns>
-            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -807,7 +825,8 @@
             A <see cref="T:System.String"/> representing the source type.
             </param>
             <returns>
-            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -831,7 +850,8 @@
             The <see cref="T:WGetNET.WinGetSource"/> to add.
             </param>
             <returns>
-            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -870,7 +890,8 @@
             This may take a while depending on the sources.
             </remarks>
             <returns>
-            <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -929,6 +950,58 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesAsync">
+            <summary>
+            Asynchronously exports the winget sources as a json string.
+            </summary>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.String"/> that contains the winget sorces in json format.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesAsync(System.String)">
+            <summary>
+            Asynchronously exports the winget sources as a json string.
+            </summary>
+            <param name="sourceName">The name of the source for the export.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.String"/> that contains the winget sorces in json format.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesAsync(WGetNET.WinGetSource)">
+            <summary>
+            Asynchronously exports the winget sources as a json string.
+            </summary>
+            <param name="source">
+            The <see cref="T:WGetNET.WinGetSource"/> for the export.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.String"/> that contains the winget sorces in json format.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToObject">
             <summary>
             Exports the winget sources to a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
@@ -950,6 +1023,38 @@
             </summary>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToObjectAsync">
+            <summary>
+            Asynchronously exports the winget sources to a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </summary>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToObjectAsync(System.String)">
+            <summary>
+            Asynchronously exports the winget sources to a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </summary>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1013,6 +1118,63 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String)">
+            <summary>
+            Asynchronously exports the winget sources in json format to a file.
+            </summary>
+            <param name="file">The file for the export.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,System.String)">
+            <summary>
+            Asynchronously exports the winget sources in json format to a file.
+            </summary>
+            <param name="file">The file for the export.</param>
+            <param name="sourceName">The name of the source for the export.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,WGetNET.WinGetSource)">
+            <summary>
+            Asynchronously exports the winget sources in json format to a file.
+            </summary>
+            <param name="file">
+            The file for the export.
+            </param>
+            <param name="source">
+            The <see cref="T:WGetNET.WinGetSource"/> for the export.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportStringToSources(System.String)">
             <summary>
             Convert the string output from winget source export to a 
@@ -1023,6 +1185,19 @@
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportStringToSourcesAsync(System.String)">
+            <summary>
+            Asynchronously convert the string output from winget source export to a 
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </summary>
+            <param name="exportString">
+            A <see cref="T:System.String"/> containing the winget source export content.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </returns>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSource(System.Collections.Generic.List{WGetNET.WinGetSource})">
@@ -1066,7 +1241,8 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
-            <see langword="true"/> if the action was successfull and <see langword="false"/> if on or more sorces failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if on or more sorces failed.
             </returns>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(WGetNET.WinGetSource)">
@@ -1077,7 +1253,8 @@
             A <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
-            <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
             </returns>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(System.String)">
@@ -1088,7 +1265,8 @@
             A <see cref="T:System.String"/> containing the json for ONE source.
             </param>
             <returns>
-            <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
             </returns>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ResetSources">
@@ -1120,7 +1298,8 @@
             This may take a while depending on the sources.
             </remarks>
             <returns>
-            <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1183,7 +1362,8 @@
             A <see cref="T:System.String"/> representing the name of the source.
             </param>
             <returns>
-            <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1204,7 +1384,8 @@
             The <see cref="T:WGetNET.WinGetSource"/> to remove.
             </param>
             <returns>
-            <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1419,7 +1600,8 @@
             A <see cref="T:System.String"/> containing the file path and name.
             </param>
             <returns>
-            <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
             </returns>
         </member>
         <member name="T:WGetNET.HelperClasses.JsonHandler">
@@ -1453,7 +1635,8 @@
             A <see cref="T:System.String"/> containing the json to deserialize.
             </param>
             <returns>
-            A nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a nullable object of the given class type. It will be <see langword="null"/> if the action failed.
             </returns>
         </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
@@ -1641,6 +1824,14 @@
         <member name="P:WGetNET.WinGetSource.SourceData">
             <summary>
             Gets or sets the data of the source.
+            </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetSource.SourceIdentifier">
+            <summary>
+            Gets or sets the identifier of the source.
             </summary>
             <remarks>
             Will only be set on source export.
