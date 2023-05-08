@@ -30,9 +30,41 @@
             containing the output an exit id of the process.
             </returns>
         </member>
-        <member name="M:WGetNET.ProcessManager.RunProcess">
+        <member name="M:WGetNET.ProcessManager.ExecuteWingetProcessAsync(System.String)">
+            <summary>
+            Asynchronous executes a winget process with the given command and returns the result.
+            </summary>
+            <param name="cmd">
+            A <see cref="T:System.String"/> representing the command that winget should be executed with.
+            </param>
+            <returns>
+            A <see cref="T:WGetNET.ProcessResult"/> object, 
+            containing the output an exit id of the process.
+            </returns>
+        </member>
+        <member name="M:WGetNET.ProcessManager.GetStartInfo(System.String)">
+            <summary>
+            Gets the start info for a process.
+            </summary>
+            <param name="cmd">
+            String containig the arguments for the action.
+            </param>
+            <returns>
+            A <see cref="T:System.Diagnostics.ProcessStartInfo"/> object, for the process.
+            </returns>
+        </member>
+        <member name="M:WGetNET.ProcessManager.RunProcess(System.Diagnostics.ProcessStartInfo)">
             <summary>
             Runs a process with the current start informations.
+            </summary>
+            <returns>
+            A <see cref="T:WGetNET.ProcessResult"/> object, 
+            containing the output an exit id of the process.
+            </returns>
+        </member>
+        <member name="M:WGetNET.ProcessManager.RunProcessAsync(System.Diagnostics.ProcessStartInfo)">
+            <summary>
+            Asynchronous runs a process with the current start informations.
             </summary>
             <returns>
             A <see cref="T:WGetNET.ProcessResult"/> object, 
@@ -42,6 +74,18 @@
         <member name="M:WGetNET.ProcessManager.ReadSreamOutput(System.IO.StreamReader)">
             <summary>
             Reads the data from the process output to a string array.
+            </summary>
+            <param name="output">
+            The <see cref="T:System.IO.StreamReader"/> with the process output.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> array 
+            containing the process output stream content by lines.
+            </returns>
+        </member>
+        <member name="M:WGetNET.ProcessManager.ReadSreamOutputAsync(System.IO.StreamReader)">
+            <summary>
+            Asynchronous reads the data from the process output to a string array.
             </summary>
             <param name="output">
             The <see cref="T:System.IO.StreamReader"/> with the process output.
