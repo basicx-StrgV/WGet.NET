@@ -26,14 +26,15 @@ var NAVTREE =
 [
   [ "WGet.NET", "index.html", [
     [ "❓ What is WGet.NET", "index.html#autotoc_md1", null ],
-    [ "🎈 Version 2.0", "index.html#autotoc_md2", null ],
-    [ "⚡ Features", "index.html#autotoc_md3", null ],
-    [ "📦 NuGet Package", "index.html#autotoc_md4", null ],
-    [ "❗ Requirements", "index.html#autotoc_md5", null ],
-    [ "💡 Getting started", "index.html#autotoc_md6", [
-      [ "WinGetInfo:", "index.html#autotoc_md7", null ],
-      [ "WinGetPackageManager:", "index.html#autotoc_md8", null ],
-      [ "WinGetSourceManager:", "index.html#autotoc_md9", null ]
+    [ "📓 Documentation", "index.html#autotoc_md2", null ],
+    [ "🎈 Version 2.0", "index.html#autotoc_md3", null ],
+    [ "⚡ Features", "index.html#autotoc_md4", null ],
+    [ "📦 NuGet Package", "index.html#autotoc_md5", null ],
+    [ "❗ Requirements", "index.html#autotoc_md6", null ],
+    [ "💡 Getting started", "index.html#autotoc_md7", [
+      [ "WinGetInfo:", "index.html#autotoc_md8", null ],
+      [ "WinGetPackageManager:", "index.html#autotoc_md9", null ],
+      [ "WinGetSourceManager:", "index.html#autotoc_md10", null ]
     ] ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ]

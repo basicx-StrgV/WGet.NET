@@ -1,12 +1,12 @@
 var annotated_dup =
 [
-    [ "WGetNET", "d5/df9/a00044.html", [
-      [ "WinGetActionFailedException", "db/df8/a00076.html", "db/df8/a00076" ],
-      [ "WinGetInfo", "df/d5f/a00064.html", "df/d5f/a00064" ],
-      [ "WinGetNotInstalledException", "da/dec/a00080.html", "da/dec/a00080" ],
-      [ "WinGetPackage", "d0/dc2/a00104.html", "d0/dc2/a00104" ],
-      [ "WinGetPackageManager", "da/d24/a00068.html", "da/d24/a00068" ],
-      [ "WinGetSource", "d1/dd6/a00108.html", "d1/dd6/a00108" ],
-      [ "WinGetSourceManager", "d6/d2c/a00072.html", "d6/d2c/a00072" ]
+    [ "WGetNET", "d5/de0/a00050.html", [
+      [ "WinGetActionFailedException", "d4/d63/a00082.html", "d4/d63/a00082" ],
+      [ "WinGetInfo", "d2/db1/a00070.html", "d2/db1/a00070" ],
+      [ "WinGetNotInstalledException", "da/d2a/a00086.html", "da/d2a/a00086" ],
+      [ "WinGetPackage", "d8/d17/a00114.html", "d8/d17/a00114" ],
+      [ "WinGetPackageManager", "db/db6/a00074.html", "db/db6/a00074" ],
+      [ "WinGetSource", "d8/d87/a00118.html", "d8/d87/a00118" ],
+      [ "WinGetSourceManager", "d9/da4/a00078.html", "d9/da4/a00078" ]
     ] ]
 ];

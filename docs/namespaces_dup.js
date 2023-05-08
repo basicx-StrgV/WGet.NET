@@ -1,4 +1,4 @@
 var namespaces_dup =
 [
-    [ "WGetNET", "d5/df9/a00044.html", "d5/df9/a00044" ]
+    [ "WGetNET", "d5/de0/a00050.html", "d5/de0/a00050" ]
 ];
