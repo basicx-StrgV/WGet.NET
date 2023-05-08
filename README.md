@@ -44,6 +44,7 @@ You can finde the changelog here: https://github.com/basicx-StrgV/WGet.NET/relea
 - Reset sources
 - Calculate file hash
 - Export Settings
+- Asynchronous Execution
 
 ## 📦 NuGet Package
 
