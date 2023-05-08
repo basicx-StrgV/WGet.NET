@@ -4,6 +4,7 @@
 //--------------------------------------------------//
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using WGetNET.HelperClasses;
 
 namespace WGetNET
@@ -91,6 +92,38 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Asynchronous exports the WinGet settings to a json string.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the settings json.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public async Task<string> ExportSettingsAsync()
+        {
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
+
+                return ProcessOutputReader.ExportOutputToString(result);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Exporting sources failed.", e);
+            }
+        }
+
+        /// <summary>
         /// Exports the WinGet settings to a json and writes them to the given file.
         /// </summary>
         /// <param name="file">
@@ -119,6 +152,46 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(_exportSettingsCmd);
 
                 return FileHandler.ExportOutputToFile(result, file);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Exporting sources failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronous exports the WinGet settings to a json and writes them to the given file.
+        /// </summary>
+        /// <param name="file">
+        /// The file for the export.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was succesfull, and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public async Task<bool> ExportSettingsToFileAsync(string file)
+        {
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                return false;
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
+
+                return await FileHandler.ExportOutputToFileAsync(result, file);
             }
             catch (Win32Exception)
             {

@@ -136,9 +136,42 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetInfo.ExportSettingsAsync">
+            <summary>
+            Asynchronous exports the WinGet settings to a json string.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> containing the settings json.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetInfo.ExportSettingsToFile(System.String)">
             <summary>
             Exports the WinGet settings to a json and writes them to the given file.
+            </summary>
+            <param name="file">
+            The file for the export.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull, and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetInfo.ExportSettingsToFileAsync(System.String)">
+            <summary>
+            Asynchronous exports the WinGet settings to a json and writes them to the given file.
             </summary>
             <param name="file">
             The file for the export.
@@ -937,6 +970,20 @@
         <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFile(WGetNET.ProcessResult,System.String)">
             <summary>
             Writes the export result to a file.
+            </summary>
+            <param name="result">
+            The <see cref="T:WGetNET.ProcessResult"/> object containing the export data.
+            </param>
+            <param name="file">
+            A <see cref="T:System.String"/> containing the file path and name.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFileAsync(WGetNET.ProcessResult,System.String)">
+            <summary>
+            Asynchronous writes the export result to a file.
             </summary>
             <param name="result">
             The <see cref="T:WGetNET.ProcessResult"/> object containing the export data.

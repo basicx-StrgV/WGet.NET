@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET;
 
@@ -54,7 +55,9 @@ namespace WGetTest
                 string hash = connector.Hash("C:\\Test\\HashTest.txt");
                 Console.WriteLine(hash);
 
-                string settings = connector.ExportSettings();
+                Task<string> settingsTask = connector.ExportSettingsAsync();
+                settingsTask.Wait();
+                string settings = settingsTask.Result;
                 bool settingExportStatus = connector.ExportSettingsToFile("C:\\Test\\Settings.json");
             }
             catch (Exception e)
