@@ -19,25 +19,27 @@ https://basicx-strgv.github.io/WGet.NET/
 
 ## ⚡ Features
 
-- Get a list of installed packages
-- Search installed packages
-- Search packages
-- Install packages
-- Uninstall packages
-- Upgrade packages
-- Get a list of upgradeable packages
-- Export and Import packages
-- Check if WinGet is installed
-- Get the WinGet version number
-- Get installed sources
-- Add sources
-- Remove sources
-- Update sources
-- Export and Import sources
-- Reset sources
-- Calculate file hash
-- Export Settings
-- Asynchronous Execution
+- WinGet
+  - [x] Get a list of installed packages
+  - [x] Search installed packages
+  - [x] Search packages
+  - [x] Install packages
+  - [x] Uninstall packages
+  - [x] Upgrade packages
+  - [x] Get a list of upgradeable packages
+  - [x] Export and Import packages
+  - [x] Check if WinGet is installed
+  - [x] Get the WinGet version number
+  - [x] Get installed sources
+  - [x] Add sources
+  - [x] Remove sources
+  - [x] Update sources
+  - [x] Export and Import sources
+  - [x] Reset sources
+  - [x] Calculate file hash
+  - [x] Export Settings
+- Other
+  - [x] Asynchronous Execution
 
 ## 📦 NuGet Package
 
