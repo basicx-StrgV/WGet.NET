@@ -80,7 +80,8 @@ namespace WGetNET
         /// The name of the package for the search.
         /// </param>
         /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -182,7 +183,8 @@ namespace WGetNET
         /// Asynchronously gets a list of all installed packages.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -217,7 +219,8 @@ namespace WGetNET
         /// The name of the package for the search.
         /// </param>
         /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -318,7 +321,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package for the installation.</param>
         /// <returns>
-        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -357,7 +361,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
         /// <returns>
-        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -456,7 +461,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package for uninstallation.</param>
         /// <returns>
-        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -495,7 +501,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
         /// <returns>
-        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -559,7 +566,8 @@ namespace WGetNET
         /// Asynchronously get all upgradeable packages.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -662,7 +670,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package for upgrade.</param>
         /// <returns>
-        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -701,7 +710,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
         /// <returns>
-        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -783,7 +793,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="file">The file for the export.</param>
         /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -868,7 +879,8 @@ namespace WGetNET
         /// </remarks>
         /// <param name="file">The file with the package data for the import.</param>
         /// <returns>
-        /// <see langword="true"/> if the import was compleatly successfull or 
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the import was compleatly successfull or 
         /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
@@ -990,7 +1002,8 @@ namespace WGetNET
         /// A <see cref="System.String"/> containing the path to the file.
         /// </param>
         /// <returns>
-        /// A <see cref="System.String"/> containing the hash.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.String"/> containing the hash.
         /// </returns>
         public async Task<string> HashAsync(string file)
         {
@@ -1029,7 +1042,8 @@ namespace WGetNET
         /// A <see cref="System.IO.FileInfo"/> object, of the file the hash should be calculated for.
         /// </param>
         /// <returns>
-        /// A <see cref="System.String"/> containing the hash.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.String"/> containing the hash.
         /// </returns>
         public async Task<string> HashAsync(FileInfo file)
         {

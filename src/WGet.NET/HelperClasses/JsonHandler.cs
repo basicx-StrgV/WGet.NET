@@ -50,7 +50,8 @@ namespace WGetNET.HelperClasses
         /// A <see cref="System.String"/> containing the json to deserialize.
         /// </param>
         /// <returns>
-        /// A nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a nullable object of the given class type. It will be <see langword="null"/> if the action failed.
         /// </returns>
         public static async Task<T?> StringToObjectAsync<T>(string jsonString) where T : class
         {

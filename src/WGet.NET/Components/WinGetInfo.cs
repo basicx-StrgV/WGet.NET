@@ -95,7 +95,8 @@ namespace WGetNET
         /// Asynchronous exports the WinGet settings to a json string.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> containing the settings json.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.String"/> containing the settings json.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -170,7 +171,8 @@ namespace WGetNET
         /// The file for the export.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was succesfull, and <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action was succesfull, and <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.

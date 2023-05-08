@@ -47,7 +47,8 @@ namespace WGetNET.HelperClasses
         /// A <see cref="System.String"/> containing the file path and name.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
         /// </returns>
         public static async Task<bool> ExportOutputToFileAsync(ProcessResult result, string file)
         {
