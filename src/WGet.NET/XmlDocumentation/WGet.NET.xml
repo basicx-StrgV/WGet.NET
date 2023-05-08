@@ -215,6 +215,24 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.SearchPackageAsync(System.String)">
+            <summary>
+            Uses the winget search function to asynchronously search for a package that maches the given name.
+            </summary>
+            <param name="packageName">
+            The name of the package for the search.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages">
             <summary>
             Gets a list of all installed packages.
@@ -233,6 +251,39 @@
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages(System.String)">
             <summary>
             Gets a list of all installed packages. That match the provided name.
+            </summary>
+            <param name="packageName">
+            The name of the package for the search.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync">
+            <summary>
+            Asynchronously gets a list of all installed packages.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync(System.String)">
+            <summary>
+            Asynchronously gets a list of all installed packages. That match the provided name.
             </summary>
             <param name="packageName">
             The name of the package for the search.
@@ -280,6 +331,38 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(System.String)">
+            <summary>
+            Asynchronously install a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for the installation.</param>
+            <returns>
+            <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage)">
+            <summary>
+            Asynchronously install a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
+            <returns>
+            <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(System.String)">
             <summary>
             Uninsatll a package using winget.
@@ -312,9 +395,56 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(System.String)">
+            <summary>
+            Asynchronously uninsatll a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for uninstallation.</param>
+            <returns>
+            <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.WinGetPackage)">
+            <summary>
+            Asynchronously uninstall a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the uninstallation.</param>
+            <returns>
+            <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackages">
             <summary>
             Get all upgradeable packages.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackagesAsync">
+            <summary>
+            Asynchronously get all upgradeable packages.
             </summary>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
@@ -359,6 +489,38 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(System.String)">
+            <summary>
+            Asynchronously upgrades a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for upgrade.</param>
+            <returns>
+            <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.WinGetPackage)">
+            <summary>
+            Asynchronously upgrades a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> that for the upgrade</param>
+            <returns>
+            <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFile(System.String)">
             <summary>
             Exports a list of all installed winget packages as json to the given file.
@@ -375,9 +537,45 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFileAsync(System.String)">
+            <summary>
+            Asynchronously exports a list of all installed winget packages as json to the given file.
+            </summary>
+            <param name="file">The file for the export.</param>
+            <returns>
+            <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFile(System.String)">
             <summary>
             Imports packages and trys to installes/upgrade all pakages in the list, if possible.
+            </summary>
+            <remarks>
+            This may take some time and winget may not install/upgrade all packages.
+            </remarks>
+            <param name="file">The file with the package data for the import.</param>
+            <returns>
+            <see langword="true"/> if the import was compleatly successfull or 
+            <see langword="false"/> if some or all packages failed to install.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFileAsync(System.String)">
+            <summary>
+            Asynchronously imports packages and trys to installes/upgrade all pakages in the list, if possible.
             </summary>
             <remarks>
             This may take some time and winget may not install/upgrade all packages.
@@ -417,6 +615,28 @@
             A <see cref="T:System.String"/> containing the hash.
             </returns>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.HashAsync(System.String)">
+            <summary>
+            Asynchronously executes the WinGet hash function, to calculate the hash for the given file.
+            </summary>
+            <param name="file">
+            A <see cref="T:System.String"/> containing the path to the file.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the hash.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.HashAsync(System.IO.FileInfo)">
+            <summary>
+            Asynchronously executes the WinGet hash function, to calculate the hash for the given file.
+            </summary>
+            <param name="file">
+            A <see cref="T:System.IO.FileInfo"/> object, of the file the hash should be calculated for.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the hash.
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.HashResultToHash(WGetNET.ProcessResult)">
             <summary>
             Reads the hash from the WinGet hash action result.
@@ -441,6 +661,18 @@
         <member name="M:WGetNET.WinGetSourceManager.GetInstalledSources">
             <summary>
             Gets a list of all sources that are installed in winget.
+            </summary>
+            <remarks>
+            Because the list source output is limited it is recommanded to use 
+            <see cref="M:WGetNET.WinGetSourceManager.ExportSourcesToObject"/> instead.
+            </remarks>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.GetInstalledSourcesAsync">
+            <summary>
+            Asynchronously gets a list of all sources that are installed in winget.
             </summary>
             <remarks>
             Because the list source output is limited it is recommanded to use 
@@ -531,9 +763,108 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.String,System.String)">
+            <summary>
+            Asynchronously adds a new source to winget (Needs administrator rights).
+            </summary>
+            <remarks>
+            The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+            </remarks>
+            <param name="name">
+            A <see cref="T:System.String"/> representing the name of the source to add.
+            </param>
+            <param name="arg">
+            A <see cref="T:System.String"/> representing the source (eg. URL).
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.String,System.String,System.String)">
+            <summary>
+            Asynchronously adds a new source to winget (Needs administrator rights).
+            </summary>
+            <remarks>
+            The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+            </remarks>
+            <param name="name">
+            A <see cref="T:System.String"/> representing the name of the source to add.
+            </param>
+            <param name="arg">
+            A <see cref="T:System.String"/> representing the source (eg. URL).
+            </param>
+            <param name="type">
+            A <see cref="T:System.String"/> representing the source type.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(WGetNET.WinGetSource)">
+            <summary>
+            Asynchronously adds a new source to winget (Needs administrator rights).
+            </summary>
+            <remarks>
+            The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+            </remarks>
+            <param name="source">
+            The <see cref="T:WGetNET.WinGetSource"/> to add.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetSourceManager.UpdateSources">
             <summary>
             Updates all sources that are installed in winget.
+            </summary>
+            <remarks>
+            This may take a while depending on the sources.
+            </remarks>
+            <returns>
+            <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.UpdateSourcesAsync">
+            <summary>
+            Asynchronously updates all sources that are installed in winget.
             </summary>
             <remarks>
             This may take a while depending on the sources.
@@ -727,9 +1058,63 @@
             <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
             </returns>
         </member>
+        <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(System.Collections.Generic.List{WGetNET.WinGetSource})">
+            <summary>
+            Asynchronously imports sources into winget.
+            </summary>
+            <param name="winGetSources">
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was successfull and <see langword="false"/> if on or more sorces failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(WGetNET.WinGetSource)">
+            <summary>
+            Asynchronously imports a source into winget.
+            </summary>
+            <param name="winGetSource">
+            A <see cref="T:WGetNET.WinGetSource"/> objects.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(System.String)">
+            <summary>
+            Asynchronously imports a source into winget.
+            </summary>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json for ONE source.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGetSourceManager.ResetSources">
             <summary>
             Resets all sources that are installed in winget (Needs administrator rights).
+            </summary>
+            <remarks>
+            This may take a while depending on the sources.
+            </remarks>
+            <returns>
+            <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.ResetSourcesAsync">
+            <summary>
+            Asynchronously resets all sources that are installed in winget (Needs administrator rights).
             </summary>
             <remarks>
             This may take a while depending on the sources.
@@ -772,6 +1157,48 @@
         <member name="M:WGetNET.WinGetSourceManager.RemoveSources(WGetNET.WinGetSource)">
             <summary>
             Removes a source from winget (Needs administrator rights).
+            </summary>
+            <param name="source">
+            The <see cref="T:WGetNET.WinGetSource"/> to remove.
+            </param>
+            <returns>
+            <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.RemoveSourcesAsync(System.String)">
+            <summary>
+            Asynchronously removes a source from winget (Needs administrator rights).
+            </summary>
+            <param name="name">
+            A <see cref="T:System.String"/> representing the name of the source.
+            </param>
+            <returns>
+            <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.RemoveSourcesAsync(WGetNET.WinGetSource)">
+            <summary>
+            Asynchronously removes a source from winget (Needs administrator rights).
             </summary>
             <param name="source">
             The <see cref="T:WGetNET.WinGetSource"/> to remove.
@@ -1004,6 +1431,20 @@
         <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObject``1(System.String)">
             <summary>
             Deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
             </summary>
             <typeparam name="T">
             Class type the json should be deserialized to.
