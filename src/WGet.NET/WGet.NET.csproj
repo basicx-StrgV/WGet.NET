@@ -7,8 +7,8 @@
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/basicx-StrgV/WGet.NET</PackageProjectUrl>
     <RepositoryUrl>https://github.com/basicx-StrgV/WGet.NET</RepositoryUrl>
-    <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>winget, dotnet, library, windows</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>winget, winget-cli, dotnet, dotnetcore, dotnet-core, library, windows, wrapper, package-manager</PackageTags>
     <PackageReleaseNotes>Changelog: https://github.com/basicx-StrgV/WGet.NET/releases/tag/2.2.0</PackageReleaseNotes>
     <Description>A winget wrapper library for .Net</Description>
     <Copyright>basicx-StrgV</Copyright>
