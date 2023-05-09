@@ -21,6 +21,7 @@ namespace WGetNET
         private const string _searchCmd = "search {0} --accept-source-agreements";
         private const string _installCmd = "install {0}";
         private const string _upgradeCmd = "upgrade {0}";
+        private const string _upgradeAllCmd = "upgrade --all";
         private const string _getUpgradeableCmd = "upgrade";
         private const string _includeUnknown = "--include-unknown";
         private const string _uninstallCmd = "uninstall {0}";
@@ -733,6 +734,76 @@ namespace WGetNET
             }
 
             return await UpgradePackageAsync(package.PackageId);
+        }
+
+        /// <summary>
+        /// Tries to upgrade all packages using winget.
+        /// </summary>
+        /// <remarks>
+        /// The action might run succesfully without upgrading every or even any package.
+        /// </remarks>
+        /// <returns>
+        /// <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public bool UpgradeAllPackages()
+        {
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_upgradeAllCmd);
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Upgrading all packages failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously tries to upgrade all packages using winget.
+        /// </summary>
+        /// <remarks>
+        /// The action might run succesfully without upgrading every or even any package.
+        /// </remarks>
+        /// <returns>
+        /// <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public async Task<bool> UpgradeAllPackagesAsync()
+        {
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(_upgradeAllCmd);
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Upgrading all packages failed.", e);
+            }
         }
 
         private string AddArgumentByVersion(string argument)

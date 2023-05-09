@@ -533,6 +533,42 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.UpgradeAllPackages">
+            <summary>
+            Tries to upgrade all packages using winget.
+            </summary>
+            <remarks>
+            The action might run succesfully without upgrading every or even any package.
+            </remarks>
+            <returns>
+            <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UpgradeAllPackagesAsync">
+            <summary>
+            Asynchronously tries to upgrade all packages using winget.
+            </summary>
+            <remarks>
+            The action might run succesfully without upgrading every or even any package.
+            </remarks>
+            <returns>
+            <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFile(System.String)">
             <summary>
             Exports a list of all installed winget packages as json to the given file.

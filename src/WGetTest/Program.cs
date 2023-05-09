@@ -59,6 +59,8 @@ namespace WGetTest
                 settingsTask.Wait();
                 string settings = settingsTask.Result;
                 bool settingExportStatus = connector.ExportSettingsToFile("C:\\Test\\Settings.json");
+
+                //bool upAllresult = connector.UpgradeAllPackages();
             }
             catch (Exception e)
             {
