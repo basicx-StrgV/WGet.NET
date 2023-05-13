@@ -23,10 +23,13 @@ namespace WGetNET.HelperClasses
         /// <param name="action">
         /// Sets info about the action that is executet.
         /// </param>
+        /// <param name="sourceName">
+        /// Name of the source used in the search by source action.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
         /// </returns>
-        public static List<WinGetPackage> ToPackageList(string[] output, PackageAction action = PackageAction.Default)
+        public static List<WinGetPackage> ToPackageList(string[] output, PackageAction action = PackageAction.Default, string? sourceName = null)
         {
             //Get top line index.
             //The array should always contain this line.
@@ -39,7 +42,7 @@ namespace WGetNET.HelperClasses
             //Remove unneeded output Lines
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
 
-            return CreatePackageListFromOutput(output, columnList, action);
+            return CreatePackageListFromOutput(output, columnList, action, sourceName);
         }
 
         /// <summary>
@@ -54,14 +57,17 @@ namespace WGetNET.HelperClasses
         /// <param name="action">
         /// Sets info about the action that is executet.
         /// </param>
+        /// <param name="sourceName">
+        /// Name of the source used in the search by source action.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
         /// </returns>
-        private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int[] columnList, PackageAction action = PackageAction.Default)
+        private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int[] columnList, PackageAction action = PackageAction.Default, string? sourceName = null)
         {
             List<WinGetPackage> resultList = new List<WinGetPackage>();
 
-            if (columnList.Length < 4)
+            if (columnList.Length < 3)
             {
                 return resultList;
             }
@@ -79,11 +85,22 @@ namespace WGetNET.HelperClasses
                 WinGetPackage package = new WinGetPackage()
                 {
                     PackageName = output[i][columnList[0]..columnList[1]].Trim(),
-                    PackageId = output[i][columnList[1]..columnList[2]].Trim(),
-                    PackageVersion = output[i][columnList[2]..columnList[3]].Trim(),
-                    PackageAvailableVersion = output[i][columnList[2]..columnList[3]].Trim()
+                    PackageId = output[i][columnList[1]..columnList[2]].Trim()
                 };
 
+                //Set version info depending on the column count.
+                if (columnList.Length > 3)
+                {
+                    package.PackageVersion = output[i][columnList[2]..columnList[3]].Trim();
+                    package.PackageAvailableVersion = output[i][columnList[2]..columnList[3]].Trim();
+                }
+                else
+                {
+                    package.PackageVersion = output[i][columnList[2]..].Trim();
+                    package.PackageAvailableVersion = output[i][columnList[2]..].Trim();
+                }
+
+                //Set information, depending on the action and the column count.
                 if ((action == PackageAction.UpgradeList || action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length >= 5)
                 {
                     string availableVersion = output[i][columnList[3]..columnList[4]].Trim();
@@ -97,6 +114,10 @@ namespace WGetNET.HelperClasses
                 else if((action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length == 4)
                 {
                     package.PackageSourceName = output[i][columnList[3]..].Trim();
+                }
+                else if (action == PackageAction.SearchBySource && !string.IsNullOrWhiteSpace(sourceName))
+                {
+                    package.PackageSourceName = sourceName;
                 }
 
                 resultList.Add(package);

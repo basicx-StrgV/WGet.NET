@@ -19,6 +19,7 @@ namespace WGetNET
         private const string _listCmd = "list";
         private const string _searchInstalledCmd = "list {0}";
         private const string _searchCmd = "search {0} --accept-source-agreements";
+        private const string _searchBySourceCmd = "search {0} --source {1} --accept-source-agreements";
         private const string _installCmd = "install {0}";
         private const string _upgradeCmd = "upgrade {0}";
         private const string _upgradeAllCmd = "upgrade --all";
@@ -75,6 +76,45 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Uses the winget search function to search for a package that maches the given name.
+        /// </summary>
+        /// <param name="packageName">
+        /// The name of the package for the search.
+        /// </param>
+        /// <param name="sourceName">
+        /// The name of the source for the search.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public List<WinGetPackage> SearchPackage(string packageName, string sourceName)
+        {
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_searchBySourceCmd, packageName, sourceName));
+
+                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("The package search failed.", e);
+            }
+        }
+
+        /// <summary>
         /// Uses the winget search function to asynchronously search for a package that maches the given name.
         /// </summary>
         /// <param name="packageName">
@@ -100,6 +140,46 @@ namespace WGetNET
                         string.Format(_searchCmd, packageName));
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("The package search failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Uses the winget search function to asynchronously search for a package that maches the given name.
+        /// </summary>
+        /// <param name="packageName">
+        /// The name of the package for the search.
+        /// </param>
+        /// <param name="sourceName">
+        /// The name of the source for the search.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageName, string sourceName)
+        {
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_searchBySourceCmd, packageName, sourceName));
+
+                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
             }
             catch (Win32Exception)
             {

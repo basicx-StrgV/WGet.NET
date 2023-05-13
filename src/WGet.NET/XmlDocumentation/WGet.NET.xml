@@ -225,12 +225,55 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.SearchPackage(System.String,System.String)">
+            <summary>
+            Uses the winget search function to search for a package that maches the given name.
+            </summary>
+            <param name="packageName">
+            The name of the package for the search.
+            </param>
+            <param name="sourceName">
+            The name of the source for the search.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.SearchPackageAsync(System.String)">
             <summary>
             Uses the winget search function to asynchronously search for a package that maches the given name.
             </summary>
             <param name="packageName">
             The name of the package for the search.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.SearchPackageAsync(System.String,System.String)">
+            <summary>
+            Uses the winget search function to asynchronously search for a package that maches the given name.
+            </summary>
+            <param name="packageName">
+            The name of the package for the search.
+            </param>
+            <param name="sourceName">
+            The name of the source for the search.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -1712,7 +1755,7 @@
             provieds <see langword="static"/> methodes to process the output of the winget processes.
             </summary>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToPackageList(System.String[],WGetNET.PackageAction)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToPackageList(System.String[],WGetNET.PackageAction,System.String)">
             <summary>
             Converts a <see cref="T:System.Collections.Generic.List`1"/> 
             of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPackage"/>'s.
@@ -1723,11 +1766,14 @@
             <param name="action">
             Sets info about the action that is executet.
             </param>
+            <param name="sourceName">
+            Name of the source used in the search by source action.
+            </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePackageListFromOutput(System.String[],System.Int32[],WGetNET.PackageAction)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePackageListFromOutput(System.String[],System.Int32[],WGetNET.PackageAction,System.String)">
             <summary>
             Creates a package list from output.
             </summary>
@@ -1739,6 +1785,9 @@
             </param>
             <param name="action">
             Sets info about the action that is executet.
+            </param>
+            <param name="sourceName">
+            Name of the source used in the search by source action.
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.

@@ -5,6 +5,7 @@
         Default,
         UpgradeList,
         InstalledList,
-        Search
+        Search,
+        SearchBySource
     }
 }

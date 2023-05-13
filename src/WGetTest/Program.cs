@@ -30,7 +30,7 @@ namespace WGetTest
                 Version winGetVersionObject = connector.WinGetVersionObject;
 
                 //---Tests-----------------------------------------------------------------------------
-                List<WinGetPackage> test = connector.SearchPackage("visualstudio");
+                List<WinGetPackage> test = connector.SearchPackage("git", "winget");
                 Console.WriteLine(test[3].PackageName);
                 Console.WriteLine(test[3].PackageId);
 
