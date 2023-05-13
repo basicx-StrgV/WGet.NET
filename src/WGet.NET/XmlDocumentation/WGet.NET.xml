@@ -116,6 +116,14 @@
             A <see cref="T:System.String"/> with the version number.
             </returns>
         </member>
+        <member name="P:WGetNET.WinGetInfo.WinGetVersionObject">
+            <summary>
+            Gets the version number of the winget installation.
+            </summary>
+            <returns>
+            A <see cref="T:System.Version"/> object.
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGetInfo.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.

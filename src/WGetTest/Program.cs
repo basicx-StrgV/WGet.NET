@@ -27,6 +27,8 @@ namespace WGetTest
                 Console.WriteLine("Winget Installed: " + info.WinGetInstalled +
                                     "\nWinget Version: " + info.WinGetVersion + "\n");
 
+                Version winGetVersionObject = connector.WinGetVersionObject;
+
                 //---Tests-----------------------------------------------------------------------------
                 List<WinGetPackage> test = connector.SearchPackage("visualstudio");
                 Console.WriteLine(test[3].PackageName);

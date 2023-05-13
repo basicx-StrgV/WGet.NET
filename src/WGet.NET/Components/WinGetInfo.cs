@@ -52,6 +52,20 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Gets the version number of the winget installation.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.Version"/> object.
+        /// </returns>
+        public Version WinGetVersionObject
+        {
+            get
+            {
+                return GetVersionObject();
+            }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetInfo"/> class.
         /// </summary>
         public WinGetInfo()
@@ -226,6 +240,36 @@ namespace WGetNET
             }
 
             return string.Empty;
+        }
+
+        private Version GetVersionObject() 
+        {
+            string versionString = CheckWinGetVersion();
+
+            //Remove the first letter from the version string.
+            if (versionString.StartsWith('v'))
+            {
+                versionString = versionString[1..];
+            }
+
+            //Remove text from the end of the version string.
+            for (int i = 0; i < versionString.Length; i++)
+            {
+                if (versionString[i] == '-')
+                {
+                    versionString = versionString[0..i];
+                    break;
+                }
+            }
+
+            Version? versionObject;
+
+            if (!Version.TryParse(versionString, out versionObject) || versionObject == null)
+            {
+                versionObject = Version.Parse("0.0.0");
+            }
+
+            return versionObject;
         }
     }
 }
