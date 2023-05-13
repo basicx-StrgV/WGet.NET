@@ -9,14 +9,14 @@
     <RepositoryUrl>https://github.com/basicx-StrgV/WGet.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>winget, winget-cli, dotnet, dotnetcore, dotnet-core, library, windows, wrapper, package-manager</PackageTags>
-    <PackageReleaseNotes>Changelog: https://github.com/basicx-StrgV/WGet.NET/releases/tag/2.2.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Changelog: https://github.com/basicx-StrgV/WGet.NET/releases/tag/2.3.0</PackageReleaseNotes>
     <Description>A winget wrapper library for .Net</Description>
     <Copyright>basicx-StrgV</Copyright>
     <SignAssembly>false</SignAssembly>
     <RootNamespace>WGetNET</RootNamespace>
-    <Version>2.2.0</Version>
-    <AssemblyVersion>2.2.0.0</AssemblyVersion>
-    <FileVersion>2.2.0.0</FileVersion>
+    <Version>2.3.0</Version>
+    <AssemblyVersion>2.3.0.0</AssemblyVersion>
+    <FileVersion>2.3.0.0</FileVersion>
     <Nullable>enable</Nullable>
     <AssemblyName>WGet.NET</AssemblyName>
     <PackageId>WGet.NET</PackageId>
