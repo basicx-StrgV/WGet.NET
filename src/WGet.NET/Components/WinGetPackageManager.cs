@@ -808,12 +808,12 @@ namespace WGetNET
 
         private string AddArgumentByVersion(string argument)
         {
-            // Checking version to determine if "--include-unknown" is necessary
-            bool castSuccessful = int.TryParse(WinGetVersion.Split(".")[1], out int wingetMinorVersion);
-            if (castSuccessful && wingetMinorVersion >= 4)
+            // Checking version to determine if "--include-unknown" is necessary.
+            Version winGetVersion = WinGetVersionObject;
+            if (winGetVersion.Major >= 1 && winGetVersion.Minor >= 4)
             {
                 // Winget version supports new argument, add "--include-unknown" to arguments
-                argument += " " + _includeUnknown;
+                argument += $" {_includeUnknown}";
             }
             return argument;
         }
