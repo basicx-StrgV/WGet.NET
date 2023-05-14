@@ -24,7 +24,7 @@ namespace WGetNET.HelperClasses
         /// Sets info about the action that is executet.
         /// </param>
         /// <param name="sourceName">
-        /// Name of the source used in the search by source action.
+        /// Name of the source used in the search or list by source action.
         /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
@@ -58,7 +58,7 @@ namespace WGetNET.HelperClasses
         /// Sets info about the action that is executet.
         /// </param>
         /// <param name="sourceName">
-        /// Name of the source used in the search by source action.
+        /// Name of the source used in the search or list by source action.
         /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
@@ -115,7 +115,7 @@ namespace WGetNET.HelperClasses
                 {
                     package.PackageSourceName = output[i][columnList[3]..].Trim();
                 }
-                else if (action == PackageAction.SearchBySource && !string.IsNullOrWhiteSpace(sourceName))
+                else if ((action == PackageAction.SearchBySource || action == PackageAction.InstalledListBySource) && !string.IsNullOrWhiteSpace(sourceName))
                 {
                     package.PackageSourceName = sourceName;
                 }

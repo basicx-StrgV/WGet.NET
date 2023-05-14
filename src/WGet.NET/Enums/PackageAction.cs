@@ -5,6 +5,7 @@
         Default,
         UpgradeList,
         InstalledList,
+        InstalledListBySource,
         Search,
         SearchBySource
     }

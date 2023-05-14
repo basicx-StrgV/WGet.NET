@@ -320,6 +320,27 @@
             Please see inner exception.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages(System.String,System.String)">
+            <summary>
+            Gets a list of all installed packages. That match the provided name.
+            </summary>
+            <param name="packageName">
+            The name of the package for the search.
+            </param>
+            <param name="sourceName">
+            The name of the source for the search.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync">
             <summary>
             Asynchronously gets a list of all installed packages.
@@ -342,6 +363,28 @@
             </summary>
             <param name="packageName">
             The name of the package for the search.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync(System.String,System.String)">
+            <summary>
+            Asynchronously gets a list of all installed packages. That match the provided name.
+            </summary>
+            <param name="packageName">
+            The name of the package for the search.
+            </param>
+            <param name="sourceName">
+            The name of the source for the search.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -1767,7 +1810,7 @@
             Sets info about the action that is executet.
             </param>
             <param name="sourceName">
-            Name of the source used in the search by source action.
+            Name of the source used in the search or list by source action.
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
@@ -1787,7 +1830,7 @@
             Sets info about the action that is executet.
             </param>
             <param name="sourceName">
-            Name of the source used in the search by source action.
+            Name of the source used in the search or list by source action.
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
