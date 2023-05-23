@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;2.2.0</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;2.3.0</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -103,44 +103,46 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 📓 Documentation</h1>
 <p><a href="https://basicx-strgv.github.io/WGet.NET/">https://basicx-strgv.github.io/WGet.NET/</a></p>
 <h1><a class="anchor" id="autotoc_md3"></a>
-🎈 Version 2.0</h1>
-<p>Version 2.0 is out now, with big changes, improvements and new features. <br  />
- But before updating to the new version, read the changelog first, because version 2.0 is not compatible with older versions of this library.</p>
-<p>You can finde the changelog here: <a href="https://github.com/basicx-StrgV/WGet.NET/releases/tag/2.0.0">https://github.com/basicx-StrgV/WGet.NET/releases/tag/2.0.0</a></p>
-<h1><a class="anchor" id="autotoc_md4"></a>
 ⚡ Features</h1>
 <ul>
-<li>Get a list of installed packages</li>
-<li>Search installed packages</li>
-<li>Search packages</li>
-<li>Install packages</li>
-<li>Uninstall packages</li>
-<li>Upgrade packages</li>
-<li>Get a list of upgradeable packages</li>
-<li>Export and Import packages</li>
-<li>Check if WinGet is installed</li>
-<li>Get the WinGet version number</li>
-<li>Get installed sources</li>
-<li>Add sources</li>
-<li>Remove sources</li>
-<li>Update sources</li>
-<li>Export and Import sources</li>
-<li>Reset sources</li>
-<li>Calculate file hash</li>
-<li>Export Settings</li>
+<li>WinGet<ul>
+<li>[x] Get a list of installed packages</li>
+<li>[x] Search installed packages</li>
+<li>[x] Search packages</li>
+<li>[x] Install packages</li>
+<li>[x] Uninstall packages</li>
+<li>[x] Upgrade packages</li>
+<li>[x] Get a list of upgradeable packages</li>
+<li>[x] Export and Import packages</li>
+<li>[x] Check if WinGet is installed</li>
+<li>[x] Get the WinGet version number</li>
+<li>[x] Get installed sources</li>
+<li>[x] Add sources</li>
+<li>[x] Remove sources</li>
+<li>[x] Update sources</li>
+<li>[x] Export and Import sources</li>
+<li>[x] Reset sources</li>
+<li>[x] Calculate file hash</li>
+<li>[x] Export Settings</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md5"></a>
+</li>
+<li>Other<ul>
+<li>[x] Asynchronous Execution</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
 📦 NuGet Package</h1>
 <p>You can get the NuGet package here: <a href="https://www.nuget.org/packages/WGet.NET/">https://www.nuget.org/packages/WGet.NET/</a></p>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 ❗ Requirements</h1>
 <p>WinGet needs to be installed on the system.</p>
 <p>If WinGet is not installed on your system you can get it here: <a href="https://github.com/microsoft/winget-cli">https://github.com/microsoft/winget-cli</a></p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 💡 Getting started</h1>
 <p>The needed namespace is <b><a class="el" href="d5/de0/a00050.html">WGetNET</a></b> (<code>using <a class="el" href="d5/de0/a00050.html">WGetNET</a>;</code>). <br  />
  This namespace contains the three classes, that are used to perform actions or get information with winget.</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 WinGetInfo:</h2>
 <p>The <em><b>WinGetInfo</b></em> class can be used to get information about WinGet itself. <br  />
  This class is inherited by the <em><b>WinGetPackageManager</b></em> and <em><b>WinGetSourceManager</b></em> class.</p>
@@ -153,13 +155,13 @@ WinGetInfo:</h2>
 <div class="line">{</div>
 <div class="line">     Console.WriteLine(<span class="stringliteral">&quot;WinGet is NOT installed.&quot;</span>);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
 WinGetPackageManager:</h2>
 <p>The <em><b>WinGetPackageManager</b></em> class is used for everything that has to do with packages. <br  />
  It can install, remove, upgrade, search, list, export and import packages.</p>
 <p>The code for installing a package could look like this: </p><div class="fragment"><div class="line">WinGetPackageManager packageManager = <span class="keyword">new</span> WinGetPackageManager();</div>
 <div class="line">packageManager.InstallPackage(<span class="stringliteral">&quot;Git.Git&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
 WinGetSourceManager:</h2>
 <p>The <em><b>WinGetSourceManager</b></em> class is used for everything that has to do with sources. <br  />
  It can list, add, update, export, reset and remove sources.</p>

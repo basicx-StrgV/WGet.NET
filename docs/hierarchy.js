@@ -1,13 +1,13 @@
 var hierarchy =
 [
     [ "Exception", null, [
-      [ "WGetNET.WinGetActionFailedException", "d4/d63/a00082.html", null ],
-      [ "WGetNET.WinGetNotInstalledException", "da/d2a/a00086.html", null ]
+      [ "WGetNET.WinGetActionFailedException", "d2/d1f/a00083.html", null ],
+      [ "WGetNET.WinGetNotInstalledException", "d1/d1e/a00087.html", null ]
     ] ],
-    [ "WGetNET.WinGetInfo", "d2/db1/a00070.html", [
-      [ "WGetNET.WinGetPackageManager", "db/db6/a00074.html", null ],
-      [ "WGetNET.WinGetSourceManager", "d9/da4/a00078.html", null ]
+    [ "WGetNET.WinGetInfo", "d0/d89/a00071.html", [
+      [ "WGetNET.WinGetPackageManager", "d9/da5/a00075.html", null ],
+      [ "WGetNET.WinGetSourceManager", "d1/d51/a00079.html", null ]
     ] ],
-    [ "WGetNET.WinGetPackage", "d8/d17/a00114.html", null ],
-    [ "WGetNET.WinGetSource", "d8/d87/a00118.html", null ]
+    [ "WGetNET.WinGetPackage", "d2/da3/a00115.html", null ],
+    [ "WGetNET.WinGetSource", "df/d6a/a00119.html", null ]
 ];
