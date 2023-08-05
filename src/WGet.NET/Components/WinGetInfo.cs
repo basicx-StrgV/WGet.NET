@@ -262,9 +262,7 @@ namespace WGetNET
                 }
             }
 
-            Version? versionObject;
-
-            if (!Version.TryParse(versionString, out versionObject) || versionObject == null)
+            if (!Version.TryParse(versionString, out Version? versionObject) || versionObject == null)
             {
                 versionObject = Version.Parse("0.0.0");
             }
