@@ -1316,7 +1316,7 @@ namespace WGetNET
         private string HashResultToHash(ProcessResult result)
         {
             string hash = "";
-            if (result.Output.Length > 0 && result.Output[0].Contains(':'))
+            if (result.Output.Length > 0 && result.Output[0].Contains(":"))
             {
                 string[] splitOutput = result.Output[0].Split(':');
                 if (splitOutput.Length >= 2)

@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+	<LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
     <Company>-</Company>
     <Authors>basicx-StrgV</Authors>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -40,6 +42,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+    <PackageReference Include="System.Text.Json" Version="7.0.3" />
   </ItemGroup>
 
 </Project>

@@ -891,6 +891,7 @@ namespace WGetNET
             return ExportSourcesToFile(file, source.SourceName);
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
@@ -1010,6 +1011,7 @@ namespace WGetNET
 
             return await ExportSourcesToFileAsync(file, source.SourceName);
         }
+#endif
 
         /// <summary>
         /// Convert the string output from winget source export to a 
@@ -1025,20 +1027,25 @@ namespace WGetNET
         {
             List<WinGetSource> sourceList = new List<WinGetSource>();
 
+#if NET6_0_OR_GREATER
             string[] jsonStrings = exportString.Split("}{");
+#elif NETSTANDARD2_0
+            string[] jsonStrings = exportString.Split(new string[1]{ "}{" }, StringSplitOptions.None);
+#endif
+
             StringBuilder jsonString = new StringBuilder();
             for (int i = 0; i < jsonStrings.Length; i++)
             {
-                if (!jsonStrings[i].StartsWith('{'))
+                if (!jsonStrings[i].StartsWith("{"))
                 {
-                    jsonString.Append('{');
+                    jsonString.Append("{");
                 }
 
                 jsonString.Append(jsonStrings[i]);
 
-                if (!jsonStrings[i].EndsWith('}'))
+                if (!jsonStrings[i].EndsWith("}"))
                 {
-                    jsonString.Append('}');
+                    jsonString.Append("}");
                 }
                 
                 WinGetSource? source =
@@ -1072,20 +1079,25 @@ namespace WGetNET
         {
             List<WinGetSource> sourceList = new List<WinGetSource>();
 
+#if NET6_0_OR_GREATER
             string[] jsonStrings = exportString.Split("}{");
+#elif NETSTANDARD2_0
+            string[] jsonStrings = exportString.Split(new string[1]{ "}{" }, StringSplitOptions.None);
+#endif
+
             StringBuilder jsonString = new StringBuilder();
             for (int i = 0; i < jsonStrings.Length; i++)
             {
-                if (!jsonStrings[i].StartsWith('{'))
+                if (!jsonStrings[i].StartsWith("{"))
                 {
-                    jsonString.Append('{');
+                    jsonString.Append("{");
                 }
 
                 jsonString.Append(jsonStrings[i]);
 
-                if (!jsonStrings[i].EndsWith('}'))
+                if (!jsonStrings[i].EndsWith("}"))
                 {
-                    jsonString.Append('}');
+                    jsonString.Append("}");
                 }
 
                 WinGetSource? source =

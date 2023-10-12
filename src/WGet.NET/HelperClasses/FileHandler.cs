@@ -37,6 +37,7 @@ namespace WGetNET.HelperClasses
             }
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronous writes the export result to a file.
         /// </summary>
@@ -65,5 +66,6 @@ namespace WGetNET.HelperClasses
                 return false;
             }
         }
+#endif
     }
 }
