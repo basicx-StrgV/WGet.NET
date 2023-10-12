@@ -30,6 +30,7 @@ namespace WGetNET
             {
                 CreateNoWindow = true,
                 FileName = processName,
+                UseShellExecute = false,
                 RedirectStandardOutput = true,
                 StandardOutputEncoding = Encoding.Default
             };

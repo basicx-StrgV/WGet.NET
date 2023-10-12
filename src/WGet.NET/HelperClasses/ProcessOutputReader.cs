@@ -93,8 +93,8 @@ namespace WGetNET.HelperClasses
                     PackageName = output[i][columnList[0]..columnList[1]].Trim(),
                     PackageId = output[i][columnList[1]..columnList[2]].Trim()
 #elif NETSTANDARD2_0
-                    PackageName = output[i].Substring(columnList[0], (columnList[1] - columnList[0]) + 1).Trim(),
-                    PackageId = output[i].Substring(columnList[1], (columnList[2] - columnList[1]) + 1).Trim()
+                    PackageName = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim(),
+                    PackageId = output[i].Substring(columnList[1], (columnList[2] - columnList[1])).Trim()
 #endif
                 };
 
@@ -105,8 +105,8 @@ namespace WGetNET.HelperClasses
                     package.PackageVersion = output[i][columnList[2]..columnList[3]].Trim();
                     package.PackageAvailableVersion = output[i][columnList[2]..columnList[3]].Trim();
 #elif NETSTANDARD2_0
-                    package.PackageVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2]) + 1).Trim();
-                    package.PackageAvailableVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2]) + 1).Trim();
+                    package.PackageVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
+                    package.PackageAvailableVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
 #endif
                 }
                 else
@@ -126,7 +126,7 @@ namespace WGetNET.HelperClasses
 #if NET6_0_OR_GREATER
                     string availableVersion = output[i][columnList[3]..columnList[4]].Trim();
 #elif NETSTANDARD2_0
-                    string availableVersion = output[i].Substring(columnList[3], (columnList[4] - columnList[3]) + 1).Trim();
+                    string availableVersion = output[i].Substring(columnList[3], (columnList[4] - columnList[3])).Trim();
 #endif
                     if (!string.IsNullOrWhiteSpace(availableVersion) && action != PackageAction.Search)
                     {
@@ -248,7 +248,7 @@ namespace WGetNET.HelperClasses
                         SourceName = output[i][columnList[0]..columnList[1]].Trim(),
                         SourceUrl = output[i][columnList[1]..].Trim(),
 #elif NETSTANDARD2_0
-                        SourceName = output[i].Substring(columnList[0], (columnList[1] - columnList[0]) + 1).Trim(),
+                        SourceName = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim(),
                         SourceUrl = output[i].Substring(columnList[1]).Trim(),
 #endif
                         SourceType = string.Empty

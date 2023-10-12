@@ -266,7 +266,7 @@ namespace WGetNET
 #if NET6_0_OR_GREATER
                     versionString = versionString[0..i];
 #elif NETSTANDARD2_0
-                    versionString = versionString.Substring(0, i + 1);
+                    versionString = versionString.Substring(0, i);
 #endif
                     break;
                 }

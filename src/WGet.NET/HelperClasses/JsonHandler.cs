@@ -4,8 +4,13 @@
 //--------------------------------------------------//
 using System;
 using System.IO;
+#if NET6_0_OR_GREATER
 using System.Text;
 using System.Text.Json;
+#elif NETSTANDARD2_0
+using System.Text;
+using System.Text.Json;
+#endif
 using System.Threading.Tasks;
 
 namespace WGetNET.HelperClasses
