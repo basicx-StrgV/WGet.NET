@@ -36,7 +36,7 @@ namespace WGetNET.HelperClasses
             inputArray = CopyTo(inputArray, 1);
 
             //Add the new line to the new enty in the main array.
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
             inputArray[^1] = value;
 #elif NETSTANDARD2_0
             inputArray[inputArray.Length-1] = value;

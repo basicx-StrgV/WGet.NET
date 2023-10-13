@@ -37,7 +37,7 @@ namespace WGetNET.HelperClasses
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous writes the export result to a file.
         /// </summary>

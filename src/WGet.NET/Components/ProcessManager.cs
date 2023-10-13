@@ -5,7 +5,7 @@
 using System.IO;
 using System.Text;
 using System.Diagnostics;
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
 using System.Threading.Tasks;
 #endif
 using WGetNET.HelperClasses;
@@ -53,7 +53,7 @@ namespace WGetNET
             return RunProcess(GetStartInfo(cmd));
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous executes a winget process with the given command and returns the result.
         /// </summary>
@@ -119,7 +119,7 @@ namespace WGetNET
             return result;
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous runs a process with the current start informations.
         /// </summary>
@@ -176,7 +176,7 @@ namespace WGetNET
             return outputArray;
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous reads the data from the process output to a string array.
         /// </summary>

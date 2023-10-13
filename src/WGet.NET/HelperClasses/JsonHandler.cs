@@ -5,7 +5,7 @@
 using System;
 using System.IO;
 using System.Text;
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
 using System.Text.Json;
 #elif NETSTANDARD2_0
 using Newtonsoft.Json;
@@ -36,7 +36,7 @@ namespace WGetNET.HelperClasses
         {
             try
             {
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                 return JsonSerializer.Deserialize<T>(jsonString);
 #elif NETSTANDARD2_0
                 return JsonConvert.DeserializeObject<T>(jsonString);
@@ -48,7 +48,7 @@ namespace WGetNET.HelperClasses
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously deserializes a given json <see cref="System.String"/> to a object of the given class.
         /// </summary>

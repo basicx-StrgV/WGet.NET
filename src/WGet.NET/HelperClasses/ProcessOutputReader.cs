@@ -75,7 +75,7 @@ namespace WGetNET.HelperClasses
             for (int i = 0; i < output.Length; i++)
             {
                 // Stop parsing the output when the end of the list is reached.
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                 if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[^1])
                 {
                     break;
@@ -89,7 +89,7 @@ namespace WGetNET.HelperClasses
 
                 WinGetPackage package = new WinGetPackage()
                 {
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                     PackageName = output[i][columnList[0]..columnList[1]].Trim(),
                     PackageId = output[i][columnList[1]..columnList[2]].Trim()
 #elif NETSTANDARD2_0
@@ -101,7 +101,7 @@ namespace WGetNET.HelperClasses
                 //Set version info depending on the column count.
                 if (columnList.Length > 3)
                 {
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                     package.PackageVersion = output[i][columnList[2]..columnList[3]].Trim();
                     package.PackageAvailableVersion = output[i][columnList[2]..columnList[3]].Trim();
 #elif NETSTANDARD2_0
@@ -111,7 +111,7 @@ namespace WGetNET.HelperClasses
                 }
                 else
                 {
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                     package.PackageVersion = output[i][columnList[2]..].Trim();
                     package.PackageAvailableVersion = output[i][columnList[2]..].Trim();
 #elif NETSTANDARD2_0
@@ -123,7 +123,7 @@ namespace WGetNET.HelperClasses
                 //Set information, depending on the action and the column count.
                 if ((action == PackageAction.UpgradeList || action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length >= 5)
                 {
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                     string availableVersion = output[i][columnList[3]..columnList[4]].Trim();
 #elif NETSTANDARD2_0
                     string availableVersion = output[i].Substring(columnList[3], (columnList[4] - columnList[3])).Trim();
@@ -133,7 +133,7 @@ namespace WGetNET.HelperClasses
                         package.PackageAvailableVersion = availableVersion;
                     }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                     package.PackageSourceName = output[i][columnList[4]..].Trim();
 #elif NETSTANDARD2_0
                     package.PackageSourceName = output[i].Substring(columnList[4]).Trim();
@@ -141,7 +141,7 @@ namespace WGetNET.HelperClasses
                 }
                 else if((action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length == 4)
                 {
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                     package.PackageSourceName = output[i][columnList[3]..].Trim();
 #elif NETSTANDARD2_0
                     package.PackageSourceName = output[i].Substring(columnList[3]).Trim();
@@ -244,7 +244,7 @@ namespace WGetNET.HelperClasses
                 resultList.Add(
                     new WinGetSource()
                     {
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                         SourceName = output[i][columnList[0]..columnList[1]].Trim(),
                         SourceUrl = output[i][columnList[1]..].Trim(),
 #elif NETSTANDARD2_0

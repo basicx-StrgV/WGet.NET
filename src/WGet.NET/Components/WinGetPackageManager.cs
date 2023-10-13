@@ -115,7 +115,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Uses the winget search function to asynchronously search for a package that maches the given name.
         /// </summary>
@@ -301,7 +301,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously gets a list of all installed packages.
         /// </summary>
@@ -479,7 +479,7 @@ namespace WGetNET
             return InstallPackage(package.PackageId);
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously install a package using winget.
         /// </summary>
@@ -621,7 +621,7 @@ namespace WGetNET
             return UninstallPackage(package.PackageId);
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously uninsatll a package using winget.
         /// </summary>
@@ -729,7 +729,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously get all upgradeable packages.
         /// </summary>
@@ -834,7 +834,7 @@ namespace WGetNET
             return UpgradePackage(package.PackageId);
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously upgrades a package using winget.
         /// </summary>
@@ -941,7 +941,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously tries to upgrade all packages using winget.
         /// </summary>
@@ -1031,7 +1031,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously exports a list of all installed winget packages as json to the given file.
         /// </summary>
@@ -1116,7 +1116,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously imports packages and trys to installes/upgrade all pakages in the list, if possible.
         /// </summary>
@@ -1242,7 +1242,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously executes the WinGet hash function, to calculate the hash for the given file.
         /// </summary>

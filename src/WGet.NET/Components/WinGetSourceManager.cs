@@ -63,7 +63,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously gets a list of all sources that are installed in winget.
         /// </summary>
@@ -252,7 +252,7 @@ namespace WGetNET
             return AddSource(source.SourceName, source.SourceUrl, source.SourceType);
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously adds a new source to winget (Needs administrator rights).
         /// </summary>
@@ -449,7 +449,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously updates all sources that are installed in winget.
         /// </summary>
@@ -596,7 +596,7 @@ namespace WGetNET
             return ExportSources(source.SourceName);
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously exports the winget sources as a json string.
         /// </summary>
@@ -744,7 +744,7 @@ namespace WGetNET
             return ExportStringToSources(ExportSources(sourceName));
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously exports the winget sources to a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </summary>
@@ -901,7 +901,7 @@ namespace WGetNET
             return ExportSourcesToFile(file, source.SourceName);
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
@@ -1037,7 +1037,7 @@ namespace WGetNET
         {
             List<WinGetSource> sourceList = new List<WinGetSource>();
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
             string[] jsonStrings = exportString.Split("}{");
 #elif NETSTANDARD2_0
             string[] jsonStrings = exportString.Split(new string[1]{ "}{" }, StringSplitOptions.None);
@@ -1074,7 +1074,7 @@ namespace WGetNET
             return sourceList;
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously convert the string output from winget source export to a 
         /// <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
@@ -1189,7 +1189,7 @@ namespace WGetNET
             return AddSource(source);
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously imports sources into winget.
         /// </summary>
@@ -1302,7 +1302,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously resets all sources that are installed in winget (Needs administrator rights).
         /// </summary>
@@ -1432,7 +1432,7 @@ namespace WGetNET
             return RemoveSources(source.SourceName);
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously removes a source from winget (Needs administrator rights).
         /// </summary>

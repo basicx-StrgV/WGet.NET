@@ -105,7 +105,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous exports the WinGet settings to a json string.
         /// </summary>
@@ -180,7 +180,7 @@ namespace WGetNET
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous exports the WinGet settings to a json and writes them to the given file.
         /// </summary>
@@ -253,7 +253,7 @@ namespace WGetNET
             //Remove the first letter from the version string.
             if (versionString.StartsWith("v"))
             {
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                 versionString = versionString[1..].Trim();
 #elif NETSTANDARD2_0
                 versionString = versionString.Substring(1).Trim();
@@ -265,7 +265,7 @@ namespace WGetNET
             {
                 if (versionString[i] == '-')
                 {
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
                     versionString = versionString[0..i];
 #elif NETSTANDARD2_0
                     versionString = versionString.Substring(0, i);

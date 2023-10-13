@@ -2,7 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
 using System.Text.Json.Serialization;
 #elif NETSTANDARD2_0
 using Newtonsoft.Json;
@@ -19,7 +19,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the name of the source.
         /// </summary>
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Name")]
 #elif NETSTANDARD2_0
         [JsonProperty("Name")]
@@ -45,7 +45,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the url of the source.
         /// </summary>
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Arg")]
 #elif NETSTANDARD2_0
         [JsonProperty("Arg")]
@@ -74,7 +74,7 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Type")]
 #elif NETSTANDARD2_0
         [JsonProperty("Type")]
@@ -103,7 +103,7 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Data")]
 #elif NETSTANDARD2_0
         [JsonProperty("Data")]
@@ -132,7 +132,7 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Identifier")]
 #elif NETSTANDARD2_0
         [JsonProperty("Identifier")]
@@ -159,7 +159,7 @@ namespace WGetNET
         /// <summary>
         /// Gets if the object is empty.
         /// </summary>
-#if NET6_0_OR_GREATER
+#if NETCOREAPP3_1_OR_GREATER
         [JsonIgnore]
 #elif NETSTANDARD2_0
         [JsonIgnore]
