@@ -66,10 +66,9 @@ namespace WGetNET.HelperClasses
         {
             try
             {
-                using (MemoryStream dataStream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
-                {
-                    return await JsonSerializer.DeserializeAsync<T>(dataStream);
-                }
+                using MemoryStream dataStream = new(Encoding.UTF8.GetBytes(jsonString));
+
+                return await JsonSerializer.DeserializeAsync<T>(dataStream);
             }
             catch (Exception)
             {

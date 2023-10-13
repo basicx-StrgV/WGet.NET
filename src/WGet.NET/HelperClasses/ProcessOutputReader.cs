@@ -65,7 +65,7 @@ namespace WGetNET.HelperClasses
         /// </returns>
         private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int[] columnList, PackageAction action = PackageAction.Default, string? sourceName = null)
         {
-            List<WinGetPackage> resultList = new List<WinGetPackage>();
+            List<WinGetPackage> resultList = new();
 
             if (columnList.Length < 3)
             {
@@ -87,7 +87,7 @@ namespace WGetNET.HelperClasses
                 }
 #endif
 
-                WinGetPackage package = new WinGetPackage()
+                WinGetPackage package = new()
                 {
 #if NETCOREAPP3_1_OR_GREATER
                     PackageName = output[i][columnList[0]..columnList[1]].Trim(),
@@ -149,7 +149,14 @@ namespace WGetNET.HelperClasses
                 }
                 else if ((action == PackageAction.SearchBySource || action == PackageAction.InstalledListBySource) && !string.IsNullOrWhiteSpace(sourceName))
                 {
+#pragma warning disable IDE0079 
+                    // Remove info about the unnecessary suppression, that is shown by .NET Core 3.1, because .Net Standard 2.0 needs to know that not me.
+#pragma warning disable CS8601
+                    // "sourceName" source name cant't be null here because of the following check "!string.IsNullOrWhiteSpace(sourceName)".
+                    // But .NET Standard 2.0 thinks it knows better. (Or I'm stupid)
                     package.PackageSourceName = sourceName;
+#pragma warning restore CS8601
+#pragma warning restore IDE0079
                 }
 
                 resultList.Add(package);
@@ -204,7 +211,7 @@ namespace WGetNET.HelperClasses
         {
             if (result.Success)
             {
-                StringBuilder outputBuilder = new StringBuilder();
+                StringBuilder outputBuilder = new();
                 foreach (string line in result.Output)
                 {
                     outputBuilder.Append(line);
@@ -232,7 +239,7 @@ namespace WGetNET.HelperClasses
         /// </returns>
         private static List<WinGetSource> CreateSourceListFromOutput(string[] output, int[] columnList)
         {
-            List<WinGetSource> resultList = new List<WinGetSource>();
+            List<WinGetSource> resultList = new();
 
             if (columnList.Length < 2)
             {

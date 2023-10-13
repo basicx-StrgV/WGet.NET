@@ -65,10 +65,8 @@ namespace WGetNET.HelperClasses
                     File.Delete(file);
                 }
                 // Create file and write the string to the stream
-                using (StreamWriter fileStream = File.CreateText(file))
-                {
-                    await fileStream.WriteAsync(outputString);
-                }
+                using StreamWriter fileStream = File.CreateText(file);
+                await fileStream.WriteAsync(outputString);
 #endif
 
                 return true;

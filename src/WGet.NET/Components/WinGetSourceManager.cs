@@ -1025,7 +1025,7 @@ namespace WGetNET
         /// </returns>
         private List<WinGetSource> ExportStringToSources(string exportString)
         {
-            List<WinGetSource> sourceList = new List<WinGetSource>();
+            List<WinGetSource> sourceList = new();
 
 #if NETCOREAPP3_1_OR_GREATER
             string[] jsonStrings = exportString.Split("}{");
@@ -1033,7 +1033,7 @@ namespace WGetNET
             string[] jsonStrings = exportString.Split(new string[1]{ "}{" }, StringSplitOptions.None);
 #endif
 
-            StringBuilder jsonString = new StringBuilder();
+            StringBuilder jsonString = new();
             for (int i = 0; i < jsonStrings.Length; i++)
             {
                 if (!jsonStrings[i].StartsWith("{"))
@@ -1049,12 +1049,8 @@ namespace WGetNET
                 }
                 
                 WinGetSource? source =
-                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString());
-
-                if (source == null)
-                {
-                    throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
-                }
+                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString()) 
+                    ?? throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
 
                 sourceList.Add(source);
 
@@ -1078,11 +1074,11 @@ namespace WGetNET
         /// </returns>
         private async Task<List<WinGetSource>> ExportStringToSourcesAsync(string exportString)
         {
-            List<WinGetSource> sourceList = new List<WinGetSource>();
+            List<WinGetSource> sourceList = new();
 
             string[] jsonStrings = exportString.Split("}{");
 
-            StringBuilder jsonString = new StringBuilder();
+            StringBuilder jsonString = new();
             for (int i = 0; i < jsonStrings.Length; i++)
             {
                 if (!jsonStrings[i].StartsWith("{"))
@@ -1098,12 +1094,8 @@ namespace WGetNET
                 }
 
                 WinGetSource? source =
-                    await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString.ToString());
-
-                if (source == null)
-                {
-                    throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
-                }
+                    await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString.ToString())
+                    ?? throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
 
                 sourceList.Add(source);
 
@@ -1169,12 +1161,9 @@ namespace WGetNET
         /// </returns>
         public bool ImportSource(string jsonString)
         {
-            WinGetSource? source = JsonHandler.StringToObject<WinGetSource>(jsonString);
-
-            if (source == null)
-            {
-                throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
-            }
+            WinGetSource? source = 
+                JsonHandler.StringToObject<WinGetSource>(jsonString) 
+                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
 
             return AddSource(source);
         }
@@ -1236,15 +1225,14 @@ namespace WGetNET
         public async Task<bool> ImportSourceAsync(string jsonString)
         {
 #if NETCOREAPP3_1_OR_GREATER
-            WinGetSource? source = await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString);
+            WinGetSource? source = 
+                await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString)
+                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
 #elif NETSTANDARD2_0
-            WinGetSource? source = JsonHandler.StringToObject<WinGetSource>(jsonString);
+            WinGetSource? source = 
+                JsonHandler.StringToObject<WinGetSource>(jsonString)
+                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
 #endif
-
-            if (source == null)
-            {
-                throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
-            }
 
             return await AddSourceAsync(source);
         }
