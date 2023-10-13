@@ -36,10 +36,11 @@ namespace WGetNET.HelperClasses
             inputArray = CopyTo(inputArray, 1);
 
             //Add the new line to the new enty in the main array.
-            //[^1] : Selects the last entry from the array.
-            //(eg. "^" selects the index from the end
-            //and 1 is the first index starting from the end of the array)
+#if NETCOREAPP3_1_OR_GREATER
             inputArray[^1] = value;
+#elif NETSTANDARD2_0
+            inputArray[inputArray.Length-1] = value;
+#endif
 
             return inputArray;
         }

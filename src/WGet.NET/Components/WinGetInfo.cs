@@ -4,7 +4,9 @@
 //--------------------------------------------------//
 using System;
 using System.ComponentModel;
+#if NETCOREAPP3_1_OR_GREATER
 using System.Threading.Tasks;
+#endif
 using WGetNET.HelperClasses;
 
 namespace WGetNET
@@ -25,16 +27,16 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if winget is installed or <see langword="false"/> if not.
         /// </returns>
-        public bool WinGetInstalled 
-        { 
-            get 
+        public bool WinGetInstalled
+        {
+            get
             {
                 if (CheckWinGetVersion() != string.Empty)
                 {
                     return true;
                 }
                 return false;
-            } 
+            }
         }
 
         /// <summary>
@@ -43,12 +45,12 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> with the version number.
         /// </returns>
-        public string WinGetVersion 
-        { 
-            get 
+        public string WinGetVersion
+        {
+            get
             {
                 return CheckWinGetVersion();
-            } 
+            }
         }
 
         /// <summary>
@@ -105,6 +107,7 @@ namespace WGetNET
             }
         }
 
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous exports the WinGet settings to a json string.
         /// </summary>
@@ -137,6 +140,7 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Exporting sources failed.", e);
             }
         }
+#endif
 
         /// <summary>
         /// Exports the WinGet settings to a json and writes them to the given file.
@@ -178,6 +182,7 @@ namespace WGetNET
             }
         }
 
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous exports the WinGet settings to a json and writes them to the given file.
         /// </summary>
@@ -218,6 +223,7 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Exporting sources failed.", e);
             }
         }
+#endif
 
         private string CheckWinGetVersion()
         {
@@ -242,14 +248,18 @@ namespace WGetNET
             return string.Empty;
         }
 
-        private Version GetVersionObject() 
+        private Version GetVersionObject()
         {
             string versionString = CheckWinGetVersion();
 
             //Remove the first letter from the version string.
-            if (versionString.StartsWith('v'))
+            if (versionString.StartsWith("v"))
             {
-                versionString = versionString[1..];
+#if NETCOREAPP3_1_OR_GREATER
+                versionString = versionString[1..].Trim();
+#elif NETSTANDARD2_0
+                versionString = versionString.Substring(1).Trim();
+#endif
             }
 
             //Remove text from the end of the version string.
@@ -257,7 +267,11 @@ namespace WGetNET
             {
                 if (versionString[i] == '-')
                 {
+#if NETCOREAPP3_1_OR_GREATER
                     versionString = versionString[0..i];
+#elif NETSTANDARD2_0
+                    versionString = versionString.Substring(0, i);
+#endif
                     break;
                 }
             }

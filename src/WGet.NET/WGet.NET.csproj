@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
+	<LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
     <Company>-</Company>
     <Authors>basicx-StrgV</Authors>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -14,10 +16,9 @@
     <Copyright>basicx-StrgV</Copyright>
     <SignAssembly>false</SignAssembly>
     <RootNamespace>WGetNET</RootNamespace>
-    <Version>2.3.0</Version>
-    <AssemblyVersion>2.3.0.0</AssemblyVersion>
-    <FileVersion>2.3.0.0</FileVersion>
-    <Nullable>enable</Nullable>
+    <Version>3.0.0-alpha1</Version>
+	<Deterministic>false</Deterministic>
+    <AssemblyVersion>3.0.0.*</AssemblyVersion>
     <AssemblyName>WGet.NET</AssemblyName>
     <PackageId>WGet.NET</PackageId>
     <Product>WGet.NET</Product>
@@ -38,8 +39,13 @@
     <Folder Include="XmlDocumentation\" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

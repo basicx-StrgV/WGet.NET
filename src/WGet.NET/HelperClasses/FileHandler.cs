@@ -3,7 +3,9 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System.IO;
+#if NETCOREAPP3_1_OR_GREATER
 using System.Threading.Tasks;
+#endif
 
 namespace WGetNET.HelperClasses
 {
@@ -37,6 +39,7 @@ namespace WGetNET.HelperClasses
             }
         }
 
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous writes the export result to a file.
         /// </summary>
@@ -65,5 +68,6 @@ namespace WGetNET.HelperClasses
                 return false;
             }
         }
+#endif
     }
 }

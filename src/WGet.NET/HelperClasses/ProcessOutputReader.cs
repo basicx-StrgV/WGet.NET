@@ -75,45 +75,77 @@ namespace WGetNET.HelperClasses
             for (int i = 0; i < output.Length; i++)
             {
                 // Stop parsing the output when the end of the list is reached.
+#if NETCOREAPP3_1_OR_GREATER
                 if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[^1])
                 {
                     break;
                 }
+#elif NETSTANDARD2_0
+                if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[columnList.Length-1])
+                {
+                    break;
+                }
+#endif
 
-                // [var1..var2] : selects the index range from var1 to var2
-                // (eg. if var1 is 2 and var2 is 5, the selectet index range will be [2, 3, 4])
                 WinGetPackage package = new WinGetPackage()
                 {
+#if NETCOREAPP3_1_OR_GREATER
                     PackageName = output[i][columnList[0]..columnList[1]].Trim(),
                     PackageId = output[i][columnList[1]..columnList[2]].Trim()
+#elif NETSTANDARD2_0
+                    PackageName = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim(),
+                    PackageId = output[i].Substring(columnList[1], (columnList[2] - columnList[1])).Trim()
+#endif
                 };
 
                 //Set version info depending on the column count.
                 if (columnList.Length > 3)
                 {
+#if NETCOREAPP3_1_OR_GREATER
                     package.PackageVersion = output[i][columnList[2]..columnList[3]].Trim();
                     package.PackageAvailableVersion = output[i][columnList[2]..columnList[3]].Trim();
+#elif NETSTANDARD2_0
+                    package.PackageVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
+                    package.PackageAvailableVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
+#endif
                 }
                 else
                 {
+#if NETCOREAPP3_1_OR_GREATER
                     package.PackageVersion = output[i][columnList[2]..].Trim();
                     package.PackageAvailableVersion = output[i][columnList[2]..].Trim();
+#elif NETSTANDARD2_0
+                    package.PackageVersion = output[i].Substring(columnList[2]).Trim();
+                    package.PackageAvailableVersion = output[i].Substring(columnList[2]).Trim();
+#endif
                 }
 
                 //Set information, depending on the action and the column count.
                 if ((action == PackageAction.UpgradeList || action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length >= 5)
                 {
+#if NETCOREAPP3_1_OR_GREATER
                     string availableVersion = output[i][columnList[3]..columnList[4]].Trim();
+#elif NETSTANDARD2_0
+                    string availableVersion = output[i].Substring(columnList[3], (columnList[4] - columnList[3])).Trim();
+#endif
                     if (!string.IsNullOrWhiteSpace(availableVersion) && action != PackageAction.Search)
                     {
                         package.PackageAvailableVersion = availableVersion;
                     }
 
+#if NETCOREAPP3_1_OR_GREATER
                     package.PackageSourceName = output[i][columnList[4]..].Trim();
+#elif NETSTANDARD2_0
+                    package.PackageSourceName = output[i].Substring(columnList[4]).Trim();
+#endif
                 }
                 else if((action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length == 4)
                 {
+#if NETCOREAPP3_1_OR_GREATER
                     package.PackageSourceName = output[i][columnList[3]..].Trim();
+#elif NETSTANDARD2_0
+                    package.PackageSourceName = output[i].Substring(columnList[3]).Trim();
+#endif
                 }
                 else if ((action == PackageAction.SearchBySource || action == PackageAction.InstalledListBySource) && !string.IsNullOrWhiteSpace(sourceName))
                 {
@@ -209,15 +241,16 @@ namespace WGetNET.HelperClasses
 
             for (int i = 0; i < output.Length; i++)
             {
-                // [var1..var2] : selects the index range from var1 to var2.
-                // (eg. if var1 is 2 and var2 is 5, the selectet index range will be [2, 3, 4])
-                // [var1..] : selects the index range from var1 to the end.
-                // (eg. if var1 is 2 and the last index is 5, the selectet index range will be[2, 3, 4, 5])
                 resultList.Add(
                     new WinGetSource()
                     {
+#if NETCOREAPP3_1_OR_GREATER
                         SourceName = output[i][columnList[0]..columnList[1]].Trim(),
                         SourceUrl = output[i][columnList[1]..].Trim(),
+#elif NETSTANDARD2_0
+                        SourceName = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim(),
+                        SourceUrl = output[i].Substring(columnList[1]).Trim(),
+#endif
                         SourceType = string.Empty
                     });
             }

@@ -2,7 +2,11 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+#if NETCOREAPP3_1_OR_GREATER
 using System.Text.Json.Serialization;
+#elif NETSTANDARD2_0
+using Newtonsoft.Json;
+#endif
 
 namespace WGetNET
 {
@@ -14,7 +18,11 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the name of the source.
         /// </summary>
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Name")]
+#elif NETSTANDARD2_0
+        [JsonProperty("Name")]
+#endif
         public string SourceName 
         {
             get
@@ -36,7 +44,11 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the url of the source.
         /// </summary>
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Arg")]
+#elif NETSTANDARD2_0
+        [JsonProperty("Arg")]
+#endif
         public string SourceUrl 
         {
             get
@@ -61,7 +73,11 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Type")]
+#elif NETSTANDARD2_0
+        [JsonProperty("Type")]
+#endif
         public string SourceType 
         {
             get
@@ -86,7 +102,11 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Data")]
+#elif NETSTANDARD2_0
+        [JsonProperty("Data")]
+#endif
         public string SourceData
         {
             get
@@ -111,7 +131,11 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Identifier")]
+#elif NETSTANDARD2_0
+        [JsonProperty("Identifier")]
+#endif
         public string SourceIdentifier
         {
             get
@@ -134,7 +158,11 @@ namespace WGetNET
         /// <summary>
         /// Gets if the object is empty.
         /// </summary>
+#if NETCOREAPP3_1_OR_GREATER
         [JsonIgnore]
+#elif NETSTANDARD2_0
+        [JsonIgnore]
+#endif
         public bool IsEmpty
         {
             get

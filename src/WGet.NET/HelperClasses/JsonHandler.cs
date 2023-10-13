@@ -3,10 +3,14 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
+#if NETCOREAPP3_1_OR_GREATER
 using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+#elif NETSTANDARD2_0
+using Newtonsoft.Json;
+#endif
 
 namespace WGetNET.HelperClasses
 {
@@ -32,7 +36,11 @@ namespace WGetNET.HelperClasses
         {
             try
             {
+#if NETCOREAPP3_1_OR_GREATER
                 return JsonSerializer.Deserialize<T>(jsonString);
+#elif NETSTANDARD2_0
+                return JsonConvert.DeserializeObject<T>(jsonString);
+#endif
             }
             catch (Exception)
             {
@@ -40,6 +48,7 @@ namespace WGetNET.HelperClasses
             }
         }
 
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously deserializes a given json <see cref="System.String"/> to a object of the given class.
         /// </summary>
@@ -67,5 +76,6 @@ namespace WGetNET.HelperClasses
                 return null;
             }
         }
+#endif
     }
 }
