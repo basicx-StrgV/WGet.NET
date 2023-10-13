@@ -41,7 +41,9 @@ https://basicx-strgv.github.io/WGet.NET/
   - [x] Calculate file hash
   - [x] Export Settings
 - Other
-  - [x] Asynchronous Execution (Only supported on .Net Core 3.1 or higher)
+  - [x] Asynchronous Execution\*
+  
+\**Asynchronously exporting sources to a WingetSource object is not available with .NET Standard 2.0*
 
 ## 📦 NuGet Package
 
