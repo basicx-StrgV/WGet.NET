@@ -56,6 +56,10 @@ namespace WGetTestLegacySupport
 
                 List<WinGetSource> sorceJson5 = sourceManager.ExportSourcesToObject();
 
+                Task<List<WinGetSource>> sorceJson6Task = sourceManager.ExportSourcesToObjectAsync();
+                sorceJson6Task.Wait();
+                List<WinGetSource> sorceJson6 = sorceJson6Task.Result;
+
                 string hash = connector.Hash("C:\\Test\\HashTest.txt");
                 Console.WriteLine(hash);
 

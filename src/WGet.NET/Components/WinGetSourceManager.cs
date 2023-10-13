@@ -736,7 +736,7 @@ namespace WGetNET
             return ExportStringToSources(ExportSources(sourceName));
         }
 
-#if NETCOREAPP3_1_OR_GREATER
+
         /// <summary>
         /// Asynchronously exports the winget sources to a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </summary>
@@ -753,7 +753,11 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetSource>> ExportSourcesToObjectAsync()
         {
+#if NETCOREAPP3_1_OR_GREATER
             return await ExportStringToSourcesAsync(await ExportSourcesAsync());
+#elif NETSTANDARD2_0
+            return ExportStringToSources(await ExportSourcesAsync());
+#endif
         }
 
         /// <summary>
@@ -772,9 +776,12 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetSource>> ExportSourcesToObjectAsync(string sourceName)
         {
+#if NETCOREAPP3_1_OR_GREATER
             return await ExportStringToSourcesAsync(await ExportSourcesAsync(sourceName));
-        }
+#elif NETSTANDARD2_0
+            return ExportStringToSources(await ExportSourcesAsync(sourceName));
 #endif
+        }
 
         /// <summary>
         /// Exports the winget sources in json format to a file.
