@@ -6,9 +6,7 @@ using System;
 using System.Text;
 using System.Security;
 using System.ComponentModel;
-#if NETCOREAPP3_1_OR_GREATER
 using System.Threading.Tasks;
-#endif
 using System.Collections.Generic;
 using WGetNET.HelperClasses;
 
@@ -65,7 +63,6 @@ namespace WGetNET
             }
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously gets a list of all sources that are installed in winget.
         /// </summary>
@@ -95,7 +92,6 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Getting installed sources failed.", e);
             }
         }
-#endif
         //---------------------------------------------------------------------------------------------
 
         //---Add---------------------------------------------------------------------------------------
@@ -254,7 +250,6 @@ namespace WGetNET
             return AddSource(source.SourceName, source.SourceUrl, source.SourceType);
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously adds a new source to winget (Needs administrator rights).
         /// </summary>
@@ -412,7 +407,6 @@ namespace WGetNET
 
             return await AddSourceAsync(source.SourceName, source.SourceUrl, source.SourceType);
         }
-#endif
         //---------------------------------------------------------------------------------------------
 
         //---Update------------------------------------------------------------------------------------
@@ -451,7 +445,6 @@ namespace WGetNET
             }
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously updates all sources that are installed in winget.
         /// </summary>
@@ -487,7 +480,6 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Updating sources failed.", e);
             }
         }
-#endif
         //---------------------------------------------------------------------------------------------
 
         //---Export------------------------------------------------------------------------------------
@@ -598,7 +590,6 @@ namespace WGetNET
             return ExportSources(source.SourceName);
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously exports the winget sources as a json string.
         /// </summary>
@@ -708,7 +699,6 @@ namespace WGetNET
 
             return await ExportSourcesAsync(source.SourceName);
         }
-#endif
 
         /// <summary>
         /// Exports the winget sources to a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
@@ -903,7 +893,6 @@ namespace WGetNET
             return ExportSourcesToFile(file, source.SourceName);
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
@@ -1023,7 +1012,6 @@ namespace WGetNET
 
             return await ExportSourcesToFileAsync(file, source.SourceName);
         }
-#endif
 
         /// <summary>
         /// Convert the string output from winget source export to a 
@@ -1191,7 +1179,6 @@ namespace WGetNET
             return AddSource(source);
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously imports sources into winget.
         /// </summary>
@@ -1248,7 +1235,11 @@ namespace WGetNET
         /// </returns>
         public async Task<bool> ImportSourceAsync(string jsonString)
         {
+#if NETCOREAPP3_1_OR_GREATER
             WinGetSource? source = await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString);
+#elif NETSTANDARD2_0
+            WinGetSource? source = JsonHandler.StringToObject<WinGetSource>(jsonString);
+#endif
 
             if (source == null)
             {
@@ -1257,7 +1248,6 @@ namespace WGetNET
 
             return await AddSourceAsync(source);
         }
-#endif
         //---------------------------------------------------------------------------------------------
 
         //---Reset-------------------------------------------------------------------------------------
@@ -1304,7 +1294,6 @@ namespace WGetNET
             }
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously resets all sources that are installed in winget (Needs administrator rights).
         /// </summary>
@@ -1348,7 +1337,6 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Reset sources failed.", e);
             }
         }
-#endif
         //---------------------------------------------------------------------------------------------
 
         //---Remove------------------------------------------------------------------------------------
@@ -1434,7 +1422,6 @@ namespace WGetNET
             return RemoveSources(source.SourceName);
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously removes a source from winget (Needs administrator rights).
         /// </summary>
@@ -1518,7 +1505,6 @@ namespace WGetNET
 
             return await RemoveSourcesAsync(source.SourceName);
         }
-#endif
         //---------------------------------------------------------------------------------------------
     }
 }

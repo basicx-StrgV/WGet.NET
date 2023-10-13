@@ -3,9 +3,7 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System.IO;
-#if NETCOREAPP3_1_OR_GREATER
 using System.Threading.Tasks;
-#endif
 
 namespace WGetNET.HelperClasses
 {
@@ -39,7 +37,6 @@ namespace WGetNET.HelperClasses
             }
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous writes the export result to a file.
         /// </summary>
@@ -59,7 +56,20 @@ namespace WGetNET.HelperClasses
             {
                 string outputString = ProcessOutputReader.ExportOutputToString(result);
 
+#if NETCOREAPP3_1_OR_GREATER
                 await File.WriteAllTextAsync(file, outputString);
+#elif NETSTANDARD2_0
+                // Deleate file to recreate it
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                }
+                // Create file and write the string to the stream
+                using (StreamWriter fileStream = File.CreateText(file))
+                {
+                    await fileStream.WriteAsync(outputString);
+                }
+#endif
 
                 return true;
             }
@@ -68,6 +78,5 @@ namespace WGetNET.HelperClasses
                 return false;
             }
         }
-#endif
     }
 }

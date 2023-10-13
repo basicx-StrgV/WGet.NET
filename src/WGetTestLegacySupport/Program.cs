@@ -51,7 +51,9 @@ namespace WGetTestLegacySupport
 
                 string sorceJson = sourceManager.ExportSources();
                 string sorceJson2 = sourceManager.ExportSources("msstore");
-                bool sorceJson3 = sourceManager.ExportSourcesToFile("C:\\Test\\AllSources.json");
+                Task<bool> sorceJson3Task = sourceManager.ExportSourcesToFileAsync("C:\\Test\\AllSources.json");
+                sorceJson3Task.Wait();
+                bool sorceJson3 = sorceJson3Task.Result;
                 bool sorceJson4 = sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
                 //bool addSuccess = sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
 
@@ -61,7 +63,9 @@ namespace WGetTestLegacySupport
                 Console.WriteLine(hash);
 
                 string settings = connector.ExportSettings();
-                bool settingExportStatus = connector.ExportSettingsToFile("C:\\Test\\Settings.json");
+                Task<bool> settingExportStatusTask = connector.ExportSettingsToFileAsync("C:\\Test\\Settings.json");
+                settingExportStatusTask.Wait();
+                bool settingExportStatus = settingExportStatusTask.Result;
 
                 //bool upAllresult = connector.UpgradeAllPackages();
 

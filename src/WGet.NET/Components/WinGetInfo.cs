@@ -4,9 +4,7 @@
 //--------------------------------------------------//
 using System;
 using System.ComponentModel;
-#if NETCOREAPP3_1_OR_GREATER
 using System.Threading.Tasks;
-#endif
 using WGetNET.HelperClasses;
 
 namespace WGetNET
@@ -107,7 +105,6 @@ namespace WGetNET
             }
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous exports the WinGet settings to a json string.
         /// </summary>
@@ -140,7 +137,6 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Exporting sources failed.", e);
             }
         }
-#endif
 
         /// <summary>
         /// Exports the WinGet settings to a json and writes them to the given file.
@@ -182,7 +178,6 @@ namespace WGetNET
             }
         }
 
-#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronous exports the WinGet settings to a json and writes them to the given file.
         /// </summary>
@@ -223,7 +218,6 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Exporting sources failed.", e);
             }
         }
-#endif
 
         private string CheckWinGetVersion()
         {
