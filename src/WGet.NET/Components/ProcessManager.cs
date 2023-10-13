@@ -34,7 +34,7 @@ namespace WGetNET
                 FileName = processName,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
-                StandardOutputEncoding = Encoding.Default
+                StandardOutputEncoding = Encoding.UTF8
             };
         }
     
