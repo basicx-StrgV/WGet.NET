@@ -3,7 +3,9 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System.IO;
+#if NETCOREAPP3_1_OR_GREATER
 using System.Threading.Tasks;
+#endif
 
 namespace WGetNET.HelperClasses
 {

@@ -6,7 +6,9 @@ using System;
 using System.Text;
 using System.Security;
 using System.ComponentModel;
+#if NETCOREAPP3_1_OR_GREATER
 using System.Threading.Tasks;
+#endif
 using System.Collections.Generic;
 using WGetNET.HelperClasses;
 

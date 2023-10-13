@@ -6,7 +6,6 @@
 using System.Text.Json.Serialization;
 #elif NETSTANDARD2_0
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 #endif
 
 namespace WGetNET

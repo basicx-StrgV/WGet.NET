@@ -5,8 +5,10 @@
 using System;
 using System.IO;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+#if NETCOREAPP3_1_OR_GREATER
+using System.Threading.Tasks;
+#endif
 using WGetNET.HelperClasses;
 
 namespace WGetNET

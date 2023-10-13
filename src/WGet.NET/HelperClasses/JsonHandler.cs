@@ -3,14 +3,14 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
+#if NETCOREAPP3_1_OR_GREATER
 using System.IO;
 using System.Text;
-#if NETCOREAPP3_1_OR_GREATER
 using System.Text.Json;
+using System.Threading.Tasks;
 #elif NETSTANDARD2_0
 using Newtonsoft.Json;
 #endif
-using System.Threading.Tasks;
 
 namespace WGetNET.HelperClasses
 {
