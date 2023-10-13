@@ -105,6 +105,7 @@ namespace WGetNET
             }
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronous exports the WinGet settings to a json string.
         /// </summary>
@@ -137,6 +138,7 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Exporting sources failed.", e);
             }
         }
+#endif
 
         /// <summary>
         /// Exports the WinGet settings to a json and writes them to the given file.

@@ -4,12 +4,11 @@
 //--------------------------------------------------//
 using System;
 using System.IO;
-#if NET6_0_OR_GREATER
 using System.Text;
+#if NET6_0_OR_GREATER
 using System.Text.Json;
 #elif NETSTANDARD2_0
-using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 #endif
 using System.Threading.Tasks;
 
@@ -37,7 +36,11 @@ namespace WGetNET.HelperClasses
         {
             try
             {
+#if NET6_0_OR_GREATER
                 return JsonSerializer.Deserialize<T>(jsonString);
+#elif NETSTANDARD2_0
+                return JsonConvert.DeserializeObject<T>(jsonString);
+#endif
             }
             catch (Exception)
             {
@@ -45,6 +48,7 @@ namespace WGetNET.HelperClasses
             }
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously deserializes a given json <see cref="System.String"/> to a object of the given class.
         /// </summary>
@@ -72,5 +76,6 @@ namespace WGetNET.HelperClasses
                 return null;
             }
         }
+#endif
     }
 }

@@ -115,6 +115,7 @@ namespace WGetNET
             }
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Uses the winget search function to asynchronously search for a package that maches the given name.
         /// </summary>
@@ -191,6 +192,7 @@ namespace WGetNET
                 throw new WinGetActionFailedException("The package search failed.", e);
             }
         }
+#endif
         //---------------------------------------------------------------------------------------------
 
         //---Install-----------------------------------------------------------------------------------
@@ -299,6 +301,7 @@ namespace WGetNET
             }
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously gets a list of all installed packages.
         /// </summary>
@@ -406,6 +409,7 @@ namespace WGetNET
                 throw new WinGetActionFailedException("The search of installed packages failed.", e);
             }
         }
+#endif
 
         /// <summary>
         /// Install a package using winget.
@@ -475,6 +479,7 @@ namespace WGetNET
             return InstallPackage(package.PackageId);
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously install a package using winget.
         /// </summary>
@@ -544,6 +549,7 @@ namespace WGetNET
 
             return await InstallPackageAsync(package.PackageId);
         }
+#endif
         //---------------------------------------------------------------------------------------------
 
         //---Uninstall---------------------------------------------------------------------------------
@@ -615,6 +621,7 @@ namespace WGetNET
             return UninstallPackage(package.PackageId);
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously uninsatll a package using winget.
         /// </summary>
@@ -684,6 +691,7 @@ namespace WGetNET
 
             return await UninstallPackageAsync(package.PackageId);
         }
+#endif
         //---------------------------------------------------------------------------------------------
 
         //---Upgrade-----------------------------------------------------------------------------------
@@ -721,6 +729,7 @@ namespace WGetNET
             }
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously get all upgradeable packages.
         /// </summary>
@@ -755,6 +764,7 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Getting updateable packages failed.", e);
             }
         }
+#endif
 
         /// <summary>
         /// Upgrades a package using winget.
@@ -824,6 +834,7 @@ namespace WGetNET
             return UpgradePackage(package.PackageId);
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously upgrades a package using winget.
         /// </summary>
@@ -893,6 +904,7 @@ namespace WGetNET
 
             return await UpgradePackageAsync(package.PackageId);
         }
+#endif
 
         /// <summary>
         /// Tries to upgrade all packages using winget.
@@ -929,6 +941,7 @@ namespace WGetNET
             }
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously tries to upgrade all packages using winget.
         /// </summary>
@@ -963,6 +976,7 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Upgrading all packages failed.", e);
             }
         }
+#endif
 
         private string AddArgumentByVersion(string argument)
         {
@@ -1017,6 +1031,7 @@ namespace WGetNET
             }
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously exports a list of all installed winget packages as json to the given file.
         /// </summary>
@@ -1056,6 +1071,7 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Exporting packages failed.", e);
             }
         }
+#endif
 
         /// <summary>
         /// Imports packages and trys to installes/upgrade all pakages in the list, if possible.
@@ -1100,6 +1116,7 @@ namespace WGetNET
             }
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously imports packages and trys to installes/upgrade all pakages in the list, if possible.
         /// </summary>
@@ -1143,6 +1160,7 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Importing packages failed.", e);
             }
         }
+#endif
         //---------------------------------------------------------------------------------------------
 
         //---Other-------------------------------------------------------------------------------------
@@ -1224,6 +1242,7 @@ namespace WGetNET
             }
         }
 
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Asynchronously executes the WinGet hash function, to calculate the hash for the given file.
         /// </summary>
@@ -1303,6 +1322,7 @@ namespace WGetNET
                 throw new WinGetActionFailedException("Hashing failed.", e);
             }
         }
+#endif
 
         /// <summary>
         /// Reads the hash from the WinGet hash action result.

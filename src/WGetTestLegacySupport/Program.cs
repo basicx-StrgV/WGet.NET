@@ -60,12 +60,12 @@ namespace WGetTestLegacySupport
                 string hash = connector.Hash("C:\\Test\\HashTest.txt");
                 Console.WriteLine(hash);
 
-                Task<string> settingsTask = connector.ExportSettingsAsync();
-                settingsTask.Wait();
-                string settings = settingsTask.Result;
+                string settings = connector.ExportSettings();
                 bool settingExportStatus = connector.ExportSettingsToFile("C:\\Test\\Settings.json");
 
                 //bool upAllresult = connector.UpgradeAllPackages();
+
+                Console.Read();
             }
             catch (Exception e)
             {
