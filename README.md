@@ -19,6 +19,8 @@ https://basicx-strgv.github.io/WGet.NET/
 
 ## ⚡ Features
 
+**Support:** .Net Core 3.1, .Net Standard 2.0
+
 - WinGet
   - [x] Get a list of installed packages
   - [x] Search installed packages
@@ -39,7 +41,7 @@ https://basicx-strgv.github.io/WGet.NET/
   - [x] Calculate file hash
   - [x] Export Settings
 - Other
-  - [x] Asynchronous Execution
+  - [x] Asynchronous Execution (Only supported on .Net Core 3.1 or higher)
 
 ## 📦 NuGet Package
 
