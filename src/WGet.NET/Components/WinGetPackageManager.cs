@@ -30,13 +30,14 @@ namespace WGetNET
         private const string _exportCmd = "export -o {0}";
         private const string _importCmd = "import -i {0} --ignore-unavailable";
         private const string _hashCmd = "hash {0}";
+        private const string _downloadCmd = "download {0} --download-directory {1}";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
         /// </summary>
         public WinGetPackageManager()
         {
-           //Provide empty constructor
+            // Provide empty constructor for xlm docs
         }
 
         //---Search------------------------------------------------------------------------------------
@@ -412,7 +413,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package for the installation.</param>
         /// <returns>
-        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -451,7 +452,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
         /// <returns>
-        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -481,7 +482,7 @@ namespace WGetNET
         /// <param name="packageId">The id or name of the package for the installation.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -521,7 +522,7 @@ namespace WGetNET
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -552,7 +553,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package for uninstallation.</param>
         /// <returns>
-        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -591,7 +592,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
         /// <returns>
-        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -621,7 +622,7 @@ namespace WGetNET
         /// <param name="packageId">The id or name of the package for uninstallation.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -661,7 +662,7 @@ namespace WGetNET
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -761,7 +762,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package for upgrade.</param>
         /// <returns>
-        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -800,7 +801,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
         /// <returns>
-        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -830,7 +831,7 @@ namespace WGetNET
         /// <param name="packageId">The id or name of the package for upgrade.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -870,7 +871,7 @@ namespace WGetNET
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -967,8 +968,7 @@ namespace WGetNET
         private string AddArgumentByVersion(string argument)
         {
             // Checking version to determine if "--include-unknown" is necessary.
-            Version winGetVersion = WinGetVersionObject;
-            if (winGetVersion.Major >= 1 && winGetVersion.Minor >= 4)
+            if (WinGetVersionIsMatchOrAbove(1, 4))
             {
                 // Winget version supports new argument, add "--include-unknown" to arguments
                 argument += $" {_includeUnknown}";
@@ -983,7 +983,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="file">The file for the export.</param>
         /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the export was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1023,7 +1023,7 @@ namespace WGetNET
         /// <param name="file">The file for the export.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1065,7 +1065,7 @@ namespace WGetNET
         /// </remarks>
         /// <param name="file">The file with the package data for the import.</param>
         /// <returns>
-        /// <see langword="true"/> if the import was compleatly successfull or 
+        /// <see langword="true"/> if the import was compleatly successful or 
         /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
@@ -1109,7 +1109,7 @@ namespace WGetNET
         /// <param name="file">The file with the package data for the import.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the import was compleatly successfull or 
+        /// The result is <see langword="true"/> if the import was compleatly successful or 
         /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
@@ -1145,7 +1145,7 @@ namespace WGetNET
         }
         //---------------------------------------------------------------------------------------------
 
-        //---Other-------------------------------------------------------------------------------------
+        //---Hash--------------------------------------------------------------------------------------
         /// <summary>
         /// Executes the WinGet hash function, to calculate the hash for the given file.
         /// </summary>
@@ -1326,6 +1326,392 @@ namespace WGetNET
             }
 
             return hash;
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Download--------------------------------------------------------------------------------------
+        /// <summary>
+        /// Downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to download.</param>
+        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool Download(string packageId, string directory)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            {
+                throw new WinGetFeatureNotSupportedException("1.6");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_downloadCmd, packageId, directory));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Download failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to download.</param>
+        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool Download(string packageId, DirectoryInfo directory)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            {
+                throw new WinGetFeatureNotSupportedException("1.6");
+            }
+            
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_downloadCmd, packageId, directory.FullName));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Download failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="package">The package to download.</param>
+        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool Download(WinGetPackage package, string directory)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            {
+                throw new WinGetFeatureNotSupportedException("1.6");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_downloadCmd, package.PackageId, directory));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Download failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="package">The package to download.</param>
+        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool Download(WinGetPackage package, DirectoryInfo directory)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            {
+                throw new WinGetFeatureNotSupportedException("1.6");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_downloadCmd, package.PackageId, directory.FullName));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Download failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to download.</param>
+        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> DownloadAsync(string packageId, string directory)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            {
+                throw new WinGetFeatureNotSupportedException("1.6");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_downloadCmd, packageId, directory));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Download failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to download.</param>
+        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> DownloadAsync(string packageId, DirectoryInfo directory)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            {
+                throw new WinGetFeatureNotSupportedException("1.6");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_downloadCmd, packageId, directory.FullName));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Download failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="package">The package to download.</param>
+        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> DownloadAsync(WinGetPackage package, string directory)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            {
+                throw new WinGetFeatureNotSupportedException("1.6");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_downloadCmd, package.PackageId, directory));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Download failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="package">The package to download.</param>
+        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            {
+                throw new WinGetFeatureNotSupportedException("1.6");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_downloadCmd, package.PackageId, directory.FullName));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Download failed.", e);
+            }
         }
         //---------------------------------------------------------------------------------------------
     }

@@ -63,6 +63,8 @@ namespace WGetTest
                 bool settingExportStatus = connector.ExportSettingsToFile("C:\\Test\\Settings.json");
 
                 //bool upAllresult = connector.UpgradeAllPackages();
+
+                bool downloadResult = connector.Download("7zip.7zip", "C:\\Test");
             }
             catch (Exception e)
             {

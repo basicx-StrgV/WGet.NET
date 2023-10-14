@@ -219,6 +219,24 @@ namespace WGetNET
             }
         }
 
+        /// <summary>
+        /// Checks if the installed WinGet version is the same or higher as the given version.
+        /// </summary>
+        /// <param name="major">The major version.</param>
+        /// <param name="minor">The minor version.</param>
+        /// <returns>
+        /// <see langword="true"/> if the installed WinGet version is the same or higher as the given version, or <see langword="false"/> if not.
+        /// </returns>
+        protected bool WinGetVersionIsMatchOrAbove(int major, int minor = 0)
+        {
+            Version winGetVersion = WinGetVersionObject;
+            if (winGetVersion.Major >= major && winGetVersion.Minor >= minor)
+            {
+                return true;
+            }
+            return false;
+        }
+
         private string CheckWinGetVersion()
         {
             try

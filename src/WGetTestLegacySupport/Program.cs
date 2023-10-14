@@ -70,6 +70,8 @@ namespace WGetTestLegacySupport
 
                 //bool upAllresult = connector.UpgradeAllPackages();
 
+                bool downloadResult = connector.Download("7zip.7zip", "C:\\Test");
+
                 Console.Read();
             }
             catch (Exception e)

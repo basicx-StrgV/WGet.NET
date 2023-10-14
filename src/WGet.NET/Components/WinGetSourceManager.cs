@@ -30,7 +30,7 @@ namespace WGetNET
         /// </summary>
         public WinGetSourceManager()
         {
-            //Provide empty constructor
+            // Provide empty constructor for xlm docs
         }
 
         //---List--------------------------------------------------------------------------------------
@@ -417,7 +417,7 @@ namespace WGetNET
         /// This may take a while depending on the sources.
         /// </remarks>
         /// <returns>
-        /// <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the update was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -453,7 +453,7 @@ namespace WGetNET
         /// </remarks>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the update was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -788,7 +788,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="file">The file for the export.</param>
         /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -827,7 +827,7 @@ namespace WGetNET
         /// <param name="file">The file for the export.</param>
         /// <param name="sourceName">The name of the source for the export.</param>
         /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -876,7 +876,7 @@ namespace WGetNET
         /// The <see cref="WGetNET.WinGetSource"/> for the export.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -906,7 +906,7 @@ namespace WGetNET
         /// <param name="file">The file for the export.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -946,7 +946,7 @@ namespace WGetNET
         /// <param name="sourceName">The name of the source for the export.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -996,7 +996,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1122,7 +1122,7 @@ namespace WGetNET
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if on or more sorces failed.
+        /// <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
         /// </returns>
         public bool ImportSource(List<WinGetSource> winGetSources)
         {
@@ -1150,7 +1150,7 @@ namespace WGetNET
         /// A <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
         public bool ImportSource(WinGetSource winGetSource)
         {
@@ -1164,7 +1164,7 @@ namespace WGetNET
         /// A <see cref="System.String"/> containing the json for ONE source.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
         public bool ImportSource(string jsonString)
         {
@@ -1183,7 +1183,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if on or more sorces failed.
+        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
         /// </returns>
         public async Task<bool> ImportSourceAsync(List<WinGetSource> winGetSources)
         {
@@ -1212,7 +1212,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
         public async Task<bool> ImportSourceAsync(WinGetSource winGetSource)
         {
@@ -1227,7 +1227,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
         public async Task<bool> ImportSourceAsync(string jsonString)
         {
@@ -1253,7 +1253,7 @@ namespace WGetNET
         /// This may take a while depending on the sources.
         /// </remarks>
         /// <returns>
-        /// <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the reset was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1297,7 +1297,7 @@ namespace WGetNET
         /// </remarks>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the reset was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1342,7 +1342,7 @@ namespace WGetNET
         /// A <see cref="System.String"/> representing the name of the source.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1390,7 +1390,7 @@ namespace WGetNET
         /// The <see cref="WGetNET.WinGetSource"/> to remove.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1425,7 +1425,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1474,7 +1474,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
