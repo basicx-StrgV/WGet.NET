@@ -19,7 +19,7 @@ https://basicx-strgv.github.io/WGet.NET/
 
 ## ⚡ Features
 
-**Support:** .Net Core 3.1, .Net Standard 2.0
+**Supported Frameworks:** .Net Core 3.1, .Net Standard 2.0
 
 - WinGet
   - [x] Get a list of installed packages
@@ -40,6 +40,7 @@ https://basicx-strgv.github.io/WGet.NET/
   - [x] Reset sources
   - [x] Calculate file hash
   - [x] Export Settings
+  - [x] Download package installer
 - Other
   - [x] Asynchronous Execution
 
