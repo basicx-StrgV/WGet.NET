@@ -242,12 +242,12 @@ namespace WGetNET
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(source.SourceType))
+            if (string.IsNullOrWhiteSpace(source.Type))
             {
-                return AddSource(source.SourceName, source.SourceUrl);
+                return AddSource(source.Name, source.Url);
             }
 
-            return AddSource(source.SourceName, source.SourceUrl, source.SourceType);
+            return AddSource(source.Name, source.Url, source.Type);
         }
 
         /// <summary>
@@ -400,12 +400,12 @@ namespace WGetNET
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(source.SourceType))
+            if (string.IsNullOrWhiteSpace(source.Type))
             {
-                return await AddSourceAsync(source.SourceName, source.SourceUrl);
+                return await AddSourceAsync(source.Name, source.Url);
             }
 
-            return await AddSourceAsync(source.SourceName, source.SourceUrl, source.SourceType);
+            return await AddSourceAsync(source.Name, source.Url, source.Type);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -587,7 +587,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return ExportSources(source.SourceName);
+            return ExportSources(source.Name);
         }
 
         /// <summary>
@@ -697,7 +697,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return await ExportSourcesAsync(source.SourceName);
+            return await ExportSourcesAsync(source.Name);
         }
 
         /// <summary>
@@ -735,7 +735,6 @@ namespace WGetNET
         {
             return ExportStringToSources(ExportSources(sourceName));
         }
-
 
         /// <summary>
         /// Asynchronously exports the winget sources to a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
@@ -897,7 +896,7 @@ namespace WGetNET
                 return false;
             }
 
-            return ExportSourcesToFile(file, source.SourceName);
+            return ExportSourcesToFile(file, source.Name);
         }
 
         /// <summary>
@@ -1017,7 +1016,7 @@ namespace WGetNET
                 return false;
             }
 
-            return await ExportSourcesToFileAsync(file, source.SourceName);
+            return await ExportSourcesToFileAsync(file, source.Name);
         }
 
         /// <summary>
@@ -1414,7 +1413,7 @@ namespace WGetNET
                 return false;
             }
 
-            return RemoveSources(source.SourceName);
+            return RemoveSources(source.Name);
         }
 
         /// <summary>
@@ -1498,7 +1497,7 @@ namespace WGetNET
                 return false;
             }
 
-            return await RemoveSourcesAsync(source.SourceName);
+            return await RemoveSourcesAsync(source.Name);
         }
         //---------------------------------------------------------------------------------------------
     }

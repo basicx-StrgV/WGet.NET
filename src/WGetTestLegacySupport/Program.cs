@@ -31,16 +31,16 @@ namespace WGetTestLegacySupport
 
                 //---Tests-----------------------------------------------------------------------------
                 List<WinGetPackage> test = connector.SearchPackage("git", "winget");
-                Console.WriteLine(test[3].PackageName);
-                Console.WriteLine(test[3].PackageId);
+                Console.WriteLine(test[3].Name);
+                Console.WriteLine(test[3].Id);
 
                 List<WinGetPackage> test2 = connector.GetUpgradeablePackages();
-                Console.WriteLine(test2[0].PackageName);
-                Console.WriteLine(test2[0].PackageId);
+                Console.WriteLine(test2[0].Name);
+                Console.WriteLine(test2[0].Id);
 
                 List<WinGetPackage> test3 = connector.GetInstalledPackages();
-                Console.WriteLine(test3[0].PackageName);
-                Console.WriteLine(test3[0].PackageId);
+                Console.WriteLine(test3[0].Name);
+                Console.WriteLine(test3[0].Id);
 
                 List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
                 bool sourceUpdateStatus = sourceManager.UpdateSources();

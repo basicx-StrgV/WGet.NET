@@ -17,16 +17,16 @@ namespace WGetNET
     public class WinGetPackageManager : WinGetInfo
     {
         private const string _listCmd = "list";
-        private const string _searchInstalledCmd = "list {0}";
-        private const string _searchInstalledBySourceCmd = "list {0} --source {1}";
-        private const string _searchCmd = "search {0} --accept-source-agreements";
-        private const string _searchBySourceCmd = "search {0} --source {1} --accept-source-agreements";
-        private const string _installCmd = "install {0}";
-        private const string _upgradeCmd = "upgrade {0}";
+        private const string _searchInstalledCmd = "list \"{0}\"";
+        private const string _searchInstalledBySourceCmd = "list \"{0}\" --source {1}";
+        private const string _searchCmd = "search \"{0}\" --accept-source-agreements";
+        private const string _searchBySourceCmd = "search \"{0}\" --source {1} --accept-source-agreements";
+        private const string _installCmd = "install \"{0}\"";
+        private const string _upgradeCmd = "upgrade \"{0}\"";
         private const string _upgradeAllCmd = "upgrade --all";
         private const string _getUpgradeableCmd = "upgrade";
         private const string _includeUnknown = "--include-unknown";
-        private const string _uninstallCmd = "uninstall {0}";
+        private const string _uninstallCmd = "uninstall \"{0}\"";
         private const string _exportCmd = "export -o {0}";
         private const string _importCmd = "import -i {0} --ignore-unavailable";
         private const string _hashCmd = "hash {0}";
@@ -473,7 +473,12 @@ namespace WGetNET
                 return false;
             }
 
-            return InstallPackage(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return InstallPackage(package.Name);
+            }
+
+            return InstallPackage(package.Id);
         }
 
         /// <summary>
@@ -543,7 +548,12 @@ namespace WGetNET
                 return false;
             }
 
-            return await InstallPackageAsync(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return await InstallPackageAsync(package.Name);
+            }
+
+            return await InstallPackageAsync(package.Id);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -613,7 +623,12 @@ namespace WGetNET
                 return false;
             }
 
-            return UninstallPackage(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return UninstallPackage(package.Name);
+            }
+
+            return UninstallPackage(package.Id);
         }
 
         /// <summary>
@@ -683,7 +698,12 @@ namespace WGetNET
                 return false;
             }
 
-            return await UninstallPackageAsync(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return await UninstallPackageAsync(package.Name);
+            }
+
+            return await UninstallPackageAsync(package.Id);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -822,7 +842,12 @@ namespace WGetNET
                 return false;
             }
 
-            return UpgradePackage(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return UpgradePackage(package.Name);
+            }
+
+            return UpgradePackage(package.Id);
         }
 
         /// <summary>
@@ -892,7 +917,12 @@ namespace WGetNET
                 return false;
             }
 
-            return await UpgradePackageAsync(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return await UpgradePackageAsync(package.Name);
+            }
+
+            return await UpgradePackageAsync(package.Id);
         }
 
         /// <summary>
@@ -1398,32 +1428,7 @@ namespace WGetNET
         /// </exception>
         public bool Download(string packageId, DirectoryInfo directory)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 6))
-            {
-                throw new WinGetFeatureNotSupportedException("1.6");
-            }
-            
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_downloadCmd, packageId, directory.FullName));
-
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Download failed.", e);
-            }
+            return Download(packageId, directory.FullName);
         }
 
         /// <summary>
@@ -1446,32 +1451,12 @@ namespace WGetNET
         /// </exception>
         public bool Download(WinGetPackage package, string directory)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            if (package.HasShortenedId)
             {
-                throw new WinGetFeatureNotSupportedException("1.6");
+                return Download(package.Name, directory);
             }
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_downloadCmd, package.PackageId, directory));
-
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Download failed.", e);
-            }
+            return Download(package.Id, directory);
         }
 
         /// <summary>
@@ -1494,32 +1479,12 @@ namespace WGetNET
         /// </exception>
         public bool Download(WinGetPackage package, DirectoryInfo directory)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            if (package.HasShortenedId)
             {
-                throw new WinGetFeatureNotSupportedException("1.6");
+                return Download(package.Name, directory.FullName);
             }
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_downloadCmd, package.PackageId, directory.FullName));
-
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Download failed.", e);
-            }
+            return Download(package.Id, directory.FullName);
         }
 
         /// <summary>
@@ -1590,32 +1555,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> DownloadAsync(string packageId, DirectoryInfo directory)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 6))
-            {
-                throw new WinGetFeatureNotSupportedException("1.6");
-            }
-
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_downloadCmd, packageId, directory.FullName));
-
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Download failed.", e);
-            }
+            return await DownloadAsync(packageId, directory.FullName);
         }
 
         /// <summary>
@@ -1638,32 +1578,12 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> DownloadAsync(WinGetPackage package, string directory)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            if (package.HasShortenedId)
             {
-                throw new WinGetFeatureNotSupportedException("1.6");
+                return await DownloadAsync(package.Name, directory);
             }
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_downloadCmd, package.PackageId, directory));
-
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Download failed.", e);
-            }
+            return await DownloadAsync(package.Id, directory);
         }
 
         /// <summary>
@@ -1686,32 +1606,12 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            if (package.HasShortenedId)
             {
-                throw new WinGetFeatureNotSupportedException("1.6");
+                return await DownloadAsync(package.Name, directory.FullName);
             }
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_downloadCmd, package.PackageId, directory.FullName));
-
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Download failed.", e);
-            }
+            return await DownloadAsync(package.Id, directory.FullName);
         }
         //---------------------------------------------------------------------------------------------
     }

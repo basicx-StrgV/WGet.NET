@@ -2090,6 +2090,14 @@
             A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CheckShortenedId(System.String)">
+            <summary>
+            Checks if the package id is possibly shortened.
+            </summary>
+            <returns>
+            <see langword="true"/> if the package id is shortened or <see langword="false"/> if not.
+            </returns>
+        </member>
         <member name="P:WGetNET.ProcessResult.ExitCode">
             <summary>
             Gets or sets the exit code of the process.
@@ -2115,7 +2123,17 @@
             Gets or sets the name of the package.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetPackage.Name">
+            <summary>
+            Gets or sets the name of the package.
+            </summary>
+        </member>
         <member name="P:WGetNET.WinGetPackage.PackageId">
+            <summary>
+            Gets or sets the id of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.Id">
             <summary>
             Gets or sets the id of the package.
             </summary>
@@ -2125,7 +2143,17 @@
             Gets or sets the version of the package.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetPackage.Version">
+            <summary>
+            Gets or sets the version of the package.
+            </summary>
+        </member>
         <member name="P:WGetNET.WinGetPackage.PackageAvailableVersion">
+            <summary>
+            Gets or sets the newest available version of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.AvailableVersion">
             <summary>
             Gets or sets the newest available version of the package.
             </summary>
@@ -2135,10 +2163,26 @@
             Gets or sets the source name for the package.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetPackage.SourceName">
+            <summary>
+            Gets or sets the source name for the package.
+            </summary>
+        </member>
         <member name="P:WGetNET.WinGetPackage.IsEmpty">
             <summary>
             Gets if the object is empty.
             </summary>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
+            </summary>
+            <param name="hasShortenedId">Sets if the id is shortened or not</param>
         </member>
         <member name="T:WGetNET.WinGetSource">
             <summary>
@@ -2150,12 +2194,30 @@
             Gets or sets the name of the source.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetSource.Name">
+            <summary>
+            Gets or sets the name of the source.
+            </summary>
+        </member>
         <member name="P:WGetNET.WinGetSource.SourceUrl">
             <summary>
             Gets or sets the url of the source.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetSource.Url">
+            <summary>
+            Gets or sets the url of the source.
+            </summary>
+        </member>
         <member name="P:WGetNET.WinGetSource.SourceType">
+            <summary>
+            Gets or sets the type of the source.
+            </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Type">
             <summary>
             Gets or sets the type of the source.
             </summary>
@@ -2171,7 +2233,23 @@
             Will only be set on source export.
             </remarks>
         </member>
+        <member name="P:WGetNET.WinGetSource.Data">
+            <summary>
+            Gets or sets the data of the source.
+            </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
+        </member>
         <member name="P:WGetNET.WinGetSource.SourceIdentifier">
+            <summary>
+            Gets or sets the identifier of the source.
+            </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Identifier">
             <summary>
             Gets or sets the identifier of the source.
             </summary>
@@ -2182,6 +2260,11 @@
         <member name="P:WGetNET.WinGetSource.IsEmpty">
             <summary>
             Gets if the object is empty.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetSource.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetSource"/> class.
             </summary>
         </member>
     </members>
