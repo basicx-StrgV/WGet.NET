@@ -31,6 +31,8 @@ namespace WGetNET
         private const string _importCmd = "import -i {0} --ignore-unavailable";
         private const string _hashCmd = "hash {0}";
         private const string _downloadCmd = "download {0} --download-directory {1}";
+        private const string _pinAddCmd = "pin add \"{0}\"";
+        private const string _pinRemoveCmd = "pin remove \"{0}\"";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
@@ -1359,7 +1361,7 @@ namespace WGetNET
         }
         //---------------------------------------------------------------------------------------------
 
-        //---Download--------------------------------------------------------------------------------------
+        //---Download----------------------------------------------------------------------------------
         /// <summary>
         /// Downloads the installer of a package using winget.
         /// </summary>
@@ -1612,6 +1614,102 @@ namespace WGetNET
             }
 
             return await DownloadAsync(package.Id, directory.FullName);
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Pin---------------------------------------------------------------------------------------
+        /// <summary>
+        /// Adds a pinned package to winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinAdd(string packageId)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_pinAddCmd, packageId));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Pinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Removes a pinned package from winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinRemove(string packageId)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_pinRemoveCmd, packageId));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Unpinning the package failed.", e);
+            }
         }
         //---------------------------------------------------------------------------------------------
     }
