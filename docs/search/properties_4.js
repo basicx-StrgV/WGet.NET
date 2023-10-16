@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['wingetinstalled_0',['WinGetInstalled',['../d0/d89/a00071.html#a95f98c1d2b3126c9fe6f25bf77dd4e6e',1,'WGetNET::WinGetInfo']]],
-  ['wingetversion_1',['WinGetVersion',['../d0/d89/a00071.html#a902e16de1231c374f3f0d7760ed046bd',1,'WGetNET::WinGetInfo']]],
-  ['wingetversionobject_2',['WinGetVersionObject',['../d0/d89/a00071.html#a9a829ec037f7f22b42dd2e96815fba3e',1,'WGetNET::WinGetInfo']]]
+  ['message_0',['Message',['../d9/dec/a00090.html#ab391872ae374f2b4e03d4095496a4ef8',1,'WGetNET.WinGetActionFailedException.Message'],['../dc/d54/a00094.html#ace1d017b0e26fcdf9129537d5642f2b8',1,'WGetNET.WinGetFeatureNotSupportedException.Message'],['../d1/d44/a00098.html#a452794df8251510bd13a7366e8aae737',1,'WGetNET.WinGetNotInstalledException.Message']]]
 ];

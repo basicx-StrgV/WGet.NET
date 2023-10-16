@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['removesources_0',['RemoveSources',['../d1/d51/a00079.html#a5ec3a8384a0dc7156933063238018c8b',1,'WGetNET.WinGetSourceManager.RemoveSources(string name)'],['../d1/d51/a00079.html#a25656610b4a23db99f57862a9eea990b',1,'WGetNET.WinGetSourceManager.RemoveSources(WinGetSource source)']]],
-  ['removesourcesasync_1',['RemoveSourcesAsync',['../d1/d51/a00079.html#afd8c160ebf87ce2777d40c65893d6677',1,'WGetNET.WinGetSourceManager.RemoveSourcesAsync(string name)'],['../d1/d51/a00079.html#a3c182a420a87d518ed76d4f716fb423c',1,'WGetNET.WinGetSourceManager.RemoveSourcesAsync(WinGetSource source)']]],
-  ['resetsources_2',['ResetSources',['../d1/d51/a00079.html#aea125a25b6ab9f169e6d9c605be31f82',1,'WGetNET::WinGetSourceManager']]],
-  ['resetsourcesasync_3',['ResetSourcesAsync',['../d1/d51/a00079.html#a860a205fb8c44337d7068931e01255b0',1,'WGetNET::WinGetSourceManager']]]
+  ['message_0',['Message',['../d9/dec/a00090.html#ab391872ae374f2b4e03d4095496a4ef8',1,'WGetNET.WinGetActionFailedException.Message'],['../dc/d54/a00094.html#ace1d017b0e26fcdf9129537d5642f2b8',1,'WGetNET.WinGetFeatureNotSupportedException.Message'],['../d1/d44/a00098.html#a452794df8251510bd13a7366e8aae737',1,'WGetNET.WinGetNotInstalledException.Message']]]
 ];
