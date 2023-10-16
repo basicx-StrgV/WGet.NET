@@ -187,6 +187,133 @@ namespace WGetNET.HelperClasses
 
         /// <summary>
         /// Converts a <see cref="System.Collections.Generic.List{T}"/> 
+        /// of output lines from a winget process to a list of <see cref="WGetNET.WinGetPinnedPackage"/>'s.
+        /// </summary>
+        /// <param name="output">
+        /// A <see cref="System.Collections.Generic.List{T}"/> of output lines from a winget process.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPinnedPackage"/>'s.
+        /// </returns>
+        public static List<WinGetPinnedPackage> ToPinnedPackageList(string[] output)
+        {
+            //Get top line index.
+            //The array should always contain this line.
+            //If it dose not contain this line the resulting out of range exception,
+            //that will be thrown later, will be catched in the calling method.
+            int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
+
+            int[] columnList = GetColumnList(output[labelLine]);
+
+            //Remove unneeded output Lines
+            output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
+
+            return CreatePinnedPackageListFromOutput(output, columnList);
+        }
+
+        /// <summary>
+        /// Creates a pinned package list from output.
+        /// </summary>
+        /// <param name="output">
+        /// The <see langword="array"/> containing the output.
+        /// </param>
+        /// <param name="columnList">
+        /// A <see cref="System.Int32"/> <see langword="array"/> containing the column start indexes.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPinnedPackage"/>'s.
+        /// </returns>
+        private static List<WinGetPinnedPackage> CreatePinnedPackageListFromOutput(string[] output, int[] columnList)
+        {
+            List<WinGetPinnedPackage> resultList = new();
+
+            if (columnList.Length < 3)
+            {
+                return resultList;
+            }
+
+            for (int i = 0; i < output.Length; i++)
+            {
+                // Stop parsing the output when the end of the list is reached.
+#if NETCOREAPP3_1_OR_GREATER
+                if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[^1])
+                {
+                    break;
+                }
+#elif NETSTANDARD2_0
+                if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[columnList.Length-1])
+                {
+                    break;
+                }
+#endif
+
+#if NETCOREAPP3_1_OR_GREATER
+                string packageName = output[i][columnList[0]..columnList[1]].Trim();
+                string packageId = output[i][columnList[1]..columnList[2]].Trim();
+                string packageVersion = output[i][columnList[2]..columnList[3]].Trim();
+                string packageSource = output[i][columnList[3]..columnList[4]].Trim();
+                string pinType = string.Empty;
+                string pinnedVersion = string.Empty;
+                if (columnList.Length > 5)
+                {
+                    pinType = output[i][columnList[4]..columnList[5]].Trim();
+                    pinnedVersion = output[i][columnList[5]..].Trim();
+                }
+                else
+                {
+                    pinType = output[i][columnList[4]..].Trim();
+                }
+#elif NETSTANDARD2_0
+                string packageName = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim();
+                string packageId = output[i].Substring(columnList[1], (columnList[2] - columnList[1])).Trim();
+                string packageVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
+                string packageSource = output[i].Substring(columnList[3], (columnList[4] - columnList[3])).Trim();
+                string pinType = string.Empty;
+                string pinnedVersion = string.Empty;
+                if (columnList.Length > 5)
+                {
+                    pinType = output[i].Substring(columnList[4], (columnList[5] - columnList[4])).Trim();
+                    pinnedVersion = output[i].Substring(columnList[5]).Trim();
+                }
+                else
+                {
+                    pinType = output[i].Substring(columnList[4]).Trim();
+                }
+#endif
+
+                // Check if the id is shortened
+                bool isShortenedId = CheckShortenedId(packageId);
+                if (isShortenedId)
+                {
+                    // Remove the char at the end of the shortened id.
+                    packageId = packageId.Remove(packageId.Length - 1);
+                }
+
+                WinGetPinnedPackage package = new(pinType, pinnedVersion, isShortenedId)
+                {
+                    Name = packageName,
+                    Id = packageId,
+                    Version = packageVersion,
+                    AvailableVersion = packageVersion,
+                    SourceName = packageSource,
+                };
+
+
+                resultList.Add(package);
+            }
+
+            // Check for secondery list in output.
+            if (ArrayManager.GetEntryContains(output, "------") != -1)
+            {
+                List<WinGetPinnedPackage> seconderyList = ToPinnedPackageList(output);
+                resultList.AddRange(seconderyList);
+            }
+
+            return resultList;
+        }
+
+        /// <summary>
+        /// Converts a <see cref="System.Collections.Generic.List{T}"/> 
         /// of output lines from a winget process to a list of <see cref="WGetNET.WinGetSource"/>'s.
         /// </summary>
         /// <param name="output">

@@ -31,6 +31,7 @@ namespace WGetNET
         private const string _importCmd = "import -i {0} --ignore-unavailable";
         private const string _hashCmd = "hash {0}";
         private const string _downloadCmd = "download {0} --download-directory {1}";
+        private const string _pinListCmd = "pin list";
         private const string _pinAddCmd = "pin add \"{0}\"";
         private const string _pinAddByVersionCmd = "pin add \"{0}\" --version \"{1}\"";
         private const string _pinRemoveCmd = "pin remove \"{0}\"";
@@ -1609,6 +1610,88 @@ namespace WGetNET
             }
 
             return await DownloadAsync(package.Id, directory.FullName);
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Pin List----------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a list of all pinned packages.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public List<WinGetPinnedPackage> GetPinnedPackages()
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_pinListCmd);
+
+                return ProcessOutputReader.ToPinnedPackageList(result.Output);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Listing all pinned packages failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously gets a list of all pinned packages.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<List<WinGetPinnedPackage>> GetPinnedPackagesAsync()
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(_pinListCmd);
+
+                return ProcessOutputReader.ToPinnedPackageList(result.Output);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Listing all pinned packages failed.", e);
+            }
         }
         //---------------------------------------------------------------------------------------------
 

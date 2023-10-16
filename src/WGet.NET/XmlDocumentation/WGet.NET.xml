@@ -964,6 +964,24 @@
             This feature is not supported in the installed WinGet version.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetPinnedPackages">
+            <summary>
+            Gets a list of all pinned packages.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAdd(System.String,System.Boolean)">
             <summary>
             Adds a pinned package to winget.
@@ -1463,6 +1481,27 @@
         <member name="M:WGetNET.WinGetPackageManager.ResetPins">
             <summary>
             Resets all pinned packages.
+            </summary>
+            <remarks>
+            This will remove all pins and it is not possible to restore them.
+            </remarks>
+            <returns>
+            <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.ResetPinsAsync">
+            <summary>
+            Asynchronously resets all pinned packages.
             </summary>
             <remarks>
             This will remove all pins and it is not possible to restore them.
@@ -2531,6 +2570,32 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToPinnedPackageList(System.String[])">
+            <summary>
+            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
+            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
+            </summary>
+            <param name="output">
+            A <see cref="T:System.Collections.Generic.List`1"/> of output lines from a winget process.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePinnedPackageListFromOutput(System.String[],System.Int32[])">
+            <summary>
+            Creates a pinned package list from output.
+            </summary>
+            <param name="output">
+            The <see langword="array"/> containing the output.
+            </param>
+            <param name="columnList">
+            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
+            </returns>
+        </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToSourceList(System.String[])">
             <summary>
             Converts a <see cref="T:System.Collections.Generic.List`1"/> 
@@ -2675,6 +2740,32 @@
         <member name="M:WGetNET.WinGetPackage.#ctor(System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
+            </summary>
+            <param name="hasShortenedId">Sets if the id is shortened or not</param>
+        </member>
+        <member name="T:WGetNET.WinGetPinnedPackage">
+            <summary>
+            Represents a winget pinned package
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.PinTypeString">
+            <summary>
+            Gets the pin type of the package as a <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersion">
+            <summary>
+            Gets the pinned version as a <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.PinType">
+            <summary>
+            Gets the pin type of the package.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetPinnedPackage"/> class.
             </summary>
             <param name="hasShortenedId">Sets if the id is shortened or not</param>
         </member>

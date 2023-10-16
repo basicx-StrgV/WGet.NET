@@ -67,8 +67,10 @@ namespace WGetTest
                 bool downloadResult = connector.Download("7zip.7zip", "C:\\Test");
 
                 Console.WriteLine(connector.PinAdd("7zip.7zip", true));
+                List<WinGetPinnedPackage> pinnedList1 = connector.GetPinnedPackages();
                 Console.WriteLine(connector.PinRemove("7zip.7zip"));
                 Console.WriteLine(connector.PinAdd("7zip.7zip", "23.*"));
+                List<WinGetPinnedPackage> pinnedList2 = connector.GetPinnedPackages();
                 Console.WriteLine(connector.PinRemove("7zip.7zip"));
 
                 Console.WriteLine(connector.PinAddInstalled("7zip.7zip", true));
