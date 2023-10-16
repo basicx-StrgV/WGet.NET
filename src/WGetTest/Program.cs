@@ -68,6 +68,9 @@ namespace WGetTest
 
                 connector.PinAdd("7zip.7zip", true);
                 connector.PinRemove("7zip.7zip");
+
+                connector.PinAddInstalled("7zip.7zip", true);
+                connector.PinRemoveInstalled("7zip.7zip");
             }
             catch (Exception e)
             {
