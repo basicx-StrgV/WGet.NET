@@ -75,6 +75,8 @@ namespace WGetTest
                 Console.WriteLine(connector.PinRemoveInstalled("7zip.7zip"));
                 Console.WriteLine(connector.PinAddInstalled("7zip.7zip", "23.*"));
                 Console.WriteLine(connector.PinRemoveInstalled("7zip.7zip"));
+
+                Console.WriteLine(connector.ResetPins());
             }
             catch (Exception e)
             {

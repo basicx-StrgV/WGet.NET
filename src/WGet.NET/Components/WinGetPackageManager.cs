@@ -37,6 +37,7 @@ namespace WGetNET
         private const string _pinAddInstalledCmd = "pin add \"{0}\" --installed";
         private const string _pinAddInstalledByVersionCmd = "pin add \"{0}\" --installed --version \"{1}\"";
         private const string _pinRemoveInstalledCmd = "pin remove \"{0}\" --installed";
+        private const string _pinResetCmd = "pin reset --force";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
@@ -2508,6 +2509,94 @@ namespace WGetNET
             }
 
             return await PinRemoveInstalledAsync(package.Id);
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Pin Reset---------------------------------------------------------------------------------
+        /// <summary>
+        /// Resets all pinned packages.
+        /// </summary>
+        /// <remarks>
+        /// This will remove all pins and it is not possible to restore them.
+        /// </remarks>
+        /// <returns>
+        /// <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool ResetPins()
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_pinResetCmd);
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Reseting of pins failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously resets all pinned packages.
+        /// </summary>
+        /// <remarks>
+        /// This will remove all pins and it is not possible to restore them.
+        /// </remarks>
+        /// <returns>
+        /// <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> ResetPinsAsync()
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(_pinResetCmd);
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Reseting of pins failed.", e);
+            }
         }
         //---------------------------------------------------------------------------------------------
     }
