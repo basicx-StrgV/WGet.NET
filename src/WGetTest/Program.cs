@@ -66,7 +66,7 @@ namespace WGetTest
 
                 bool downloadResult = connector.Download("7zip.7zip", "C:\\Test");
 
-                connector.PinAdd("7zip.7zip");
+                connector.PinAdd("7zip.7zip", true);
                 connector.PinRemove("7zip.7zip");
             }
             catch (Exception e)

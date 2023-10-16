@@ -1622,6 +1622,7 @@ namespace WGetNET
         /// Adds a pinned package to winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -1635,7 +1636,7 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        public bool PinAdd(string packageId)
+        public bool PinAdd(string packageId, bool blocking = false)
         {
             if (!WinGetVersionIsMatchOrAbove(1, 5))
             {
@@ -1644,9 +1645,16 @@ namespace WGetNET
 
             try
             {
+                string cmd = string.Format(_pinAddCmd, packageId);
+
+                if (blocking)
+                {
+                    cmd += " --blocking";
+                }
+
+
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_pinAddCmd, packageId));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 if (!result.Success)
                 {
@@ -1663,6 +1671,117 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("Pinning the package failed.", e);
             }
+        }
+
+        /// <summary>
+        /// Adds a pinned package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinAdd(WinGetPackage package, bool blocking = false)
+        {
+            if (package.HasShortenedId)
+            {
+                return PinAdd(package.Name, blocking);
+            }
+
+            return PinAdd(package.Id, blocking);
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned package to winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinAddAsync(string packageId, bool blocking = false)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                string cmd = string.Format(_pinAddCmd, packageId);
+
+                if (blocking)
+                {
+                    cmd += " --blocking";
+                }
+
+
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Pinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false)
+        {
+            if (package.HasShortenedId)
+            {
+                return await PinAddAsync(package.Name, blocking);
+            }
+
+            return await PinAddAsync(package.Id, blocking);
         }
 
         /// <summary>
@@ -1710,6 +1829,107 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("Unpinning the package failed.", e);
             }
+        }
+
+        /// <summary>
+        /// Removes a pinned package from winget.
+        /// </summary>
+        /// <param name="package">The package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinRemove(WinGetPackage package)
+        {
+            if (package.HasShortenedId)
+            {
+                return PinRemove(package.Name);
+            }
+
+            return PinRemove(package.Id);
+        }
+
+        /// <summary>
+        /// Asynchronously removes a pinned package from winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinRemoveAsync(string packageId)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_pinRemoveCmd, packageId));
+
+                if (!result.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Unpinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously removes a pinned package from winget.
+        /// </summary>
+        /// <param name="package">The package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinRemoveAsync(WinGetPackage package)
+        {
+            if (package.HasShortenedId)
+            {
+                return await PinRemoveAsync(package.Name);
+            }
+
+            return await PinRemoveAsync(package.Id);
         }
         //---------------------------------------------------------------------------------------------
     }
