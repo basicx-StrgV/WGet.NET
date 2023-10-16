@@ -72,6 +72,17 @@ namespace WGetTestLegacySupport
 
                 bool downloadResult = connector.Download("7zip.7zip", "C:\\Test");
 
+                Console.WriteLine(connector.PinAdd("7zip.7zip", true));
+                Console.WriteLine(connector.PinRemove("7zip.7zip"));
+                Console.WriteLine(connector.PinAdd("7zip.7zip", "23.*"));
+                Console.WriteLine(connector.PinRemove("7zip.7zip"));
+
+                Console.WriteLine(connector.PinAddInstalled("7zip.7zip", true));
+                Console.WriteLine(connector.PinRemoveInstalled("7zip.7zip"));
+                Console.WriteLine(connector.PinAddInstalled("7zip.7zip", "23.*"));
+                Console.WriteLine(connector.PinRemoveInstalled("7zip.7zip"));
+
+                Console.WriteLine("\nEnd of Test! Press any button to exit.");
                 Console.Read();
             }
             catch (Exception e)

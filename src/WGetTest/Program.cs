@@ -66,11 +66,15 @@ namespace WGetTest
 
                 bool downloadResult = connector.Download("7zip.7zip", "C:\\Test");
 
-                connector.PinAdd("7zip.7zip", true);
-                connector.PinRemove("7zip.7zip");
+                Console.WriteLine(connector.PinAdd("7zip.7zip", true));
+                Console.WriteLine(connector.PinRemove("7zip.7zip"));
+                Console.WriteLine(connector.PinAdd("7zip.7zip", "23.*"));
+                Console.WriteLine(connector.PinRemove("7zip.7zip"));
 
-                connector.PinAddInstalled("7zip.7zip", true);
-                connector.PinRemoveInstalled("7zip.7zip");
+                Console.WriteLine(connector.PinAddInstalled("7zip.7zip", true));
+                Console.WriteLine(connector.PinRemoveInstalled("7zip.7zip"));
+                Console.WriteLine(connector.PinAddInstalled("7zip.7zip", "23.*"));
+                Console.WriteLine(connector.PinRemoveInstalled("7zip.7zip"));
             }
             catch (Exception e)
             {

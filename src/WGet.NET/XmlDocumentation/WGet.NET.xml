@@ -984,12 +984,58 @@
             This feature is not supported in the installed WinGet version.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAdd(System.String,System.String)">
+            <summary>
+            Adds a pinned package to winget.
+            </summary>
+            <param name="packageId">The id or name of the package to pin.</param>
+            <param name="version">
+            <see cref="T:System.String"/> representing the version to pin. 
+            Please refer to the WinGet documentation for more info about version pinning.
+            </param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
             Adds a pinned package to winget.
             </summary>
             <param name="package">The package to pin.</param>
             <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.WinGetPackage,System.String)">
+            <summary>
+            Adds a pinned package to winget.
+            </summary>
+            <param name="package">The package to pin.</param>
+            <param name="version">
+            <see cref="T:System.String"/> representing the version to pin. 
+            Please refer to the WinGet documentation for more info about version pinning.
+            </param>
             <returns>
             <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
@@ -1024,12 +1070,230 @@
             This feature is not supported in the installed WinGet version.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(System.String,System.String)">
+            <summary>
+            Asynchronously adds a pinned package to winget.
+            </summary>
+            <param name="packageId">The id or name of the package to pin.</param>
+            <param name="version">
+            <see cref="T:System.String"/> representing the version to pin. 
+            Please refer to the WinGet documentation for more info about version pinning.
+            </param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
             Asynchronously adds a pinned package to winget.
             </summary>
             <param name="package">The package to pin.</param>
             <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.WinGetPackage,System.String)">
+            <summary>
+            Asynchronously adds a pinned package to winget.
+            </summary>
+            <param name="package">The package to pin.</param>
+            <param name="version">
+            <see cref="T:System.String"/> representing the version to pin. 
+            Please refer to the WinGet documentation for more info about version pinning.
+            </param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(System.String,System.Boolean)">
+            <summary>
+            Adds a pinned installed package to winget.
+            </summary>
+            <param name="packageId">The id or name of the package to pin.</param>
+            <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(System.String,System.String)">
+            <summary>
+            Adds a pinned installed package to winget.
+            </summary>
+            <param name="packageId">The id or name of the package to pin.</param>
+            <param name="version">
+            <see cref="T:System.String"/> representing the version to pin. 
+            Please refer to the WinGet documentation for more info about version pinning.
+            </param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.Boolean)">
+            <summary>
+            Adds a pinned installed package to winget.
+            </summary>
+            <param name="package">The package to pin.</param>
+            <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.String)">
+            <summary>
+            Adds a pinned installed package to winget.
+            </summary>
+            <param name="package">The package to pin.</param>
+            <param name="version">
+            <see cref="T:System.String"/> representing the version to pin. 
+            Please refer to the WinGet documentation for more info about version pinning.
+            </param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(System.String,System.Boolean)">
+            <summary>
+            Asynchronously adds a pinned installed package to winget.
+            </summary>
+            <param name="packageId">The id or name of the package to pin.</param>
+            <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(System.String,System.String)">
+            <summary>
+            Asynchronously adds a pinned installed package to winget.
+            </summary>
+            <param name="packageId">The id or name of the package to pin.</param>
+            <param name="version">
+            <see cref="T:System.String"/> representing the version to pin. 
+            Please refer to the WinGet documentation for more info about version pinning.
+            </param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.Boolean)">
+            <summary>
+            Asynchronously adds a pinned installed package to winget.
+            </summary>
+            <param name="package">The package to pin.</param>
+            <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+            <returns>
+            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.String)">
+            <summary>
+            Asynchronously adds a pinned installed package to winget.
+            </summary>
+            <param name="package">The package to pin.</param>
+            <param name="version">
+            <see cref="T:System.String"/> representing the version to pin. 
+            Please refer to the WinGet documentation for more info about version pinning.
+            </param>
             <returns>
             <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
@@ -1108,86 +1372,6 @@
             <param name="package">The package to unpin.</param>
             <returns>
             <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
-            </returns>
-            <exception cref="T:WGetNET.WinGetNotInstalledException">
-            WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
-            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
-            This feature is not supported in the installed WinGet version.
-            </exception>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(System.String,System.Boolean)">
-            <summary>
-            Adds a pinned installed package to winget.
-            </summary>
-            <param name="packageId">The id or name of the package to pin.</param>
-            <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
-            <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
-            </returns>
-            <exception cref="T:WGetNET.WinGetNotInstalledException">
-            WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
-            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
-            This feature is not supported in the installed WinGet version.
-            </exception>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.Boolean)">
-            <summary>
-            Adds a pinned installed package to winget.
-            </summary>
-            <param name="package">The package to pin.</param>
-            <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
-            <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
-            </returns>
-            <exception cref="T:WGetNET.WinGetNotInstalledException">
-            WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
-            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
-            This feature is not supported in the installed WinGet version.
-            </exception>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(System.String,System.Boolean)">
-            <summary>
-            Asynchronously adds a pinned installed package to winget.
-            </summary>
-            <param name="packageId">The id or name of the package to pin.</param>
-            <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
-            <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
-            </returns>
-            <exception cref="T:WGetNET.WinGetNotInstalledException">
-            WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
-            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
-            This feature is not supported in the installed WinGet version.
-            </exception>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.Boolean)">
-            <summary>
-            Asynchronously adds a pinned installed package to winget.
-            </summary>
-            <param name="package">The package to pin.</param>
-            <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
-            <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1799,6 +1983,19 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </returns>
         </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportStringToSourcesAsync(System.String)">
+            <summary>
+            Asynchronously convert the string output from winget source export to a 
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </summary>
+            <param name="exportString">
+            A <see cref="T:System.String"/> containing the winget source export content.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSource(System.Collections.Generic.List{WGetNET.WinGetSource})">
             <summary>
             Imports sources into winget.
@@ -1983,22 +2180,6 @@
             The <see cref="T:WGetNET.WinGetSource"/> to remove.
             </param>
             <returns>
-            A <see cref="T:Syst:WGetNET.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
-            <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
-            </exception>
-        </member>
-        <member name="M:WGetNET.WinGetSourceManager.RemoveSourcesAsync(WGetNET.WinGetSource)">
-            <summary>
-            Asynchronously removes a source from winget (Needs administrator rights).
-            </summary>
-            <param name="source">
-            The <see cref="T:WGetNET.WinGetSource"/> to remove.
-            </param>
-            <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
             </returns>
@@ -2061,7 +2242,20 @@
         </member>
         <member name="P:WGetNET.WinGetFeatureNotSupportedException.Message">
             <summary>
-            Gets a message that describes the cm>
+            Gets a message that describes the current exception.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetFeatureNotSupportedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetFeatureNotSupportedException"/> class.
+            </summary>
+            <param name="minVersion">Min WinGet version needed for the feature</param>
+        </member>
+        <member name="M:WGetNET.WinGetFeatureNotSupportedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetFeatureNotSupportedException"/> class.
+            </summary>
+            <param name="minVersion">Min WinGet version needed for the feature</param>
             <param name="innerException">The inner exception</param>
         </member>
         <member name="M:WGetNET.WinGetFeatureNotSupportedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
@@ -2262,6 +2456,21 @@
             A nullable object of the given class type. It will be <see langword="null"/> if the action failed.
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+            </returns>
+        </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
@@ -2460,6 +2669,11 @@
             Gets if the object is empty.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetPackage.HasShortenedId">
+            <summary>
+            Gets if id of the package is shortened.
+            </summary>
+        </member>
         <member name="M:WGetNET.WinGetPackage.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
@@ -2470,52 +2684,6 @@
             Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
             </summary>
             <param name="hasShortenedId">Sets if the id is shortened or not</param>
-        </member>
-        <member name="T:WGetNET.WinGetSource">
-            <summary>
-            Represents a winget source
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.SourceName">
-            <summary>
-            Gets or sets the name of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Name">
-            <summary>
-            Gets or sets the name of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.SourceUrl">
-            <summary>
-            Gets or sets the url of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Url">
-            <summary>
-            Gets or sets the url of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.SourceType">
-            <summary>
-            Gets or sets the type of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Type">
-            <summary>
-            Gets or sets the type of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.SourceData">
-            <summary>
-            Gets or sets the data of the source.
-    Sets if the id is shortened or not</param>
         </member>
         <member name="T:WGetNET.WinGetSource">
             <summary>

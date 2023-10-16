@@ -245,6 +245,10 @@ namespace WGetNET
                 return true;
             }
         }
+        
+        /// <summary>
+        /// Gets if id of the package is shortened.
+        /// </summary>
         public bool HasShortenedId
         {
             get
