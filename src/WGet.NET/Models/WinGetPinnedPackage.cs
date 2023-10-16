@@ -49,7 +49,9 @@ namespace WGetNET
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPinnedPackage"/> class.
         /// </summary>
-        /// <param name="hasShortenedId">Sets if the id is shortened or not</param>
+        /// <param name="pinType">Name of the winget pin type for the package.</param>
+        /// <param name="pinnedVersion"><see cref="System.String"/> containing the pinned version for the package.</param>
+        /// <param name="hasShortenedId">Sets if the id is shortened or not.</param>
         internal WinGetPinnedPackage(string pinType, string pinnedVersion, bool hasShortenedId): base(hasShortenedId)
         {
             _pinTypeString = pinType;

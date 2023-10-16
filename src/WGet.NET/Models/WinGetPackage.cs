@@ -276,7 +276,7 @@ namespace WGetNET
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackage"/> class.
         /// </summary>
-        /// <param name="hasShortenedId">Sets if the id is shortened or not</param>
+        /// <param name="hasShortenedId">Sets if the id is shortened or not.</param>
         internal WinGetPackage(bool hasShortenedId)
         {
             _hasShortenedId = hasShortenedId;

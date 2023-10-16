@@ -203,7 +203,7 @@ namespace WGetNET.HelperClasses
             //that will be thrown later, will be catched in the calling method.
             int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
 
-            int[] columnList = GetColumnList(output[labelLine]);
+            int[] columnList = GetColumnList(output[labelLine], true);
 
             //Remove unneeded output Lines
             output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
@@ -247,39 +247,61 @@ namespace WGetNET.HelperClasses
                 }
 #endif
 
+                string pinType = string.Empty;
+                string pinnedVersion = string.Empty;
+
 #if NETCOREAPP3_1_OR_GREATER
                 string packageName = output[i][columnList[0]..columnList[1]].Trim();
                 string packageId = output[i][columnList[1]..columnList[2]].Trim();
                 string packageVersion = output[i][columnList[2]..columnList[3]].Trim();
                 string packageSource = output[i][columnList[3]..columnList[4]].Trim();
-                string pinType = string.Empty;
-                string pinnedVersion = string.Empty;
-                if (columnList.Length > 5)
-                {
-                    pinType = output[i][columnList[4]..columnList[5]].Trim();
-                    pinnedVersion = output[i][columnList[5]..].Trim();
-                }
-                else
-                {
-                    pinType = output[i][columnList[4]..].Trim();
-                }
+
 #elif NETSTANDARD2_0
                 string packageName = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim();
                 string packageId = output[i].Substring(columnList[1], (columnList[2] - columnList[1])).Trim();
                 string packageVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
                 string packageSource = output[i].Substring(columnList[3], (columnList[4] - columnList[3])).Trim();
-                string pinType = string.Empty;
-                string pinnedVersion = string.Empty;
-                if (columnList.Length > 5)
+#endif
+
+                // Workaround for getting the pin data from the output.
+                // The normal method will not work, because "Pin type" and "Pinned version" contain spaces.
+#if NETCOREAPP3_1_OR_GREATER
+                string pinInfoString = output[i][columnList[4]..].TrimStart();
+#elif NETSTANDARD2_0
+                string pinInfoString = output[i].Substring(columnList[4]).TrimStart();
+#endif
+                int endOfTypeIndex = -1;
+                for (int j = 0; j < pinInfoString.Length; j++)
                 {
-                    pinType = output[i].Substring(columnList[4], (columnList[5] - columnList[4])).Trim();
-                    pinnedVersion = output[i].Substring(columnList[5]).Trim();
+                    if (pinInfoString[j] == (char)32)
+                    {
+                        endOfTypeIndex = j;
+                        break;
+                    }
+                }
+
+#if NETCOREAPP3_1_OR_GREATER
+                if (endOfTypeIndex == -1)
+                {
+                    pinType = pinInfoString.Trim();
                 }
                 else
                 {
-                    pinType = output[i].Substring(columnList[4]).Trim();
+                    pinType = pinInfoString[0..endOfTypeIndex].Trim();
+                    pinnedVersion = pinInfoString[endOfTypeIndex..].Trim();
+                }
+#elif NETSTANDARD2_0
+                if (endOfTypeIndex == -1)
+                {
+                    pinType = pinInfoString.Trim();
+                }
+                else
+                {
+                    pinType = pinInfoString.Substring(0, endOfTypeIndex).Trim();
+                    pinnedVersion = pinInfoString.Substring(endOfTypeIndex);
                 }
 #endif
+                // End of workaround
 
                 // Check if the id is shortened
                 bool isShortenedId = CheckShortenedId(packageId);
@@ -411,16 +433,23 @@ namespace WGetNET.HelperClasses
         /// <param name="line">
         /// A <see cref="System.String"/> containing the header, for column calculation.
         /// </param>
+        /// <param name="isPinnedPackageTable">Activate workaround for the pinned package list.</param>
         /// <returns>
         /// A <see cref="System.Int32"/> <see langword="array"/> containing the column start indexes.
         /// </returns>
-        private static int[] GetColumnList(string line)
+        private static int[] GetColumnList(string line, bool isPinnedPackageTable = false)
         {
             int[] columns = new int[0];
             
             bool checkForColumn = true;
             for (int i = 0; i < line.Length; i++)
             {
+                if (isPinnedPackageTable && columns.Length >= 5)
+                {
+                    // Workaround for the pinned package table
+                    break;
+                }
+
                 if (line[i] != ((char)32) && checkForColumn)
                 {
                     columns = ArrayManager.Add(columns, i);

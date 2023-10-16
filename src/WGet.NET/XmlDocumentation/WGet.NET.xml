@@ -982,6 +982,24 @@
             This feature is not supported in the installed WinGet version.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetPinnedPackagesAsync">
+            <summary>
+            Asynchronously gets a list of all pinned packages.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAdd(System.String,System.Boolean)">
             <summary>
             Adds a pinned package to winget.
@@ -2241,6 +2259,35 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
+        <member name="T:WGetNET.PinType">
+            <summary>
+            Enum of winget pin types.
+            </summary>
+        </member>
+        <member name="F:WGetNET.PinType.Pinning">
+            <summary>
+            The package is pinned.
+            </summary>
+            <remarks>
+            Package can't be updatet automatically.
+            </remarks>
+        </member>
+        <member name="F:WGetNET.PinType.Blocking">
+            <summary>
+            The package is blocked.
+            </summary>
+            <remarks>
+            Package can't be updatet automatically and manually.
+            </remarks>
+        </member>
+        <member name="F:WGetNET.PinType.Gating">
+            <summary>
+            The package is gated.
+            </summary>
+            <remarks>
+            Package can't be updated to versions, that are not contained in the provided pinned version.
+            </remarks>
+        </member>
         <member name="T:WGetNET.WinGetActionFailedException">
             <summary>
             Exception that gets thrown if a winget action failed.
@@ -2633,13 +2680,14 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnList(System.String)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnList(System.String,System.Boolean)">
             <summary>
             Gets all column start indexes from the input line.
             </summary>
             <param name="line">
             A <see cref="T:System.String"/> containing the header, for column calculation.
             </param>
+            <param name="isPinnedPackageTable">Activate workaround for the pinned package list.</param>
             <returns>
             A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
             </returns>
@@ -2741,7 +2789,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
             </summary>
-            <param name="hasShortenedId">Sets if the id is shortened or not</param>
+            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
         </member>
         <member name="T:WGetNET.WinGetPinnedPackage">
             <summary>
@@ -2767,7 +2815,9 @@
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetPinnedPackage"/> class.
             </summary>
-            <param name="hasShortenedId">Sets if the id is shortened or not</param>
+            <param name="pinType">Name of the winget pin type for the package.</param>
+            <param name="pinnedVersion"><see cref="T:System.String"/> containing the pinned version for the package.</param>
+            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
         </member>
         <member name="T:WGetNET.WinGetSource">
             <summary>
