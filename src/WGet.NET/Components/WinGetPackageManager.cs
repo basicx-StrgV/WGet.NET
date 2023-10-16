@@ -1397,12 +1397,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_downloadCmd, packageId, directory));
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -1524,12 +1519,7 @@ namespace WGetNET
                     await _processManager.ExecuteWingetProcessAsync(
                         string.Format(_downloadCmd, packageId, directory));
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -1656,16 +1646,10 @@ namespace WGetNET
                     cmd += " --blocking";
                 }
 
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -1711,12 +1695,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_pinAddByVersionCmd, packageId, version));
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -1825,12 +1804,7 @@ namespace WGetNET
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -1876,12 +1850,7 @@ namespace WGetNET
                     await _processManager.ExecuteWingetProcessAsync(
                         string.Format(_pinAddByVersionCmd, packageId, version));
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -1990,12 +1959,7 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -2041,12 +2005,7 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_pinAddInstalledByVersionCmd, packageId, version));
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -2155,12 +2114,7 @@ namespace WGetNET
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -2206,12 +2160,7 @@ namespace WGetNET
                     await _processManager.ExecuteWingetProcessAsync(
                         string.Format(_pinAddInstalledByVersionCmd, packageId, version));
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -2314,12 +2263,8 @@ namespace WGetNET
                     _processManager.ExecuteWingetProcess(
                         string.Format(_pinRemoveCmd, packageId));
 
-                if (!result.Success)
-                {
-                    return false;
-                }
 
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -2388,12 +2333,7 @@ namespace WGetNET
                     await _processManager.ExecuteWingetProcessAsync(
                         string.Format(_pinRemoveCmd, packageId));
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -2461,13 +2401,8 @@ namespace WGetNET
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(
                         string.Format(_pinRemoveInstalledCmd, packageId));
-
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                
+                return result.Success;
             }
             catch (Win32Exception)
             {
@@ -2536,12 +2471,7 @@ namespace WGetNET
                     await _processManager.ExecuteWingetProcessAsync(
                         string.Format(_pinRemoveInstalledCmd, packageId));
 
-                if (!result.Success)
-                {
-                    return false;
-                }
-
-                return true;
+                return result.Success;
             }
             catch (Win32Exception)
             {
