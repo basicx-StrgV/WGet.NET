@@ -40,6 +40,7 @@ https://basicx-strgv.github.io/WGet.NET/
   - [x] Calculate file hash
   - [x] Export Settings
   - [x] Download package installer
+  - [x] Manage pinned packages
 - Other
   - [x] Asynchronous Execution
 
