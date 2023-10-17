@@ -246,10 +246,17 @@ namespace WGetNET
 
                 for (int i = 0; i < result.Output.Length; i++)
                 {
+#if NETCOREAPP3_1_OR_GREATER
+                    if (result.Output[i].StartsWith('v'))
+                    {
+                        return result.Output[i].Trim();
+                    }
+#elif NETSTANDARD2_0
                     if (result.Output[i].StartsWith("v"))
                     {
                         return result.Output[i].Trim();
                     }
+#endif
                 }
             }
             catch
@@ -281,7 +288,7 @@ namespace WGetNET
                     break;
                 }
             }
-#elif NETSTANDARD2_0        
+#elif NETSTANDARD2_0
             //Remove the first letter from the version string.
             if (versionString.StartsWith("v"))
             {
@@ -300,7 +307,7 @@ namespace WGetNET
             }
 #endif
 
-            if (!Version.TryParse(versionString, out Version? versionObject) || versionObject == null)
+            if (!Version.TryParse(versionString, out Version? versionObject))
             {
                 versionObject = Version.Parse("0.0.0");
             }

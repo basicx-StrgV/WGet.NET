@@ -1042,18 +1042,32 @@ namespace WGetNET
             StringBuilder jsonString = new();
             for (int i = 0; i < jsonStrings.Length; i++)
             {
+#if NETCOREAPP3_1_OR_GREATER
+                if (!jsonStrings[i].StartsWith('{'))
+                {
+                    jsonString.Append("{");
+                }
+#elif NETSTANDARD2_0
                 if (!jsonStrings[i].StartsWith("{"))
                 {
                     jsonString.Append("{");
                 }
+#endif
 
                 jsonString.Append(jsonStrings[i]);
 
+#if NETCOREAPP3_1_OR_GREATER
+                if (!jsonStrings[i].EndsWith('}'))
+                {
+                    jsonString.Append("}");
+                }
+#elif NETSTANDARD2_0
                 if (!jsonStrings[i].EndsWith("}"))
                 {
                     jsonString.Append("}");
                 }
-                
+#endif
+
                 WinGetSource? source =
                     JsonHandler.StringToObject<WinGetSource>(jsonString.ToString()) 
                     ?? throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
@@ -1087,14 +1101,14 @@ namespace WGetNET
             StringBuilder jsonString = new();
             for (int i = 0; i < jsonStrings.Length; i++)
             {
-                if (!jsonStrings[i].StartsWith("{"))
+                if (!jsonStrings[i].StartsWith('{'))
                 {
                     jsonString.Append("{");
                 }
 
                 jsonString.Append(jsonStrings[i]);
 
-                if (!jsonStrings[i].EndsWith("}"))
+                if (!jsonStrings[i].EndsWith('}'))
                 {
                     jsonString.Append("}");
                 }
