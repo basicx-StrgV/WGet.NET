@@ -103,7 +103,7 @@ sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.
 
 Using the ***WinGetPackageManager*** class you can use the `SearchPackage` capability to get the latest version of a package and then retrieve the version number from the `AvailableVersion` property.
 
-You would thn be able to compare this to the latest version of your executing assembly and determine if you need to notify users of an available upgrade.
+You would then be able to compare this to the latest version of your executing assembly and determine if you need to notify users of an available upgrade.
 
 ```csharp
 Version latestPackageVersion = null;
