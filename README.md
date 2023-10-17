@@ -4,7 +4,6 @@
 [![NuGet](https://img.shields.io/nuget/dt/WGet.NET?label=NuGet%20Downloads)](https://www.nuget.org/packages/WGet.NET/)
 [![License](https://img.shields.io/github/license/basicx-strgv/WGet.NET)](https://github.com/basicx-StrgV/WGet.NET/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/basicx-StrgV/WGet.NET)](https://github.com/basicx-StrgV/WGet.NET/issues)
-[![CodeQL_main](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/basicx-StrgV/WGet.NET/actions/workflows/codeql-analysis.yml)
 
 ## ❓ What is WGet.NET
 
