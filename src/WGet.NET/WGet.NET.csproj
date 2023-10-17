@@ -1,23 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
+	<LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
     <Company>-</Company>
     <Authors>basicx-StrgV</Authors>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/basicx-StrgV/WGet.NET</PackageProjectUrl>
     <RepositoryUrl>https://github.com/basicx-StrgV/WGet.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>winget, winget-cli, dotnet, dotnetcore, dotnet-core, library, windows, wrapper, package-manager</PackageTags>
-    <PackageReleaseNotes>Changelog: https://github.com/basicx-StrgV/WGet.NET/releases/tag/2.3.0</PackageReleaseNotes>
+    <PackageTags>winget, winget-cli, dotnet, dotnetcore, dotnet-core, dotnet-standard, dotnet-framework, library, windows, wrapper, package-manager</PackageTags>
+    <PackageReleaseNotes>https://github.com/basicx-StrgV/WGet.NET/releases/tag/3.0.0</PackageReleaseNotes>
     <Description>A winget wrapper library for .Net</Description>
     <Copyright>basicx-StrgV</Copyright>
     <SignAssembly>false</SignAssembly>
     <RootNamespace>WGetNET</RootNamespace>
-    <Version>2.3.0</Version>
-    <AssemblyVersion>2.3.0.0</AssemblyVersion>
-    <FileVersion>2.3.0.0</FileVersion>
-    <Nullable>enable</Nullable>
+    <Version>3.0.0</Version>
+	<Deterministic>false</Deterministic>
+    <AssemblyVersion>3.0.0.*</AssemblyVersion>
     <AssemblyName>WGet.NET</AssemblyName>
     <PackageId>WGet.NET</PackageId>
     <Product>WGet.NET</Product>
@@ -38,8 +39,13 @@
     <Folder Include="XmlDocumentation\" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

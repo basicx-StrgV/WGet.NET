@@ -30,7 +30,7 @@ namespace WGetNET
         /// </summary>
         public WinGetSourceManager()
         {
-            //Provide empty constructor
+            // Provide empty constructor for xlm docs
         }
 
         //---List--------------------------------------------------------------------------------------
@@ -242,12 +242,12 @@ namespace WGetNET
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(source.SourceType))
+            if (string.IsNullOrWhiteSpace(source.Type))
             {
-                return AddSource(source.SourceName, source.SourceUrl);
+                return AddSource(source.Name, source.Url);
             }
 
-            return AddSource(source.SourceName, source.SourceUrl, source.SourceType);
+            return AddSource(source.Name, source.Url, source.Type);
         }
 
         /// <summary>
@@ -400,12 +400,12 @@ namespace WGetNET
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(source.SourceType))
+            if (string.IsNullOrWhiteSpace(source.Type))
             {
-                return await AddSourceAsync(source.SourceName, source.SourceUrl);
+                return await AddSourceAsync(source.Name, source.Url);
             }
 
-            return await AddSourceAsync(source.SourceName, source.SourceUrl, source.SourceType);
+            return await AddSourceAsync(source.Name, source.Url, source.Type);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -417,7 +417,7 @@ namespace WGetNET
         /// This may take a while depending on the sources.
         /// </remarks>
         /// <returns>
-        /// <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the update was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -453,7 +453,7 @@ namespace WGetNET
         /// </remarks>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the update was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the update was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -587,7 +587,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return ExportSources(source.SourceName);
+            return ExportSources(source.Name);
         }
 
         /// <summary>
@@ -697,7 +697,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return await ExportSourcesAsync(source.SourceName);
+            return await ExportSourcesAsync(source.Name);
         }
 
         /// <summary>
@@ -752,7 +752,11 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetSource>> ExportSourcesToObjectAsync()
         {
+#if NETCOREAPP3_1_OR_GREATER
             return await ExportStringToSourcesAsync(await ExportSourcesAsync());
+#elif NETSTANDARD2_0
+            return ExportStringToSources(await ExportSourcesAsync());
+#endif
         }
 
         /// <summary>
@@ -771,7 +775,11 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetSource>> ExportSourcesToObjectAsync(string sourceName)
         {
+#if NETCOREAPP3_1_OR_GREATER
             return await ExportStringToSourcesAsync(await ExportSourcesAsync(sourceName));
+#elif NETSTANDARD2_0
+            return ExportStringToSources(await ExportSourcesAsync(sourceName));
+#endif
         }
 
         /// <summary>
@@ -779,7 +787,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="file">The file for the export.</param>
         /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -818,7 +826,7 @@ namespace WGetNET
         /// <param name="file">The file for the export.</param>
         /// <param name="sourceName">The name of the source for the export.</param>
         /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -867,7 +875,7 @@ namespace WGetNET
         /// The <see cref="WGetNET.WinGetSource"/> for the export.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -888,7 +896,7 @@ namespace WGetNET
                 return false;
             }
 
-            return ExportSourcesToFile(file, source.SourceName);
+            return ExportSourcesToFile(file, source.Name);
         }
 
         /// <summary>
@@ -897,7 +905,7 @@ namespace WGetNET
         /// <param name="file">The file for the export.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -937,7 +945,7 @@ namespace WGetNET
         /// <param name="sourceName">The name of the source for the export.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -987,7 +995,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1008,7 +1016,7 @@ namespace WGetNET
                 return false;
             }
 
-            return await ExportSourcesToFileAsync(file, source.SourceName);
+            return await ExportSourcesToFileAsync(file, source.Name);
         }
 
         /// <summary>
@@ -1023,31 +1031,46 @@ namespace WGetNET
         /// </returns>
         private List<WinGetSource> ExportStringToSources(string exportString)
         {
-            List<WinGetSource> sourceList = new List<WinGetSource>();
+            List<WinGetSource> sourceList = new();
 
+#if NETCOREAPP3_1_OR_GREATER
             string[] jsonStrings = exportString.Split("}{");
-            StringBuilder jsonString = new StringBuilder();
+#elif NETSTANDARD2_0
+            string[] jsonStrings = exportString.Split(new string[1]{ "}{" }, StringSplitOptions.None);
+#endif
+
+            StringBuilder jsonString = new();
             for (int i = 0; i < jsonStrings.Length; i++)
             {
+#if NETCOREAPP3_1_OR_GREATER
                 if (!jsonStrings[i].StartsWith('{'))
                 {
-                    jsonString.Append('{');
+                    jsonString.Append("{");
                 }
+#elif NETSTANDARD2_0
+                if (!jsonStrings[i].StartsWith("{"))
+                {
+                    jsonString.Append("{");
+                }
+#endif
 
                 jsonString.Append(jsonStrings[i]);
 
+#if NETCOREAPP3_1_OR_GREATER
                 if (!jsonStrings[i].EndsWith('}'))
                 {
-                    jsonString.Append('}');
+                    jsonString.Append("}");
                 }
-                
-                WinGetSource? source =
-                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString());
-
-                if (source == null)
+#elif NETSTANDARD2_0
+                if (!jsonStrings[i].EndsWith("}"))
                 {
-                    throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
+                    jsonString.Append("}");
                 }
+#endif
+
+                WinGetSource? source =
+                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString()) 
+                    ?? throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
 
                 sourceList.Add(source);
 
@@ -1057,6 +1080,7 @@ namespace WGetNET
             return sourceList;
         }
 
+#if NETCOREAPP3_1_OR_GREATER
         /// <summary>
         /// Asynchronously convert the string output from winget source export to a 
         /// <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
@@ -1070,31 +1094,28 @@ namespace WGetNET
         /// </returns>
         private async Task<List<WinGetSource>> ExportStringToSourcesAsync(string exportString)
         {
-            List<WinGetSource> sourceList = new List<WinGetSource>();
+            List<WinGetSource> sourceList = new();
 
             string[] jsonStrings = exportString.Split("}{");
-            StringBuilder jsonString = new StringBuilder();
+
+            StringBuilder jsonString = new();
             for (int i = 0; i < jsonStrings.Length; i++)
             {
                 if (!jsonStrings[i].StartsWith('{'))
                 {
-                    jsonString.Append('{');
+                    jsonString.Append("{");
                 }
 
                 jsonString.Append(jsonStrings[i]);
 
                 if (!jsonStrings[i].EndsWith('}'))
                 {
-                    jsonString.Append('}');
+                    jsonString.Append("}");
                 }
 
                 WinGetSource? source =
-                    await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString.ToString());
-
-                if (source == null)
-                {
-                    throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
-                }
+                    await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString.ToString())
+                    ?? throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
 
                 sourceList.Add(source);
 
@@ -1103,6 +1124,7 @@ namespace WGetNET
 
             return sourceList;
         }
+#endif
         //---------------------------------------------------------------------------------------------
 
         //---Import------------------------------------------------------------------------------------
@@ -1113,7 +1135,7 @@ namespace WGetNET
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if on or more sorces failed.
+        /// <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
         /// </returns>
         public bool ImportSource(List<WinGetSource> winGetSources)
         {
@@ -1141,7 +1163,7 @@ namespace WGetNET
         /// A <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
         public bool ImportSource(WinGetSource winGetSource)
         {
@@ -1155,16 +1177,13 @@ namespace WGetNET
         /// A <see cref="System.String"/> containing the json for ONE source.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
         public bool ImportSource(string jsonString)
         {
-            WinGetSource? source = JsonHandler.StringToObject<WinGetSource>(jsonString);
-
-            if (source == null)
-            {
-                throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
-            }
+            WinGetSource? source = 
+                JsonHandler.StringToObject<WinGetSource>(jsonString) 
+                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
 
             return AddSource(source);
         }
@@ -1177,7 +1196,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if on or more sorces failed.
+        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
         /// </returns>
         public async Task<bool> ImportSourceAsync(List<WinGetSource> winGetSources)
         {
@@ -1206,7 +1225,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
         public async Task<bool> ImportSourceAsync(WinGetSource winGetSource)
         {
@@ -1221,16 +1240,19 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
         public async Task<bool> ImportSourceAsync(string jsonString)
         {
-            WinGetSource? source = await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString);
-
-            if (source == null)
-            {
-                throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
-            }
+#if NETCOREAPP3_1_OR_GREATER
+            WinGetSource? source = 
+                await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString)
+                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
+#elif NETSTANDARD2_0
+            WinGetSource? source = 
+                JsonHandler.StringToObject<WinGetSource>(jsonString)
+                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
+#endif
 
             return await AddSourceAsync(source);
         }
@@ -1244,7 +1266,7 @@ namespace WGetNET
         /// This may take a while depending on the sources.
         /// </remarks>
         /// <returns>
-        /// <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the reset was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1288,7 +1310,7 @@ namespace WGetNET
         /// </remarks>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the reset was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the reset was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1333,7 +1355,7 @@ namespace WGetNET
         /// A <see cref="System.String"/> representing the name of the source.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1381,7 +1403,7 @@ namespace WGetNET
         /// The <see cref="WGetNET.WinGetSource"/> to remove.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+        /// <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1405,7 +1427,7 @@ namespace WGetNET
                 return false;
             }
 
-            return RemoveSources(source.SourceName);
+            return RemoveSources(source.Name);
         }
 
         /// <summary>
@@ -1416,7 +1438,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1465,7 +1487,7 @@ namespace WGetNET
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the remove was successfull or <see langword="false"/> if the it failed.
+        /// The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1489,7 +1511,7 @@ namespace WGetNET
                 return false;
             }
 
-            return await RemoveSourcesAsync(source.SourceName);
+            return await RemoveSourcesAsync(source.Name);
         }
         //---------------------------------------------------------------------------------------------
     }

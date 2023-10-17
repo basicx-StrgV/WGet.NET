@@ -31,16 +31,16 @@ namespace WGetTest
 
                 //---Tests-----------------------------------------------------------------------------
                 List<WinGetPackage> test = connector.SearchPackage("git", "winget");
-                Console.WriteLine(test[3].PackageName);
-                Console.WriteLine(test[3].PackageId);
+                Console.WriteLine(test[3].Name);
+                Console.WriteLine(test[3].Id);
 
                 List<WinGetPackage> test2 = connector.GetUpgradeablePackages();
-                Console.WriteLine(test2[0].PackageName);
-                Console.WriteLine(test2[0].PackageId);
+                Console.WriteLine(test2[0].Name);
+                Console.WriteLine(test2[0].Id);
 
                 List<WinGetPackage> test3 = connector.GetInstalledPackages();
-                Console.WriteLine(test3[0].PackageName);
-                Console.WriteLine(test3[0].PackageId);
+                Console.WriteLine(test3[0].Name);
+                Console.WriteLine(test3[0].Id);
 
                 List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
                 bool sourceUpdateStatus = sourceManager.UpdateSources();
@@ -63,6 +63,24 @@ namespace WGetTest
                 bool settingExportStatus = connector.ExportSettingsToFile("C:\\Test\\Settings.json");
 
                 //bool upAllresult = connector.UpgradeAllPackages();
+
+                bool downloadResult = connector.Download("7zip.7zip", "C:\\Test");
+
+                Console.WriteLine(connector.PinAdd("7zip.7zip", true));
+                List<WinGetPinnedPackage> pinnedList1 = connector.GetPinnedPackages();
+                Console.WriteLine(pinnedList1[0].Name + ": " + pinnedList1[0].PinTypeString);
+                Console.WriteLine(connector.PinRemove("7zip.7zip"));
+                Console.WriteLine(connector.PinAdd("7zip.7zip", "23.*"));
+                List<WinGetPinnedPackage> pinnedList2 = connector.GetPinnedPackages();
+                Console.WriteLine(pinnedList2[0].Name + ": " + pinnedList2[0].PinTypeString);
+                Console.WriteLine(connector.PinRemove("7zip.7zip"));
+
+                Console.WriteLine(connector.PinAddInstalled("7zip.7zip", true));
+                Console.WriteLine(connector.PinRemoveInstalled("7zip.7zip"));
+                Console.WriteLine(connector.PinAddInstalled("7zip.7zip", "23.*"));
+                Console.WriteLine(connector.PinRemoveInstalled("7zip.7zip"));
+
+                Console.WriteLine(connector.ResetPins());
             }
             catch (Exception e)
             {

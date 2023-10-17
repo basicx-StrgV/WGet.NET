@@ -2,7 +2,12 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System;
+#if NETCOREAPP3_1_OR_GREATER
 using System.Text.Json.Serialization;
+#elif NETSTANDARD2_0
+using Newtonsoft.Json;
+#endif
 
 namespace WGetNET
 {
@@ -14,44 +19,121 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the name of the source.
         /// </summary>
-        [JsonPropertyName("Name")]
+        [Obsolete("The property \"SourceName\" is deprecated, please use \"Name\" instead.")]
+        [JsonIgnore]
         public string SourceName 
         {
             get
             {
-                return _sourceName;
+                return _name;
             }
             set
             {
                 if (value is null)
                 {
-                    _sourceName = string.Empty;
+                    _name = string.Empty;
                 }
                 else
                 {
-                    _sourceName = value;
+                    _name = value;
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the name of the source.
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    _name = string.Empty;
+                }
+                else
+                {
+                    _name = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the url of the source.
+        /// </summary>
+        [Obsolete("The property \"SourceUrl\" is deprecated, please use \"Url\" instead.")]
+        [JsonIgnore]
+        public string SourceUrl 
+        {
+            get
+            {
+                return _url;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    _url = string.Empty;
+                }
+                else
+                {
+                    _url = value;
                 }
             }
         }
         /// <summary>
         /// Gets or sets the url of the source.
         /// </summary>
+#if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Arg")]
-        public string SourceUrl 
+#elif NETSTANDARD2_0
+        [JsonProperty("Arg")]
+#endif
+        public string Url
         {
             get
             {
-                return _sourceUrl;
+                return _url;
             }
             set
             {
                 if (value is null)
                 {
-                    _sourceUrl = string.Empty;
+                    _url = string.Empty;
                 }
                 else
                 {
-                    _sourceUrl = value;
+                    _url = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the type of the source.
+        /// </summary>
+        /// <remarks>
+        /// Will only be set on source export.
+        /// </remarks>
+        [Obsolete("The property \"SourceType\" is deprecated, please use \"Type\" instead.")]
+        [JsonIgnore]
+        public string SourceType 
+        {
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    _type = string.Empty;
+                }
+                else
+                {
+                    _type = value;
                 }
             }
         }
@@ -61,22 +143,48 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-        [JsonPropertyName("Type")]
-        public string SourceType 
+        public string Type
         {
             get
             {
-                return _sourceType;
+                return _type;
             }
             set
             {
                 if (value is null)
                 {
-                    _sourceType = string.Empty;
+                    _type = string.Empty;
                 }
                 else
                 {
-                    _sourceType = value;
+                    _type = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the data of the source.
+        /// </summary>
+        /// <remarks>
+        /// Will only be set on source export.
+        /// </remarks>
+        [Obsolete("The property \"SourceData\" is deprecated, please use \"Data\" instead.")]
+        [JsonIgnore]
+        public string SourceData
+        {
+            get
+            {
+                return _data;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    _data = string.Empty;
+                }
+                else
+                {
+                    _data = value;
                 }
             }
         }
@@ -86,22 +194,48 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-        [JsonPropertyName("Data")]
-        public string SourceData
+        public string Data
         {
             get
             {
-                return _sourceData;
+                return _data;
             }
             set
             {
                 if (value is null)
                 {
-                    _sourceData = string.Empty;
+                    _data = string.Empty;
                 }
                 else
                 {
-                    _sourceData = value;
+                    _data = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the identifier of the source.
+        /// </summary>
+        /// <remarks>
+        /// Will only be set on source export.
+        /// </remarks>
+        [Obsolete("The property \"SourceIdentifier\" is deprecated, please use \"Identifier\" instead.")]
+        [JsonIgnore]
+        public string SourceIdentifier
+        {
+            get
+            {
+                return _identifier;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    _identifier = string.Empty;
+                }
+                else
+                {
+                    _identifier = value;
                 }
             }
         }
@@ -111,22 +245,21 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-        [JsonPropertyName("Identifier")]
-        public string SourceIdentifier
+        public string Identifier
         {
             get
             {
-                return _sourceIdentifier;
+                return _identifier;
             }
             set
             {
                 if (value is null)
                 {
-                    _sourceIdentifier = string.Empty;
+                    _identifier = string.Empty;
                 }
                 else
                 {
-                    _sourceIdentifier = value;
+                    _identifier = value;
                 }
             }
         }
@@ -139,7 +272,7 @@ namespace WGetNET
         {
             get
             {
-                if ((_sourceName.Length + _sourceUrl.Length + _sourceType.Length + _sourceData.Length + _sourceIdentifier.Length) > 0)
+                if ((_name.Length + _url.Length + _type.Length + _data.Length + _identifier.Length) > 0)
                 {
                     return false;
                 }
@@ -147,10 +280,18 @@ namespace WGetNET
             }
         }
 
-        private string _sourceName = string.Empty;
-        private string _sourceUrl = string.Empty;
-        private string _sourceType = string.Empty;
-        private string _sourceData = string.Empty;
-        private string _sourceIdentifier = string.Empty;
+        private string _name = string.Empty;
+        private string _url = string.Empty;
+        private string _type = string.Empty;
+        private string _data = string.Empty;
+        private string _identifier = string.Empty;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WGetNET.WinGetSource"/> class.
+        /// </summary>
+        public WinGetSource()
+        {
+            // Provide empty constructor for xlm docs
+        }
     }
 }

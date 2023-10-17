@@ -30,8 +30,9 @@ namespace WGetNET
             {
                 CreateNoWindow = true,
                 FileName = processName,
+                UseShellExecute = false,
                 RedirectStandardOutput = true,
-                StandardOutputEncoding = Encoding.Default
+                StandardOutputEncoding = Encoding.UTF8
             };
         }
     
@@ -97,10 +98,10 @@ namespace WGetNET
         /// </returns>
         private ProcessResult RunProcess(ProcessStartInfo processStartInfo)
         {
-            ProcessResult result = new ProcessResult();
+            ProcessResult result = new();
 
             //Create and run process
-            using (Process proc = new Process { StartInfo = processStartInfo })
+            using (Process proc = new() { StartInfo = processStartInfo })
             {
                 proc.Start();
 
@@ -123,10 +124,10 @@ namespace WGetNET
         /// </returns>
         private async Task<ProcessResult> RunProcessAsync(ProcessStartInfo processStartInfo)
         {
-            ProcessResult result = new ProcessResult();
+            ProcessResult result = new();
 
             //Create and run process
-            using (Process proc = new Process { StartInfo = processStartInfo })
+            using (Process proc = new() { StartInfo = processStartInfo })
             {
                 proc.Start();
 

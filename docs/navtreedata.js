@@ -36,7 +36,11 @@ var NAVTREE =
       [ "WinGetSourceManager:", "index.html#autotoc_md9", null ]
     ] ],
     [ "Packages", "namespaces.html", [
-      [ "Package List", "namespaces.html", "namespaces_dup" ]
+      [ "Package List", "namespaces.html", "namespaces_dup" ],
+      [ "Package Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Enumerations", "namespacemembers_enum.html", null ]
+      ] ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -57,7 +61,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"functions_func.html"
+"da/d2a/a00086.html#a0f1ce04fcbf36df88cf45923fbd6969a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

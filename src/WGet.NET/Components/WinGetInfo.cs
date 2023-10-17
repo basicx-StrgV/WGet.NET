@@ -25,16 +25,16 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if winget is installed or <see langword="false"/> if not.
         /// </returns>
-        public bool WinGetInstalled 
-        { 
-            get 
+        public bool WinGetInstalled
+        {
+            get
             {
                 if (CheckWinGetVersion() != string.Empty)
                 {
                     return true;
                 }
                 return false;
-            } 
+            }
         }
 
         /// <summary>
@@ -43,12 +43,12 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> with the version number.
         /// </returns>
-        public string WinGetVersion 
-        { 
-            get 
+        public string WinGetVersion
+        {
+            get
             {
                 return CheckWinGetVersion();
-            } 
+            }
         }
 
         /// <summary>
@@ -219,6 +219,24 @@ namespace WGetNET
             }
         }
 
+        /// <summary>
+        /// Checks if the installed WinGet version is the same or higher as the given version.
+        /// </summary>
+        /// <param name="major">The major version.</param>
+        /// <param name="minor">The minor version.</param>
+        /// <returns>
+        /// <see langword="true"/> if the installed WinGet version is the same or higher as the given version, or <see langword="false"/> if not.
+        /// </returns>
+        protected bool WinGetVersionIsMatchOrAbove(int major, int minor = 0)
+        {
+            Version winGetVersion = WinGetVersionObject;
+            if (winGetVersion.Major >= major && winGetVersion.Minor >= minor)
+            {
+                return true;
+            }
+            return false;
+        }
+
         private string CheckWinGetVersion()
         {
             try
@@ -228,10 +246,17 @@ namespace WGetNET
 
                 for (int i = 0; i < result.Output.Length; i++)
                 {
+#if NETCOREAPP3_1_OR_GREATER
+                    if (result.Output[i].StartsWith('v'))
+                    {
+                        return result.Output[i].Trim();
+                    }
+#elif NETSTANDARD2_0
                     if (result.Output[i].StartsWith("v"))
                     {
                         return result.Output[i].Trim();
                     }
+#endif
                 }
             }
             catch
@@ -242,14 +267,16 @@ namespace WGetNET
             return string.Empty;
         }
 
-        private Version GetVersionObject() 
+        private Version GetVersionObject()
         {
             string versionString = CheckWinGetVersion();
 
+#if NETCOREAPP3_1_OR_GREATER
             //Remove the first letter from the version string.
             if (versionString.StartsWith('v'))
             {
-                versionString = versionString[1..];
+                versionString = versionString[1..].Trim();
+
             }
 
             //Remove text from the end of the version string.
@@ -261,10 +288,26 @@ namespace WGetNET
                     break;
                 }
             }
+#elif NETSTANDARD2_0
+            //Remove the first letter from the version string.
+            if (versionString.StartsWith("v"))
+            {
+                versionString = versionString.Substring(1).Trim();
 
-            Version? versionObject;
+            }
 
-            if (!Version.TryParse(versionString, out versionObject) || versionObject == null)
+            //Remove text from the end of the version string.
+            for (int i = 0; i < versionString.Length; i++)
+            {
+                if (versionString[i] == '-')
+                {
+                    versionString = versionString.Substring(0, i);
+                    break;
+                }
+            }
+#endif
+
+            if (!Version.TryParse(versionString, out Version? versionObject))
             {
                 versionObject = Version.Parse("0.0.0");
             }

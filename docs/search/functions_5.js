@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['removesources_0',['RemoveSources',['../d1/d51/a00079.html#a5ec3a8384a0dc7156933063238018c8b',1,'WGetNET.WinGetSourceManager.RemoveSources(string name)'],['../d1/d51/a00079.html#a25656610b4a23db99f57862a9eea990b',1,'WGetNET.WinGetSourceManager.RemoveSources(WinGetSource source)']]],
-  ['removesourcesasync_1',['RemoveSourcesAsync',['../d1/d51/a00079.html#afd8c160ebf87ce2777d40c65893d6677',1,'WGetNET.WinGetSourceManager.RemoveSourcesAsync(string name)'],['../d1/d51/a00079.html#a3c182a420a87d518ed76d4f716fb423c',1,'WGetNET.WinGetSourceManager.RemoveSourcesAsync(WinGetSource source)']]],
-  ['resetsources_2',['ResetSources',['../d1/d51/a00079.html#aea125a25b6ab9f169e6d9c605be31f82',1,'WGetNET::WinGetSourceManager']]],
-  ['resetsourcesasync_3',['ResetSourcesAsync',['../d1/d51/a00079.html#a860a205fb8c44337d7068931e01255b0',1,'WGetNET::WinGetSourceManager']]]
+  ['importpackagesfromfile_0',['ImportPackagesFromFile',['../d4/d63/a00082.html#a9aed88bc91bf761484adf20c67727f45',1,'WGetNET::WinGetPackageManager']]],
+  ['importpackagesfromfileasync_1',['ImportPackagesFromFileAsync',['../d4/d63/a00082.html#a581686f9d8171fbb51b5337a1e3eeae9',1,'WGetNET::WinGetPackageManager']]],
+  ['importsource_2',['ImportSource',['../da/d2a/a00086.html#a979b454d3f4af7dfe94f9746239b4732',1,'WGetNET.WinGetSourceManager.ImportSource(List&lt; WinGetSource &gt; winGetSources)'],['../da/d2a/a00086.html#ae999d6643201de4ae1590f4f5f1ef798',1,'WGetNET.WinGetSourceManager.ImportSource(WinGetSource winGetSource)'],['../da/d2a/a00086.html#a8b8edac7cf7cf64ead6abdc0ec6c48f8',1,'WGetNET.WinGetSourceManager.ImportSource(string jsonString)']]],
+  ['importsourceasync_3',['ImportSourceAsync',['../da/d2a/a00086.html#acc3d76bd39bc95a547f6e112963e4287',1,'WGetNET.WinGetSourceManager.ImportSourceAsync(List&lt; WinGetSource &gt; winGetSources)'],['../da/d2a/a00086.html#aaa812901dbfb28733aff71b24bb07721',1,'WGetNET.WinGetSourceManager.ImportSourceAsync(WinGetSource winGetSource)'],['../da/d2a/a00086.html#a2752a9645e042fc62a9a018aebb72111',1,'WGetNET.WinGetSourceManager.ImportSourceAsync(string jsonString)']]],
+  ['installpackage_4',['InstallPackage',['../d4/d63/a00082.html#a78d6fc774df217bf5b477b3b1b5dfd5e',1,'WGetNET.WinGetPackageManager.InstallPackage(string packageId)'],['../d4/d63/a00082.html#af267d5bc2caaa031760a471b3299f98c',1,'WGetNET.WinGetPackageManager.InstallPackage(WinGetPackage package)']]],
+  ['installpackageasync_5',['InstallPackageAsync',['../d4/d63/a00082.html#afe3772834d17a264741d01a2487f21ed',1,'WGetNET.WinGetPackageManager.InstallPackageAsync(string packageId)'],['../d4/d63/a00082.html#ae11a1b719d7d09687af3cd321241a5cc',1,'WGetNET.WinGetPackageManager.InstallPackageAsync(WinGetPackage package)']]]
 ];

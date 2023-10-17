@@ -19,7 +19,7 @@ namespace WGetNET.HelperClasses
         /// A <see cref="System.String"/> containing the file path and name.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
         public static bool ExportOutputToFile(ProcessResult result, string file)
         {
@@ -48,7 +48,7 @@ namespace WGetNET.HelperClasses
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successfull and <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
         public static async Task<bool> ExportOutputToFileAsync(ProcessResult result, string file)
         {
@@ -56,7 +56,18 @@ namespace WGetNET.HelperClasses
             {
                 string outputString = ProcessOutputReader.ExportOutputToString(result);
 
+#if NETCOREAPP3_1_OR_GREATER
                 await File.WriteAllTextAsync(file, outputString);
+#elif NETSTANDARD2_0
+                // Deleate file to recreate it
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                }
+                // Create file and write the string to the stream
+                using StreamWriter fileStream = File.CreateText(file);
+                await fileStream.WriteAsync(outputString);
+#endif
 
                 return true;
             }

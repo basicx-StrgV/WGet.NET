@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['sourcedata_0',['SourceData',['../df/d6a/a00119.html#acee47c5bc3410db9c13fbdec4921f5ed',1,'WGetNET::WinGetSource']]],
-  ['sourceidentifier_1',['SourceIdentifier',['../df/d6a/a00119.html#a95f6544839d8adafa78640c5ffa1a232',1,'WGetNET::WinGetSource']]],
-  ['sourcename_2',['SourceName',['../df/d6a/a00119.html#ab34f0a87aa7ee6062aadc999223408bc',1,'WGetNET::WinGetSource']]],
-  ['sourcetype_3',['SourceType',['../df/d6a/a00119.html#a986c271e7bb7efcf4162644ef71e04ad',1,'WGetNET::WinGetSource']]],
-  ['sourceurl_4',['SourceUrl',['../df/d6a/a00119.html#af9ce5f3f1c059eb33d7ca3d0b06ac124',1,'WGetNET::WinGetSource']]]
+  ['id_0',['Id',['../d7/d12/a00126.html#a45b8861e8baff1792ea278e396bafdfd',1,'WGetNET::WinGetPackage']]],
+  ['identifier_1',['Identifier',['../de/d76/a00134.html#a99ec3198563ad2facc5e559c37b51ab9',1,'WGetNET::WinGetSource']]],
+  ['isempty_2',['IsEmpty',['../d7/d12/a00126.html#a2e52f2a27eecc0d0053d08c40f70b22d',1,'WGetNET.WinGetPackage.IsEmpty'],['../de/d76/a00134.html#a27474cab3379b9d20a921827456f18d8',1,'WGetNET.WinGetSource.IsEmpty']]]
 ];

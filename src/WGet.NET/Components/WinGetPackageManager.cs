@@ -17,26 +17,35 @@ namespace WGetNET
     public class WinGetPackageManager : WinGetInfo
     {
         private const string _listCmd = "list";
-        private const string _searchInstalledCmd = "list {0}";
-        private const string _searchInstalledBySourceCmd = "list {0} --source {1}";
-        private const string _searchCmd = "search {0} --accept-source-agreements";
-        private const string _searchBySourceCmd = "search {0} --source {1} --accept-source-agreements";
-        private const string _installCmd = "install {0}";
-        private const string _upgradeCmd = "upgrade {0}";
+        private const string _searchInstalledCmd = "list \"{0}\"";
+        private const string _searchInstalledBySourceCmd = "list \"{0}\" --source {1}";
+        private const string _searchCmd = "search \"{0}\" --accept-source-agreements";
+        private const string _searchBySourceCmd = "search \"{0}\" --source {1} --accept-source-agreements";
+        private const string _installCmd = "install \"{0}\"";
+        private const string _upgradeCmd = "upgrade \"{0}\"";
         private const string _upgradeAllCmd = "upgrade --all";
         private const string _getUpgradeableCmd = "upgrade";
         private const string _includeUnknown = "--include-unknown";
-        private const string _uninstallCmd = "uninstall {0}";
+        private const string _uninstallCmd = "uninstall \"{0}\"";
         private const string _exportCmd = "export -o {0}";
         private const string _importCmd = "import -i {0} --ignore-unavailable";
         private const string _hashCmd = "hash {0}";
+        private const string _downloadCmd = "download {0} --download-directory {1}";
+        private const string _pinListCmd = "pin list";
+        private const string _pinAddCmd = "pin add \"{0}\"";
+        private const string _pinAddByVersionCmd = "pin add \"{0}\" --version \"{1}\"";
+        private const string _pinRemoveCmd = "pin remove \"{0}\"";
+        private const string _pinAddInstalledCmd = "pin add \"{0}\" --installed";
+        private const string _pinAddInstalledByVersionCmd = "pin add \"{0}\" --installed --version \"{1}\"";
+        private const string _pinRemoveInstalledCmd = "pin remove \"{0}\" --installed";
+        private const string _pinResetCmd = "pin reset --force";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
         /// </summary>
         public WinGetPackageManager()
         {
-           //Provide empty constructor
+            // Provide empty constructor for xlm docs
         }
 
         //---Search------------------------------------------------------------------------------------
@@ -412,7 +421,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package for the installation.</param>
         /// <returns>
-        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -451,7 +460,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
         /// <returns>
-        /// <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -472,7 +481,12 @@ namespace WGetNET
                 return false;
             }
 
-            return InstallPackage(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return InstallPackage(package.Name);
+            }
+
+            return InstallPackage(package.Id);
         }
 
         /// <summary>
@@ -481,7 +495,7 @@ namespace WGetNET
         /// <param name="packageId">The id or name of the package for the installation.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -521,7 +535,7 @@ namespace WGetNET
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the installation was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -542,7 +556,12 @@ namespace WGetNET
                 return false;
             }
 
-            return await InstallPackageAsync(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return await InstallPackageAsync(package.Name);
+            }
+
+            return await InstallPackageAsync(package.Id);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -552,7 +571,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package for uninstallation.</param>
         /// <returns>
-        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -591,7 +610,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
         /// <returns>
-        /// <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -612,7 +631,12 @@ namespace WGetNET
                 return false;
             }
 
-            return UninstallPackage(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return UninstallPackage(package.Name);
+            }
+
+            return UninstallPackage(package.Id);
         }
 
         /// <summary>
@@ -621,7 +645,7 @@ namespace WGetNET
         /// <param name="packageId">The id or name of the package for uninstallation.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -661,7 +685,7 @@ namespace WGetNET
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the uninstallation was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -682,7 +706,12 @@ namespace WGetNET
                 return false;
             }
 
-            return await UninstallPackageAsync(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return await UninstallPackageAsync(package.Name);
+            }
+
+            return await UninstallPackageAsync(package.Id);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -761,7 +790,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package for upgrade.</param>
         /// <returns>
-        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -800,7 +829,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
         /// <returns>
-        /// <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -821,7 +850,12 @@ namespace WGetNET
                 return false;
             }
 
-            return UpgradePackage(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return UpgradePackage(package.Name);
+            }
+
+            return UpgradePackage(package.Id);
         }
 
         /// <summary>
@@ -830,7 +864,7 @@ namespace WGetNET
         /// <param name="packageId">The id or name of the package for upgrade.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -870,7 +904,7 @@ namespace WGetNET
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the upgrade was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -891,7 +925,12 @@ namespace WGetNET
                 return false;
             }
 
-            return await UpgradePackageAsync(package.PackageId);
+            if (package.HasShortenedId)
+            {
+                return await UpgradePackageAsync(package.Name);
+            }
+
+            return await UpgradePackageAsync(package.Id);
         }
 
         /// <summary>
@@ -967,8 +1006,7 @@ namespace WGetNET
         private string AddArgumentByVersion(string argument)
         {
             // Checking version to determine if "--include-unknown" is necessary.
-            Version winGetVersion = WinGetVersionObject;
-            if (winGetVersion.Major >= 1 && winGetVersion.Minor >= 4)
+            if (WinGetVersionIsMatchOrAbove(1, 4))
             {
                 // Winget version supports new argument, add "--include-unknown" to arguments
                 argument += $" {_includeUnknown}";
@@ -983,7 +1021,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="file">The file for the export.</param>
         /// <returns>
-        /// <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
+        /// <see langword="true"/> if the export was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1023,7 +1061,7 @@ namespace WGetNET
         /// <param name="file">The file for the export.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successfull or <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1065,7 +1103,7 @@ namespace WGetNET
         /// </remarks>
         /// <param name="file">The file with the package data for the import.</param>
         /// <returns>
-        /// <see langword="true"/> if the import was compleatly successfull or 
+        /// <see langword="true"/> if the import was compleatly successful or 
         /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
@@ -1109,7 +1147,7 @@ namespace WGetNET
         /// <param name="file">The file with the package data for the import.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the import was compleatly successfull or 
+        /// The result is <see langword="true"/> if the import was compleatly successful or 
         /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
         /// <exception cref="WGetNET.WinGetNotInstalledException">
@@ -1145,7 +1183,7 @@ namespace WGetNET
         }
         //---------------------------------------------------------------------------------------------
 
-        //---Other-------------------------------------------------------------------------------------
+        //---Hash--------------------------------------------------------------------------------------
         /// <summary>
         /// Executes the WinGet hash function, to calculate the hash for the given file.
         /// </summary>
@@ -1316,7 +1354,7 @@ namespace WGetNET
         private string HashResultToHash(ProcessResult result)
         {
             string hash = "";
-            if (result.Output.Length > 0 && result.Output[0].Contains(':'))
+            if (result.Output.Length > 0 && result.Output[0].Contains(":"))
             {
                 string[] splitOutput = result.Output[0].Split(':');
                 if (splitOutput.Length >= 2)
@@ -1326,6 +1364,1322 @@ namespace WGetNET
             }
 
             return hash;
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Download----------------------------------------------------------------------------------
+        /// <summary>
+        /// Downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to download.</param>
+        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool Download(string packageId, string directory)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            {
+                throw new WinGetFeatureNotSupportedException("1.6");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_downloadCmd, packageId, directory));
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Download failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to download.</param>
+        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool Download(string packageId, DirectoryInfo directory)
+        {
+            return Download(packageId, directory.FullName);
+        }
+
+        /// <summary>
+        /// Downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="package">The package to download.</param>
+        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool Download(WinGetPackage package, string directory)
+        {
+            if (package.HasShortenedId)
+            {
+                return Download(package.Name, directory);
+            }
+
+            return Download(package.Id, directory);
+        }
+
+        /// <summary>
+        /// Downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="package">The package to download.</param>
+        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool Download(WinGetPackage package, DirectoryInfo directory)
+        {
+            if (package.HasShortenedId)
+            {
+                return Download(package.Name, directory.FullName);
+            }
+
+            return Download(package.Id, directory.FullName);
+        }
+
+        /// <summary>
+        /// Asynchronously downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to download.</param>
+        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> DownloadAsync(string packageId, string directory)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            {
+                throw new WinGetFeatureNotSupportedException("1.6");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_downloadCmd, packageId, directory));
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Download failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to download.</param>
+        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> DownloadAsync(string packageId, DirectoryInfo directory)
+        {
+            return await DownloadAsync(packageId, directory.FullName);
+        }
+
+        /// <summary>
+        /// Asynchronously downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="package">The package to download.</param>
+        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> DownloadAsync(WinGetPackage package, string directory)
+        {
+            if (package.HasShortenedId)
+            {
+                return await DownloadAsync(package.Name, directory);
+            }
+
+            return await DownloadAsync(package.Id, directory);
+        }
+
+        /// <summary>
+        /// Asynchronously downloads the installer of a package using winget.
+        /// </summary>
+        /// <param name="package">The package to download.</param>
+        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <returns>
+        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory)
+        {
+            if (package.HasShortenedId)
+            {
+                return await DownloadAsync(package.Name, directory.FullName);
+            }
+
+            return await DownloadAsync(package.Id, directory.FullName);
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Pin List----------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a list of all pinned packages.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public List<WinGetPinnedPackage> GetPinnedPackages()
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_pinListCmd);
+
+                return ProcessOutputReader.ToPinnedPackageList(result.Output);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Listing all pinned packages failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously gets a list of all pinned packages.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<List<WinGetPinnedPackage>> GetPinnedPackagesAsync()
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(_pinListCmd);
+
+                return ProcessOutputReader.ToPinnedPackageList(result.Output);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Listing all pinned packages failed.", e);
+            }
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Pin Add-----------------------------------------------------------------------------------
+        /// <summary>
+        /// Adds a pinned package to winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinAdd(string packageId, bool blocking = false)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                string cmd = string.Format(_pinAddCmd, packageId);
+
+                if (blocking)
+                {
+                    cmd += " --blocking";
+                }
+
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(cmd);
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Pinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Adds a pinned package to winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <param name="version">
+        /// <see cref="System.String"/> representing the version to pin. 
+        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinAdd(string packageId, string version)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_pinAddByVersionCmd, packageId, version));
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Pinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Adds a pinned package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinAdd(WinGetPackage package, bool blocking = false)
+        {
+            if (package.HasShortenedId)
+            {
+                return PinAdd(package.Name, blocking);
+            }
+
+            return PinAdd(package.Id, blocking);
+        }
+
+        /// <summary>
+        /// Adds a pinned package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="version">
+        /// <see cref="System.String"/> representing the version to pin. 
+        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinAdd(WinGetPackage package, string version)
+        {
+            if (package.HasShortenedId)
+            {
+                return PinAdd(package.Name, version);
+            }
+
+            return PinAdd(package.Id, version);
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned package to winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinAddAsync(string packageId, bool blocking = false)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                string cmd = string.Format(_pinAddCmd, packageId);
+
+                if (blocking)
+                {
+                    cmd += " --blocking";
+                }
+
+
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Pinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned package to winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <param name="version">
+        /// <see cref="System.String"/> representing the version to pin. 
+        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinAddAsync(string packageId, string version)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_pinAddByVersionCmd, packageId, version));
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Pinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false)
+        {
+            if (package.HasShortenedId)
+            {
+                return await PinAddAsync(package.Name, blocking);
+            }
+
+            return await PinAddAsync(package.Id, blocking);
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="version">
+        /// <see cref="System.String"/> representing the version to pin. 
+        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinAddAsync(WinGetPackage package, string version)
+        {
+            if (package.HasShortenedId)
+            {
+                return await PinAddAsync(package.Name, version);
+            }
+
+            return await PinAddAsync(package.Id, version);
+        }
+
+        /// <summary>
+        /// Adds a pinned installed package to winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinAddInstalled(string packageId, bool blocking = false)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                string cmd = string.Format(_pinAddInstalledCmd, packageId);
+
+                if (blocking)
+                {
+                    cmd += " --blocking";
+                }
+
+
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(cmd);
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Pinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Adds a pinned installed package to winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <param name="version">
+        /// <see cref="System.String"/> representing the version to pin. 
+        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinAddInstalled(string packageId, string version)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_pinAddInstalledByVersionCmd, packageId, version));
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Pinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Adds a pinned installed package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinAddInstalled(WinGetPackage package, bool blocking = false)
+        {
+            if (package.HasShortenedId)
+            {
+                return PinAddInstalled(package.Name, blocking);
+            }
+
+            return PinAddInstalled(package.Id, blocking);
+        }
+
+        /// <summary>
+        /// Adds a pinned installed package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="version">
+        /// <see cref="System.String"/> representing the version to pin. 
+        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinAddInstalled(WinGetPackage package, string version)
+        {
+            if (package.HasShortenedId)
+            {
+                return PinAddInstalled(package.Name, version);
+            }
+
+            return PinAddInstalled(package.Id, version);
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned installed package to winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinAddInstalledAsync(string packageId, bool blocking = false)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                string cmd = string.Format(_pinAddInstalledCmd, packageId);
+
+                if (blocking)
+                {
+                    cmd += " --blocking";
+                }
+
+
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Pinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned installed package to winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to pin.</param>
+        /// <param name="version">
+        /// <see cref="System.String"/> representing the version to pin. 
+        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinAddInstalledAsync(string packageId, string version)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_pinAddInstalledByVersionCmd, packageId, version));
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Pinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned installed package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, bool blocking = false)
+        {
+            if (package.HasShortenedId)
+            {
+                return await PinAddInstalledAsync(package.Name, blocking);
+            }
+
+            return await PinAddInstalledAsync(package.Id, blocking);
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned installed package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="version">
+        /// <see cref="System.String"/> representing the version to pin. 
+        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, string version)
+        {
+            if (package.HasShortenedId)
+            {
+                return await PinAddInstalledAsync(package.Name, version);
+            }
+
+            return await PinAddInstalledAsync(package.Id, version);
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Pin Remove--------------------------------------------------------------------------------
+        /// <summary>
+        /// Removes a pinned package from winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinRemove(string packageId)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_pinRemoveCmd, packageId));
+
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Unpinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Removes a pinned package from winget.
+        /// </summary>
+        /// <param name="package">The package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinRemove(WinGetPackage package)
+        {
+            if (package.HasShortenedId)
+            {
+                return PinRemove(package.Name);
+            }
+
+            return PinRemove(package.Id);
+        }
+
+        /// <summary>
+        /// Asynchronously removes a pinned package from winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinRemoveAsync(string packageId)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_pinRemoveCmd, packageId));
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Unpinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously removes a pinned package from winget.
+        /// </summary>
+        /// <param name="package">The package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinRemoveAsync(WinGetPackage package)
+        {
+            if (package.HasShortenedId)
+            {
+                return await PinRemoveAsync(package.Name);
+            }
+
+            return await PinRemoveAsync(package.Id);
+        }
+
+        /// <summary>
+        /// Removes a pinned package from winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinRemoveInstalled(string packageId)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(
+                        string.Format(_pinRemoveInstalledCmd, packageId));
+                
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Unpinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Removes a pinned package from winget.
+        /// </summary>
+        /// <param name="package">The package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool PinRemoveInstalled(WinGetPackage package)
+        {
+            if (package.HasShortenedId)
+            {
+                return PinRemoveInstalled(package.Name);
+            }
+
+            return PinRemoveInstalled(package.Id);
+        }
+
+        /// <summary>
+        /// Asynchronously removes a pinned package from winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinRemoveInstalledAsync(string packageId)
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(
+                        string.Format(_pinRemoveInstalledCmd, packageId));
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Unpinning the package failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously removes a pinned package from winget.
+        /// </summary>
+        /// <param name="package">The package to unpin.</param>
+        /// <returns>
+        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> PinRemoveInstalledAsync(WinGetPackage package)
+        {
+            if (package.HasShortenedId)
+            {
+                return await PinRemoveInstalledAsync(package.Name);
+            }
+
+            return await PinRemoveInstalledAsync(package.Id);
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Pin Reset---------------------------------------------------------------------------------
+        /// <summary>
+        /// Resets all pinned packages.
+        /// </summary>
+        /// <remarks>
+        /// This will remove all pins and it is not possible to restore them.
+        /// </remarks>
+        /// <returns>
+        /// <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public bool ResetPins()
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_pinResetCmd);
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Reseting of pins failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously resets all pinned packages.
+        /// </summary>
+        /// <remarks>
+        /// This will remove all pins and it is not possible to restore them.
+        /// </remarks>
+        /// <returns>
+        /// <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        public async Task<bool> ResetPinsAsync()
+        {
+            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            {
+                throw new WinGetFeatureNotSupportedException("1.5");
+            }
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(_pinResetCmd);
+
+                return result.Success;
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Reseting of pins failed.", e);
+            }
         }
         //---------------------------------------------------------------------------------------------
     }
