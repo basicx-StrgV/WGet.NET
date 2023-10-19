@@ -98,3 +98,24 @@ The code for adding a source could look like this:
 WinGetSourceManager sourceManager = new WinGetSourceManager();
 sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
 ```
+
+### Find Latest Versions of a Package:
+
+Using the ***WinGetPackageManager*** class you can use the `SearchPackage` capability to get the latest version of a package and then retrieve the version number from the `AvailableVersion` property.
+
+You would then be able to compare this to the latest version of your executing assembly and determine if you need to notify users of an available upgrade.
+
+```csharp
+Version latestPackageVersion = null;
+WinGetPackageManager packageManager = new WinGetPackageManager();
+string packageId = "nkdAgility.AzureDevOpsMigrationTools";
+var package = packageManager.SearchPackage(PackageId).SingleOrDefault();
+latestPackageVersion = new Version(package.AvailableVersion);
+
+var version = Assembly.GetEntryAssembly().GetName().Version;
+if (latestPackageVersion > version)
+{
+    // Notify user of available upgrade
+    _logger.LogWarning("You are currently running version {version} and a newer version ({latestVersion}) is available. You should update now using Winget command 'winget {packageId}' from the Windows Terminal.", version, latestPackageVersion, packageId);
+}
+```
