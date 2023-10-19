@@ -52,9 +52,10 @@ namespace WGetNET
         /// <summary>
         /// Uses the winget search function to search for a package that maches the given name.
         /// </summary>
-        /// <param name="packageName">
-        /// The name of the package for the search.
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
         /// </param>
+        /// <param name="exact">Use exact match.</param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
@@ -65,13 +66,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public List<WinGetPackage> SearchPackage(string packageName)
+        public List<WinGetPackage> SearchPackage(string packageId, bool exact = false)
         {
             try
             {
+                string cmd = string.Format(_searchCmd, packageId);
+
+                if (exact)
+                {
+                    cmd += " --exact";
+                }
+
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_searchCmd, packageName));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
             }
@@ -88,12 +95,13 @@ namespace WGetNET
         /// <summary>
         /// Uses the winget search function to search for a package that maches the given name.
         /// </summary>
-        /// <param name="packageName">
-        /// The name of the package for the search.
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
         /// </param>
         /// <param name="sourceName">
         /// The name of the source for the search.
         /// </param>
+        /// <param name="exact">Use exact match.</param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
@@ -104,13 +112,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public List<WinGetPackage> SearchPackage(string packageName, string sourceName)
+        public List<WinGetPackage> SearchPackage(string packageId, string sourceName, bool exact = false)
         {
             try
             {
+                string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
+
+                if (exact)
+                {
+                    cmd += " --exact";
+                }
+
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_searchBySourceCmd, packageName, sourceName));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
             }
@@ -127,9 +141,10 @@ namespace WGetNET
         /// <summary>
         /// Uses the winget search function to asynchronously search for a package that maches the given name.
         /// </summary>
-        /// <param name="packageName">
-        /// The name of the package for the search.
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
         /// </param>
+        /// <param name="exact">Use exact match.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -141,13 +156,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageName)
+        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, bool exact = false)
         {
             try
             {
+                string cmd = string.Format(_searchCmd, packageId);
+
+                if (exact)
+                {
+                    cmd += " --exact";
+                }
+
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_searchCmd, packageName));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
             }
@@ -164,12 +185,13 @@ namespace WGetNET
         /// <summary>
         /// Uses the winget search function to asynchronously search for a package that maches the given name.
         /// </summary>
-        /// <param name="packageName">
-        /// The name of the package for the search.
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
         /// </param>
         /// <param name="sourceName">
         /// The name of the source for the search.
         /// </param>
+        /// <param name="exact">Use exact match.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -181,13 +203,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageName, string sourceName)
+        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, string sourceName, bool exact = false)
         {
             try
             {
+                string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
+
+                if (exact)
+                {
+                    cmd += " --exact";
+                }
+
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_searchBySourceCmd, packageName, sourceName));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
             }
@@ -238,9 +266,10 @@ namespace WGetNET
         /// <summary>
         /// Gets a list of all installed packages. That match the provided name.
         /// </summary>
-        /// <param name="packageName">
-        /// The name of the package for the search.
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
         /// </param>
+        /// <param name="exact">Use exact match.</param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
@@ -251,12 +280,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public List<WinGetPackage> GetInstalledPackages(string packageName)
+        public List<WinGetPackage> GetInstalledPackages(string packageId, bool exact = false)
         {
             try
             {
+                string cmd = string.Format(_searchInstalledCmd, packageId);
+
+                if (exact)
+                {
+                    cmd += " --exact";
+                }
+
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(string.Format(_searchInstalledCmd, packageName));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
             }
@@ -273,12 +309,13 @@ namespace WGetNET
         /// <summary>
         /// Gets a list of all installed packages. That match the provided name.
         /// </summary>
-        /// <param name="packageName">
-        /// The name of the package for the search.
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
         /// </param>
         /// <param name="sourceName">
         /// The name of the source for the search.
         /// </param>
+        /// <param name="exact">Use exact match.</param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
@@ -289,12 +326,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public List<WinGetPackage> GetInstalledPackages(string packageName, string sourceName)
+        public List<WinGetPackage> GetInstalledPackages(string packageId, string sourceName, bool exact = false)
         {
             try
             {
+                string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
+
+                if (exact)
+                {
+                    cmd += " --exact";
+                }
+
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(string.Format(_searchInstalledBySourceCmd, packageName, sourceName));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
             }
@@ -344,9 +388,10 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously gets a list of all installed packages. That match the provided name.
         /// </summary>
-        /// <param name="packageName">
-        /// The name of the package for the search.
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
         /// </param>
+        /// <param name="exact">Use exact match.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -358,12 +403,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageName)
+        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, bool exact = false)
         {
             try
             {
+                string cmd = string.Format(_searchInstalledCmd, packageId);
+
+                if (exact)
+                {
+                    cmd += " --exact";
+                }
+
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(string.Format(_searchInstalledCmd, packageName));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
             }
@@ -380,12 +432,13 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously gets a list of all installed packages. That match the provided name.
         /// </summary>
-        /// <param name="packageName">
-        /// The name of the package for the search.
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
         /// </param>
         /// <param name="sourceName">
         /// The name of the source for the search.
         /// </param>
+        /// <param name="exact">Use exact match.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -397,12 +450,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageName, string sourceName)
+        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, string sourceName, bool exact = false)
         {
             try
             {
+                string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
+
+                if (exact)
+                {
+                    cmd += " --exact";
+                }
+
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(string.Format(_searchInstalledBySourceCmd, packageName, sourceName));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
             }
