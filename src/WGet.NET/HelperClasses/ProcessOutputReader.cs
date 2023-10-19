@@ -37,6 +37,12 @@ namespace WGetNET.HelperClasses
             //that will be thrown later, will be catched in the calling method.
             int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
 
+            if (labelLine < 0)
+            {
+                // Output does not contain any entries
+                return new List<WinGetPackage>();
+            }
+
             int[] columnList = GetColumnList(output[labelLine]);
 
             //Remove unneeded output Lines
@@ -202,6 +208,12 @@ namespace WGetNET.HelperClasses
             //If it dose not contain this line the resulting out of range exception,
             //that will be thrown later, will be catched in the calling method.
             int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
+
+            if (labelLine < 0)
+            {
+                // Output does not contain any entries
+                return new List<WinGetPinnedPackage>();
+            }
 
             int[] columnList = GetColumnList(output[labelLine], true);
 

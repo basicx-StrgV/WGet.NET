@@ -33,7 +33,8 @@ var NAVTREE =
     [ "💡 Getting started", "index.html#autotoc_md6", [
       [ "WinGetInfo:", "index.html#autotoc_md7", null ],
       [ "WinGetPackageManager:", "index.html#autotoc_md8", null ],
-      [ "WinGetSourceManager:", "index.html#autotoc_md9", null ]
+      [ "WinGetSourceManager:", "index.html#autotoc_md9", null ],
+      [ "Find Latest Versions of a Package:", "index.html#autotoc_md10", null ]
     ] ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ],

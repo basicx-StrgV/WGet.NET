@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -172,6 +172,22 @@ WinGetSourceManager:</h2>
  (WinGet can’t perform these actions without administrator privileges)</b></em></p>
 <p>The code for adding a source could look like this: </p><div class="fragment"><div class="line">WinGetSourceManager sourceManager = <span class="keyword">new</span> WinGetSourceManager();</div>
 <div class="line">sourceManager.AddSource(<span class="stringliteral">&quot;msstore&quot;</span>, <span class="stringliteral">&quot;https://storeedgefd.dsx.mp.microsoft.com/v9.0&quot;</span>, <span class="stringliteral">&quot;Microsoft.Rest&quot;</span>);</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
+Find Latest Versions of a Package:</h2>
+<p>Using the <em><b>WinGetPackageManager</b></em> class you can use the <code>GetInstalledPackages</code> capability to get the latest version of a package and then retrieve the version number from the <code>AvailableVersion</code> property.</p>
+<p>You would then be able to compare this to the current version of the package and determine if you need to notify users of an available upgrade.</p>
+<div class="fragment"><div class="line">Version currentPackageVersion = <span class="keyword">null</span>;</div>
+<div class="line">Version latestPackageVersion = <span class="keyword">null</span>;</div>
+<div class="line">WinGetPackageManager packageManager = <span class="keyword">new</span> WinGetPackageManager();</div>
+<div class="line"><span class="keywordtype">string</span> packageId = <span class="stringliteral">&quot;nkdAgility.AzureDevOpsMigrationTools&quot;</span>;</div>
+<div class="line">var <span class="keyword">package </span>= packageManager.GetInstalledPackages(packageId, true).FirstOrDefault();</div>
+<div class="line">currentPackageVersion = <span class="keyword">new</span> Version(package.Version);</div>
+<div class="line">latestPackageVersion = <span class="keyword">new</span> Version(package.AvailableVersion);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">if</span> (latestPackageVersion &gt; currentPackageVersion)</div>
+<div class="line">{</div>
+<div class="line">    Console.WriteLine(<span class="stringliteral">&quot;You are currently running version {currentVersion} and a newer version ({latestVersion}) is available. You should update now using Winget command &#39;winget {packageId}&#39; from the Windows Terminal.&quot;</span>, currentPackageVersion, latestPackageVersion, packageId);</div>
+<div class="line">}</div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
