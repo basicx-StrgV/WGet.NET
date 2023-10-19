@@ -19,7 +19,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the name of the source.
         /// </summary>
-        [Obsolete("The property \"SourceName\" is deprecated, please use \"Name\" instead.")]
+        [Obsolete("The property \"SourceName\" is deprecated, please use \"Name\" instead.", true)]
         [JsonIgnore]
         public string SourceName 
         {
@@ -64,7 +64,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the url of the source.
         /// </summary>
-        [Obsolete("The property \"SourceUrl\" is deprecated, please use \"Url\" instead.")]
+        [Obsolete("The property \"SourceUrl\" is deprecated, please use \"Url\" instead.", true)]
         [JsonIgnore]
         public string SourceUrl 
         {
@@ -117,7 +117,7 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-        [Obsolete("The property \"SourceType\" is deprecated, please use \"Type\" instead.")]
+        [Obsolete("The property \"SourceType\" is deprecated, please use \"Type\" instead.", true)]
         [JsonIgnore]
         public string SourceType 
         {
@@ -168,7 +168,7 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-        [Obsolete("The property \"SourceData\" is deprecated, please use \"Data\" instead.")]
+        [Obsolete("The property \"SourceData\" is deprecated, please use \"Data\" instead.", true)]
         [JsonIgnore]
         public string SourceData
         {
@@ -219,7 +219,7 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-        [Obsolete("The property \"SourceIdentifier\" is deprecated, please use \"Identifier\" instead.")]
+        [Obsolete("The property \"SourceIdentifier\" is deprecated, please use \"Identifier\" instead.", true)]
         [JsonIgnore]
         public string SourceIdentifier
         {

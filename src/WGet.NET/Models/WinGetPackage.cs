@@ -14,7 +14,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the name of the package.
         /// </summary>
-        [Obsolete("The property \"PackageName\" is deprecated, please use \"Name\" instead.")]
+        [Obsolete("The property \"PackageName\" is deprecated, please use \"Name\" instead.", true)]
         public string PackageName 
         { 
             get
@@ -58,7 +58,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the id of the package.
         /// </summary>
-        [Obsolete("The property \"PackageId\" is deprecated, please use \"Id\" instead.")]
+        [Obsolete("The property \"PackageId\" is deprecated, please use \"Id\" instead.", true)]
         public string PackageId 
         {
             get
@@ -102,7 +102,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the version of the package.
         /// </summary>
-        [Obsolete("The property \"PackageVersion\" is deprecated, please use \"Version\" instead.")]
+        [Obsolete("The property \"PackageVersion\" is deprecated, please use \"Version\" instead.", true)]
         public string PackageVersion 
         {
             get
@@ -146,7 +146,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the newest available version of the package.
         /// </summary>
-        [Obsolete("The property \"PackageAvailableVersion\" is deprecated, please use \"AvailableVersion\" instead.")]
+        [Obsolete("The property \"PackageAvailableVersion\" is deprecated, please use \"AvailableVersion\" instead.", true)]
         public string PackageAvailableVersion
         {
             get
@@ -190,7 +190,7 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the source name for the package.
         /// </summary>
-        [Obsolete("The property \"PackageSourceName\" is deprecated, please use \"SourceName\" instead.")]
+        [Obsolete("The property \"PackageSourceName\" is deprecated, please use \"SourceName\" instead.", true)]
         public string PackageSourceName
         {
             get
