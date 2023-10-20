@@ -40,6 +40,9 @@ namespace WGetNET
         private const string _pinRemoveInstalledCmd = "pin remove \"{0}\" --installed";
         private const string _pinResetCmd = "pin reset --force";
 
+        private readonly Version _downloadMinVersion = new(1, 6, 0);
+        private readonly Version _pinMinVersion = new(1, 5, 0);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
         /// </summary>
@@ -1066,7 +1069,7 @@ namespace WGetNET
         private string AddArgumentByVersion(string argument)
         {
             // Checking version to determine if "--include-unknown" is necessary.
-            if (WinGetVersionIsMatchOrAbove(1, 4))
+            if (CheckWinGetVersion(new Version(1, 4, 0)))
             {
                 // Winget version supports new argument, add "--include-unknown" to arguments
                 argument += $" {_includeUnknown}";
@@ -1448,9 +1451,9 @@ namespace WGetNET
         /// </exception>
         public bool Download(string packageId, string directory)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            if (!CheckWinGetVersion(_downloadMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.6");
+                throw new WinGetFeatureNotSupportedException(_downloadMinVersion);
             }
 
             try
@@ -1570,9 +1573,9 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> DownloadAsync(string packageId, string directory)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 6))
+            if (!CheckWinGetVersion(_downloadMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.6");
+                throw new WinGetFeatureNotSupportedException(_downloadMinVersion);
             }
 
             try
@@ -1692,9 +1695,9 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPinnedPackage> GetPinnedPackages()
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -1732,9 +1735,9 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPinnedPackage>> GetPinnedPackagesAsync()
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -1776,9 +1779,9 @@ namespace WGetNET
         /// </exception>
         public bool PinAdd(string packageId, bool blocking = false)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -1828,9 +1831,9 @@ namespace WGetNET
         /// </exception>
         public bool PinAdd(string packageId, string version)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -1930,9 +1933,9 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddAsync(string packageId, bool blocking = false)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -1983,9 +1986,9 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddAsync(string packageId, string version)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -2085,9 +2088,9 @@ namespace WGetNET
         /// </exception>
         public bool PinAddInstalled(string packageId, bool blocking = false)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -2138,9 +2141,9 @@ namespace WGetNET
         /// </exception>
         public bool PinAddInstalled(string packageId, string version)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -2240,9 +2243,9 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddInstalledAsync(string packageId, bool blocking = false)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -2293,9 +2296,9 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddInstalledAsync(string packageId, string version)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -2396,9 +2399,9 @@ namespace WGetNET
         /// </exception>
         public bool PinRemove(string packageId)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -2466,9 +2469,9 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinRemoveAsync(string packageId)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -2535,9 +2538,9 @@ namespace WGetNET
         /// </exception>
         public bool PinRemoveInstalled(string packageId)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -2604,9 +2607,9 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinRemoveInstalledAsync(string packageId)
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -2677,9 +2680,9 @@ namespace WGetNET
         /// </exception>
         public bool ResetPins()
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try
@@ -2720,9 +2723,9 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ResetPinsAsync()
         {
-            if (!WinGetVersionIsMatchOrAbove(1, 5))
+            if (!CheckWinGetVersion(_pinMinVersion))
             {
-                throw new WinGetFeatureNotSupportedException("1.5");
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
             try

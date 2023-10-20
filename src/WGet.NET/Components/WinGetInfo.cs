@@ -220,17 +220,21 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Checks if the installed WinGet version is the same or higher as the given version.
+        /// Checks if the installed WinGet version is between the given versions or the same.
         /// </summary>
-        /// <param name="major">The major version.</param>
-        /// <param name="minor">The minor version.</param>
+        /// <remarks>
+        /// If no max version is provided, no upper limit will be set.
+        /// </remarks>
+        /// <param name="minVersion">The min version for the check.</param>
+        /// <param name="maxVersion">The max version for the check.</param>
         /// <returns>
-        /// <see langword="true"/> if the installed WinGet version is the same or higher as the given version, or <see langword="false"/> if not.
+        /// <see langword="true"/> if the installed WinGet version matches the check, or <see langword="false"/> if not.
         /// </returns>
-        protected bool WinGetVersionIsMatchOrAbove(int major, int minor = 0)
+        protected bool CheckWinGetVersion(Version minVersion, Version? maxVersion = null)
         {
             Version winGetVersion = WinGetVersionObject;
-            if (winGetVersion.Major >= major && winGetVersion.Minor >= minor)
+            if ((winGetVersion.Major >= minVersion.Major && winGetVersion.Minor >= minVersion.Minor && winGetVersion.Build >= minVersion.Build) &&
+                ((maxVersion == null) || (winGetVersion.Major <= maxVersion.Major && winGetVersion.Minor <= maxVersion.Minor && winGetVersion.Build <= maxVersion.Build)))
             {
                 return true;
             }

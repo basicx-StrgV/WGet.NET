@@ -20,7 +20,7 @@ namespace WGetNET
         { 
             get 
             {
-                if (string.IsNullOrWhiteSpace(_minVersion))
+                if (_minVersion == null)
                 {
                     return "This feature is not supported in the installed WinGet version.";
                 }
@@ -30,13 +30,13 @@ namespace WGetNET
         
         }
 
-        private readonly string _minVersion = "";
+        private readonly Version? _minVersion;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetFeatureNotSupportedException"/> class.
         /// </summary>
         /// <param name="minVersion">Min WinGet version needed for the feature</param>
-        public WinGetFeatureNotSupportedException(string minVersion)
+        public WinGetFeatureNotSupportedException(Version minVersion)
         {
             _minVersion = minVersion;
         }
@@ -46,7 +46,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="minVersion">Min WinGet version needed for the feature</param>
         /// <param name="innerException">The inner exception</param>
-        public WinGetFeatureNotSupportedException(string minVersion, Exception innerException) : base(null, innerException)
+        public WinGetFeatureNotSupportedException(Version minVersion, Exception innerException) : base(null, innerException)
         {
             _minVersion = minVersion;
         }
