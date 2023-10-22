@@ -14,6 +14,7 @@ namespace WGetNET
     /// </summary>
     public class WinGetInfo
     {
+        private const string _infoCmd = "--info";
         private const string _versionCmd = "--version";
         private const string _exportSettingsCmd = "settings export";
 
@@ -220,6 +221,98 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Gets all WinGet related data provided by the WinGet info action.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="WGetNET.WinGetData"/> containing winget related information.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public WinGetData GetWinGetData()
+        {
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(_infoCmd);
+
+                InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
+                if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
+                {
+                    actionVersionId = InfoActionVersionId.VersionRange2;
+                }
+                else if (CheckWinGetVersion(new Version(1, 5, 441), new Version(1, 5, 441)))
+                {
+                    actionVersionId= InfoActionVersionId.VersionRange3;
+                }
+                else if (CheckWinGetVersion(new Version(1, 5, 1081)))
+                {
+                    actionVersionId = InfoActionVersionId.VersionRange4;
+                }
+
+                return ProcessOutputReader.ToWingetData(result.Output, actionVersionId);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Getting data failed.", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronous gets all WinGet related data provided by the WinGet info action.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="WGetNET.WinGetData"/> containing winget related information.
+        /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        public async Task<WinGetData> GetWinGetDataAsync()
+        {
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(_infoCmd);
+
+                InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
+                if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
+                {
+                    actionVersionId = InfoActionVersionId.VersionRange2;
+                }
+                else if (CheckWinGetVersion(new Version(1, 5, 441), new Version(1, 5, 441)))
+                {
+                    actionVersionId = InfoActionVersionId.VersionRange3;
+                }
+                else if (CheckWinGetVersion(new Version(1, 5, 1081)))
+                {
+                    actionVersionId = InfoActionVersionId.VersionRange4;
+                }
+
+                return ProcessOutputReader.ToWingetData(result.Output, actionVersionId);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Getting data failed.", e);
+            }
+        }
+
+        /// <summary>
         /// Checks if the installed WinGet version is between the given versions or the same.
         /// </summary>
         /// <remarks>
@@ -233,8 +326,10 @@ namespace WGetNET
         protected bool CheckWinGetVersion(Version minVersion, Version? maxVersion = null)
         {
             Version winGetVersion = WinGetVersionObject;
-            if ((winGetVersion.Major >= minVersion.Major && winGetVersion.Minor >= minVersion.Minor && winGetVersion.Build >= minVersion.Build) &&
-                ((maxVersion == null) || (winGetVersion.Major <= maxVersion.Major && winGetVersion.Minor <= maxVersion.Minor && winGetVersion.Build <= maxVersion.Build)))
+            if ((winGetVersion.Major >= minVersion.Major && winGetVersion.Minor >= minVersion.Minor && 
+                ((winGetVersion.Minor != minVersion.Minor) || (winGetVersion.Minor == minVersion.Minor && winGetVersion.Build >= minVersion.Build))) &&
+                ((maxVersion == null) || (winGetVersion.Major <= maxVersion.Major && winGetVersion.Minor <= maxVersion.Minor && 
+                ((winGetVersion.Minor != maxVersion.Minor) || (winGetVersion.Minor == maxVersion.Minor && winGetVersion.Build <= maxVersion.Build)))))
             {
                 return true;
             }

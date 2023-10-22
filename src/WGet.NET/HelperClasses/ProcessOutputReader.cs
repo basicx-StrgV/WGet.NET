@@ -13,6 +13,7 @@ namespace WGetNET.HelperClasses
     /// </summary>
     internal static class ProcessOutputReader
     {
+        //---To Package List------------------------------------------------------------------------------------------
         /// <summary>
         /// Converts a <see cref="System.Collections.Generic.List{T}"/> 
         /// of output lines from a winget process to a list of <see cref="WGetNET.WinGetPackage"/>'s.
@@ -190,13 +191,15 @@ namespace WGetNET.HelperClasses
 
             return resultList;
         }
+        //------------------------------------------------------------------------------------------------------------
 
+        //---To Pinned Package List-----------------------------------------------------------------------------------
         /// <summary>
         /// Converts a <see cref="System.Collections.Generic.List{T}"/> 
         /// of output lines from a winget process to a list of <see cref="WGetNET.WinGetPinnedPackage"/>'s.
         /// </summary>
         /// <param name="output">
-        /// A <see cref="System.Collections.Generic.List{T}"/> of output lines from a winget process.
+        /// The <see langword="array"/> of output lines from a winget process.
         /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPinnedPackage"/>'s.
@@ -345,13 +348,15 @@ namespace WGetNET.HelperClasses
 
             return resultList;
         }
+        //------------------------------------------------------------------------------------------------------------
 
+        //---To Source List-------------------------------------------------------------------------------------------
         /// <summary>
         /// Converts a <see cref="System.Collections.Generic.List{T}"/> 
         /// of output lines from a winget process to a list of <see cref="WGetNET.WinGetSource"/>'s.
         /// </summary>
         /// <param name="output">
-        /// A <see cref="System.Collections.Generic.List{T}"/> of output lines from a winget process.
+        /// The <see langword="array"/> of output lines from a winget process.
         /// </param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/>'s.
@@ -373,37 +378,10 @@ namespace WGetNET.HelperClasses
         }
 
         /// <summary>
-        /// Writes the export result to a <see cref="System.String"/>.
-        /// </summary>
-        /// <param name="result">
-        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
-        /// </param>
-        /// <returns>
-        /// The <see cref="System.String"/> containing the export result.
-        /// </returns>
-        public static string ExportOutputToString(ProcessResult result)
-        {
-            if (result.Success)
-            {
-                StringBuilder outputBuilder = new();
-                foreach (string line in result.Output)
-                {
-                    outputBuilder.Append(line);
-                }
-
-                return outputBuilder.ToString().Trim();
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
-
-        /// <summary>
         /// Creates a source list from output.
         /// </summary>
         /// <param name="output">
-        /// The <see langword="array"/> containing the output.
+        /// The <see langword="array"/> containing the winget output.
         /// </param>
         /// <param name="columnList">
         /// A <see cref="System.Int32"/> <see langword="array"/> containing the column start indexes.
@@ -438,7 +416,380 @@ namespace WGetNET.HelperClasses
 
             return resultList;
         }
-    
+        //------------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Creates a <see cref="WGetNET.WinGetData"/> object from the winget output.
+        /// </summary>
+        /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+        /// <param name="actionVersionId">Containes info about the winget version range for the output.</param>
+        /// <returns>
+        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// </returns>
+        public static WinGetData ToWingetData(string[] output, InfoActionVersionId actionVersionId)
+        {
+            if (output.Length <= 0)
+            {
+                return WinGetData.Empty;
+            }
+
+            return ReadDataByRange(output, actionVersionId);
+        }
+
+        /// <summary>
+        /// Reads the version number from the winget info output.
+        /// </summary>
+        /// <param name="output"></param>
+        /// <returns></returns>
+        private static string ReadVersionFromData(string[] output)
+        {
+            string version = string.Empty;
+
+            string[] versionLineContent = output[0].Split((char)32);
+            for (int i = 0; i < versionLineContent.Length; i++)
+            {
+#if NETCOREAPP3_1_OR_GREATER
+                if (versionLineContent[i].Trim().StartsWith('v'))
+                {
+                    version = versionLineContent[i].Trim()[1..];
+                    break;
+                }
+#elif NETSTANDARD2_0
+                if (versionLineContent[i].Trim().StartsWith("v"))
+                {
+                    version = versionLineContent[i].Trim().Substring(1);
+                    break;
+                }
+#endif
+            }
+
+            return version;
+        }
+
+        /// <summary>
+        /// Initializes the reading of the data for the specific version range.
+        /// </summary>
+        /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+        /// <param name="actionVersionId">Containes info about the winget version range for the output.</param>
+        /// <returns>
+        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// </returns>
+        private static WinGetData ReadDataByRange(string[] output, InfoActionVersionId actionVersionId)
+        {
+            return actionVersionId switch
+            {
+                InfoActionVersionId.VersionRange1 => ReadDataForRange1(output),
+                InfoActionVersionId.VersionRange2 => ReadDataForRange2(output),
+                InfoActionVersionId.VersionRange3 => ReadDataForRange3(output),
+                InfoActionVersionId.VersionRange4 => ReadDataForRange4(output),
+                _ => WinGetData.Empty,
+            };
+        }
+
+        /// <summary>
+        /// Reads the data from the winget info output for the version range 1.
+        /// </summary>
+        /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+        /// <returns>
+        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// </returns>
+        private static WinGetData ReadDataForRange1(string[] output)
+        {
+            string version = ReadVersionFromData(output);
+
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                // Return if version number could not be determined, because the outupt is probably not correct.
+                return WinGetData.Empty;
+            }
+
+            List<WinGetInfoEntry> directories = new();
+            string[] logsEntry = output[7].Split(':');
+            if (logsEntry.Length == 2)
+            {
+                directories.Add(new WinGetInfoEntry(logsEntry[0].Trim(), logsEntry[1].Trim()));
+            }
+
+            // Remove unnasesary range from output
+            output = ArrayManager.RemoveRange(output, 0, 11);
+
+            List<WinGetInfoEntry> links = ReadLinks(output);
+
+            return new WinGetData(version, directories, links, new());
+        }
+
+        /// <summary>
+        /// Reads the data from the winget info output for the version range 1.
+        /// </summary>
+        /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+        /// <returns>
+        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// </returns>
+        private static WinGetData ReadDataForRange2(string[] output)
+        {
+            string version = ReadVersionFromData(output);
+
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                // Return if version number could not be determined, because the outupt is probably not correct.
+                return WinGetData.Empty;
+            }
+
+            List<WinGetInfoEntry> directories = new();
+            string[] logsEntry = output[7].Split(':');
+            if (logsEntry.Length == 2)
+            {
+                directories.Add(new WinGetInfoEntry(logsEntry[0].Trim(), logsEntry[1].Trim()));
+            }
+
+            string[] userSettingsEntry = output[9].Split(':');
+            if (userSettingsEntry.Length == 2)
+            {
+                directories.Add(new WinGetInfoEntry(userSettingsEntry[0].Trim(), userSettingsEntry[1].Trim()));
+            }
+
+            // Remove unnasesary range from output
+            output = ArrayManager.RemoveRange(output, 0, 13);
+
+            List<WinGetInfoEntry> links = ReadLinks(output);
+
+            return new WinGetData(version, directories, links, new List<WinGetInfoEntry>());
+        }
+
+        /// <summary>
+        /// Reads the data from the winget info output for the version range 1.
+        /// </summary>
+        /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+        /// <returns>
+        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// </returns>
+        private static WinGetData ReadDataForRange3(string[] output)
+        {
+            string version = ReadVersionFromData(output);
+
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                // Return if version number could not be determined, because the outupt is probably not correct.
+                return WinGetData.Empty;
+            }
+
+            List<WinGetInfoEntry> directories = new();
+            string[] logsEntry = output[7].Split(':');
+            if (logsEntry.Length == 2)
+            {
+                directories.Add(new WinGetInfoEntry(logsEntry[0].Trim(), logsEntry[1].Trim()));
+            }
+
+            string[] userSettingsEntry = output[9].Split(':');
+            if (userSettingsEntry.Length == 2)
+            {
+                directories.Add(new WinGetInfoEntry(userSettingsEntry[0].Trim(), userSettingsEntry[1].Trim()));
+            }
+
+            // Remove unnasesary range from output
+            output = ArrayManager.RemoveRange(output, 0, 13);
+
+            List<WinGetInfoEntry> links = ReadLinks(output);
+
+            // Remove links area and admin settings header range from output
+            output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
+
+            List<WinGetInfoEntry> adminSetting = ReadAdminSettings(output);
+
+            return new WinGetData(version, directories, links, adminSetting);
+        }
+
+        /// <summary>
+        /// Reads the data from the winget info output for the version range 1.
+        /// </summary>
+        /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+        /// <returns>
+        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// </returns>
+        private static WinGetData ReadDataForRange4(string[] output)
+        {
+            string version = ReadVersionFromData(output);
+
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                // Return if version number could not be determined, because the outupt is probably not correct.
+                return WinGetData.Empty;
+            }
+
+            // Remove unnasesary range from output
+            output = ArrayManager.RemoveRange(output, 0, 9);
+
+            List<WinGetInfoEntry> directories = ReadDirectories(output);
+
+            // Remove directories area and links header range from output
+            output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
+
+            List<WinGetInfoEntry> links = ReadLinks(output);
+
+            // Remove links area and admin settings header range from output
+            output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
+
+            List<WinGetInfoEntry> adminSetting = ReadAdminSettings(output);
+
+            return new WinGetData(version, directories, links, adminSetting);
+        }
+
+        private static List<WinGetInfoEntry> ReadDirectories(string[] output)
+        {
+            List<WinGetInfoEntry> directories = new();
+
+            StringBuilder nameBuilder = new();
+            StringBuilder directoryBuilder = new();
+            for (int i = 0; i < output.Length; i++)
+            {
+                if (string.IsNullOrWhiteSpace(output[i]))
+                {
+                    break;
+                }
+
+                string[] directoryEntry = ArrayManager.RemoveEmptyEntries(output[i].Split((char)32));
+
+                nameBuilder.Clear();
+                int startOfDirectory = 0;
+                for (int j = 0; j < directoryEntry.Length; j++)
+                {
+#if NETCOREAPP3_1_OR_GREATER
+                    if (directoryEntry[j].StartsWith('%') || directoryEntry[j].Contains(":\\"))
+                    {
+                        // Start of the directory reached, stop building name.
+                        startOfDirectory = j;
+                        break;
+                    }
+#elif NETSTANDARD2_0
+                    if (directoryEntry[j].StartsWith("%") || directoryEntry[j].Contains(":\\"))
+                    {
+                        // Start of the directory reached, stop building name.
+                        startOfDirectory = j;
+                        break;
+                    }
+#endif
+
+                    if (j > 0)
+                    {
+                        // Add a space in front of every part of the name that comes after the first on.
+                        nameBuilder.Append((char)32);
+                    }
+
+                    nameBuilder.Append(directoryEntry[j].Trim());
+                }
+
+                directoryEntry = ArrayManager.RemoveRange(directoryEntry, 0, startOfDirectory);
+
+                directoryBuilder.Clear();
+                for (int j = 0; j < directoryEntry.Length; j++)
+                {
+                    if (j > 0)
+                    {
+                        // Add a space in front of every part of the directory that comes after the first on.
+                        directoryBuilder.Append((char)32);
+                    }
+
+                    directoryBuilder.Append(directoryEntry[j].Trim());
+                }
+
+                directories.Add(new WinGetInfoEntry(nameBuilder.ToString(), directoryBuilder.ToString()));
+            }
+
+            return directories;
+        }
+
+        private static List<WinGetInfoEntry> ReadLinks(string[] output)
+        {
+            List<WinGetInfoEntry> links = new();
+
+            StringBuilder nameBuilder = new();
+            for (int i = 0; i < output.Length; i++)
+            {
+                if (string.IsNullOrWhiteSpace(output[i]))
+                {
+                    break;
+                }
+
+                string[] linksEntry = ArrayManager.RemoveEmptyEntries(output[i].Split((char)32));
+
+#if NETCOREAPP3_1_OR_GREATER
+                string link = linksEntry[^1].Trim();
+#elif NETSTANDARD2_0
+                string link = linksEntry[linksEntry.Length - 1].Trim();
+#endif
+
+                // Remove link from entry, so it only contains the name
+                linksEntry = ArrayManager.RemoveRange(linksEntry, linksEntry.Length - 1, 1);
+
+                nameBuilder.Clear();
+                for (int j = 0; j < linksEntry.Length; j++)
+                {
+                    if (j > 0)
+                    {
+                        // Add a space in front of every part of the name that comes after the first on.
+                        nameBuilder.Append((char)32);
+                    }
+                    nameBuilder.Append(linksEntry[j].Trim());
+                }
+
+                links.Add(new WinGetInfoEntry(nameBuilder.ToString(), link));
+            }
+
+            return links;
+        }
+
+        private static List<WinGetInfoEntry> ReadAdminSettings(string[] output)
+        {
+            List<WinGetInfoEntry> adminSetting = new();
+
+            for (int i = 0; i < output.Length; i++)
+            {
+                if (string.IsNullOrWhiteSpace(output[i]))
+                {
+                    break;
+                }
+
+                string[] settingsEntry = ArrayManager.RemoveEmptyEntries(output[i].Split((char)32));
+
+                if (settingsEntry.Length == 2)
+                {
+                    adminSetting.Add(new WinGetInfoEntry(settingsEntry[0].Trim(), settingsEntry[1].Trim()));
+                }
+            }
+
+            return adminSetting;
+        }
+
+        //---Other----------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Writes the export result to a <see cref="System.String"/>.
+        /// </summary>
+        /// <param name="result">
+        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
+        /// </param>
+        /// <returns>
+        /// The <see cref="System.String"/> containing the export result.
+        /// </returns>
+        public static string ExportOutputToString(ProcessResult result)
+        {
+            if (result.Success)
+            {
+                StringBuilder outputBuilder = new();
+                foreach (string line in result.Output)
+                {
+                    outputBuilder.Append(line);
+                }
+
+                return outputBuilder.ToString().Trim();
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+        //------------------------------------------------------------------------------------------------------------
+
+        //---Helper---------------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets all column start indexes from the input line.
         /// </summary>
@@ -499,5 +850,6 @@ namespace WGetNET.HelperClasses
 
             return false;
         }
+        //------------------------------------------------------------------------------------------------------------
     }
 }

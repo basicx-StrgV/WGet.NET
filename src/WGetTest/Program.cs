@@ -29,6 +29,9 @@ namespace WGetTest
 
                 Version winGetVersionObject = connector.WinGetVersionObject;
 
+                WinGetData data = info.GetWinGetData();
+                Console.WriteLine(data.WinGetVersion);
+
                 //---Tests-----------------------------------------------------------------------------
                 List<WinGetPackage> test = connector.SearchPackage("git", "winget");
                 Console.WriteLine(test[3].Name);

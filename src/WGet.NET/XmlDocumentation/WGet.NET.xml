@@ -197,14 +197,47 @@
             Please see inner exception.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetInfo.WinGetVersionIsMatchOrAbove(System.Int32,System.Int32)">
+        <member name="M:WGetNET.WinGetInfo.GetWinGetData">
             <summary>
-            Checks if the installed WinGet version is the same or higher as the given version.
+            Gets all WinGet related data provided by the WinGet info action.
             </summary>
-            <param name="major">The major version.</param>
-            <param name="minor">The minor version.</param>
             <returns>
-            <see langword="true"/> if the installed WinGet version is the same or higher as the given version, or <see langword="false"/> if not.
+            A <see cref="T:WGetNET.WinGetData"/> containing winget related information.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetInfo.GetWinGetDataAsync">
+            <summary>
+            Asynchronous gets all WinGet related data provided by the WinGet info action.
+            </summary>
+            <returns>
+            A <see cref="T:WGetNET.WinGetData"/> containing winget related information.
+            </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetInfo.CheckWinGetVersion(System.Version,System.Version)">
+            <summary>
+            Checks if the installed WinGet version is between the given versions or the same.
+            </summary>
+            <remarks>
+            If no max version is provided, no upper limit will be set.
+            </remarks>
+            <param name="minVersion">The min version for the check.</param>
+            <param name="maxVersion">The max version for the check.</param>
+            <returns>
+            <see langword="true"/> if the installed WinGet version matches the check, or <see langword="false"/> if not.
             </returns>
         </member>
         <member name="T:WGetNET.WinGetPackageManager">
@@ -2069,19 +2102,6 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportStringToSourcesAsync(System.String)">
-            <summary>
-            Asynchronously convert the string output from winget source export to a 
-            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
-            </summary>
-            <param name="exportString">
-            A <see cref="T:System.String"/> containing the winget source export content.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
-            </returns>
-        </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSource(System.Collections.Generic.List{WGetNET.WinGetSource})">
             <summary>
             Imports sources into winget.
@@ -2280,6 +2300,31 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
+        <member name="T:WGetNET.InfoActionVersionId">
+            <summary>
+            Defines identifiers for all version ranges that generate a different output when using "winget --info".
+            </summary>
+        </member>
+        <member name="F:WGetNET.InfoActionVersionId.VersionRange1">
+            <summary>
+            First WinGet version to version 1.4.3132
+            </summary>
+        </member>
+        <member name="F:WGetNET.InfoActionVersionId.VersionRange2">
+            <summary>
+            Version 1.4.3531 to version 1.5.101
+            </summary>
+        </member>
+        <member name="F:WGetNET.InfoActionVersionId.VersionRange3">
+            <summary>
+            Version 1.5.441
+            </summary>
+        </member>
+        <member name="F:WGetNET.InfoActionVersionId.VersionRange4">
+            <summary>
+            Version 1.5.1081 to newest version
+            </summary>
+        </member>
         <member name="T:WGetNET.PinType">
             <summary>
             Enum of winget pin types.
@@ -2360,13 +2405,13 @@
             Gets a message that describes the current exception.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetFeatureNotSupportedException.#ctor(System.String)">
+        <member name="M:WGetNET.WinGetFeatureNotSupportedException.#ctor(System.Version)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetFeatureNotSupportedException"/> class.
             </summary>
             <param name="minVersion">Min WinGet version needed for the feature</param>
         </member>
-        <member name="M:WGetNET.WinGetFeatureNotSupportedException.#ctor(System.String,System.Exception)">
+        <member name="M:WGetNET.WinGetFeatureNotSupportedException.#ctor(System.Version,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetFeatureNotSupportedException"/> class.
             </summary>
@@ -2484,6 +2529,15 @@
             A <see cref="T:System.Int32"/> representing the index of the entry (-1 if the entry is not found).
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.ArrayManager.RemoveEmptyEntries(System.String[])">
+            <summary>
+            Removes empty entries from a <see langword="array"/> of <see cref="T:System.String"/>'s.
+            </summary>
+            <param name="inputArray">The input <see langword="array"/>.</param>
+            <returns>
+            The <see langword="array"/> with empty entries removed.
+            </returns>
+        </member>
         <member name="M:WGetNET.HelperClasses.ArrayManager.CopyTo``1(``0[],System.Int32)">
             <summary>
             Copys a <see langword="array"/> to a new one.
@@ -2571,21 +2625,6 @@
             A nullable object of the given class type. It will be <see langword="null"/> if the action failed.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            The result is a nullable object of the given class type. It will be <see langword="null"/> if the action failed.
-            </returns>
-        </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
@@ -2659,7 +2698,7 @@
             of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
             </summary>
             <param name="output">
-            A <see cref="T:System.Collections.Generic.List`1"/> of output lines from a winget process.
+            The <see langword="array"/> of output lines from a winget process.
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
@@ -2685,10 +2724,87 @@
             of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetSource"/>'s.
             </summary>
             <param name="output">
-            A <see cref="T:System.Collections.Generic.List`1"/> of output lines from a winget process.
+            The <see langword="array"/> of output lines from a winget process.
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateSourceListFromOutput(System.String[],System.Int32[])">
+            <summary>
+            Creates a source list from output.
+            </summary>
+            <param name="output">
+            The <see langword="array"/> containing the winget output.
+            </param>
+            <param name="columnList">
+            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToWingetData(System.String[],WGetNET.InfoActionVersionId)">
+            <summary>
+            Creates a <see cref="T:WGetNET.WinGetData"/> object from the winget output.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <param name="actionVersionId">Containes info about the winget version range for the output.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadVersionFromData(System.String[])">
+            <summary>
+            Reads the version number from the winget info output.
+            </summary>
+            <param name="output"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataByRange(System.String[],WGetNET.InfoActionVersionId)">
+            <summary>
+            Initializes the reading of the data for the specific version range.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <param name="actionVersionId">Containes info about the winget version range for the output.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange1(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange2(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange3(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange4(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ExportOutputToString(WGetNET.ProcessResult)">
@@ -2700,20 +2816,6 @@
             </param>
             <returns>
             The <see cref="T:System.String"/> containing the export result.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateSourceListFromOutput(System.String[],System.Int32[])">
-            <summary>
-            Creates a source list from output.
-            </summary>
-            <param name="output">
-            The <see langword="array"/> containing the output.
-            </param>
-            <param name="columnList">
-            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnList(System.String,System.Boolean)">
@@ -2750,6 +2852,96 @@
             <summary>
             Gets if the process finished successfully.
             </summary>
+        </member>
+        <member name="T:WGetNET.WinGetData">
+            <summary>
+            Represents WinGet related data
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetData.WinGetVersionString">
+            <summary>
+            Gets the version number of the winget installation as a <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetData.WinGetVersion">
+            <summary>
+            Gets the version number of the winget installation.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetData.Directories">
+            <summary>
+            Gets a list of the winget direcories.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetData.Links">
+            <summary>
+            Gets a list of the winget related links.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetData.AdminSetting">
+            <summary>
+            Gets a list of the winget admin setting states.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetData.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetData.Empty">
+            <summary>
+            Gets an empty instance of this object.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetData.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry})">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetData"/> class.
+            </summary>
+            <param name="wingetVersion">The installed winget version.</param>
+            <param name="directories">
+            <see cref="T:System.Collections.Generic.List`1"/> of info entries containing the WinGet directories.
+            </param>
+            <param name="links">
+            <see cref="T:System.Collections.Generic.List`1"/> of info entries containing WinGet related links.
+            </param>
+            <param name="adminSetting">
+            <see cref="T:System.Collections.Generic.List`1"/> of info entries containing the WinGet admin setting states.
+            </param>
+        </member>
+        <member name="T:WGetNET.WinGetInfoEntry">
+            <summary>
+            Represents a basic WinGet info entry
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfoEntry.Name">
+            <summary>
+            Gets the name of this info entry.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfoEntry.Content">
+            <summary>
+            Gets the content of this info entry.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfoEntry.HasShortenedContent">
+            <summary>
+            Gets if content of the package is shortened.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetInfoEntry.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetInfoEntry"/> class.
+            </summary>
+            <param name="name">The name of the info entry.</param>
+            <param name="content">The content of the info entry.</param>
+        </member>
+        <member name="M:WGetNET.WinGetInfoEntry.CheckShortenedContent(System.String)">
+            <summary>
+            Checks if the content is possibly shortened.
+            </summary>
+            <returns>
+            <see langword="true"/> if the content is shortened or <see langword="false"/> if not.
+            </returns>
         </member>
         <member name="T:WGetNET.WinGetPackage">
             <summary>
