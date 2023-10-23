@@ -2642,6 +2642,38 @@
         </member>
         <member name="M:WGetNET.HelperClasses.PrivilegeChecker.CurrentUserIsAdmin">
             <summary>
+            Checks if the current user is an.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+            </returns>
+        </member>
+        <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
+            provides methods for checking user privileges.
+            </summary>
+        </member>
+        <member name="M:WGetNET.HelperClasses.PrivilegeChecker.CheckAdministratorPrivileges">
+            <summary>
+            Check if the current user has administrator privileges.
+            </summary>
+            <returns>
+            <see langword="true"/> if the current user has administrator privileges and
+            <see langword="false"/> if not.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.PrivilegeChecker.CurrentUserIsAdmin">
+            <summary>
             Checks if the current user is an administrator.
             </summary>
             <returns>
@@ -2692,36 +2724,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToPinnedPackageList(System.String[])">
-            <summary>
-            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
-            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
-            </summary>
-            <param name="output">
-            The <see langword="array"/> of output lines from a winget process.
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePinnedPackageListFromOutput(System.String[],System.Int32[])">
-            <summary>
-            Creates a pinned package list from output.
-            </summary>
-            <param name="output">
-            The <see langword="array"/> containing the output.
-            </param>
-            <param name="columnList">
-            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToSourceList(System.String[])">
-            <summary>
-            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
-            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetSource"/>'s.
+        <member name="M:WGetNET.HelperClasses.Procf <see cref="T:WGetNET.WinGetSource"/>'s.
             </summary>
             <param name="output">
             The <see langword="array"/> of output lines from a winget process.
@@ -2769,6 +2772,35 @@
             <param name="actionVersionId">Containes info about the winget version range for the output.</param>
             <returns>
             The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange1(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange2(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange3(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            </returns>
+           The <see cref="T:WGetNET.WinGetData"/> object created from the output.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange1(System.String[])">

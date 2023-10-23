@@ -504,10 +504,10 @@ namespace WGetNET.HelperClasses
             }
 
             List<WinGetInfoEntry> directories = new();
-            string[] logsEntry = output[7].Split(':');
-            if (logsEntry.Length == 2)
+            WinGetInfoEntry? logs = ReadSingleEntry(output, 7);
+            if (logs != null)
             {
-                directories.Add(new WinGetInfoEntry(logsEntry[0].Trim(), logsEntry[1].Trim()));
+                directories.Add(logs);
             }
 
             // Remove unnasesary range from output
@@ -536,16 +536,16 @@ namespace WGetNET.HelperClasses
             }
 
             List<WinGetInfoEntry> directories = new();
-            string[] logsEntry = output[7].Split(':');
-            if (logsEntry.Length == 2)
+            WinGetInfoEntry? logs = ReadSingleEntry(output, 7);
+            if (logs != null)
             {
-                directories.Add(new WinGetInfoEntry(logsEntry[0].Trim(), logsEntry[1].Trim()));
+                directories.Add(logs);
             }
 
-            string[] userSettingsEntry = output[9].Split(':');
-            if (userSettingsEntry.Length == 2)
+            WinGetInfoEntry? userSettings = ReadSingleEntry(output, 9);
+            if (userSettings != null)
             {
-                directories.Add(new WinGetInfoEntry(userSettingsEntry[0].Trim(), userSettingsEntry[1].Trim()));
+                directories.Add(userSettings);
             }
 
             // Remove unnasesary range from output
@@ -574,16 +574,16 @@ namespace WGetNET.HelperClasses
             }
 
             List<WinGetInfoEntry> directories = new();
-            string[] logsEntry = output[7].Split(':');
-            if (logsEntry.Length == 2)
+            WinGetInfoEntry? logs = ReadSingleEntry(output, 7);
+            if (logs != null)
             {
-                directories.Add(new WinGetInfoEntry(logsEntry[0].Trim(), logsEntry[1].Trim()));
+                directories.Add(logs);
             }
 
-            string[] userSettingsEntry = output[9].Split(':');
-            if (userSettingsEntry.Length == 2)
+            WinGetInfoEntry? userSettings = ReadSingleEntry(output, 9);
+            if (userSettings != null)
             {
-                directories.Add(new WinGetInfoEntry(userSettingsEntry[0].Trim(), userSettingsEntry[1].Trim()));
+                directories.Add(userSettings);
             }
 
             // Remove unnasesary range from output
@@ -632,6 +632,16 @@ namespace WGetNET.HelperClasses
             List<WinGetInfoEntry> adminSetting = ReadAdminSettings(output);
 
             return new WinGetData(version, directories, links, adminSetting);
+        }
+
+        private static WinGetInfoEntry? ReadSingleEntry(string[] output, int index)
+        {
+            string[] entry = output[index].Split(':');
+            if (entry.Length == 2)
+            {
+                return new WinGetInfoEntry(entry[0].Trim(), entry[1].Trim());
+            }
+            return null;
         }
 
         private static List<WinGetInfoEntry> ReadDirectories(string[] output)
