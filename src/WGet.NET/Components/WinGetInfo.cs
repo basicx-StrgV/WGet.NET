@@ -377,16 +377,6 @@ namespace WGetNET
                 versionString = versionString[1..].Trim();
 
             }
-
-            //Remove text from the end of the version string.
-            for (int i = 0; i < versionString.Length; i++)
-            {
-                if (versionString[i] == '-')
-                {
-                    versionString = versionString[0..i];
-                    break;
-                }
-            }
 #elif NETSTANDARD2_0
             //Remove the first letter from the version string.
             if (versionString.StartsWith("v"))
@@ -394,24 +384,9 @@ namespace WGetNET
                 versionString = versionString.Substring(1).Trim();
 
             }
-
-            //Remove text from the end of the version string.
-            for (int i = 0; i < versionString.Length; i++)
-            {
-                if (versionString[i] == '-')
-                {
-                    versionString = versionString.Substring(0, i);
-                    break;
-                }
-            }
 #endif
 
-            if (!Version.TryParse(versionString, out Version? versionObject))
-            {
-                versionObject = Version.Parse("0.0.0");
-            }
-
-            return versionObject;
+            return VersionParser.Parse(versionString);
         }
     }
 }
