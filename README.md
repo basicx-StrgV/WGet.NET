@@ -41,6 +41,7 @@ https://basicx-strgv.github.io/WGet.NET/
   - [x] Export Settings
   - [x] Download package installer
   - [x] Manage pinned packages
+  - [x] Access info of the WinGet installation
 - Other
   - [x] Asynchronous Execution
 
