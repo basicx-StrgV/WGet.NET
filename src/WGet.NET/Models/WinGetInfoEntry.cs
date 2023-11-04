@@ -42,9 +42,9 @@ namespace WGetNET
             }
         }
 
-        private readonly string _name;
-        private readonly string _content;
-        private readonly bool _hasShortenedContent;
+        private protected readonly string _name;
+        private protected readonly string _content;
+        private protected readonly bool _hasShortenedContent;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetInfoEntry"/> class.

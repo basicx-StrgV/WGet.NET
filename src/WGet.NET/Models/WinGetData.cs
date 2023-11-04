@@ -59,7 +59,7 @@ namespace WGetNET
         /// <summary>
         /// Gets a list of the winget admin setting states.
         /// </summary>
-        public List<WinGetInfoEntry> AdminSetting
+        public List<WinGetAdminSetting> AdminSetting
         {
             get
             {
@@ -89,7 +89,7 @@ namespace WGetNET
         {
             get
             {
-                return new WinGetData("", new List<WinGetInfoEntry>(), new List<WinGetInfoEntry>(), new List<WinGetInfoEntry>());
+                return new WinGetData("", new List<WinGetInfoEntry>(), new List<WinGetInfoEntry>(), new List<WinGetAdminSetting>());
             }
         }
 
@@ -97,7 +97,7 @@ namespace WGetNET
         private readonly Version _wingetVersion;
         private readonly List<WinGetInfoEntry> _directories;
         private readonly List<WinGetInfoEntry> _links;
-        private readonly List<WinGetInfoEntry> _adminSetting;
+        private readonly List<WinGetAdminSetting> _adminSetting;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetData"/> class.
@@ -112,7 +112,7 @@ namespace WGetNET
         /// <param name="adminSetting">
         /// <see cref="System.Collections.Generic.List{T}"/> of info entries containing the WinGet admin setting states.
         /// </param>
-        internal WinGetData(string wingetVersion, List<WinGetInfoEntry> directories, List<WinGetInfoEntry> links, List<WinGetInfoEntry> adminSetting)
+        internal WinGetData(string wingetVersion, List<WinGetInfoEntry> directories, List<WinGetInfoEntry> links, List<WinGetAdminSetting> adminSetting)
         {
             _wingetVersionString = wingetVersion;
             _wingetVersion = CreateVersionObject(wingetVersion);

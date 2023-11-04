@@ -515,7 +515,7 @@ namespace WGetNET.HelperClasses
 
             List<WinGetInfoEntry> links = ReadLinks(output);
 
-            return new WinGetData(version, directories, links, new());
+            return new WinGetData(version, directories, links, new List<WinGetAdminSetting>());
         }
 
         /// <summary>
@@ -553,7 +553,7 @@ namespace WGetNET.HelperClasses
 
             List<WinGetInfoEntry> links = ReadLinks(output);
 
-            return new WinGetData(version, directories, links, new List<WinGetInfoEntry>());
+            return new WinGetData(version, directories, links, new List<WinGetAdminSetting>());
         }
 
         /// <summary>
@@ -594,7 +594,7 @@ namespace WGetNET.HelperClasses
             // Remove links area and admin settings header range from output
             output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
 
-            List<WinGetInfoEntry> adminSetting = ReadAdminSettings(output);
+            List<WinGetAdminSetting> adminSetting = ReadAdminSettings(output);
 
             return new WinGetData(version, directories, links, adminSetting);
         }
@@ -629,7 +629,7 @@ namespace WGetNET.HelperClasses
             // Remove links area and admin settings header range from output
             output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
 
-            List<WinGetInfoEntry> adminSetting = ReadAdminSettings(output);
+            List<WinGetAdminSetting> adminSetting = ReadAdminSettings(output);
 
             return new WinGetData(version, directories, links, adminSetting);
         }
@@ -748,9 +748,9 @@ namespace WGetNET.HelperClasses
             return links;
         }
 
-        private static List<WinGetInfoEntry> ReadAdminSettings(string[] output)
+        private static List<WinGetAdminSetting> ReadAdminSettings(string[] output)
         {
-            List<WinGetInfoEntry> adminSetting = new();
+            List<WinGetAdminSetting> adminSetting = new();
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -763,7 +763,7 @@ namespace WGetNET.HelperClasses
 
                 if (settingsEntry.Length == 2)
                 {
-                    adminSetting.Add(new WinGetInfoEntry(settingsEntry[0].Trim(), settingsEntry[1].Trim()));
+                    adminSetting.Add(new WinGetAdminSetting(settingsEntry[0].Trim(), settingsEntry[1].Trim()));
                 }
             }
 

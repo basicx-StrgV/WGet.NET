@@ -2102,6 +2102,19 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </returns>
         </member>
+        <member name="M:WGetNET.WinGetSourceManager.ExportStringToSourcesAsync(System.String)">
+            <summary>
+            Asynchronously convert the string output from winget source export to a 
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </summary>
+            <param name="exportString">
+            A <see cref="T:System.String"/> containing the winget source export content.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSource(System.Collections.Generic.List{WGetNET.WinGetSource})">
             <summary>
             Imports sources into winget.
@@ -2625,6 +2638,21 @@
             A nullable object of the given class type. It will be <see langword="null"/> if the action failed.
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+            </returns>
+        </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
@@ -2853,6 +2881,23 @@
             Gets if the process finished successfully.
             </summary>
         </member>
+        <member name="T:WGetNET.WinGetAdminSetting">
+            <summary>
+            Represents a winget admin settings entry.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetAdminSetting.IsEnabled">
+            <summary>
+            Gets if the admin setting is enabled.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetAdminSetting.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetAdminSetting"/> class.
+            </summary>
+            <param name="name">The name of the settings entry.</param>
+            <param name="content">The content of the settings entry.</param>
+        </member>
         <member name="T:WGetNET.WinGetData">
             <summary>
             Represents WinGet related data
@@ -2893,7 +2938,7 @@
             Gets an empty instance of this object.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetData.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry})">
+        <member name="M:WGetNET.WinGetData.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetAdminSetting})">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetData"/> class.
             </summary>
@@ -3031,54 +3076,6 @@
             <summary>
             Represents a winget source
             </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Name">
-            <summary>
-            Gets or sets the name of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Url">
-            <summary>
-            Gets or sets the url of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Type">
-            <summary>
-            Gets or sets the type of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Data">
-            <summary>
-            Gets or sets the data of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Identifier">
-            <summary>
-            Gets or sets the identifier of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-        </member>
-        <member name="M:WGetNET.WinGetSource.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetSource"/> class.
-            </summary>
-        </member>
-    </members>
-</doc>
- </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.Name">
             <summary>
