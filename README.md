@@ -107,15 +107,11 @@ Using the ***WinGetPackageManager*** class you can use the `GetInstalledPackages
 You would then be able to compare this to the current version of the package and determine if you need to notify users of an available upgrade.
 
 ```csharp
-Version currentPackageVersion = null;
-Version latestPackageVersion = null;
 WinGetPackageManager packageManager = new WinGetPackageManager();
 string packageId = "nkdAgility.AzureDevOpsMigrationTools";
-var package = packageManager.GetInstalledPackages(packageId, true).FirstOrDefault();
-currentPackageVersion = new Version(package.Version);
-latestPackageVersion = new Version(package.AvailableVersion);
+WinGetPackage package = packageManager.GetInstalledPackages(packageId, true).FirstOrDefault();
 
-if (latestPackageVersion > currentPackageVersion)
+if (package.AvailableVersionObject > package.VersionObject)
 {
     Console.WriteLine("You are currently running version {currentVersion} and a newer version ({latestVersion}) is available. You should update now using Winget command 'winget {packageId}' from the Windows Terminal.", currentPackageVersion, latestPackageVersion, packageId);
 }
