@@ -100,6 +100,28 @@ namespace WGetNET.HelperClasses
         }
 
         /// <summary>
+        /// Removes empty entries from a <see langword="array"/> of <see cref="System.String"/>'s.
+        /// </summary>
+        /// <param name="inputArray">The input <see langword="array"/>.</param>
+        /// <returns>
+        /// The <see langword="array"/> with empty entries removed.
+        /// </returns>
+        public static string[] RemoveEmptyEntries(string[] inputArray)
+        {
+            string[] newArray = new string[0];
+
+            for (int i = 0; i < inputArray.Length; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(inputArray[i]))
+                {
+                    newArray = Add(newArray, inputArray[i]);
+                }
+            }
+
+            return newArray;
+        }
+
+        /// <summary>
         /// Copys a <see langword="array"/> to a new one.
         /// </summary>
         /// <typeparam name="T">

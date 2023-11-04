@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['hasshortenedid_0',['HasShortenedId',['../d7/d12/a00126.html#aa01bb448e1cdd8513799d6a23a11c06e',1,'WGetNET::WinGetPackage']]]
+  ['data_0',['Data',['../d0/d48/a00165.html#afc675d53ec85af4640f325f817784f31',1,'WGetNET::WinGetSource']]],
+  ['directories_1',['Directories',['../da/d1e/a00149.html#a8c610b938c1c06ba2c3d63a8b642d726',1,'WGetNET::WinGetData']]]
 ];

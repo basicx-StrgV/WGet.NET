@@ -3,6 +3,7 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
+using WGetNET.HelperClasses;
 
 namespace WGetNET
 {
@@ -11,28 +12,6 @@ namespace WGetNET
     /// </summary>
     public class WinGetPackage
     {
-        /// <summary>
-        /// Gets or sets the name of the package.
-        /// </summary>
-        [Obsolete("The property \"PackageName\" is deprecated, please use \"Name\" instead.", true)]
-        public string PackageName 
-        { 
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _name = string.Empty;
-                }
-                else
-                {
-                    _name = value;
-                }
-            }
-        }
         /// <summary>
         /// Gets or sets the name of the package.
         /// </summary>
@@ -58,28 +37,6 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the id of the package.
         /// </summary>
-        [Obsolete("The property \"PackageId\" is deprecated, please use \"Id\" instead.", true)]
-        public string PackageId 
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _id = string.Empty;
-                }
-                else
-                {
-                    _id = value;
-                }
-            }
-        }
-        /// <summary>
-        /// Gets or sets the id of the package.
-        /// </summary>
         public string Id
         {
             get
@@ -102,28 +59,6 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the version of the package.
         /// </summary>
-        [Obsolete("The property \"PackageVersion\" is deprecated, please use \"Version\" instead.", true)]
-        public string PackageVersion 
-        {
-            get
-            {
-                return _version;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _version = string.Empty;
-                }
-                else
-                {
-                    _version = value;
-                }
-            }
-        }
-        /// <summary>
-        /// Gets or sets the version of the package.
-        /// </summary>
         public string Version
         {
             get
@@ -139,32 +74,22 @@ namespace WGetNET
                 else
                 {
                     _version = value;
+                    _versionObject = VersionParser.Parse(_version);
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the newest available version of the package.
+        /// Gets the version of the package.
         /// </summary>
-        [Obsolete("The property \"PackageAvailableVersion\" is deprecated, please use \"AvailableVersion\" instead.", true)]
-        public string PackageAvailableVersion
+        public Version VersionObject
         {
             get
             {
-                return _availableVersion;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _availableVersion = string.Empty;
-                }
-                else
-                {
-                    _availableVersion = value;
-                }
+                return _versionObject;
             }
         }
+
         /// <summary>
         /// Gets or sets the newest available version of the package.
         /// </summary>
@@ -183,32 +108,22 @@ namespace WGetNET
                 else
                 {
                     _availableVersion = value;
+                    _availableVersionObject = VersionParser.Parse(_availableVersion);
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the source name for the package.
+        /// Gets the newest available version of the package.
         /// </summary>
-        [Obsolete("The property \"PackageSourceName\" is deprecated, please use \"SourceName\" instead.", true)]
-        public string PackageSourceName
+        public Version AvailableVersionObject
         {
             get
             {
-                return _sourceName;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _sourceName = string.Empty;
-                }
-                else
-                {
-                    _sourceName = value;
-                }
+                return _availableVersionObject;
             }
         }
+
         /// <summary>
         /// Gets or sets the source name for the package.
         /// </summary>
@@ -260,7 +175,9 @@ namespace WGetNET
         private string _name = string.Empty;
         private string _id = string.Empty;
         private string _version = string.Empty;
+        private Version _versionObject = new(0, 0);
         private string _availableVersion = string.Empty;
+        private Version _availableVersionObject = new(0, 0);
         private string _sourceName = string.Empty;
 
         private readonly bool _hasShortenedId = false;

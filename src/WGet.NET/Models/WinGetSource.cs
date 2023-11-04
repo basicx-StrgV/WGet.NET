@@ -19,29 +19,6 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the name of the source.
         /// </summary>
-        [Obsolete("The property \"SourceName\" is deprecated, please use \"Name\" instead.", true)]
-        [JsonIgnore]
-        public string SourceName 
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _name = string.Empty;
-                }
-                else
-                {
-                    _name = value;
-                }
-            }
-        }
-        /// <summary>
-        /// Gets or sets the name of the source.
-        /// </summary>
         public string Name
         {
             get
@@ -61,29 +38,6 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets or sets the url of the source.
-        /// </summary>
-        [Obsolete("The property \"SourceUrl\" is deprecated, please use \"Url\" instead.", true)]
-        [JsonIgnore]
-        public string SourceUrl 
-        {
-            get
-            {
-                return _url;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _url = string.Empty;
-                }
-                else
-                {
-                    _url = value;
-                }
-            }
-        }
         /// <summary>
         /// Gets or sets the url of the source.
         /// </summary>
@@ -117,32 +71,6 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-        [Obsolete("The property \"SourceType\" is deprecated, please use \"Type\" instead.", true)]
-        [JsonIgnore]
-        public string SourceType 
-        {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _type = string.Empty;
-                }
-                else
-                {
-                    _type = value;
-                }
-            }
-        }
-        /// <summary>
-        /// Gets or sets the type of the source.
-        /// </summary>
-        /// <remarks>
-        /// Will only be set on source export.
-        /// </remarks>
         public string Type
         {
             get
@@ -168,32 +96,6 @@ namespace WGetNET
         /// <remarks>
         /// Will only be set on source export.
         /// </remarks>
-        [Obsolete("The property \"SourceData\" is deprecated, please use \"Data\" instead.", true)]
-        [JsonIgnore]
-        public string SourceData
-        {
-            get
-            {
-                return _data;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _data = string.Empty;
-                }
-                else
-                {
-                    _data = value;
-                }
-            }
-        }
-        /// <summary>
-        /// Gets or sets the data of the source.
-        /// </summary>
-        /// <remarks>
-        /// Will only be set on source export.
-        /// </remarks>
         public string Data
         {
             get
@@ -213,32 +115,6 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets or sets the identifier of the source.
-        /// </summary>
-        /// <remarks>
-        /// Will only be set on source export.
-        /// </remarks>
-        [Obsolete("The property \"SourceIdentifier\" is deprecated, please use \"Identifier\" instead.", true)]
-        [JsonIgnore]
-        public string SourceIdentifier
-        {
-            get
-            {
-                return _identifier;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _identifier = string.Empty;
-                }
-                else
-                {
-                    _identifier = value;
-                }
-            }
-        }
         /// <summary>
         /// Gets or sets the identifier of the source.
         /// </summary>

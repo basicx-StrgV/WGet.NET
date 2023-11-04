@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version_0',['Version',['../d7/d12/a00126.html#ac86ff6242b8572380ded22953c36bc41',1,'WGetNET::WinGetPackage']]]
+  ['type_0',['Type',['../d0/d48/a00165.html#a384d3f7208b12fa603a83686467afc9d',1,'WGetNET::WinGetSource']]]
 ];
