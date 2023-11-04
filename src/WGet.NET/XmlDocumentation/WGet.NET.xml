@@ -2853,19 +2853,19 @@
             Gets if the process finished successfully.
             </summary>
         </member>
-        <member name="T:WGetNET.WinGetAdminSetting">
+        <member name="T:WGetNET.WinGetAdminOption">
             <summary>
             Represents a winget admin settings entry.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetAdminSetting.IsEnabled">
+        <member name="P:WGetNET.WinGetAdminOption.IsEnabled">
             <summary>
             Gets if the admin setting is enabled.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetAdminSetting.#ctor(System.String,System.String)">
+        <member name="M:WGetNET.WinGetAdminOption.#ctor(System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetAdminSetting"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetAdminOption"/> class.
             </summary>
             <param name="name">The name of the settings entry.</param>
             <param name="content">The content of the settings entry.</param>
@@ -2910,7 +2910,7 @@
             Gets an empty instance of this object.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetData.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetAdminSetting})">
+        <member name="M:WGetNET.WinGetData.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetData"/> class.
             </summary>

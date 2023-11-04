@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['helperclasses_0',['HelperClasses',['../d9/da5/a00075.html',1,'WGetNET']]],
+  ['wget_2enet_1',['WGet.NET',['../index.html',1,'']]],
+  ['wgetnet_2',['WGetNET',['../db/db6/a00074.html',1,'']]],
+  ['wingetactionfailedexception_3',['WinGetActionFailedException',['../d3/d32/a00105.html',1,'WGetNET.WinGetActionFailedException'],['../d3/d32/a00105.html#a5e1c7d3f85dc9a6b5cfbb811997a580c',1,'WGetNET.WinGetActionFailedException.WinGetActionFailedException()'],['../d3/d32/a00105.html#abb99b366648f035f1d97743dda3b1559',1,'WGetNET.WinGetActionFailedException.WinGetActionFailedException(string message)'],['../d3/d32/a00105.html#a97f11d572d10c3dfb58402ab91993ce9',1,'WGetNET.WinGetActionFailedException.WinGetActionFailedException(string message, Exception innerException)'],['../d3/d32/a00105.html#aaef6a5f5a49c20d3d33959e00dbb052f',1,'WGetNET.WinGetActionFailedException.WinGetActionFailedException(SerializationInfo info, StreamingContext context)']]],
+  ['wingetadminoption_4',['WinGetAdminOption',['../da/ddb/a00145.html',1,'WGetNET']]],
+  ['wingetdata_5',['WinGetData',['../da/d1e/a00149.html',1,'WGetNET']]],
+  ['wingetfeaturenotsupportedexception_6',['WinGetFeatureNotSupportedException',['../dd/d42/a00109.html',1,'WGetNET.WinGetFeatureNotSupportedException'],['../dd/d42/a00109.html#a8fc03b5086b7b0ffb64312b6ae46b213',1,'WGetNET.WinGetFeatureNotSupportedException.WinGetFeatureNotSupportedException(Version minVersion, Exception innerException)'],['../dd/d42/a00109.html#aaa57639c68ace097c94f1ef3af867576',1,'WGetNET.WinGetFeatureNotSupportedException.WinGetFeatureNotSupportedException(SerializationInfo info, StreamingContext context)'],['../dd/d42/a00109.html#ad5b68e0b9a564a20fe55bc59aade7c8b',1,'WGetNET.WinGetFeatureNotSupportedException.WinGetFeatureNotSupportedException(Version minVersion)']]],
+  ['wingetinfo_7',['WinGetInfo',['../d4/d7d/a00093.html',1,'WGetNET.WinGetInfo'],['../d4/d7d/a00093.html#a49c9affeba708626bafaa534ce49fcc8',1,'WGetNET.WinGetInfo.WinGetInfo()']]],
+  ['wingetinfoentry_8',['WinGetInfoEntry',['../da/d01/a00153.html',1,'WGetNET']]],
+  ['wingetinstalled_9',['WinGetInstalled',['../d4/d7d/a00093.html#a95f98c1d2b3126c9fe6f25bf77dd4e6e',1,'WGetNET::WinGetInfo']]],
+  ['wingetnotinstalledexception_10',['WinGetNotInstalledException',['../d3/d00/a00113.html',1,'WGetNET.WinGetNotInstalledException'],['../d3/d00/a00113.html#a493eb7c0391062d5a938addeb54352bf',1,'WGetNET.WinGetNotInstalledException.WinGetNotInstalledException()'],['../d3/d00/a00113.html#a1d12ba7c7a6522a9f92f9ec5b6b283b7',1,'WGetNET.WinGetNotInstalledException.WinGetNotInstalledException(string message)'],['../d3/d00/a00113.html#a58fe26eeaf05e7db491141f4e13fceb3',1,'WGetNET.WinGetNotInstalledException.WinGetNotInstalledException(string message, Exception innerException)'],['../d3/d00/a00113.html#a339ea67792d105215b4e302109c9b9a3',1,'WGetNET.WinGetNotInstalledException.WinGetNotInstalledException(SerializationInfo info, StreamingContext context)']]],
+  ['wingetpackage_11',['WinGetPackage',['../d1/db7/a00157.html',1,'WGetNET.WinGetPackage'],['../d1/db7/a00157.html#a2fafd31ae138347af4deec94af1b192d',1,'WGetNET.WinGetPackage.WinGetPackage()']]],
+  ['wingetpackagemanager_12',['WinGetPackageManager',['../d1/d84/a00097.html',1,'WGetNET.WinGetPackageManager'],['../d1/d84/a00097.html#ad068c0c7340c7aaed19f192f0d3036c2',1,'WGetNET.WinGetPackageManager.WinGetPackageManager()']]],
+  ['wingetpinnedpackage_13',['WinGetPinnedPackage',['../d6/d7d/a00161.html',1,'WGetNET']]],
+  ['wingetsource_14',['WinGetSource',['../d0/d48/a00165.html',1,'WGetNET.WinGetSource'],['../d0/d48/a00165.html#ae007ba2ec03ab16f315c6b01ef8038a6',1,'WGetNET.WinGetSource.WinGetSource()']]],
+  ['wingetsourcemanager_15',['WinGetSourceManager',['../d4/d3a/a00101.html',1,'WGetNET.WinGetSourceManager'],['../d4/d3a/a00101.html#a0fcf06b9d5d0b11df3a6f0b531cbc31e',1,'WGetNET.WinGetSourceManager.WinGetSourceManager()']]],
+  ['wingetversion_16',['WinGetVersion',['../d4/d7d/a00093.html#a902e16de1231c374f3f0d7760ed046bd',1,'WGetNET.WinGetInfo.WinGetVersion'],['../da/d1e/a00149.html#af6e46593a22481a63c0814bb40b7ff28',1,'WGetNET.WinGetData.WinGetVersion']]],
+  ['wingetversionobject_17',['WinGetVersionObject',['../d4/d7d/a00093.html#a9a829ec037f7f22b42dd2e96815fba3e',1,'WGetNET::WinGetInfo']]],
+  ['wingetversionstring_18',['WinGetVersionString',['../da/d1e/a00149.html#a1aec5c7bdabddae09c42db770428e041',1,'WGetNET::WinGetData']]]
+];

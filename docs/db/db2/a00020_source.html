@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>WGet.NET: PinType.cs Source File</title>
+<title>WGet.NET: PackageAction.cs Source File</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;3.1.0</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;3.2.0</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -90,33 +90,32 @@ $(document).ready(function(){initNavTree('db/db2/a00020_source.html','../../'); 
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">PinType.cs</div></div>
+  <div class="headertitle"><div class="title">PackageAction.cs</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//--------------------------------------------------//</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Created by basicx-StrgV                          //</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// https://github.com/basicx-StrgV/                 //</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//--------------------------------------------------//</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../d3/d8b/a00059.html">WGetNET</a></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../db/db6/a00074.html">WGetNET</a></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>{</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="../../d3/d8b/a00059.html#a6463096e9a46a5fca424de0c0639f69d">   10</a></span>    <span class="keyword">public</span> <span class="keyword">enum</span> <a class="code hl_enumeration" href="../../d3/d8b/a00059.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_enumvalue" href="../../d3/d8b/a00059.html#a6463096e9a46a5fca424de0c0639f69da2c1d230283ecd79abc124faf038152e8">Pinning</a>,</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_enumvalue" href="../../d3/d8b/a00059.html#a6463096e9a46a5fca424de0c0639f69dabd0ca6be53b0f3d2886fd53fcb52574e">Blocking</a>,</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_enumvalue" href="../../d3/d8b/a00059.html#a6463096e9a46a5fca424de0c0639f69da2326c560e662dfb6f33a8100eedd6f3a">Gating</a></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    }</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
-<div class="ttc" id="aa00059_html"><div class="ttname"><a href="../../d3/d8b/a00059.html">WGetNET</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/dad/a00005_source.html#l00011">ProcessManager.cs:12</a></div></div>
-<div class="ttc" id="aa00059_html_a6463096e9a46a5fca424de0c0639f69d"><div class="ttname"><a href="../../d3/d8b/a00059.html#a6463096e9a46a5fca424de0c0639f69d">WGetNET.PinType</a></div><div class="ttdeci">PinType</div><div class="ttdoc">Enum of winget pin types.</div><div class="ttdef"><b>Definition</b> <a href="../../db/db2/a00020_source.html#l00010">PinType.cs:11</a></div></div>
-<div class="ttc" id="aa00059_html_a6463096e9a46a5fca424de0c0639f69da2326c560e662dfb6f33a8100eedd6f3a"><div class="ttname"><a href="../../d3/d8b/a00059.html#a6463096e9a46a5fca424de0c0639f69da2326c560e662dfb6f33a8100eedd6f3a">WGetNET.PinType.Gating</a></div><div class="ttdeci">@ Gating</div><div class="ttdoc">The package is gated.</div></div>
-<div class="ttc" id="aa00059_html_a6463096e9a46a5fca424de0c0639f69da2c1d230283ecd79abc124faf038152e8"><div class="ttname"><a href="../../d3/d8b/a00059.html#a6463096e9a46a5fca424de0c0639f69da2c1d230283ecd79abc124faf038152e8">WGetNET.PinType.Pinning</a></div><div class="ttdeci">@ Pinning</div><div class="ttdoc">The package is pinned.</div></div>
-<div class="ttc" id="aa00059_html_a6463096e9a46a5fca424de0c0639f69dabd0ca6be53b0f3d2886fd53fcb52574e"><div class="ttname"><a href="../../d3/d8b/a00059.html#a6463096e9a46a5fca424de0c0639f69dabd0ca6be53b0f3d2886fd53fcb52574e">WGetNET.PinType.Blocking</a></div><div class="ttdeci">@ Blocking</div><div class="ttdoc">The package is blocked.</div></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keyword">internal</span> <span class="keyword">enum</span> PackageAction</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>        Default,</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        UpgradeList,</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>        InstalledList,</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        InstalledListBySource,</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        Search,</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        SearchBySource</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    }</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>}</div>
+<div class="ttc" id="aa00074_html"><div class="ttname"><a href="../../db/db6/a00074.html">WGetNET</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/dad/a00005_source.html#l00011">ProcessManager.cs:12</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_6d6c1721fe51dc6ac8b574ec9e5a1ea1.html">WGet.NET</a></li><li class="navelem"><a class="el" href="../../dir_0d28f04d2f8c6a34ddbac6c8ff30d9e6.html">Enums</a></li><li class="navelem"><b>PinType.cs</b></li>
+    <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_6d6c1721fe51dc6ac8b574ec9e5a1ea1.html">WGet.NET</a></li><li class="navelem"><a class="el" href="../../dir_0d28f04d2f8c6a34ddbac6c8ff30d9e6.html">Enums</a></li><li class="navelem"><b>PackageAction.cs</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['data_0',['Data',['../de/d76/a00134.html#afc675d53ec85af4640f325f817784f31',1,'WGetNET::WinGetSource']]],
-  ['download_1',['Download',['../d4/d63/a00082.html#a7c7c853fee8cf0545cf6bb22c918be7e',1,'WGetNET.WinGetPackageManager.Download(string packageId, string directory)'],['../d4/d63/a00082.html#afc93578324beea3133947f97b1efd485',1,'WGetNET.WinGetPackageManager.Download(string packageId, DirectoryInfo directory)'],['../d4/d63/a00082.html#aa477197f026fd8e3bc2696ce1ef8ad17',1,'WGetNET.WinGetPackageManager.Download(WinGetPackage package, string directory)'],['../d4/d63/a00082.html#a3ddee88a6bb71ae39653608e5deeb1fe',1,'WGetNET.WinGetPackageManager.Download(WinGetPackage package, DirectoryInfo directory)']]],
-  ['downloadasync_2',['DownloadAsync',['../d4/d63/a00082.html#a4e25397a8b15aa7020b3b0cfed51b28a',1,'WGetNET.WinGetPackageManager.DownloadAsync(string packageId, string directory)'],['../d4/d63/a00082.html#a1829b2386619ee6d96a5d9ef6d5c9ff7',1,'WGetNET.WinGetPackageManager.DownloadAsync(string packageId, DirectoryInfo directory)'],['../d4/d63/a00082.html#aad254abd0b972855e0aa1825e466a02a',1,'WGetNET.WinGetPackageManager.DownloadAsync(WinGetPackage package, string directory)'],['../d4/d63/a00082.html#ac0a44954dd010b7d7d0d7dc01bace4e5',1,'WGetNET.WinGetPackageManager.DownloadAsync(WinGetPackage package, DirectoryInfo directory)']]]
+  ['checkwingetversion_0',['CheckWinGetVersion',['../d4/d7d/a00093.html#ad088b2c2ca407f683d2dc507b63e9cdf',1,'WGetNET::WinGetInfo']]],
+  ['content_1',['Content',['../da/d01/a00153.html#a080cbda88afe4fced6bd5f0eb1f8623e',1,'WGetNET::WinGetInfoEntry']]]
 ];
