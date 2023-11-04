@@ -80,7 +80,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets or sets the version of the package.
+        /// Gets the version of the package.
         /// </summary>
         public Version VersionObject
         {
@@ -108,7 +108,19 @@ namespace WGetNET
                 else
                 {
                     _availableVersion = value;
+                    _availableVersionObject = VersionParser.Parse(_availableVersion);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets the newest available version of the package.
+        /// </summary>
+        public Version AvailableVersionObject
+        {
+            get
+            {
+                return _availableVersionObject;
             }
         }
 
@@ -165,6 +177,7 @@ namespace WGetNET
         private string _version = string.Empty;
         private Version _versionObject = new(0, 0);
         private string _availableVersion = string.Empty;
+        private Version _availableVersionObject = new(0, 0);
         private string _sourceName = string.Empty;
 
         private readonly bool _hasShortenedId = false;
