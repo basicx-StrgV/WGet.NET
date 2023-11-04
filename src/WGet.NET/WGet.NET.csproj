@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
@@ -16,9 +16,9 @@
     <Copyright>basicx-StrgV</Copyright>
     <SignAssembly>false</SignAssembly>
     <RootNamespace>WGetNET</RootNamespace>
-    <Version>3.1.0</Version>
+    <Version>3.2.0</Version>
 	<Deterministic>false</Deterministic>
-    <AssemblyVersion>3.1.0.0</AssemblyVersion>
+    <AssemblyVersion>3.2.0.0</AssemblyVersion>
     <AssemblyName>WGet.NET</AssemblyName>
     <PackageId>WGet.NET</PackageId>
     <Product>WGet.NET</Product>
