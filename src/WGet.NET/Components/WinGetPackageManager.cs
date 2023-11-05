@@ -1489,7 +1489,7 @@ namespace WGetNET
         /// Downloads the installer of a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package to download.</param>
-        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -1533,7 +1533,10 @@ namespace WGetNET
         /// Downloads the installer of a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package to download.</param>
-        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <param name="directory">
+        /// A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+        /// It will be created if it does not exist.
+        /// </param>
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -1556,7 +1559,7 @@ namespace WGetNET
         /// Downloads the installer of a package using winget.
         /// </summary>
         /// <param name="package">The package to download.</param>
-        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -1584,7 +1587,10 @@ namespace WGetNET
         /// Downloads the installer of a package using winget.
         /// </summary>
         /// <param name="package">The package to download.</param>
-        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <param name="directory">
+        /// A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+        /// It will be created if it does not exist.
+        /// </param>
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -1612,7 +1618,7 @@ namespace WGetNET
         /// Asynchronously downloads the installer of a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package to download.</param>
-        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -1656,7 +1662,10 @@ namespace WGetNET
         /// Asynchronously downloads the installer of a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package to download.</param>
-        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <param name="directory">
+        /// A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+        /// It will be created if it does not exist.
+        /// </param>
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -1679,7 +1688,7 @@ namespace WGetNET
         /// Asynchronously downloads the installer of a package using winget.
         /// </summary>
         /// <param name="package">The package to download.</param>
-        /// <param name="directory">Directory path the files will be downloaded to.</param>
+        /// <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -1707,7 +1716,9 @@ namespace WGetNET
         /// Asynchronously downloads the installer of a package using winget.
         /// </summary>
         /// <param name="package">The package to download.</param>
-        /// <param name="directory">A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+        /// <param name="directory">
+        /// A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+        /// It will be created if it does not exist.</param>
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>

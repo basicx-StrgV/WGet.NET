@@ -798,6 +798,16 @@
             <returns>
             A <see cref="T:System.String"/> containing the hash.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Unable to find the specified file.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Hash(System.IO.FileInfo)">
             <summary>
@@ -809,6 +819,16 @@
             <returns>
             A <see cref="T:System.String"/> containing the hash.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Unable to find the specified file.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.HashAsync(System.String)">
             <summary>
@@ -821,6 +841,16 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is a <see cref="T:System.String"/> containing the hash.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Unable to find the specified file.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.HashAsync(System.IO.FileInfo)">
             <summary>
@@ -833,6 +863,16 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is a <see cref="T:System.String"/> containing the hash.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Unable to find the specified file.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.HashResultToHash(WGetNET.ProcessResult)">
             <summary>
@@ -850,7 +890,7 @@
             Downloads the installer of a package using winget.
             </summary>
             <param name="packageId">The id or name of the package to download.</param>
-            <param name="directory">Directory path the files will be downloaded to.</param>
+            <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -870,7 +910,10 @@
             Downloads the installer of a package using winget.
             </summary>
             <param name="packageId">The id or name of the package to download.</param>
-            <param name="directory">A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+            <param name="directory">
+            A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+            It will be created if it does not exist.
+            </param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -890,7 +933,7 @@
             Downloads the installer of a package using winget.
             </summary>
             <param name="package">The package to download.</param>
-            <param name="directory">Directory path the files will be downloaded to.</param>
+            <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -910,7 +953,10 @@
             Downloads the installer of a package using winget.
             </summary>
             <param name="package">The package to download.</param>
-            <param name="directory">A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+            <param name="directory">
+            A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+            It will be created if it does not exist.
+            </param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -930,7 +976,7 @@
             Asynchronously downloads the installer of a package using winget.
             </summary>
             <param name="packageId">The id or name of the package to download.</param>
-            <param name="directory">Directory path the files will be downloaded to.</param>
+            <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -950,7 +996,10 @@
             Asynchronously downloads the installer of a package using winget.
             </summary>
             <param name="packageId">The id or name of the package to download.</param>
-            <param name="directory">A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+            <param name="directory">
+            A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+            It will be created if it does not exist.
+            </param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -970,7 +1019,7 @@
             Asynchronously downloads the installer of a package using winget.
             </summary>
             <param name="package">The package to download.</param>
-            <param name="directory">Directory path the files will be downloaded to.</param>
+            <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -990,7 +1039,9 @@
             Asynchronously downloads the installer of a package using winget.
             </summary>
             <param name="package">The package to download.</param>
-            <param name="directory">A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+            <param name="directory">
+            A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+            It will be created if it does not exist.</param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -2112,6 +2163,16 @@
             <returns>
             <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSource(WGetNET.WinGetSource)">
             <summary>
@@ -2123,6 +2184,16 @@
             <returns>
             <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSource(System.String)">
             <summary>
@@ -2134,6 +2205,19 @@
             <returns>
             <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(System.Collections.Generic.List{WGetNET.WinGetSource})">
             <summary>
@@ -2146,6 +2230,16 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(WGetNET.WinGetSource)">
             <summary>
@@ -2158,6 +2252,16 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(System.String)">
             <summary>
@@ -2170,6 +2274,19 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ResetSources">
             <summary>
@@ -2354,6 +2471,53 @@
             Package can't be updated to versions, that are not contained in the provided pinned version.
             </remarks>
         </member>
+        <member name="T:WGetNET.InvalidJsonException">
+            <summary>
+            Exception that gets thrown if the provided json string could not be deserialized.
+            </summary>
+        </member>
+        <member name="P:WGetNET.InvalidJsonException.Message">
+            <summary>
+            Gets a message that describes the current exception.
+            </summary>
+        </member>
+        <member name="M:WGetNET.InvalidJsonException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.InvalidJsonException"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.InvalidJsonException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.InvalidJsonException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+        </member>
+        <member name="M:WGetNET.InvalidJsonException.#ctor(System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.InvalidJsonException"/> class.
+            </summary>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:WGetNET.InvalidJsonException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.InvalidJsonException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:WGetNET.InvalidJsonException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.InvalidJsonException"/> class with serialized data.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> 
+            that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext"/> 
+            that contains contextual information about the source or destination.
+            </param>
+        </member>
         <member name="T:WGetNET.WinGetActionFailedException">
             <summary>
             Exception that gets thrown if a winget action failed.
@@ -2375,11 +2539,26 @@
             </summary>
             <param name="message">Message of the exception</param>
         </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+            <param name="action">The winget action that was executed</param>
+        </member>
         <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
             </summary>
             <param name="message">Message of the exception</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+            <param name="action">The winget action that was executed</param>
             <param name="innerException">The inner exception</param>
         </member>
         <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
@@ -2622,8 +2801,11 @@
             A <see cref="T:System.String"/> containing the json to deserialize.
             </param>
             <returns>
-            A nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+            Object of the given class type.
             </returns>
+            <exception cref="T:WGetNET.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
         </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>
