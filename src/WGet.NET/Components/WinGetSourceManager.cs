@@ -130,15 +130,8 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentNullException("name");
-            }
-
-            if (string.IsNullOrWhiteSpace(arg))
-            {
-                throw new ArgumentNullException("arg");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
@@ -197,20 +190,9 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentNullException("name");
-            }
-
-            if (string.IsNullOrWhiteSpace(arg))
-            {
-                throw new ArgumentNullException("arg");
-            }
-
-            if (string.IsNullOrWhiteSpace(type))
-            {
-                throw new ArgumentNullException("type");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
@@ -258,10 +240,7 @@ namespace WGetNET
         /// </exception>
         public bool AddSource(WinGetSource source)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(source, "source");
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
@@ -307,15 +286,8 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentNullException("name");
-            }
-
-            if (string.IsNullOrWhiteSpace(arg))
-            {
-                throw new ArgumentNullException("arg");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
@@ -375,20 +347,9 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentNullException("name");
-            }
-
-            if (string.IsNullOrWhiteSpace(arg))
-            {
-                throw new ArgumentNullException("arg");
-            }
-
-            if (string.IsNullOrWhiteSpace(type))
-            {
-                throw new ArgumentNullException("type");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
@@ -437,10 +398,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> AddSourceAsync(WinGetSource source)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(source, "source");
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
@@ -576,10 +534,7 @@ namespace WGetNET
         /// </exception>
         public string ExportSources(string sourceName)
         {
-            if (string.IsNullOrWhiteSpace(sourceName))
-            {
-                throw new ArgumentNullException("sourceName");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
@@ -621,10 +576,7 @@ namespace WGetNET
         /// </exception>
         public string ExportSources(WinGetSource source)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(source, "source");
 
             return ExportSources(source.Name);
         }
@@ -682,10 +634,7 @@ namespace WGetNET
         /// </exception>
         public async Task<string> ExportSourcesAsync(string sourceName)
         {
-            if (string.IsNullOrWhiteSpace(sourceName))
-            {
-                throw new ArgumentNullException("sourceName");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
@@ -728,10 +677,7 @@ namespace WGetNET
         /// </exception>
         public async Task<string> ExportSourcesAsync(WinGetSource source)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(source, "source");
 
             return await ExportSourcesAsync(source.Name);
         }
@@ -837,10 +783,7 @@ namespace WGetNET
         /// </exception>
         public bool ExportSourcesToFile(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                throw new ArgumentNullException("file");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             try
             {
@@ -879,15 +822,8 @@ namespace WGetNET
         /// </exception>
         public bool ExportSourcesToFile(string file, string sourceName)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                throw new ArgumentNullException("file");
-            }
-
-            if (string.IsNullOrWhiteSpace(sourceName))
-            {
-                throw new ArgumentNullException("sourceName");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
@@ -932,10 +868,7 @@ namespace WGetNET
         /// </exception>
         public bool ExportSourcesToFile(string file, WinGetSource source)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(source, "source");
 
             return ExportSourcesToFile(file, source.Name);
         }
@@ -960,10 +893,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ExportSourcesToFileAsync(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                throw new ArgumentNullException("file");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             try
             {
@@ -1003,15 +933,8 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ExportSourcesToFileAsync(string file, string sourceName)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                throw new ArgumentNullException("file");
-            }
-
-            if (string.IsNullOrWhiteSpace(sourceName))
-            {
-                throw new ArgumentNullException("sourceName");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
@@ -1057,10 +980,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ExportSourcesToFileAsync(string file, WinGetSource source)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(source, "source");
 
             return await ExportSourcesToFileAsync(file, source.Name);
         }
@@ -1181,7 +1101,7 @@ namespace WGetNET
         /// <summary>
         /// Imports sources into winget.
         /// </summary>
-        /// <param name="winGetSources">
+        /// <param name="sources">
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
@@ -1200,17 +1120,14 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public bool ImportSource(List<WinGetSource> winGetSources)
+        public bool ImportSource(List<WinGetSource> sources)
         {
-            if (winGetSources == null)
-            {
-                throw new ArgumentNullException("winGetSources");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
             bool status = true;
-            for (int i = 0; i < winGetSources.Count; i++)
+            for (int i = 0; i < sources.Count; i++)
             {
-                if (!AddSource(winGetSources[i]))
+                if (!AddSource(sources[i]))
                 {
                     status = false;
                 }
@@ -1222,7 +1139,7 @@ namespace WGetNET
         /// <summary>
         /// Imports a source into winget.
         /// </summary>
-        /// <param name="winGetSource">
+        /// <param name="source">
         /// A <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
@@ -1238,9 +1155,9 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public bool ImportSource(WinGetSource winGetSource)
+        public bool ImportSource(WinGetSource source)
         {
-            return AddSource(winGetSource);
+            return AddSource(source);
         }
 
         /// <summary>
@@ -1270,10 +1187,7 @@ namespace WGetNET
         /// </exception>
         public bool ImportSource(string jsonString)
         {
-            if (string.IsNullOrWhiteSpace(jsonString))
-            {
-                throw new ArgumentNullException("jsonString");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
             WinGetSource source = JsonHandler.StringToObject<WinGetSource>(jsonString);
             
@@ -1283,7 +1197,7 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously imports sources into winget.
         /// </summary>
-        /// <param name="winGetSources">
+        /// <param name="sources">
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
@@ -1303,17 +1217,14 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> ImportSourceAsync(List<WinGetSource> winGetSources)
+        public async Task<bool> ImportSourceAsync(List<WinGetSource> sources)
         {
-            if (winGetSources == null)
-            {
-                throw new ArgumentNullException("winGetSources");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
             bool status = true;
-            for (int i = 0; i < winGetSources.Count; i++)
+            for (int i = 0; i < sources.Count; i++)
             {
-                if (!await AddSourceAsync(winGetSources[i]))
+                if (!await AddSourceAsync(sources[i]))
                 {
                     status = false;
                 }
@@ -1325,7 +1236,7 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously imports a source into winget.
         /// </summary>
-        /// <param name="winGetSource">
+        /// <param name="source">
         /// A <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
@@ -1342,9 +1253,9 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> ImportSourceAsync(WinGetSource winGetSource)
+        public async Task<bool> ImportSourceAsync(WinGetSource source)
         {
-            return await AddSourceAsync(winGetSource);
+            return await AddSourceAsync(source);
         }
 
         /// <summary>
@@ -1375,10 +1286,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ImportSourceAsync(string jsonString)
         {
-            if (string.IsNullOrWhiteSpace(jsonString))
-            {
-                throw new ArgumentNullException("jsonString");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
 #if NETCOREAPP3_1_OR_GREATER
             WinGetSource source = 
@@ -1506,15 +1414,12 @@ namespace WGetNET
         /// </exception>
         public bool RemoveSources(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentNullException("name");
-            }
-
             if (!PrivilegeChecker.CheckAdministratorPrivileges())
             {
                 throw new SecurityException("Administrator privileges are missing.");
             }
+
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
             string cmd = string.Format(_sourceRemoveCmd, name);
 
@@ -1559,10 +1464,7 @@ namespace WGetNET
         /// </exception>
         public bool RemoveSources(WinGetSource source)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(source, "source");
 
             return RemoveSources(source.Name);
         }
@@ -1592,15 +1494,12 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> RemoveSourcesAsync(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentNullException("name");
-            }
-
             if (!PrivilegeChecker.CheckAdministratorPrivileges())
             {
                 throw new SecurityException("Administrator privileges are missing.");
             }
+
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
             string cmd = string.Format(_sourceRemoveCmd, name);
 
@@ -1646,10 +1545,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> RemoveSourcesAsync(WinGetSource source)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(source, "source");
 
             return await RemoveSourcesAsync(source.Name);
         }

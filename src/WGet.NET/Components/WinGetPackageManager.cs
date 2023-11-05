@@ -74,10 +74,7 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> SearchPackage(string packageId, bool exact = false)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_searchCmd, packageId);
             
@@ -128,15 +125,8 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> SearchPackage(string packageId, string sourceName, bool exact = false)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
-
-            if (string.IsNullOrWhiteSpace(sourceName))
-            {
-                throw new ArgumentNullException("sourceName");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
             string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
 
@@ -185,10 +175,7 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, bool exact = false)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_searchCmd, packageId);
 
@@ -240,15 +227,8 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, string sourceName, bool exact = false)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
-
-            if (string.IsNullOrWhiteSpace(sourceName))
-            {
-                throw new ArgumentNullException("sourceName");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
             string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
 
@@ -330,10 +310,7 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages(string packageId, bool exact = false)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_searchInstalledCmd, packageId);
 
@@ -384,15 +361,8 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages(string packageId, string sourceName, bool exact = false)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
-
-            if (string.IsNullOrWhiteSpace(sourceName))
-            {
-                throw new ArgumentNullException("sourceName");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
             string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
 
@@ -474,10 +444,7 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, bool exact = false)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_searchInstalledCmd, packageId);
 
@@ -529,15 +496,8 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, string sourceName, bool exact = false)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
-
-            if (string.IsNullOrWhiteSpace(sourceName))
-            {
-                throw new ArgumentNullException("sourceName");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
             string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
 
@@ -582,10 +542,7 @@ namespace WGetNET
         /// </exception>
         public bool InstallPackage(string packageId)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_installCmd, packageId);
 
@@ -625,10 +582,7 @@ namespace WGetNET
         /// </exception>
         public bool InstallPackage(WinGetPackage package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -658,10 +612,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> InstallPackageAsync(string packageId)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_installCmd, packageId);
 
@@ -702,10 +653,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> InstallPackageAsync(WinGetPackage package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -736,10 +684,7 @@ namespace WGetNET
         /// </exception>
         public bool UninstallPackage(string packageId)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_uninstallCmd, packageId);
 
@@ -779,10 +724,7 @@ namespace WGetNET
         /// </exception>
         public bool UninstallPackage(WinGetPackage package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -812,10 +754,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UninstallPackageAsync(string packageId)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_uninstallCmd, packageId);
 
@@ -856,10 +795,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UninstallPackageAsync(WinGetPackage package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -959,10 +895,7 @@ namespace WGetNET
         /// </exception>
         public bool UpgradePackage(string packageId)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_upgradeCmd, packageId);
 
@@ -1002,10 +935,7 @@ namespace WGetNET
         /// </exception>
         public bool UpgradePackage(WinGetPackage package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -1035,10 +965,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpgradePackageAsync(string packageId)
         {
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_upgradeCmd, packageId);
 
@@ -1079,10 +1006,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpgradePackageAsync(WinGetPackage package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -1194,10 +1118,7 @@ namespace WGetNET
         /// </exception>
         public bool ExportPackagesToFile(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                throw new ArgumentNullException("file");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             string cmd = string.Format(_exportCmd, file);
 
@@ -1238,10 +1159,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ExportPackagesToFileAsync(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                throw new ArgumentNullException("file");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             string cmd = string.Format(_exportCmd, file);
 
@@ -1285,10 +1203,7 @@ namespace WGetNET
         /// </exception>
         public bool ImportPackagesFromFile(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                throw new ArgumentNullException("file");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             string cmd = string.Format(_importCmd, file);
 
@@ -1333,10 +1248,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ImportPackagesFromFileAsync(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                throw new ArgumentNullException("file");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             string cmd = string.Format(_importCmd, file);
 
@@ -1383,10 +1295,7 @@ namespace WGetNET
         /// </exception>
         public string Hash(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                throw new ArgumentNullException("file");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             if (!File.Exists(file))
             {
@@ -1441,10 +1350,7 @@ namespace WGetNET
         /// </exception>
         public string Hash(FileInfo file)
         {
-            if (file == null)
-            {
-                throw new ArgumentNullException("file");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(file, "file");
 
             if (!file.Exists)
             {
@@ -1500,10 +1406,7 @@ namespace WGetNET
         /// </exception>
         public async Task<string> HashAsync(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                throw new ArgumentNullException("file");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             if (!File.Exists(file))
             {
@@ -1559,10 +1462,7 @@ namespace WGetNET
         /// </exception>
         public async Task<string> HashAsync(FileInfo file)
         {
-            if (file == null)
-            {
-                throw new ArgumentNullException("file");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(file, "file");
 
             if (!file.Exists)
             {
@@ -1647,15 +1547,8 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_downloadMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
-
-            if (string.IsNullOrWhiteSpace(directory))
-            {
-                throw new ArgumentNullException("directory");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
 
             string cmd = string.Format(_downloadCmd, packageId, directory);
 
@@ -1702,10 +1595,7 @@ namespace WGetNET
         /// </exception>
         public bool Download(string packageId, DirectoryInfo directory)
         {
-            if (directory == null)
-            {
-                throw new ArgumentNullException("directory");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
             return Download(packageId, directory.FullName);
         }
@@ -1733,10 +1623,7 @@ namespace WGetNET
         /// </exception>
         public bool Download(WinGetPackage package, string directory)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -1772,15 +1659,8 @@ namespace WGetNET
         /// </exception>
         public bool Download(WinGetPackage package, DirectoryInfo directory)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
-
-            if (directory == null)
-            {
-                throw new ArgumentNullException("directory");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
             if (package.HasShortenedId)
             {
@@ -1818,15 +1698,8 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_downloadMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
-
-            if (string.IsNullOrWhiteSpace(directory))
-            {
-                throw new ArgumentNullException("directory");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
 
             string cmd = string.Format(_downloadCmd, packageId, directory);
 
@@ -1873,10 +1746,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> DownloadAsync(string packageId, DirectoryInfo directory)
         {
-            if (directory == null)
-            {
-                throw new ArgumentNullException("directory");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
             return await DownloadAsync(packageId, directory.FullName);
         }
@@ -1904,10 +1774,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> DownloadAsync(WinGetPackage package, string directory)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -1942,15 +1809,8 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
-
-            if (directory == null)
-            {
-                throw new ArgumentNullException("directory");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
             if (package.HasShortenedId)
             {
@@ -2072,10 +1932,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_pinAddCmd, packageId);
 
@@ -2132,15 +1989,8 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
-
-            if (string.IsNullOrWhiteSpace(version))
-            {
-                throw new ArgumentNullException("version");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
             string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
 
@@ -2184,10 +2034,7 @@ namespace WGetNET
         /// </exception>
         public bool PinAdd(WinGetPackage package, bool blocking = false)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2223,15 +2070,7 @@ namespace WGetNET
         /// </exception>
         public bool PinAdd(WinGetPackage package, string version)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
-
-            if (string.IsNullOrWhiteSpace(version))
-            {
-                throw new ArgumentNullException("version");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2269,10 +2108,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_pinAddCmd, packageId);
 
@@ -2329,15 +2165,8 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
-
-            if (string.IsNullOrWhiteSpace(version))
-            {
-                throw new ArgumentNullException("version");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
             string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
 
@@ -2381,10 +2210,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2420,10 +2246,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddAsync(WinGetPackage package, string version)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2461,10 +2284,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_pinAddInstalledCmd, packageId);
 
@@ -2521,15 +2341,8 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
-
-            if (string.IsNullOrWhiteSpace(version))
-            {
-                throw new ArgumentNullException("version");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
             string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
 
@@ -2573,10 +2386,7 @@ namespace WGetNET
         /// </exception>
         public bool PinAddInstalled(WinGetPackage package, bool blocking = false)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2612,10 +2422,7 @@ namespace WGetNET
         /// </exception>
         public bool PinAddInstalled(WinGetPackage package, string version)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2653,10 +2460,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_pinAddInstalledCmd, packageId);
 
@@ -2713,15 +2517,8 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
-
-            if (string.IsNullOrWhiteSpace(version))
-            {
-                throw new ArgumentNullException("version");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
             string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
 
@@ -2765,10 +2562,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddInstalledAsync(WinGetPackage package, bool blocking = false)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2804,10 +2598,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddInstalledAsync(WinGetPackage package, string version)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2846,10 +2637,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_pinRemoveCmd, packageId);
 
@@ -2892,10 +2680,7 @@ namespace WGetNET
         /// </exception>
         public bool PinRemove(WinGetPackage package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2932,10 +2717,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_pinRemoveCmd, packageId);
 
@@ -2978,10 +2760,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinRemoveAsync(WinGetPackage package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -3018,10 +2797,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
 
@@ -3064,10 +2840,7 @@ namespace WGetNET
         /// </exception>
         public bool PinRemoveInstalled(WinGetPackage package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -3104,10 +2877,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            if (string.IsNullOrWhiteSpace(packageId))
-            {
-                throw new ArgumentNullException("packageId");
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
 
@@ -3150,10 +2920,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinRemoveInstalledAsync(WinGetPackage package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ArgsHelper.ThrowIfObjectIsNull(package, "package");
 
             if (package.HasShortenedId)
             {
