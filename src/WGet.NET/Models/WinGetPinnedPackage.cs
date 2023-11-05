@@ -2,6 +2,9 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System;
+using WGetNET.HelperClasses;
+
 namespace WGetNET
 {
     /// <summary>
@@ -28,6 +31,17 @@ namespace WGetNET
             get
             {
                 return _pinnedVersion;
+            }
+        }
+
+        /// <summary>
+        /// Gets the pinned version.
+        /// </summary>
+        public Version PinnedVersionObject
+        {
+            get
+            {
+                return _pinnedVersionObject;
             }
         }
 
@@ -60,6 +74,7 @@ namespace WGetNET
 
         private readonly string _pinTypeString;
         private readonly string _pinnedVersion;
+        private readonly Version _pinnedVersionObject;
         private readonly PinType _pinType;
 
         /// <summary>
@@ -72,6 +87,8 @@ namespace WGetNET
         {
             _pinTypeString = pinType;
             _pinnedVersion = pinnedVersion;
+
+            _pinnedVersionObject = VersionParser.Parse(_pinnedVersion);
 
             _pinType = _pinTypeString.ToUpper() switch
             {
