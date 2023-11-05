@@ -69,10 +69,18 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public List<WinGetPackage> SearchPackage(string packageId, bool exact = false)
         {
-            string cmd = string.Format(_searchCmd, packageId);
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
 
+            string cmd = string.Format(_searchCmd, packageId);
+            
             if (exact)
             {
                 cmd += " --exact";
@@ -115,8 +123,21 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public List<WinGetPackage> SearchPackage(string packageId, string sourceName, bool exact = false)
         {
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
+            if (string.IsNullOrWhiteSpace(sourceName))
+            {
+                throw new ArgumentNullException("sourceName");
+            }
+
             string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
 
             if (exact)
@@ -159,8 +180,16 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, bool exact = false)
         {
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
             string cmd = string.Format(_searchCmd, packageId);
 
             if (exact)
@@ -206,8 +235,21 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, string sourceName, bool exact = false)
         {
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
+            if (string.IsNullOrWhiteSpace(sourceName))
+            {
+                throw new ArgumentNullException("sourceName");
+            }
+
             string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
 
             if (exact)
@@ -283,8 +325,16 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public List<WinGetPackage> GetInstalledPackages(string packageId, bool exact = false)
         {
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
             string cmd = string.Format(_searchInstalledCmd, packageId);
 
             if (exact)
@@ -329,8 +379,21 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public List<WinGetPackage> GetInstalledPackages(string packageId, string sourceName, bool exact = false)
         {
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
+            if (string.IsNullOrWhiteSpace(sourceName))
+            {
+                throw new ArgumentNullException("sourceName");
+            }
+
             string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
 
             if (exact)
@@ -406,8 +469,16 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, bool exact = false)
         {
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
             string cmd = string.Format(_searchInstalledCmd, packageId);
 
             if (exact)
@@ -453,8 +524,21 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, string sourceName, bool exact = false)
         {
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
+            if (string.IsNullOrWhiteSpace(sourceName))
+            {
+                throw new ArgumentNullException("sourceName");
+            }
+
             string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
 
             if (exact)
@@ -493,11 +577,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool InstallPackage(string packageId)
         {
             if (string.IsNullOrWhiteSpace(packageId))
             {
-                return false;
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_installCmd, packageId);
@@ -533,16 +620,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool InstallPackage(WinGetPackage package)
         {
             if (package == null)
             {
-                return false;
-            }
-
-            if (package.IsEmpty)
-            {
-                return false;
+                throw new ArgumentNullException("package");
             }
 
             if (package.HasShortenedId)
@@ -568,11 +653,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> InstallPackageAsync(string packageId)
         {
             if (string.IsNullOrWhiteSpace(packageId))
             {
-                return false;
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_installCmd, packageId);
@@ -609,16 +697,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> InstallPackageAsync(WinGetPackage package)
         {
             if (package == null)
             {
-                return false;
-            }
-
-            if (package.IsEmpty)
-            {
-                return false;
+                throw new ArgumentNullException("package");
             }
 
             if (package.HasShortenedId)
@@ -645,11 +731,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool UninstallPackage(string packageId)
         {
             if (string.IsNullOrWhiteSpace(packageId))
             {
-                return false;
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_uninstallCmd, packageId);
@@ -685,16 +774,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool UninstallPackage(WinGetPackage package)
         {
             if (package == null)
             {
-                return false;
-            }
-
-            if (package.IsEmpty)
-            {
-                return false;
+                throw new ArgumentNullException("package");
             }
 
             if (package.HasShortenedId)
@@ -720,11 +807,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> UninstallPackageAsync(string packageId)
         {
             if (string.IsNullOrWhiteSpace(packageId))
             {
-                return false;
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_uninstallCmd, packageId);
@@ -761,16 +851,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> UninstallPackageAsync(WinGetPackage package)
         {
             if (package == null)
             {
-                return false;
-            }
-
-            if (package.IsEmpty)
-            {
-                return false;
+                throw new ArgumentNullException("package");
             }
 
             if (package.HasShortenedId)
@@ -866,11 +954,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool UpgradePackage(string packageId)
         {
             if (string.IsNullOrWhiteSpace(packageId))
             {
-                return false;
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_upgradeCmd, packageId);
@@ -906,16 +997,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool UpgradePackage(WinGetPackage package)
         {
             if (package == null)
             {
-                return false;
-            }
-            
-            if (package.IsEmpty)
-            {
-                return false;
+                throw new ArgumentNullException("package");
             }
 
             if (package.HasShortenedId)
@@ -941,11 +1030,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> UpgradePackageAsync(string packageId)
         {
             if (string.IsNullOrWhiteSpace(packageId))
             {
-                return false;
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_upgradeCmd, packageId);
@@ -982,16 +1074,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> UpgradePackageAsync(WinGetPackage package)
         {
             if (package == null)
             {
-                return false;
-            }
-
-            if (package.IsEmpty)
-            {
-                return false;
+                throw new ArgumentNullException("package");
             }
 
             if (package.HasShortenedId)
@@ -1099,11 +1189,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool ExportPackagesToFile(string file)
         {
             if (string.IsNullOrWhiteSpace(file))
             {
-                return false;
+                throw new ArgumentNullException("file");
             }
 
             string cmd = string.Format(_exportCmd, file);
@@ -1140,11 +1233,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> ExportPackagesToFileAsync(string file)
         {
             if (string.IsNullOrWhiteSpace(file))
             {
-                return false;
+                throw new ArgumentNullException("file");
             }
 
             string cmd = string.Format(_exportCmd, file);
@@ -1184,11 +1280,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool ImportPackagesFromFile(string file)
         {
             if (string.IsNullOrWhiteSpace(file))
             {
-                return false;
+                throw new ArgumentNullException("file");
             }
 
             string cmd = string.Format(_importCmd, file);
@@ -1229,11 +1328,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> ImportPackagesFromFileAsync(string file)
         {
             if (string.IsNullOrWhiteSpace(file))
             {
-                return false;
+                throw new ArgumentNullException("file");
             }
 
             string cmd = string.Format(_importCmd, file);
@@ -1273,11 +1375,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
         public string Hash(string file)
         {
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                throw new ArgumentNullException("file");
+            }
+
             if (!File.Exists(file))
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file}'");
@@ -1323,11 +1433,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
         public string Hash(FileInfo file)
         {
+            if (file == null)
+            {
+                throw new ArgumentNullException("file");
+            }
+
             if (!file.Exists)
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file.FullName}'");
@@ -1374,11 +1492,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
         public async Task<string> HashAsync(string file)
         {
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                throw new ArgumentNullException("file");
+            }
+
             if (!File.Exists(file))
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file}'");
@@ -1425,11 +1551,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
         public async Task<string> HashAsync(FileInfo file)
         {
+            if (file == null)
+            {
+                throw new ArgumentNullException("file");
+            }
+
             if (!file.Exists)
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file.FullName}'");
@@ -1503,11 +1637,24 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool Download(string packageId, string directory)
         {
             if (!CheckWinGetVersion(_downloadMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_downloadMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
+            if (string.IsNullOrWhiteSpace(directory))
+            {
+                throw new ArgumentNullException("directory");
             }
 
             string cmd = string.Format(_downloadCmd, packageId, directory);
@@ -1550,8 +1697,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool Download(string packageId, DirectoryInfo directory)
         {
+            if (directory == null)
+            {
+                throw new ArgumentNullException("directory");
+            }
+
             return Download(packageId, directory.FullName);
         }
 
@@ -1573,8 +1728,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool Download(WinGetPackage package, string directory)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return Download(package.Name, directory);
@@ -1604,8 +1767,21 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool Download(WinGetPackage package, DirectoryInfo directory)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
+            if (directory == null)
+            {
+                throw new ArgumentNullException("directory");
+            }
+
             if (package.HasShortenedId)
             {
                 return Download(package.Name, directory.FullName);
@@ -1632,11 +1808,24 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> DownloadAsync(string packageId, string directory)
         {
             if (!CheckWinGetVersion(_downloadMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_downloadMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
+            if (string.IsNullOrWhiteSpace(directory))
+            {
+                throw new ArgumentNullException("directory");
             }
 
             string cmd = string.Format(_downloadCmd, packageId, directory);
@@ -1679,8 +1868,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> DownloadAsync(string packageId, DirectoryInfo directory)
         {
+            if (directory == null)
+            {
+                throw new ArgumentNullException("directory");
+            }
+
             return await DownloadAsync(packageId, directory.FullName);
         }
 
@@ -1702,8 +1899,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> DownloadAsync(WinGetPackage package, string directory)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return await DownloadAsync(package.Name, directory);
@@ -1732,8 +1937,21 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
+            if (directory == null)
+            {
+                throw new ArgumentNullException("directory");
+            }
+
             if (package.HasShortenedId)
             {
                 return await DownloadAsync(package.Name, directory.FullName);
@@ -1844,11 +2062,19 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinAdd(string packageId, bool blocking = false)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_pinAddCmd, packageId);
@@ -1896,11 +2122,24 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinAdd(string packageId, string version)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                throw new ArgumentNullException("version");
             }
 
             string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
@@ -1940,8 +2179,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinAdd(WinGetPackage package, bool blocking = false)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return PinAdd(package.Name, blocking);
@@ -1971,8 +2218,21 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinAdd(WinGetPackage package, string version)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                throw new ArgumentNullException("version");
+            }
+
             if (package.HasShortenedId)
             {
                 return PinAdd(package.Name, version);
@@ -1999,11 +2259,19 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinAddAsync(string packageId, bool blocking = false)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_pinAddCmd, packageId);
@@ -2051,11 +2319,24 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinAddAsync(string packageId, string version)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                throw new ArgumentNullException("version");
             }
 
             string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
@@ -2095,8 +2376,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return await PinAddAsync(package.Name, blocking);
@@ -2126,8 +2415,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinAddAsync(WinGetPackage package, string version)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return await PinAddAsync(package.Name, version);
@@ -2154,11 +2451,19 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinAddInstalled(string packageId, bool blocking = false)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_pinAddInstalledCmd, packageId);
@@ -2206,11 +2511,24 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinAddInstalled(string packageId, string version)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                throw new ArgumentNullException("version");
             }
 
             string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
@@ -2250,8 +2568,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinAddInstalled(WinGetPackage package, bool blocking = false)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return PinAddInstalled(package.Name, blocking);
@@ -2281,8 +2607,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinAddInstalled(WinGetPackage package, string version)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return PinAddInstalled(package.Name, version);
@@ -2309,11 +2643,19 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinAddInstalledAsync(string packageId, bool blocking = false)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_pinAddInstalledCmd, packageId);
@@ -2361,11 +2703,24 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinAddInstalledAsync(string packageId, string version)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
+            }
+
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                throw new ArgumentNullException("version");
             }
 
             string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
@@ -2405,8 +2760,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinAddInstalledAsync(WinGetPackage package, bool blocking = false)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return await PinAddInstalledAsync(package.Name, blocking);
@@ -2436,8 +2799,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinAddInstalledAsync(WinGetPackage package, string version)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return await PinAddInstalledAsync(package.Name, version);
@@ -2465,11 +2836,19 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinRemove(string packageId)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_pinRemoveCmd, packageId);
@@ -2508,8 +2887,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinRemove(WinGetPackage package)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return PinRemove(package.Name);
@@ -2535,11 +2922,19 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinRemoveAsync(string packageId)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_pinRemoveCmd, packageId);
@@ -2578,8 +2973,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinRemoveAsync(WinGetPackage package)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return await PinRemoveAsync(package.Name);
@@ -2605,11 +3008,19 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinRemoveInstalled(string packageId)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
@@ -2648,8 +3059,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool PinRemoveInstalled(WinGetPackage package)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return PinRemoveInstalled(package.Name);
@@ -2675,11 +3094,19 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinRemoveInstalledAsync(string packageId)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                throw new ArgumentNullException("packageId");
             }
 
             string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
@@ -2718,8 +3145,16 @@ namespace WGetNET
         /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> PinRemoveInstalledAsync(WinGetPackage package)
         {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package");
+            }
+
             if (package.HasShortenedId)
             {
                 return await PinRemoveInstalledAsync(package.Name);
