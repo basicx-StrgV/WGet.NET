@@ -1266,11 +1266,21 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> containing the hash.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.IO.FileNotFoundException">
+        /// Unable to find the specified file.
+        /// </exception>
         public string Hash(string file)
         {
             if (!File.Exists(file))
             {
-                return string.Empty;
+                throw new FileNotFoundException($"Unable to find the specified file. File:'{file}'");
             }
 
             string cmd = string.Format(_hashCmd, file);
@@ -1306,11 +1316,21 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> containing the hash.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.IO.FileNotFoundException">
+        /// Unable to find the specified file.
+        /// </exception>
         public string Hash(FileInfo file)
         {
             if (!file.Exists)
             {
-                return string.Empty;
+                throw new FileNotFoundException($"Unable to find the specified file. File:'{file.FullName}'");
             }
 
             string cmd = string.Format(_hashCmd, file.FullName);
@@ -1347,11 +1367,21 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> containing the hash.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.IO.FileNotFoundException">
+        /// Unable to find the specified file.
+        /// </exception>
         public async Task<string> HashAsync(string file)
         {
             if (!File.Exists(file))
             {
-                return string.Empty;
+                throw new FileNotFoundException($"Unable to find the specified file. File:'{file}'");
             }
 
             string cmd = string.Format(_hashCmd, file);
@@ -1388,11 +1418,21 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> containing the hash.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.IO.FileNotFoundException">
+        /// Unable to find the specified file.
+        /// </exception>
         public async Task<string> HashAsync(FileInfo file)
         {
             if (!file.Exists)
             {
-                return string.Empty;
+                throw new FileNotFoundException($"Unable to find the specified file. File:'{file.FullName}'");
             }
 
             string cmd = string.Format(_hashCmd, file.FullName);
