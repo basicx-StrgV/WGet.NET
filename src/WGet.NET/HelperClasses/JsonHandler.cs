@@ -30,22 +30,34 @@ namespace WGetNET.HelperClasses
         /// A <see cref="System.String"/> containing the json to deserialize.
         /// </param>
         /// <returns>
-        /// A nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+        /// Object of the given class type.
         /// </returns>
-        public static T? StringToObject<T>(string jsonString) where T: class
+        /// <exception cref="WGetNET.InvalidJsonException">
+        /// The provided JSON could not be deserialized.
+        /// </exception>
+        public static T StringToObject<T>(string jsonString) where T: class
         {
+            T? instance = null;
+
             try
             {
 #if NETCOREAPP3_1_OR_GREATER
-                return JsonSerializer.Deserialize<T>(jsonString);
+                instance = JsonSerializer.Deserialize<T>(jsonString);
 #elif NETSTANDARD2_0
-                return JsonConvert.DeserializeObject<T>(jsonString);
+                instance = JsonConvert.DeserializeObject<T>(jsonString);
 #endif
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                throw new InvalidJsonException(e);
             }
+
+            if (instance == null)
+            {
+                throw new InvalidJsonException();
+            }
+
+            return instance;
         }
 
 #if NETCOREAPP3_1_OR_GREATER
@@ -60,20 +72,32 @@ namespace WGetNET.HelperClasses
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is a nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+        /// Object of the given class type.
         /// </returns>
-        public static async Task<T?> StringToObjectAsync<T>(string jsonString) where T : class
+        /// <exception cref="WGetNET.InvalidJsonException">
+        /// The provided JSON could not be deserialized.
+        /// </exception>
+        public static async Task<T> StringToObjectAsync<T>(string jsonString) where T : class
         {
+            T? instance = null;
+
             try
             {
                 using MemoryStream dataStream = new(Encoding.UTF8.GetBytes(jsonString));
 
-                return await JsonSerializer.DeserializeAsync<T>(dataStream);
+                instance = await JsonSerializer.DeserializeAsync<T>(dataStream);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                throw new InvalidJsonException(e);
             }
+
+            if (instance == null)
+            {
+                throw new InvalidJsonException();
+            }
+
+            return instance;
         }
 #endif
     }

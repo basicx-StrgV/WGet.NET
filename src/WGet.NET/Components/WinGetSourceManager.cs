@@ -1129,6 +1129,16 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public bool ImportSource(List<WinGetSource> winGetSources)
         {
             if (winGetSources == null || winGetSources.Count <= 0)
@@ -1157,6 +1167,16 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public bool ImportSource(WinGetSource winGetSource)
         {
             return AddSource(winGetSource);
@@ -1171,12 +1191,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.InvalidJsonException">
+        /// The provided JSON could not be deserialized.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public bool ImportSource(string jsonString)
         {
-            WinGetSource? source = 
-                JsonHandler.StringToObject<WinGetSource>(jsonString) 
-                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
-            // TODO: New Exeption
+            WinGetSource source = JsonHandler.StringToObject<WinGetSource>(jsonString);
+            
             return AddSource(source);
         }
 
@@ -1190,6 +1221,16 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public async Task<bool> ImportSourceAsync(List<WinGetSource> winGetSources)
         {
             if (winGetSources == null || winGetSources.Count <= 0)
@@ -1219,6 +1260,16 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public async Task<bool> ImportSourceAsync(WinGetSource winGetSource)
         {
             return await AddSourceAsync(winGetSource);
@@ -1234,18 +1285,27 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.InvalidJsonException">
+        /// The provided JSON could not be deserialized.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public async Task<bool> ImportSourceAsync(string jsonString)
         {
 #if NETCOREAPP3_1_OR_GREATER
-            WinGetSource? source = 
-                await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString)
-                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
-            // TODO: New Exeption
+            WinGetSource source = 
+                await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString);
 #elif NETSTANDARD2_0
-            WinGetSource? source = 
-                JsonHandler.StringToObject<WinGetSource>(jsonString)
-                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
-            // TODO: New Exeption
+            WinGetSource source = 
+                JsonHandler.StringToObject<WinGetSource>(jsonString);
 #endif
 
             return await AddSourceAsync(source);
