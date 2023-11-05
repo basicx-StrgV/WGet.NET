@@ -42,6 +42,9 @@ namespace WGetNET
             }
         }
 
+        /// <summary>
+        /// Gets if the object is empty.
+        /// </summary>
         public bool IsEmpty
         {
             get
