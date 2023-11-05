@@ -59,7 +59,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceListCmd, e);
             }
         }
 
@@ -89,7 +89,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceListCmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -132,11 +132,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_sourceAddCmd, name, arg);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_sourceAddCmd, name, arg));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -146,7 +147,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
             }
         }
 
@@ -190,11 +191,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_sourceAddWithTypeCmd, name, arg, type));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -204,7 +206,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
             }
         }
 
@@ -288,11 +290,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_sourceAddCmd, name, arg);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_sourceAddCmd, name, arg));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -302,7 +305,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
             }
         }
 
@@ -347,11 +350,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_sourceAddWithTypeCmd, name, arg, type));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -361,7 +365,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
             }
         }
 
@@ -441,7 +445,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Updating sources failed.", e);
+                throw new WinGetActionFailedException("Updating sources failed.", _sourceUpdateCmd, e);
             }
         }
 
@@ -477,7 +481,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Updating sources failed.", e);
+                throw new WinGetActionFailedException("Updating sources failed.", _sourceUpdateCmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -511,7 +515,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
             }
         }
 
@@ -536,14 +540,10 @@ namespace WGetNET
                 return string.Empty;
             }
 
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
+
             try
             {
-                //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    sourceName;
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
@@ -555,7 +555,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
             }
         }
 
@@ -619,7 +619,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
             }
         }
 
@@ -645,14 +645,10 @@ namespace WGetNET
                 return string.Empty;
             }
 
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
+
             try
             {
-                //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    sourceName;
-
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
@@ -664,7 +660,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
             }
         }
 
@@ -816,7 +812,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
             }
         }
 
@@ -842,14 +838,10 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
+
             try
             {
-                //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    sourceName;
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
@@ -861,7 +853,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
             }
         }
 
@@ -934,7 +926,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
             }
         }
 
@@ -961,14 +953,10 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
+
             try
             {
-                //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    sourceName;
-
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
@@ -980,7 +968,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
             }
         }
 
@@ -1069,10 +1057,12 @@ namespace WGetNET
 #endif
 
                 WinGetSource? source =
-                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString()) 
-                    ?? throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
+                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString());
 
-                sourceList.Add(source);
+                if (source != null)
+                {
+                    sourceList.Add(source);
+                }
 
                 jsonString.Clear();
             }
@@ -1114,10 +1104,12 @@ namespace WGetNET
                 }
 
                 WinGetSource? source =
-                    await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString.ToString())
-                    ?? throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
+                    await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString.ToString());
 
-                sourceList.Add(source);
+                if (source != null)
+                {
+                    sourceList.Add(source);
+                }
 
                 jsonString.Clear();
             }
@@ -1184,7 +1176,7 @@ namespace WGetNET
             WinGetSource? source = 
                 JsonHandler.StringToObject<WinGetSource>(jsonString) 
                 ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
-
+            // TODO: New Exeption
             return AddSource(source);
         }
 
@@ -1248,10 +1240,12 @@ namespace WGetNET
             WinGetSource? source = 
                 await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString)
                 ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
+            // TODO: New Exeption
 #elif NETSTANDARD2_0
             WinGetSource? source = 
                 JsonHandler.StringToObject<WinGetSource>(jsonString)
                 ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
+            // TODO: New Exeption
 #endif
 
             return await AddSourceAsync(source);
@@ -1298,7 +1292,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Reset sources failed.", e);
+                throw new WinGetActionFailedException("Reset sources failed.", _sourceResetCmd, e);
             }
         }
 
@@ -1342,7 +1336,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Reset sources failed.", e);
+                throw new WinGetActionFailedException("Reset sources failed.", _sourceResetCmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -1379,10 +1373,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_sourceRemoveCmd, name);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(string.Format(_sourceRemoveCmd, name));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -1392,7 +1388,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Removing source failed.", e);
+                throw new WinGetActionFailedException("Removing source failed.", cmd, e);
             }
         }
 
@@ -1462,10 +1458,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_sourceRemoveCmd, name);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(string.Format(_sourceRemoveCmd, name));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -1475,7 +1473,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Removing source failed.", e);
+                throw new WinGetActionFailedException("Removing source failed.", cmd, e);
             }
         }
 

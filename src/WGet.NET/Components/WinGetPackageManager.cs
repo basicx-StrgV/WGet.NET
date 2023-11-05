@@ -71,15 +71,15 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> SearchPackage(string packageId, bool exact = false)
         {
+            string cmd = string.Format(_searchCmd, packageId);
+
+            if (exact)
+            {
+                cmd += " --exact";
+            }
+
             try
             {
-                string cmd = string.Format(_searchCmd, packageId);
-
-                if (exact)
-                {
-                    cmd += " --exact";
-                }
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
@@ -91,7 +91,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The package search failed.", e);
+                throw new WinGetActionFailedException("The package search failed.", cmd, e);
             }
         }
 
@@ -117,15 +117,15 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> SearchPackage(string packageId, string sourceName, bool exact = false)
         {
+            string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
+
+            if (exact)
+            {
+                cmd += " --exact";
+            }
+
             try
             {
-                string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
-
-                if (exact)
-                {
-                    cmd += " --exact";
-                }
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
@@ -137,7 +137,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The package search failed.", e);
+                throw new WinGetActionFailedException("The package search failed.", cmd, e);
             }
         }
 
@@ -161,15 +161,15 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, bool exact = false)
         {
+            string cmd = string.Format(_searchCmd, packageId);
+
+            if (exact)
+            {
+                cmd += " --exact";
+            }
+
             try
             {
-                string cmd = string.Format(_searchCmd, packageId);
-
-                if (exact)
-                {
-                    cmd += " --exact";
-                }
-
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
@@ -181,7 +181,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The package search failed.", e);
+                throw new WinGetActionFailedException("The package search failed.", cmd, e);
             }
         }
 
@@ -208,15 +208,15 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, string sourceName, bool exact = false)
         {
+            string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
+
+            if (exact)
+            {
+                cmd += " --exact";
+            }
+
             try
             {
-                string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
-
-                if (exact)
-                {
-                    cmd += " --exact";
-                }
-
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
@@ -228,7 +228,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The package search failed.", e);
+                throw new WinGetActionFailedException("The package search failed.", cmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The search of installed packages failed.", e);
+                throw new WinGetActionFailedException("The search of installed packages failed.", _listCmd, e);
             }
         }
 
@@ -285,15 +285,15 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages(string packageId, bool exact = false)
         {
+            string cmd = string.Format(_searchInstalledCmd, packageId);
+
+            if (exact)
+            {
+                cmd += " --exact";
+            }
+
             try
             {
-                string cmd = string.Format(_searchInstalledCmd, packageId);
-
-                if (exact)
-                {
-                    cmd += " --exact";
-                }
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
@@ -305,7 +305,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The search of installed packages failed.", e);
+                throw new WinGetActionFailedException("The search of installed packages failed.", cmd, e);
             }
         }
 
@@ -331,15 +331,15 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages(string packageId, string sourceName, bool exact = false)
         {
+            string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
+
+            if (exact)
+            {
+                cmd += " --exact";
+            }
+
             try
             {
-                string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
-
-                if (exact)
-                {
-                    cmd += " --exact";
-                }
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
@@ -351,7 +351,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The search of installed packages failed.", e);
+                throw new WinGetActionFailedException("The search of installed packages failed.", cmd, e);
             }
         }
 
@@ -384,7 +384,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The search of installed packages failed.", e);
+                throw new WinGetActionFailedException("The search of installed packages failed.", _listCmd, e);
             }
         }
 
@@ -408,15 +408,15 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, bool exact = false)
         {
+            string cmd = string.Format(_searchInstalledCmd, packageId);
+
+            if (exact)
+            {
+                cmd += " --exact";
+            }
+
             try
             {
-                string cmd = string.Format(_searchInstalledCmd, packageId);
-
-                if (exact)
-                {
-                    cmd += " --exact";
-                }
-
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
@@ -428,7 +428,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The search of installed packages failed.", e);
+                throw new WinGetActionFailedException("The search of installed packages failed.", cmd, e);
             }
         }
 
@@ -455,15 +455,15 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, string sourceName, bool exact = false)
         {
+            string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
+
+            if (exact)
+            {
+                cmd += " --exact";
+            }
+
             try
             {
-                string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
-
-                if (exact)
-                {
-                    cmd += " --exact";
-                }
-
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
@@ -475,7 +475,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The search of installed packages failed.", e);
+                throw new WinGetActionFailedException("The search of installed packages failed.", cmd, e);
             }
         }
 
@@ -500,11 +500,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_installCmd, packageId);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_installCmd, packageId));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -514,7 +515,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The package installtion failed.", e);
+                throw new WinGetActionFailedException("The package installtion failed.", cmd, e);
             }
         }
 
@@ -574,11 +575,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_installCmd, packageId);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_installCmd, packageId));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -588,7 +590,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The package installtion failed.", e);
+                throw new WinGetActionFailedException("The package installtion failed.", cmd, e);
             }
         }
 
@@ -650,11 +652,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_uninstallCmd, packageId);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_uninstallCmd, packageId));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -664,7 +667,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The package uninstalltion failed.", e);
+                throw new WinGetActionFailedException("The package uninstalltion failed.", cmd, e);
             }
         }
 
@@ -724,11 +727,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_uninstallCmd, packageId);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_uninstallCmd, packageId));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -738,7 +742,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("The package uninstalltion failed.", e);
+                throw new WinGetActionFailedException("The package uninstalltion failed.", cmd, e);
             }
         }
 
@@ -794,12 +798,12 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetUpgradeablePackages()
         {
+            string cmd = AddArgumentByVersion(_getUpgradeableCmd);
+
             try
             {
-                string argument = AddArgumentByVersion(_getUpgradeableCmd);
-
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(argument);
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
             }
@@ -809,7 +813,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting updateable packages failed.", e);
+                throw new WinGetActionFailedException("Getting updateable packages failed.", cmd, e);
             }
         }
 
@@ -829,12 +833,12 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync()
         {
+            string cmd = AddArgumentByVersion(_getUpgradeableCmd);
+
             try
             {
-                string argument = AddArgumentByVersion(_getUpgradeableCmd);
-
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(argument);
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
             }
@@ -844,7 +848,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting updateable packages failed.", e);
+                throw new WinGetActionFailedException("Getting updateable packages failed.", cmd, e);
             }
         }
 
@@ -869,11 +873,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_upgradeCmd, packageId);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_upgradeCmd, packageId));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -883,7 +888,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Upgrading the package failed.", e);
+                throw new WinGetActionFailedException("Upgrading the package failed.", cmd, e);
             }
         }
 
@@ -943,11 +948,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_upgradeCmd, packageId);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_upgradeCmd, packageId));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -957,7 +963,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Upgrading the package failed.", e);
+                throw new WinGetActionFailedException("Upgrading the package failed.", cmd, e);
             }
         }
 
@@ -1027,7 +1033,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Upgrading all packages failed.", e);
+                throw new WinGetActionFailedException("Upgrading all packages failed.", _upgradeAllCmd, e);
             }
         }
 
@@ -1062,7 +1068,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Upgrading all packages failed.", e);
+                throw new WinGetActionFailedException("Upgrading all packages failed.", _upgradeAllCmd, e);
             }
         }
 
@@ -1100,11 +1106,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_exportCmd, file);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_exportCmd, file));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -1114,7 +1121,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting packages failed.", e);
+                throw new WinGetActionFailedException("Exporting packages failed.", cmd, e);
             }
         }
 
@@ -1140,11 +1147,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_exportCmd, file);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_exportCmd, file));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -1154,7 +1162,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting packages failed.", e);
+                throw new WinGetActionFailedException("Exporting packages failed.", cmd, e);
             }
         }
 
@@ -1183,11 +1191,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_importCmd, file);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_importCmd, file));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -1197,7 +1206,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Importing packages failed.", e);
+                throw new WinGetActionFailedException("Importing packages failed.", cmd, e);
             }
         }
 
@@ -1227,11 +1236,12 @@ namespace WGetNET
                 return false;
             }
 
+            string cmd = string.Format(_importCmd, file);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_importCmd, file));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -1241,7 +1251,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Importing packages failed.", e);
+                throw new WinGetActionFailedException("Importing packages failed.", cmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -1260,14 +1270,15 @@ namespace WGetNET
         {
             if (!File.Exists(file))
             {
-                throw new WinGetActionFailedException("File does not exist.");
+                return string.Empty;
             }
+
+            string cmd = string.Format(_hashCmd, file);
 
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_hashCmd, file));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 if (!result.Success)
                 {
@@ -1282,7 +1293,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Hashing failed.", e);
+                throw new WinGetActionFailedException("Hashing failed.", cmd, e);
             }
         }
 
@@ -1299,14 +1310,15 @@ namespace WGetNET
         {
             if (!file.Exists)
             {
-                throw new WinGetActionFailedException("File does not exist.");
+                return string.Empty;
             }
+
+            string cmd = string.Format(_hashCmd, file.FullName);
 
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_hashCmd, file.FullName));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 if (!result.Success)
                 {
@@ -1321,7 +1333,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Hashing failed.", e);
+                throw new WinGetActionFailedException("Hashing failed.", cmd, e);
             }
         }
 
@@ -1339,14 +1351,15 @@ namespace WGetNET
         {
             if (!File.Exists(file))
             {
-                throw new WinGetActionFailedException("File does not exist.");
+                return string.Empty;
             }
+
+            string cmd = string.Format(_hashCmd, file);
 
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_hashCmd, file));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 if (!result.Success)
                 {
@@ -1361,7 +1374,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Hashing failed.", e);
+                throw new WinGetActionFailedException("Hashing failed.", cmd, e);
             }
         }
 
@@ -1379,14 +1392,15 @@ namespace WGetNET
         {
             if (!file.Exists)
             {
-                throw new WinGetActionFailedException("File does not exist.");
+                return string.Empty;
             }
+
+            string cmd = string.Format(_hashCmd, file.FullName);
 
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_hashCmd, file.FullName));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 if (!result.Success)
                 {
@@ -1401,7 +1415,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Hashing failed.", e);
+                throw new WinGetActionFailedException("Hashing failed.", cmd, e);
             }
         }
 
@@ -1456,11 +1470,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_downloadMinVersion);
             }
 
+            string cmd = string.Format(_downloadCmd, packageId, directory);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_downloadCmd, packageId, directory));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -1470,7 +1485,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Download failed.", e);
+                throw new WinGetActionFailedException("Download failed.", cmd, e);
             }
         }
 
@@ -1578,11 +1593,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_downloadMinVersion);
             }
 
+            string cmd = string.Format(_downloadCmd, packageId, directory);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_downloadCmd, packageId, directory));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -1592,7 +1608,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Download failed.", e);
+                throw new WinGetActionFailedException("Download failed.", cmd, e);
             }
         }
 
@@ -1713,7 +1729,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Listing all pinned packages failed.", e);
+                throw new WinGetActionFailedException("Listing all pinned packages failed.", _pinListCmd, e);
             }
         }
 
@@ -1753,7 +1769,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Listing all pinned packages failed.", e);
+                throw new WinGetActionFailedException("Listing all pinned packages failed.", _pinListCmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -1784,15 +1800,15 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinAddCmd, packageId);
+
+            if (blocking)
+            {
+                cmd += " --blocking";
+            }
+
             try
             {
-                string cmd = string.Format(_pinAddCmd, packageId);
-
-                if (blocking)
-                {
-                    cmd += " --blocking";
-                }
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
@@ -1804,7 +1820,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Pinning the package failed.", e);
+                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
             }
         }
 
@@ -1836,11 +1852,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_pinAddByVersionCmd, packageId, version));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -1850,7 +1867,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Pinning the package failed.", e);
+                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
             }
         }
 
@@ -1938,16 +1955,15 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinAddCmd, packageId);
+
+            if (blocking)
+            {
+                cmd += " --blocking";
+            }
+
             try
             {
-                string cmd = string.Format(_pinAddCmd, packageId);
-
-                if (blocking)
-                {
-                    cmd += " --blocking";
-                }
-
-
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
@@ -1959,7 +1975,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Pinning the package failed.", e);
+                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
             }
         }
 
@@ -1991,11 +2007,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_pinAddByVersionCmd, packageId, version));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -2005,7 +2022,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Pinning the package failed.", e);
+                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
             }
         }
 
@@ -2093,16 +2110,15 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinAddInstalledCmd, packageId);
+
+            if (blocking)
+            {
+                cmd += " --blocking";
+            }
+
             try
             {
-                string cmd = string.Format(_pinAddInstalledCmd, packageId);
-
-                if (blocking)
-                {
-                    cmd += " --blocking";
-                }
-
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
@@ -2114,7 +2130,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Pinning the package failed.", e);
+                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
             }
         }
 
@@ -2146,11 +2162,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_pinAddInstalledByVersionCmd, packageId, version));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -2160,7 +2177,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Pinning the package failed.", e);
+                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
             }
         }
 
@@ -2248,16 +2265,15 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinAddInstalledCmd, packageId);
+
+            if (blocking)
+            {
+                cmd += " --blocking";
+            }
+
             try
             {
-                string cmd = string.Format(_pinAddInstalledCmd, packageId);
-
-                if (blocking)
-                {
-                    cmd += " --blocking";
-                }
-
-
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
@@ -2269,7 +2285,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Pinning the package failed.", e);
+                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
             }
         }
 
@@ -2301,11 +2317,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_pinAddInstalledByVersionCmd, packageId, version));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -2315,7 +2332,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Pinning the package failed.", e);
+                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
             }
         }
 
@@ -2404,12 +2421,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinRemoveCmd, packageId);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_pinRemoveCmd, packageId));
-
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -2419,7 +2436,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Unpinning the package failed.", e);
+                throw new WinGetActionFailedException("Unpinning the package failed.", cmd, e);
             }
         }
 
@@ -2474,11 +2491,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinRemoveCmd, packageId);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_pinRemoveCmd, packageId));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -2488,7 +2506,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Unpinning the package failed.", e);
+                throw new WinGetActionFailedException("Unpinning the package failed.", cmd, e);
             }
         }
 
@@ -2543,11 +2561,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
+
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_pinRemoveInstalledCmd, packageId));
+                    _processManager.ExecuteWingetProcess(cmd);
                 
                 return result.Success;
             }
@@ -2557,7 +2576,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Unpinning the package failed.", e);
+                throw new WinGetActionFailedException("Unpinning the package failed.", cmd, e);
             }
         }
 
@@ -2612,11 +2631,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
+            string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
+
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_pinRemoveInstalledCmd, packageId));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -2626,7 +2646,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Unpinning the package failed.", e);
+                throw new WinGetActionFailedException("Unpinning the package failed.", cmd, e);
             }
         }
 
@@ -2698,7 +2718,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Reseting of pins failed.", e);
+                throw new WinGetActionFailedException("Reseting of pins failed.", _pinResetCmd, e);
             }
         }
 
@@ -2741,7 +2761,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Reseting of pins failed.", e);
+                throw new WinGetActionFailedException("Reseting of pins failed.", _pinResetCmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------

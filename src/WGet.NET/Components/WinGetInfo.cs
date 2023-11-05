@@ -102,7 +102,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _exportSettingsCmd, e);
             }
         }
 
@@ -135,7 +135,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _exportSettingsCmd, e);
             }
         }
 
@@ -175,7 +175,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _exportSettingsCmd, e);
             }
         }
 
@@ -216,7 +216,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _exportSettingsCmd, e);
             }
         }
 
@@ -262,7 +262,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting data failed.", e);
+                throw new WinGetActionFailedException("Getting data failed.", _infoCmd, e);
             }
         }
 
@@ -308,7 +308,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting data failed.", e);
+                throw new WinGetActionFailedException("Getting data failed.", _infoCmd, e);
             }
         }
 
@@ -360,7 +360,7 @@ namespace WGetNET
             }
             catch
             {
-                //No handling needed, winget can not be accessed
+                return string.Empty;
             }
 
             return string.Empty;
