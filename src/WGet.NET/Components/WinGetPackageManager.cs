@@ -582,7 +582,7 @@ namespace WGetNET
         /// </exception>
         public bool InstallPackage(WinGetPackage package)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -653,7 +653,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> InstallPackageAsync(WinGetPackage package)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -724,7 +724,7 @@ namespace WGetNET
         /// </exception>
         public bool UninstallPackage(WinGetPackage package)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -795,7 +795,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UninstallPackageAsync(WinGetPackage package)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -935,7 +935,7 @@ namespace WGetNET
         /// </exception>
         public bool UpgradePackage(WinGetPackage package)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -1006,7 +1006,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpgradePackageAsync(WinGetPackage package)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -1623,7 +1623,7 @@ namespace WGetNET
         /// </exception>
         public bool Download(WinGetPackage package, string directory)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -1659,7 +1659,7 @@ namespace WGetNET
         /// </exception>
         public bool Download(WinGetPackage package, DirectoryInfo directory)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
             if (package.HasShortenedId)
@@ -1774,7 +1774,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> DownloadAsync(WinGetPackage package, string directory)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -1809,7 +1809,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
             if (package.HasShortenedId)
@@ -2034,7 +2034,7 @@ namespace WGetNET
         /// </exception>
         public bool PinAdd(WinGetPackage package, bool blocking = false)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2070,7 +2070,7 @@ namespace WGetNET
         /// </exception>
         public bool PinAdd(WinGetPackage package, string version)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2210,7 +2210,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2246,7 +2246,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddAsync(WinGetPackage package, string version)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2386,7 +2386,7 @@ namespace WGetNET
         /// </exception>
         public bool PinAddInstalled(WinGetPackage package, bool blocking = false)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2422,7 +2422,7 @@ namespace WGetNET
         /// </exception>
         public bool PinAddInstalled(WinGetPackage package, string version)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2562,7 +2562,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddInstalledAsync(WinGetPackage package, bool blocking = false)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2598,7 +2598,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinAddInstalledAsync(WinGetPackage package, string version)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2680,7 +2680,7 @@ namespace WGetNET
         /// </exception>
         public bool PinRemove(WinGetPackage package)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2760,7 +2760,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinRemoveAsync(WinGetPackage package)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2840,7 +2840,7 @@ namespace WGetNET
         /// </exception>
         public bool PinRemoveInstalled(WinGetPackage package)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {
@@ -2920,7 +2920,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> PinRemoveInstalledAsync(WinGetPackage package)
         {
-            ArgsHelper.ThrowIfObjectIsNull(package, "package");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId)
             {

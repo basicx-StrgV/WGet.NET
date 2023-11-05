@@ -23,5 +23,13 @@ namespace WGetNET.HelperClasses
                 throw new ArgumentNullException(name);
             }
         }
+
+        public static void ThrowIfWinGetObjectIsNullOrEmpty(IWinGetObject arg, string name)
+        {
+            if (arg == null || arg.IsEmpty)
+            {
+                throw new ArgumentNullException(name);
+            }
+        }
     }
 }

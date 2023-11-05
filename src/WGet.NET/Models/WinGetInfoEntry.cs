@@ -7,7 +7,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a basic WinGet info entry
     /// </summary>
-    public class WinGetInfoEntry
+    public class WinGetInfoEntry: IWinGetObject
     {
         /// <summary>
         /// Gets the name of this info entry.
@@ -39,6 +39,18 @@ namespace WGetNET
             get
             {
                 return _hasShortenedContent;
+            }
+        }
+
+        public bool IsEmpty
+        {
+            get
+            {
+                if ((_name.Length + _content.Length) > 0)
+                {
+                    return false;
+                }
+                return true;
             }
         }
 

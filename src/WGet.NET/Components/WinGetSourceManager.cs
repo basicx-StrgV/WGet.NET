@@ -240,7 +240,7 @@ namespace WGetNET
         /// </exception>
         public bool AddSource(WinGetSource source)
         {
-            ArgsHelper.ThrowIfObjectIsNull(source, "source");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
@@ -398,7 +398,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> AddSourceAsync(WinGetSource source)
         {
-            ArgsHelper.ThrowIfObjectIsNull(source, "source");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
@@ -576,7 +576,7 @@ namespace WGetNET
         /// </exception>
         public string ExportSources(WinGetSource source)
         {
-            ArgsHelper.ThrowIfObjectIsNull(source, "source");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return ExportSources(source.Name);
         }
@@ -677,7 +677,7 @@ namespace WGetNET
         /// </exception>
         public async Task<string> ExportSourcesAsync(WinGetSource source)
         {
-            ArgsHelper.ThrowIfObjectIsNull(source, "source");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return await ExportSourcesAsync(source.Name);
         }
@@ -868,7 +868,7 @@ namespace WGetNET
         /// </exception>
         public bool ExportSourcesToFile(string file, WinGetSource source)
         {
-            ArgsHelper.ThrowIfObjectIsNull(source, "source");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return ExportSourcesToFile(file, source.Name);
         }
@@ -980,7 +980,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ExportSourcesToFileAsync(string file, WinGetSource source)
         {
-            ArgsHelper.ThrowIfObjectIsNull(source, "source");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return await ExportSourcesToFileAsync(file, source.Name);
         }
@@ -1464,7 +1464,7 @@ namespace WGetNET
         /// </exception>
         public bool RemoveSources(WinGetSource source)
         {
-            ArgsHelper.ThrowIfObjectIsNull(source, "source");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return RemoveSources(source.Name);
         }
@@ -1545,7 +1545,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> RemoveSourcesAsync(WinGetSource source)
         {
-            ArgsHelper.ThrowIfObjectIsNull(source, "source");
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return await RemoveSourcesAsync(source.Name);
         }

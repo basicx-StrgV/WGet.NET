@@ -2385,7 +2385,7 @@
             <summary>
             Imports sources into winget.
             </summary>
-            <param name="winGetSources">
+            <param name="sources">
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
@@ -2409,7 +2409,7 @@
             <summary>
             Imports a source into winget.
             </summary>
-            <param name="winGetSource">
+            <param name="source">
             A <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
@@ -2457,7 +2457,7 @@
             <summary>
             Asynchronously imports sources into winget.
             </summary>
-            <param name="winGetSources">
+            <param name="sources">
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
@@ -2482,7 +2482,7 @@
             <summary>
             Asynchronously imports a source into winget.
             </summary>
-            <param name="winGetSource">
+            <param name="source">
             A <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
@@ -3272,6 +3272,16 @@
             <see langword="true"/> if the package id is shortened or <see langword="false"/> if not.
             </returns>
         </member>
+        <member name="T:WGetNET.IWinGetObject">
+            <summary>
+            Interface for all WinGet related objects.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetObject.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
         <member name="P:WGetNET.ProcessResult.ExitCode">
             <summary>
             Gets or sets the exit code of the process.
@@ -3434,14 +3444,14 @@
             Gets or sets the source name for the package.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetPackage.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-        </member>
         <member name="P:WGetNET.WinGetPackage.HasShortenedId">
             <summary>
             Gets if id of the package is shortened.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.IsEmpty">
+            <summary>
+            Gets if the object is empty.
             </summary>
         </member>
         <member name="M:WGetNET.WinGetPackage.#ctor">
@@ -3475,43 +3485,9 @@
             Gets the pin type of the package.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.Boolean)">
+        <member name="P:WGetNET.WinGetPinnedPackage.IsEmpty">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetPinnedPackage"/> class.
-            </summary>
-            <param name="pinType">Name of the winget pin type for the package.</param>
-            <param name="pinnedVersion"><see cref="T:System.String"/> containing the pinned version for the package.</param>
-            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
-        </member>
-        <member name="T:WGetNET.WinGetSource">
-            <summary>
-            Represents a winget source
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Name">
-            <summary>
-            Gets or sets the name of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Url">
-            <summary>
-            Gets or sets the url of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Type">
-            <summary>
-            Gets or sets the type of the source.
-            </summary>
-            <remarks>>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersion">
-            <summary>
-            Gets the pinned version as a <see cref="T:System.String"/>.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.PinType">
-            <summary>
-            Gets the pin type of the package.
+            Gets if the object is empty.
             </summary>
         </member>
         <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.Boolean)">

@@ -42,6 +42,22 @@ namespace WGetNET
             }
         }
 
+        /// <summary>
+        /// Gets if the object is empty.
+        /// </summary>
+        public override bool IsEmpty
+        {
+            get
+            {
+                if (((_name.Length + _id.Length + _version.Length + _availableVersion.Length + _sourceName.Length) +
+                    (_pinTypeString.Length + _pinnedVersion.Length)) > 0)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
         private readonly string _pinTypeString;
         private readonly string _pinnedVersion;
         private readonly PinType _pinType;
