@@ -117,6 +117,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -127,9 +130,14 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(arg))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                return false;
+                throw new ArgumentNullException("name");
+            }
+
+            if (string.IsNullOrWhiteSpace(arg))
+            {
+                throw new ArgumentNullException("arg");
             }
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
@@ -176,6 +184,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -186,9 +197,19 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(arg) || string.IsNullOrWhiteSpace(type))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                return false;
+                throw new ArgumentNullException("name");
+            }
+
+            if (string.IsNullOrWhiteSpace(arg))
+            {
+                throw new ArgumentNullException("arg");
+            }
+
+            if (string.IsNullOrWhiteSpace(type))
+            {
+                throw new ArgumentNullException("type");
             }
 
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
@@ -229,6 +250,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -236,12 +260,7 @@ namespace WGetNET
         {
             if (source == null)
             {
-                return false;
-            }
-
-            if (source.IsEmpty)
-            {
-                return false;
+                throw new ArgumentNullException("source");
             }
 
             if (string.IsNullOrWhiteSpace(source.Type))
@@ -275,6 +294,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -285,9 +307,14 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(arg))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                return false;
+                throw new ArgumentNullException("name");
+            }
+
+            if (string.IsNullOrWhiteSpace(arg))
+            {
+                throw new ArgumentNullException("arg");
             }
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
@@ -335,6 +362,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -345,9 +375,19 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(arg) || string.IsNullOrWhiteSpace(type))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                return false;
+                throw new ArgumentNullException("name");
+            }
+
+            if (string.IsNullOrWhiteSpace(arg))
+            {
+                throw new ArgumentNullException("arg");
+            }
+
+            if (string.IsNullOrWhiteSpace(type))
+            {
+                throw new ArgumentNullException("type");
             }
 
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
@@ -389,6 +429,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -396,12 +439,7 @@ namespace WGetNET
         {
             if (source == null)
             {
-                return false;
-            }
-
-            if (source.IsEmpty)
-            {
-                return false;
+                throw new ArgumentNullException("source");
             }
 
             if (string.IsNullOrWhiteSpace(source.Type))
@@ -533,11 +571,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public string ExportSources(string sourceName)
         {
             if (string.IsNullOrWhiteSpace(sourceName))
             {
-                return string.Empty;
+                throw new ArgumentNullException("sourceName");
             }
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
@@ -575,16 +616,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public string ExportSources(WinGetSource source)
         {
             if (source == null)
             {
-                return string.Empty;
-            }
-
-            if (source.IsEmpty)
-            {
-                return string.Empty;
+                throw new ArgumentNullException("source");
             }
 
             return ExportSources(source.Name);
@@ -638,11 +677,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<string> ExportSourcesAsync(string sourceName)
         {
             if (string.IsNullOrWhiteSpace(sourceName))
             {
-                return string.Empty;
+                throw new ArgumentNullException("sourceName");
             }
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
@@ -681,16 +723,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<string> ExportSourcesAsync(WinGetSource source)
         {
             if (source == null)
             {
-                return string.Empty;
-            }
-
-            if (source.IsEmpty)
-            {
-                return string.Empty;
+                throw new ArgumentNullException("source");
             }
 
             return await ExportSourcesAsync(source.Name);
@@ -792,11 +832,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool ExportSourcesToFile(string file)
         {
             if (string.IsNullOrWhiteSpace(file))
             {
-                return false;
+                throw new ArgumentNullException("file");
             }
 
             try
@@ -831,11 +874,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool ExportSourcesToFile(string file, string sourceName)
         {
-            if (string.IsNullOrWhiteSpace(file) || string.IsNullOrWhiteSpace(sourceName))
+            if (string.IsNullOrWhiteSpace(file))
             {
-                return false;
+                throw new ArgumentNullException("file");
+            }
+
+            if (string.IsNullOrWhiteSpace(sourceName))
+            {
+                throw new ArgumentNullException("sourceName");
             }
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
@@ -876,16 +927,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool ExportSourcesToFile(string file, WinGetSource source)
         {
             if (source == null)
             {
-                return false;
-            }
-
-            if (source.IsEmpty || string.IsNullOrWhiteSpace(file))
-            {
-                return false;
+                throw new ArgumentNullException("source");
             }
 
             return ExportSourcesToFile(file, source.Name);
@@ -906,11 +955,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> ExportSourcesToFileAsync(string file)
         {
             if (string.IsNullOrWhiteSpace(file))
             {
-                return false;
+                throw new ArgumentNullException("file");
             }
 
             try
@@ -946,11 +998,19 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> ExportSourcesToFileAsync(string file, string sourceName)
         {
-            if (string.IsNullOrWhiteSpace(file) || string.IsNullOrWhiteSpace(sourceName))
+            if (string.IsNullOrWhiteSpace(file))
             {
-                return false;
+                throw new ArgumentNullException("file");
+            }
+
+            if (string.IsNullOrWhiteSpace(sourceName))
+            {
+                throw new ArgumentNullException("sourceName");
             }
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
@@ -992,16 +1052,14 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> ExportSourcesToFileAsync(string file, WinGetSource source)
         {
             if (source == null)
             {
-                return false;
-            }
-
-            if (source.IsEmpty || string.IsNullOrWhiteSpace(file))
-            {
-                return false;
+                throw new ArgumentNullException("source");
             }
 
             return await ExportSourcesToFileAsync(file, source.Name);
@@ -1136,14 +1194,17 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public bool ImportSource(List<WinGetSource> winGetSources)
         {
-            if (winGetSources == null || winGetSources.Count <= 0)
+            if (winGetSources == null)
             {
-                return false;
+                throw new ArgumentNullException("winGetSources");
             }
 
             bool status = true;
@@ -1201,11 +1262,19 @@ namespace WGetNET
         /// <exception cref="WGetNET.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public bool ImportSource(string jsonString)
         {
+            if (string.IsNullOrWhiteSpace(jsonString))
+            {
+                throw new ArgumentNullException("jsonString");
+            }
+
             WinGetSource source = JsonHandler.StringToObject<WinGetSource>(jsonString);
             
             return AddSource(source);
@@ -1228,14 +1297,17 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public async Task<bool> ImportSourceAsync(List<WinGetSource> winGetSources)
         {
-            if (winGetSources == null || winGetSources.Count <= 0)
+            if (winGetSources == null)
             {
-                return false;
+                throw new ArgumentNullException("winGetSources");
             }
 
             bool status = true;
@@ -1295,11 +1367,19 @@ namespace WGetNET
         /// <exception cref="WGetNET.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public async Task<bool> ImportSourceAsync(string jsonString)
         {
+            if (string.IsNullOrWhiteSpace(jsonString))
+            {
+                throw new ArgumentNullException("jsonString");
+            }
+
 #if NETCOREAPP3_1_OR_GREATER
             WinGetSource source = 
                 await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString);
@@ -1418,19 +1498,22 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public bool RemoveSources(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("name");
+            }
+
             if (!PrivilegeChecker.CheckAdministratorPrivileges())
             {
                 throw new SecurityException("Administrator privileges are missing.");
-            }
-
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return false;
             }
 
             string cmd = string.Format(_sourceRemoveCmd, name);
@@ -1468,6 +1551,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -1475,12 +1561,7 @@ namespace WGetNET
         {
             if (source == null)
             {
-                return false;
-            }
-
-            if (source.IsEmpty)
-            {
-                return false;
+                throw new ArgumentNullException("source");
             }
 
             return RemoveSources(source.Name);
@@ -1503,19 +1584,22 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public async Task<bool> RemoveSourcesAsync(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("name");
+            }
+
             if (!PrivilegeChecker.CheckAdministratorPrivileges())
             {
                 throw new SecurityException("Administrator privileges are missing.");
-            }
-
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return false;
             }
 
             string cmd = string.Format(_sourceRemoveCmd, name);
@@ -1554,6 +1638,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -1561,12 +1648,7 @@ namespace WGetNET
         {
             if (source == null)
             {
-                return false;
-            }
-
-            if (source.IsEmpty)
-            {
-                return false;
+                throw new ArgumentNullException("source");
             }
 
             return await RemoveSourcesAsync(source.Name);
