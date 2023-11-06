@@ -2969,24 +2969,6 @@
             The <see langword="array"/> with empty entries removed.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ArrayManager.CopyTo``1(``0[],System.Int32)">
-            <summary>
-            Copys a <see langword="array"/> to a new one.
-            </summary>
-            <typeparam name="T">
-            The type of the array.
-            </typeparam>
-            <param name="inputArray">
-            The <see langword="array"/> that should be copyed.
-            </param>
-            <param name="addLengthOf">
-            A <see cref="T:System.Int32"/> representing a extra length,
-            that should be added to the end of the new array. (DEFAULT = 0)
-            </param>
-            <returns>
-            The new <see langword="array"/>.
-            </returns>
-        </member>
         <member name="M:WGetNET.HelperClasses.ArrayManager.CopyToWithoutRange``1(``0[],System.Int32,System.Int32)">
             <summary>
             Copys a <see langword="array"/> to a new one, but ignores the given range.
@@ -3389,6 +3371,11 @@
             Gets if content of the package is shortened.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetInfoEntry.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
         <member name="M:WGetNET.WinGetInfoEntry.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetInfoEntry"/> class.
@@ -3478,6 +3465,11 @@
         <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersion">
             <summary>
             Gets the pinned version as a <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersionObject">
+            <summary>
+            Gets the pinned version.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPinnedPackage.PinType">
