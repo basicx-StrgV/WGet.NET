@@ -74,7 +74,10 @@ namespace WGetNET
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(WinGetVersionString) && Directories.Count <= 0 && Links.Count <= 0 && AdminSetting.Count <= 0)
+                if (string.IsNullOrWhiteSpace(_wingetVersionString) &&
+                    (_directories == null || _directories.Count <= 0) &&
+                    (_links == null || _links.Count <= 0) &&
+                    (_adminSetting == null || _adminSetting.Count <= 0))
                 {
                     return true;
                 }

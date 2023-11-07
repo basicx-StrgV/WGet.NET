@@ -49,11 +49,11 @@ namespace WGetNET
         {
             get
             {
-                if ((_name.Length + _content.Length) > 0)
+                if (string.IsNullOrWhiteSpace(_name) && string.IsNullOrWhiteSpace(_content))
                 {
-                    return false;
+                    return true;
                 }
-                return true;
+                return false;
             }
         }
 

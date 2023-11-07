@@ -154,9 +154,9 @@ namespace WGetNET
                     string.IsNullOrWhiteSpace(_data) && 
                     string.IsNullOrWhiteSpace(_identifier))
                 {
-                    return false;
+                    return true;
                 }
-                return true;
+                return false;
             }
         }
 
