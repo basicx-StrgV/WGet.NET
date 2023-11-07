@@ -2,6 +2,8 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System;
+
 namespace WGetNET.HelperClasses
 {
     /// <summary>
@@ -32,8 +34,7 @@ namespace WGetNET.HelperClasses
                 return inputArray;
             }
 
-            //Add a entry to the main array.
-            inputArray = CopyTo(inputArray, 1);
+            Array.Resize(ref inputArray, inputArray.Length + 1);
 
             //Add the new line to the new enty in the main array.
 #if NETCOREAPP3_1_OR_GREATER
@@ -116,34 +117,6 @@ namespace WGetNET.HelperClasses
                 {
                     newArray = Add(newArray, inputArray[i]);
                 }
-            }
-
-            return newArray;
-        }
-
-        /// <summary>
-        /// Copys a <see langword="array"/> to a new one.
-        /// </summary>
-        /// <typeparam name="T">
-        /// The type of the array.
-        /// </typeparam>
-        /// <param name="inputArray">
-        /// The <see langword="array"/> that should be copyed.
-        /// </param>
-        /// <param name="addLengthOf">
-        /// A <see cref="System.Int32"/> representing a extra length,
-        /// that should be added to the end of the new array. (DEFAULT = 0)
-        /// </param>
-        /// <returns>
-        /// The new <see langword="array"/>.
-        /// </returns>
-        private static T[] CopyTo<T>(T[] inputArray, int addLengthOf = 0)
-        {
-            //Copy the input array to the new array.
-            T[] newArray = new T[inputArray.Length + addLengthOf];
-            for (int i = 0; i < inputArray.Length; i++)
-            {
-                newArray[i] = inputArray[i];
             }
 
             return newArray;

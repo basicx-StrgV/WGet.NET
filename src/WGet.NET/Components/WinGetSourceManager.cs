@@ -59,7 +59,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceListCmd, e);
             }
         }
 
@@ -89,7 +89,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceListCmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -117,6 +117,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -127,16 +130,15 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(arg))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
+
+            string cmd = string.Format(_sourceAddCmd, name, arg);
 
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_sourceAddCmd, name, arg));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -146,7 +148,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
             }
         }
 
@@ -175,6 +177,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -185,16 +190,16 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(arg) || string.IsNullOrWhiteSpace(type))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
+
+            string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(
-                        string.Format(_sourceAddWithTypeCmd, name, arg, type));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -204,7 +209,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
             }
         }
 
@@ -227,20 +232,15 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public bool AddSource(WinGetSource source)
         {
-            if (source == null)
-            {
-                return false;
-            }
-
-            if (source.IsEmpty)
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
@@ -273,6 +273,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -283,16 +286,15 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(arg))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
+
+            string cmd = string.Format(_sourceAddCmd, name, arg);
 
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_sourceAddCmd, name, arg));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -302,7 +304,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
             }
         }
 
@@ -332,6 +334,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -342,16 +347,16 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(arg) || string.IsNullOrWhiteSpace(type))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
+
+            string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(
-                        string.Format(_sourceAddWithTypeCmd, name, arg, type));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -361,7 +366,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
             }
         }
 
@@ -385,20 +390,15 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public async Task<bool> AddSourceAsync(WinGetSource source)
         {
-            if (source == null)
-            {
-                return false;
-            }
-
-            if (source.IsEmpty)
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
@@ -441,7 +441,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Updating sources failed.", e);
+                throw new WinGetActionFailedException("Updating sources failed.", _sourceUpdateCmd, e);
             }
         }
 
@@ -477,7 +477,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Updating sources failed.", e);
+                throw new WinGetActionFailedException("Updating sources failed.", _sourceUpdateCmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -511,7 +511,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
             }
         }
 
@@ -529,21 +529,17 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public string ExportSources(string sourceName)
         {
-            if (string.IsNullOrWhiteSpace(sourceName))
-            {
-                return string.Empty;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
             try
             {
-                //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    sourceName;
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
@@ -555,7 +551,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
             }
         }
 
@@ -575,17 +571,12 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public string ExportSources(WinGetSource source)
         {
-            if (source == null)
-            {
-                return string.Empty;
-            }
-
-            if (source.IsEmpty)
-            {
-                return string.Empty;
-            }
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return ExportSources(source.Name);
         }
@@ -619,7 +610,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
             }
         }
 
@@ -638,21 +629,17 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<string> ExportSourcesAsync(string sourceName)
         {
-            if (string.IsNullOrWhiteSpace(sourceName))
-            {
-                return string.Empty;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
             try
             {
-                //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    sourceName;
-
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
@@ -664,7 +651,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
             }
         }
 
@@ -685,17 +672,12 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<string> ExportSourcesAsync(WinGetSource source)
         {
-            if (source == null)
-            {
-                return string.Empty;
-            }
-
-            if (source.IsEmpty)
-            {
-                return string.Empty;
-            }
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return await ExportSourcesAsync(source.Name);
         }
@@ -796,12 +778,12 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool ExportSourcesToFile(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             try
             {
@@ -816,7 +798,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
             }
         }
 
@@ -835,21 +817,18 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool ExportSourcesToFile(string file, string sourceName)
         {
-            if (string.IsNullOrWhiteSpace(file) || string.IsNullOrWhiteSpace(sourceName))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
             try
             {
-                //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    sourceName;
-
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
 
@@ -861,7 +840,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
             }
         }
 
@@ -884,17 +863,12 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool ExportSourcesToFile(string file, WinGetSource source)
         {
-            if (source == null)
-            {
-                return false;
-            }
-
-            if (source.IsEmpty || string.IsNullOrWhiteSpace(file))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return ExportSourcesToFile(file, source.Name);
         }
@@ -914,12 +888,12 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> ExportSourcesToFileAsync(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             try
             {
@@ -934,7 +908,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
             }
         }
 
@@ -954,21 +928,18 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> ExportSourcesToFileAsync(string file, string sourceName)
         {
-            if (string.IsNullOrWhiteSpace(file) || string.IsNullOrWhiteSpace(sourceName))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
             try
             {
-                //Set Arguments
-                string cmd =
-                    _sourceExportCmd +
-                    " -n " +
-                    sourceName;
-
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(cmd);
 
@@ -980,7 +951,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Exporting sources failed.", e);
+                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
             }
         }
 
@@ -1004,17 +975,12 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> ExportSourcesToFileAsync(string file, WinGetSource source)
         {
-            if (source == null)
-            {
-                return false;
-            }
-
-            if (source.IsEmpty || string.IsNullOrWhiteSpace(file))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return await ExportSourcesToFileAsync(file, source.Name);
         }
@@ -1069,10 +1035,12 @@ namespace WGetNET
 #endif
 
                 WinGetSource? source =
-                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString()) 
-                    ?? throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
+                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString());
 
-                sourceList.Add(source);
+                if (source != null)
+                {
+                    sourceList.Add(source);
+                }
 
                 jsonString.Clear();
             }
@@ -1114,10 +1082,12 @@ namespace WGetNET
                 }
 
                 WinGetSource? source =
-                    await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString.ToString())
-                    ?? throw new WinGetActionFailedException("Exporting sources failed. Could not parse json.");
+                    await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString.ToString());
 
-                sourceList.Add(source);
+                if (source != null)
+                {
+                    sourceList.Add(source);
+                }
 
                 jsonString.Clear();
             }
@@ -1131,23 +1101,33 @@ namespace WGetNET
         /// <summary>
         /// Imports sources into winget.
         /// </summary>
-        /// <param name="winGetSources">
+        /// <param name="sources">
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
         /// </returns>
-        public bool ImportSource(List<WinGetSource> winGetSources)
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public bool ImportSource(List<WinGetSource> sources)
         {
-            if (winGetSources == null || winGetSources.Count <= 0)
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
             bool status = true;
-            for (int i = 0; i < winGetSources.Count; i++)
+            for (int i = 0; i < sources.Count; i++)
             {
-                if (!AddSource(winGetSources[i]))
+                if (!AddSource(sources[i]))
                 {
                     status = false;
                 }
@@ -1159,15 +1139,25 @@ namespace WGetNET
         /// <summary>
         /// Imports a source into winget.
         /// </summary>
-        /// <param name="winGetSource">
+        /// <param name="source">
         /// A <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
-        public bool ImportSource(WinGetSource winGetSource)
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public bool ImportSource(WinGetSource source)
         {
-            return AddSource(winGetSource);
+            return AddSource(source);
         }
 
         /// <summary>
@@ -1179,36 +1169,62 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.InvalidJsonException">
+        /// The provided JSON could not be deserialized.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public bool ImportSource(string jsonString)
         {
-            WinGetSource? source = 
-                JsonHandler.StringToObject<WinGetSource>(jsonString) 
-                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
+            WinGetSource source = JsonHandler.StringToObject<WinGetSource>(jsonString);
+            
             return AddSource(source);
         }
 
         /// <summary>
         /// Asynchronously imports sources into winget.
         /// </summary>
-        /// <param name="winGetSources">
+        /// <param name="sources">
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
         /// </returns>
-        public async Task<bool> ImportSourceAsync(List<WinGetSource> winGetSources)
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> ImportSourceAsync(List<WinGetSource> sources)
         {
-            if (winGetSources == null || winGetSources.Count <= 0)
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
             bool status = true;
-            for (int i = 0; i < winGetSources.Count; i++)
+            for (int i = 0; i < sources.Count; i++)
             {
-                if (!await AddSourceAsync(winGetSources[i]))
+                if (!await AddSourceAsync(sources[i]))
                 {
                     status = false;
                 }
@@ -1220,16 +1236,26 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously imports a source into winget.
         /// </summary>
-        /// <param name="winGetSource">
+        /// <param name="source">
         /// A <see cref="WGetNET.WinGetSource"/> objects.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
-        public async Task<bool> ImportSourceAsync(WinGetSource winGetSource)
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> ImportSourceAsync(WinGetSource source)
         {
-            return await AddSourceAsync(winGetSource);
+            return await AddSourceAsync(source);
         }
 
         /// <summary>
@@ -1242,16 +1268,32 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
+        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="WGetNET.InvalidJsonException">
+        /// The provided JSON could not be deserialized.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
         public async Task<bool> ImportSourceAsync(string jsonString)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
+
 #if NETCOREAPP3_1_OR_GREATER
-            WinGetSource? source = 
-                await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString)
-                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
+            WinGetSource source = 
+                await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString);
 #elif NETSTANDARD2_0
-            WinGetSource? source = 
-                JsonHandler.StringToObject<WinGetSource>(jsonString)
-                ?? throw new WinGetActionFailedException("Importing source failed. Could not parse json.");
+            WinGetSource source = 
+                JsonHandler.StringToObject<WinGetSource>(jsonString);
 #endif
 
             return await AddSourceAsync(source);
@@ -1298,7 +1340,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Reset sources failed.", e);
+                throw new WinGetActionFailedException("Reset sources failed.", _sourceResetCmd, e);
             }
         }
 
@@ -1342,7 +1384,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Reset sources failed.", e);
+                throw new WinGetActionFailedException("Reset sources failed.", _sourceResetCmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------
@@ -1364,6 +1406,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -1374,15 +1419,14 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+
+            string cmd = string.Format(_sourceRemoveCmd, name);
 
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(string.Format(_sourceRemoveCmd, name));
+                    _processManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -1392,7 +1436,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Removing source failed.", e);
+                throw new WinGetActionFailedException("Removing source failed.", cmd, e);
             }
         }
 
@@ -1412,20 +1456,15 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public bool RemoveSources(WinGetSource source)
         {
-            if (source == null)
-            {
-                return false;
-            }
-
-            if (source.IsEmpty)
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return RemoveSources(source.Name);
         }
@@ -1447,6 +1486,9 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -1457,15 +1499,14 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+
+            string cmd = string.Format(_sourceRemoveCmd, name);
 
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(string.Format(_sourceRemoveCmd, name));
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -1475,7 +1516,7 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Removing source failed.", e);
+                throw new WinGetActionFailedException("Removing source failed.", cmd, e);
             }
         }
 
@@ -1496,20 +1537,15 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public async Task<bool> RemoveSourcesAsync(WinGetSource source)
         {
-            if (source == null)
-            {
-                return false;
-            }
-
-            if (source.IsEmpty)
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return await RemoveSourcesAsync(source.Name);
         }

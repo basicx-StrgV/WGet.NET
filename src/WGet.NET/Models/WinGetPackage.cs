@@ -10,7 +10,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget package
     /// </summary>
-    public class WinGetPackage
+    public class WinGetPackage: IWinGetObject
     {
         /// <summary>
         /// Gets or sets the name of the package.
@@ -147,21 +147,6 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets if the object is empty.
-        /// </summary>
-        public bool IsEmpty
-        {
-            get
-            {
-                if ((_name.Length + _id.Length + _version.Length + _availableVersion.Length + _sourceName.Length) > 0)
-                {
-                    return false;
-                }
-                return true;
-            }
-        }
-        
-        /// <summary>
         /// Gets if id of the package is shortened.
         /// </summary>
         public bool HasShortenedId
@@ -172,13 +157,28 @@ namespace WGetNET
             }
         }
 
-        private string _name = string.Empty;
-        private string _id = string.Empty;
-        private string _version = string.Empty;
-        private Version _versionObject = new(0, 0);
-        private string _availableVersion = string.Empty;
-        private Version _availableVersionObject = new(0, 0);
-        private string _sourceName = string.Empty;
+        /// <summary>
+        /// Gets if the object is empty.
+        /// </summary>
+        public virtual bool IsEmpty
+        {
+            get
+            {
+                if ((_name.Length + _id.Length + _version.Length + _availableVersion.Length + _sourceName.Length) > 0)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        private protected string _name = string.Empty;
+        private protected string _id = string.Empty;
+        private protected string _version = string.Empty;
+        private protected Version _versionObject = new(0, 0);
+        private protected string _availableVersion = string.Empty;
+        private protected Version _availableVersionObject = new(0, 0);
+        private protected string _sourceName = string.Empty;
 
         private readonly bool _hasShortenedId = false;
 

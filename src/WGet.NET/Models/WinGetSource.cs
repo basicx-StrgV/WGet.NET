@@ -14,7 +14,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget source
     /// </summary>
-    public class WinGetSource
+    public class WinGetSource: IWinGetObject
     {
         /// <summary>
         /// Gets or sets the name of the source.

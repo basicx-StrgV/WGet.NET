@@ -9,7 +9,7 @@
 
 WGet.NET is a WinGet wrapper library for .Net.
 
-I created it for another project and then made a library out of it in hope it might be usefull to someone else too.  
+I created it for another project and then made a library out of it in hope it might be useful to someone else too.  
 **If you tried this library, please give me some feedback. And if you miss a feature, you can create an issue to let me know.**
 
 ## 📓 Documentation
@@ -58,7 +58,7 @@ If WinGet is not installed on your system you can get it here: https://github.co
 ## 💡 Getting started 
 
 The needed namespace is **WGetNET** (`using WGetNET;`).  
-This namespace contains the three classes, that are used to perform actions or get information with winget.
+This namespace contains the three main classes that are used to perform actions or get information with winget, plus all additional classes that are needed.
 
 ### WinGetInfo:  
 The ***WinGetInfo*** class can be used to get information about WinGet itself.  

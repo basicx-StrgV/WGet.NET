@@ -2,6 +2,9 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System;
+using WGetNET.HelperClasses;
+
 namespace WGetNET
 {
     /// <summary>
@@ -32,6 +35,17 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Gets the pinned version.
+        /// </summary>
+        public Version PinnedVersionObject
+        {
+            get
+            {
+                return _pinnedVersionObject;
+            }
+        }
+
+        /// <summary>
         /// Gets the pin type of the package.
         /// </summary>
         public PinType PinType
@@ -42,8 +56,25 @@ namespace WGetNET
             }
         }
 
+        /// <summary>
+        /// Gets if the object is empty.
+        /// </summary>
+        public override bool IsEmpty
+        {
+            get
+            {
+                if (((_name.Length + _id.Length + _version.Length + _availableVersion.Length + _sourceName.Length) +
+                    (_pinTypeString.Length + _pinnedVersion.Length)) > 0)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
         private readonly string _pinTypeString;
         private readonly string _pinnedVersion;
+        private readonly Version _pinnedVersionObject;
         private readonly PinType _pinType;
 
         /// <summary>
@@ -56,6 +87,8 @@ namespace WGetNET
         {
             _pinTypeString = pinType;
             _pinnedVersion = pinnedVersion;
+
+            _pinnedVersionObject = VersionParser.Parse(_pinnedVersion);
 
             _pinType = _pinTypeString.ToUpper() switch
             {

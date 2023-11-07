@@ -268,6 +268,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.SearchPackage(System.String,System.String,System.Boolean)">
             <summary>
@@ -290,6 +293,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.SearchPackageAsync(System.String,System.Boolean)">
             <summary>
@@ -309,6 +315,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.SearchPackageAsync(System.String,System.String,System.Boolean)">
@@ -332,6 +341,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages">
@@ -367,6 +379,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages(System.String,System.String,System.Boolean)">
             <summary>
@@ -388,6 +403,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync">
@@ -425,6 +443,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync(System.String,System.String,System.Boolean)">
             <summary>
@@ -448,6 +469,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(System.String)">
             <summary>
@@ -464,6 +488,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage)">
             <summary>
@@ -479,6 +506,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(System.String)">
@@ -497,6 +527,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage)">
             <summary>
@@ -514,6 +547,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(System.String)">
             <summary>
@@ -530,6 +566,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.WinGetPackage)">
             <summary>
@@ -545,6 +584,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(System.String)">
@@ -563,6 +605,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.WinGetPackage)">
             <summary>
@@ -579,6 +624,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackages">
@@ -627,6 +675,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(WGetNET.WinGetPackage)">
             <summary>
@@ -642,6 +693,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(System.String)">
@@ -660,6 +714,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.WinGetPackage)">
             <summary>
@@ -676,6 +733,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradeAllPackages">
@@ -729,6 +789,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFileAsync(System.String)">
             <summary>
@@ -745,6 +808,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFile(System.String)">
@@ -765,6 +831,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFileAsync(System.String)">
@@ -787,6 +856,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Hash(System.String)">
             <summary>
@@ -798,6 +870,19 @@
             <returns>
             A <see cref="T:System.String"/> containing the hash.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Unable to find the specified file.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Hash(System.IO.FileInfo)">
             <summary>
@@ -809,6 +894,19 @@
             <returns>
             A <see cref="T:System.String"/> containing the hash.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Unable to find the specified file.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.HashAsync(System.String)">
             <summary>
@@ -821,6 +919,19 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is a <see cref="T:System.String"/> containing the hash.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Unable to find the specified file.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.HashAsync(System.IO.FileInfo)">
             <summary>
@@ -833,6 +944,19 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is a <see cref="T:System.String"/> containing the hash.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Unable to find the specified file.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.HashResultToHash(WGetNET.ProcessResult)">
             <summary>
@@ -850,7 +974,7 @@
             Downloads the installer of a package using winget.
             </summary>
             <param name="packageId">The id or name of the package to download.</param>
-            <param name="directory">Directory path the files will be downloaded to.</param>
+            <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -863,6 +987,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Download(System.String,System.IO.DirectoryInfo)">
@@ -870,7 +997,10 @@
             Downloads the installer of a package using winget.
             </summary>
             <param name="packageId">The id or name of the package to download.</param>
-            <param name="directory">A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+            <param name="directory">
+            A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+            It will be created if it does not exist.
+            </param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -883,6 +1013,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.WinGetPackage,System.String)">
@@ -890,7 +1023,7 @@
             Downloads the installer of a package using winget.
             </summary>
             <param name="package">The package to download.</param>
-            <param name="directory">Directory path the files will be downloaded to.</param>
+            <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -903,6 +1036,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.WinGetPackage,System.IO.DirectoryInfo)">
@@ -910,7 +1046,10 @@
             Downloads the installer of a package using winget.
             </summary>
             <param name="package">The package to download.</param>
-            <param name="directory">A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+            <param name="directory">
+            A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+            It will be created if it does not exist.
+            </param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -923,6 +1062,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(System.String,System.String)">
@@ -930,7 +1072,7 @@
             Asynchronously downloads the installer of a package using winget.
             </summary>
             <param name="packageId">The id or name of the package to download.</param>
-            <param name="directory">Directory path the files will be downloaded to.</param>
+            <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -943,6 +1085,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(System.String,System.IO.DirectoryInfo)">
@@ -950,7 +1095,10 @@
             Asynchronously downloads the installer of a package using winget.
             </summary>
             <param name="packageId">The id or name of the package to download.</param>
-            <param name="directory">A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+            <param name="directory">
+            A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+            It will be created if it does not exist.
+            </param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -963,6 +1111,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.WinGetPackage,System.String)">
@@ -970,7 +1121,7 @@
             Asynchronously downloads the installer of a package using winget.
             </summary>
             <param name="package">The package to download.</param>
-            <param name="directory">Directory path the files will be downloaded to.</param>
+            <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -983,6 +1134,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.WinGetPackage,System.IO.DirectoryInfo)">
@@ -990,7 +1144,9 @@
             Asynchronously downloads the installer of a package using winget.
             </summary>
             <param name="package">The package to download.</param>
-            <param name="directory">A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to.</param>
+            <param name="directory">
+            A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
+            It will be created if it does not exist.</param>
             <returns>
             <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
@@ -1003,6 +1159,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetPinnedPackages">
@@ -1060,6 +1219,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAdd(System.String,System.String)">
             <summary>
@@ -1083,6 +1245,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
@@ -1102,6 +1267,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.WinGetPackage,System.String)">
@@ -1126,6 +1294,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(System.String,System.Boolean)">
             <summary>
@@ -1145,6 +1316,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(System.String,System.String)">
@@ -1169,6 +1343,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
@@ -1188,6 +1365,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.WinGetPackage,System.String)">
@@ -1212,6 +1392,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(System.String,System.Boolean)">
             <summary>
@@ -1231,6 +1414,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(System.String,System.String)">
@@ -1255,6 +1441,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
@@ -1274,6 +1463,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.String)">
@@ -1298,6 +1490,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(System.String,System.Boolean)">
             <summary>
@@ -1317,6 +1512,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(System.String,System.String)">
@@ -1341,6 +1539,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
@@ -1360,6 +1561,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.String)">
@@ -1384,6 +1588,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemove(System.String)">
             <summary>
@@ -1402,6 +1609,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemove(WGetNET.WinGetPackage)">
@@ -1422,6 +1632,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveAsync(System.String)">
             <summary>
@@ -1440,6 +1653,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveAsync(WGetNET.WinGetPackage)">
@@ -1460,6 +1676,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalled(System.String)">
             <summary>
@@ -1478,6 +1697,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalled(WGetNET.WinGetPackage)">
@@ -1498,6 +1720,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalledAsync(System.String)">
             <summary>
@@ -1517,6 +1742,9 @@
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalledAsync(WGetNET.WinGetPackage)">
             <summary>
@@ -1535,6 +1763,9 @@
             </exception>
             <exception cref="T:WGetNET.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ResetPins">
@@ -1637,6 +1868,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
@@ -1667,6 +1901,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
@@ -1690,6 +1927,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
@@ -1718,6 +1958,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
@@ -1750,6 +1993,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
@@ -1774,6 +2020,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
@@ -1846,6 +2095,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSources(WGetNET.WinGetSource)">
             <summary>
@@ -1863,6 +2115,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesAsync">
@@ -1897,6 +2152,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesAsync(WGetNET.WinGetSource)">
             <summary>
@@ -1915,6 +2173,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToObject">
@@ -1994,6 +2255,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,System.String)">
             <summary>
@@ -2010,6 +2274,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,WGetNET.WinGetSource)">
@@ -2032,6 +2299,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String)">
             <summary>
@@ -2048,6 +2318,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,System.String)">
@@ -2066,6 +2339,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,WGetNET.WinGetSource)">
@@ -2089,6 +2365,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportStringToSources(System.String)">
             <summary>
@@ -2106,23 +2385,46 @@
             <summary>
             Imports sources into winget.
             </summary>
-            <param name="winGetSources">
+            <param name="sources">
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
             <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSource(WGetNET.WinGetSource)">
             <summary>
             Imports a source into winget.
             </summary>
-            <param name="winGetSource">
+            <param name="source">
             A <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
             <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSource(System.String)">
             <summary>
@@ -2134,30 +2436,69 @@
             <returns>
             <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(System.Collections.Generic.List{WGetNET.WinGetSource})">
             <summary>
             Asynchronously imports sources into winget.
             </summary>
-            <param name="winGetSources">
+            <param name="sources">
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(WGetNET.WinGetSource)">
             <summary>
             Asynchronously imports a source into winget.
             </summary>
-            <param name="winGetSource">
+            <param name="source">
             A <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(System.String)">
             <summary>
@@ -2170,6 +2511,22 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:WGetNET.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:WGetNET.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ResetSources">
             <summary>
@@ -2231,6 +2588,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
@@ -2251,6 +2611,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
@@ -2274,6 +2637,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
@@ -2295,6 +2661,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
@@ -2354,6 +2723,53 @@
             Package can't be updated to versions, that are not contained in the provided pinned version.
             </remarks>
         </member>
+        <member name="T:WGetNET.InvalidJsonException">
+            <summary>
+            Exception that gets thrown if the provided json string could not be deserialized.
+            </summary>
+        </member>
+        <member name="P:WGetNET.InvalidJsonException.Message">
+            <summary>
+            Gets a message that describes the current exception.
+            </summary>
+        </member>
+        <member name="M:WGetNET.InvalidJsonException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.InvalidJsonException"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.InvalidJsonException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.InvalidJsonException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+        </member>
+        <member name="M:WGetNET.InvalidJsonException.#ctor(System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.InvalidJsonException"/> class.
+            </summary>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:WGetNET.InvalidJsonException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.InvalidJsonException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:WGetNET.InvalidJsonException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.InvalidJsonException"/> class with serialized data.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> 
+            that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext"/> 
+            that contains contextual information about the source or destination.
+            </param>
+        </member>
         <member name="T:WGetNET.WinGetActionFailedException">
             <summary>
             Exception that gets thrown if a winget action failed.
@@ -2375,11 +2791,26 @@
             </summary>
             <param name="message">Message of the exception</param>
         </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+            <param name="action">The winget action that was executed</param>
+        </member>
         <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
             </summary>
             <param name="message">Message of the exception</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetActionFailedException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+            <param name="action">The winget action that was executed</param>
             <param name="innerException">The inner exception</param>
         </member>
         <member name="M:WGetNET.WinGetActionFailedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
@@ -2538,24 +2969,6 @@
             The <see langword="array"/> with empty entries removed.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ArrayManager.CopyTo``1(``0[],System.Int32)">
-            <summary>
-            Copys a <see langword="array"/> to a new one.
-            </summary>
-            <typeparam name="T">
-            The type of the array.
-            </typeparam>
-            <param name="inputArray">
-            The <see langword="array"/> that should be copyed.
-            </param>
-            <param name="addLengthOf">
-            A <see cref="T:System.Int32"/> representing a extra length,
-            that should be added to the end of the new array. (DEFAULT = 0)
-            </param>
-            <returns>
-            The new <see langword="array"/>.
-            </returns>
-        </member>
         <member name="M:WGetNET.HelperClasses.ArrayManager.CopyToWithoutRange``1(``0[],System.Int32,System.Int32)">
             <summary>
             Copys a <see langword="array"/> to a new one, but ignores the given range.
@@ -2622,8 +3035,11 @@
             A <see cref="T:System.String"/> containing the json to deserialize.
             </param>
             <returns>
-            A nullable object of the given class type. It will be <see langword="null"/> if the action failed.
+            Object of the given class type.
             </returns>
+            <exception cref="T:WGetNET.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
         </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>
@@ -2838,6 +3254,16 @@
             <see langword="true"/> if the package id is shortened or <see langword="false"/> if not.
             </returns>
         </member>
+        <member name="T:WGetNET.IWinGetObject">
+            <summary>
+            Interface for all WinGet related objects.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetObject.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
         <member name="P:WGetNET.ProcessResult.ExitCode">
             <summary>
             Gets or sets the exit code of the process.
@@ -2945,6 +3371,11 @@
             Gets if content of the package is shortened.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetInfoEntry.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
         <member name="M:WGetNET.WinGetInfoEntry.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetInfoEntry"/> class.
@@ -3000,14 +3431,14 @@
             Gets or sets the source name for the package.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetPackage.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-        </member>
         <member name="P:WGetNET.WinGetPackage.HasShortenedId">
             <summary>
             Gets if id of the package is shortened.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.IsEmpty">
+            <summary>
+            Gets if the object is empty.
             </summary>
         </member>
         <member name="M:WGetNET.WinGetPackage.#ctor">
@@ -3036,9 +3467,19 @@
             Gets the pinned version as a <see cref="T:System.String"/>.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersionObject">
+            <summary>
+            Gets the pinned version.
+            </summary>
+        </member>
         <member name="P:WGetNET.WinGetPinnedPackage.PinType">
             <summary>
             Gets the pin type of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.IsEmpty">
+            <summary>
+            Gets if the object is empty.
             </summary>
         </member>
         <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.Boolean)">

@@ -10,7 +10,7 @@ namespace WGetNET
     /// <summary>
     /// Represents WinGet related data
     /// </summary>
-    public class WinGetData
+    public class WinGetData: IWinGetObject
     {
         /// <summary>
         /// Gets the version number of the winget installation as a <see cref="System.String"/>.
