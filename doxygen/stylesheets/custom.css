@@ -1,0 +1,23 @@
+.custom-footer-container {
+    height: 3em;
+    border-top: 1px solid var(--separator-color);
+}
+
+.custom-footer {
+    height: 3em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: end;
+    align-items: center;
+    align-content: center;
+}
+
+.custom-footer-entry {
+    height: max-content;
+    margin-right: 1em;
+}
+
+.custom-footer-icon {
+    height: 2em;
+}
