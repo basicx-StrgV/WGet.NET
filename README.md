@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/basicx-StrgV/WGet.NET/main/repo_design/WGet.NET_Icon.png" width="50" /> WGet.NET
+# ![WGet.NET Icon](https://raw.githubusercontent.com/basicx-StrgV/WGet.NET/main/repo_design/WGet.NET_Icon_Small.png) WGet.NET
 
 [![Version](https://img.shields.io/github/v/release/basicx-StrgV/WGet.NET?label=Version)](https://github.com/basicx-StrgV/WGet.NET/releases)
 [![NuGet](https://img.shields.io/nuget/dt/WGet.NET?label=NuGet%20Downloads)](https://www.nuget.org/packages/WGet.NET/)
