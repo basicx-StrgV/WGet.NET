@@ -148,7 +148,11 @@ namespace WGetNET
         {
             get
             {
-                if ((_name.Length + _url.Length + _type.Length + _data.Length + _identifier.Length) > 0)
+                if (string.IsNullOrWhiteSpace(_name) && 
+                    string.IsNullOrWhiteSpace(_url) && 
+                    string.IsNullOrWhiteSpace(_type) && 
+                    string.IsNullOrWhiteSpace(_data) && 
+                    string.IsNullOrWhiteSpace(_identifier))
                 {
                     return false;
                 }

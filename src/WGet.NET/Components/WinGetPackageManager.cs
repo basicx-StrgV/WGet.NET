@@ -584,7 +584,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return InstallPackage(package.Name);
             }
@@ -655,7 +655,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await InstallPackageAsync(package.Name);
             }
@@ -726,7 +726,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return UninstallPackage(package.Name);
             }
@@ -797,7 +797,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await UninstallPackageAsync(package.Name);
             }
@@ -937,7 +937,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return UpgradePackage(package.Name);
             }
@@ -1008,7 +1008,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await UpgradePackageAsync(package.Name);
             }
@@ -1625,7 +1625,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return Download(package.Name, directory);
             }
@@ -1662,7 +1662,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return Download(package.Name, directory.FullName);
             }
@@ -1776,7 +1776,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await DownloadAsync(package.Name, directory);
             }
@@ -1812,7 +1812,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await DownloadAsync(package.Name, directory.FullName);
             }
@@ -2036,7 +2036,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinAdd(package.Name, blocking);
             }
@@ -2072,7 +2072,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinAdd(package.Name, version);
             }
@@ -2212,7 +2212,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await PinAddAsync(package.Name, blocking);
             }
@@ -2248,7 +2248,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await PinAddAsync(package.Name, version);
             }
@@ -2388,7 +2388,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinAddInstalled(package.Name, blocking);
             }
@@ -2424,7 +2424,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinAddInstalled(package.Name, version);
             }
@@ -2564,7 +2564,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await PinAddInstalledAsync(package.Name, blocking);
             }
@@ -2600,7 +2600,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await PinAddInstalledAsync(package.Name, version);
             }
@@ -2682,7 +2682,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinRemove(package.Name);
             }
@@ -2762,7 +2762,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await PinRemoveAsync(package.Name);
             }
@@ -2842,7 +2842,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinRemoveInstalled(package.Name);
             }
@@ -2922,7 +2922,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return await PinRemoveInstalledAsync(package.Name);
             }

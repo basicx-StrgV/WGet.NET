@@ -158,17 +158,41 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Gets if the package does not provide an id.
+        /// </summary>
+        /// <remarks>
+        /// If this is true somthing whent wrong in the creation of the package.
+        /// The name of the package will be used for all actions performd with this package.
+        /// </remarks>
+        public bool HasNoId
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_id))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets if the object is empty.
         /// </summary>
+        /// <remarks>
+        /// A package object counts as empty if it does not contain a id and name.
+        /// Because the rest of the information is useless in this state.
+        /// </remarks>
         public virtual bool IsEmpty
         {
             get
             {
-                if ((_name.Length + _id.Length + _version.Length + _availableVersion.Length + _sourceName.Length) > 0)
+                if (string.IsNullOrWhiteSpace(_id) && string.IsNullOrWhiteSpace(_name))
                 {
-                    return false;
+                    return true;
                 }
-                return true;
+                return false;
             }
         }
 
