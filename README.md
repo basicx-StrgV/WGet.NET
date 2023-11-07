@@ -1,4 +1,4 @@
-# ![WGet.NET Icon](https://raw.githubusercontent.com/basicx-StrgV/WGet.NET/main/repo_design/WGet.NET_Icon_Small.png) WGet.NET
+# WGet.NET
 
 [![Version](https://img.shields.io/github/v/release/basicx-StrgV/WGet.NET?label=Version)](https://github.com/basicx-StrgV/WGet.NET/releases)
 [![NuGet](https://img.shields.io/nuget/dt/WGet.NET?label=NuGet%20Downloads)](https://www.nuget.org/packages/WGet.NET/)
@@ -8,6 +8,8 @@
 ## ❓ What is WGet.NET
 
 WGet.NET is a WinGet wrapper library for .Net.
+
+![WGet.NET Icon](https://raw.githubusercontent.com/basicx-StrgV/WGet.NET/main/repo_design/WGet.NET_Icon_Small.png) 
 
 I created it for another project and then made a library out of it in hope it might be useful to someone else too.  
 **If you tried this library, please give me some feedback. And if you miss a feature, you can create an issue to let me know.**
