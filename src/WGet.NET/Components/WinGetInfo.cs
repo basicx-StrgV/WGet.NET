@@ -155,12 +155,12 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public bool ExportSettingsToFile(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             try
             {
@@ -196,12 +196,12 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<bool> ExportSettingsToFileAsync(string file)
         {
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                return false;
-            }
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             try
             {
