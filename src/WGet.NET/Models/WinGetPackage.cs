@@ -13,7 +13,7 @@ namespace WGetNET
     public class WinGetPackage: IWinGetObject
     {
         /// <summary>
-        /// Gets or sets the name of the package.
+        /// Gets the name of the package.
         /// </summary>
         public string Name
         {
@@ -21,21 +21,10 @@ namespace WGetNET
             {
                 return _name;
             }
-            set
-            {
-                if (value is null)
-                {
-                    _name = string.Empty;
-                }
-                else
-                {
-                    _name = value;
-                }
-            }
         }
 
         /// <summary>
-        /// Gets or sets the id of the package.
+        /// Gets the id of the package.
         /// </summary>
         public string Id
         {
@@ -43,39 +32,16 @@ namespace WGetNET
             {
                 return _id;
             }
-            set
-            {
-                if (value is null)
-                {
-                    _id = string.Empty;
-                }
-                else
-                {
-                    _id = value;
-                }
-            }
         }
 
         /// <summary>
-        /// Gets or sets the version of the package.
+        /// Gets the version of the package.
         /// </summary>
         public string Version
         {
             get
             {
                 return _version;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _version = string.Empty;
-                }
-                else
-                {
-                    _version = value;
-                    _versionObject = VersionParser.Parse(_version);
-                }
             }
         }
 
@@ -91,25 +57,13 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets or sets the newest available version of the package.
+        /// Gets the newest available version of the package.
         /// </summary>
         public string AvailableVersion
         {
             get
             {
                 return _availableVersion;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _availableVersion = string.Empty;
-                }
-                else
-                {
-                    _availableVersion = value;
-                    _availableVersionObject = VersionParser.Parse(_availableVersion);
-                }
             }
         }
 
@@ -125,24 +79,13 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets or sets the source name for the package.
+        /// Gets the source name for the package.
         /// </summary>
         public string SourceName
         {
             get
             {
                 return _sourceName;
-            }
-            set
-            {
-                if (value is null)
-                {
-                    _sourceName = string.Empty;
-                }
-                else
-                {
-                    _sourceName = value;
-                }
             }
         }
 
@@ -196,30 +139,38 @@ namespace WGetNET
             }
         }
 
-        private protected string _name = string.Empty;
-        private protected string _id = string.Empty;
-        private protected string _version = string.Empty;
-        private protected Version _versionObject = new(0, 0);
-        private protected string _availableVersion = string.Empty;
-        private protected Version _availableVersionObject = new(0, 0);
-        private protected string _sourceName = string.Empty;
+        private readonly string _name;
+        private readonly string _id;
+        private readonly string _version;
+        private readonly Version _versionObject;
+        private readonly string _availableVersion;
+        private readonly Version _availableVersionObject;
+        private readonly string _sourceName;
 
         private readonly bool _hasShortenedId = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackage"/> class.
         /// </summary>
-        public WinGetPackage()
-        {
-            // Provide empty constructor
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetPackage"/> class.
-        /// </summary>
+        /// <param name="name">The name of the package.</param>
+        /// <param name="id">The id of the package.</param>
+        /// <param name="version">The current version of the package.</param>
+        /// <param name="availableVersion">Heighest available version of the package.</param>
+        /// <param name="sourceName">Name of the source the package comes from.</param>
         /// <param name="hasShortenedId">Sets if the id is shortened or not.</param>
-        internal WinGetPackage(bool hasShortenedId)
+        internal WinGetPackage(string name, string id, string version, string availableVersion, string sourceName, bool hasShortenedId)
         {
+            _name = name;
+            _id = id;
+            
+            _version = version;
+            _versionObject = VersionParser.Parse(_version);
+            
+            _availableVersion = availableVersion;
+            _availableVersionObject = VersionParser.Parse(_availableVersion);
+
+            _sourceName = sourceName;
+
             _hasShortenedId = hasShortenedId;
         }
     }

@@ -177,6 +177,9 @@
             The current action failed for an unexpected reason.
             Please see inner exception.
             </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetInfo.ExportSettingsToFileAsync(System.String)">
             <summary>
@@ -195,6 +198,9 @@
             <exception cref="T:WGetNET.WinGetActionFailedException">
             The current action failed for an unexpected reason.
             Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetInfo.GetWinGetData">
@@ -3052,6 +3058,40 @@
             Check if the current user has administrator privileges.
             </summary>
             <returns>
+            <see langword="true"/> if the current user has administrator pr
+            <exception cref="T:WGetNET.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
+        <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
+            provides methods for checking user privileges.
+            </summary>
+        </member>
+        <member name="M:WGetNET.HelperClasses.PrivilegeChecker.CheckAdministratorPrivileges">
+            <summary>
+            Check if the current user has administrator privileges.
+            </summary>
+            <returns>
             <see langword="true"/> if the current user has administrator privileges and
             <see langword="false"/> if not.
             </returns>
@@ -3398,17 +3438,17 @@
         </member>
         <member name="P:WGetNET.WinGetPackage.Name">
             <summary>
-            Gets or sets the name of the package.
+            Gets the name of the package.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.Id">
             <summary>
-            Gets or sets the id of the package.
+            Gets the id of the package.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.Version">
             <summary>
-            Gets or sets the version of the package.
+            Gets the version of the package.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.VersionObject">
@@ -3418,7 +3458,7 @@
         </member>
         <member name="P:WGetNET.WinGetPackage.AvailableVersion">
             <summary>
-            Gets or sets the newest available version of the package.
+            Gets the newest available version of the package.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.AvailableVersionObject">
@@ -3428,7 +3468,7 @@
         </member>
         <member name="P:WGetNET.WinGetPackage.SourceName">
             <summary>
-            Gets or sets the source name for the package.
+            Gets the source name for the package.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.HasShortenedId">
@@ -3436,20 +3476,33 @@
             Gets if id of the package is shortened.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetPackage.HasNoId">
+            <summary>
+            Gets if the package does not provide an id.
+            </summary>
+            <remarks>
+            If this is true somthing whent wrong in the creation of the package.
+            The name of the package will be used for all actions performd with this package.
+            </remarks>
+        </member>
         <member name="P:WGetNET.WinGetPackage.IsEmpty">
             <summary>
             Gets if the object is empty.
             </summary>
+            <remarks>
+            A package object counts as empty if it does not contain a id and name.
+            Because the rest of the information is useless in this state.
+            </remarks>
         </member>
-        <member name="M:WGetNET.WinGetPackage.#ctor">
+        <member name="M:WGetNET.WinGetPackage.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
             </summary>
-        </member>
-        <member name="M:WGetNET.WinGetPackage.#ctor(System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
-            </summary>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="version">The current version of the package.</param>
+            <param name="availableVersion">Heighest available version of the package.</param>
+            <param name="sourceName">Name of the source the package comes from.</param>
             <param name="hasShortenedId">Sets if the id is shortened or not.</param>
         </member>
         <member name="T:WGetNET.WinGetPinnedPackage">
@@ -3477,18 +3530,18 @@
             Gets the pin type of the package.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-        </member>
-        <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.Boolean)">
+        <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetPinnedPackage"/> class.
             </summary>
             <param name="pinType">Name of the winget pin type for the package.</param>
             <param name="pinnedVersion"><see cref="T:System.String"/> containing the pinned version for the package.</param>
             <param name="hasShortenedId">Sets if the id is shortened or not.</param>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="version">The current version of the package.</param>
+            <param name="availableVersion">Heighest available version of the package.</param>
+            <param name="sourceName">Name of the source the package comes from.</param>
         </member>
         <member name="T:WGetNET.WinGetSource">
             <summary>
@@ -3497,17 +3550,17 @@
         </member>
         <member name="P:WGetNET.WinGetSource.Name">
             <summary>
-            Gets or sets the name of the source.
+            Gets the name of the source.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.Url">
             <summary>
-            Gets or sets the url of the source.
+            Gets the url of the source.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.Type">
             <summary>
-            Gets or sets the type of the source.
+            Gets the type of the source.
             </summary>
             <remarks>
             Will only be set on source export.
@@ -3515,7 +3568,7 @@
         </member>
         <member name="P:WGetNET.WinGetSource.Data">
             <summary>
-            Gets or sets the data of the source.
+            Gets the data of the source.
             </summary>
             <remarks>
             Will only be set on source export.
@@ -3523,7 +3576,7 @@
         </member>
         <member name="P:WGetNET.WinGetSource.Identifier">
             <summary>
-            Gets or sets the identifier of the source.
+            Gets the identifier of the source.
             </summary>
             <remarks>
             Will only be set on source export.
@@ -3538,6 +3591,16 @@
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetSource"/> class.
             </summary>
+        </member>
+        <member name="M:WGetNET.WinGetSource.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetSource"/> class.
+            </summary>
+            <param name="name">The name of the source.</param>
+            <param name="url">The url to the source.</param>
+            <param name="type">Type identifier of the source.</param>
+            <param name="data">Data of the source source. This field is only used by some sources.</param>
+            <param name="identifier">The identifier of the package</param>
         </member>
     </members>
 </doc>

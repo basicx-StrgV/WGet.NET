@@ -67,7 +67,20 @@ namespace WGetNET
         /// <param name="pinType">Name of the winget pin type for the package.</param>
         /// <param name="pinnedVersion"><see cref="System.String"/> containing the pinned version for the package.</param>
         /// <param name="hasShortenedId">Sets if the id is shortened or not.</param>
-        internal WinGetPinnedPackage(string pinType, string pinnedVersion, bool hasShortenedId): base(hasShortenedId)
+        /// <param name="name">The name of the package.</param>
+        /// <param name="id">The id of the package.</param>
+        /// <param name="version">The current version of the package.</param>
+        /// <param name="availableVersion">Heighest available version of the package.</param>
+        /// <param name="sourceName">Name of the source the package comes from.</param>
+        internal WinGetPinnedPackage(
+            string pinType, 
+            string pinnedVersion, 
+            string name, 
+            string id, 
+            string version, 
+            string availableVersion, 
+            string sourceName, 
+            bool hasShortenedId) : base(name, id, version, availableVersion, sourceName, hasShortenedId)
         {
             _pinTypeString = pinType;
             _pinnedVersion = pinnedVersion;

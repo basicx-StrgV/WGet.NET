@@ -4,6 +4,7 @@
 //--------------------------------------------------//
 using System.Text;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace WGetNET.HelperClasses
 {
@@ -108,35 +109,35 @@ namespace WGetNET.HelperClasses
                     packageId = packageId.Remove(packageId.Length-1);
                 }
 
-                WinGetPackage package = new(isShortenedId)
-                {
 #if NETCOREAPP3_1_OR_GREATER
-                    Name = output[i][columnList[0]..columnList[1]].Trim(),
+                string packageName = output[i][columnList[0]..columnList[1]].Trim();
 #elif NETSTANDARD2_0
-                    Name = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim(),
+                string packageName = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim();
 #endif
-                    Id = packageId
-                };
+
+                string packageVersion;
+                string packageAvailableVersion;
+                string packageSourceName = string.Empty;
 
                 //Set version info depending on the column count.
                 if (columnList.Length > 3)
                 {
 #if NETCOREAPP3_1_OR_GREATER
-                    package.Version = output[i][columnList[2]..columnList[3]].Trim();
-                    package.AvailableVersion = output[i][columnList[2]..columnList[3]].Trim();
+                    packageVersion = output[i][columnList[2]..columnList[3]].Trim();
+                    packageAvailableVersion = output[i][columnList[2]..columnList[3]].Trim();
 #elif NETSTANDARD2_0
-                    package.Version = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
-                    package.AvailableVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
+                    packageVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
+                    packageAvailableVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
 #endif
                 }
                 else
                 {
 #if NETCOREAPP3_1_OR_GREATER
-                    package.Version = output[i][columnList[2]..].Trim();
-                    package.AvailableVersion = output[i][columnList[2]..].Trim();
+                    packageVersion = output[i][columnList[2]..].Trim();
+                    packageAvailableVersion = output[i][columnList[2]..].Trim();
 #elif NETSTANDARD2_0
-                    package.Version = output[i].Substring(columnList[2]).Trim();
-                    package.AvailableVersion = output[i].Substring(columnList[2]).Trim();
+                    packageVersion = output[i].Substring(columnList[2]).Trim();
+                    packageAvailableVersion = output[i].Substring(columnList[2]).Trim();
 #endif
                 }
 
@@ -150,36 +151,32 @@ namespace WGetNET.HelperClasses
 #endif
                     if (!string.IsNullOrWhiteSpace(availableVersion) && action != PackageAction.Search)
                     {
-                        package.AvailableVersion = availableVersion;
+                        packageAvailableVersion = availableVersion;
                     }
 
 #if NETCOREAPP3_1_OR_GREATER
-                    package.SourceName = output[i][columnList[4]..].Trim();
+                    packageSourceName = output[i][columnList[4]..].Trim();
 #elif NETSTANDARD2_0
-                    package.SourceName = output[i].Substring(columnList[4]).Trim();
+                    packageSourceName = output[i].Substring(columnList[4]).Trim();
 #endif
                 }
                 else if((action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length == 4)
                 {
 #if NETCOREAPP3_1_OR_GREATER
-                    package.SourceName = output[i][columnList[3]..].Trim();
+                    packageSourceName = output[i][columnList[3]..].Trim();
 #elif NETSTANDARD2_0
-                    package.SourceName = output[i].Substring(columnList[3]).Trim();
+                    packageSourceName = output[i].Substring(columnList[3]).Trim();
 #endif
                 }
-                else if ((action == PackageAction.SearchBySource || action == PackageAction.InstalledListBySource) && !string.IsNullOrWhiteSpace(sourceName))
+                else if ((action == PackageAction.SearchBySource || action == PackageAction.InstalledListBySource) 
+                    && !string.IsNullOrWhiteSpace(sourceName) && sourceName != null)
                 {
-#pragma warning disable IDE0079 
-                    // Remove info about the unnecessary suppression, that is shown by .NET Core 3.1, because .Net Standard 2.0 needs to know that not me.
-#pragma warning disable CS8601
                     // "sourceName" source name cant't be null here because of the following check "!string.IsNullOrWhiteSpace(sourceName)".
-                    // But .NET Standard 2.0 thinks it knows better. (Or I'm stupid)
-                    package.SourceName = sourceName;
-#pragma warning restore CS8601
-#pragma warning restore IDE0079
+                    // But .NET Standard 2.0 thinks it knows better (Or I'm stupid). Therefore a second null check comes after it.
+                    packageSourceName = sourceName;
                 }
 
-                resultList.Add(package);
+                resultList.Add(new WinGetPackage(packageName, packageId, packageVersion, packageAvailableVersion, packageSourceName, isShortenedId));
             }
 
             // Check for secondery list in output.
@@ -326,17 +323,8 @@ namespace WGetNET.HelperClasses
                     packageId = packageId.Remove(packageId.Length - 1);
                 }
 
-                WinGetPinnedPackage package = new(pinType, pinnedVersion, isShortenedId)
-                {
-                    Name = packageName,
-                    Id = packageId,
-                    Version = packageVersion,
-                    AvailableVersion = packageVersion,
-                    SourceName = packageSource,
-                };
-
-
-                resultList.Add(package);
+                resultList.Add(
+                    new WinGetPinnedPackage(pinType, pinnedVersion, packageName, packageId, packageVersion, packageVersion, packageSource, isShortenedId));
             }
 
             // Check for secondery list in output.
@@ -400,18 +388,15 @@ namespace WGetNET.HelperClasses
 
             for (int i = 0; i < output.Length; i++)
             {
-                resultList.Add(
-                    new WinGetSource()
-                    {
 #if NETCOREAPP3_1_OR_GREATER
-                        Name = output[i][columnList[0]..columnList[1]].Trim(),
-                        Url = output[i][columnList[1]..].Trim(),
+                string name = output[i][columnList[0]..columnList[1]].Trim();
+                string url = output[i][columnList[1]..].Trim();
 #elif NETSTANDARD2_0
-                        Name = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim(),
-                        Url = output[i].Substring(columnList[1]).Trim(),
+                string name = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim();
+                string url = output[i].Substring(columnList[1]).Trim();
 #endif
-                        Type = string.Empty
-                    });
+
+                resultList.Add(new WinGetSource(name, url));
             }
 
             return resultList;

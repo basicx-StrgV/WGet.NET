@@ -17,7 +17,7 @@ namespace WGetNET
     public class WinGetSource: IWinGetObject
     {
         /// <summary>
-        /// Gets or sets the name of the source.
+        /// Gets the name of the source.
         /// </summary>
         public string Name
         {
@@ -27,19 +27,19 @@ namespace WGetNET
             }
             set
             {
-                if (value is null)
+                if (value != null)
                 {
-                    _name = string.Empty;
+                    _name = value;
                 }
                 else
                 {
-                    _name = value;
+                    _name = string.Empty;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the url of the source.
+        /// Gets the url of the source.
         /// </summary>
 #if NETCOREAPP3_1_OR_GREATER
         [JsonPropertyName("Arg")]
@@ -54,19 +54,19 @@ namespace WGetNET
             }
             set
             {
-                if (value is null)
+                if (value != null)
                 {
-                    _url = string.Empty;
+                    _url = value;
                 }
                 else
                 {
-                    _url = value;
+                    _url = string.Empty;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the type of the source.
+        /// Gets the type of the source.
         /// </summary>
         /// <remarks>
         /// Will only be set on source export.
@@ -79,19 +79,19 @@ namespace WGetNET
             }
             set
             {
-                if (value is null)
+                if (value != null)
                 {
-                    _type = string.Empty;
+                    _type = value;
                 }
                 else
                 {
-                    _type = value;
+                    _type = string.Empty;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the data of the source.
+        /// Gets the data of the source.
         /// </summary>
         /// <remarks>
         /// Will only be set on source export.
@@ -104,19 +104,19 @@ namespace WGetNET
             }
             set
             {
-                if (value is null)
+                if (value != null)
                 {
-                    _data = string.Empty;
+                    _data = value;
                 }
                 else
                 {
-                    _data = value;
+                    _data = string.Empty;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the identifier of the source.
+        /// Gets the identifier of the source.
         /// </summary>
         /// <remarks>
         /// Will only be set on source export.
@@ -129,13 +129,13 @@ namespace WGetNET
             }
             set
             {
-                if (value is null)
+                if (value != null)
                 {
-                    _identifier = string.Empty;
+                    _identifier = value;
                 }
                 else
                 {
-                    _identifier = value;
+                    _identifier = string.Empty;
                 }
             }
         }
@@ -169,9 +169,50 @@ namespace WGetNET
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetSource"/> class.
         /// </summary>
-        public WinGetSource()
+        internal WinGetSource()
         {
-            // Provide empty constructor for xlm docs
+            // Empty constructor for json parsing.
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WGetNET.WinGetSource"/> class.
+        /// </summary>
+        /// <param name="name">The name of the source.</param>
+        /// <param name="url">The url to the source.</param>
+        /// <param name="type">Type identifier of the source.</param>
+        /// <param name="data">Data of the source source. This field is only used by some sources.</param>
+        /// <param name="identifier">The identifier of the package</param>
+        internal WinGetSource(string name, string url, string? type = null, string? data = null, string? identifier = null)
+        {
+            _name = name;
+            _url = url;
+
+            if (type != null)
+            {
+                _type = type;
+            }
+            else
+            {
+                _type = string.Empty;
+            }
+
+            if (data != null)
+            {
+                _data = data;
+            }
+            else
+            {
+                _data = string.Empty;
+            }
+
+            if (identifier != null)
+            {
+                _identifier = identifier;
+            }
+            else
+            {
+                _identifier = string.Empty;
+            }
         }
     }
 }
