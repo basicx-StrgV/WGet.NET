@@ -4,7 +4,6 @@
 //--------------------------------------------------//
 using System.Text;
 using System.Collections.Generic;
-using System.Xml.Linq;
 
 namespace WGetNET.HelperClasses
 {
