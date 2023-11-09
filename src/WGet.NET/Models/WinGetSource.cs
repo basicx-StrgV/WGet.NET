@@ -2,6 +2,8 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using WGetNET.HelperClasses;
+
 namespace WGetNET
 {
     /// <summary>
@@ -137,6 +139,54 @@ namespace WGetNET
             {
                 _identifier = string.Empty;
             }
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="WGetNET.WinGetSource"/> class and returns it.
+        /// </summary>
+        /// <param name="name">The name of the source.</param>
+        /// <param name="identifier">The identifier of the source.</param>
+        /// <param name="url">The URL of the source.</param>
+        /// <param name="type">The type identifier for the source.</param>
+        /// <returns>
+        /// The created instance of the <see cref="WGetNET.WinGetSource"/> class.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
+        public WinGetSource Create(string name, string identifier, string url, string type)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(identifier, "identifier");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(url, "url");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
+
+            return new WinGetSource(name, url, type, null, identifier);
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="WGetNET.WinGetSource"/> class and returns it.
+        /// </summary>
+        /// <param name="name">The name of the source.</param>
+        /// <param name="identifier">The identifier of the source.</param>
+        /// <param name="url">The URL of the source.</param>
+        /// <param name="type">The type identifier for the source.</param>
+        /// <param name="data">The data field of the source.</param>
+        /// <returns>
+        /// The created instance of the <see cref="WGetNET.WinGetSource"/> class.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
+        public WinGetSource Create(string name, string identifier, string url, string type, string data)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(identifier, "identifier");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(url, "url");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(data, "data");
+
+            return new WinGetSource(name, url, type, data, identifier);
         }
 
         /// <summary>
