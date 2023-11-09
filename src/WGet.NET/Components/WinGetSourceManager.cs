@@ -1034,12 +1034,12 @@ namespace WGetNET
                 }
 #endif
 
-                WinGetSource? source =
-                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString());
+                SourceModel? source =
+                    JsonHandler.StringToObject<SourceModel>(jsonString.ToString());
 
                 if (source != null)
                 {
-                    sourceList.Add(source);
+                    sourceList.Add(WinGetSource.FromSourceModel(source));
                 }
 
                 jsonString.Clear();
@@ -1081,12 +1081,12 @@ namespace WGetNET
                     jsonString.Append("}");
                 }
 
-                WinGetSource? source =
-                    await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString.ToString());
+                SourceModel? source =
+                    await JsonHandler.StringToObjectAsync<SourceModel>(jsonString.ToString());
 
                 if (source != null)
                 {
-                    sourceList.Add(source);
+                    sourceList.Add(WinGetSource.FromSourceModel(source));
                 }
 
                 jsonString.Clear();
@@ -1189,9 +1189,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
-            WinGetSource source = JsonHandler.StringToObject<WinGetSource>(jsonString);
+            SourceModel source = JsonHandler.StringToObject<SourceModel>(jsonString);
             
-            return AddSource(source);
+            return AddSource(WinGetSource.FromSourceModel(source));
         }
 
         /// <summary>
@@ -1289,14 +1289,14 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
 #if NETCOREAPP3_1_OR_GREATER
-            WinGetSource source = 
-                await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString);
+            SourceModel source = 
+                await JsonHandler.StringToObjectAsync<SourceModel>(jsonString);
 #elif NETSTANDARD2_0
-            WinGetSource source = 
-                JsonHandler.StringToObject<WinGetSource>(jsonString);
+            SourceModel source = 
+                JsonHandler.StringToObject<SourceModel>(jsonString);
 #endif
 
-            return await AddSourceAsync(source);
+            return await AddSourceAsync(WinGetSource.FromSourceModel(source));
         }
         //---------------------------------------------------------------------------------------------
 

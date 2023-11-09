@@ -2,13 +2,6 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-using System;
-#if NETCOREAPP3_1_OR_GREATER
-using System.Text.Json.Serialization;
-#elif NETSTANDARD2_0
-using Newtonsoft.Json;
-#endif
-
 namespace WGetNET
 {
     /// <summary>
@@ -25,43 +18,16 @@ namespace WGetNET
             {
                 return _name;
             }
-            set
-            {
-                if (value != null)
-                {
-                    _name = value;
-                }
-                else
-                {
-                    _name = string.Empty;
-                }
-            }
         }
 
         /// <summary>
         /// Gets the url of the source.
         /// </summary>
-#if NETCOREAPP3_1_OR_GREATER
-        [JsonPropertyName("Arg")]
-#elif NETSTANDARD2_0
-        [JsonProperty("Arg")]
-#endif
         public string Url
         {
             get
             {
                 return _url;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _url = value;
-                }
-                else
-                {
-                    _url = string.Empty;
-                }
             }
         }
 
@@ -77,17 +43,6 @@ namespace WGetNET
             {
                 return _type;
             }
-            set
-            {
-                if (value != null)
-                {
-                    _type = value;
-                }
-                else
-                {
-                    _type = string.Empty;
-                }
-            }
         }
 
         /// <summary>
@@ -101,17 +56,6 @@ namespace WGetNET
             get
             {
                 return _data;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _data = value;
-                }
-                else
-                {
-                    _data = string.Empty;
-                }
             }
         }
 
@@ -127,23 +71,11 @@ namespace WGetNET
             {
                 return _identifier;
             }
-            set
-            {
-                if (value != null)
-                {
-                    _identifier = value;
-                }
-                else
-                {
-                    _identifier = string.Empty;
-                }
-            }
         }
 
         /// <summary>
         /// Gets if the object is empty.
         /// </summary>
-        [JsonIgnore]
         public bool IsEmpty
         {
             get
@@ -160,19 +92,11 @@ namespace WGetNET
             }
         }
 
-        private string _name = string.Empty;
-        private string _url = string.Empty;
-        private string _type = string.Empty;
-        private string _data = string.Empty;
-        private string _identifier = string.Empty;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetSource"/> class.
-        /// </summary>
-        internal WinGetSource()
-        {
-            // Empty constructor for json parsing.
-        }
+        private readonly string _name;
+        private readonly string _url;
+        private readonly string _type;
+        private readonly string _data;
+        private readonly string _identifier;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetSource"/> class.
@@ -213,6 +137,18 @@ namespace WGetNET
             {
                 _identifier = string.Empty;
             }
+        }
+
+        /// <summary>
+        /// Creates a <see cref="WGetNET.WinGetSource"/> instance from a <see cref="WGetNET.SourceModel"/> instance.
+        /// </summary>
+        /// <param name="model">The <see cref="WGetNET.SourceModel"/> instance.</param>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetSource"/> instance.
+        /// </returns>
+        internal static WinGetSource FromSourceModel(SourceModel model)
+        {
+            return new WinGetSource(model.Name, model.Arg, model.Type, model.Data, model.Identifier);
         }
     }
 }
