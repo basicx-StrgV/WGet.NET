@@ -5,7 +5,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace WGetNET
+namespace WGetNET.Exceptions
 {
     /// <summary>
     /// Exception that gets thrown if a winget action failed.
@@ -34,14 +34,14 @@ namespace WGetNET
         private readonly string _action = string.Empty;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetActionFailedException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetActionFailedException"/> class.
         /// </summary>
         public WinGetActionFailedException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetActionFailedException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetActionFailedException"/> class.
         /// </summary>
         /// <param name="message">Message of the exception</param>
         public WinGetActionFailedException(string message) : base(message)
@@ -50,7 +50,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetActionFailedException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetActionFailedException"/> class.
         /// </summary>
         /// <param name="message">Message of the exception</param>
         /// <param name="action">The winget action that was executed</param>
@@ -61,7 +61,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetActionFailedException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetActionFailedException"/> class.
         /// </summary>
         /// <param name="message">Message of the exception</param>
         /// <param name="innerException">The inner exception</param>
@@ -71,7 +71,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetActionFailedException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetActionFailedException"/> class.
         /// </summary>
         /// <param name="message">Message of the exception</param>
         /// <param name="action">The winget action that was executed</param>
@@ -83,7 +83,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetActionFailedException"/> class with serialized data.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetActionFailedException"/> class with serialized data.
         /// </summary>
         /// <param name="info">
         /// The <see cref="System.Runtime.Serialization.SerializationInfo"/> 

@@ -7,6 +7,7 @@ using System.IO;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using WGetNET.Exceptions;
 using WGetNET.HelperClasses;
 
 namespace WGetNET
@@ -62,10 +63,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -113,10 +114,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -163,10 +164,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -215,10 +216,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -262,10 +263,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -298,10 +299,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -349,10 +350,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -395,10 +396,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -432,10 +433,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -484,10 +485,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -530,10 +531,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -570,10 +571,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -600,10 +601,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -641,10 +642,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -672,10 +673,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -712,10 +713,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -742,10 +743,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -783,10 +784,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -813,10 +814,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -848,10 +849,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -883,10 +884,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -923,10 +924,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -953,10 +954,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -994,10 +995,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1025,10 +1026,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1060,10 +1061,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1106,10 +1107,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the export was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1147,10 +1148,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1191,10 +1192,10 @@ namespace WGetNET
         /// <see langword="true"/> if the import was compleatly successful or 
         /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1236,10 +1237,10 @@ namespace WGetNET
         /// The result is <see langword="true"/> if the import was compleatly successful or 
         /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1280,10 +1281,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> containing the hash.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1335,10 +1336,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> containing the hash.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1391,10 +1392,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> containing the hash.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1447,10 +1448,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> containing the hash.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1527,14 +1528,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1580,14 +1581,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1608,14 +1609,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1644,14 +1645,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1678,14 +1679,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1731,14 +1732,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1759,14 +1760,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1794,14 +1795,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1828,14 +1829,14 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         public List<WinGetPinnedPackage> GetPinnedPackages()
@@ -1868,14 +1869,14 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         public async Task<List<WinGetPinnedPackage>> GetPinnedPackagesAsync()
@@ -1912,14 +1913,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1969,14 +1970,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2019,14 +2020,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2055,14 +2056,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2088,14 +2089,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2145,14 +2146,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2195,14 +2196,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2231,14 +2232,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2264,14 +2265,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2321,14 +2322,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2371,14 +2372,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2407,14 +2408,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2440,14 +2441,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2497,14 +2498,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2547,14 +2548,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2583,14 +2584,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2617,14 +2618,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2665,14 +2666,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2697,14 +2698,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2745,14 +2746,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2777,14 +2778,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2825,14 +2826,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2857,14 +2858,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2905,14 +2906,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -2941,14 +2942,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         public bool ResetPins()
@@ -2984,14 +2985,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         public async Task<bool> ResetPinsAsync()

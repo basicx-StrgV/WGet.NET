@@ -8,6 +8,7 @@ using System.Security;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using WGetNET.Exceptions;
 using WGetNET.HelperClasses;
 
 namespace WGetNET
@@ -110,10 +111,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -170,10 +171,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -225,10 +226,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -266,10 +267,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -327,10 +328,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -383,10 +384,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -419,10 +420,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the update was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -455,10 +456,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the update was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -489,10 +490,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> that contains the winget sorces in json format.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -522,10 +523,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> that contains the winget sorces in json format.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -564,10 +565,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> that contains the winget sorces in json format.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -588,10 +589,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> that contains the winget sorces in json format.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -622,10 +623,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> that contains the winget sorces in json format.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -665,10 +666,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> that contains the winget sorces in json format.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -688,10 +689,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -706,10 +707,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -725,10 +726,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -748,10 +749,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -771,10 +772,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -810,10 +811,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -856,10 +857,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -881,10 +882,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -921,10 +922,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -968,10 +969,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1107,10 +1108,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1145,10 +1146,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1169,14 +1170,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.InvalidJsonException">
+        /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1204,10 +1205,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1243,10 +1244,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1268,14 +1269,14 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="WGetNET.InvalidJsonException">
+        /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
@@ -1310,10 +1311,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the reset was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1354,10 +1355,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the reset was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1399,10 +1400,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1449,10 +1450,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1479,10 +1480,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
@@ -1530,10 +1531,10 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>

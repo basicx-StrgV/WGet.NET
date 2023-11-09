@@ -5,7 +5,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace WGetNET
+namespace WGetNET.Exceptions
 {
     /// <summary>
     /// Exception that gets thrown if winget is not installed.
@@ -19,14 +19,14 @@ namespace WGetNET
         public override string Message { get; } = "WinGet is not installed on this system or could not be found.";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetNotInstalledException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetNotInstalledException"/> class.
         /// </summary>
         public WinGetNotInstalledException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetNotInstalledException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetNotInstalledException"/> class.
         /// </summary>
         /// <param name="message">Message of the exception</param>
         public WinGetNotInstalledException(string message) : base(message)
@@ -35,7 +35,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetNotInstalledException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetNotInstalledException"/> class.
         /// </summary>
         /// <param name="message">Message of the exception</param>
         /// <param name="innerException">The inner exception</param>
@@ -45,7 +45,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetNotInstalledException"/> class with serialized data.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetNotInstalledException"/> class with serialized data.
         /// </summary>
         /// <param name="info">
         /// The <see cref="System.Runtime.Serialization.SerializationInfo"/> 

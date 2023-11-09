@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 #elif NETSTANDARD2_0
 using Newtonsoft.Json;
 #endif
+using WGetNET.Exceptions;
 
 namespace WGetNET.HelperClasses
 {
@@ -32,7 +33,7 @@ namespace WGetNET.HelperClasses
         /// <returns>
         /// Object of the given class type.
         /// </returns>
-        /// <exception cref="WGetNET.InvalidJsonException">
+        /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
         public static T StringToObject<T>(string jsonString) where T: class
@@ -74,7 +75,7 @@ namespace WGetNET.HelperClasses
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// Object of the given class type.
         /// </returns>
-        /// <exception cref="WGetNET.InvalidJsonException">
+        /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
         public static async Task<T> StringToObjectAsync<T>(string jsonString) where T : class

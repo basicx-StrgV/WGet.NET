@@ -5,7 +5,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace WGetNET
+namespace WGetNET.Exceptions
 {
     /// <summary>
     /// Exception that gets thrown if a winget feature is not supportet in the installed winget version.
@@ -33,7 +33,7 @@ namespace WGetNET
         private readonly Version? _minVersion;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetFeatureNotSupportedException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException"/> class.
         /// </summary>
         /// <param name="minVersion">Min WinGet version needed for the feature</param>
         public WinGetFeatureNotSupportedException(Version minVersion)
@@ -42,7 +42,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetFeatureNotSupportedException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException"/> class.
         /// </summary>
         /// <param name="minVersion">Min WinGet version needed for the feature</param>
         /// <param name="innerException">The inner exception</param>
@@ -52,7 +52,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetFeatureNotSupportedException"/> class with serialized data.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException"/> class with serialized data.
         /// </summary>
         /// <param name="info">
         /// The <see cref="System.Runtime.Serialization.SerializationInfo"/> 
