@@ -155,7 +155,7 @@ namespace WGetNET
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
         /// <param name="arg">
-        /// A <see cref="System.String"/> representing the source (eg. URL).
+        /// A <see cref="System.String"/> representing the sources URL or UNC.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -209,7 +209,7 @@ namespace WGetNET
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
         /// <param name="arg">
-        /// A <see cref="System.String"/> representing the source (eg. URL).
+        /// A <see cref="System.String"/> representing the sources URL or UNC.
         /// </param>
         /// <param name="type">
         /// A <see cref="System.String"/> representing the source type.
@@ -339,7 +339,7 @@ namespace WGetNET
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
         /// <param name="arg">
-        /// A <see cref="System.String"/> representing the source (eg. URL).
+        /// A <see cref="System.String"/> representing the sources URL or UNC.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -394,7 +394,7 @@ namespace WGetNET
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
         /// <param name="arg">
-        /// A <see cref="System.String"/> representing the source (eg. URL).
+        /// A <see cref="System.String"/> representing the sources URL or UNC.
         /// </param>
         /// <param name="type">
         /// A <see cref="System.String"/> representing the source type.

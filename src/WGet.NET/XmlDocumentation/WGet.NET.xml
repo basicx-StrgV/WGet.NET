@@ -1870,7 +1870,7 @@
             A <see cref="T:System.String"/> representing the name of the source to add.
             </param>
             <param name="arg">
-            A <see cref="T:System.String"/> representing the source (eg. URL).
+            A <see cref="T:System.String"/> representing the sources URL or UNC.
             </param>
             <returns>
             <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -1897,7 +1897,7 @@
             A <see cref="T:System.String"/> representing the name of the source to add.
             </param>
             <param name="arg">
-            A <see cref="T:System.String"/> representing the source (eg. URL).
+            A <see cref="T:System.String"/> representing the sources URL or UNC.
             </param>
             <param name="type">
             A <see cref="T:System.String"/> representing the source type.
@@ -1975,7 +1975,7 @@
             A <see cref="T:System.String"/> representing the name of the source to add.
             </param>
             <param name="arg">
-            A <see cref="T:System.String"/> representing the source (eg. URL).
+            A <see cref="T:System.String"/> representing the sources URL or UNC.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -2003,7 +2003,7 @@
             A <see cref="T:System.String"/> representing the name of the source to add.
             </param>
             <param name="arg">
-            A <see cref="T:System.String"/> representing the source (eg. URL).
+            A <see cref="T:System.String"/> representing the sources URL or UNC.
             </param>
             <param name="type">
             A <see cref="T:System.String"/> representing the source type.
@@ -3202,24 +3202,6 @@
             A <see cref="T:System.String"/> containing the json to deserialize.
             </param>
             <returns>
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
-        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             Object of the given class type.
             </returns>
             <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
