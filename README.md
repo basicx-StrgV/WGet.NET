@@ -69,16 +69,18 @@ If WinGet is not installed on your system you can get it here: https://github.co
 ## 💡 Getting started 
 
 The needed namespace is **WGetNET** (`using WGetNET;`).  
-This namespace contains the three main classes that are used to perform actions or get information with winget, plus all additional classes that are needed.
+This namespace contains the three main classes that are used to perform actions or get information with winget, plus additional classes that are needed.
+
+Exceptions are located in the `WGetNET.Exceptions` namespace.
 
 ### WinGetInfo:  
-The ***WinGetInfo*** class can be used to get information about WinGet itself.  
+The ***WinGet*** class can be used to get information about WinGet itself.  
 This class is inherited by the ***WinGetPackageManager*** and ***WinGetSourceManager*** class.
 
-USing this class to check if winget is installed could look like this:
+Using this class to check if winget is installed could look like this:
 ```csharp
-WinGetInfo wingetInfo = new WinGetInfo();
-if (wingetInfo.WinGetInstalled)
+WinGet winget = new WinGet();
+if (winget.IsInstalled)
 {
      Console.WriteLine("WinGet is installed.");
 }
