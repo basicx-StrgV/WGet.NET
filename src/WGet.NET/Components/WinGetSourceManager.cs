@@ -100,9 +100,6 @@ namespace WGetNET
         /// <summary>
         /// Adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
@@ -157,9 +154,6 @@ namespace WGetNET
         /// <summary>
         /// Adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
@@ -218,9 +212,6 @@ namespace WGetNET
         /// <summary>
         /// Adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="source">
         /// The <see cref="WGetNET.WinGetSource"/> to add.
         /// </param>
@@ -253,11 +244,46 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Adds multiple new sources to winget (Needs administrator rights).
+        /// </summary>
+        /// <param name="sources">
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects to add.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if adding all sources was succesfull and <see langword="false"/> if one or more failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public bool AddSource(List<WinGetSource> sources)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
+
+            bool succes = true;
+            for (int i = 0; i < sources.Count; i++)
+            {
+                if (!AddSource(sources[i]))
+                {
+                    succes = false;
+                }
+            }
+
+            return succes;
+        }
+
+        /// <summary>
         /// Asynchronously adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
@@ -313,9 +339,6 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
@@ -375,9 +398,6 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="source">
         /// The <see cref="WGetNET.WinGetSource"/> to add.
         /// </param>
@@ -408,6 +428,48 @@ namespace WGetNET
             }
 
             return await AddSourceAsync(source.Name, source.Url, source.Type);
+        }
+
+        /// <summary>
+        /// Asynchronously adds multiple new sources to winget (Needs administrator rights).
+        /// </summary>
+        /// <remarks>
+        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+        /// </remarks>
+        /// <param name="sources">
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects to add.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if adding all sources was succesfull and <see langword="false"/> if one or more failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> AddSourceAsync(List<WinGetSource> sources)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
+
+            bool succes = true;
+            for (int i = 0; i < sources.Count; i++)
+            {
+                if (!(await AddSourceAsync(sources[i])))
+                {
+                    succes = false;
+                }
+            }
+
+            return succes;
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1101,68 +1163,6 @@ namespace WGetNET
 
         //---Import------------------------------------------------------------------------------------
         /// <summary>
-        /// Imports sources into winget.
-        /// </summary>
-        /// <param name="sources">
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </param>
-        /// <returns>
-        /// <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public bool ImportSource(List<WinGetSource> sources)
-        {
-            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
-
-            bool status = true;
-            for (int i = 0; i < sources.Count; i++)
-            {
-                if (!AddSource(sources[i]))
-                {
-                    status = false;
-                }
-            }
-
-            return status;
-        }
-
-        /// <summary>
-        /// Imports a source into winget.
-        /// </summary>
-        /// <param name="source">
-        /// A <see cref="WGetNET.WinGetSource"/> objects.
-        /// </param>
-        /// <returns>
-        /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public bool ImportSource(WinGetSource source)
-        {
-            return AddSource(source);
-        }
-
-        /// <summary>
         /// Imports a source into winget.
         /// </summary>
         /// <param name="jsonString">
@@ -1194,70 +1194,6 @@ namespace WGetNET
             SourceModel source = JsonHandler.StringToObject<SourceModel>(jsonString);
             
             return AddSource(WinGetSource.FromSourceModel(source));
-        }
-
-        /// <summary>
-        /// Asynchronously imports sources into winget.
-        /// </summary>
-        /// <param name="sources">
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public async Task<bool> ImportSourceAsync(List<WinGetSource> sources)
-        {
-            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
-
-            bool status = true;
-            for (int i = 0; i < sources.Count; i++)
-            {
-                if (!await AddSourceAsync(sources[i]))
-                {
-                    status = false;
-                }
-            }
-
-            return status;
-        }
-
-        /// <summary>
-        /// Asynchronously imports a source into winget.
-        /// </summary>
-        /// <param name="source">
-        /// A <see cref="WGetNET.WinGetSource"/> objects.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public async Task<bool> ImportSourceAsync(WinGetSource source)
-        {
-            return await AddSourceAsync(source);
         }
 
         /// <summary>
