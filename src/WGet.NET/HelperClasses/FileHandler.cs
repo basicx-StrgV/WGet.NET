@@ -4,6 +4,7 @@
 //--------------------------------------------------//
 using System.IO;
 using System.Threading.Tasks;
+using WGetNET.Models;
 
 namespace WGetNET.HelperClasses
 {
@@ -13,7 +14,7 @@ namespace WGetNET.HelperClasses
         /// Writes the export result to a file.
         /// </summary>
         /// <param name="result">
-        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
+        /// The <see cref="WGetNET.Models.ProcessResult"/> object containing the export data.
         /// </param>
         /// <param name="file">
         /// A <see cref="System.String"/> containing the file path and name.
@@ -41,7 +42,7 @@ namespace WGetNET.HelperClasses
         /// Asynchronous writes the export result to a file.
         /// </summary>
         /// <param name="result">
-        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
+        /// The <see cref="WGetNET.Models.ProcessResult"/> object containing the export data.
         /// </param>
         /// <param name="file">
         /// A <see cref="System.String"/> containing the file path and name.

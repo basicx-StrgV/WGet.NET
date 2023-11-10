@@ -2,7 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-namespace WGetNET
+namespace WGetNET.Models
 {
     /// <summary>
     /// Represents a winget source for json parsing.
@@ -126,7 +126,7 @@ namespace WGetNET
         private string _identifier = string.Empty;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.SourceModel"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Models.SourceModel"/> class.
         /// </summary>
         internal SourceModel()
         {

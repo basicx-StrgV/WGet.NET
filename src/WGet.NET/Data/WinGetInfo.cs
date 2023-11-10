@@ -9,7 +9,7 @@ using WGetNET.HelperClasses;
 namespace WGetNET
 {
     /// <summary>
-    /// Represents WinGet related information
+    /// Represents WinGet related information.
     /// </summary>
     public class WinGetInfo: IWinGetObject
     {

@@ -7,6 +7,7 @@ using System.IO;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using WGetNET.Models;
 using WGetNET.Exceptions;
 using WGetNET.HelperClasses;
 
@@ -1498,7 +1499,7 @@ namespace WGetNET
         /// Reads the hash from the WinGet hash action result.
         /// </summary>
         /// <param name="result">
-        /// The <see cref="WGetNET.ProcessResult"/> object of the action.
+        /// The <see cref="WGetNET.Models.ProcessResult"/> object of the action.
         /// </param>
         /// <returns>
         /// A <see cref="System.String"/> containing the hash value.

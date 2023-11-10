@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using WGetNET.Models;
 using WGetNET.Exceptions;
 using WGetNET.HelperClasses;
 

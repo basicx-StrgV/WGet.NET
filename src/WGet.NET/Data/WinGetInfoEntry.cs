@@ -5,7 +5,7 @@
 namespace WGetNET
 {
     /// <summary>
-    /// Represents a basic WinGet info entry
+    /// Represents a basic WinGet info entry.
     /// </summary>
     public class WinGetInfoEntry: IWinGetObject
     {

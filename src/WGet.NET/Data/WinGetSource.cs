@@ -2,12 +2,13 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using WGetNET.Models;
 using WGetNET.HelperClasses;
 
 namespace WGetNET
 {
     /// <summary>
-    /// Represents a winget source
+    /// Represents a winget source.
     /// </summary>
     public class WinGetSource: IWinGetObject
     {
@@ -190,9 +191,9 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Creates a <see cref="WGetNET.WinGetSource"/> instance from a <see cref="WGetNET.SourceModel"/> instance.
+        /// Creates a <see cref="WGetNET.WinGetSource"/> instance from a <see cref="WGetNET.Models.SourceModel"/> instance.
         /// </summary>
-        /// <param name="model">The <see cref="WGetNET.SourceModel"/> instance.</param>
+        /// <param name="model">The <see cref="WGetNET.Models.SourceModel"/> instance.</param>
         /// <returns>
         /// The created <see cref="WGetNET.WinGetSource"/> instance.
         /// </returns>

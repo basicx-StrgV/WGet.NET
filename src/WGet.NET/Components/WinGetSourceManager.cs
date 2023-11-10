@@ -8,6 +8,7 @@ using System.Security;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using WGetNET.Models;
 using WGetNET.Exceptions;
 using WGetNET.HelperClasses;
 

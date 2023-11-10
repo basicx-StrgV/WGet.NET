@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using WGetNET.Models;
 using WGetNET.HelperClasses;
 
 namespace WGetNET
@@ -35,7 +36,7 @@ namespace WGetNET
                 StandardOutputEncoding = Encoding.UTF8
             };
         }
-    
+
         /// <summary>
         /// Executes a winget process with the given command and returns the result.
         /// </summary>
@@ -43,7 +44,7 @@ namespace WGetNET
         /// A <see cref="System.String"/> representing the command that winget should be executed with.
         /// </param>
         /// <returns>
-        /// A <see cref="WGetNET.ProcessResult"/> object, 
+        /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
         public ProcessResult ExecuteWingetProcess(string cmd)
@@ -58,7 +59,7 @@ namespace WGetNET
         /// A <see cref="System.String"/> representing the command that winget should be executed with.
         /// </param>
         /// <returns>
-        /// A <see cref="WGetNET.ProcessResult"/> object, 
+        /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
         public async Task<ProcessResult> ExecuteWingetProcessAsync(string cmd)
@@ -93,7 +94,7 @@ namespace WGetNET
         /// Runs a process with the current start informations.
         /// </summary>
         /// <returns>
-        /// A <see cref="WGetNET.ProcessResult"/> object, 
+        /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
         private ProcessResult RunProcess(ProcessStartInfo processStartInfo)
@@ -119,7 +120,7 @@ namespace WGetNET
         /// Asynchronous runs a process with the current start informations.
         /// </summary>
         /// <returns>
-        /// A <see cref="WGetNET.ProcessResult"/> object, 
+        /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
         private async Task<ProcessResult> RunProcessAsync(ProcessStartInfo processStartInfo)

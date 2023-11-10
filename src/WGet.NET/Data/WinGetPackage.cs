@@ -8,7 +8,7 @@ using WGetNET.HelperClasses;
 namespace WGetNET
 {
     /// <summary>
-    /// Represents a winget package
+    /// Represents a winget package.
     /// </summary>
     public class WinGetPackage: IWinGetObject
     {

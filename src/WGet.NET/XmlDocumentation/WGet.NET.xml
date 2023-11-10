@@ -26,7 +26,7 @@
             A <see cref="T:System.String"/> representing the command that winget should be executed with.
             </param>
             <returns>
-            A <see cref="T:WGetNET.ProcessResult"/> object, 
+            A <see cref="T:WGetNET.Models.ProcessResult"/> object, 
             containing the output an exit id of the process.
             </returns>
         </member>
@@ -38,7 +38,7 @@
             A <see cref="T:System.String"/> representing the command that winget should be executed with.
             </param>
             <returns>
-            A <see cref="T:WGetNET.ProcessResult"/> object, 
+            A <see cref="T:WGetNET.Models.ProcessResult"/> object, 
             containing the output an exit id of the process.
             </returns>
         </member>
@@ -58,7 +58,7 @@
             Runs a process with the current start informations.
             </summary>
             <returns>
-            A <see cref="T:WGetNET.ProcessResult"/> object, 
+            A <see cref="T:WGetNET.Models.ProcessResult"/> object, 
             containing the output an exit id of the process.
             </returns>
         </member>
@@ -67,7 +67,7 @@
             Asynchronous runs a process with the current start informations.
             </summary>
             <returns>
-            A <see cref="T:WGetNET.ProcessResult"/> object, 
+            A <see cref="T:WGetNET.Models.ProcessResult"/> object, 
             containing the output an exit id of the process.
             </returns>
         </member>
@@ -964,12 +964,12 @@
             Unable to find the specified file.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.HashResultToHash(WGetNET.ProcessResult)">
+        <member name="M:WGetNET.WinGetPackageManager.HashResultToHash(WGetNET.Models.ProcessResult)">
             <summary>
             Reads the hash from the WinGet hash action result.
             </summary>
             <param name="result">
-            The <see cref="T:WGetNET.ProcessResult"/> object of the action.
+            The <see cref="T:WGetNET.Models.ProcessResult"/> object of the action.
             </param>
             <returns>
             A <see cref="T:System.String"/> containing the hash value.
@@ -2688,6 +2688,401 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
+        <member name="T:WGetNET.WinGetAdminOption">
+            <summary>
+            Represents a winget admin settings entry.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetAdminOption.IsEnabled">
+            <summary>
+            Gets if the admin setting is enabled.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetAdminOption.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetAdminOption"/> class.
+            </summary>
+            <param name="name">The name of the settings entry.</param>
+            <param name="content">The content of the settings entry.</param>
+        </member>
+        <member name="T:WGetNET.WinGetInfo">
+            <summary>
+            Represents WinGet related information.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.VersionString">
+            <summary>
+            Gets the version number of the winget installation as a <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.Version">
+            <summary>
+            Gets the version number of the winget installation.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.Directories">
+            <summary>
+            Gets a list of the winget direcories.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.Links">
+            <summary>
+            Gets a list of the winget related links.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.AdminSetting">
+            <summary>
+            Gets a list of the winget admin setting states.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.Empty">
+            <summary>
+            Gets an empty instance of this object.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetInfo.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.
+            </summary>
+            <param name="version">The installed winget version.</param>
+            <param name="directories">
+            <see cref="T:System.Collections.Generic.List`1"/> of info entries containing the WinGet directories.
+            </param>
+            <param name="links">
+            <see cref="T:System.Collections.Generic.List`1"/> of info entries containing WinGet related links.
+            </param>
+            <param name="adminSetting">
+            <see cref="T:System.Collections.Generic.List`1"/> of info entries containing the WinGet admin setting states.
+            </param>
+        </member>
+        <member name="T:WGetNET.WinGetInfoEntry">
+            <summary>
+            Represents a basic WinGet info entry.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfoEntry.Name">
+            <summary>
+            Gets the name of this info entry.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfoEntry.Content">
+            <summary>
+            Gets the content of this info entry.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfoEntry.HasShortenedContent">
+            <summary>
+            Gets if content of the package is shortened.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfoEntry.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetInfoEntry.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetInfoEntry"/> class.
+            </summary>
+            <param name="name">The name of the info entry.</param>
+            <param name="content">The content of the info entry.</param>
+        </member>
+        <member name="M:WGetNET.WinGetInfoEntry.CheckShortenedContent(System.String)">
+            <summary>
+            Checks if the content is possibly shortened.
+            </summary>
+            <returns>
+            <see langword="true"/> if the content is shortened or <see langword="false"/> if not.
+            </returns>
+        </member>
+        <member name="T:WGetNET.WinGetPackage">
+            <summary>
+            Represents a winget package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.Name">
+            <summary>
+            Gets the name of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.Id">
+            <summary>
+            Gets the id of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.VersionString">
+            <summary>
+            Gets the version of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.Version">
+            <summary>
+            Gets the version of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.AvailableVersionString">
+            <summary>
+            Gets the newest available version of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.AvailableVersion">
+            <summary>
+            Gets the newest available version of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.SourceName">
+            <summary>
+            Gets the source name for the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.HasShortenedId">
+            <summary>
+            Gets if id of the package is shortened.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.HasNoId">
+            <summary>
+            Gets if the package does not provide an id.
+            </summary>
+            <remarks>
+            If this is true somthing whent wrong in the creation of the package.
+            The name of the package will be used for all actions performd with this package.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+            <remarks>
+            A package object counts as empty if it does not contain a id and name.
+            Because the rest of the information is useless in this state.
+            </remarks>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
+            </summary>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="version">The current version of the package.</param>
+            <param name="availableVersion">Heighest available version of the package.</param>
+            <param name="sourceName">Name of the source the package comes from.</param>
+            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.#ctor(System.String,System.String,System.Version,System.Version,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
+            </summary>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="version">The current version of the package.</param>
+            <param name="availableVersion">Heighest available version of the package.</param>
+            <param name="sourceName">Name of the source the package comes from.</param>
+            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.Create(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Creates a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class and returns it.
+            </summary>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="version">The current version of the package as a <see cref="T:System.String"/>. It will also be used for the available version.</param>
+            <param name="sourceName">The name of the source the package comes from.</param>
+            <param name="hasShortenedId">Sets if the id of the package is shortend or not.</param>
+            <returns>
+            The created instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.Create(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Creates a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class and returns it.
+            </summary>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="version">The current version of the package as a <see cref="T:System.String"/>.</param>
+            <param name="availableVersion">The highest available version of the package as a <see cref="T:System.String"/>.</param>
+            <param name="sourceName">The name of the source the package comes from.</param>
+            <param name="hasShortenedId">Sets if the id of the package is shortend or not.</param>
+            <returns>
+            The created instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.Create(System.String,System.String,System.Version,System.String,System.Boolean)">
+            <summary>
+            Creates a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class and returns it.
+            </summary>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="version">The current version of the package. It will also be used for the available version.</param>
+            <param name="sourceName">The name of the source the package comes from.</param>
+            <param name="hasShortenedId">Sets if the id of the package is shortend or not.</param>
+            <returns>
+            The created instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.Create(System.String,System.String,System.Version,System.Version,System.String,System.Boolean)">
+            <summary>
+            Creates a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class and returns it.
+            </summary>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="version">The current version of the package.</param>
+            <param name="availableVersion">The highest available version of the package.</param>
+            <param name="sourceName">The name of the source the package comes from.</param>
+            <param name="hasShortenedId">Sets if the id of the package is shortend or not.</param>
+            <returns>
+            The created instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+        </member>
+        <member name="T:WGetNET.WinGetPinnedPackage">
+            <summary>
+            Represents a winget pinned package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.PinTypeString">
+            <summary>
+            Gets the pin type of the package as a <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersion">
+            <summary>
+            Gets the pinned version as a <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersionObject">
+            <summary>
+            Gets the pinned version.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.PinType">
+            <summary>
+            Gets the pin type of the package.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetPinnedPackage"/> class.
+            </summary>
+            <param name="pinType">Name of the winget pin type for the package.</param>
+            <param name="pinnedVersion"><see cref="T:System.String"/> containing the pinned version for the package.</param>
+            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="version">The current version of the package.</param>
+            <param name="availableVersion">Heighest available version of the package.</param>
+            <param name="sourceName">Name of the source the package comes from.</param>
+        </member>
+        <member name="T:WGetNET.WinGetSource">
+            <summary>
+            Represents a winget source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Name">
+            <summary>
+            Gets the name of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Url">
+            <summary>
+            Gets the url of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Type">
+            <summary>
+            Gets the type of the source.
+            </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Data">
+            <summary>
+            Gets the data of the source.
+            </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Identifier">
+            <summary>
+            Gets the identifier of the source.
+            </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetSource.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetSource.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetSource"/> class.
+            </summary>
+            <param name="name">The name of the source.</param>
+            <param name="url">The url to the source.</param>
+            <param name="type">Type identifier of the source.</param>
+            <param name="data">Data of the source source. This field is only used by some sources.</param>
+            <param name="identifier">The identifier of the package</param>
+        </member>
+        <member name="M:WGetNET.WinGetSource.Create(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:WGetNET.WinGetSource"/> class and returns it.
+            </summary>
+            <param name="name">The name of the source.</param>
+            <param name="identifier">The identifier of the source.</param>
+            <param name="url">The URL of the source.</param>
+            <param name="type">The type identifier for the source.</param>
+            <returns>
+            The created instance of the <see cref="T:WGetNET.WinGetSource"/> class.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSource.Create(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:WGetNET.WinGetSource"/> class and returns it.
+            </summary>
+            <param name="name">The name of the source.</param>
+            <param name="identifier">The identifier of the source.</param>
+            <param name="url">The URL of the source.</param>
+            <param name="type">The type identifier for the source.</param>
+            <param name="data">The data field of the source.</param>
+            <returns>
+            The created instance of the <see cref="T:WGetNET.WinGetSource"/> class.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSource.FromSourceModel(WGetNET.Models.SourceModel)">
+            <summary>
+            Creates a <see cref="T:WGetNET.WinGetSource"/> instance from a <see cref="T:WGetNET.Models.SourceModel"/> instance.
+            </summary>
+            <param name="model">The <see cref="T:WGetNET.Models.SourceModel"/> instance.</param>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetSource"/> instance.
+            </returns>
+        </member>
         <member name="T:WGetNET.InfoActionVersionId">
             <summary>
             Defines identifiers for all version ranges that generate a different output when using "winget --info".
@@ -3008,12 +3403,12 @@
             The new <see langword="array"/>.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFile(WGetNET.ProcessResult,System.String)">
+        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFile(WGetNET.Models.ProcessResult,System.String)">
             <summary>
             Writes the export result to a file.
             </summary>
             <param name="result">
-            The <see cref="T:WGetNET.ProcessResult"/> object containing the export data.
+            The <see cref="T:WGetNET.Models.ProcessResult"/> object containing the export data.
             </param>
             <param name="file">
             A <see cref="T:System.String"/> containing the file path and name.
@@ -3022,12 +3417,12 @@
             <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFileAsync(WGetNET.ProcessResult,System.String)">
+        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFileAsync(WGetNET.Models.ProcessResult,System.String)">
             <summary>
             Asynchronous writes the export result to a file.
             </summary>
             <param name="result">
-            The <see cref="T:WGetNET.ProcessResult"/> object containing the export data.
+            The <see cref="T:WGetNET.Models.ProcessResult"/> object containing the export data.
             </param>
             <param name="file">
             A <see cref="T:System.String"/> containing the file path and name.
@@ -3260,12 +3655,12 @@
             The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ExportOutputToString(WGetNET.ProcessResult)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ExportOutputToString(WGetNET.Models.ProcessResult)">
             <summary>
             Writes the export result to a <see cref="T:System.String"/>.
             </summary>
             <param name="result">
-            The <see cref="T:WGetNET.ProcessResult"/> object containing the export data.
+            The <see cref="T:WGetNET.Models.ProcessResult"/> object containing the export data.
             </param>
             <returns>
             The <see cref="T:System.String"/> containing the export result.
@@ -3301,450 +3696,55 @@
             Gets if the object is empty.
             </summary>
         </member>
-        <member name="P:WGetNET.ProcessResult.ExitCode">
+        <member name="P:WGetNET.Models.ProcessResult.ExitCode">
             <summary>
             Gets or sets the exit code of the process.
             </summary>
         </member>
-        <member name="P:WGetNET.ProcessResult.Output">
+        <member name="P:WGetNET.Models.ProcessResult.Output">
             <summary>
             Gets or sets the output of the process.
             </summary>
         </member>
-        <member name="P:WGetNET.ProcessResult.Success">
+        <member name="P:WGetNET.Models.ProcessResult.Success">
             <summary>
             Gets if the process finished successfully.
             </summary>
         </member>
-        <member name="T:WGetNET.SourceModel">
+        <member name="T:WGetNET.Models.SourceModel">
             <summary>
             Represents a winget source for json parsing.
             </summary>
         </member>
-        <member name="P:WGetNET.SourceModel.Name">
+        <member name="P:WGetNET.Models.SourceModel.Name">
             <summary>
             Gets or sets the name of the source.
             </summary>
         </member>
-        <member name="P:WGetNET.SourceModel.Arg">
+        <member name="P:WGetNET.Models.SourceModel.Arg">
             <summary>
             Gets or sets the arg of the source.
             </summary>
         </member>
-        <member name="P:WGetNET.SourceModel.Type">
+        <member name="P:WGetNET.Models.SourceModel.Type">
             <summary>
             Gets sets the type of the source.
             </summary>
         </member>
-        <member name="P:WGetNET.SourceModel.Data">
+        <member name="P:WGetNET.Models.SourceModel.Data">
             <summary>
             Gets or sets the data of the source.
             </summary>
         </member>
-        <member name="P:WGetNET.SourceModel.Identifier">
+        <member name="P:WGetNET.Models.SourceModel.Identifier">
             <summary>
             Gets or sets the identifier of the source.
             </summary>
         </member>
-        <member name="M:WGetNET.SourceModel.#ctor">
+        <member name="M:WGetNET.Models.SourceModel.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.SourceModel"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
             </summary>
-        </member>
-        <member name="T:WGetNET.WinGetAdminOption">
-            <summary>
-            Represents a winget admin settings entry.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetAdminOption.IsEnabled">
-            <summary>
-            Gets if the admin setting is enabled.
-            </summary>
-        </member>
-        <member name="M:WGetNET.WinGetAdminOption.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetAdminOption"/> class.
-            </summary>
-            <param name="name">The name of the settings entry.</param>
-            <param name="content">The content of the settings entry.</param>
-        </member>
-        <member name="T:WGetNET.WinGetInfo">
-            <summary>
-            Represents WinGet related information
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfo.VersionString">
-            <summary>
-            Gets the version number of the winget installation as a <see cref="T:System.String"/>.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfo.Version">
-            <summary>
-            Gets the version number of the winget installation.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfo.Directories">
-            <summary>
-            Gets a list of the winget direcories.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfo.Links">
-            <summary>
-            Gets a list of the winget related links.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfo.AdminSetting">
-            <summary>
-            Gets a list of the winget admin setting states.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfo.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfo.Empty">
-            <summary>
-            Gets an empty instance of this object.
-            </summary>
-        </member>
-        <member name="M:WGetNET.WinGetInfo.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.
-            </summary>
-            <param name="version">The installed winget version.</param>
-            <param name="directories">
-            <see cref="T:System.Collections.Generic.List`1"/> of info entries containing the WinGet directories.
-            </param>
-            <param name="links">
-            <see cref="T:System.Collections.Generic.List`1"/> of info entries containing WinGet related links.
-            </param>
-            <param name="adminSetting">
-            <see cref="T:System.Collections.Generic.List`1"/> of info entries containing the WinGet admin setting states.
-            </param>
-        </member>
-        <member name="T:WGetNET.WinGetInfoEntry">
-            <summary>
-            Represents a basic WinGet info entry
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfoEntry.Name">
-            <summary>
-            Gets the name of this info entry.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfoEntry.Content">
-            <summary>
-            Gets the content of this info entry.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfoEntry.HasShortenedContent">
-            <summary>
-            Gets if content of the package is shortened.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfoEntry.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-        </member>
-        <member name="M:WGetNET.WinGetInfoEntry.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetInfoEntry"/> class.
-            </summary>
-            <param name="name">The name of the info entry.</param>
-            <param name="content">The content of the info entry.</param>
-        </member>
-        <member name="M:WGetNET.WinGetInfoEntry.CheckShortenedContent(System.String)">
-            <summary>
-            Checks if the content is possibly shortened.
-            </summary>
-            <returns>
-            <see langword="true"/> if the content is shortened or <see langword="false"/> if not.
-            </returns>
-        </member>
-        <member name="T:WGetNET.WinGetPackage">
-            <summary>
-            Represents a winget package
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPackage.Name">
-            <summary>
-            Gets the name of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPackage.Id">
-            <summary>
-            Gets the id of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPackage.VersionString">
-            <summary>
-            Gets the version of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPackage.Version">
-            <summary>
-            Gets the version of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPackage.AvailableVersionString">
-            <summary>
-            Gets the newest available version of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPackage.AvailableVersion">
-            <summary>
-            Gets the newest available version of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPackage.SourceName">
-            <summary>
-            Gets the source name for the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPackage.HasShortenedId">
-            <summary>
-            Gets if id of the package is shortened.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPackage.HasNoId">
-            <summary>
-            Gets if the package does not provide an id.
-            </summary>
-            <remarks>
-            If this is true somthing whent wrong in the creation of the package.
-            The name of the package will be used for all actions performd with this package.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetPackage.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-            <remarks>
-            A package object counts as empty if it does not contain a id and name.
-            Because the rest of the information is useless in this state.
-            </remarks>
-        </member>
-        <member name="M:WGetNET.WinGetPackage.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
-            </summary>
-            <param name="name">The name of the package.</param>
-            <param name="id">The id of the package.</param>
-            <param name="version">The current version of the package.</param>
-            <param name="availableVersion">Heighest available version of the package.</param>
-            <param name="sourceName">Name of the source the package comes from.</param>
-            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
-        </member>
-        <member name="M:WGetNET.WinGetPackage.#ctor(System.String,System.String,System.Version,System.Version,System.String,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
-            </summary>
-            <param name="name">The name of the package.</param>
-            <param name="id">The id of the package.</param>
-            <param name="version">The current version of the package.</param>
-            <param name="availableVersion">Heighest available version of the package.</param>
-            <param name="sourceName">Name of the source the package comes from.</param>
-            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
-        </member>
-        <member name="M:WGetNET.WinGetPackage.Create(System.String,System.String,System.String,System.String,System.Boolean)">
-            <summary>
-            Creates a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class and returns it.
-            </summary>
-            <param name="name">The name of the package.</param>
-            <param name="id">The id of the package.</param>
-            <param name="version">The current version of the package as a <see cref="T:System.String"/>. It will also be used for the available version.</param>
-            <param name="sourceName">The name of the source the package comes from.</param>
-            <param name="hasShortenedId">Sets if the id of the package is shortend or not.</param>
-            <returns>
-            The created instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">
-            A provided argument is null or empty.
-            </exception>
-        </member>
-        <member name="M:WGetNET.WinGetPackage.Create(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
-            <summary>
-            Creates a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class and returns it.
-            </summary>
-            <param name="name">The name of the package.</param>
-            <param name="id">The id of the package.</param>
-            <param name="version">The current version of the package as a <see cref="T:System.String"/>.</param>
-            <param name="availableVersion">The highest available version of the package as a <see cref="T:System.String"/>.</param>
-            <param name="sourceName">The name of the source the package comes from.</param>
-            <param name="hasShortenedId">Sets if the id of the package is shortend or not.</param>
-            <returns>
-            The created instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">
-            A provided argument is null or empty.
-            </exception>
-        </member>
-        <member name="M:WGetNET.WinGetPackage.Create(System.String,System.String,System.Version,System.String,System.Boolean)">
-            <summary>
-            Creates a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class and returns it.
-            </summary>
-            <param name="name">The name of the package.</param>
-            <param name="id">The id of the package.</param>
-            <param name="version">The current version of the package. It will also be used for the available version.</param>
-            <param name="sourceName">The name of the source the package comes from.</param>
-            <param name="hasShortenedId">Sets if the id of the package is shortend or not.</param>
-            <returns>
-            The created instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">
-            A provided argument is null or empty.
-            </exception>
-        </member>
-        <member name="M:WGetNET.WinGetPackage.Create(System.String,System.String,System.Version,System.Version,System.String,System.Boolean)">
-            <summary>
-            Creates a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class and returns it.
-            </summary>
-            <param name="name">The name of the package.</param>
-            <param name="id">The id of the package.</param>
-            <param name="version">The current version of the package.</param>
-            <param name="availableVersion">The highest available version of the package.</param>
-            <param name="sourceName">The name of the source the package comes from.</param>
-            <param name="hasShortenedId">Sets if the id of the package is shortend or not.</param>
-            <returns>
-            The created instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">
-            A provided argument is null or empty.
-            </exception>
-        </member>
-        <member name="T:WGetNET.WinGetPinnedPackage">
-            <summary>
-            Represents a winget pinned package
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.PinTypeString">
-            <summary>
-            Gets the pin type of the package as a <see cref="T:System.String"/>.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersion">
-            <summary>
-            Gets the pinned version as a <see cref="T:System.String"/>.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersionObject">
-            <summary>
-            Gets the pinned version.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.PinType">
-            <summary>
-            Gets the pin type of the package.
-            </summary>
-        </member>
-        <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetPinnedPackage"/> class.
-            </summary>
-            <param name="pinType">Name of the winget pin type for the package.</param>
-            <param name="pinnedVersion"><see cref="T:System.String"/> containing the pinned version for the package.</param>
-            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
-            <param name="name">The name of the package.</param>
-            <param name="id">The id of the package.</param>
-            <param name="version">The current version of the package.</param>
-            <param name="availableVersion">Heighest available version of the package.</param>
-            <param name="sourceName">Name of the source the package comes from.</param>
-        </member>
-        <member name="T:WGetNET.WinGetSource">
-            <summary>
-            Represents a winget source
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Name">
-            <summary>
-            Gets the name of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Url">
-            <summary>
-            Gets the url of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Type">
-            <summary>
-            Gets the type of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Data">
-            <summary>
-            Gets the data of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Identifier">
-            <summary>
-            Gets the identifier of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-        </member>
-        <member name="M:WGetNET.WinGetSource.#ctor(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetSource"/> class.
-            </summary>
-            <param name="name">The name of the source.</param>
-            <param name="url">The url to the source.</param>
-            <param name="type">Type identifier of the source.</param>
-            <param name="data">Data of the source source. This field is only used by some sources.</param>
-            <param name="identifier">The identifier of the package</param>
-        </member>
-        <member name="M:WGetNET.WinGetSource.Create(System.String,System.String,System.String,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:WGetNET.WinGetSource"/> class and returns it.
-            </summary>
-            <param name="name">The name of the source.</param>
-            <param name="identifier">The identifier of the source.</param>
-            <param name="url">The URL of the source.</param>
-            <param name="type">The type identifier for the source.</param>
-            <returns>
-            The created instance of the <see cref="T:WGetNET.WinGetSource"/> class.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">
-            A provided argument is null or empty.
-            </exception>
-        </member>
-        <member name="M:WGetNET.WinGetSource.Create(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:WGetNET.WinGetSource"/> class and returns it.
-            </summary>
-            <param name="name">The name of the source.</param>
-            <param name="identifier">The identifier of the source.</param>
-            <param name="url">The URL of the source.</param>
-            <param name="type">The type identifier for the source.</param>
-            <param name="data">The data field of the source.</param>
-            <returns>
-            The created instance of the <see cref="T:WGetNET.WinGetSource"/> class.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">
-            A provided argument is null or empty.
-            </exception>
-        </member>
-        <member name="M:WGetNET.WinGetSource.FromSourceModel(WGetNET.SourceModel)">
-            <summary>
-            Creates a <see cref="T:WGetNET.WinGetSource"/> instance from a <see cref="T:WGetNET.SourceModel"/> instance.
-            </summary>
-            <param name="model">The <see cref="T:WGetNET.SourceModel"/> instance.</param>
-            <returns>
-            The created <see cref="T:WGetNET.WinGetSource"/> instance.
-            </returns>
         </member>
     </members>
 </doc>

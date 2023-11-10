@@ -2,7 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-namespace WGetNET
+namespace WGetNET.Models
 {
     internal class ProcessResult
     {

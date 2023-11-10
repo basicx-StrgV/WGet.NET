@@ -4,6 +4,7 @@
 //--------------------------------------------------//
 using System.Text;
 using System.Collections.Generic;
+using WGetNET.Models;
 
 namespace WGetNET.HelperClasses
 {
@@ -759,7 +760,7 @@ namespace WGetNET.HelperClasses
         /// Writes the export result to a <see cref="System.String"/>.
         /// </summary>
         /// <param name="result">
-        /// The <see cref="WGetNET.ProcessResult"/> object containing the export data.
+        /// The <see cref="WGetNET.Models.ProcessResult"/> object containing the export data.
         /// </param>
         /// <returns>
         /// The <see cref="System.String"/> containing the export result.
