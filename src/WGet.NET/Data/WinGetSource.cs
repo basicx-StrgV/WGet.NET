@@ -24,13 +24,13 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets the url of the source.
+        /// Gets the URL/UNC of the source.
         /// </summary>
-        public string Url
+        public string Arg
         {
             get
             {
-                return _url;
+                return _arg;
             }
         }
 
@@ -84,7 +84,7 @@ namespace WGetNET
             get
             {
                 if (string.IsNullOrWhiteSpace(_name) && 
-                    string.IsNullOrWhiteSpace(_url) && 
+                    string.IsNullOrWhiteSpace(_arg) && 
                     string.IsNullOrWhiteSpace(_type) && 
                     string.IsNullOrWhiteSpace(_data) && 
                     string.IsNullOrWhiteSpace(_identifier))
@@ -96,7 +96,7 @@ namespace WGetNET
         }
 
         private readonly string _name;
-        private readonly string _url;
+        private readonly string _arg;
         private readonly string _type;
         private readonly string _data;
         private readonly string _identifier;
@@ -105,14 +105,14 @@ namespace WGetNET
         /// Initializes a new instance of the <see cref="WGetNET.WinGetSource"/> class.
         /// </summary>
         /// <param name="name">The name of the source.</param>
-        /// <param name="url">The url to the source.</param>
+        /// <param name="arg">The URL or UNC of the source.</param>
         /// <param name="type">Type identifier of the source.</param>
         /// <param name="data">Data of the source source. This field is only used by some sources.</param>
         /// <param name="identifier">The identifier of the package</param>
-        internal WinGetSource(string name, string url, string? type = null, string? data = null, string? identifier = null)
+        internal WinGetSource(string name, string arg, string? type = null, string? data = null, string? identifier = null)
         {
             _name = name;
-            _url = url;
+            _arg = arg;
 
             if (type != null)
             {
@@ -147,7 +147,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="name">The name of the source.</param>
         /// <param name="identifier">The identifier of the source.</param>
-        /// <param name="url">The URL of the source.</param>
+        /// <param name="arg">The URL or UNC of the source.</param>
         /// <param name="type">The type identifier for the source.</param>
         /// <returns>
         /// The created instance of the <see cref="WGetNET.WinGetSource"/> class.
@@ -155,14 +155,14 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public WinGetSource Create(string name, string identifier, string url, string type)
+        public WinGetSource Create(string name, string identifier, string arg, string type)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(identifier, "identifier");
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(url, "url");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
-            return new WinGetSource(name, url, type, null, identifier);
+            return new WinGetSource(name, arg, type, null, identifier);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="name">The name of the source.</param>
         /// <param name="identifier">The identifier of the source.</param>
-        /// <param name="url">The URL of the source.</param>
+        /// <param name="arg">The URL or UNC of the source.</param>
         /// <param name="type">The type identifier for the source.</param>
         /// <param name="data">The data field of the source.</param>
         /// <returns>
@@ -179,15 +179,15 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public WinGetSource Create(string name, string identifier, string url, string type, string data)
+        public WinGetSource Create(string name, string identifier, string arg, string type, string data)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(identifier, "identifier");
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(url, "url");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "url");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(data, "data");
 
-            return new WinGetSource(name, url, type, data, identifier);
+            return new WinGetSource(name, arg, type, data, identifier);
         }
 
         /// <summary>

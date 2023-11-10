@@ -2752,9 +2752,9 @@
             Gets the name of the source.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetSource.Url">
+        <member name="P:WGetNET.WinGetSource.Arg">
             <summary>
-            Gets the url of the source.
+            Gets the URL/UNC of the source.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.Type">
@@ -2791,7 +2791,7 @@
             Initializes a new instance of the <see cref="T:WGetNET.WinGetSource"/> class.
             </summary>
             <param name="name">The name of the source.</param>
-            <param name="url">The url to the source.</param>
+            <param name="arg">The URL or UNC of the source.</param>
             <param name="type">Type identifier of the source.</param>
             <param name="data">Data of the source source. This field is only used by some sources.</param>
             <param name="identifier">The identifier of the package</param>
@@ -2802,7 +2802,7 @@
             </summary>
             <param name="name">The name of the source.</param>
             <param name="identifier">The identifier of the source.</param>
-            <param name="url">The URL of the source.</param>
+            <param name="arg">The URL or UNC of the source.</param>
             <param name="type">The type identifier for the source.</param>
             <returns>
             The created instance of the <see cref="T:WGetNET.WinGetSource"/> class.
@@ -2817,7 +2817,7 @@
             </summary>
             <param name="name">The name of the source.</param>
             <param name="identifier">The identifier of the source.</param>
-            <param name="url">The URL of the source.</param>
+            <param name="arg">The URL or UNC of the source.</param>
             <param name="type">The type identifier for the source.</param>
             <param name="data">The data field of the source.</param>
             <returns>

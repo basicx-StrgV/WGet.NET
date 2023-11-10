@@ -3,7 +3,6 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
-using System.Text;
 using System.Security;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -289,10 +288,10 @@ namespace WGetNET
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
-                return AddSource(source.Name, source.Url);
+                return AddSource(source.Name, source.Arg);
             }
 
-            return AddSource(source.Name, source.Url, source.Type);
+            return AddSource(source.Name, source.Arg, source.Type);
         }
 
         /// <summary>
@@ -476,10 +475,10 @@ namespace WGetNET
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
-                return await AddSourceAsync(source.Name, source.Url);
+                return await AddSourceAsync(source.Name, source.Arg);
             }
 
-            return await AddSourceAsync(source.Name, source.Url, source.Type);
+            return await AddSourceAsync(source.Name, source.Arg, source.Type);
         }
 
         /// <summary>
