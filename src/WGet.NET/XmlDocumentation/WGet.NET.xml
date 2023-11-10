@@ -1833,6 +1833,16 @@
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
             </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.GetInstalledSources(System.String)">
             <summary>
@@ -1842,6 +1852,16 @@
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
             </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.GetInstalledSourcesAsync">
             <summary>
@@ -1851,6 +1871,16 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
             </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.GetInstalledSourcesAsync(System.String)">
             <summary>
@@ -1861,6 +1891,16 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
             </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
+            The current action failed for an unexpected reason.
+            Please see inner exception.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSource(System.String,System.String)">
             <summary>
@@ -2120,10 +2160,10 @@
             <summary>
             Exports the winget sources in json format to a file.
             </summary>
+            <remarks>
+            If the provided file and/or path does not exist, they will be created.
+            </remarks>
             <param name="file">The file for the export.</param>
-            <returns>
-            <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-            </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
@@ -2133,17 +2173,42 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,System.String)">
             <summary>
             Exports the winget sources in json format to a file.
             </summary>
+            <remarks>
+            If the provided file and/or path does not exist, they will be created.
+            </remarks>
             <param name="file">The file for the export.</param>
             <param name="sourceName">The name of the source for the export.</param>
-            <returns>
-            <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-            </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
@@ -2153,21 +2218,46 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,WGetNET.WinGetSource)">
             <summary>
             Exports the winget sources in json format to a file.
             </summary>
+            <remarks>
+            If the provided file and/or path does not exist, they will be created.
+            </remarks>
             <param name="file">
             The file for the export.
             </param>
             <param name="source">
             The <see cref="T:WGetNET.WinGetSource"/> for the export.
             </param>
-            <returns>
-            <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-            </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
@@ -2177,17 +2267,41 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String)">
             <summary>
             Asynchronously exports the winget sources in json format to a file.
             </summary>
+            <remarks>
+            If the provided file and/or path does not exist, they will be created.
+            </remarks>
             <param name="file">The file for the export.</param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-            </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
@@ -2197,18 +2311,42 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,System.String)">
             <summary>
             Asynchronously exports the winget sources in json format to a file.
             </summary>
+            <remarks>
+            If the provided file and/or path does not exist, they will be created.
+            </remarks>
             <param name="file">The file for the export.</param>
             <param name="sourceName">The name of the source for the export.</param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-            </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
@@ -2218,22 +2356,46 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,WGetNET.WinGetSource)">
             <summary>
             Asynchronously exports the winget sources in json format to a file.
             </summary>
+            <remarks>
+            If the provided file and/or path does not exist, they will be created.
+            </remarks>
             <param name="file">
             The file for the export.
             </param>
             <param name="source">
             The <see cref="T:WGetNET.WinGetSource"/> for the export.
             </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-            </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
@@ -2243,6 +2405,31 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSource(System.String)">
@@ -2439,6 +2626,20 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.SourcesToJson(System.Collections.Generic.List{WGetNET.WinGetSource})">
+            <summary>
+            Generates a valid json string from the provided sources.
+            </summary>
+            <param name="sources">
+            The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the generated json.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null or empty.
             </exception>
         </member>
         <member name="T:WGetNET.WinGetAdminOption">
@@ -3185,6 +3386,70 @@
             The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.FileHandler.WriteTextToFile(System.String,System.String)">
+            <summary>
+            Writes the provided text to the given file.
+            </summary>
+            <param name="path">The file path.</param>
+            <param name="text">The text to write to the file.</param>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
+            </exception>
+        </member>
+        <member name="M:WGetNET.HelperClasses.FileHandler.WriteTextToFileAsync(System.String,System.String)">
+            <summary>
+            Asyncounes writes the provided text to the given file.
+            </summary>
+            <param name="path">The file path.</param>
+            <param name="text">The text to write to the file.</param>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
+            </exception>
+        </member>
         <member name="T:WGetNET.HelperClasses.JsonHandler">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.JsonHandler"/> class,
@@ -3207,6 +3472,15 @@
             <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
             The provided JSON could not be deserialized.
             </exception>
+        </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.GetJson(System.Object)">
+            <summary>
+            Serializes a json <see cref="T:System.String"/> from the provided object.
+            </summary>
+            <param name="input">The object to serialize.</param>
+            <returns>
+            A <see cref="T:System.String"/> containing the generated json.
+            </returns>
         </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>

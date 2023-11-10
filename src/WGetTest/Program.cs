@@ -49,8 +49,8 @@ namespace WGetTest
                 bool sourceUpdateStatus = sourceManager.UpdateSources();
                 //bool sourceResetStatus = sourceManager.ResetSources();
 
-                bool sorceJson3 = sourceManager.ExportSourcesToFile("C:\\Test\\AllSources.json");
-                bool sorceJson4 = sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
+                sourceManager.ExportSourcesToFile("C:\\Test\\AllSources.json");
+                sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
                 //bool addSuccess = sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
 
                 string hash = connector.Hash("C:\\Test\\HashTest.txt");

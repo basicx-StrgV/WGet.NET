@@ -40,6 +40,16 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
         /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public List<WinGetSource> GetInstalledSources()
         {
             try
@@ -66,6 +76,16 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
         /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public List<WinGetSource> GetInstalledSources(string sourceName)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
@@ -96,6 +116,16 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
         /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<List<WinGetSource>> GetInstalledSourcesAsync()
         {
             try
@@ -123,6 +153,16 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
         /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
+        /// The current action failed for an unexpected reason.
+        /// Please see inner exception.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
         public async Task<List<WinGetSource>> GetInstalledSourcesAsync(string sourceName)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
@@ -601,10 +641,10 @@ namespace WGetNET
         /// <summary>
         /// Exports the winget sources in json format to a file.
         /// </summary>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
         /// <param name="file">The file for the export.</param>
-        /// <returns>
-        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
@@ -615,35 +655,49 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool ExportSourcesToFile(string file)
+        /// <exception cref="System.ArgumentException">
+        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// Path specified a file that is read-only. 
+        /// Or Path specified a file that is hidden.
+        /// Or This operation is not supported on the current platform. 
+        /// Or Path specified a directory. 
+        /// Or The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public void ExportSourcesToFile(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceExportCmd);
-
-                return FileHandler.ExportOutputToFile(result, file);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
-            }
+            FileHandler.WriteTextToFile(
+                file, 
+                SourcesToJson(
+                    GetInstalledSources()));
         }
 
         /// <summary>
         /// Exports the winget sources in json format to a file.
         /// </summary>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
         /// <param name="file">The file for the export.</param>
         /// <param name="sourceName">The name of the source for the export.</param>
-        /// <returns>
-        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
@@ -654,42 +708,54 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool ExportSourcesToFile(string file, string sourceName)
+        /// <exception cref="System.ArgumentException">
+        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// Path specified a file that is read-only. 
+        /// Or Path specified a file that is hidden.
+        /// Or This operation is not supported on the current platform. 
+        /// Or Path specified a directory. 
+        /// Or The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public void ExportSourcesToFile(string file, string sourceName)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            string cmd = $"{_sourceExportCmd} -n {sourceName}";
-
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
-
-                return FileHandler.ExportOutputToFile(result, file);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
-            }
+            FileHandler.WriteTextToFile(
+                file, 
+                SourcesToJson(
+                    GetInstalledSources(sourceName)));
         }
 
         /// <summary>
         /// Exports the winget sources in json format to a file.
         /// </summary>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
         /// <param name="file">
         /// The file for the export.
         /// </param>
         /// <param name="source">
         /// The <see cref="WGetNET.WinGetSource"/> for the export.
         /// </param>
-        /// <returns>
-        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
@@ -700,21 +766,45 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool ExportSourcesToFile(string file, WinGetSource source)
+        /// <exception cref="System.ArgumentException">
+        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// Path specified a file that is read-only. 
+        /// Or Path specified a file that is hidden.
+        /// Or This operation is not supported on the current platform. 
+        /// Or Path specified a directory. 
+        /// Or The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public void ExportSourcesToFile(string file, WinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
-            return ExportSourcesToFile(file, source.Name);
+            ExportSourcesToFile(file, source.Name);
         }
 
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
         /// <param name="file">The file for the export.</param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
@@ -725,36 +815,48 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> ExportSourcesToFileAsync(string file)
+        /// <exception cref="System.ArgumentException">
+        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// Path specified a file that is read-only. 
+        /// Or Path specified a file that is hidden.
+        /// Or This operation is not supported on the current platform. 
+        /// Or Path specified a directory. 
+        /// Or The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public async Task ExportSourcesToFileAsync(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_sourceExportCmd);
-
-                return await FileHandler.ExportOutputToFileAsync(result, file);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
-            }
+            await FileHandler.WriteTextToFileAsync(
+                file, SourcesToJson(
+                    await GetInstalledSourcesAsync()));
         }
 
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
         /// <param name="file">The file for the export.</param>
         /// <param name="sourceName">The name of the source for the export.</param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
@@ -765,43 +867,54 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> ExportSourcesToFileAsync(string file, string sourceName)
+        /// <exception cref="System.ArgumentException">
+        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// Path specified a file that is read-only. 
+        /// Or Path specified a file that is hidden.
+        /// Or This operation is not supported on the current platform. 
+        /// Or Path specified a directory. 
+        /// Or The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public async Task ExportSourcesToFileAsync(string file, string sourceName)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            string cmd = $"{_sourceExportCmd} -n {sourceName}";
-
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
-
-                return await FileHandler.ExportOutputToFileAsync(result, file);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
-            }
+            await FileHandler.WriteTextToFileAsync(
+                file, 
+                SourcesToJson(
+                    await GetInstalledSourcesAsync(sourceName)));
         }
 
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
         /// <param name="file">
         /// The file for the export.
         /// </param>
         /// <param name="source">
         /// The <see cref="WGetNET.WinGetSource"/> for the export.
         /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
@@ -812,11 +925,36 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> ExportSourcesToFileAsync(string file, WinGetSource source)
+        /// <exception cref="System.ArgumentException">
+        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// Path specified a file that is read-only. 
+        /// Or Path specified a file that is hidden.
+        /// Or This operation is not supported on the current platform. 
+        /// Or Path specified a directory. 
+        /// Or The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public async Task ExportSourcesToFileAsync(string file, WinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
-            return await ExportSourcesToFileAsync(file, source.Name);
+            await ExportSourcesToFileAsync(file, source.Name);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1145,6 +1283,27 @@ namespace WGetNET
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             return await RemoveSourcesAsync(source.Name);
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Other-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Generates a valid json string from the provided sources.
+        /// </summary>
+        /// <param name="sources">
+        /// The <see cref="System.Collections.Generic.List{T}"/> of <see cref="WinGetSource"/> objects.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the generated json.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null or empty.
+        /// </exception>
+        public string SourcesToJson(List<WinGetSource> sources)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
+
+            return JsonHandler.GetJson(sources);
         }
         //---------------------------------------------------------------------------------------------
     }

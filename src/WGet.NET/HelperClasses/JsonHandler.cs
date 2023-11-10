@@ -101,5 +101,25 @@ namespace WGetNET.HelperClasses
             return instance;
         }
 #endif
+
+        /// <summary>
+        /// Serializes a json <see cref="System.String"/> from the provided object.
+        /// </summary>
+        /// <param name="input">The object to serialize.</param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the generated json.
+        /// </returns>
+        public static string GetJson(object input)
+        {
+            string json = string.Empty;
+
+#if NETCOREAPP3_1_OR_GREATER
+                json = JsonSerializer.Serialize(input);
+#elif NETSTANDARD2_0
+                json = JsonConvert.SerializeObject(input);
+#endif
+
+            return json;
+        }
     }
 }
