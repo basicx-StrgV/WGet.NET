@@ -49,19 +49,11 @@ namespace WGetTestLegacySupport
                 bool sourceUpdateStatus = sourceManager.UpdateSources();
                 //bool sourceResetStatus = sourceManager.ResetSources();
 
-                string sorceJson = sourceManager.ExportSources();
-                string sorceJson2 = sourceManager.ExportSources("msstore");
                 Task<bool> sorceJson3Task = sourceManager.ExportSourcesToFileAsync("C:\\Test\\AllSources.json");
                 sorceJson3Task.Wait();
                 bool sorceJson3 = sorceJson3Task.Result;
                 bool sorceJson4 = sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
                 //bool addSuccess = sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
-
-                List<WinGetSource> sorceJson5 = sourceManager.ExportSourcesToObject();
-
-                Task<List<WinGetSource>> sorceJson6Task = sourceManager.ExportSourcesToObjectAsync();
-                sorceJson6Task.Wait();
-                List<WinGetSource> sorceJson6 = sorceJson6Task.Result;
 
                 string hash = connector.Hash("C:\\Test\\HashTest.txt");
                 Console.WriteLine(hash);
