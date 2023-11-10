@@ -37,7 +37,18 @@ namespace WGetNET
         /// <summary>
         /// Gets the version of the package.
         /// </summary>
-        public string Version
+        public string VersionString
+        {
+            get
+            {
+                return _versionString;
+            }
+        }
+
+        /// <summary>
+        /// Gets the version of the package.
+        /// </summary>
+        public Version Version
         {
             get
             {
@@ -46,35 +57,24 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets the version of the package.
+        /// Gets the newest available version of the package.
         /// </summary>
-        public Version VersionObject
+        public string AvailableVersionString
         {
             get
             {
-                return _versionObject;
+                return _availableVersionString;
             }
         }
 
         /// <summary>
         /// Gets the newest available version of the package.
         /// </summary>
-        public string AvailableVersion
+        public Version AvailableVersion
         {
             get
             {
                 return _availableVersion;
-            }
-        }
-
-        /// <summary>
-        /// Gets the newest available version of the package.
-        /// </summary>
-        public Version AvailableVersionObject
-        {
-            get
-            {
-                return _availableVersionObject;
             }
         }
 
@@ -141,10 +141,10 @@ namespace WGetNET
 
         private readonly string _name;
         private readonly string _id;
-        private readonly string _version;
-        private readonly Version _versionObject;
-        private readonly string _availableVersion;
-        private readonly Version _availableVersionObject;
+        private readonly string _versionString;
+        private readonly Version _version;
+        private readonly string _availableVersionString;
+        private readonly Version _availableVersion;
         private readonly string _sourceName;
 
         private readonly bool _hasShortenedId = false;
@@ -163,11 +163,11 @@ namespace WGetNET
             _name = name;
             _id = id;
             
-            _version = version;
-            _versionObject = VersionParser.Parse(_version);
+            _versionString = version;
+            _version = VersionParser.Parse(_versionString);
             
-            _availableVersion = availableVersion;
-            _availableVersionObject = VersionParser.Parse(_availableVersion);
+            _availableVersionString = availableVersion;
+            _availableVersion = VersionParser.Parse(_availableVersionString);
 
             _sourceName = sourceName;
 
@@ -188,11 +188,11 @@ namespace WGetNET
             _name = name;
             _id = id;
 
-            _versionObject = version;
-            _version = _versionObject.ToString();
+            _version = version;
+            _versionString = _version.ToString();
 
-            _availableVersionObject = availableVersion;
-            _availableVersion = _availableVersionObject.ToString();
+            _availableVersion = availableVersion;
+            _availableVersionString = _availableVersion.ToString();
 
             _sourceName = sourceName;
 
