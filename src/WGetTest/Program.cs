@@ -23,13 +23,13 @@ namespace WGetTest
             {
                 WinGetPackageManager connector = new WinGetPackageManager();
                 WinGetSourceManager sourceManager = new WinGetSourceManager();
-                WinGetInfo info = new WinGetInfo();
-                Console.WriteLine("Winget Installed: " + info.WinGetInstalled +
-                                    "\nWinget Version: " + info.WinGetVersion + "\n");
+                WinGet winget = new WinGet();
+                Console.WriteLine("Winget Installed: " + winget.IsInstalled +
+                                    "\nWinget Version: " + winget.VersionString + "\n");
 
-                Version winGetVersionObject = connector.WinGetVersionObject;
+                Version winGetVersionObject = connector.Version;
 
-                WinGetData data = info.GetWinGetData();
+                WinGetData data = winget.GetInfo();
                 Console.WriteLine(data.WinGetVersion);
 
                 //---Tests-----------------------------------------------------------------------------

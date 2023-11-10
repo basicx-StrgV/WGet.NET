@@ -11,9 +11,9 @@ using WGetNET.HelperClasses;
 namespace WGetNET
 {
     /// <summary>
-    /// The <see cref="WGetNET.WinGetInfo"/> class offers informations about the installed winget version.
+    /// The <see cref="WGetNET.WinGet"/> class offers informations about the installed winget version.
     /// </summary>
-    public class WinGetInfo
+    public class WinGet
     {
         private const string _infoCmd = "--info";
         private const string _versionCmd = "--version";
@@ -27,7 +27,7 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if winget is installed or <see langword="false"/> if not.
         /// </returns>
-        public bool WinGetInstalled
+        public bool IsInstalled
         {
             get
             {
@@ -45,7 +45,7 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> with the version number.
         /// </returns>
-        public string WinGetVersion
+        public string VersionString
         {
             get
             {
@@ -59,7 +59,7 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Version"/> object.
         /// </returns>
-        public Version WinGetVersionObject
+        public Version Version
         {
             get
             {
@@ -68,9 +68,9 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetInfo"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.WinGet"/> class.
         /// </summary>
-        public WinGetInfo()
+        public WinGet()
         {
             _processManager = new ProcessManager("winget");
         }
@@ -234,7 +234,7 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public WinGetData GetWinGetData()
+        public WinGetData GetInfo()
         {
             try
             {
@@ -280,7 +280,7 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public async Task<WinGetData> GetWinGetDataAsync()
+        public async Task<WinGetData> GetInfoAsync()
         {
             try
             {
@@ -326,7 +326,7 @@ namespace WGetNET
         /// </returns>
         protected bool CheckWinGetVersion(Version minVersion, Version? maxVersion = null)
         {
-            Version winGetVersion = WinGetVersionObject;
+            Version winGetVersion = Version;
             if ((winGetVersion.Major >= minVersion.Major && winGetVersion.Minor >= minVersion.Minor && 
                 ((winGetVersion.Minor != minVersion.Minor) || (winGetVersion.Minor == minVersion.Minor && winGetVersion.Build >= minVersion.Build))) &&
                 ((maxVersion == null) || (winGetVersion.Major <= maxVersion.Major && winGetVersion.Minor <= maxVersion.Minor && 

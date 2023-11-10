@@ -95,12 +95,12 @@
             containing the process output stream content by lines.
             </returns>
         </member>
-        <member name="T:WGetNET.WinGetInfo">
+        <member name="T:WGetNET.WinGet">
             <summary>
-            The <see cref="T:WGetNET.WinGetInfo"/> class offers informations about the installed winget version.
+            The <see cref="T:WGetNET.WinGet"/> class offers informations about the installed winget version.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetInfo.WinGetInstalled">
+        <member name="P:WGetNET.WinGet.IsInstalled">
             <summary>
             Gets if winget is installed on the system.
             </summary>
@@ -108,7 +108,7 @@
             <see langword="true"/> if winget is installed or <see langword="false"/> if not.
             </returns>
         </member>
-        <member name="P:WGetNET.WinGetInfo.WinGetVersion">
+        <member name="P:WGetNET.WinGet.VersionString">
             <summary>
             Gets the version number of the winget installation.
             </summary>
@@ -116,7 +116,7 @@
             A <see cref="T:System.String"/> with the version number.
             </returns>
         </member>
-        <member name="P:WGetNET.WinGetInfo.WinGetVersionObject">
+        <member name="P:WGetNET.WinGet.Version">
             <summary>
             Gets the version number of the winget installation.
             </summary>
@@ -124,12 +124,12 @@
             A <see cref="T:System.Version"/> object.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetInfo.#ctor">
+        <member name="M:WGetNET.WinGet.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.WinGet"/> class.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetInfo.ExportSettings">
+        <member name="M:WGetNET.WinGet.ExportSettings">
             <summary>
             Exports the WinGet settings to a json string.
             </summary>
@@ -144,7 +144,7 @@
             Please see inner exception.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetInfo.ExportSettingsAsync">
+        <member name="M:WGetNET.WinGet.ExportSettingsAsync">
             <summary>
             Asynchronous exports the WinGet settings to a json string.
             </summary>
@@ -160,7 +160,7 @@
             Please see inner exception.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetInfo.ExportSettingsToFile(System.String)">
+        <member name="M:WGetNET.WinGet.ExportSettingsToFile(System.String)">
             <summary>
             Exports the WinGet settings to a json and writes them to the given file.
             </summary>
@@ -181,7 +181,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetInfo.ExportSettingsToFileAsync(System.String)">
+        <member name="M:WGetNET.WinGet.ExportSettingsToFileAsync(System.String)">
             <summary>
             Asynchronous exports the WinGet settings to a json and writes them to the given file.
             </summary>
@@ -203,7 +203,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetInfo.GetWinGetData">
+        <member name="M:WGetNET.WinGet.GetInfo">
             <summary>
             Gets all WinGet related data provided by the WinGet info action.
             </summary>
@@ -218,7 +218,7 @@
             Please see inner exception.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetInfo.GetWinGetDataAsync">
+        <member name="M:WGetNET.WinGet.GetInfoAsync">
             <summary>
             Asynchronous gets all WinGet related data provided by the WinGet info action.
             </summary>
@@ -233,7 +233,7 @@
             Please see inner exception.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetInfo.CheckWinGetVersion(System.Version,System.Version)">
+        <member name="M:WGetNET.WinGet.CheckWinGetVersion(System.Version,System.Version)">
             <summary>
             Checks if the installed WinGet version is between the given versions or the same.
             </summary>
@@ -2759,21 +2759,7 @@
         </member>
         <member name="M:WGetNET.Exceptions.InvalidJsonException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.InvalidJsonException"/> class.
-            </summary>
-            <param name="message">Message of the exception</param>
-        </member>
-        <member name="M:WGetNET.Exceptions.InvalidJsonException.#ctor(System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.InvalidJsonException"/> class.
-            </summary>
-            <param name="innerException">The inner exception</param>
-        </member>
-        <member name="M:WGetNET.Exceptions.InvalidJsonException.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.InvalidJsonException"/> class.
-            </summary>
-            <param name="message">Message of the exception</param>
+            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.InvalidJsonException"/>ption</param>
             <param name="innerException">The inner exception</param>
         </member>
         <member name="M:WGetNET.Exceptions.InvalidJsonException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
@@ -3054,24 +3040,6 @@
             A <see cref="T:System.String"/> containing the json to deserialize.
             </param>
             <returns>
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
-        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             Object of the given class type.
             </returns>
             <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
@@ -3659,6 +3627,50 @@
         </member>
         <member name="P:WGetNET.WinGetSource.Name">
             <summary>
+            Gets the name of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Url">
+            <summary>
+            Gets the url of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Type">
+            <summary>
+            Gets the type of the source.
+            </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Data">
+            <summary>
+            Gets the data of the source.
+            </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetSource.Identifier">
+            <summary>
+            Gets the identifier of the source.
+            </summary>
+            <remarks>
+            Will only be set on source export.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetSource.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetSource.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetSource"/> class.
+            </summary>
+            <param name="name">The name of the source.</param>
+            <param name="url">The url to the source.</param>
+            <param name="type">Type identifier of the source.</param>
             Gets the name of the source.
             </summary>
         </member>

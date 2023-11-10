@@ -15,7 +15,7 @@ namespace WGetNET
     /// <summary>
     /// The <see cref="WGetNET.WinGetPackageManager"/> class offers methods to manage packages with winget.
     /// </summary>
-    public class WinGetPackageManager : WinGetInfo
+    public class WinGetPackageManager : WinGet
     {
         private const string _listCmd = "list";
         private const string _searchInstalledCmd = "list \"{0}\"";
