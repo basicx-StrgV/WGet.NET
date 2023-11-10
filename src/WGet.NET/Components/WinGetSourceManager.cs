@@ -19,7 +19,6 @@ namespace WGetNET
     /// </summary>
     public class WinGetSourceManager : WinGet
     {
-        private const string _sourceListCmd = "source list";
         private const string _sourceAddCmd = "source add -n {0} -a {1} --accept-source-agreements";
         private const string _sourceAddWithTypeCmd = "source add -n {0} -a {1} -t {2} --accept-source-agreements";
         private const string _sourceUpdateCmd = "source update";
@@ -39,10 +38,6 @@ namespace WGetNET
         /// <summary>
         /// Gets a list of all sources that are installed in winget.
         /// </summary>
-        /// <remarks>
-        /// Because the list source output is limited it is recommanded to use 
-        /// <see cref="WGetNET.WinGetSourceManager.ExportSourcesToObject()"/> instead.
-        /// </remarks>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
         /// </returns>
@@ -51,7 +46,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceListCmd);
+                    _processManager.ExecuteWingetProcess(_sourceExportCmd);
 
                 return ProcessOutputReader.ToSourceList(result.Output);
             }
@@ -61,17 +56,43 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceListCmd, e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceExportCmd, e);
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of installed sources that matches the provided name.
+        /// </summary>
+        /// <param name="sourceName">Name of the sources to export.</param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
+        /// </returns>
+        public List<WinGetSource> GetInstalledSources(string sourceName)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
+
+            try
+            {
+                ProcessResult result =
+                    _processManager.ExecuteWingetProcess(cmd);
+
+                return ProcessOutputReader.ToSourceList(result.Output);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
             }
         }
 
         /// <summary>
         /// Asynchronously gets a list of all sources that are installed in winget.
         /// </summary>
-        /// <remarks>
-        /// Because the list source output is limited it is recommanded to use 
-        /// <see cref="WGetNET.WinGetSourceManager.ExportSourcesToObject()"/> instead.
-        /// </remarks>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
@@ -81,7 +102,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_sourceListCmd);
+                    await _processManager.ExecuteWingetProcessAsync(_sourceExportCmd);
 
                 return ProcessOutputReader.ToSourceList(result.Output);
             }
@@ -91,7 +112,38 @@ namespace WGetNET
             }
             catch (Exception e)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceListCmd, e);
+                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceExportCmd, e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously gets a list of installed sources that matches the provided name.
+        /// </summary>
+        /// <param name="sourceName">Name of the sources to export.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
+        /// </returns>
+        public async Task<List<WinGetSource>> GetInstalledSourcesAsync(string sourceName)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
+
+            try
+            {
+                ProcessResult result =
+                    await _processManager.ExecuteWingetProcessAsync(cmd);
+
+                return ProcessOutputReader.ToSourceList(result.Output);
+            }
+            catch (Win32Exception)
+            {
+                throw new WinGetNotInstalledException();
+            }
+            catch (Exception e)
+            {
+                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
             }
         }
         //---------------------------------------------------------------------------------------------

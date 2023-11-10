@@ -1830,10 +1830,15 @@
             <summary>
             Gets a list of all sources that are installed in winget.
             </summary>
-            <remarks>
-            Because the list source output is limited it is recommanded to use 
-            <see cref="M:WGetNET.WinGetSourceManager.ExportSourcesToObject"/> instead.
-            </remarks>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.GetInstalledSources(System.String)">
+            <summary>
+            Gets a list of installed sources that matches the provided name.
+            </summary>
+            <param name="sourceName">Name of the sources to export.</param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
             </returns>
@@ -1842,10 +1847,16 @@
             <summary>
             Asynchronously gets a list of all sources that are installed in winget.
             </summary>
-            <remarks>
-            Because the list source output is limited it is recommanded to use 
-            <see cref="M:WGetNET.WinGetSourceManager.ExportSourcesToObject"/> instead.
-            </remarks>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSourceManager.GetInstalledSourcesAsync(System.String)">
+            <summary>
+            Asynchronously gets a list of installed sources that matches the provided name.
+            </summary>
+            <param name="sourceName">Name of the sources to export.</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> instances.
@@ -2669,7 +2680,25 @@
         </member>
         <member name="P:WGetNET.WinGetInfo.Links">
             <summary>
-            Gets a list of tollections.Generic.List{WGetNET.WinGetAdminOption})">
+            Gets a list of the winget related links.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.AdminSetting">
+            <summary>
+            Gets a list of the winget admin setting states.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetInfo.Empty">
+            <summary>
+            Gets an empty instance of this object.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetInfo.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.
             </summary>
@@ -3379,6 +3408,24 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
         <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
@@ -3475,24 +3522,10 @@
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToSourceList(System.String[])">
             <summary>
             Converts a <see cref="T:System.Collections.Generic.List`1"/> 
-            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetSource"/>'s.
+            of output lines from a winget process, that contains the sources in json format, to a list of <see cref="T:WGetNET.WinGetSource"/>'s.
             </summary>
             <param name="output">
             The <see langword="array"/> of output lines from a winget process.
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreateSourceListFromOutput(System.String[],System.Int32[])">
-            <summary>
-            Creates a source list from output.
-            </summary>
-            <param name="output">
-            The <see langword="array"/> containing the winget output.
-            </param>
-            <param name="columnList">
-            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
             </param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
@@ -3608,53 +3641,6 @@
             </summary>
         </member>
         <member name="P:WGetNET.Models.ProcessResult.Output">
-            <summary>
-            Gets or sets the output of the process.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.ProcessResult.Success">
-            <summary>
-            Gets if the process finished successfully.
-            </summary>
-        </member>
-        <member name="T:WGetNET.Models.SourceModel">
-            <summary>
-            Represents a winget source for json parsing.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Name">
-            <summary>
-            Gets or sets the name of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Arg">
-            <summary>
-            Gets or sets the arg of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Type">
-            <summary>
-            Gets sets the type of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Data">
-            <summary>
-            Gets or sets the data of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Identifier">
-            <summary>
-            Gets or sets the identifier of the source.
-            </summary>
-        </member>
-        <member name="M:WGetNET.Models.SourceModel.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
-            </summary>
-        </member>
-    </members>
-</doc>
-tNET.Models.ProcessResult.Output">
             <summary>
             Gets or sets the output of the process.
             </summary>

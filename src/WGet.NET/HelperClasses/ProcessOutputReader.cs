@@ -341,7 +341,7 @@ namespace WGetNET.HelperClasses
         //---To Source List-------------------------------------------------------------------------------------------
         /// <summary>
         /// Converts a <see cref="System.Collections.Generic.List{T}"/> 
-        /// of output lines from a winget process to a list of <see cref="WGetNET.WinGetSource"/>'s.
+        /// of output lines from a winget process, that contains the sources in json format, to a list of <see cref="WGetNET.WinGetSource"/>'s.
         /// </summary>
         /// <param name="output">
         /// The <see langword="array"/> of output lines from a winget process.
@@ -351,55 +351,20 @@ namespace WGetNET.HelperClasses
         /// </returns>
         public static List<WinGetSource> ToSourceList(string[] output)
         {
-            //Get top line index.
-            //The array should always contain this line.
-            //If it dose not contain this line the resulting out of range exception,
-            //that will be thrown later, will be catched in the calling method.
-            int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
-
-            int[] columnList = GetColumnList(output[labelLine]);
-
-            //Remove unneeded output Lines
-            output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
-
-            return CreateSourceListFromOutput(output, columnList);
-        }
-
-        /// <summary>
-        /// Creates a source list from output.
-        /// </summary>
-        /// <param name="output">
-        /// The <see langword="array"/> containing the winget output.
-        /// </param>
-        /// <param name="columnList">
-        /// A <see cref="System.Int32"/> <see langword="array"/> containing the column start indexes.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/>'s.
-        /// </returns>
-        private static List<WinGetSource> CreateSourceListFromOutput(string[] output, int[] columnList)
-        {
-            List<WinGetSource> resultList = new();
-
-            if (columnList.Length < 2)
-            {
-                return resultList;
-            }
+            List<WinGetSource> sourceList = new();
 
             for (int i = 0; i < output.Length; i++)
             {
-#if NETCOREAPP3_1_OR_GREATER
-                string name = output[i][columnList[0]..columnList[1]].Trim();
-                string url = output[i][columnList[1]..].Trim();
-#elif NETSTANDARD2_0
-                string name = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim();
-                string url = output[i].Substring(columnList[1]).Trim();
-#endif
+                SourceModel? source =
+                    JsonHandler.StringToObject<SourceModel>(output[i]);
 
-                resultList.Add(new WinGetSource(name, url));
+                if (source != null)
+                {
+                    sourceList.Add(WinGetSource.FromSourceModel(source));
+                }
             }
 
-            return resultList;
+            return sourceList;
         }
         //------------------------------------------------------------------------------------------------------------
 
