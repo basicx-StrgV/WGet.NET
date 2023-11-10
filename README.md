@@ -126,6 +126,6 @@ WinGetPackage package = packageManager.GetInstalledPackages(packageId, true).Fir
 
 if (package.AvailableVersionObject > package.VersionObject)
 {
-    Console.WriteLine("You are currently running version {currentVersion} and a newer version ({latestVersion}) is available. You should update now using Winget command 'winget {packageId}' from the Windows Terminal.", currentPackageVersion, latestPackageVersion, packageId);
+    Console.WriteLine("You are currently running version {currentVersion} and a newer version ({latestVersion}) is available. You should update now using Winget command 'winget {packageId}' from the Windows Terminal.", package.VersionObject, package.AvailableVersionObject, packageId);
 }
 ```
