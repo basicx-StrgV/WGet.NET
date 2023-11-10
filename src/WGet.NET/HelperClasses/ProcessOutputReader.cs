@@ -403,18 +403,18 @@ namespace WGetNET.HelperClasses
         //------------------------------------------------------------------------------------------------------------
 
         /// <summary>
-        /// Creates a <see cref="WGetNET.WinGetData"/> object from the winget output.
+        /// Creates a <see cref="WGetNET.WinGetInfo"/> object from the winget output.
         /// </summary>
         /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
         /// <param name="actionVersionId">Containes info about the winget version range for the output.</param>
         /// <returns>
-        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        public static WinGetData ToWingetData(string[] output, InfoActionVersionId actionVersionId)
+        public static WinGetInfo ToWingetData(string[] output, InfoActionVersionId actionVersionId)
         {
             if (output.Length <= 0)
             {
-                return WinGetData.Empty;
+                return WinGetInfo.Empty;
             }
 
             return ReadDataByRange(output, actionVersionId);
@@ -456,9 +456,9 @@ namespace WGetNET.HelperClasses
         /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
         /// <param name="actionVersionId">Containes info about the winget version range for the output.</param>
         /// <returns>
-        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        private static WinGetData ReadDataByRange(string[] output, InfoActionVersionId actionVersionId)
+        private static WinGetInfo ReadDataByRange(string[] output, InfoActionVersionId actionVersionId)
         {
             return actionVersionId switch
             {
@@ -466,7 +466,7 @@ namespace WGetNET.HelperClasses
                 InfoActionVersionId.VersionRange2 => ReadDataForRange2(output),
                 InfoActionVersionId.VersionRange3 => ReadDataForRange3(output),
                 InfoActionVersionId.VersionRange4 => ReadDataForRange4(output),
-                _ => WinGetData.Empty,
+                _ => WinGetInfo.Empty,
             };
         }
 
@@ -475,16 +475,16 @@ namespace WGetNET.HelperClasses
         /// </summary>
         /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
         /// <returns>
-        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        private static WinGetData ReadDataForRange1(string[] output)
+        private static WinGetInfo ReadDataForRange1(string[] output)
         {
             string version = ReadVersionFromData(output);
 
             if (string.IsNullOrWhiteSpace(version))
             {
                 // Return if version number could not be determined, because the outupt is probably not correct.
-                return WinGetData.Empty;
+                return WinGetInfo.Empty;
             }
 
             List<WinGetInfoEntry> directories = new();
@@ -499,7 +499,7 @@ namespace WGetNET.HelperClasses
 
             List<WinGetInfoEntry> links = ReadLinks(output);
 
-            return new WinGetData(version, directories, links, new List<WinGetAdminOption>());
+            return new WinGetInfo(version, directories, links, new List<WinGetAdminOption>());
         }
 
         /// <summary>
@@ -507,16 +507,16 @@ namespace WGetNET.HelperClasses
         /// </summary>
         /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
         /// <returns>
-        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        private static WinGetData ReadDataForRange2(string[] output)
+        private static WinGetInfo ReadDataForRange2(string[] output)
         {
             string version = ReadVersionFromData(output);
 
             if (string.IsNullOrWhiteSpace(version))
             {
                 // Return if version number could not be determined, because the outupt is probably not correct.
-                return WinGetData.Empty;
+                return WinGetInfo.Empty;
             }
 
             List<WinGetInfoEntry> directories = new();
@@ -537,7 +537,7 @@ namespace WGetNET.HelperClasses
 
             List<WinGetInfoEntry> links = ReadLinks(output);
 
-            return new WinGetData(version, directories, links, new List<WinGetAdminOption>());
+            return new WinGetInfo(version, directories, links, new List<WinGetAdminOption>());
         }
 
         /// <summary>
@@ -545,16 +545,16 @@ namespace WGetNET.HelperClasses
         /// </summary>
         /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
         /// <returns>
-        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        private static WinGetData ReadDataForRange3(string[] output)
+        private static WinGetInfo ReadDataForRange3(string[] output)
         {
             string version = ReadVersionFromData(output);
 
             if (string.IsNullOrWhiteSpace(version))
             {
                 // Return if version number could not be determined, because the outupt is probably not correct.
-                return WinGetData.Empty;
+                return WinGetInfo.Empty;
             }
 
             List<WinGetInfoEntry> directories = new();
@@ -580,7 +580,7 @@ namespace WGetNET.HelperClasses
 
             List<WinGetAdminOption> adminSetting = ReadAdminSettings(output);
 
-            return new WinGetData(version, directories, links, adminSetting);
+            return new WinGetInfo(version, directories, links, adminSetting);
         }
 
         /// <summary>
@@ -588,16 +588,16 @@ namespace WGetNET.HelperClasses
         /// </summary>
         /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
         /// <returns>
-        /// The <see cref="WGetNET.WinGetData"/> object created from the output.
+        /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        private static WinGetData ReadDataForRange4(string[] output)
+        private static WinGetInfo ReadDataForRange4(string[] output)
         {
             string version = ReadVersionFromData(output);
 
             if (string.IsNullOrWhiteSpace(version))
             {
                 // Return if version number could not be determined, because the outupt is probably not correct.
-                return WinGetData.Empty;
+                return WinGetInfo.Empty;
             }
 
             // Remove unnasesary range from output
@@ -615,7 +615,7 @@ namespace WGetNET.HelperClasses
 
             List<WinGetAdminOption> adminSetting = ReadAdminSettings(output);
 
-            return new WinGetData(version, directories, links, adminSetting);
+            return new WinGetInfo(version, directories, links, adminSetting);
         }
 
         private static WinGetInfoEntry? ReadSingleEntry(string[] output, int index)

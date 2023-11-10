@@ -4,33 +4,34 @@
 //--------------------------------------------------//
 using System;
 using System.Collections.Generic;
+using WGetNET.HelperClasses;
 
 namespace WGetNET
 {
     /// <summary>
-    /// Represents WinGet related data
+    /// Represents WinGet related information
     /// </summary>
-    public class WinGetData: IWinGetObject
+    public class WinGetInfo: IWinGetObject
     {
         /// <summary>
         /// Gets the version number of the winget installation as a <see cref="System.String"/>.
         /// </summary>
-        public string WinGetVersionString
+        public string VersionString
         {
             get
             {
-                return _wingetVersionString;
+                return _versionString;
             }
         }
 
         /// <summary>
         /// Gets the version number of the winget installation.
         /// </summary>
-        public Version WinGetVersion
+        public Version Version
         {
             get
             {
-                return _wingetVersion;
+                return _version;
             }
         }
 
@@ -74,7 +75,7 @@ namespace WGetNET
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_wingetVersionString) &&
+                if (string.IsNullOrWhiteSpace(_versionString) &&
                     (_directories == null || _directories.Count <= 0) &&
                     (_links == null || _links.Count <= 0) &&
                     (_adminSetting == null || _adminSetting.Count <= 0))
@@ -88,24 +89,24 @@ namespace WGetNET
         /// <summary>
         /// Gets an empty instance of this object.
         /// </summary>
-        internal static WinGetData Empty
+        internal static WinGetInfo Empty
         {
             get
             {
-                return new WinGetData("", new List<WinGetInfoEntry>(), new List<WinGetInfoEntry>(), new List<WinGetAdminOption>());
+                return new WinGetInfo("", new List<WinGetInfoEntry>(), new List<WinGetInfoEntry>(), new List<WinGetAdminOption>());
             }
         }
 
-        private readonly string _wingetVersionString;
-        private readonly Version _wingetVersion;
+        private readonly string _versionString;
+        private readonly Version _version;
         private readonly List<WinGetInfoEntry> _directories;
         private readonly List<WinGetInfoEntry> _links;
         private readonly List<WinGetAdminOption> _adminSetting;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetData"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.WinGetInfo"/> class.
         /// </summary>
-        /// <param name="wingetVersion">The installed winget version.</param>
+        /// <param name="version">The installed winget version.</param>
         /// <param name="directories">
         /// <see cref="System.Collections.Generic.List{T}"/> of info entries containing the WinGet directories.
         /// </param>
@@ -115,23 +116,13 @@ namespace WGetNET
         /// <param name="adminSetting">
         /// <see cref="System.Collections.Generic.List{T}"/> of info entries containing the WinGet admin setting states.
         /// </param>
-        internal WinGetData(string wingetVersion, List<WinGetInfoEntry> directories, List<WinGetInfoEntry> links, List<WinGetAdminOption> adminSetting)
+        internal WinGetInfo(string version, List<WinGetInfoEntry> directories, List<WinGetInfoEntry> links, List<WinGetAdminOption> adminSetting)
         {
-            _wingetVersionString = wingetVersion;
-            _wingetVersion = CreateVersionObject(wingetVersion);
+            _versionString = version;
+            _version = VersionParser.Parse(version);
             _directories = directories;
             _links = links;
             _adminSetting = adminSetting;
-        }
-
-        private Version CreateVersionObject(string version)
-        {
-            if (!Version.TryParse(version, out Version? versionObject))
-            {
-                versionObject = Version.Parse("0.0.0");
-            }
-
-            return versionObject;
         }
     }
 }

@@ -29,8 +29,8 @@ namespace WGetTestLegacySupport
 
                 Version winGetVersionObject = connector.Version;
 
-                WinGetData data = winget.GetInfo();
-                Console.WriteLine(data.WinGetVersion);
+                WinGetInfo info = winget.GetInfo();
+                Console.WriteLine(info.Version);
 
                 //---Tests-----------------------------------------------------------------------------
                 List<WinGetPackage> test = connector.SearchPackage("git", "winget");

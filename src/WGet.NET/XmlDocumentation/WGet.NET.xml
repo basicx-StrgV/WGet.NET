@@ -208,7 +208,7 @@
             Gets all WinGet related data provided by the WinGet info action.
             </summary>
             <returns>
-            A <see cref="T:WGetNET.WinGetData"/> containing winget related information.
+            A <see cref="T:WGetNET.WinGetInfo"/> containing winget related information.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -223,7 +223,7 @@
             Asynchronous gets all WinGet related data provided by the WinGet info action.
             </summary>
             <returns>
-            A <see cref="T:WGetNET.WinGetData"/> containing winget related information.
+            A <see cref="T:WGetNET.WinGetInfo"/> containing winget related information.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -2387,19 +2387,6 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportStringToSourcesAsync(System.String)">
-            <summary>
-            Asynchronously convert the string output from winget source export to a 
-            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
-            </summary>
-            <param name="exportString">
-            A <see cref="T:System.String"/> containing the winget source export content.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
-            </returns>
-        </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSource(System.Collections.Generic.List{WGetNET.WinGetSource})">
             <summary>
             Imports sources into winget.
@@ -2759,7 +2746,21 @@
         </member>
         <member name="M:WGetNET.Exceptions.InvalidJsonException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.InvalidJsonException"/>ption</param>
+            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.InvalidJsonException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
+        </member>
+        <member name="M:WGetNET.Exceptions.InvalidJsonException.#ctor(System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.InvalidJsonException"/> class.
+            </summary>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:WGetNET.Exceptions.InvalidJsonException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.InvalidJsonException"/> class.
+            </summary>
+            <param name="message">Message of the exception</param>
             <param name="innerException">The inner exception</param>
         </member>
         <member name="M:WGetNET.Exceptions.InvalidJsonException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
@@ -3167,12 +3168,12 @@
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToWingetData(System.String[],WGetNET.InfoActionVersionId)">
             <summary>
-            Creates a <see cref="T:WGetNET.WinGetData"/> object from the winget output.
+            Creates a <see cref="T:WGetNET.WinGetInfo"/> object from the winget output.
             </summary>
             <param name="output">The <see langword="array"/> containing the winget output lines.</param>
             <param name="actionVersionId">Containes info about the winget version range for the output.</param>
             <returns>
-            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadVersionFromData(System.String[])">
@@ -3189,7 +3190,7 @@
             <param name="output">The <see langword="array"/> containing the winget output lines.</param>
             <param name="actionVersionId">Containes info about the winget version range for the output.</param>
             <returns>
-            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange1(System.String[])">
@@ -3198,7 +3199,7 @@
             </summary>
             <param name="output">The <see langword="array"/> containing the winget output lines.</param>
             <returns>
-            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange2(System.String[])">
@@ -3207,7 +3208,7 @@
             </summary>
             <param name="output">The <see langword="array"/> containing the winget output lines.</param>
             <returns>
-            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange3(System.String[])">
@@ -3216,7 +3217,7 @@
             </summary>
             <param name="output">The <see langword="array"/> containing the winget output lines.</param>
             <returns>
-            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange4(System.String[])">
@@ -3225,7 +3226,7 @@
             </summary>
             <param name="output">The <see langword="array"/> containing the winget output lines.</param>
             <returns>
-            The <see cref="T:WGetNET.WinGetData"/> object created from the output.
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ExportOutputToString(WGetNET.ProcessResult)">
@@ -3336,51 +3337,51 @@
             <param name="name">The name of the settings entry.</param>
             <param name="content">The content of the settings entry.</param>
         </member>
-        <member name="T:WGetNET.WinGetData">
+        <member name="T:WGetNET.WinGetInfo">
             <summary>
-            Represents WinGet related data
+            Represents WinGet related information
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetData.WinGetVersionString">
+        <member name="P:WGetNET.WinGetInfo.VersionString">
             <summary>
             Gets the version number of the winget installation as a <see cref="T:System.String"/>.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetData.WinGetVersion">
+        <member name="P:WGetNET.WinGetInfo.Version">
             <summary>
             Gets the version number of the winget installation.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetData.Directories">
+        <member name="P:WGetNET.WinGetInfo.Directories">
             <summary>
             Gets a list of the winget direcories.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetData.Links">
+        <member name="P:WGetNET.WinGetInfo.Links">
             <summary>
             Gets a list of the winget related links.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetData.AdminSetting">
+        <member name="P:WGetNET.WinGetInfo.AdminSetting">
             <summary>
             Gets a list of the winget admin setting states.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetData.IsEmpty">
+        <member name="P:WGetNET.WinGetInfo.IsEmpty">
             <summary>
             Gets if the object is empty.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetData.Empty">
+        <member name="P:WGetNET.WinGetInfo.Empty">
             <summary>
             Gets an empty instance of this object.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetData.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
+        <member name="M:WGetNET.WinGetInfo.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetData"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.
             </summary>
-            <param name="wingetVersion">The installed winget version.</param>
+            <param name="version">The installed winget version.</param>
             <param name="directories">
             <see cref="T:System.Collections.Generic.List`1"/> of info entries containing the WinGet directories.
             </param>
@@ -3627,50 +3628,6 @@
         </member>
         <member name="P:WGetNET.WinGetSource.Name">
             <summary>
-            Gets the name of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Url">
-            <summary>
-            Gets the url of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Type">
-            <summary>
-            Gets the type of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Data">
-            <summary>
-            Gets the data of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.Identifier">
-            <summary>
-            Gets the identifier of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
-        </member>
-        <member name="P:WGetNET.WinGetSource.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-        </member>
-        <member name="M:WGetNET.WinGetSource.#ctor(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetSource"/> class.
-            </summary>
-            <param name="name">The name of the source.</param>
-            <param name="url">The url to the source.</param>
-            <param name="type">Type identifier of the source.</param>
             Gets the name of the source.
             </summary>
         </member>

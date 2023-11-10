@@ -225,7 +225,7 @@ namespace WGetNET
         /// Gets all WinGet related data provided by the WinGet info action.
         /// </summary>
         /// <returns>
-        /// A <see cref="WGetNET.WinGetData"/> containing winget related information.
+        /// A <see cref="WGetNET.WinGetInfo"/> containing winget related information.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -234,7 +234,7 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public WinGetData GetInfo()
+        public WinGetInfo GetInfo()
         {
             try
             {
@@ -271,7 +271,7 @@ namespace WGetNET
         /// Asynchronous gets all WinGet related data provided by the WinGet info action.
         /// </summary>
         /// <returns>
-        /// A <see cref="WGetNET.WinGetData"/> containing winget related information.
+        /// A <see cref="WGetNET.WinGetInfo"/> containing winget related information.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -280,7 +280,7 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        public async Task<WinGetData> GetInfoAsync()
+        public async Task<WinGetInfo> GetInfoAsync()
         {
             try
             {
