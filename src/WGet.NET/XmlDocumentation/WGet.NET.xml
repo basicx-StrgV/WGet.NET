@@ -180,6 +180,31 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null or empty.
             </exception>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExportSettingsToFileAsync(System.String)">
             <summary>
@@ -201,6 +226,31 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null or empty.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.GetInfo">
@@ -3357,34 +3407,84 @@
             The new <see langword="array"/>.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFile(WGetNET.Models.ProcessResult,System.String)">
+        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFile(System.String,WGetNET.Models.ProcessResult)">
             <summary>
             Writes the export result to a file.
             </summary>
+            <param name="path">
+            A <see cref="T:System.String"/> containing the file path and name.
+            </param>
             <param name="result">
             The <see cref="T:WGetNET.Models.ProcessResult"/> object containing the export data.
-            </param>
-            <param name="file">
-            A <see cref="T:System.String"/> containing the file path and name.
             </param>
             <returns>
             <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
+            </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFileAsync(WGetNET.Models.ProcessResult,System.String)">
+        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFileAsync(System.String,WGetNET.Models.ProcessResult)">
             <summary>
             Asynchronous writes the export result to a file.
             </summary>
+            <param name="path">
+            A <see cref="T:System.String"/> containing the file path and name.
+            </param>
             <param name="result">
             The <see cref="T:WGetNET.Models.ProcessResult"/> object containing the export data.
-            </param>
-            <param name="file">
-            A <see cref="T:System.String"/> containing the file path and name.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
             </returns>
+            <exception cref="T:System.ArgumentException">
+            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The specified path is invalid (for example, it is on an unmapped drive).
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurred while opening the file
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            Path specified a file that is read-only. 
+            Or Path specified a file that is hidden.
+            Or This operation is not supported on the current platform. 
+            Or Path specified a directory. 
+            Or The caller does not have the required permission.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Path is in an invalid format.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The caller does not have the required permission.
+            </exception>
         </member>
         <member name="M:WGetNET.HelperClasses.FileHandler.WriteTextToFile(System.String,System.String)">
             <summary>
@@ -3467,6 +3567,24 @@
             A <see cref="T:System.String"/> containing the json to deserialize.
             </param>
             <returns>
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             Object of the given class type.
             </returns>
             <exception cref="T:WGetNET.Exceptions.InvalidJsonException">

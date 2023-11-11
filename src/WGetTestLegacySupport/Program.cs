@@ -58,9 +58,8 @@ namespace WGetTestLegacySupport
                 Console.WriteLine(hash);
 
                 string settings = connector.ExportSettings();
-                Task<bool> settingExportStatusTask = connector.ExportSettingsToFileAsync("C:\\Test\\Settings.json");
+                Task settingExportStatusTask = connector.ExportSettingsToFileAsync("C:\\Test\\Settings.json");
                 settingExportStatusTask.Wait();
-                bool settingExportStatus = settingExportStatusTask.Result;
 
                 //bool upAllresult = connector.UpgradeAllPackages();
 

@@ -160,16 +160,40 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool ExportSettingsToFile(string file)
+        /// <exception cref="System.ArgumentException">
+        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// Path specified a file that is read-only. 
+        /// Or Path specified a file that is hidden.
+        /// Or This operation is not supported on the current platform. 
+        /// Or Path specified a directory. 
+        /// Or The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public void ExportSettingsToFile(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
+            ProcessResult result;
+
             try
             {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_exportSettingsCmd);
-
-                return FileHandler.ExportOutputToFile(result, file);
+                result = _processManager.ExecuteWingetProcess(_exportSettingsCmd);
             }
             catch (Win32Exception)
             {
@@ -179,6 +203,8 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("Exporting sources failed.", _exportSettingsCmd, e);
             }
+
+            FileHandler.ExportOutputToFile(file, result);
         }
 
         /// <summary>
@@ -201,16 +227,40 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> ExportSettingsToFileAsync(string file)
+        /// <exception cref="System.ArgumentException">
+        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// Path specified a file that is read-only. 
+        /// Or Path specified a file that is hidden.
+        /// Or This operation is not supported on the current platform. 
+        /// Or Path specified a directory. 
+        /// Or The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public async Task ExportSettingsToFileAsync(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
+            ProcessResult result;
+
             try
             {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
-
-                return await FileHandler.ExportOutputToFileAsync(result, file);
+                result = await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
             }
             catch (Win32Exception)
             {
@@ -220,6 +270,8 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("Exporting sources failed.", _exportSettingsCmd, e);
             }
+
+            await FileHandler.ExportOutputToFileAsync(file, result);
         }
 
         /// <summary>
