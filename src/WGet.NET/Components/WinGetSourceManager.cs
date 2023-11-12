@@ -942,13 +942,13 @@ namespace WGetNET
 
         //---Import------------------------------------------------------------------------------------
         /// <summary>
-        /// Imports a source into winget.
+        /// Imports sources into winget from a json string.
         /// </summary>
         /// <param name="jsonString">
-        /// A <see cref="System.String"/> containing the json for ONE source.
+        /// A <see cref="System.String"/> containing the json for multiple sources.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
+        /// <see langword="true"/> if importing all sources was successful and <see langword="false"/> if on or more failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -966,24 +966,33 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public bool ImportSource(string jsonString)
+        public bool ImportSourcesFromJson(string jsonString)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
-            SourceModel source = JsonHandler.StringToObject<SourceModel>(jsonString);
-            
-            return AddSource(WinGetSource.FromSourceModel(source));
+            List<SourceModel> sources = JsonHandler.StringToObject<List<SourceModel>>(jsonString);
+
+            bool success = true;
+            for (int i = 0; i < sources.Count; i++)
+            {
+                if (!AddSource(WinGetSource.FromSourceModel(sources[i])))
+                {
+                    success = false;
+                }
+            }
+
+            return success;
         }
 
         /// <summary>
-        /// Asynchronously imports a source into winget.
+        /// Asynchronously imports sources into winget from a json string.
         /// </summary>
         /// <param name="jsonString">
-        /// A <see cref="System.String"/> containing the json for ONE source.
+        /// A <see cref="System.String"/> containing the json for multiple sources.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if importing all sources was successful and <see langword="false"/> if on or more failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1001,19 +1010,28 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> ImportSourceAsync(string jsonString)
+        public async Task<bool> ImportSourcesFromJsonAsync(string jsonString)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
 #if NETCOREAPP3_1_OR_GREATER
-            SourceModel source = 
-                await JsonHandler.StringToObjectAsync<SourceModel>(jsonString);
+            List<SourceModel> sources = 
+                await JsonHandler.StringToObjectAsync<List<SourceModel>>(jsonString);
 #elif NETSTANDARD2_0
-            SourceModel source = 
-                JsonHandler.StringToObject<SourceModel>(jsonString);
+            List<SourceModel> sources = 
+                JsonHandler.StringToObject<List<SourceModel>>(jsonString);
 #endif
 
-            return await AddSourceAsync(WinGetSource.FromSourceModel(source));
+            bool success = true;
+            for (int i = 0; i < sources.Count; i++)
+            {
+                if (!(await AddSourceAsync(WinGetSource.FromSourceModel(sources[i]))))
+                {
+                    success = false;
+                }
+            }
+
+            return success;
         }
         //---------------------------------------------------------------------------------------------
 
