@@ -23,6 +23,10 @@ This includes breaking changes to the usage of the library.
 
 You can find the full migration documentation [here](https://github.com/basicx-StrgV/WGet.NET/blob/develop/migration_info/V3-V4.md).
 
+This was done to improve maintainability and the experience of using the library, by improving the data structure, removing redundant or useless functions and making the implementation more consistent.
+
+***More information about version 4.0 can be found [here](https://github.com/basicx-StrgV/WGet.NET/releases/tag/4.0.0).***
+
 ## 📓 Documentation
 
 https://basicx-strgv.github.io/WGet.NET/
