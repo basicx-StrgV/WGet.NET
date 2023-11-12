@@ -656,23 +656,19 @@ namespace WGetNET
         /// A provided argument is null or empty.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
         /// </exception>
         /// <exception cref="System.IO.PathTooLongException">
         /// The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.IO.IOException">
         /// An I/O error occurred while opening the file
-        /// </exception>
-        /// <exception cref="System.UnauthorizedAccessException">
-        /// Path specified a file that is read-only. 
-        /// Or Path specified a file that is hidden.
-        /// Or This operation is not supported on the current platform. 
-        /// Or Path specified a directory. 
-        /// Or The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.NotSupportedException">
         /// Path is in an invalid format.
@@ -683,6 +679,7 @@ namespace WGetNET
         public void ExportSourcesToFile(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
             FileHandler.WriteTextToFile(
                 file, 
@@ -709,23 +706,19 @@ namespace WGetNET
         /// A provided argument is null or empty.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
         /// </exception>
         /// <exception cref="System.IO.PathTooLongException">
         /// The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.IO.IOException">
         /// An I/O error occurred while opening the file
-        /// </exception>
-        /// <exception cref="System.UnauthorizedAccessException">
-        /// Path specified a file that is read-only. 
-        /// Or Path specified a file that is hidden.
-        /// Or This operation is not supported on the current platform. 
-        /// Or Path specified a directory. 
-        /// Or The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.NotSupportedException">
         /// Path is in an invalid format.
@@ -737,6 +730,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
             FileHandler.WriteTextToFile(
                 file, 
@@ -767,23 +761,19 @@ namespace WGetNET
         /// A provided argument is null or empty.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
         /// </exception>
         /// <exception cref="System.IO.PathTooLongException">
         /// The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.IO.IOException">
         /// An I/O error occurred while opening the file
-        /// </exception>
-        /// <exception cref="System.UnauthorizedAccessException">
-        /// Path specified a file that is read-only. 
-        /// Or Path specified a file that is hidden.
-        /// Or This operation is not supported on the current platform. 
-        /// Or Path specified a directory. 
-        /// Or The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.NotSupportedException">
         /// Path is in an invalid format.
@@ -794,6 +784,7 @@ namespace WGetNET
         public void ExportSourcesToFile(string file, WinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
             ExportSourcesToFile(file, source.Name);
         }
@@ -816,23 +807,19 @@ namespace WGetNET
         /// A provided argument is null or empty.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
         /// </exception>
         /// <exception cref="System.IO.PathTooLongException">
         /// The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.IO.IOException">
         /// An I/O error occurred while opening the file
-        /// </exception>
-        /// <exception cref="System.UnauthorizedAccessException">
-        /// Path specified a file that is read-only. 
-        /// Or Path specified a file that is hidden.
-        /// Or This operation is not supported on the current platform. 
-        /// Or Path specified a directory. 
-        /// Or The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.NotSupportedException">
         /// Path is in an invalid format.
@@ -843,6 +830,7 @@ namespace WGetNET
         public async Task ExportSourcesToFileAsync(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
             await FileHandler.WriteTextToFileAsync(
                 file, SourcesToJson(
@@ -868,23 +856,19 @@ namespace WGetNET
         /// A provided argument is null or empty.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
         /// </exception>
         /// <exception cref="System.IO.PathTooLongException">
         /// The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.IO.IOException">
         /// An I/O error occurred while opening the file
-        /// </exception>
-        /// <exception cref="System.UnauthorizedAccessException">
-        /// Path specified a file that is read-only. 
-        /// Or Path specified a file that is hidden.
-        /// Or This operation is not supported on the current platform. 
-        /// Or Path specified a directory. 
-        /// Or The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.NotSupportedException">
         /// Path is in an invalid format.
@@ -896,6 +880,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
             await FileHandler.WriteTextToFileAsync(
                 file, 
@@ -926,23 +911,19 @@ namespace WGetNET
         /// A provided argument is null or empty.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
         /// </exception>
         /// <exception cref="System.IO.PathTooLongException">
         /// The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.IO.IOException">
         /// An I/O error occurred while opening the file
-        /// </exception>
-        /// <exception cref="System.UnauthorizedAccessException">
-        /// Path specified a file that is read-only. 
-        /// Or Path specified a file that is hidden.
-        /// Or This operation is not supported on the current platform. 
-        /// Or Path specified a directory. 
-        /// Or The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.NotSupportedException">
         /// Path is in an invalid format.
@@ -953,6 +934,7 @@ namespace WGetNET
         public async Task ExportSourcesToFileAsync(string file, WinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
             await ExportSourcesToFileAsync(file, source.Name);
         }

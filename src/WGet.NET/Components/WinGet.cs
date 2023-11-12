@@ -161,23 +161,19 @@ namespace WGetNET
         /// A provided argument is null or empty.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
         /// </exception>
         /// <exception cref="System.IO.PathTooLongException">
         /// The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.IO.IOException">
         /// An I/O error occurred while opening the file
-        /// </exception>
-        /// <exception cref="System.UnauthorizedAccessException">
-        /// Path specified a file that is read-only. 
-        /// Or Path specified a file that is hidden.
-        /// Or This operation is not supported on the current platform. 
-        /// Or Path specified a directory. 
-        /// Or The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.NotSupportedException">
         /// Path is in an invalid format.
@@ -188,6 +184,7 @@ namespace WGetNET
         public void ExportSettingsToFile(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
             ProcessResult result;
 
@@ -255,6 +252,7 @@ namespace WGetNET
         public async Task ExportSettingsToFileAsync(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
             ProcessResult result;
 

@@ -181,23 +181,19 @@
             A provided argument is null or empty.
             </exception>
             <exception cref="T:System.ArgumentException">
-            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            The path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The directory root does not exist.
             </exception>
             <exception cref="T:System.IO.PathTooLongException">
             The specified path, file name, or both exceed the system-defined maximum length.
             </exception>
-            <exception cref="T:System.IO.DirectoryNotFoundException">
-            The specified path is invalid (for example, it is on an unmapped drive).
+            <exception cref="T:System.UnauthorizedAccessException">
+            The caller does not have the required permission.
             </exception>
             <exception cref="T:System.IO.IOException">
             An I/O error occurred while opening the file
-            </exception>
-            <exception cref="T:System.UnauthorizedAccessException">
-            Path specified a file that is read-only. 
-            Or Path specified a file that is hidden.
-            Or This operation is not supported on the current platform. 
-            Or Path specified a directory. 
-            Or The caller does not have the required permission.
             </exception>
             <exception cref="T:System.NotSupportedException">
             Path is in an invalid format.
@@ -2225,23 +2221,19 @@
             A provided argument is null or empty.
             </exception>
             <exception cref="T:System.ArgumentException">
-            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            The path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The directory root does not exist.
             </exception>
             <exception cref="T:System.IO.PathTooLongException">
             The specified path, file name, or both exceed the system-defined maximum length.
             </exception>
-            <exception cref="T:System.IO.DirectoryNotFoundException">
-            The specified path is invalid (for example, it is on an unmapped drive).
+            <exception cref="T:System.UnauthorizedAccessException">
+            The caller does not have the required permission.
             </exception>
             <exception cref="T:System.IO.IOException">
             An I/O error occurred while opening the file
-            </exception>
-            <exception cref="T:System.UnauthorizedAccessException">
-            Path specified a file that is read-only. 
-            Or Path specified a file that is hidden.
-            Or This operation is not supported on the current platform. 
-            Or Path specified a directory. 
-            Or The caller does not have the required permission.
             </exception>
             <exception cref="T:System.NotSupportedException">
             Path is in an invalid format.
@@ -2270,23 +2262,19 @@
             A provided argument is null or empty.
             </exception>
             <exception cref="T:System.ArgumentException">
-            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            The path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The directory root does not exist.
             </exception>
             <exception cref="T:System.IO.PathTooLongException">
             The specified path, file name, or both exceed the system-defined maximum length.
             </exception>
-            <exception cref="T:System.IO.DirectoryNotFoundException">
-            The specified path is invalid (for example, it is on an unmapped drive).
+            <exception cref="T:System.UnauthorizedAccessException">
+            The caller does not have the required permission.
             </exception>
             <exception cref="T:System.IO.IOException">
             An I/O error occurred while opening the file
-            </exception>
-            <exception cref="T:System.UnauthorizedAccessException">
-            Path specified a file that is read-only. 
-            Or Path specified a file that is hidden.
-            Or This operation is not supported on the current platform. 
-            Or Path specified a directory. 
-            Or The caller does not have the required permission.
             </exception>
             <exception cref="T:System.NotSupportedException">
             Path is in an invalid format.
@@ -2319,23 +2307,19 @@
             A provided argument is null or empty.
             </exception>
             <exception cref="T:System.ArgumentException">
-            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            The path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The directory root does not exist.
             </exception>
             <exception cref="T:System.IO.PathTooLongException">
             The specified path, file name, or both exceed the system-defined maximum length.
             </exception>
-            <exception cref="T:System.IO.DirectoryNotFoundException">
-            The specified path is invalid (for example, it is on an unmapped drive).
+            <exception cref="T:System.UnauthorizedAccessException">
+            The caller does not have the required permission.
             </exception>
             <exception cref="T:System.IO.IOException">
             An I/O error occurred while opening the file
-            </exception>
-            <exception cref="T:System.UnauthorizedAccessException">
-            Path specified a file that is read-only. 
-            Or Path specified a file that is hidden.
-            Or This operation is not supported on the current platform. 
-            Or Path specified a directory. 
-            Or The caller does not have the required permission.
             </exception>
             <exception cref="T:System.NotSupportedException">
             Path is in an invalid format.
@@ -2363,23 +2347,19 @@
             A provided argument is null or empty.
             </exception>
             <exception cref="T:System.ArgumentException">
-            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            The path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The directory root does not exist.
             </exception>
             <exception cref="T:System.IO.PathTooLongException">
             The specified path, file name, or both exceed the system-defined maximum length.
             </exception>
-            <exception cref="T:System.IO.DirectoryNotFoundException">
-            The specified path is invalid (for example, it is on an unmapped drive).
+            <exception cref="T:System.UnauthorizedAccessException">
+            The caller does not have the required permission.
             </exception>
             <exception cref="T:System.IO.IOException">
             An I/O error occurred while opening the file
-            </exception>
-            <exception cref="T:System.UnauthorizedAccessException">
-            Path specified a file that is read-only. 
-            Or Path specified a file that is hidden.
-            Or This operation is not supported on the current platform. 
-            Or Path specified a directory. 
-            Or The caller does not have the required permission.
             </exception>
             <exception cref="T:System.NotSupportedException">
             Path is in an invalid format.
@@ -2408,23 +2388,19 @@
             A provided argument is null or empty.
             </exception>
             <exception cref="T:System.ArgumentException">
-            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            The path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The directory root does not exist.
             </exception>
             <exception cref="T:System.IO.PathTooLongException">
             The specified path, file name, or both exceed the system-defined maximum length.
             </exception>
-            <exception cref="T:System.IO.DirectoryNotFoundException">
-            The specified path is invalid (for example, it is on an unmapped drive).
+            <exception cref="T:System.UnauthorizedAccessException">
+            The caller does not have the required permission.
             </exception>
             <exception cref="T:System.IO.IOException">
             An I/O error occurred while opening the file
-            </exception>
-            <exception cref="T:System.UnauthorizedAccessException">
-            Path specified a file that is read-only. 
-            Or Path specified a file that is hidden.
-            Or This operation is not supported on the current platform. 
-            Or Path specified a directory. 
-            Or The caller does not have the required permission.
             </exception>
             <exception cref="T:System.NotSupportedException">
             Path is in an invalid format.
@@ -2457,23 +2433,19 @@
             A provided argument is null or empty.
             </exception>
             <exception cref="T:System.ArgumentException">
-            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            The path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The directory root does not exist.
             </exception>
             <exception cref="T:System.IO.PathTooLongException">
             The specified path, file name, or both exceed the system-defined maximum length.
             </exception>
-            <exception cref="T:System.IO.DirectoryNotFoundException">
-            The specified path is invalid (for example, it is on an unmapped drive).
+            <exception cref="T:System.UnauthorizedAccessException">
+            The caller does not have the required permission.
             </exception>
             <exception cref="T:System.IO.IOException">
             An I/O error occurred while opening the file
-            </exception>
-            <exception cref="T:System.UnauthorizedAccessException">
-            Path specified a file that is read-only. 
-            Or Path specified a file that is hidden.
-            Or This operation is not supported on the current platform. 
-            Or Path specified a directory. 
-            Or The caller does not have the required permission.
             </exception>
             <exception cref="T:System.NotSupportedException">
             Path is in an invalid format.
@@ -3321,6 +3293,71 @@
             that contains contextual information about the source or destination.
             </param>
         </member>
+        <member name="M:WGetNET.HelperClasses.ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(System.String,System.String)">
+            <summary>
+            Throws a <see cref="T:System.ArgumentNullException"/> if the given string is <see langword="null"/> or empty/whitespace.
+            </summary>
+            <param name="arg">
+            The argument to check.
+            </param>
+            <param name="name">
+            The name of the arument.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            The given string is null or empty/whitespace.
+            </exception>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ArgsHelper.ThrowIfObjectIsNull(System.Object,System.String)">
+            <summary>
+            Throws a <see cref="T:System.ArgumentNullException"/> if the given object is <see langword="null"/>.
+            </summary>
+            <param name="arg">
+            The argument to check.
+            </param>
+            <param name="name">
+            The name of the arument.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            The given object is <see langword="null"/>
+            </exception>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(WGetNET.IWinGetObject,System.String)">
+            <summary>
+            Throws a <see cref="T:System.ArgumentNullException"/> if the given winget object is <see langword="null"/> or empty.
+            </summary>
+            <param name="arg">
+            The argument to check.
+            </param>
+            <param name="name">
+            The name of the arument.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            The given winget object is null or empty.
+            </exception>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ArgsHelper.ThrowIfPathIsInvalid(System.String)">
+            <summary>
+            Throws one of the listet exception if the path is invalid or cant be accessed.
+            </summary>
+            <param name="arg">
+            The argument to check.
+            </param>
+            <param name="name">
+            The name of the arument.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            The path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            The directory root does not exist.
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            The specified path, file name, or both exceed the system-defined maximum length.
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            The caller does not have the required permission.
+            </exception>
+        </member>
         <member name="T:WGetNET.HelperClasses.ArrayManager">
             <summary>
             The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.ArrayManager"/> class,
@@ -3499,7 +3536,7 @@
             The specified path, file name, or both exceed the system-defined maximum length.
             </exception>
             <exception cref="T:System.IO.DirectoryNotFoundException">
-            The specified path is invalid (for example, it is on an unmapped drive).
+            The root of the specified path is invalid.
             </exception>
             <exception cref="T:System.IO.IOException">
             An I/O error occurred while opening the file

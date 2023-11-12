@@ -49,15 +49,9 @@ namespace WGetNET.HelperClasses
         /// </exception>
         public static void ExportOutputToFile(string path, ProcessResult result)
         {
-            string? directory = Path.GetDirectoryName(path);
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-
             string outputString = ProcessOutputReader.ExportOutputToString(result);
 
-            File.WriteAllText(path, outputString);
+            WriteTextToFile(path, outputString);
         }
 
         /// <summary>
@@ -100,27 +94,9 @@ namespace WGetNET.HelperClasses
         /// </exception>
         public static async Task ExportOutputToFileAsync(string path, ProcessResult result)
         {
-            string? directory = Path.GetDirectoryName(path);
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-
             string outputString = ProcessOutputReader.ExportOutputToString(result);
 
-#if NETCOREAPP3_1_OR_GREATER
-            await File.WriteAllTextAsync(path, outputString);
-#elif NETSTANDARD2_0
-            // Delete file to recreate it
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-            // Create file and write the string to the stream
-            using StreamWriter fileStream = File.CreateText(path);
-            await fileStream.WriteAsync(outputString);
-            fileStream.Close();
-#endif
+            await WriteTextToFileAsync(path, outputString);
         }
 
         /// <summary>
@@ -135,7 +111,7 @@ namespace WGetNET.HelperClasses
         /// The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
         /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// The root of the specified path is invalid.
         /// </exception>
         /// <exception cref="System.IO.IOException">
         /// An I/O error occurred while opening the file
