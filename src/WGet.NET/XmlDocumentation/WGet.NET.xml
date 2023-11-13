@@ -2454,15 +2454,15 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ImportSource(System.String)">
+        <member name="M:WGetNET.WinGetSourceManager.ImportSourcesFromJson(System.String)">
             <summary>
-            Imports a source into winget.
+            Imports sources into winget from a json string.
             </summary>
             <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json for ONE source.
+            A <see cref="T:System.String"/> containing the json for multiple sources.
             </param>
             <returns>
-            <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
+            <see langword="true"/> if importing all sources was successful and <see langword="false"/> if on or more failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -2481,16 +2481,16 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ImportSourceAsync(System.String)">
+        <member name="M:WGetNET.WinGetSourceManager.ImportSourcesFromJsonAsync(System.String)">
             <summary>
-            Asynchronously imports a source into winget.
+            Asynchronously imports sources into winget from a json string.
             </summary>
             <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json for ONE source.
+            A <see cref="T:System.String"/> containing the json for multiple sources.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
+            The result is <see langword="true"/> if importing all sources was successful and <see langword="false"/> if on or more failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.

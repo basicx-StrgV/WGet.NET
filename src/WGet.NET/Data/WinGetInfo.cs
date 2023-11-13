@@ -4,6 +4,7 @@
 //--------------------------------------------------//
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using WGetNET.HelperClasses;
 
 namespace WGetNET
@@ -38,7 +39,7 @@ namespace WGetNET
         /// <summary>
         /// Gets a list of the winget direcories.
         /// </summary>
-        public List<WinGetInfoEntry> Directories
+        public ReadOnlyCollection<WinGetInfoEntry> Directories
         {
             get
             {
@@ -49,7 +50,7 @@ namespace WGetNET
         /// <summary>
         /// Gets a list of the winget related links.
         /// </summary>
-        public List<WinGetInfoEntry> Links
+        public ReadOnlyCollection<WinGetInfoEntry> Links
         {
             get
             {
@@ -60,7 +61,7 @@ namespace WGetNET
         /// <summary>
         /// Gets a list of the winget admin setting states.
         /// </summary>
-        public List<WinGetAdminOption> AdminSetting
+        public ReadOnlyCollection<WinGetAdminOption> AdminSetting
         {
             get
             {
@@ -99,9 +100,9 @@ namespace WGetNET
 
         private readonly string _versionString;
         private readonly Version _version;
-        private readonly List<WinGetInfoEntry> _directories;
-        private readonly List<WinGetInfoEntry> _links;
-        private readonly List<WinGetAdminOption> _adminSetting;
+        private readonly ReadOnlyCollection<WinGetInfoEntry> _directories;
+        private readonly ReadOnlyCollection<WinGetInfoEntry> _links;
+        private readonly ReadOnlyCollection<WinGetAdminOption> _adminSetting;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetInfo"/> class.
@@ -120,9 +121,9 @@ namespace WGetNET
         {
             _versionString = version;
             _version = VersionParser.Parse(version);
-            _directories = directories;
-            _links = links;
-            _adminSetting = adminSetting;
+            _directories = new ReadOnlyCollection<WinGetInfoEntry>(directories);
+            _links = new ReadOnlyCollection<WinGetInfoEntry>(links);
+            _adminSetting = new ReadOnlyCollection<WinGetAdminOption>(adminSetting);
         }
     }
 }
