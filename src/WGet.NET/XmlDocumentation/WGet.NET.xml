@@ -2698,17 +2698,17 @@
         </member>
         <member name="P:WGetNET.WinGetInfo.Directories">
             <summary>
-            Gets a list of the winget direcories.
+            Gets a collection of the winget direcories.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetInfo.Links">
             <summary>
-            Gets a list of the winget related links.
+            Gets a collection of the winget related links.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetInfo.AdminSetting">
             <summary>
-            Gets a list of the winget admin setting states.
+            Gets a collection of the winget admin setting states.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetInfo.IsEmpty">
@@ -3610,24 +3610,6 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
         <member name="M:WGetNET.HelperClasses.JsonHandler.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -3873,6 +3855,32 @@
         </member>
         <member name="P:WGetNET.Models.SourceModel.Arg">
             <summary>
+            Gets or sets the arg of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SourceModel.Type">
+            <summary>
+            Gets sets the type of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SourceModel.Data">
+            <summary>
+            Gets or sets the data of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SourceModel.Identifier">
+            <summary>
+            Gets or sets the identifier of the source.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Models.SourceModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
+            </summary>
+        </member>
+    </members>
+</doc>
+>
             Gets or sets the arg of the source.
             </summary>
         </member>

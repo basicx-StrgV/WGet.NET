@@ -37,7 +37,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets a list of the winget direcories.
+        /// Gets a collection of the winget direcories.
         /// </summary>
         public ReadOnlyCollection<WinGetInfoEntry> Directories
         {
@@ -48,7 +48,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets a list of the winget related links.
+        /// Gets a collection of the winget related links.
         /// </summary>
         public ReadOnlyCollection<WinGetInfoEntry> Links
         {
@@ -59,7 +59,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets a list of the winget admin setting states.
+        /// Gets a collection of the winget admin setting states.
         /// </summary>
         public ReadOnlyCollection<WinGetAdminOption> AdminSetting
         {
