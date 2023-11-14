@@ -24,24 +24,13 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets the pinned version as a <see cref="System.String"/>.
+        /// Gets the pinned version or version range.
         /// </summary>
-        public string PinnedVersionString
+        public string PinnedVersion
         {
             get
             {
                 return _pinnedVersionString;
-            }
-        }
-
-        /// <summary>
-        /// Gets the pinned version.
-        /// </summary>
-        public Version PinnedVersion
-        {
-            get
-            {
-                return _pinnedVersion;
             }
         }
 
@@ -58,7 +47,6 @@ namespace WGetNET
 
         private readonly string _pinTypeString;
         private readonly string _pinnedVersionString;
-        private readonly Version _pinnedVersion;
         private readonly PinType _pinType;
 
         /// <summary>
@@ -84,8 +72,6 @@ namespace WGetNET
         {
             _pinTypeString = pinType;
             _pinnedVersionString = pinnedVersion;
-
-            _pinnedVersion = VersionParser.Parse(_pinnedVersionString);
 
             _pinType = _pinTypeString.ToUpper() switch
             {
