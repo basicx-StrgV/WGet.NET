@@ -2048,12 +2048,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSource(System.Collections.Generic.List{WGetNET.IWinGetSource})">
+        <member name="M:WGetNET.WinGetSourceManager.AddSource(System.Collections.Generic.IEnumerable{WGetNET.IWinGetSource})">
             <summary>
             Adds multiple new sources to winget (Needs administrator rights).
             </summary>
             <param name="sources">
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects to add.
+            A <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects to add.
             </param>
             <returns>
             <see langword="true"/> if adding all sources was succesfull and <see langword="false"/> if one or more failed.
@@ -2156,7 +2156,7 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.Collections.Generic.List{WGetNET.IWinGetSource})">
+        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.Collections.Generic.IEnumerable{WGetNET.IWinGetSource})">
             <summary>
             Asynchronously adds multiple new sources to winget (Needs administrator rights).
             </summary>
@@ -2164,7 +2164,7 @@
             The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
             </remarks>
             <param name="sources">
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects to add.
+            A <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects to add.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -2683,7 +2683,7 @@
             Generates a valid json string from the provided sources.
             </summary>
             <param name="sources">
-            The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects.
+            The <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects.
             </param>
             <returns>
             A <see cref="T:System.String"/> containing the generated json.
@@ -2932,6 +2932,9 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null or empty.
             </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.Equals(WGetNET.WinGetPackage)">
+            <inheritdoc/>
         </member>
         <member name="T:WGetNET.WinGetPinnedPackage">
             <summary>
@@ -3623,6 +3626,24 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
         <member name="M:WGetNET.HelperClasses.JsonHandler.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -3952,32 +3973,6 @@
         </member>
         <member name="P:WGetNET.Models.SourceModel.Arg">
             <summary>
-            Gets or sets the arg of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Type">
-            <summary>
-            Gets sets the type of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Data">
-            <summary>
-            Gets or sets the data of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Identifier">
-            <summary>
-            Gets or sets the identifier of the source.
-            </summary>
-        </member>
-        <member name="M:WGetNET.Models.SourceModel.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
-            </summary>
-        </member>
-    </members>
-</doc>
->
             Gets or sets the arg of the source.
             </summary>
         </member>

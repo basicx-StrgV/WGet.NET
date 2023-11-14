@@ -10,7 +10,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget package.
     /// </summary>
-    public sealed class WinGetPackage : IWinGetPackage
+    public sealed class WinGetPackage : IWinGetPackage, IEquatable<WinGetPackage>
     {
         /// <inheritdoc/>
         public string Name
@@ -275,6 +275,30 @@ namespace WGetNET
             ArgsHelper.ThrowIfObjectIsNull(sourceName, "sourceName");
 
             return new WinGetPackage(name, id, version, availableVersion, sourceName, hasShortenedId);
+        }
+
+        /// <inheritdoc/>
+        public bool Equals(WinGetPackage? other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (_name.Equals(other.Name) && _id.Equals(other.Id) &&
+                _versionString.Equals(other.VersionString) && _version.Equals(other.Version) &&
+                _availableVersionString.Equals(other.AvailableVersionString) && _availableVersion.Equals(other.AvailableVersion) &&
+                _sourceName.Equals(other.SourceName) && _hasShortenedId.Equals(other.HasShortenedId))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
