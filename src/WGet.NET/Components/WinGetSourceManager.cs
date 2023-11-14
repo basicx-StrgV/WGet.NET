@@ -304,7 +304,7 @@ namespace WGetNET
         /// Adds a new source to winget (Needs administrator rights).
         /// </summary>
         /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> to add.
+        /// The <see cref="WGetNET.IWinGetSource"/> to add.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -322,7 +322,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public bool AddSource(WinGetSource source)
+        public bool AddSource(IWinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
@@ -338,7 +338,7 @@ namespace WGetNET
         /// Adds multiple new sources to winget (Needs administrator rights).
         /// </summary>
         /// <param name="sources">
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects to add.
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.IWinGetSource"/> objects to add.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if adding all sources was succesfull and <see langword="false"/> if one or more failed.
@@ -356,7 +356,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public bool AddSource(List<WinGetSource> sources)
+        public bool AddSource(List<IWinGetSource> sources)
         {
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
@@ -490,7 +490,7 @@ namespace WGetNET
         /// Asynchronously adds a new source to winget (Needs administrator rights).
         /// </summary>
         /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> to add.
+        /// The <see cref="WGetNET.IWinGetSource"/> to add.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -509,7 +509,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> AddSourceAsync(WinGetSource source)
+        public async Task<bool> AddSourceAsync(IWinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
@@ -528,7 +528,7 @@ namespace WGetNET
         /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
         /// </remarks>
         /// <param name="sources">
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects to add.
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.IWinGetSource"/> objects to add.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -547,7 +547,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> AddSourceAsync(List<WinGetSource> sources)
+        public async Task<bool> AddSourceAsync(List<IWinGetSource> sources)
         {
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
@@ -682,7 +682,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
             FileHandler.WriteTextToFile(
-                file, 
+                file,
                 SourcesToJson(
                     GetInstalledSources()));
         }
@@ -733,7 +733,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
             FileHandler.WriteTextToFile(
-                file, 
+                file,
                 SourcesToJson(
                     GetInstalledSources(sourceName)));
         }
@@ -748,7 +748,7 @@ namespace WGetNET
         /// The file for the export.
         /// </param>
         /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> for the export.
+        /// The <see cref="WGetNET.IWinGetSource"/> for the export.
         /// </param>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -781,7 +781,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permission.
         /// </exception>
-        public void ExportSourcesToFile(string file, WinGetSource source)
+        public void ExportSourcesToFile(string file, IWinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
             ArgsHelper.ThrowIfPathIsInvalid(file);
@@ -883,7 +883,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
             await FileHandler.WriteTextToFileAsync(
-                file, 
+                file,
                 SourcesToJson(
                     await GetInstalledSourcesAsync(sourceName)));
         }
@@ -898,7 +898,7 @@ namespace WGetNET
         /// The file for the export.
         /// </param>
         /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> for the export.
+        /// The <see cref="WGetNET.IWinGetSource"/> for the export.
         /// </param>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -931,7 +931,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permission.
         /// </exception>
-        public async Task ExportSourcesToFileAsync(string file, WinGetSource source)
+        public async Task ExportSourcesToFileAsync(string file, IWinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
             ArgsHelper.ThrowIfPathIsInvalid(file);
@@ -1015,7 +1015,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
 #if NETCOREAPP3_1_OR_GREATER
-            List<SourceModel> sources = 
+            List<SourceModel> sources =
                 await JsonHandler.StringToObjectAsync<List<SourceModel>>(jsonString);
 #elif NETSTANDARD2_0
             List<SourceModel> sources = 
@@ -1179,7 +1179,7 @@ namespace WGetNET
         /// Removes a source from winget (Needs administrator rights).
         /// </summary>
         /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> to remove.
+        /// The <see cref="WGetNET.IWinGetSource"/> to remove.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
@@ -1197,7 +1197,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public bool RemoveSources(WinGetSource source)
+        public bool RemoveSources(IWinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
@@ -1259,7 +1259,7 @@ namespace WGetNET
         /// Asynchronously removes a source from winget (Needs administrator rights).
         /// </summary>
         /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> to remove.
+        /// The <see cref="WGetNET.IWinGetSource"/> to remove.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -1278,7 +1278,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> RemoveSourcesAsync(WinGetSource source)
+        public async Task<bool> RemoveSourcesAsync(IWinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
@@ -1291,7 +1291,7 @@ namespace WGetNET
         /// Generates a valid json string from the provided sources.
         /// </summary>
         /// <param name="sources">
-        /// The <see cref="System.Collections.Generic.List{T}"/> of <see cref="WinGetSource"/> objects.
+        /// The <see cref="System.Collections.Generic.List{T}"/> of <see cref="IWinGetSource"/> objects.
         /// </param>
         /// <returns>
         /// A <see cref="System.String"/> containing the generated json.
@@ -1299,7 +1299,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public string SourcesToJson(List<WinGetSource> sources)
+        public string SourcesToJson(List<IWinGetSource> sources)
         {
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
