@@ -210,10 +210,6 @@ namespace WGetNET
         /// <param name="file">
         /// The file for the export.
         /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was succesfull, and <see langword="false"/> if it failed.
-        /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
@@ -276,7 +272,7 @@ namespace WGetNET
         /// Gets all WinGet related data provided by the WinGet info action.
         /// </summary>
         /// <returns>
-        /// A <see cref="WGetNET.WinGetInfo"/> containing winget related information.
+        /// A <see cref="WGetNET.WinGetInfo"/> object containing winget related information.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -299,7 +295,7 @@ namespace WGetNET
                 }
                 else if (CheckWinGetVersion(new Version(1, 5, 441), new Version(1, 5, 441)))
                 {
-                    actionVersionId= InfoActionVersionId.VersionRange3;
+                    actionVersionId = InfoActionVersionId.VersionRange3;
                 }
                 else if (CheckWinGetVersion(new Version(1, 5, 1081)))
                 {
@@ -322,7 +318,8 @@ namespace WGetNET
         /// Asynchronous gets all WinGet related data provided by the WinGet info action.
         /// </summary>
         /// <returns>
-        /// A <see cref="WGetNET.WinGetInfo"/> containing winget related information.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="WGetNET.WinGetInfo"/> object containing winget related information.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -378,9 +375,9 @@ namespace WGetNET
         protected bool CheckWinGetVersion(Version minVersion, Version? maxVersion = null)
         {
             Version winGetVersion = Version;
-            if ((winGetVersion.Major >= minVersion.Major && winGetVersion.Minor >= minVersion.Minor && 
+            if ((winGetVersion.Major >= minVersion.Major && winGetVersion.Minor >= minVersion.Minor &&
                 ((winGetVersion.Minor != minVersion.Minor) || (winGetVersion.Minor == minVersion.Minor && winGetVersion.Build >= minVersion.Build))) &&
-                ((maxVersion == null) || (winGetVersion.Major <= maxVersion.Major && winGetVersion.Minor <= maxVersion.Minor && 
+                ((maxVersion == null) || (winGetVersion.Major <= maxVersion.Major && winGetVersion.Minor <= maxVersion.Minor &&
                 ((winGetVersion.Minor != maxVersion.Minor) || (winGetVersion.Minor == maxVersion.Minor && winGetVersion.Build <= maxVersion.Build)))))
             {
                 return true;

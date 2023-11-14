@@ -795,6 +795,9 @@ namespace WGetNET
         /// <remarks>
         /// If the provided file and/or path does not exist, they will be created.
         /// </remarks>
+        /// <returns>
+        /// The <see cref="System.Threading.Tasks.Task"/> for the action.
+        /// </returns>
         /// <param name="file">The file for the export.</param>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -843,6 +846,9 @@ namespace WGetNET
         /// <remarks>
         /// If the provided file and/or path does not exist, they will be created.
         /// </remarks>
+        /// <returns>
+        /// The <see cref="System.Threading.Tasks.Task"/> for the action.
+        /// </returns>
         /// <param name="file">The file for the export.</param>
         /// <param name="sourceName">The name of the source for the export.</param>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
@@ -894,6 +900,9 @@ namespace WGetNET
         /// <remarks>
         /// If the provided file and/or path does not exist, they will be created.
         /// </remarks>
+        /// <returns>
+        /// The <see cref="System.Threading.Tasks.Task"/> for the action.
+        /// </returns>
         /// <param name="file">
         /// The file for the export.
         /// </param>

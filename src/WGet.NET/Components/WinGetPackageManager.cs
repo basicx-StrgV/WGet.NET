@@ -568,7 +568,7 @@ namespace WGetNET
         /// <summary>
         /// Install a package using winget.
         /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
+        /// <param name="package">The <see cref="WGetNET.IWinGetPackage"/> for the installation.</param>
         /// <returns>
         /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -638,7 +638,7 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously install a package using winget.
         /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
+        /// <param name="package">The <see cref="WGetNET.IWinGetPackage"/> for the installation.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
@@ -710,7 +710,7 @@ namespace WGetNET
         /// <summary>
         /// Uninstall a package using winget.
         /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
+        /// <param name="package">The <see cref="WGetNET.IWinGetPackage"/> for the uninstallation.</param>
         /// <returns>
         /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -780,7 +780,7 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously uninstall a package using winget.
         /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
+        /// <param name="package">The <see cref="WGetNET.IWinGetPackage"/> for the uninstallation.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
@@ -921,7 +921,7 @@ namespace WGetNET
         /// <summary>
         /// Upgrades a package using winget.
         /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
+        /// <param name="package">The <see cref="WGetNET.IWinGetPackage"/> that for the upgrade</param>
         /// <returns>
         /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -991,7 +991,7 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously upgrades a package using winget.
         /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
+        /// <param name="package">The <see cref="WGetNET.IWinGetPackage"/> that for the upgrade</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
@@ -1060,7 +1060,8 @@ namespace WGetNET
         /// The action might run succesfully without upgrading every or even any package.
         /// </remarks>
         /// <returns>
-        /// <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1678,7 +1679,8 @@ namespace WGetNET
         /// <param name="packageId">The id or name of the package to download.</param>
         /// <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
         /// <returns>
-        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1731,7 +1733,8 @@ namespace WGetNET
         /// It will be created if it does not exist.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1759,7 +1762,8 @@ namespace WGetNET
         /// <param name="package">The package to download.</param>
         /// <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
         /// <returns>
-        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1794,7 +1798,8 @@ namespace WGetNET
         /// A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
         /// It will be created if it does not exist.</param>
         /// <returns>
-        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -1868,7 +1873,8 @@ namespace WGetNET
         /// Asynchronously gets a list of all pinned packages.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2088,7 +2094,8 @@ namespace WGetNET
         /// <param name="packageId">The id or name of the package to pin.</param>
         /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2145,7 +2152,8 @@ namespace WGetNET
         /// Please refer to the WinGet documentation for more info about version pinning.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2195,7 +2203,8 @@ namespace WGetNET
         /// <param name="package">The package to pin.</param>
         /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2231,7 +2240,8 @@ namespace WGetNET
         /// Please refer to the WinGet documentation for more info about version pinning.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2440,7 +2450,8 @@ namespace WGetNET
         /// <param name="packageId">The id or name of the package to pin.</param>
         /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2497,7 +2508,8 @@ namespace WGetNET
         /// Please refer to the WinGet documentation for more info about version pinning.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2547,7 +2559,8 @@ namespace WGetNET
         /// <param name="package">The package to pin.</param>
         /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2583,7 +2596,8 @@ namespace WGetNET
         /// Please refer to the WinGet documentation for more info about version pinning.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2697,7 +2711,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package to unpin.</param>
         /// <returns>
-        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2745,7 +2760,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The package to unpin.</param>
         /// <returns>
-        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2857,7 +2873,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package to unpin.</param>
         /// <returns>
-        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2905,7 +2922,8 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The package to unpin.</param>
         /// <returns>
-        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
@@ -2984,7 +3002,8 @@ namespace WGetNET
         /// This will remove all pins and it is not possible to restore them.
         /// </remarks>
         /// <returns>
-        /// <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
