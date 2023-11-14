@@ -210,6 +210,9 @@ namespace WGetNET
         /// <param name="file">
         /// The file for the export.
         /// </param>
+        /// <returns>
+        /// The <see cref="System.Threading.Tasks.Task"/> for the action.
+        /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>

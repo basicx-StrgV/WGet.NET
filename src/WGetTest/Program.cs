@@ -49,6 +49,9 @@ namespace WGetTest
                 bool sourceUpdateStatus = sourceManager.UpdateSources();
                 //bool sourceResetStatus = sourceManager.ResetSources();
 
+                string json = sourceManager.SourcesToJson(sourceList);
+                Console.WriteLine(json);
+
                 sourceManager.ExportSourcesToFile("C:\\Test\\AllSources.json");
                 sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
                 //bool addSuccess = sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");

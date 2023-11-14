@@ -338,7 +338,7 @@ namespace WGetNET
         /// Adds multiple new sources to winget (Needs administrator rights).
         /// </summary>
         /// <param name="sources">
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.IWinGetSource"/> objects to add.
+        /// A <see cref="System.Collections.Generic.IEnumerable{T}"/> of <see cref="WGetNET.IWinGetSource"/> objects to add.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if adding all sources was succesfull and <see langword="false"/> if one or more failed.
@@ -356,7 +356,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public bool AddSource(List<IWinGetSource> sources)
+        public bool AddSource(IEnumerable<IWinGetSource> sources)
         {
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
@@ -528,7 +528,7 @@ namespace WGetNET
         /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
         /// </remarks>
         /// <param name="sources">
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.IWinGetSource"/> objects to add.
+        /// A <see cref="System.Collections.Generic.IEnumerable{T}"/> of <see cref="WGetNET.IWinGetSource"/> objects to add.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -547,7 +547,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> AddSourceAsync(List<IWinGetSource> sources)
+        public async Task<bool> AddSourceAsync(IEnumerable<IWinGetSource> sources)
         {
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
@@ -1300,7 +1300,7 @@ namespace WGetNET
         /// Generates a valid json string from the provided sources.
         /// </summary>
         /// <param name="sources">
-        /// The <see cref="System.Collections.Generic.List{T}"/> of <see cref="IWinGetSource"/> objects.
+        /// The <see cref="System.Collections.Generic.IEnumerable{T}"/> of <see cref="IWinGetSource"/> objects.
         /// </param>
         /// <returns>
         /// A <see cref="System.String"/> containing the generated json.
@@ -1308,7 +1308,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public string SourcesToJson(List<IWinGetSource> sources)
+        public string SourcesToJson(IEnumerable<IWinGetSource> sources)
         {
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 

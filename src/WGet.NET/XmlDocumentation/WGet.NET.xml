@@ -210,8 +210,7 @@
             The file for the export.
             </param>
             <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            The result is <see langword="true"/> if the action was succesfull, and <see langword="false"/> if it failed.
+            The <see cref="T:System.Threading.Tasks.Task"/> for the action.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -254,7 +253,7 @@
             Gets all WinGet related data provided by the WinGet info action.
             </summary>
             <returns>
-            A <see cref="T:WGetNET.WinGetInfo"/> containing winget related information.
+            A <see cref="T:WGetNET.WinGetInfo"/> object containing winget related information.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -269,7 +268,8 @@
             Asynchronous gets all WinGet related data provided by the WinGet info action.
             </summary>
             <returns>
-            A <see cref="T:WGetNET.WinGetInfo"/> containing winget related information.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:WGetNET.WinGetInfo"/> object containing winget related information.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -548,7 +548,7 @@
             <summary>
             Install a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
+            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> for the installation.</param>
             <returns>
             <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
             </returns>
@@ -587,7 +587,7 @@
             <summary>
             Asynchronously install a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
+            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> for the installation.</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
@@ -626,7 +626,7 @@
             <summary>
             Uninstall a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the uninstallation.</param>
+            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> for the uninstallation.</param>
             <returns>
             <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
             </returns>
@@ -665,7 +665,7 @@
             <summary>
             Asynchronously uninstall a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the uninstallation.</param>
+            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> for the uninstallation.</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
@@ -735,7 +735,7 @@
             <summary>
             Upgrades a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> that for the upgrade</param>
+            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> that for the upgrade</param>
             <returns>
             <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
             </returns>
@@ -774,7 +774,7 @@
             <summary>
             Asynchronously upgrades a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> that for the upgrade</param>
+            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> that for the upgrade</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
@@ -816,7 +816,8 @@
             The action might run succesfully without upgrading every or even any package.
             </remarks>
             <returns>
-            <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1126,7 +1127,8 @@
             <param name="packageId">The id or name of the package to download.</param>
             <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
             <returns>
-            <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1152,7 +1154,8 @@
             It will be created if it does not exist.
             </param>
             <returns>
-            <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1175,7 +1178,8 @@
             <param name="package">The package to download.</param>
             <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
             <returns>
-            <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1200,7 +1204,8 @@
             A <see cref="T:System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
             It will be created if it does not exist.</param>
             <returns>
-            <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1239,7 +1244,8 @@
             Asynchronously gets a list of all pinned packages.
             </summary>
             <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/> instances.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1357,7 +1363,8 @@
             <param name="packageId">The id or name of the package to pin.</param>
             <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
             <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1383,7 +1390,8 @@
             Please refer to the WinGet documentation for more info about version pinning.
             </param>
             <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1406,7 +1414,8 @@
             <param name="package">The package to pin.</param>
             <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
             <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1432,7 +1441,8 @@
             Please refer to the WinGet documentation for more info about version pinning.
             </param>
             <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1553,7 +1563,8 @@
             <param name="packageId">The id or name of the package to pin.</param>
             <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
             <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1579,7 +1590,8 @@
             Please refer to the WinGet documentation for more info about version pinning.
             </param>
             <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1602,7 +1614,8 @@
             <param name="package">The package to pin.</param>
             <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
             <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1628,7 +1641,8 @@
             Please refer to the WinGet documentation for more info about version pinning.
             </param>
             <returns>
-            <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1694,7 +1708,8 @@
             </summary>
             <param name="packageId">The id or name of the package to unpin.</param>
             <returns>
-            <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1716,7 +1731,8 @@
             </summary>
             <param name="package">The package to unpin.</param>
             <returns>
-            <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1782,7 +1798,8 @@
             </summary>
             <param name="packageId">The id or name of the package to unpin.</param>
             <returns>
-            <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1804,7 +1821,8 @@
             </summary>
             <param name="package">The package to unpin.</param>
             <returns>
-            <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -1849,7 +1867,8 @@
             This will remove all pins and it is not possible to restore them.
             </remarks>
             <returns>
-            <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -2005,12 +2024,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSource(WGetNET.WinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.AddSource(WGetNET.IWinGetSource)">
             <summary>
             Adds a new source to winget (Needs administrator rights).
             </summary>
             <param name="source">
-            The <see cref="T:WGetNET.WinGetSource"/> to add.
+            The <see cref="T:WGetNET.IWinGetSource"/> to add.
             </param>
             <returns>
             <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -2029,12 +2048,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSource(System.Collections.Generic.List{WGetNET.WinGetSource})">
+        <member name="M:WGetNET.WinGetSourceManager.AddSource(System.Collections.Generic.List{WGetNET.IWinGetSource})">
             <summary>
             Adds multiple new sources to winget (Needs administrator rights).
             </summary>
             <param name="sources">
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects to add.
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects to add.
             </param>
             <returns>
             <see langword="true"/> if adding all sources was succesfull and <see langword="false"/> if one or more failed.
@@ -2112,12 +2131,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(WGetNET.WinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(WGetNET.IWinGetSource)">
             <summary>
             Asynchronously adds a new source to winget (Needs administrator rights).
             </summary>
             <param name="source">
-            The <see cref="T:WGetNET.WinGetSource"/> to add.
+            The <see cref="T:WGetNET.IWinGetSource"/> to add.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -2137,7 +2156,7 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.Collections.Generic.List{WGetNET.WinGetSource})">
+        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.Collections.Generic.List{WGetNET.IWinGetSource})">
             <summary>
             Asynchronously adds multiple new sources to winget (Needs administrator rights).
             </summary>
@@ -2145,7 +2164,7 @@
             The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
             </remarks>
             <param name="sources">
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects to add.
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects to add.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -2283,7 +2302,7 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,WGetNET.WinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,WGetNET.IWinGetSource)">
             <summary>
             Exports the winget sources in json format to a file.
             </summary>
@@ -2294,7 +2313,7 @@
             The file for the export.
             </param>
             <param name="source">
-            The <see cref="T:WGetNET.WinGetSource"/> for the export.
+            The <see cref="T:WGetNET.IWinGetSource"/> for the export.
             </param>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -2335,6 +2354,9 @@
             <remarks>
             If the provided file and/or path does not exist, they will be created.
             </remarks>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/> for the action.
+            </returns>
             <param name="file">The file for the export.</param>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -2375,6 +2397,9 @@
             <remarks>
             If the provided file and/or path does not exist, they will be created.
             </remarks>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/> for the action.
+            </returns>
             <param name="file">The file for the export.</param>
             <param name="sourceName">The name of the source for the export.</param>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
@@ -2409,18 +2434,21 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,WGetNET.WinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,WGetNET.IWinGetSource)">
             <summary>
             Asynchronously exports the winget sources in json format to a file.
             </summary>
             <remarks>
             If the provided file and/or path does not exist, they will be created.
             </remarks>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/> for the action.
+            </returns>
             <param name="file">
             The file for the export.
             </param>
             <param name="source">
-            The <see cref="T:WGetNET.WinGetSource"/> for the export.
+            The <see cref="T:WGetNET.IWinGetSource"/> for the export.
             </param>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -2576,12 +2604,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.RemoveSources(WGetNET.WinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.RemoveSources(WGetNET.IWinGetSource)">
             <summary>
             Removes a source from winget (Needs administrator rights).
             </summary>
             <param name="source">
-            The <see cref="T:WGetNET.WinGetSource"/> to remove.
+            The <see cref="T:WGetNET.IWinGetSource"/> to remove.
             </param>
             <returns>
             <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
@@ -2625,12 +2653,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.RemoveSourcesAsync(WGetNET.WinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.RemoveSourcesAsync(WGetNET.IWinGetSource)">
             <summary>
             Asynchronously removes a source from winget (Needs administrator rights).
             </summary>
             <param name="source">
-            The <see cref="T:WGetNET.WinGetSource"/> to remove.
+            The <see cref="T:WGetNET.IWinGetSource"/> to remove.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -2650,12 +2678,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.SourcesToJson(System.Collections.Generic.List{WGetNET.WinGetSource})">
+        <member name="M:WGetNET.WinGetSourceManager.SourcesToJson(System.Collections.Generic.IEnumerable{WGetNET.IWinGetSource})">
             <summary>
             Generates a valid json string from the provided sources.
             </summary>
             <param name="sources">
-            The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
+            The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects.
             </param>
             <returns>
             A <see cref="T:System.String"/> containing the generated json.
@@ -3595,24 +3623,6 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
         <member name="M:WGetNET.HelperClasses.JsonHandler.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -3942,6 +3952,32 @@
         </member>
         <member name="P:WGetNET.Models.SourceModel.Arg">
             <summary>
+            Gets or sets the arg of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SourceModel.Type">
+            <summary>
+            Gets sets the type of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SourceModel.Data">
+            <summary>
+            Gets or sets the data of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SourceModel.Identifier">
+            <summary>
+            Gets or sets the identifier of the source.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Models.SourceModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
+            </summary>
+        </member>
+    </members>
+</doc>
+>
             Gets or sets the arg of the source.
             </summary>
         </member>
