@@ -2867,6 +2867,19 @@
             <param name="sourceName">Name of the source the package comes from.</param>
             <param name="hasShortenedId">Sets if the id is shortened or not.</param>
         </member>
+        <member name="M:WGetNET.WinGetPackage.#ctor(System.String,System.String,System.String,System.Version,System.String,System.Version,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class.
+            </summary>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="versionString">The current version of the package as a <see cref="T:System.String"/>.</param>
+            <param name="version">The current version of the package.</param>
+            <param name="availableVersion">Heighest available version of the package.</param>
+            <param name="availableVersionString">Heighest available version of the package as a <see cref="T:System.String"/>.</param>
+            <param name="sourceName">Name of the source the package comes from.</param>
+            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
+        </member>
         <member name="M:WGetNET.WinGetPackage.Create(System.String,System.String,System.String,System.String,System.Boolean)">
             <summary>
             Creates a new instance of the <see cref="T:WGetNET.WinGetPackage"/> class and returns it.
@@ -2934,6 +2947,9 @@
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackage.Equals(WGetNET.WinGetPackage)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.WinGetPackage.Clone">
             <inheritdoc/>
         </member>
         <member name="T:WGetNET.WinGetPinnedPackage">
@@ -3005,7 +3021,25 @@
             <param name="availableVersion">Heighest available version of the package.</param>
             <param name="sourceName">Name of the source the package comes from.</param>
         </member>
+        <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.String,System.String,System.String,System.Version,System.String,System.Version,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetPinnedPackage"/> class.
+            </summary>
+            <param name="pinType">Name of the winget pin type for the package.</param>
+            <param name="pinnedVersion"><see cref="T:System.String"/> containing the pinned version for the package.</param>
+            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
+            <param name="name">The name of the package.</param>
+            <param name="id">The id of the package.</param>
+            <param name="versionString">The current version of the package as a <see cref="T:System.String"/>.</param>
+            <param name="version">The current version of the package.</param>
+            <param name="availableVersionString">Heighest available version of the package as a <see cref="T:System.String"/>.</param>
+            <param name="availableVersion">Heighest available version of the package.</param>
+            <param name="sourceName">Name of the source the package comes from.</param>
+        </member>
         <member name="M:WGetNET.WinGetPinnedPackage.Equals(WGetNET.WinGetPinnedPackage)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.WinGetPinnedPackage.Clone">
             <inheritdoc/>
         </member>
         <member name="T:WGetNET.WinGetSource">
@@ -3082,6 +3116,9 @@
             </returns>
         </member>
         <member name="M:WGetNET.WinGetSource.Equals(WGetNET.WinGetSource)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.WinGetSource.Clone">
             <inheritdoc/>
         </member>
         <member name="T:WGetNET.InfoActionVersionId">

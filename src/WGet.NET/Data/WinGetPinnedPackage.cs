@@ -10,7 +10,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget pinned package.
     /// </summary>
-    public sealed class WinGetPinnedPackage : IWinGetPackage, IEquatable<WinGetPinnedPackage>
+    public sealed class WinGetPinnedPackage : IWinGetPackage, IEquatable<WinGetPinnedPackage>, ICloneable
     {
         /// <summary>
         /// Gets the pin type of the package as a <see cref="System.String"/>.
@@ -210,6 +210,56 @@ namespace WGetNET
             _hasShortenedId = hasShortenedId;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WGetNET.WinGetPinnedPackage"/> class.
+        /// </summary>
+        /// <param name="pinType">Name of the winget pin type for the package.</param>
+        /// <param name="pinnedVersion"><see cref="System.String"/> containing the pinned version for the package.</param>
+        /// <param name="hasShortenedId">Sets if the id is shortened or not.</param>
+        /// <param name="name">The name of the package.</param>
+        /// <param name="id">The id of the package.</param>
+        /// <param name="versionString">The current version of the package as a <see cref="System.String"/>.</param>
+        /// <param name="version">The current version of the package.</param>
+        /// <param name="availableVersionString">Heighest available version of the package as a <see cref="System.String"/>.</param>
+        /// <param name="availableVersion">Heighest available version of the package.</param>
+        /// <param name="sourceName">Name of the source the package comes from.</param>
+        internal WinGetPinnedPackage(
+            string pinType,
+            string pinnedVersion,
+            string name,
+            string id,
+            string versionString,
+            Version version,
+            string availableVersionString,
+            Version availableVersion,
+            string sourceName,
+            bool hasShortenedId)
+        {
+            _pinTypeString = pinType;
+            _pinnedVersionString = pinnedVersion;
+
+            _pinType = _pinTypeString.ToUpper() switch
+            {
+                "PINNING" => PinType.Pinning,
+                "BLOCKING" => PinType.Blocking,
+                "GATING" => PinType.Gating,
+                _ => PinType.Pinning,
+            };
+
+            _name = name;
+            _id = id;
+
+            _versionString = versionString;
+            _version = version;
+
+            _availableVersionString = availableVersionString;
+            _availableVersion = availableVersion;
+
+            _sourceName = sourceName;
+
+            _hasShortenedId = hasShortenedId;
+        }
+
         /// <inheritdoc/>
         public bool Equals(WinGetPinnedPackage? other)
         {
@@ -233,6 +283,23 @@ namespace WGetNET
             }
 
             return false;
+        }
+
+        /// <inheritdoc/>
+        public object Clone()
+        {
+            return new WinGetPinnedPackage(
+                    _pinTypeString,
+                    _pinnedVersionString,
+                    _name,
+                    _id,
+                    _versionString,
+                    _version,
+                    _availableVersionString,
+                    _availableVersion,
+                    _sourceName,
+                    _hasShortenedId
+                );
         }
     }
 }

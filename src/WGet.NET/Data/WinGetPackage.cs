@@ -10,7 +10,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget package.
     /// </summary>
-    public sealed class WinGetPackage : IWinGetPackage, IEquatable<WinGetPackage>
+    public sealed class WinGetPackage : IWinGetPackage, IEquatable<WinGetPackage>, ICloneable
     {
         /// <inheritdoc/>
         public string Name
@@ -178,6 +178,33 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="WGetNET.WinGetPackage"/> class.
+        /// </summary>
+        /// <param name="name">The name of the package.</param>
+        /// <param name="id">The id of the package.</param>
+        /// <param name="versionString">The current version of the package as a <see cref="System.String"/>.</param>
+        /// <param name="version">The current version of the package.</param>
+        /// <param name="availableVersion">Heighest available version of the package.</param>
+        /// <param name="availableVersionString">Heighest available version of the package as a <see cref="System.String"/>.</param>
+        /// <param name="sourceName">Name of the source the package comes from.</param>
+        /// <param name="hasShortenedId">Sets if the id is shortened or not.</param>
+        internal WinGetPackage(string name, string id, string versionString, Version version, string availableVersionString, Version availableVersion, string sourceName, bool hasShortenedId)
+        {
+            _name = name;
+            _id = id;
+
+            _versionString = versionString;
+            _version = version;
+
+            _availableVersionString = availableVersionString;
+            _availableVersion = availableVersion;
+
+            _sourceName = sourceName;
+
+            _hasShortenedId = hasShortenedId;
+        }
+
+        /// <summary>
         /// Creates a new instance of the <see cref="WGetNET.WinGetPackage"/> class and returns it.
         /// </summary>
         /// <param name="name">The name of the package.</param>
@@ -299,6 +326,21 @@ namespace WGetNET
             }
 
             return false;
+        }
+
+        /// <inheritdoc/>
+        public object Clone()
+        {
+            return new WinGetPackage(
+                    _name,
+                    _id,
+                    _versionString,
+                    _version,
+                    _availableVersionString,
+                    _availableVersion,
+                    _sourceName,
+                    _hasShortenedId
+                );
         }
     }
 }

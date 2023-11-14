@@ -16,7 +16,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget source.
     /// </summary>
-    public sealed class WinGetSource : IWinGetSource, IEquatable<WinGetSource>
+    public sealed class WinGetSource : IWinGetSource, IEquatable<WinGetSource>, ICloneable
     {
         /// <inheritdoc/>
         public string Name
@@ -95,19 +95,12 @@ namespace WGetNET
         /// <param name="type">Type identifier of the source.</param>
         /// <param name="data">Data of the source source. This field is only used by some sources.</param>
         /// <param name="identifier">The identifier of the package</param>
-        internal WinGetSource(string name, string arg, string? type = null, string? data = null, string? identifier = null)
+        internal WinGetSource(string name, string arg, string type, string identifier, string? data = null)
         {
             _name = name;
             _arg = arg;
-
-            if (type != null)
-            {
-                _type = type;
-            }
-            else
-            {
-                _type = string.Empty;
-            }
+            _type = type;
+            _identifier = identifier;
 
             if (data != null)
             {
@@ -116,15 +109,6 @@ namespace WGetNET
             else
             {
                 _data = string.Empty;
-            }
-
-            if (identifier != null)
-            {
-                _identifier = identifier;
-            }
-            else
-            {
-                _identifier = string.Empty;
             }
         }
 
@@ -148,7 +132,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
-            return new WinGetSource(name, arg, type, null, identifier);
+            return new WinGetSource(name, arg, type, identifier);
         }
 
         /// <summary>
@@ -173,7 +157,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(data, "data");
 
-            return new WinGetSource(name, arg, type, data, identifier);
+            return new WinGetSource(name, arg, type, identifier, data);
         }
 
         /// <summary>
@@ -185,7 +169,7 @@ namespace WGetNET
         /// </returns>
         internal static WinGetSource FromSourceModel(SourceModel model)
         {
-            return new WinGetSource(model.Name, model.Arg, model.Type, model.Data, model.Identifier);
+            return new WinGetSource(model.Name, model.Arg, model.Type, model.Identifier, model.Data);
         }
 
         /// <inheritdoc/>
@@ -208,6 +192,18 @@ namespace WGetNET
             }
 
             return false;
+        }
+
+        /// <inheritdoc/>
+        public object Clone()
+        {
+            return new WinGetSource(
+                    _name,
+                    _arg,
+                    _type,
+                    _identifier,
+                    _data
+                );
         }
     }
 }
