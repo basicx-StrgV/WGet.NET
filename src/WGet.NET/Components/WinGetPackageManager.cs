@@ -79,7 +79,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_searchCmd, packageId);
-            
+
             if (exact)
             {
                 cmd += " --exact";
@@ -582,7 +582,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool InstallPackage(WinGetPackage package)
+        public bool InstallPackage(IWinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -653,7 +653,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> InstallPackageAsync(WinGetPackage package)
+        public async Task<bool> InstallPackageAsync(IWinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -724,7 +724,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool UninstallPackage(WinGetPackage package)
+        public bool UninstallPackage(IWinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -795,7 +795,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> UninstallPackageAsync(WinGetPackage package)
+        public async Task<bool> UninstallPackageAsync(IWinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -935,7 +935,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool UpgradePackage(WinGetPackage package)
+        public bool UpgradePackage(IWinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -1006,7 +1006,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> UpgradePackageAsync(WinGetPackage package)
+        public async Task<bool> UpgradePackageAsync(IWinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -1623,7 +1623,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool Download(WinGetPackage package, string directory)
+        public bool Download(IWinGetPackage package, string directory)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -1659,7 +1659,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool Download(WinGetPackage package, DirectoryInfo directory)
+        public bool Download(IWinGetPackage package, DirectoryInfo directory)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
@@ -1774,7 +1774,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> DownloadAsync(WinGetPackage package, string directory)
+        public async Task<bool> DownloadAsync(IWinGetPackage package, string directory)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -1809,7 +1809,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory)
+        public async Task<bool> DownloadAsync(IWinGetPackage package, DirectoryInfo directory)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
@@ -2034,7 +2034,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool PinAdd(WinGetPackage package, bool blocking = false)
+        public bool PinAdd(IWinGetPackage package, bool blocking = false)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2070,7 +2070,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool PinAdd(WinGetPackage package, string version)
+        public bool PinAdd(IWinGetPackage package, string version)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2210,7 +2210,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false)
+        public async Task<bool> PinAddAsync(IWinGetPackage package, bool blocking = false)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2246,7 +2246,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> PinAddAsync(WinGetPackage package, string version)
+        public async Task<bool> PinAddAsync(IWinGetPackage package, string version)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2386,7 +2386,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool PinAddInstalled(WinGetPackage package, bool blocking = false)
+        public bool PinAddInstalled(IWinGetPackage package, bool blocking = false)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2422,7 +2422,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool PinAddInstalled(WinGetPackage package, string version)
+        public bool PinAddInstalled(IWinGetPackage package, string version)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2562,7 +2562,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, bool blocking = false)
+        public async Task<bool> PinAddInstalledAsync(IWinGetPackage package, bool blocking = false)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2598,7 +2598,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, string version)
+        public async Task<bool> PinAddInstalledAsync(IWinGetPackage package, string version)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2680,7 +2680,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool PinRemove(WinGetPackage package)
+        public bool PinRemove(IWinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2760,7 +2760,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> PinRemoveAsync(WinGetPackage package)
+        public async Task<bool> PinRemoveAsync(IWinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2807,7 +2807,7 @@ namespace WGetNET
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(cmd);
-                
+
                 return result.Success;
             }
             catch (Win32Exception)
@@ -2840,7 +2840,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public bool PinRemoveInstalled(WinGetPackage package)
+        public bool PinRemoveInstalled(IWinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
@@ -2920,7 +2920,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null or empty.
         /// </exception>
-        public async Task<bool> PinRemoveInstalledAsync(WinGetPackage package)
+        public async Task<bool> PinRemoveInstalledAsync(IWinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 

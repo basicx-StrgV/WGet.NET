@@ -544,7 +544,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.IWinGetPackage)">
             <summary>
             Install a package using winget.
             </summary>
@@ -583,7 +583,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.IWinGetPackage)">
             <summary>
             Asynchronously install a package using winget.
             </summary>
@@ -622,7 +622,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.IWinGetPackage)">
             <summary>
             Uninstall a package using winget.
             </summary>
@@ -661,7 +661,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.IWinGetPackage)">
             <summary>
             Asynchronously uninstall a package using winget.
             </summary>
@@ -731,7 +731,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(WGetNET.IWinGetPackage)">
             <summary>
             Upgrades a package using winget.
             </summary>
@@ -770,7 +770,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.IWinGetPackage)">
             <summary>
             Asynchronously upgrades a package using winget.
             </summary>
@@ -1070,7 +1070,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.WinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.IWinGetPackage,System.String)">
             <summary>
             Downloads the installer of a package using winget.
             </summary>
@@ -1093,7 +1093,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.WinGetPackage,System.IO.DirectoryInfo)">
+        <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.IWinGetPackage,System.IO.DirectoryInfo)">
             <summary>
             Downloads the installer of a package using winget.
             </summary>
@@ -1168,7 +1168,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.WinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.IWinGetPackage,System.String)">
             <summary>
             Asynchronously downloads the installer of a package using winget.
             </summary>
@@ -1191,7 +1191,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.WinGetPackage,System.IO.DirectoryInfo)">
+        <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.IWinGetPackage,System.IO.DirectoryInfo)">
             <summary>
             Asynchronously downloads the installer of a package using winget.
             </summary>
@@ -1301,7 +1301,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.WinGetPackage,System.Boolean)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.IWinGetPackage,System.Boolean)">
             <summary>
             Adds a pinned package to winget.
             </summary>
@@ -1324,7 +1324,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.WinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.IWinGetPackage,System.String)">
             <summary>
             Adds a pinned package to winget.
             </summary>
@@ -1399,7 +1399,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.WinGetPackage,System.Boolean)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.IWinGetPackage,System.Boolean)">
             <summary>
             Asynchronously adds a pinned package to winget.
             </summary>
@@ -1422,7 +1422,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.WinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.IWinGetPackage,System.String)">
             <summary>
             Asynchronously adds a pinned package to winget.
             </summary>
@@ -1497,7 +1497,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.Boolean)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.IWinGetPackage,System.Boolean)">
             <summary>
             Adds a pinned installed package to winget.
             </summary>
@@ -1520,7 +1520,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.IWinGetPackage,System.String)">
             <summary>
             Adds a pinned installed package to winget.
             </summary>
@@ -1595,7 +1595,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.Boolean)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.IWinGetPackage,System.Boolean)">
             <summary>
             Asynchronously adds a pinned installed package to winget.
             </summary>
@@ -1618,7 +1618,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.IWinGetPackage,System.String)">
             <summary>
             Asynchronously adds a pinned installed package to winget.
             </summary>
@@ -1666,7 +1666,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinRemove(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.PinRemove(WGetNET.IWinGetPackage)">
             <summary>
             Removes a pinned package from winget.
             </summary>
@@ -1710,7 +1710,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinRemoveAsync(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.PinRemoveAsync(WGetNET.IWinGetPackage)">
             <summary>
             Asynchronously removes a pinned package from winget.
             </summary>
@@ -1754,7 +1754,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalled(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalled(WGetNET.IWinGetPackage)">
             <summary>
             Removes a pinned package from winget.
             </summary>
@@ -1798,7 +1798,7 @@
             A provided argument is null or empty.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalledAsync(WGetNET.WinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalledAsync(WGetNET.IWinGetPackage)">
             <summary>
             Asynchronously removes a pinned package from winget.
             </summary>

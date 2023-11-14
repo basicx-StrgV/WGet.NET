@@ -16,7 +16,7 @@ namespace WGetTest
         {
             Run();
         }
-    
+
         private void Run()
         {
             try
@@ -63,7 +63,11 @@ namespace WGetTest
 
                 //bool upAllresult = connector.UpgradeAllPackages();
 
-                bool downloadResult = connector.Download("7zip.7zip", "C:\\Test");
+                List<WinGetPackage> packageList = connector.SearchPackage("7zip.7zip", "winget");
+                if (packageList.Count > 0)
+                {
+                    bool downloadResult = connector.Download(packageList[0], "C:\\Test");
+                }
 
                 Console.WriteLine(connector.PinAdd("7zip.7zip", true));
                 List<WinGetPinnedPackage> pinnedList1 = connector.GetPinnedPackages();
