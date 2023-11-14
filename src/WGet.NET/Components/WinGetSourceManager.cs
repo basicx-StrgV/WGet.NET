@@ -361,9 +361,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
             bool succes = true;
-            for (int i = 0; i < sources.Count; i++)
+            foreach (IWinGetSource source in sources)
             {
-                if (!AddSource(sources[i]))
+                if (!AddSource(source))
                 {
                     succes = false;
                 }
@@ -552,9 +552,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
             bool succes = true;
-            for (int i = 0; i < sources.Count; i++)
+            foreach (IWinGetSource source in sources)
             {
-                if (!(await AddSourceAsync(sources[i])))
+                if (!(await AddSourceAsync(sources)))
                 {
                     succes = false;
                 }
