@@ -15,11 +15,9 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget source.
     /// </summary>
-    public class WinGetSource: IWinGetObject
+    public sealed class WinGetSource : IWinGetSource
     {
-        /// <summary>
-        /// Gets the name of the source.
-        /// </summary>
+        /// <inheritdoc/>
         public string Name
         {
             get
@@ -28,9 +26,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets the URL/UNC of the source.
-        /// </summary>
+        /// <inheritdoc/>
         public string Arg
         {
             get
@@ -39,12 +35,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets the type of the source.
-        /// </summary>
-        /// <remarks>
-        /// Will only be set on source export.
-        /// </remarks>
+        /// <inheritdoc/>
         public string Type
         {
             get
@@ -53,12 +44,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets the data of the source.
-        /// </summary>
-        /// <remarks>
-        /// Will only be set on source export.
-        /// </remarks>
+        /// <inheritdoc/>
         public string Data
         {
             get
@@ -67,12 +53,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets the identifier of the source.
-        /// </summary>
-        /// <remarks>
-        /// Will only be set on source export.
-        /// </remarks>
+        /// <inheritdoc/>
         public string Identifier
         {
             get
@@ -81,18 +62,16 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets if the object is empty.
-        /// </summary>
+        /// <inheritdoc/>
         [JsonIgnore]
         public bool IsEmpty
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_name) && 
-                    string.IsNullOrWhiteSpace(_arg) && 
-                    string.IsNullOrWhiteSpace(_type) && 
-                    string.IsNullOrWhiteSpace(_data) && 
+                if (string.IsNullOrWhiteSpace(_name) &&
+                    string.IsNullOrWhiteSpace(_arg) &&
+                    string.IsNullOrWhiteSpace(_type) &&
+                    string.IsNullOrWhiteSpace(_data) &&
                     string.IsNullOrWhiteSpace(_identifier))
                 {
                     return true;

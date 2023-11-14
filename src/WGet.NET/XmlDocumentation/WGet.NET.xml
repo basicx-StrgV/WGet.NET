@@ -2980,43 +2980,22 @@
             </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.Name">
-            <summary>
-            Gets the name of the source.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetSource.Arg">
-            <summary>
-            Gets the URL/UNC of the source.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetSource.Type">
-            <summary>
-            Gets the type of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetSource.Data">
-            <summary>
-            Gets the data of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetSource.Identifier">
-            <summary>
-            Gets the identifier of the source.
-            </summary>
-            <remarks>
-            Will only be set on source export.
-            </remarks>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetSource.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:WGetNET.WinGetSource.#ctor(System.String,System.String,System.String,System.String,System.String)">
             <summary>
@@ -3905,6 +3884,36 @@
             If this is true somthing whent wrong in the creation of the package.
             The name of the package will be used for all actions performd with this package.
             </remarks>
+        </member>
+        <member name="T:WGetNET.IWinGetSource">
+            <summary>
+            Represents a winget source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetSource.Name">
+            <summary>
+            Gets the name of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetSource.Arg">
+            <summary>
+            Gets the URL/UNC of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetSource.Type">
+            <summary>
+            Gets the type of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetSource.Data">
+            <summary>
+            Gets the data of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetSource.Identifier">
+            <summary>
+            Gets the identifier of the source.
+            </summary>
         </member>
         <member name="P:WGetNET.Models.ProcessResult.ExitCode">
             <summary>
