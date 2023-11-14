@@ -3005,6 +3005,9 @@
             <param name="availableVersion">Heighest available version of the package.</param>
             <param name="sourceName">Name of the source the package comes from.</param>
         </member>
+        <member name="M:WGetNET.WinGetPinnedPackage.Equals(WGetNET.WinGetPinnedPackage)">
+            <inheritdoc/>
+        </member>
         <member name="T:WGetNET.WinGetSource">
             <summary>
             Represents a winget source.
@@ -3077,6 +3080,9 @@
             <returns>
             The created <see cref="T:WGetNET.WinGetSource"/> instance.
             </returns>
+        </member>
+        <member name="M:WGetNET.WinGetSource.Equals(WGetNET.WinGetSource)">
+            <inheritdoc/>
         </member>
         <member name="T:WGetNET.InfoActionVersionId">
             <summary>

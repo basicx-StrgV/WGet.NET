@@ -9,13 +9,14 @@ using Newtonsoft.Json;
 #endif
 using WGetNET.Models;
 using WGetNET.HelperClasses;
+using System;
 
 namespace WGetNET
 {
     /// <summary>
     /// Represents a winget source.
     /// </summary>
-    public sealed class WinGetSource : IWinGetSource
+    public sealed class WinGetSource : IWinGetSource, IEquatable<WinGetSource>
     {
         /// <inheritdoc/>
         public string Name
@@ -185,6 +186,28 @@ namespace WGetNET
         internal static WinGetSource FromSourceModel(SourceModel model)
         {
             return new WinGetSource(model.Name, model.Arg, model.Type, model.Data, model.Identifier);
+        }
+
+        /// <inheritdoc/>
+        public bool Equals(WinGetSource? other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (_name.Equals(other.Name) && _identifier.Equals(other.Identifier) &&
+                _arg.Equals(other.Arg) && _type.Equals(other.Type) && _data.Equals(other.Data))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
