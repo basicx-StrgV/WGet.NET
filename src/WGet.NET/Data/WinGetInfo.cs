@@ -10,9 +10,9 @@ using WGetNET.HelperClasses;
 namespace WGetNET
 {
     /// <summary>
-    /// Represents WinGet related information.
+    /// Represents winget related information.
     /// </summary>
-    public class WinGetInfo: IWinGetObject
+    public class WinGetInfo : IWinGetObject
     {
         /// <summary>
         /// Gets the version number of the winget installation as a <see cref="System.String"/>.

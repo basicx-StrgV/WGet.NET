@@ -2711,7 +2711,7 @@
         </member>
         <member name="T:WGetNET.WinGetInfo">
             <summary>
-            Represents WinGet related information.
+            Represents winget related information.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetInfo.VersionString">
@@ -2766,7 +2766,7 @@
         </member>
         <member name="T:WGetNET.WinGetInfoEntry">
             <summary>
-            Represents a basic WinGet info entry.
+            Represents a basic winget info entry.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetInfoEntry.Name">
@@ -3897,7 +3897,7 @@
         </member>
         <member name="T:WGetNET.IWinGetObject">
             <summary>
-            Interface for all WinGet related objects.
+            Interface for all winget related objects.
             </summary>
         </member>
         <member name="P:WGetNET.IWinGetObject.IsEmpty">
