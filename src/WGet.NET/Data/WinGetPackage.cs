@@ -10,11 +10,9 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget package.
     /// </summary>
-    public class WinGetPackage: IWinGetObject
+    public sealed class WinGetPackage : IWinGetPackage
     {
-        /// <summary>
-        /// Gets the name of the package.
-        /// </summary>
+        /// <inheritdoc/>
         public string Name
         {
             get
@@ -23,9 +21,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets the id of the package.
-        /// </summary>
+        /// <inheritdoc/>
         public string Id
         {
             get
@@ -34,9 +30,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets the version of the package.
-        /// </summary>
+        /// <inheritdoc/>
         public string VersionString
         {
             get
@@ -45,9 +39,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets the version of the package.
-        /// </summary>
+        /// <inheritdoc/>
         public Version Version
         {
             get
@@ -56,9 +48,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets the newest available version of the package.
-        /// </summary>
+        /// <inheritdoc/>
         public string AvailableVersionString
         {
             get
@@ -67,9 +57,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets the newest available version of the package.
-        /// </summary>
+        /// <inheritdoc/>
         public Version AvailableVersion
         {
             get
@@ -78,9 +66,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets the source name for the package.
-        /// </summary>
+        /// <inheritdoc/>
         public string SourceName
         {
             get
@@ -89,9 +75,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets if id of the package is shortened.
-        /// </summary>
+        /// <inheritdoc/>
         public bool HasShortenedId
         {
             get
@@ -100,13 +84,7 @@ namespace WGetNET
             }
         }
 
-        /// <summary>
-        /// Gets if the package does not provide an id.
-        /// </summary>
-        /// <remarks>
-        /// If this is true somthing whent wrong in the creation of the package.
-        /// The name of the package will be used for all actions performd with this package.
-        /// </remarks>
+        /// <inheritdoc/>
         public bool HasNoId
         {
             get
@@ -127,7 +105,7 @@ namespace WGetNET
         /// A package object counts as empty if it does not contain a id and name.
         /// Because the rest of the information is useless in this state.
         /// </remarks>
-        public virtual bool IsEmpty
+        public bool IsEmpty
         {
             get
             {
@@ -162,10 +140,10 @@ namespace WGetNET
         {
             _name = name;
             _id = id;
-            
+
             _versionString = version;
             _version = VersionParser.Parse(_versionString);
-            
+
             _availableVersionString = availableVersion;
             _availableVersion = VersionParser.Parse(_availableVersionString);
 

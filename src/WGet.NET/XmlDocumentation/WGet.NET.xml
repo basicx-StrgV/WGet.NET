@@ -2782,53 +2782,31 @@
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.Name">
-            <summary>
-            Gets the name of the package.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetPackage.Id">
-            <summary>
-            Gets the id of the package.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetPackage.VersionString">
-            <summary>
-            Gets the version of the package.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetPackage.Version">
-            <summary>
-            Gets the version of the package.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetPackage.AvailableVersionString">
-            <summary>
-            Gets the newest available version of the package.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetPackage.AvailableVersion">
-            <summary>
-            Gets the newest available version of the package.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetPackage.SourceName">
-            <summary>
-            Gets the source name for the package.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetPackage.HasShortenedId">
-            <summary>
-            Gets if id of the package is shortened.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetPackage.HasNoId">
-            <summary>
-            Gets if the package does not provide an id.
-            </summary>
-            <remarks>
-            If this is true somthing whent wrong in the creation of the package.
-            The name of the package will be used for all actions performd with this package.
-            </remarks>
+            <inheritdoc/>
         </member>
         <member name="P:WGetNET.WinGetPackage.IsEmpty">
             <summary>
@@ -2939,18 +2917,49 @@
         </member>
         <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersion">
             <summary>
-            Gets the pinned version as a <see cref="T:System.String"/>.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.PinnedVersionObject">
-            <summary>
-            Gets the pinned version.
+            Gets the pinned version or version range.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPinnedPackage.PinType">
             <summary>
             Gets the pin type of the package.
             </summary>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.VersionString">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.Version">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.AvailableVersionString">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.AvailableVersion">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.SourceName">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.HasShortenedId">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.HasNoId">
+            <inheritdoc/>
+        </member>
+        <member name="P:WGetNET.WinGetPinnedPackage.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+            <remarks>
+            A package object counts as empty if it does not contain a id and name.
+            Because the rest of the information is useless in this state.
+            </remarks>
         </member>
         <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
             <summary>
@@ -3342,9 +3351,6 @@
             <param name="arg">
             The argument to check.
             </param>
-            <param name="name">
-            The name of the arument.
-            </param>
             <exception cref="T:System.ArgumentException">
             The path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
             </exception>
@@ -3610,6 +3616,24 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
         <member name="M:WGetNET.HelperClasses.JsonHandler.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -3828,6 +3852,60 @@
             Gets if the object is empty.
             </summary>
         </member>
+        <member name="T:WGetNET.IWinGetPackage">
+            <summary>
+            Represents a winget package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetPackage.Name">
+            <summary>
+            Gets the name of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetPackage.Id">
+            <summary>
+            Gets the id of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetPackage.VersionString">
+            <summary>
+            Gets the version of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetPackage.Version">
+            <summary>
+            Gets the version of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetPackage.AvailableVersionString">
+            <summary>
+            Gets the newest available version of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetPackage.AvailableVersion">
+            <summary>
+            Gets the newest available version of the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetPackage.SourceName">
+            <summary>
+            Gets the source name for the package.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetPackage.HasShortenedId">
+            <summary>
+            Gets if id of the package is shortened.
+            </summary>
+        </member>
+        <member name="P:WGetNET.IWinGetPackage.HasNoId">
+            <summary>
+            Gets if the package does not provide an id.
+            </summary>
+            <remarks>
+            If this is true somthing whent wrong in the creation of the package.
+            The name of the package will be used for all actions performd with this package.
+            </remarks>
+        </member>
         <member name="P:WGetNET.Models.ProcessResult.ExitCode">
             <summary>
             Gets or sets the exit code of the process.
@@ -3855,32 +3933,6 @@
         </member>
         <member name="P:WGetNET.Models.SourceModel.Arg">
             <summary>
-            Gets or sets the arg of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Type">
-            <summary>
-            Gets sets the type of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Data">
-            <summary>
-            Gets or sets the data of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Identifier">
-            <summary>
-            Gets or sets the identifier of the source.
-            </summary>
-        </member>
-        <member name="M:WGetNET.Models.SourceModel.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
-            </summary>
-        </member>
-    </members>
-</doc>
->
             Gets or sets the arg of the source.
             </summary>
         </member>

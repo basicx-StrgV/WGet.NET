@@ -75,9 +75,6 @@ namespace WGetNET.HelperClasses
         /// <param name="arg">
         /// The argument to check.
         /// </param>
-        /// <param name="name">
-        /// The name of the arument.
-        /// </param>
         /// <exception cref="System.ArgumentException">
         /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
         /// </exception>
@@ -94,7 +91,7 @@ namespace WGetNET.HelperClasses
         {
             // This will indirectly throw other exeption.
             string root = Directory.GetDirectoryRoot(arg);
-            
+
             // Check if the path exists.
             if (!Directory.Exists(root))
             {
