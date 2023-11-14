@@ -26,22 +26,22 @@ namespace WGetNET
         /// <summary>
         /// Gets the pinned version as a <see cref="System.String"/>.
         /// </summary>
-        public string PinnedVersion
+        public string PinnedVersionString
         {
             get
             {
-                return _pinnedVersion;
+                return _pinnedVersionString;
             }
         }
 
         /// <summary>
         /// Gets the pinned version.
         /// </summary>
-        public Version PinnedVersionObject
+        public Version PinnedVersion
         {
             get
             {
-                return _pinnedVersionObject;
+                return _pinnedVersion;
             }
         }
 
@@ -57,8 +57,8 @@ namespace WGetNET
         }
 
         private readonly string _pinTypeString;
-        private readonly string _pinnedVersion;
-        private readonly Version _pinnedVersionObject;
+        private readonly string _pinnedVersionString;
+        private readonly Version _pinnedVersion;
         private readonly PinType _pinType;
 
         /// <summary>
@@ -83,9 +83,9 @@ namespace WGetNET
             bool hasShortenedId) : base(name, id, version, availableVersion, sourceName, hasShortenedId)
         {
             _pinTypeString = pinType;
-            _pinnedVersion = pinnedVersion;
+            _pinnedVersionString = pinnedVersion;
 
-            _pinnedVersionObject = VersionParser.Parse(_pinnedVersion);
+            _pinnedVersion = VersionParser.Parse(_pinnedVersionString);
 
             _pinType = _pinTypeString.ToUpper() switch
             {
