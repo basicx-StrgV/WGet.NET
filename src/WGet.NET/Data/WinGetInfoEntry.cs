@@ -78,6 +78,12 @@ namespace WGetNET
             }
         }
 
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return _name;
+        }
+
         /// <summary>
         /// Checks if the content is possibly shortened.
         /// </summary>

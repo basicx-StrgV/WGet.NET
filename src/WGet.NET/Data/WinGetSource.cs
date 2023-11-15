@@ -205,5 +205,11 @@ namespace WGetNET
                     _data
                 );
         }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return _name;
+        }
     }
 }

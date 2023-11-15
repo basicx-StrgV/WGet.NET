@@ -2832,6 +2832,9 @@
             <param name="name">The name of the info entry.</param>
             <param name="content">The content of the info entry.</param>
         </member>
+        <member name="M:WGetNET.WinGetInfoEntry.ToString">
+            <inheritdoc/>
+        </member>
         <member name="M:WGetNET.WinGetInfoEntry.CheckShortenedContent(System.String)">
             <summary>
             Checks if the content is possibly shortened.
@@ -3024,6 +3027,9 @@
         <member name="M:WGetNET.WinGetPackage.Clone">
             <inheritdoc/>
         </member>
+        <member name="M:WGetNET.WinGetPackage.ToString">
+            <inheritdoc/>
+        </member>
         <member name="T:WGetNET.WinGetPinnedPackage">
             <summary>
             Represents a winget pinned package.
@@ -3114,6 +3120,9 @@
         <member name="M:WGetNET.WinGetPinnedPackage.Clone">
             <inheritdoc/>
         </member>
+        <member name="M:WGetNET.WinGetPinnedPackage.ToString">
+            <inheritdoc/>
+        </member>
         <member name="T:WGetNET.WinGetSource">
             <summary>
             Represents a winget source.
@@ -3191,6 +3200,9 @@
             <inheritdoc/>
         </member>
         <member name="M:WGetNET.WinGetSource.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.WinGetSource.ToString">
             <inheritdoc/>
         </member>
         <member name="T:WGetNET.InfoActionVersionId">
@@ -3741,6 +3753,24 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
         <member name="M:WGetNET.HelperClasses.JsonHandler.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -3918,6 +3948,52 @@
             The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadSingleDirectoryEntry(System.String[],System.Int32)">
+            <summary>
+            Reads a single directory entry from the winget info output.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <param name="index">The index of the directory entry.</param>
+            <returns>
+            A <see cref="T:WGetNET.WinGetDirectory"/> instance if the action was successful, or null if it failed. 
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDirectories(System.String[])">
+            <summary>
+            Reads all directories from the winget info output.
+            </summary>
+            <remarks>
+            The first output entry needs to be the first directory entry.
+            </remarks>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetDirectory"/> objects.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadLinks(System.String[])">
+            <summary>
+            Reads all links from the winget info output.
+            </summary>
+            <remarks>
+            The first output entry needs to be the first link entry.
+            </remarks>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetLink"/> objects.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadAdminSettings(System.String[])">
+            <summary>
+            Reads all admin options from the winget info output.
+            </summary>
+            <remarks>
+            The first output entry needs to be the first admin option entry.
+            </remarks>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminOption"/> objects.
+            </returns>
+        </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ExportOutputToString(WGetNET.Models.ProcessResult)">
             <summary>
             Writes the export result to a <see cref="T:System.String"/>.
@@ -4070,32 +4146,6 @@
         </member>
         <member name="P:WGetNET.Models.SourceModel.Arg">
             <summary>
-            Gets or sets the arg of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Type">
-            <summary>
-            Gets sets the type of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Data">
-            <summary>
-            Gets or sets the data of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Identifier">
-            <summary>
-            Gets or sets the identifier of the source.
-            </summary>
-        </member>
-        <member name="M:WGetNET.Models.SourceModel.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
-            </summary>
-        </member>
-    </members>
-</doc>
->
             Gets or sets the arg of the source.
             </summary>
         </member>

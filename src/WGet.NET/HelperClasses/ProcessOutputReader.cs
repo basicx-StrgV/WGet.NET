@@ -585,6 +585,14 @@ namespace WGetNET.HelperClasses
             return new WinGetInfo(version, directories, links, adminSetting);
         }
 
+        /// <summary>
+        /// Reads a single directory entry from the winget info output.
+        /// </summary>
+        /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+        /// <param name="index">The index of the directory entry.</param>
+        /// <returns>
+        /// A <see cref="WinGetDirectory"/> instance if the action was successful, or null if it failed. 
+        /// </returns>
         private static WinGetDirectory? ReadSingleDirectoryEntry(string[] output, int index)
         {
             string[] entry = output[index].Split(':');
@@ -595,6 +603,16 @@ namespace WGetNET.HelperClasses
             return null;
         }
 
+        /// <summary>
+        /// Reads all directories from the winget info output.
+        /// </summary>
+        /// <remarks>
+        /// The first output entry needs to be the first directory entry.
+        /// </remarks>
+        /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetDirectory"/> objects.
+        /// </returns>
         private static List<WinGetDirectory> ReadDirectories(string[] output)
         {
             List<WinGetDirectory> directories = new();
@@ -659,6 +677,16 @@ namespace WGetNET.HelperClasses
             return directories;
         }
 
+        /// <summary>
+        /// Reads all links from the winget info output.
+        /// </summary>
+        /// <remarks>
+        /// The first output entry needs to be the first link entry.
+        /// </remarks>
+        /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetLink"/> objects.
+        /// </returns>
         private static List<WinGetLink> ReadLinks(string[] output)
         {
             List<WinGetLink> links = new();
@@ -699,6 +727,16 @@ namespace WGetNET.HelperClasses
             return links;
         }
 
+        /// <summary>
+        /// Reads all admin options from the winget info output.
+        /// </summary>
+        /// <remarks>
+        /// The first output entry needs to be the first admin option entry.
+        /// </remarks>
+        /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetAdminOption"/> objects.
+        /// </returns>
         private static List<WinGetAdminOption> ReadAdminSettings(string[] output)
         {
             List<WinGetAdminOption> adminSetting = new();

@@ -301,5 +301,11 @@ namespace WGetNET
                     _hasShortenedId
                 );
         }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return $"{_name} {_versionString}";
+        }
     }
 }
