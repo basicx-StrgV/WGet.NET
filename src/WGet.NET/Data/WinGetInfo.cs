@@ -12,7 +12,7 @@ namespace WGetNET
     /// <summary>
     /// Represents winget related information.
     /// </summary>
-    public class WinGetInfo : IWinGetObject
+    public sealed class WinGetInfo : IWinGetObject
     {
         /// <summary>
         /// Gets the version number of the winget installation as a <see cref="System.String"/>.
@@ -39,7 +39,7 @@ namespace WGetNET
         /// <summary>
         /// Gets a collection of the winget direcories.
         /// </summary>
-        public ReadOnlyCollection<WinGetInfoEntry> Directories
+        public ReadOnlyCollection<WinGetDirectory> Directories
         {
             get
             {
@@ -50,7 +50,7 @@ namespace WGetNET
         /// <summary>
         /// Gets a collection of the winget related links.
         /// </summary>
-        public ReadOnlyCollection<WinGetInfoEntry> Links
+        public ReadOnlyCollection<WinGetLink> Links
         {
             get
             {
@@ -94,14 +94,14 @@ namespace WGetNET
         {
             get
             {
-                return new WinGetInfo("", new List<WinGetInfoEntry>(), new List<WinGetInfoEntry>(), new List<WinGetAdminOption>());
+                return new WinGetInfo("", new List<WinGetDirectory>(), new List<WinGetLink>(), new List<WinGetAdminOption>());
             }
         }
 
         private readonly string _versionString;
         private readonly Version _version;
-        private readonly ReadOnlyCollection<WinGetInfoEntry> _directories;
-        private readonly ReadOnlyCollection<WinGetInfoEntry> _links;
+        private readonly ReadOnlyCollection<WinGetDirectory> _directories;
+        private readonly ReadOnlyCollection<WinGetLink> _links;
         private readonly ReadOnlyCollection<WinGetAdminOption> _adminSetting;
 
         /// <summary>
@@ -117,12 +117,12 @@ namespace WGetNET
         /// <param name="adminSetting">
         /// <see cref="System.Collections.Generic.List{T}"/> of info entries containing the WinGet admin setting states.
         /// </param>
-        internal WinGetInfo(string version, List<WinGetInfoEntry> directories, List<WinGetInfoEntry> links, List<WinGetAdminOption> adminSetting)
+        internal WinGetInfo(string version, List<WinGetDirectory> directories, List<WinGetLink> links, List<WinGetAdminOption> adminSetting)
         {
             _versionString = version;
             _version = VersionParser.Parse(version);
-            _directories = new ReadOnlyCollection<WinGetInfoEntry>(directories);
-            _links = new ReadOnlyCollection<WinGetInfoEntry>(links);
+            _directories = new ReadOnlyCollection<WinGetDirectory>(directories);
+            _links = new ReadOnlyCollection<WinGetLink>(links);
             _adminSetting = new ReadOnlyCollection<WinGetAdminOption>(adminSetting);
         }
     }

@@ -2709,6 +2709,42 @@
             <param name="name">The name of the settings entry.</param>
             <param name="content">The content of the settings entry.</param>
         </member>
+        <member name="T:WGetNET.WinGetDirectory">
+            <summary>
+            Represents a winget directory in the info set.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetDirectory.Info">
+            <summary>
+            Gets the direcory info instance.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetDirectory.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetDirectory"/> class.
+            </summary>
+            <param name="name">The name of the settings entry.</param>
+            <param name="content">The content of the settings entry.</param>
+        </member>
+        <member name="M:WGetNET.WinGetDirectory.CreateDirectoryInfo">
+            <summary>
+            Creates and returns a <see cref="T:System.IO.DirectoryInfo"/> instance from the content of the class.
+            </summary>
+            <returns>
+            The created <see cref="T:System.IO.DirectoryInfo"/> instance.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetDirectory.TrimLastDirectory(System.String)">
+            <summary>
+            Removes the last directory from the given path.
+            </summary>
+            <param name="path">
+            <see cref="T:System.String"/> containing the path that sould be trimed.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the trimed path.
+            </returns>
+        </member>
         <member name="T:WGetNET.WinGetInfo">
             <summary>
             Represents winget related information.
@@ -2749,7 +2785,7 @@
             Gets an empty instance of this object.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetInfo.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetInfoEntry},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
+        <member name="M:WGetNET.WinGetInfo.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetDirectory},System.Collections.Generic.List{WGetNET.WinGetLink},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.
             </summary>
@@ -2802,6 +2838,42 @@
             </summary>
             <returns>
             <see langword="true"/> if the content is shortened or <see langword="false"/> if not.
+            </returns>
+        </member>
+        <member name="T:WGetNET.WinGetLink">
+            <summary>
+            Represents a winget link in the info set.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetLink.Url">
+            <summary>
+            Gets the url.
+            </summary>
+        </member>
+        <member name="M:WGetNET.WinGetLink.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetLink"/> class.
+            </summary>
+            <param name="name">The name of the settings entry.</param>
+            <param name="content">The content of the settings entry.</param>
+        </member>
+        <member name="M:WGetNET.WinGetLink.CreateUri">
+            <summary>
+            Creates and returns a <see cref="T:System.Uri"/> instance from the content of the class.
+            </summary>
+            <returns>
+            The created <see cref="T:System.Uri"/> instance.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetLink.TrimLastUriPart(System.String)">
+            <summary>
+            Removes the last part from the given URI.
+            </summary>
+            <param name="uri">
+            <see cref="T:System.String"/> containing the URI that sould be trimed.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the trimed URI.
             </returns>
         </member>
         <member name="T:WGetNET.WinGetPackage">
@@ -3669,24 +3741,6 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
         <member name="M:WGetNET.HelperClasses.JsonHandler.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -3801,7 +3855,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToWingetData(System.String[],WGetNET.InfoActionVersionId)">
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToWingetInfo(System.String[],WGetNET.InfoActionVersionId)">
             <summary>
             Creates a <see cref="T:WGetNET.WinGetInfo"/> object from the winget output.
             </summary>
@@ -4016,6 +4070,32 @@
         </member>
         <member name="P:WGetNET.Models.SourceModel.Arg">
             <summary>
+            Gets or sets the arg of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SourceModel.Type">
+            <summary>
+            Gets sets the type of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SourceModel.Data">
+            <summary>
+            Gets or sets the data of the source.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SourceModel.Identifier">
+            <summary>
+            Gets or sets the identifier of the source.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Models.SourceModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
+            </summary>
+        </member>
+    </members>
+</doc>
+>
             Gets or sets the arg of the source.
             </summary>
         </member>

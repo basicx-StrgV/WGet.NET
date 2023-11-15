@@ -305,7 +305,7 @@ namespace WGetNET
                     actionVersionId = InfoActionVersionId.VersionRange4;
                 }
 
-                return ProcessOutputReader.ToWingetData(result.Output, actionVersionId);
+                return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
             }
             catch (Win32Exception)
             {
@@ -352,7 +352,7 @@ namespace WGetNET
                     actionVersionId = InfoActionVersionId.VersionRange4;
                 }
 
-                return ProcessOutputReader.ToWingetData(result.Output, actionVersionId);
+                return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
             }
             catch (Win32Exception)
             {

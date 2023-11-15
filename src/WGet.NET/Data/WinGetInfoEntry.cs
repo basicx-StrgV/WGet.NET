@@ -7,7 +7,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a basic winget info entry.
     /// </summary>
-    public class WinGetInfoEntry : IWinGetObject
+    public abstract class WinGetInfoEntry : IWinGetObject
     {
         /// <summary>
         /// Gets the name of this info entry.
@@ -66,7 +66,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="name">The name of the info entry.</param>
         /// <param name="content">The content of the info entry.</param>
-        internal WinGetInfoEntry(string name, string content)
+        private protected WinGetInfoEntry(string name, string content)
         {
             _name = name;
             _content = content;

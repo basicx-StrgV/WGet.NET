@@ -7,7 +7,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget admin settings entry.
     /// </summary>
-    public class WinGetAdminOption: WinGetInfoEntry
+    public sealed class WinGetAdminOption : WinGetInfoEntry
     {
         /// <summary>
         /// Gets if the admin setting is enabled.
@@ -30,7 +30,7 @@ namespace WGetNET
         /// </summary>
         /// <param name="name">The name of the settings entry.</param>
         /// <param name="content">The content of the settings entry.</param>
-        internal WinGetAdminOption(string name, string content): base(name, content)
+        internal WinGetAdminOption(string name, string content) : base(name, content)
         {
             // Handled by base
         }

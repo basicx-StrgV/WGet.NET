@@ -106,7 +106,7 @@ namespace WGetNET.HelperClasses
                 if (isShortenedId)
                 {
                     // Remove the char at the end of the shortened id.
-                    packageId = packageId.Remove(packageId.Length-1);
+                    packageId = packageId.Remove(packageId.Length - 1);
                 }
 
 #if NETCOREAPP3_1_OR_GREATER
@@ -160,7 +160,7 @@ namespace WGetNET.HelperClasses
                     packageSourceName = output[i].Substring(columnList[4]).Trim();
 #endif
                 }
-                else if((action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length == 4)
+                else if ((action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length == 4)
                 {
 #if NETCOREAPP3_1_OR_GREATER
                     packageSourceName = output[i][columnList[3]..].Trim();
@@ -168,7 +168,7 @@ namespace WGetNET.HelperClasses
                     packageSourceName = output[i].Substring(columnList[3]).Trim();
 #endif
                 }
-                else if ((action == PackageAction.SearchBySource || action == PackageAction.InstalledListBySource) 
+                else if ((action == PackageAction.SearchBySource || action == PackageAction.InstalledListBySource)
                     && !string.IsNullOrWhiteSpace(sourceName) && sourceName != null)
                 {
                     // "sourceName" source name cant't be null here because of the following check "!string.IsNullOrWhiteSpace(sourceName)".
@@ -368,6 +368,7 @@ namespace WGetNET.HelperClasses
         }
         //------------------------------------------------------------------------------------------------------------
 
+        //---To WinGet info-------------------------------------------------------------------------------------------
         /// <summary>
         /// Creates a <see cref="WGetNET.WinGetInfo"/> object from the winget output.
         /// </summary>
@@ -376,7 +377,7 @@ namespace WGetNET.HelperClasses
         /// <returns>
         /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        public static WinGetInfo ToWingetData(string[] output, InfoActionVersionId actionVersionId)
+        public static WinGetInfo ToWingetInfo(string[] output, InfoActionVersionId actionVersionId)
         {
             if (output.Length <= 0)
             {
@@ -453,8 +454,8 @@ namespace WGetNET.HelperClasses
                 return WinGetInfo.Empty;
             }
 
-            List<WinGetInfoEntry> directories = new();
-            WinGetInfoEntry? logs = ReadSingleEntry(output, 7);
+            List<WinGetDirectory> directories = new();
+            WinGetDirectory? logs = ReadSingleDirectoryEntry(output, 7);
             if (logs != null)
             {
                 directories.Add(logs);
@@ -463,7 +464,7 @@ namespace WGetNET.HelperClasses
             // Remove unnasesary range from output
             output = ArrayManager.RemoveRange(output, 0, 11);
 
-            List<WinGetInfoEntry> links = ReadLinks(output);
+            List<WinGetLink> links = ReadLinks(output);
 
             return new WinGetInfo(version, directories, links, new List<WinGetAdminOption>());
         }
@@ -485,14 +486,14 @@ namespace WGetNET.HelperClasses
                 return WinGetInfo.Empty;
             }
 
-            List<WinGetInfoEntry> directories = new();
-            WinGetInfoEntry? logs = ReadSingleEntry(output, 7);
+            List<WinGetDirectory> directories = new();
+            WinGetDirectory? logs = ReadSingleDirectoryEntry(output, 7);
             if (logs != null)
             {
                 directories.Add(logs);
             }
 
-            WinGetInfoEntry? userSettings = ReadSingleEntry(output, 9);
+            WinGetDirectory? userSettings = ReadSingleDirectoryEntry(output, 9);
             if (userSettings != null)
             {
                 directories.Add(userSettings);
@@ -501,7 +502,7 @@ namespace WGetNET.HelperClasses
             // Remove unnasesary range from output
             output = ArrayManager.RemoveRange(output, 0, 13);
 
-            List<WinGetInfoEntry> links = ReadLinks(output);
+            List<WinGetLink> links = ReadLinks(output);
 
             return new WinGetInfo(version, directories, links, new List<WinGetAdminOption>());
         }
@@ -523,14 +524,14 @@ namespace WGetNET.HelperClasses
                 return WinGetInfo.Empty;
             }
 
-            List<WinGetInfoEntry> directories = new();
-            WinGetInfoEntry? logs = ReadSingleEntry(output, 7);
+            List<WinGetDirectory> directories = new();
+            WinGetDirectory? logs = ReadSingleDirectoryEntry(output, 7);
             if (logs != null)
             {
                 directories.Add(logs);
             }
 
-            WinGetInfoEntry? userSettings = ReadSingleEntry(output, 9);
+            WinGetDirectory? userSettings = ReadSingleDirectoryEntry(output, 9);
             if (userSettings != null)
             {
                 directories.Add(userSettings);
@@ -539,7 +540,7 @@ namespace WGetNET.HelperClasses
             // Remove unnasesary range from output
             output = ArrayManager.RemoveRange(output, 0, 13);
 
-            List<WinGetInfoEntry> links = ReadLinks(output);
+            List<WinGetLink> links = ReadLinks(output);
 
             // Remove links area and admin settings header range from output
             output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
@@ -569,12 +570,12 @@ namespace WGetNET.HelperClasses
             // Remove unnasesary range from output
             output = ArrayManager.RemoveRange(output, 0, 9);
 
-            List<WinGetInfoEntry> directories = ReadDirectories(output);
+            List<WinGetDirectory> directories = ReadDirectories(output);
 
             // Remove directories area and links header range from output
             output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
 
-            List<WinGetInfoEntry> links = ReadLinks(output);
+            List<WinGetLink> links = ReadLinks(output);
 
             // Remove links area and admin settings header range from output
             output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
@@ -584,19 +585,19 @@ namespace WGetNET.HelperClasses
             return new WinGetInfo(version, directories, links, adminSetting);
         }
 
-        private static WinGetInfoEntry? ReadSingleEntry(string[] output, int index)
+        private static WinGetDirectory? ReadSingleDirectoryEntry(string[] output, int index)
         {
             string[] entry = output[index].Split(':');
             if (entry.Length == 2)
             {
-                return new WinGetInfoEntry(entry[0].Trim(), entry[1].Trim());
+                return new WinGetDirectory(entry[0].Trim(), entry[1].Trim());
             }
             return null;
         }
 
-        private static List<WinGetInfoEntry> ReadDirectories(string[] output)
+        private static List<WinGetDirectory> ReadDirectories(string[] output)
         {
-            List<WinGetInfoEntry> directories = new();
+            List<WinGetDirectory> directories = new();
 
             StringBuilder nameBuilder = new();
             StringBuilder directoryBuilder = new();
@@ -652,15 +653,15 @@ namespace WGetNET.HelperClasses
                     directoryBuilder.Append(directoryEntry[j].Trim());
                 }
 
-                directories.Add(new WinGetInfoEntry(nameBuilder.ToString(), directoryBuilder.ToString()));
+                directories.Add(new WinGetDirectory(nameBuilder.ToString(), directoryBuilder.ToString()));
             }
 
             return directories;
         }
 
-        private static List<WinGetInfoEntry> ReadLinks(string[] output)
+        private static List<WinGetLink> ReadLinks(string[] output)
         {
-            List<WinGetInfoEntry> links = new();
+            List<WinGetLink> links = new();
 
             StringBuilder nameBuilder = new();
             for (int i = 0; i < output.Length; i++)
@@ -692,7 +693,7 @@ namespace WGetNET.HelperClasses
                     nameBuilder.Append(linksEntry[j].Trim());
                 }
 
-                links.Add(new WinGetInfoEntry(nameBuilder.ToString(), link));
+                links.Add(new WinGetLink(nameBuilder.ToString(), link));
             }
 
             return links;
@@ -719,6 +720,7 @@ namespace WGetNET.HelperClasses
 
             return adminSetting;
         }
+        //------------------------------------------------------------------------------------------------------------
 
         //---Other----------------------------------------------------------------------------------------------------
         /// <summary>
@@ -763,7 +765,7 @@ namespace WGetNET.HelperClasses
         private static int[] GetColumnList(string line, bool isPinnedPackageTable = false)
         {
             int[] columns = new int[0];
-            
+
             bool checkForColumn = true;
             for (int i = 0; i < line.Length; i++)
             {
