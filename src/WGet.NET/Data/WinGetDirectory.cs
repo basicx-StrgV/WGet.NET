@@ -2,6 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System;
 using System.IO;
 
 namespace WGetNET
@@ -44,13 +45,27 @@ namespace WGetNET
         {
             try
             {
+                string path = _content;
+
+#if NETCOREAPP3_1_OR_GREATER
+                if (path.StartsWith('%'))
+                {
+                    path = Environment.ExpandEnvironmentVariables(path);
+                }
+#elif NETSTANDARD2_0
+                if (path.StartsWith("%"))
+                {
+                    path = Environment.ExpandEnvironmentVariables(path);
+                }
+#endif
+
                 if (!_hasShortenedContent)
                 {
-                    return new DirectoryInfo(_content);
+                    return new DirectoryInfo(path);
                 }
 
                 // Fallback for an incomplete directory path.
-                return new DirectoryInfo(TrimLastDirectory(_content));
+                return new DirectoryInfo(TrimLastDirectory(path));
             }
             catch
             {
