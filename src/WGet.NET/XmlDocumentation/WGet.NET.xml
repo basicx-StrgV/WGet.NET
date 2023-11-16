@@ -4,6 +4,42 @@
         <name>WGet.NET</name>
     </assembly>
     <members>
+        <member name="T:WGetNET.Abstractions.WinGetInfoEntry">
+            <summary>
+            Represents a basic winget info entry.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Abstractions.WinGetInfoEntry.EntryName">
+            <summary>
+            Gets the name of the info entry.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Abstractions.WinGetInfoEntry.RawContent">
+            <summary>
+            Gets the raw content of the info entry.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Abstractions.WinGetInfoEntry.HasShortenedContent">
+            <summary>
+            Gets if content of the package is shortened.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Abstractions.WinGetInfoEntry.IsEmpty">
+            <summary>
+            Gets if the object is empty.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Abstractions.WinGetInfoEntry.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Abstractions.WinGetInfoEntry"/> class.
+            </summary>
+            <param name="entryName">The name of the info entry.</param>
+            <param name="rawContent">The content of the info entry.</param>
+            <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
+        </member>
+        <member name="M:WGetNET.Abstractions.WinGetInfoEntry.ToString">
+            <inheritdoc/>
+        </member>
         <member name="T:WGetNET.ProcessManager">
             <summary>
             The <see langword="internal"/> class <see cref="T:WGetNET.ProcessManager"/> 
@@ -2702,12 +2738,24 @@
             Gets if the admin setting is enabled.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetAdminOption.#ctor(System.String,System.String)">
+        <member name="M:WGetNET.WinGetAdminOption.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetAdminOption"/> class.
             </summary>
-            <param name="name">The name of the settings entry.</param>
-            <param name="content">The content of the settings entry.</param>
+            <param name="entryName">The name of the settings entry.</param>
+            <param name="rawContent">The content of the settings entry.</param>
+            <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
+            <param name="isEnabled">Idicator for the setting state.</param>
+        </member>
+        <member name="M:WGetNET.WinGetAdminOption.Create(System.String,System.String)">
+            <summary>
+            Creates a new <see cref="T:WGetNET.WinGetAdminOption"/> instance.
+            </summary>
+            <param name="entryName">The name of the settings entry.</param>
+            <param name="rawContent">The content of the settings entry.</param>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetAdminOption"/> instance or <see langword="null"/> if parsing the data failed.
+            </returns>
         </member>
         <member name="T:WGetNET.WinGetDirectory">
             <summary>
@@ -2719,14 +2767,26 @@
             Gets the direcory info instance.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetDirectory.#ctor(System.String,System.String)">
+        <member name="M:WGetNET.WinGetDirectory.#ctor(System.String,System.String,System.Boolean,System.IO.DirectoryInfo)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetDirectory"/> class.
             </summary>
-            <param name="name">The name of the settings entry.</param>
-            <param name="content">The content of the settings entry.</param>
+            <param name="entryName">The name of the settings entry.</param>
+            <param name="rawContent">The content of the settings entry.</param>
+            <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
+            <param name="directoryInfo"><see cref="T:System.IO.DirectoryInfo"/> instance that was created from the raw content.</param>
         </member>
-        <member name="M:WGetNET.WinGetDirectory.CreateDirectoryInfo">
+        <member name="M:WGetNET.WinGetDirectory.Create(System.String,System.String)">
+            <summary>
+            Creates a new <see cref="T:WGetNET.WinGetDirectory"/> instance.
+            </summary>
+            <param name="entryName">The name of the settings entry.</param>
+            <param name="rawContent">The content of the settings entry.</param>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetDirectory"/> instance or <see langword="null"/> if parsing the data failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetDirectory.CreateDirectoryInfo(System.String,System.Boolean)">
             <summary>
             Creates and returns a <see cref="T:System.IO.DirectoryInfo"/> instance from the content of the class.
             </summary>
@@ -2800,49 +2860,6 @@
             <see cref="T:System.Collections.Generic.List`1"/> of info entries containing the WinGet admin setting states.
             </param>
         </member>
-        <member name="T:WGetNET.WinGetInfoEntry">
-            <summary>
-            Represents a basic winget info entry.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfoEntry.Name">
-            <summary>
-            Gets the name of this info entry.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfoEntry.Content">
-            <summary>
-            Gets the content of this info entry.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfoEntry.HasShortenedContent">
-            <summary>
-            Gets if content of the package is shortened.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGetInfoEntry.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-        </member>
-        <member name="M:WGetNET.WinGetInfoEntry.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetInfoEntry"/> class.
-            </summary>
-            <param name="name">The name of the info entry.</param>
-            <param name="content">The content of the info entry.</param>
-        </member>
-        <member name="M:WGetNET.WinGetInfoEntry.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="M:WGetNET.WinGetInfoEntry.CheckShortenedContent(System.String)">
-            <summary>
-            Checks if the content is possibly shortened.
-            </summary>
-            <returns>
-            <see langword="true"/> if the content is shortened or <see langword="false"/> if not.
-            </returns>
-        </member>
         <member name="T:WGetNET.WinGetLink">
             <summary>
             Represents a winget link in the info set.
@@ -2853,14 +2870,26 @@
             Gets the url.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetLink.#ctor(System.String,System.String)">
+        <member name="M:WGetNET.WinGetLink.#ctor(System.String,System.String,System.Boolean,System.Uri)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetLink"/> class.
             </summary>
-            <param name="name">The name of the settings entry.</param>
-            <param name="content">The content of the settings entry.</param>
+            <param name="entryName">The name of the settings entry.</param>
+            <param name="rawContent">The content of the settings entry.</param>
+            <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
+            <param name="url"><see cref="T:System.Uri"/> instance containing the url.</param>
         </member>
-        <member name="M:WGetNET.WinGetLink.CreateUri">
+        <member name="M:WGetNET.WinGetLink.Create(System.String,System.String)">
+            <summary>
+            Creates a new <see cref="T:WGetNET.WinGetLink"/> instance.
+            </summary>
+            <param name="entryName">The name of the settings entry.</param>
+            <param name="rawContent">The content of the settings entry.</param>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetLink"/> instance or <see langword="null"/> if parsing the data failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetLink.CreateUri(System.String,System.Boolean)">
             <summary>
             Creates and returns a <see cref="T:System.Uri"/> instance from the content of the class.
             </summary>
@@ -4005,6 +4034,14 @@
             The <see cref="T:System.String"/> containing the export result.
             </returns>
         </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CheckShortenedValue(System.String)">
+            <summary>
+            Checks if the given value is possibly shortened.
+            </summary>
+            <returns>
+            <see langword="true"/> if the value is shortened or <see langword="false"/> if not.
+            </returns>
+        </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnList(System.String,System.Boolean)">
             <summary>
             Gets all column start indexes from the input line.
@@ -4015,14 +4052,6 @@
             <param name="isPinnedPackageTable">Activate workaround for the pinned package list.</param>
             <returns>
             A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CheckShortenedId(System.String)">
-            <summary>
-            Checks if the package id is possibly shortened.
-            </summary>
-            <returns>
-            <see langword="true"/> if the package id is shortened or <see langword="false"/> if not.
             </returns>
         </member>
         <member name="T:WGetNET.IWinGetObject">

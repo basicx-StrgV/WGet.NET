@@ -3,6 +3,8 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
+using WGetNET.Abstractions;
+using WGetNET.HelperClasses;
 
 namespace WGetNET
 {
@@ -14,7 +16,7 @@ namespace WGetNET
         /// <summary>
         /// Gets the url.
         /// </summary>
-        public Uri? Url
+        public Uri Url
         {
             get
             {
@@ -22,16 +24,46 @@ namespace WGetNET
             }
         }
 
-        private readonly Uri? _url;
+        private readonly Uri _url;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetLink"/> class.
         /// </summary>
-        /// <param name="name">The name of the settings entry.</param>
-        /// <param name="content">The content of the settings entry.</param>
-        internal WinGetLink(string name, string content) : base(name, content)
+        /// <param name="entryName">The name of the settings entry.</param>
+        /// <param name="rawContent">The content of the settings entry.</param>
+        /// <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
+        /// <param name="url"><see cref="System.Uri"/> instance containing the url.</param>
+        private WinGetLink(string entryName, string rawContent, bool hasShortenedContent, Uri url) : base(entryName, rawContent, hasShortenedContent)
         {
-            _url = CreateUri();
+            _url = url;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="WGetNET.WinGetLink"/> instance.
+        /// </summary>
+        /// <param name="entryName">The name of the settings entry.</param>
+        /// <param name="rawContent">The content of the settings entry.</param>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetLink"/> instance or <see langword="null"/> if parsing the data failed.
+        /// </returns>
+        internal static WinGetLink? Create(string entryName, string rawContent)
+        {
+            bool hasShortenedContent = ProcessOutputReader.CheckShortenedValue(rawContent);
+
+            if (hasShortenedContent)
+            {
+                // Remove the char at the end of the shortened content.
+                rawContent = rawContent.Remove(rawContent.Length - 1);
+            }
+
+            Uri? url = CreateUri(rawContent, hasShortenedContent);
+
+            if (url == null)
+            {
+                return null;
+            }
+
+            return new WinGetLink(entryName, rawContent, hasShortenedContent, url);
         }
 
         /// <summary>
@@ -40,16 +72,16 @@ namespace WGetNET
         /// <returns>
         /// The created <see cref="System.Uri"/> instance.
         /// </returns>
-        private Uri? CreateUri()
+        private static Uri? CreateUri(string rawContent, bool hasShortenedContent)
         {
-            if (!_hasShortenedContent)
+            if (!hasShortenedContent)
             {
-                Uri.TryCreate(_content, UriKind.Absolute, out Uri? uri);
+                Uri.TryCreate(rawContent, UriKind.Absolute, out Uri? uri);
                 return uri;
             }
 
             // Fallback for an incomplete uri.
-            Uri.TryCreate(TrimLastUriPart(_content), UriKind.Absolute, out Uri? shortenedUri);
+            Uri.TryCreate(TrimLastUriPart(rawContent), UriKind.Absolute, out Uri? shortenedUri);
             return shortenedUri;
         }
 
@@ -62,7 +94,7 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> containing the trimed URI.
         /// </returns>
-        private string TrimLastUriPart(string uri)
+        private static string TrimLastUriPart(string uri)
         {
             int lastSeparatorIndex = -1;
             for (int i = 0; i < uri.Length; i++)

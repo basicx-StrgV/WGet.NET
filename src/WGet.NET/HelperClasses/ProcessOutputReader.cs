@@ -102,7 +102,7 @@ namespace WGetNET.HelperClasses
 #endif
 
                 // Check if the id is shortened
-                bool isShortenedId = CheckShortenedId(packageId);
+                bool isShortenedId = CheckShortenedValue(packageId);
                 if (isShortenedId)
                 {
                     // Remove the char at the end of the shortened id.
@@ -316,7 +316,7 @@ namespace WGetNET.HelperClasses
                 // End of workaround
 
                 // Check if the id is shortened
-                bool isShortenedId = CheckShortenedId(packageId);
+                bool isShortenedId = CheckShortenedValue(packageId);
                 if (isShortenedId)
                 {
                     // Remove the char at the end of the shortened id.
@@ -598,7 +598,7 @@ namespace WGetNET.HelperClasses
             string[] entry = output[index].Split(':');
             if (entry.Length == 2)
             {
-                return new WinGetDirectory(entry[0].Trim(), entry[1].Trim());
+                return WinGetDirectory.Create(entry[0].Trim(), entry[1].Trim());
             }
             return null;
         }
@@ -671,7 +671,11 @@ namespace WGetNET.HelperClasses
                     directoryBuilder.Append(directoryEntry[j].Trim());
                 }
 
-                directories.Add(new WinGetDirectory(nameBuilder.ToString(), directoryBuilder.ToString()));
+                WinGetDirectory? winGetDirectory = WinGetDirectory.Create(nameBuilder.ToString(), directoryBuilder.ToString());
+                if (winGetDirectory != null)
+                {
+                    directories.Add(winGetDirectory);
+                }
             }
 
             return directories;
@@ -721,7 +725,11 @@ namespace WGetNET.HelperClasses
                     nameBuilder.Append(linksEntry[j].Trim());
                 }
 
-                links.Add(new WinGetLink(nameBuilder.ToString(), link));
+                WinGetLink? winGetLink = WinGetLink.Create(nameBuilder.ToString(), link);
+                if (winGetLink != null)
+                {
+                    links.Add(winGetLink);
+                }
             }
 
             return links;
@@ -752,7 +760,11 @@ namespace WGetNET.HelperClasses
 
                 if (settingsEntry.Length == 2)
                 {
-                    adminSetting.Add(new WinGetAdminOption(settingsEntry[0].Trim(), settingsEntry[1].Trim()));
+                    WinGetAdminOption? adminOption = WinGetAdminOption.Create(settingsEntry[0].Trim(), settingsEntry[1].Trim());
+                    if (adminOption != null)
+                    {
+                        adminSetting.Add(adminOption);
+                    }
                 }
             }
 
@@ -786,6 +798,30 @@ namespace WGetNET.HelperClasses
             {
                 return string.Empty;
             }
+        }
+
+        /// <summary>
+        /// Checks if the given value is possibly shortened.
+        /// </summary>
+        /// <returns>
+        /// <see langword="true"/> if the value is shortened or <see langword="false"/> if not.
+        /// </returns>
+        public static bool CheckShortenedValue(string value)
+        {
+            // Char 8230 is at the end of the shortened id if UTF-8 encoding is used.
+#if NETCOREAPP3_1_OR_GREATER
+            if (value.EndsWith((char)8230))
+            {
+                return true;
+            }
+#elif NETSTANDARD2_0
+            if (value.EndsWith(((char)8230).ToString()))
+            {
+                return true;
+            }
+#endif
+
+            return false;
         }
         //------------------------------------------------------------------------------------------------------------
 
@@ -825,30 +861,6 @@ namespace WGetNET.HelperClasses
             }
 
             return columns;
-        }
-
-        /// <summary>
-        /// Checks if the package id is possibly shortened.
-        /// </summary>
-        /// <returns>
-        /// <see langword="true"/> if the package id is shortened or <see langword="false"/> if not.
-        /// </returns>
-        private static bool CheckShortenedId(string id)
-        {
-            // Char 8230 is at the end of the shortened id if UTF-8 encoding is used.
-#if NETCOREAPP3_1_OR_GREATER
-            if (id.EndsWith((char)8230))
-            {
-                return true;
-            }
-#elif NETSTANDARD2_0
-            if (id.EndsWith(((char)8230).ToString()))
-            {
-                return true;
-            }
-#endif
-
-            return false;
         }
         //------------------------------------------------------------------------------------------------------------
     }

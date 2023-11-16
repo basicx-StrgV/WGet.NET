@@ -4,6 +4,8 @@
 //--------------------------------------------------//
 using System;
 using System.IO;
+using WGetNET.Abstractions;
+using WGetNET.HelperClasses;
 
 namespace WGetNET
 {
@@ -15,7 +17,7 @@ namespace WGetNET
         /// <summary>
         /// Gets the direcory info instance.
         /// </summary>
-        public DirectoryInfo? Info
+        public DirectoryInfo Info
         {
             get
             {
@@ -23,16 +25,46 @@ namespace WGetNET
             }
         }
 
-        private readonly DirectoryInfo? _directoryInfo;
+        private readonly DirectoryInfo _directoryInfo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetDirectory"/> class.
         /// </summary>
-        /// <param name="name">The name of the settings entry.</param>
-        /// <param name="content">The content of the settings entry.</param>
-        internal WinGetDirectory(string name, string content) : base(name, content)
+        /// <param name="entryName">The name of the settings entry.</param>
+        /// <param name="rawContent">The content of the settings entry.</param>
+        /// <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
+        /// <param name="directoryInfo"><see cref="System.IO.DirectoryInfo"/> instance that was created from the raw content.</param>
+        private WinGetDirectory(string entryName, string rawContent, bool hasShortenedContent, DirectoryInfo directoryInfo) : base(entryName, rawContent, hasShortenedContent)
         {
-            _directoryInfo = CreateDirectoryInfo();
+            _directoryInfo = directoryInfo;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="WGetNET.WinGetDirectory"/> instance.
+        /// </summary>
+        /// <param name="entryName">The name of the settings entry.</param>
+        /// <param name="rawContent">The content of the settings entry.</param>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetDirectory"/> instance or <see langword="null"/> if parsing the data failed.
+        /// </returns>
+        internal static WinGetDirectory? Create(string entryName, string rawContent)
+        {
+            bool hasShortenedContent = ProcessOutputReader.CheckShortenedValue(rawContent);
+
+            if (hasShortenedContent)
+            {
+                // Remove the char at the end of the shortened content.
+                rawContent = rawContent.Remove(rawContent.Length - 1);
+            }
+
+            DirectoryInfo? directoryInfo = CreateDirectoryInfo(rawContent, hasShortenedContent);
+
+            if (directoryInfo == null)
+            {
+                return null;
+            }
+
+            return new WinGetDirectory(entryName, rawContent, hasShortenedContent, directoryInfo);
         }
 
         /// <summary>
@@ -41,11 +73,11 @@ namespace WGetNET
         /// <returns>
         /// The created <see cref="System.IO.DirectoryInfo"/> instance.
         /// </returns>
-        private DirectoryInfo? CreateDirectoryInfo()
+        private static DirectoryInfo? CreateDirectoryInfo(string rawContent, bool hasShortenedContent)
         {
             try
             {
-                string path = _content;
+                string path = rawContent;
 
 #if NETCOREAPP3_1_OR_GREATER
                 if (path.StartsWith('%'))
@@ -59,7 +91,7 @@ namespace WGetNET
                 }
 #endif
 
-                if (!_hasShortenedContent)
+                if (!hasShortenedContent)
                 {
                     return new DirectoryInfo(path);
                 }
@@ -82,7 +114,7 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> containing the trimed path.
         /// </returns>
-        private string TrimLastDirectory(string path)
+        private static string TrimLastDirectory(string path)
         {
             int lastSeparatorIndex = -1;
             for (int i = 0; i < path.Length; i++)
