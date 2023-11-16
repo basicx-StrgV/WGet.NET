@@ -2762,6 +2762,21 @@
             Represents a winget directory in the info set.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetDirectory.Exists">
+            <summary>
+            Gets a value indicating whether the directory exists.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetDirectory.Name">
+            <summary>
+            Gets the name of the directory.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetDirectory.FullName">
+            <summary>
+            Gets the full path of the directory.
+            </summary>
+        </member>
         <member name="P:WGetNET.WinGetDirectory.Info">
             <summary>
             Gets the direcory info instance.

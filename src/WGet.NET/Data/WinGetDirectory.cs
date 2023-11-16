@@ -15,6 +15,39 @@ namespace WGetNET
     public sealed class WinGetDirectory : WinGetInfoEntry
     {
         /// <summary>
+        /// Gets a value indicating whether the directory exists.
+        /// </summary>
+        public bool Exists
+        {
+            get
+            {
+                return _directoryInfo.Exists;
+            }
+        }
+
+        /// <summary>
+        /// Gets the name of the directory.
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                return _directoryInfo.Name;
+            }
+        }
+
+        /// <summary>
+        /// Gets the full path of the directory.
+        /// </summary>
+        public string FullName
+        {
+            get
+            {
+                return _directoryInfo.FullName;
+            }
+        }
+
+        /// <summary>
         /// Gets the direcory info instance.
         /// </summary>
         public DirectoryInfo Info
