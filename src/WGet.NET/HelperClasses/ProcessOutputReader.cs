@@ -755,8 +755,12 @@ namespace WGetNET.HelperClasses
         {
             List<WinGetAdminOption> adminSetting = new();
 
+            AdminOptionBuilder adminOptionBuilder = new AdminOptionBuilder();
+
             for (int i = 0; i < output.Length; i++)
             {
+                adminOptionBuilder.Clear();
+
                 if (string.IsNullOrWhiteSpace(output[i]))
                 {
                     break;
@@ -766,7 +770,10 @@ namespace WGetNET.HelperClasses
 
                 if (settingsEntry.Length == 2)
                 {
-                    WinGetAdminOption? adminOption = WinGetAdminOption.Create(settingsEntry[0].Trim(), settingsEntry[1].Trim());
+                    adminOptionBuilder.AddEntryName(settingsEntry[0].Trim());
+                    adminOptionBuilder.AddRawContent(settingsEntry[1].Trim());
+
+                    WinGetAdminOption? adminOption = adminOptionBuilder.GetInstance();
                     if (adminOption != null)
                     {
                         adminSetting.Add(adminOption);
