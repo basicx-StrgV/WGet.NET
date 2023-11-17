@@ -59,9 +59,9 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Gets a collection of the winget admin setting states.
+        /// Gets a collection of the winget admin settings.
         /// </summary>
-        public ReadOnlyCollection<WinGetAdminOption> AdminSetting
+        public ReadOnlyCollection<WinGetAdminOption> AdminSettings
         {
             get
             {

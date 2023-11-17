@@ -62,6 +62,42 @@
             Cleares all added data from the builder.
             </summary>
         </member>
+        <member name="T:WGetNET.Builder.AdminOptionBuilder">
+            <summary>
+            Builder to create a new <see cref="T:WGetNET.WinGetAdminOption"/> instance.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Builder.AdminOptionBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.AdminOptionBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Builder.AdminOptionBuilder.AddEntryName(System.String)">
+            <summary>
+            Addes the entry name for the winget info entry.
+            </summary>
+            <param name="entryName">The name of the info entry.</param>
+        </member>
+        <member name="M:WGetNET.Builder.AdminOptionBuilder.AddRawContent(System.String)">
+            <summary>
+            Adds the raw content of the winget info entry.
+            </summary>
+            <remarks>
+            The data will be parsed to the content of the direcory entry.
+            </remarks>
+            <param name="rawContent">The raw data of the info entry as a <see cref="T:System.String"/></param>
+        </member>
+        <member name="M:WGetNET.Builder.AdminOptionBuilder.GetInstance">
+            <summary>
+            Returns a <see cref="T:WGetNET.WinGetAdminOption"/> instance from data provided to the builder.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetAdminOption"/> instance, or <see langword="null"/> if the provided data failed to be parsed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Builder.AdminOptionBuilder.Clear">
+            <inheritdoc/>
+        </member>
         <member name="T:WGetNET.Builder.DirectoryBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetDirectory"/> instance.
@@ -3046,7 +3082,7 @@
         </member>
         <member name="P:WGetNET.WinGetAdminOption.IsEnabled">
             <summary>
-            Gets if the admin setting is enabled.
+            Gets if the admin option is enabled.
             </summary>
         </member>
         <member name="M:WGetNET.WinGetAdminOption.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
@@ -3057,16 +3093,6 @@
             <param name="rawContent">The content of the settings entry.</param>
             <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
             <param name="isEnabled">Idicator for the setting state.</param>
-        </member>
-        <member name="M:WGetNET.WinGetAdminOption.Create(System.String,System.String)">
-            <summary>
-            Creates a new <see cref="T:WGetNET.WinGetAdminOption"/> instance.
-            </summary>
-            <param name="entryName">The name of the settings entry.</param>
-            <param name="rawContent">The content of the settings entry.</param>
-            <returns>
-            The created <see cref="T:WGetNET.WinGetAdminOption"/> instance or <see langword="null"/> if parsing the data failed.
-            </returns>
         </member>
         <member name="T:WGetNET.WinGetDirectory">
             <summary>
@@ -3127,9 +3153,9 @@
             Gets a collection of the winget related links.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetInfo.AdminSetting">
+        <member name="P:WGetNET.WinGetInfo.AdminSettings">
             <summary>
-            Gets a collection of the winget admin setting states.
+            Gets a collection of the winget admin settings.
             </summary>
         </member>
         <member name="P:WGetNET.WinGetInfo.IsEmpty">
