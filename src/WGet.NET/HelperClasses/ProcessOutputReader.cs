@@ -614,6 +614,8 @@ namespace WGetNET.HelperClasses
 
             for (int i = 0; i < output.Length; i++)
             {
+                directoryBuilder.Clear();
+
                 if (string.IsNullOrWhiteSpace(output[i]))
                 {
                     break;
@@ -693,8 +695,13 @@ namespace WGetNET.HelperClasses
             List<WinGetLink> links = new();
 
             StringBuilder nameBuilder = new();
+
+            LinkBuilder linkBuilder = new LinkBuilder();
+
             for (int i = 0; i < output.Length; i++)
             {
+                linkBuilder.Clear();
+
                 if (string.IsNullOrWhiteSpace(output[i]))
                 {
                     break;
@@ -703,9 +710,9 @@ namespace WGetNET.HelperClasses
                 string[] linksEntry = ArrayManager.RemoveEmptyEntries(output[i].Split((char)32));
 
 #if NETCOREAPP3_1_OR_GREATER
-                string link = linksEntry[^1].Trim();
+                linkBuilder.AddRawContent(linksEntry[^1].Trim());
 #elif NETSTANDARD2_0
-                string link = linksEntry[linksEntry.Length - 1].Trim();
+                linkBuilder.AddRawContent(linksEntry[linksEntry.Length - 1].Trim());
 #endif
 
                 // Remove link from entry, so it only contains the name
@@ -722,7 +729,9 @@ namespace WGetNET.HelperClasses
                     nameBuilder.Append(linksEntry[j].Trim());
                 }
 
-                WinGetLink? winGetLink = WinGetLink.Create(nameBuilder.ToString(), link);
+                linkBuilder.AddEntryName(nameBuilder.ToString());
+
+                WinGetLink? winGetLink = linkBuilder.GetInstance();
                 if (winGetLink != null)
                 {
                     links.Add(winGetLink);

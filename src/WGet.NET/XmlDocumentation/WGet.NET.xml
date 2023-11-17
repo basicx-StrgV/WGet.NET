@@ -119,6 +119,63 @@
             A <see cref="T:System.String"/> containing the trimed path.
             </returns>
         </member>
+        <member name="T:WGetNET.Builder.LinkBuilder">
+            <summary>
+            Builder to create a new <see cref="T:WGetNET.WinGetLink"/> instance.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Builder.LinkBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.LinkBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Builder.LinkBuilder.AddEntryName(System.String)">
+            <summary>
+            Addes the entry name for the winget info entry.
+            </summary>
+            <param name="entryName">The name of the info entry.</param>
+        </member>
+        <member name="M:WGetNET.Builder.LinkBuilder.AddRawContent(System.String)">
+            <summary>
+            Adds the raw content of the winget info entry.
+            </summary>
+            <remarks>
+            The data will be parsed to the content of the direcory entry.
+            </remarks>
+            <param name="rawContent">The raw data of the info entry as a <see cref="T:System.String"/></param>
+        </member>
+        <member name="M:WGetNET.Builder.LinkBuilder.GetInstance">
+            <summary>
+            Returns a <see cref="T:WGetNET.WinGetLink"/> instance from data provided to the builder.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetLink"/> instance, or <see langword="null"/> if the provided data failed to be parsed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Builder.LinkBuilder.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.Builder.LinkBuilder.CreateUri(System.String,System.Boolean)">
+            <summary>
+            Creates and returns a <see cref="T:System.Uri"/> instance from the raw content.
+            </summary>
+            <param name="rawContent"><see cref="T:System.String"/> containing the raw data that should get parsed.</param>
+            <param name="hasShortenedContent">Indcates if the information in the raw content is shortened.</param>
+            <returns>
+            The created <see cref="T:System.Uri"/> instance.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Builder.LinkBuilder.TrimLastUriPart(System.String)">
+            <summary>
+            Removes the last part from the given URI.
+            </summary>
+            <param name="uri">
+            <see cref="T:System.String"/> containing the URI that sould be trimed.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the trimed URI.
+            </returns>
+        </member>
         <member name="T:WGetNET.Builder.PackageBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetPackage"/> instance.
@@ -3118,35 +3175,6 @@
             <param name="rawContent">The content of the settings entry.</param>
             <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
             <param name="url"><see cref="T:System.Uri"/> instance containing the url.</param>
-        </member>
-        <member name="M:WGetNET.WinGetLink.Create(System.String,System.String)">
-            <summary>
-            Creates a new <see cref="T:WGetNET.WinGetLink"/> instance.
-            </summary>
-            <param name="entryName">The name of the settings entry.</param>
-            <param name="rawContent">The content of the settings entry.</param>
-            <returns>
-            The created <see cref="T:WGetNET.WinGetLink"/> instance or <see langword="null"/> if parsing the data failed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetLink.CreateUri(System.String,System.Boolean)">
-            <summary>
-            Creates and returns a <see cref="T:System.Uri"/> instance from the content of the class.
-            </summary>
-            <returns>
-            The created <see cref="T:System.Uri"/> instance.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetLink.TrimLastUriPart(System.String)">
-            <summary>
-            Removes the last part from the given URI.
-            </summary>
-            <param name="uri">
-            <see cref="T:System.String"/> containing the URI that sould be trimed.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the trimed URI.
-            </returns>
         </member>
         <member name="T:WGetNET.WinGetPackage">
             <summary>
