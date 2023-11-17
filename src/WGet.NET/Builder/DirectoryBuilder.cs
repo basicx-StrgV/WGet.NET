@@ -5,7 +5,6 @@
 using System;
 using System.IO;
 using WGetNET.Abstractions;
-using WGetNET.HelperClasses;
 
 namespace WGetNET.Builder
 {
@@ -45,7 +44,7 @@ namespace WGetNET.Builder
         /// <param name="rawContent">The raw data of the info entry as a <see cref="System.String"/></param>
         public void AddRawContent(string rawContent)
         {
-            _hasShortenedContent = ProcessOutputReader.CheckShortenedValue(rawContent);
+            _hasShortenedContent = CheckShortenedValue(rawContent);
 
             if (_hasShortenedContent)
             {

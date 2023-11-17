@@ -62,6 +62,14 @@
             Cleares all added data from the builder.
             </summary>
         </member>
+        <member name="M:WGetNET.Abstractions.WinGetObjectBuilder`1.CheckShortenedValue(System.String)">
+            <summary>
+            Checks if the given value is possibly shortened.
+            </summary>
+            <returns>
+            <see langword="true"/> if the value is shortened or <see langword="false"/> if not.
+            </returns>
+        </member>
         <member name="T:WGetNET.Builder.AdminOptionBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetAdminOption"/> instance.
@@ -4288,14 +4296,6 @@
             </param>
             <returns>
             The <see cref="T:System.String"/> containing the export result.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CheckShortenedValue(System.String)">
-            <summary>
-            Checks if the given value is possibly shortened.
-            </summary>
-            <returns>
-            <see langword="true"/> if the value is shortened or <see langword="false"/> if not.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnList(System.String,System.Boolean)">

@@ -812,30 +812,6 @@ namespace WGetNET.HelperClasses
                 return string.Empty;
             }
         }
-
-        /// <summary>
-        /// Checks if the given value is possibly shortened.
-        /// </summary>
-        /// <returns>
-        /// <see langword="true"/> if the value is shortened or <see langword="false"/> if not.
-        /// </returns>
-        public static bool CheckShortenedValue(string value)
-        {
-            // Char 8230 is at the end of the shortened id if UTF-8 encoding is used.
-#if NETCOREAPP3_1_OR_GREATER
-            if (value.EndsWith((char)8230))
-            {
-                return true;
-            }
-#elif NETSTANDARD2_0
-            if (value.EndsWith(((char)8230).ToString()))
-            {
-                return true;
-            }
-#endif
-
-            return false;
-        }
         //------------------------------------------------------------------------------------------------------------
 
         //---Helper---------------------------------------------------------------------------------------------------

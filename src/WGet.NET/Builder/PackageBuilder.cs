@@ -52,7 +52,7 @@ namespace WGetNET.Builder
         /// </param>
         public void AddId(string id)
         {
-            _hasShortenedId = ProcessOutputReader.CheckShortenedValue(id);
+            _hasShortenedId = CheckShortenedValue(id);
             if (_hasShortenedId)
             {
                 // Remove the char at the end of the shortened id.
