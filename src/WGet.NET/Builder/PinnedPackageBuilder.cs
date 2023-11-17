@@ -9,10 +9,14 @@ using WGetNET.HelperClasses;
 namespace WGetNET.Builder
 {
     /// <summary>
-    /// Builder to create a new <see cref="WGetNET.WinGetPackage"/> instance.
+    /// Builder to create a new <see cref="WGetNET.WinGetPinnedPackage"/> instance.
     /// </summary>
-    internal class PackageBuilder : WinGetObjectBuilder<WinGetPackage>
+    internal class PinnedPackageBuilder : WinGetObjectBuilder<WinGetPinnedPackage>
     {
+        private string _pinTypeString = string.Empty;
+        private string _pinnedVersionString = string.Empty;
+        private PinType _pinType = PinType.Pinning;
+
         private string _name = string.Empty;
         private string _id = string.Empty;
         private string _versionString = string.Empty;
@@ -23,11 +27,40 @@ namespace WGetNET.Builder
         private bool _hasShortenedId = false;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.Builder.PackageBuilder"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Builder.PinnedPackageBuilder"/> class.
         /// </summary>
-        public PackageBuilder()
+        public PinnedPackageBuilder()
         {
             // Provide empty constructor
+        }
+
+        /// <summary>
+        /// Adds the pin type of the package.
+        /// </summary>
+        /// <param name="pinType">The packag pin type as a <see cref="System.String"/></param>
+        public void AddPinType(string pinType)
+        {
+            _pinTypeString = pinType;
+
+            _pinType = _pinTypeString.ToUpper() switch
+            {
+                "PINNING" => PinType.Pinning,
+                "BLOCKING" => PinType.Blocking,
+                "GATING" => PinType.Gating,
+                _ => PinType.Pinning,
+            };
+        }
+
+        /// <summary>
+        /// Adds the pinned version for the package.
+        /// </summary>
+        /// <param name="pinnedVersion">
+        /// The pinned version of the of the package.
+        /// This could be a single version or a version range.
+        /// </param>
+        public void AddPinnedVersion(string pinnedVersion)
+        {
+            _pinnedVersionString = pinnedVersion;
         }
 
         /// <summary>
@@ -81,6 +114,13 @@ namespace WGetNET.Builder
                 // if it is not set already.
                 AddAvailableVersion(version);
             }
+
+            if (string.IsNullOrWhiteSpace(_pinnedVersionString))
+            {
+                // Set the pinned version the th current version as a default,
+                // if it is not set already.
+                AddPinnedVersion(version);
+            }
         }
 
         /// <summary>
@@ -99,6 +139,13 @@ namespace WGetNET.Builder
                 // Set the available version the current version as a default,
                 // if it is not set already.
                 AddAvailableVersion(version);
+            }
+
+            if (string.IsNullOrWhiteSpace(_pinnedVersionString))
+            {
+                // Set the pinned version the th current version as a default,
+                // if it is not set already.
+                AddPinnedVersion(version.ToString());
             }
         }
 
@@ -138,10 +185,10 @@ namespace WGetNET.Builder
         }
 
         /// <summary>
-        /// Returns a <see cref="WGetNET.WinGetPackage"/> instance from data provided to the builder.
+        /// Returns a <see cref="WGetNET.WinGetPinnedPackage"/> instance from data provided to the builder.
         /// </summary>
         /// <returns></returns>
-        public override WinGetPackage GetInstance()
+        public override WinGetPinnedPackage GetInstance()
         {
             if (_version == null)
             {
@@ -153,7 +200,18 @@ namespace WGetNET.Builder
                 _availableVersion = VersionParser.Parse(_availableVersionString);
             }
 
-            return new WinGetPackage(_name, _id, _versionString, _version, _availableVersionString, _availableVersion, _sourceName, _hasShortenedId);
+            return new WinGetPinnedPackage(
+                _pinTypeString,
+                _pinType,
+                _pinnedVersionString,
+                _name,
+                _id,
+                _versionString,
+                _version,
+                _availableVersionString,
+                _availableVersion,
+                _sourceName,
+                _hasShortenedId);
         }
 
         /// <inheritdoc/>

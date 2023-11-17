@@ -3,7 +3,6 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
-using WGetNET.HelperClasses;
 
 namespace WGetNET
 {
@@ -167,53 +166,8 @@ namespace WGetNET
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPinnedPackage"/> class.
         /// </summary>
-        /// <param name="pinType">Name of the winget pin type for the package.</param>
-        /// <param name="pinnedVersion"><see cref="System.String"/> containing the pinned version for the package.</param>
-        /// <param name="hasShortenedId">Sets if the id is shortened or not.</param>
-        /// <param name="name">The name of the package.</param>
-        /// <param name="id">The id of the package.</param>
-        /// <param name="version">The current version of the package.</param>
-        /// <param name="availableVersion">Heighest available version of the package.</param>
-        /// <param name="sourceName">Name of the source the package comes from.</param>
-        internal WinGetPinnedPackage(
-            string pinType,
-            string pinnedVersion,
-            string name,
-            string id,
-            string version,
-            string availableVersion,
-            string sourceName,
-            bool hasShortenedId)
-        {
-            _pinTypeString = pinType;
-            _pinnedVersionString = pinnedVersion;
-
-            _pinType = _pinTypeString.ToUpper() switch
-            {
-                "PINNING" => PinType.Pinning,
-                "BLOCKING" => PinType.Blocking,
-                "GATING" => PinType.Gating,
-                _ => PinType.Pinning,
-            };
-
-            _name = name;
-            _id = id;
-
-            _versionString = version;
-            _version = VersionParser.Parse(_versionString);
-
-            _availableVersionString = availableVersion;
-            _availableVersion = VersionParser.Parse(_availableVersionString);
-
-            _sourceName = sourceName;
-
-            _hasShortenedId = hasShortenedId;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetPinnedPackage"/> class.
-        /// </summary>
-        /// <param name="pinType">Name of the winget pin type for the package.</param>
+        /// <param name="pinTypeString">Name of the winget pin type for the package.</param>
+        /// <param name="pinType">The <see cref="WGetNET.PinType"/> of the package.</param>
         /// <param name="pinnedVersion"><see cref="System.String"/> containing the pinned version for the package.</param>
         /// <param name="hasShortenedId">Sets if the id is shortened or not.</param>
         /// <param name="name">The name of the package.</param>
@@ -224,7 +178,8 @@ namespace WGetNET
         /// <param name="availableVersion">Heighest available version of the package.</param>
         /// <param name="sourceName">Name of the source the package comes from.</param>
         internal WinGetPinnedPackage(
-            string pinType,
+            string pinTypeString,
+            PinType pinType,
             string pinnedVersion,
             string name,
             string id,
@@ -235,16 +190,10 @@ namespace WGetNET
             string sourceName,
             bool hasShortenedId)
         {
-            _pinTypeString = pinType;
+            _pinTypeString = pinTypeString;
             _pinnedVersionString = pinnedVersion;
 
-            _pinType = _pinTypeString.ToUpper() switch
-            {
-                "PINNING" => PinType.Pinning,
-                "BLOCKING" => PinType.Blocking,
-                "GATING" => PinType.Gating,
-                _ => PinType.Pinning,
-            };
+            _pinType = pinType;
 
             _name = name;
             _id = id;
@@ -290,6 +239,7 @@ namespace WGetNET
         {
             return new WinGetPinnedPackage(
                     _pinTypeString,
+                    _pinType,
                     _pinnedVersionString,
                     _name,
                     _id,
@@ -305,7 +255,7 @@ namespace WGetNET
         /// <inheritdoc/>
         public override string ToString()
         {
-            return $"{_name} {_versionString}";
+            return $"{_pinTypeString} {_name} {_versionString}";
         }
     }
 }

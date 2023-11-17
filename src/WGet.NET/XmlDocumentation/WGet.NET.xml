@@ -136,9 +136,100 @@
             <returns></returns>
         </member>
         <member name="M:WGetNET.Builder.PackageBuilder.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="T:WGetNET.Builder.PinnedPackageBuilder">
             <summary>
-            Cleares all added data from the builder.
+            Builder to create a new <see cref="T:WGetNET.WinGetPinnedPackage"/> instance.
             </summary>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.PinnedPackageBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddPinType(System.String)">
+            <summary>
+            Adds the pin type of the package.
+            </summary>
+            <param name="pinType">The packag pin type as a <see cref="T:System.String"/></param>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddPinnedVersion(System.String)">
+            <summary>
+            Adds the pinned version for the package.
+            </summary>
+            <param name="pinnedVersion">
+            The pinned version of the of the package.
+            This could be a single version or a version range.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddName(System.String)">
+            <summary>
+            Addss the name of the package.
+            </summary>
+            <param name="name">
+            The name of the package.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddId(System.String)">
+            <summary>
+            Addss the id of the package.
+            </summary>
+            <remarks>
+            The id will be parsed accordingly if a shortened id is detected.
+            </remarks>
+            <param name="id">
+            The id of the package.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddVersion(System.String)">
+            <summary>
+            Adds the current version of the package.
+            </summary>
+            <param name="version">
+            The current version of the package contained in a <see cref="T:System.String"/>.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddVersion(System.Version)">
+            <summary>
+            Adds the current version of the package.
+            </summary>
+            <param name="version">
+            The current version of the package.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddAvailableVersion(System.String)">
+            <summary>
+            Adds the heigest available version of the package.
+            </summary>
+            <param name="availableVersion">
+            The heigest available version of the package contained in a <see cref="T:System.String"/>.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddAvailableVersion(System.Version)">
+            <summary>
+            Adds the heigest available version of the package.
+            </summary>
+            <param name="availableVersion">
+            The heigest available version of the package.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddSourceName(System.String)">
+            <summary>
+            Adds the source name of the package.
+            </summary>
+            <param name="sourceName">
+            The name of the source for the package.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.GetInstance">
+            <summary>
+            Returns a <see cref="T:WGetNET.WinGetPinnedPackage"/> instance from data provided to the builder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WGetNET.Builder.PinnedPackageBuilder.Clear">
+            <inheritdoc/>
         </member>
         <member name="T:WGetNET.ProcessManager">
             <summary>
@@ -3204,24 +3295,12 @@
             Because the rest of the information is useless in this state.
             </remarks>
         </member>
-        <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+        <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,WGetNET.PinType,System.String,System.String,System.String,System.String,System.Version,System.String,System.Version,System.String,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetPinnedPackage"/> class.
             </summary>
-            <param name="pinType">Name of the winget pin type for the package.</param>
-            <param name="pinnedVersion"><see cref="T:System.String"/> containing the pinned version for the package.</param>
-            <param name="hasShortenedId">Sets if the id is shortened or not.</param>
-            <param name="name">The name of the package.</param>
-            <param name="id">The id of the package.</param>
-            <param name="version">The current version of the package.</param>
-            <param name="availableVersion">Heighest available version of the package.</param>
-            <param name="sourceName">Name of the source the package comes from.</param>
-        </member>
-        <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,System.String,System.String,System.String,System.String,System.Version,System.String,System.Version,System.String,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetPinnedPackage"/> class.
-            </summary>
-            <param name="pinType">Name of the winget pin type for the package.</param>
+            <param name="pinTypeString">Name of the winget pin type for the package.</param>
+            <param name="pinType">The <see cref="T:WGetNET.PinType"/> of the package.</param>
             <param name="pinnedVersion"><see cref="T:System.String"/> containing the pinned version for the package.</param>
             <param name="hasShortenedId">Sets if the id is shortened or not.</param>
             <param name="name">The name of the package.</param>
@@ -3871,6 +3950,24 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
+        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
         <member name="M:WGetNET.HelperClasses.JsonHandler.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -4246,32 +4343,6 @@
         </member>
         <member name="P:WGetNET.Models.SourceModel.Arg">
             <summary>
-            Gets or sets the arg of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Type">
-            <summary>
-            Gets sets the type of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Data">
-            <summary>
-            Gets or sets the data of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Models.SourceModel.Identifier">
-            <summary>
-            Gets or sets the identifier of the source.
-            </summary>
-        </member>
-        <member name="M:WGetNET.Models.SourceModel.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
-            </summary>
-        </member>
-    </members>
-</doc>
->
             Gets or sets the arg of the source.
             </summary>
         </member>

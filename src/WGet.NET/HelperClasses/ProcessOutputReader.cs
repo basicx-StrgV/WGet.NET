@@ -81,11 +81,11 @@ namespace WGetNET.HelperClasses
                 return resultList;
             }
 
-            PackageBuilder packageBuilder = new PackageBuilder();
+            PackageBuilder builder = new PackageBuilder();
 
             for (int i = 0; i < output.Length; i++)
             {
-                packageBuilder.Clear();
+                builder.Clear();
 
                 // Stop parsing the output when the end of the list is reached.
 #if NETCOREAPP3_1_OR_GREATER
@@ -101,36 +101,36 @@ namespace WGetNET.HelperClasses
 #endif
 
 #if NETCOREAPP3_1_OR_GREATER
-                packageBuilder.AddId(output[i][columnList[1]..columnList[2]].Trim());
+                builder.AddId(output[i][columnList[1]..columnList[2]].Trim());
 #elif NETSTANDARD2_0
-                packageBuilder.AddId(output[i].Substring(columnList[1], (columnList[2] - columnList[1])).Trim());
+                builder.AddId(output[i].Substring(columnList[1], (columnList[2] - columnList[1])).Trim());
 #endif
 
 #if NETCOREAPP3_1_OR_GREATER
-                packageBuilder.AddName(output[i][columnList[0]..columnList[1]].Trim());
+                builder.AddName(output[i][columnList[0]..columnList[1]].Trim());
 #elif NETSTANDARD2_0
-                packageBuilder.AddName(output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim());
+                builder.AddName(output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim());
 #endif
 
                 //Set version info depending on the column count.
                 if (columnList.Length > 3)
                 {
 #if NETCOREAPP3_1_OR_GREATER
-                    packageBuilder.AddVersion(output[i][columnList[2]..columnList[3]].Trim());
-                    packageBuilder.AddAvailableVersion(output[i][columnList[2]..columnList[3]].Trim());
+                    builder.AddVersion(output[i][columnList[2]..columnList[3]].Trim());
+                    builder.AddAvailableVersion(output[i][columnList[2]..columnList[3]].Trim());
 #elif NETSTANDARD2_0
-                    packageBuilder.AddVersion(output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim());
-                    packageBuilder.AddAvailableVersion(output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim());
+                    builder.AddVersion(output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim());
+                    builder.AddAvailableVersion(output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim());
 #endif
                 }
                 else
                 {
 #if NETCOREAPP3_1_OR_GREATER
-                    packageBuilder.AddVersion(output[i][columnList[2]..].Trim());
-                    packageBuilder.AddAvailableVersion(output[i][columnList[2]..].Trim());
+                    builder.AddVersion(output[i][columnList[2]..].Trim());
+                    builder.AddAvailableVersion(output[i][columnList[2]..].Trim());
 #elif NETSTANDARD2_0
-                    packageBuilder.AddVersion(output[i].Substring(columnList[2]).Trim());
-                    packageBuilder.AddAvailableVersion(output[i].Substring(columnList[2]).Trim());
+                    builder.AddVersion(output[i].Substring(columnList[2]).Trim());
+                    builder.AddAvailableVersion(output[i].Substring(columnList[2]).Trim());
 #endif
                 }
 
@@ -144,21 +144,21 @@ namespace WGetNET.HelperClasses
 #endif
                     if (!string.IsNullOrWhiteSpace(availableVersion) && action != PackageAction.Search)
                     {
-                        packageBuilder.AddAvailableVersion(availableVersion);
+                        builder.AddAvailableVersion(availableVersion);
                     }
 
 #if NETCOREAPP3_1_OR_GREATER
-                    packageBuilder.AddSourceName(output[i][columnList[4]..].Trim());
+                    builder.AddSourceName(output[i][columnList[4]..].Trim());
 #elif NETSTANDARD2_0
-                    packageBuilder.AddSourceName(output[i].Substring(columnList[4]).Trim());
+                    builder.AddSourceName(output[i].Substring(columnList[4]).Trim());
 #endif
                 }
                 else if ((action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length == 4)
                 {
 #if NETCOREAPP3_1_OR_GREATER
-                    packageBuilder.AddSourceName(output[i][columnList[3]..].Trim());
+                    builder.AddSourceName(output[i][columnList[3]..].Trim());
 #elif NETSTANDARD2_0
-                    packageBuilder.AddSourceName(output[i].Substring(columnList[3]).Trim());
+                    builder.AddSourceName(output[i].Substring(columnList[3]).Trim());
 #endif
                 }
                 else if ((action == PackageAction.SearchBySource || action == PackageAction.InstalledListBySource)
@@ -166,10 +166,10 @@ namespace WGetNET.HelperClasses
                 {
                     // "sourceName" source name cant't be null here because of the following check "!string.IsNullOrWhiteSpace(sourceName)".
                     // But .NET Standard 2.0 thinks it knows better (Or I'm stupid). Therefore a second null check comes after it.
-                    packageBuilder.AddSourceName(sourceName);
+                    builder.AddSourceName(sourceName);
                 }
 
-                resultList.Add(packageBuilder.GetInstance());
+                resultList.Add(builder.GetInstance());
             }
 
             // Check for secondery list in output.
@@ -237,6 +237,8 @@ namespace WGetNET.HelperClasses
                 return resultList;
             }
 
+            PinnedPackageBuilder builder = new PinnedPackageBuilder();
+
             for (int i = 0; i < output.Length; i++)
             {
                 // Stop parsing the output when the end of the list is reached.
@@ -252,20 +254,17 @@ namespace WGetNET.HelperClasses
                 }
 #endif
 
-                string pinType = string.Empty;
-                string pinnedVersion = string.Empty;
-
 #if NETCOREAPP3_1_OR_GREATER
-                string packageName = output[i][columnList[0]..columnList[1]].Trim();
-                string packageId = output[i][columnList[1]..columnList[2]].Trim();
-                string packageVersion = output[i][columnList[2]..columnList[3]].Trim();
-                string packageSource = output[i][columnList[3]..columnList[4]].Trim();
+                builder.AddName(output[i][columnList[0]..columnList[1]].Trim());
+                builder.AddId(output[i][columnList[1]..columnList[2]].Trim());
+                builder.AddVersion(output[i][columnList[2]..columnList[3]].Trim());
+                builder.AddSourceName(output[i][columnList[3]..columnList[4]].Trim());
 
 #elif NETSTANDARD2_0
-                string packageName = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim();
-                string packageId = output[i].Substring(columnList[1], (columnList[2] - columnList[1])).Trim();
-                string packageVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
-                string packageSource = output[i].Substring(columnList[3], (columnList[4] - columnList[3])).Trim();
+                builder.AddName(output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim());
+                builder.AddId(output[i].Substring(columnList[1], (columnList[2] - columnList[1])).Trim());
+                builder.AddVersion(output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim());
+                builder.AddSourceName(output[i].Substring(columnList[3], (columnList[4] - columnList[3])).Trim());
 #endif
 
                 // Workaround for getting the pin data from the output.
@@ -288,36 +287,27 @@ namespace WGetNET.HelperClasses
 #if NETCOREAPP3_1_OR_GREATER
                 if (endOfTypeIndex == -1)
                 {
-                    pinType = pinInfoString.Trim();
+                    builder.AddPinType(pinInfoString.Trim());
                 }
                 else
                 {
-                    pinType = pinInfoString[0..endOfTypeIndex].Trim();
-                    pinnedVersion = pinInfoString[endOfTypeIndex..].Trim();
+                    builder.AddPinType(pinInfoString[0..endOfTypeIndex].Trim());
+                    builder.AddPinnedVersion(pinInfoString[endOfTypeIndex..].Trim());
                 }
 #elif NETSTANDARD2_0
                 if (endOfTypeIndex == -1)
                 {
-                    pinType = pinInfoString.Trim();
+                    builder.AddPinType(pinInfoString.Trim());
                 }
                 else
                 {
-                    pinType = pinInfoString.Substring(0, endOfTypeIndex).Trim();
-                    pinnedVersion = pinInfoString.Substring(endOfTypeIndex);
+                    builder.AddPinType(pinInfoString.Substring(0, endOfTypeIndex).Trim());
+                    builder.AddPinnedVersion(pinInfoString.Substring(endOfTypeIndex));
                 }
 #endif
                 // End of workaround
 
-                // Check if the id is shortened
-                bool isShortenedId = CheckShortenedValue(packageId);
-                if (isShortenedId)
-                {
-                    // Remove the char at the end of the shortened id.
-                    packageId = packageId.Remove(packageId.Length - 1);
-                }
-
-                resultList.Add(
-                    new WinGetPinnedPackage(pinType, pinnedVersion, packageName, packageId, packageVersion, packageVersion, packageSource, isShortenedId));
+                resultList.Add(builder.GetInstance());
             }
 
             // Check for secondery list in output.
