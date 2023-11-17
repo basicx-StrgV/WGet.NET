@@ -183,7 +183,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
             ArgsHelper.ThrowIfObjectIsNull(sourceName, "sourceName");
 
-            PackageBuilder builder = new PackageBuilder();
+            PackageBuilder builder = new();
 
             builder.AddName(name);
             builder.AddId(id);
@@ -215,7 +215,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(availableVersion, "availableVersion");
             ArgsHelper.ThrowIfObjectIsNull(sourceName, "sourceName");
 
-            PackageBuilder builder = new PackageBuilder();
+            PackageBuilder builder = new();
 
             builder.AddName(name);
             builder.AddId(id);
@@ -246,7 +246,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfObjectIsNull(version, "version");
             ArgsHelper.ThrowIfObjectIsNull(sourceName, "sourceName");
 
-            PackageBuilder builder = new PackageBuilder();
+            PackageBuilder builder = new();
 
             builder.AddName(name);
             builder.AddId(id);
@@ -278,7 +278,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfObjectIsNull(availableVersion, "availableVersion");
             ArgsHelper.ThrowIfObjectIsNull(sourceName, "sourceName");
 
-            PackageBuilder builder = new PackageBuilder();
+            PackageBuilder builder = new();
 
             builder.AddName(name);
             builder.AddId(id);

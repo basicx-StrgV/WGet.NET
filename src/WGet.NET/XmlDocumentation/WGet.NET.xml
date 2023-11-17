@@ -4310,6 +4310,80 @@
             A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
             </returns>
         </member>
+        <member name="T:WGetNET.HelperClasses.VersionParser">
+            <summary>
+            Handels the parsing of strings to a <see cref="T:System.Version"/> instance.
+            </summary>
+        </member>
+        <member name="M:WGetNET.HelperClasses.VersionParser.Parse(System.String)">
+            <summary>
+            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Version"/> instance as best as possible.
+            </summary>
+            <param name="input">The <see cref="T:System.String"/> to parse.</param>
+            <returns>
+            The created <see cref="T:System.Version"/> instance.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.VersionParser.CleanParse(System.String)">
+            <summary>
+            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Version"/> instance as best as possible.
+            </summary>
+            <remarks>
+            This tries to resolve the string one by one to parse it.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to parse.</param>
+            <returns>
+            The created <see cref="T:System.Version"/> instance.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.VersionParser.ParseToInt(System.String,System.Int32)">
+            <summary>
+            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Int32"/> as best as possible.
+            </summary>
+            <param name="input">The <see cref="T:System.String"/> to parse.</param>
+            <param name="defaultValue">Default value that is used if the input can't be parsed.</param>
+            <returns>
+            The created <see cref="T:System.Int32"/>.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.VersionParser.CleanParseToInt(System.String,System.Int32)">
+            <summary>
+            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Int32"/> as best as possible.
+            </summary>
+            <remarks>
+            This tries to clean the provided input <see cref="T:System.String"/>, 
+            with minimal data loss, so it can be parsed to a <see cref="T:System.Int32"/>
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to parse.</param>
+            <param name="defaultValue">Default value that is used if the input can't be parsed.</param>
+            <returns>
+            The created <see cref="T:System.Int32"/>.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.VersionParser.CleanupNumberString(System.String)">
+            <summary>
+            Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
+            </summary>
+            <remarks>
+            If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>:
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.VersionParser.RemoveAppendix(System.String)">
+            <summary>
+            Removes version appendixes from the string.
+            </summary>
+            <remarks>
+            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to process.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>.
+            </returns>
+        </member>
         <member name="T:WGetNET.IWinGetObject">
             <summary>
             Interface for all winget related objects.

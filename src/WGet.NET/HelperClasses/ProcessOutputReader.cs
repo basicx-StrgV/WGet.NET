@@ -81,7 +81,7 @@ namespace WGetNET.HelperClasses
                 return resultList;
             }
 
-            PackageBuilder builder = new PackageBuilder();
+            PackageBuilder builder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -237,7 +237,7 @@ namespace WGetNET.HelperClasses
                 return resultList;
             }
 
-            PinnedPackageBuilder builder = new PinnedPackageBuilder();
+            PinnedPackageBuilder builder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -583,7 +583,7 @@ namespace WGetNET.HelperClasses
             string[] entry = output[index].Split(':');
             if (entry.Length == 2)
             {
-                DirectoryBuilder builder = new DirectoryBuilder();
+                DirectoryBuilder builder = new();
 
                 builder.AddEntryName(entry[0].Trim());
                 builder.AddRawContent(entry[1].Trim());
@@ -610,7 +610,7 @@ namespace WGetNET.HelperClasses
             StringBuilder nameBuilder = new();
             StringBuilder contentBuilder = new();
 
-            DirectoryBuilder directoryBuilder = new DirectoryBuilder();
+            DirectoryBuilder directoryBuilder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -696,7 +696,7 @@ namespace WGetNET.HelperClasses
 
             StringBuilder nameBuilder = new();
 
-            LinkBuilder linkBuilder = new LinkBuilder();
+            LinkBuilder linkBuilder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -755,7 +755,7 @@ namespace WGetNET.HelperClasses
         {
             List<WinGetAdminOption> adminSetting = new();
 
-            AdminOptionBuilder adminOptionBuilder = new AdminOptionBuilder();
+            AdminOptionBuilder adminOptionBuilder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
