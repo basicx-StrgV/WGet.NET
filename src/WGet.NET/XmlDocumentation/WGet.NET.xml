@@ -53,12 +53,71 @@
             <summary>
             Returns an instance that is created from the data provided to the builder.
             </summary>
-            <returns></returns>
+            <returns>
+            The created instance.
+            </returns>
         </member>
         <member name="M:WGetNET.Abstractions.WinGetObjectBuilder`1.Clear">
             <summary>
             Cleares all added data from the builder.
             </summary>
+        </member>
+        <member name="T:WGetNET.Builder.DirectoryBuilder">
+            <summary>
+            Builder to create a new <see cref="T:WGetNET.WinGetDirectory"/> instance.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Builder.DirectoryBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.DirectoryBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Builder.DirectoryBuilder.AddEntryName(System.String)">
+            <summary>
+            Addes the entry name for the winget info entry.
+            </summary>
+            <param name="entryName">The name of the info entry.</param>
+        </member>
+        <member name="M:WGetNET.Builder.DirectoryBuilder.AddRawContent(System.String)">
+            <summary>
+            Adds the raw content of the winget info entry.
+            </summary>
+            <remarks>
+            The data will be parsed to the content of the direcory entry.
+            </remarks>
+            <param name="rawContent">The raw data of the info entry as a <see cref="T:System.String"/></param>
+        </member>
+        <member name="M:WGetNET.Builder.DirectoryBuilder.GetInstance">
+            <summary>
+            Returns a <see cref="T:WGetNET.WinGetDirectory"/> instance from data provided to the builder.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetDirectory"/> instance, or <see langword="null"/> if the provided data failed to be parsed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Builder.DirectoryBuilder.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.Builder.DirectoryBuilder.CreateDirectoryInfo(System.String,System.Boolean)">
+            <summary>
+            Creates and returns a <see cref="T:System.IO.DirectoryInfo"/> instance from the raw content.
+            </summary>
+            <param name="rawContent"><see cref="T:System.String"/> containing the raw data that should get parsed.</param>
+            <param name="hasShortenedContent">Indcates if the information in the raw content is shortened.</param>
+            <returns>
+            The created <see cref="T:System.IO.DirectoryInfo"/> instance, or <see langword="null"/> if parsing the raw content failed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Builder.DirectoryBuilder.TrimLastDirectory(System.String)">
+            <summary>
+            Removes the last directory from the given path.
+            </summary>
+            <param name="path">
+            <see cref="T:System.String"/> containing the path that sould be trimed.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the trimed path.
+            </returns>
         </member>
         <member name="T:WGetNET.Builder.PackageBuilder">
             <summary>
@@ -133,7 +192,9 @@
             <summary>
             Returns a <see cref="T:WGetNET.WinGetPackage"/> instance from data provided to the builder.
             </summary>
-            <returns></returns>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetPackage"/> instance.
+            </returns>
         </member>
         <member name="M:WGetNET.Builder.PackageBuilder.Clear">
             <inheritdoc/>
@@ -226,7 +287,9 @@
             <summary>
             Returns a <see cref="T:WGetNET.WinGetPinnedPackage"/> instance from data provided to the builder.
             </summary>
-            <returns></returns>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetPinnedPackage"/> instance.
+            </returns>
         </member>
         <member name="M:WGetNET.Builder.PinnedPackageBuilder.Clear">
             <inheritdoc/>
@@ -2981,35 +3044,6 @@
             <param name="rawContent">The content of the settings entry.</param>
             <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
             <param name="directoryInfo"><see cref="T:System.IO.DirectoryInfo"/> instance that was created from the raw content.</param>
-        </member>
-        <member name="M:WGetNET.WinGetDirectory.Create(System.String,System.String)">
-            <summary>
-            Creates a new <see cref="T:WGetNET.WinGetDirectory"/> instance.
-            </summary>
-            <param name="entryName">The name of the settings entry.</param>
-            <param name="rawContent">The content of the settings entry.</param>
-            <returns>
-            The created <see cref="T:WGetNET.WinGetDirectory"/> instance or <see langword="null"/> if parsing the data failed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetDirectory.CreateDirectoryInfo(System.String,System.Boolean)">
-            <summary>
-            Creates and returns a <see cref="T:System.IO.DirectoryInfo"/> instance from the content of the class.
-            </summary>
-            <returns>
-            The created <see cref="T:System.IO.DirectoryInfo"/> instance.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetDirectory.TrimLastDirectory(System.String)">
-            <summary>
-            Removes the last directory from the given path.
-            </summary>
-            <param name="path">
-            <see cref="T:System.String"/> containing the path that sould be trimed.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the trimed path.
-            </returns>
         </member>
         <member name="T:WGetNET.WinGetInfo">
             <summary>

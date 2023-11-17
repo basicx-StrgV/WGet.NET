@@ -241,6 +241,8 @@ namespace WGetNET.HelperClasses
 
             for (int i = 0; i < output.Length; i++)
             {
+                builder.Clear();
+
                 // Stop parsing the output when the end of the list is reached.
 #if NETCOREAPP3_1_OR_GREATER
                 if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[^1])
@@ -581,7 +583,12 @@ namespace WGetNET.HelperClasses
             string[] entry = output[index].Split(':');
             if (entry.Length == 2)
             {
-                return WinGetDirectory.Create(entry[0].Trim(), entry[1].Trim());
+                DirectoryBuilder builder = new DirectoryBuilder();
+
+                builder.AddEntryName(entry[0].Trim());
+                builder.AddRawContent(entry[1].Trim());
+
+                return builder.GetInstance();
             }
             return null;
         }
@@ -601,7 +608,10 @@ namespace WGetNET.HelperClasses
             List<WinGetDirectory> directories = new();
 
             StringBuilder nameBuilder = new();
-            StringBuilder directoryBuilder = new();
+            StringBuilder contentBuilder = new();
+
+            DirectoryBuilder directoryBuilder = new DirectoryBuilder();
+
             for (int i = 0; i < output.Length; i++)
             {
                 if (string.IsNullOrWhiteSpace(output[i]))
@@ -640,21 +650,25 @@ namespace WGetNET.HelperClasses
                     nameBuilder.Append(directoryEntry[j].Trim());
                 }
 
+                directoryBuilder.AddEntryName(nameBuilder.ToString());
+
                 directoryEntry = ArrayManager.RemoveRange(directoryEntry, 0, startOfDirectory);
 
-                directoryBuilder.Clear();
+                contentBuilder.Clear();
                 for (int j = 0; j < directoryEntry.Length; j++)
                 {
                     if (j > 0)
                     {
                         // Add a space in front of every part of the directory that comes after the first on.
-                        directoryBuilder.Append((char)32);
+                        contentBuilder.Append((char)32);
                     }
 
-                    directoryBuilder.Append(directoryEntry[j].Trim());
+                    contentBuilder.Append(directoryEntry[j].Trim());
                 }
 
-                WinGetDirectory? winGetDirectory = WinGetDirectory.Create(nameBuilder.ToString(), directoryBuilder.ToString());
+                directoryBuilder.AddRawContent(contentBuilder.ToString());
+
+                WinGetDirectory? winGetDirectory = directoryBuilder.GetInstance();
                 if (winGetDirectory != null)
                 {
                     directories.Add(winGetDirectory);

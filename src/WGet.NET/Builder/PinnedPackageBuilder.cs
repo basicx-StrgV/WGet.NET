@@ -187,7 +187,9 @@ namespace WGetNET.Builder
         /// <summary>
         /// Returns a <see cref="WGetNET.WinGetPinnedPackage"/> instance from data provided to the builder.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetPinnedPackage"/> instance.
+        /// </returns>
         public override WinGetPinnedPackage GetInstance()
         {
             if (_version == null)

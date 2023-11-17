@@ -140,7 +140,9 @@ namespace WGetNET.Builder
         /// <summary>
         /// Returns a <see cref="WGetNET.WinGetPackage"/> instance from data provided to the builder.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetPackage"/> instance.
+        /// </returns>
         public override WinGetPackage GetInstance()
         {
             if (_version == null)

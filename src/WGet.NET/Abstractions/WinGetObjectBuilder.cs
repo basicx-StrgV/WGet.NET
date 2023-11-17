@@ -1,4 +1,8 @@
-﻿namespace WGetNET.Abstractions
+﻿//--------------------------------------------------//
+// Created by basicx-StrgV                          //
+// https://github.com/basicx-StrgV/                 //
+//--------------------------------------------------//
+namespace WGetNET.Abstractions
 {
     /// <summary>
     /// Base class for internal builders.
@@ -7,12 +11,14 @@
     /// Type of the class the builder creates an instance of.
     /// The class needs to inherit <see cref="WGetNET.IWinGetObject"/>.
     /// </typeparam>
-    internal abstract class WinGetObjectBuilder<T> where T : IWinGetObject
+    internal abstract class WinGetObjectBuilder<T> where T : IWinGetObject?
     {
         /// <summary>
         /// Returns an instance that is created from the data provided to the builder.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// The created instance.
+        /// </returns>
         public abstract T GetInstance();
 
         /// <summary>
