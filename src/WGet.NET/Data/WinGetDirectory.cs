@@ -10,7 +10,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget directory in the info set.
     /// </summary>
-    public sealed class WinGetDirectory : WinGetInfoEntry
+    public sealed class WinGetDirectory : WinGetInfoEntry<WinGetDirectory>
     {
         /// <summary>
         /// Gets a value indicating whether the directory exists.
@@ -68,6 +68,40 @@ namespace WGetNET
         internal WinGetDirectory(string entryName, string rawContent, bool hasShortenedContent, DirectoryInfo directoryInfo) : base(entryName, rawContent, hasShortenedContent)
         {
             _directoryInfo = directoryInfo;
+        }
+
+        /// <inheritdoc/>
+        public override bool Equals(WinGetDirectory? other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (_entryName.Equals(other.EntryName) && _rawContent.Equals(other.RawContent) &&
+                _hasShortenedContent.Equals(other.HasShortenedContent) &&
+                _directoryInfo.Equals(other.Info))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public override object Clone()
+        {
+            return new WinGetDirectory(
+                    _entryName,
+                    _rawContent,
+                    _hasShortenedContent,
+                    _directoryInfo
+                );
         }
     }
 }

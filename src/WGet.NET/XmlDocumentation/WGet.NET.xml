@@ -4,40 +4,49 @@
         <name>WGet.NET</name>
     </assembly>
     <members>
-        <member name="T:WGetNET.Abstractions.WinGetInfoEntry">
+        <member name="T:WGetNET.Abstractions.WinGetInfoEntry`1">
             <summary>
             Represents a basic winget info entry.
             </summary>
+            <typeparam name="T">
+            The type of the derived class.
+            </typeparam>
         </member>
-        <member name="P:WGetNET.Abstractions.WinGetInfoEntry.EntryName">
+        <member name="P:WGetNET.Abstractions.WinGetInfoEntry`1.EntryName">
             <summary>
             Gets the name of the info entry.
             </summary>
         </member>
-        <member name="P:WGetNET.Abstractions.WinGetInfoEntry.RawContent">
+        <member name="P:WGetNET.Abstractions.WinGetInfoEntry`1.RawContent">
             <summary>
             Gets the raw content of the info entry.
             </summary>
         </member>
-        <member name="P:WGetNET.Abstractions.WinGetInfoEntry.HasShortenedContent">
+        <member name="P:WGetNET.Abstractions.WinGetInfoEntry`1.HasShortenedContent">
             <summary>
             Gets if content of the package is shortened.
             </summary>
         </member>
-        <member name="P:WGetNET.Abstractions.WinGetInfoEntry.IsEmpty">
+        <member name="P:WGetNET.Abstractions.WinGetInfoEntry`1.IsEmpty">
             <summary>
             Gets if the object is empty.
             </summary>
         </member>
-        <member name="M:WGetNET.Abstractions.WinGetInfoEntry.#ctor(System.String,System.String,System.Boolean)">
+        <member name="M:WGetNET.Abstractions.WinGetInfoEntry`1.#ctor(System.String,System.String,System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Abstractions.WinGetInfoEntry"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.Abstractions.WinGetInfoEntry`1"/> class.
             </summary>
             <param name="entryName">The name of the info entry.</param>
             <param name="rawContent">The content of the info entry.</param>
             <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
         </member>
-        <member name="M:WGetNET.Abstractions.WinGetInfoEntry.ToString">
+        <member name="M:WGetNET.Abstractions.WinGetInfoEntry`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.Abstractions.WinGetInfoEntry`1.Equals(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.Abstractions.WinGetInfoEntry`1.Clone">
             <inheritdoc/>
         </member>
         <member name="T:WGetNET.Abstractions.WinGetObjectBuilder`1">
@@ -45,7 +54,7 @@
             Base class for internal builders.
             </summary>
             <typeparam name="T">
-            Type of the class the builder creates an instance of.
+            The type of the class the builder creates an instance of.
             The class needs to inherit <see cref="T:WGetNET.IWinGetObject"/>.
             </typeparam>
         </member>
@@ -3102,6 +3111,12 @@
             <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
             <param name="isEnabled">Idicator for the setting state.</param>
         </member>
+        <member name="M:WGetNET.WinGetAdminOption.Equals(WGetNET.WinGetAdminOption)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.WinGetAdminOption.Clone">
+            <inheritdoc/>
+        </member>
         <member name="T:WGetNET.WinGetDirectory">
             <summary>
             Represents a winget directory in the info set.
@@ -3135,6 +3150,12 @@
             <param name="rawContent">The content of the settings entry.</param>
             <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
             <param name="directoryInfo"><see cref="T:System.IO.DirectoryInfo"/> instance that was created from the raw content.</param>
+        </member>
+        <member name="M:WGetNET.WinGetDirectory.Equals(WGetNET.WinGetDirectory)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.WinGetDirectory.Clone">
+            <inheritdoc/>
         </member>
         <member name="T:WGetNET.WinGetInfo">
             <summary>
@@ -3209,6 +3230,12 @@
             <param name="rawContent">The content of the settings entry.</param>
             <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
             <param name="url"><see cref="T:System.Uri"/> instance containing the url.</param>
+        </member>
+        <member name="M:WGetNET.WinGetLink.Equals(WGetNET.WinGetLink)">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.WinGetLink.Clone">
+            <inheritdoc/>
         </member>
         <member name="T:WGetNET.WinGetPackage">
             <summary>

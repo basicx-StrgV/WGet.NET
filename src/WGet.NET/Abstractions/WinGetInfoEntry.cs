@@ -2,12 +2,17 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System;
+
 namespace WGetNET.Abstractions
 {
     /// <summary>
     /// Represents a basic winget info entry.
     /// </summary>
-    public abstract class WinGetInfoEntry : IWinGetObject
+    /// <typeparam name="T">
+    /// The type of the derived class.
+    /// </typeparam>
+    public abstract class WinGetInfoEntry<T> : IWinGetObject, IEquatable<T>, ICloneable where T : WinGetInfoEntry<T>
     {
         /// <summary>
         /// Gets the name of the info entry.
@@ -62,7 +67,7 @@ namespace WGetNET.Abstractions
         private protected readonly bool _hasShortenedContent;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WinGetInfoEntry"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Abstractions.WinGetInfoEntry{T}"/> class.
         /// </summary>
         /// <param name="entryName">The name of the info entry.</param>
         /// <param name="rawContent">The content of the info entry.</param>
@@ -79,5 +84,11 @@ namespace WGetNET.Abstractions
         {
             return _entryName;
         }
+
+        /// <inheritdoc/>
+        public abstract bool Equals(T? other);
+
+        /// <inheritdoc/>
+        public abstract object Clone();
     }
 }

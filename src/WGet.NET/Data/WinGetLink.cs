@@ -10,7 +10,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget link in the info set.
     /// </summary>
-    public sealed class WinGetLink : WinGetInfoEntry
+    public sealed class WinGetLink : WinGetInfoEntry<WinGetLink>
     {
         /// <summary>
         /// Gets the url.
@@ -35,6 +35,40 @@ namespace WGetNET
         internal WinGetLink(string entryName, string rawContent, bool hasShortenedContent, Uri url) : base(entryName, rawContent, hasShortenedContent)
         {
             _url = url;
+        }
+
+        /// <inheritdoc/>
+        public override bool Equals(WinGetLink? other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (_entryName.Equals(other.EntryName) && _rawContent.Equals(other.RawContent) &&
+                _hasShortenedContent.Equals(other.HasShortenedContent) &&
+                _url.Equals(other.Url))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public override object Clone()
+        {
+            return new WinGetLink(
+                    _entryName,
+                    _rawContent,
+                    _hasShortenedContent,
+                    _url
+                );
         }
     }
 }

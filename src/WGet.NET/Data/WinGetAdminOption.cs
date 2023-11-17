@@ -9,7 +9,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget admin settings entry.
     /// </summary>
-    public sealed class WinGetAdminOption : WinGetInfoEntry
+    public sealed class WinGetAdminOption : WinGetInfoEntry<WinGetAdminOption>
     {
         /// <summary>
         /// Gets if the admin option is enabled.
@@ -34,6 +34,40 @@ namespace WGetNET
         internal WinGetAdminOption(string entryName, string rawContent, bool hasShortenedContent, bool isEnabled) : base(entryName, rawContent, hasShortenedContent)
         {
             _isEnabled = isEnabled;
+        }
+
+        /// <inheritdoc/>
+        public override bool Equals(WinGetAdminOption? other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (_entryName.Equals(other.EntryName) && _rawContent.Equals(other.RawContent) &&
+                _hasShortenedContent.Equals(other.HasShortenedContent) &&
+                _isEnabled.Equals(other.IsEnabled))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public override object Clone()
+        {
+            return new WinGetAdminOption(
+                    _entryName,
+                    _rawContent,
+                    _hasShortenedContent,
+                    _isEnabled
+                );
         }
     }
 }
