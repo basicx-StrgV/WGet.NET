@@ -5,6 +5,7 @@
 using System.Text;
 using System.Collections.Generic;
 using WGetNET.Models;
+using WGetNET.Builder;
 
 namespace WGetNET.HelperClasses
 {
@@ -80,8 +81,12 @@ namespace WGetNET.HelperClasses
                 return resultList;
             }
 
+            PackageBuilder packageBuilder = new PackageBuilder();
+
             for (int i = 0; i < output.Length; i++)
             {
+                packageBuilder.Clear();
+
                 // Stop parsing the output when the end of the list is reached.
 #if NETCOREAPP3_1_OR_GREATER
                 if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[^1])
@@ -96,48 +101,36 @@ namespace WGetNET.HelperClasses
 #endif
 
 #if NETCOREAPP3_1_OR_GREATER
-                string packageId = output[i][columnList[1]..columnList[2]].Trim();
+                packageBuilder.AddId(output[i][columnList[1]..columnList[2]].Trim());
 #elif NETSTANDARD2_0
-                string packageId = output[i].Substring(columnList[1], (columnList[2] - columnList[1])).Trim();
+                packageBuilder.AddId(output[i].Substring(columnList[1], (columnList[2] - columnList[1])).Trim());
 #endif
-
-                // Check if the id is shortened
-                bool isShortenedId = CheckShortenedValue(packageId);
-                if (isShortenedId)
-                {
-                    // Remove the char at the end of the shortened id.
-                    packageId = packageId.Remove(packageId.Length - 1);
-                }
 
 #if NETCOREAPP3_1_OR_GREATER
-                string packageName = output[i][columnList[0]..columnList[1]].Trim();
+                packageBuilder.AddName(output[i][columnList[0]..columnList[1]].Trim());
 #elif NETSTANDARD2_0
-                string packageName = output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim();
+                packageBuilder.AddName(output[i].Substring(columnList[0], (columnList[1] - columnList[0])).Trim());
 #endif
-
-                string packageVersion;
-                string packageAvailableVersion;
-                string packageSourceName = string.Empty;
 
                 //Set version info depending on the column count.
                 if (columnList.Length > 3)
                 {
 #if NETCOREAPP3_1_OR_GREATER
-                    packageVersion = output[i][columnList[2]..columnList[3]].Trim();
-                    packageAvailableVersion = output[i][columnList[2]..columnList[3]].Trim();
+                    packageBuilder.AddVersion(output[i][columnList[2]..columnList[3]].Trim());
+                    packageBuilder.AddAvailableVersion(output[i][columnList[2]..columnList[3]].Trim());
 #elif NETSTANDARD2_0
-                    packageVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
-                    packageAvailableVersion = output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim();
+                    packageBuilder.AddVersion(output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim());
+                    packageBuilder.AddAvailableVersion(output[i].Substring(columnList[2], (columnList[3] - columnList[2])).Trim());
 #endif
                 }
                 else
                 {
 #if NETCOREAPP3_1_OR_GREATER
-                    packageVersion = output[i][columnList[2]..].Trim();
-                    packageAvailableVersion = output[i][columnList[2]..].Trim();
+                    packageBuilder.AddVersion(output[i][columnList[2]..].Trim());
+                    packageBuilder.AddAvailableVersion(output[i][columnList[2]..].Trim());
 #elif NETSTANDARD2_0
-                    packageVersion = output[i].Substring(columnList[2]).Trim();
-                    packageAvailableVersion = output[i].Substring(columnList[2]).Trim();
+                    packageBuilder.AddVersion(output[i].Substring(columnList[2]).Trim());
+                    packageBuilder.AddAvailableVersion(output[i].Substring(columnList[2]).Trim());
 #endif
                 }
 
@@ -151,21 +144,21 @@ namespace WGetNET.HelperClasses
 #endif
                     if (!string.IsNullOrWhiteSpace(availableVersion) && action != PackageAction.Search)
                     {
-                        packageAvailableVersion = availableVersion;
+                        packageBuilder.AddAvailableVersion(availableVersion);
                     }
 
 #if NETCOREAPP3_1_OR_GREATER
-                    packageSourceName = output[i][columnList[4]..].Trim();
+                    packageBuilder.AddSourceName(output[i][columnList[4]..].Trim());
 #elif NETSTANDARD2_0
-                    packageSourceName = output[i].Substring(columnList[4]).Trim();
+                    packageBuilder.AddSourceName(output[i].Substring(columnList[4]).Trim());
 #endif
                 }
                 else if ((action == PackageAction.InstalledList || action == PackageAction.Search) && columnList.Length == 4)
                 {
 #if NETCOREAPP3_1_OR_GREATER
-                    packageSourceName = output[i][columnList[3]..].Trim();
+                    packageBuilder.AddSourceName(output[i][columnList[3]..].Trim());
 #elif NETSTANDARD2_0
-                    packageSourceName = output[i].Substring(columnList[3]).Trim();
+                    packageBuilder.AddSourceName(output[i].Substring(columnList[3]).Trim());
 #endif
                 }
                 else if ((action == PackageAction.SearchBySource || action == PackageAction.InstalledListBySource)
@@ -173,10 +166,10 @@ namespace WGetNET.HelperClasses
                 {
                     // "sourceName" source name cant't be null here because of the following check "!string.IsNullOrWhiteSpace(sourceName)".
                     // But .NET Standard 2.0 thinks it knows better (Or I'm stupid). Therefore a second null check comes after it.
-                    packageSourceName = sourceName;
+                    packageBuilder.AddSourceName(sourceName);
                 }
 
-                resultList.Add(new WinGetPackage(packageName, packageId, packageVersion, packageAvailableVersion, packageSourceName, isShortenedId));
+                resultList.Add(packageBuilder.GetInstance());
             }
 
             // Check for secondery list in output.

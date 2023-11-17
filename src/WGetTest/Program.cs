@@ -92,7 +92,7 @@ namespace WGetTest
 
                 Console.WriteLine("Package Equals:");
 
-                WinGetPackage p1 = WinGetPackage.Create("SampleP1", "SampleId1", "1.0.0", "SampleSource", false);
+                WinGetPackage p1 = WinGetPackage.Create("SampleP1", "SampleId1", "1.0.0", "SampleSource");
                 WinGetPackage p2 = WinGetPackage.Create("SampleP2", "SampleId2", "2.0.0", "3.0.0", "");
 
                 Console.WriteLine(p1.Equals(p1));

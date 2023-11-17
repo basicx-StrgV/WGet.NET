@@ -11,6 +11,11 @@ namespace WGetNET.HelperClasses
     {
         public static Version Parse(string input)
         {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return new Version(0, 0);
+            }
+
             if (Version.TryParse(input, out Version? result))
             {
                 return result;
@@ -64,7 +69,7 @@ namespace WGetNET.HelperClasses
 
         private static int ParseToInt(string input, int defaultValue = 0)
         {
-            if(int.TryParse(input, out int result))
+            if (int.TryParse(input, out int result))
             {
                 return result;
             }
