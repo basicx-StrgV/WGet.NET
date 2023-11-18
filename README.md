@@ -7,12 +7,13 @@
 
 ## ❓ What is WGet.NET
 
-WGet.NET is a WinGet wrapper library for .Net.
+WGet.NET is a WinGet wrapper library for **.Net** that allows you to easily install, update, uninstall and more, with the help of **WinGet**, from your application. 
 
 ![WGet.NET Icon](https://raw.githubusercontent.com/basicx-StrgV/WGet.NET/main/repo_design/WGet.NET_Icon_Small.png) 
 
-I created it for another project and then made a library out of it in hope it might be useful to someone else too.  
-**If you tried this library, please give me some feedback. And if you miss a feature, you can create an issue to let me know.**
+I created it for another project and then made a library out of it in the hope it might be useful to someone else too.  
+
+**If you miss a feature or find a problem with the library, feel free to create an [issue](https://github.com/basicx-StrgV/WGet.NET/issues).**
 
 ## ✨ Version 4.0
 
@@ -33,7 +34,7 @@ https://basicx-strgv.github.io/WGet.NET/
 
 ## ⚡ Features
 
-**Supported Frameworks:** .Net Core 3.1, .Net Standard 2.0
+**[Supported Framework Versions](https://www.nuget.org/packages/WGet.NET/#supportedframeworks-body-tab)**
 
 - WinGet
   - [x] Get a list of installed packages
