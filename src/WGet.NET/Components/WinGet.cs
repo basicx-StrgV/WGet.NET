@@ -64,7 +64,7 @@ namespace WGetNET
         {
             get
             {
-                return GetVersionObject();
+                return VersionParser.Parse(CheckWinGetVersion());
             }
         }
 
@@ -388,6 +388,12 @@ namespace WGetNET
             return false;
         }
 
+        /// <summary>
+        /// Checks the winget version and returns it as a <see cref="System.String"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the winget version.
+        /// </returns>
         private string CheckWinGetVersion()
         {
             try
@@ -398,14 +404,15 @@ namespace WGetNET
                 for (int i = 0; i < result.Output.Length; i++)
                 {
 #if NETCOREAPP3_1_OR_GREATER
-                    if (result.Output[i].StartsWith('v'))
+                    if (result.Output[i].StartsWith('v') && result.Output[i].Length >= 2)
                     {
-                        return result.Output[i].Trim();
+                        // Return output without the 'v' at the start.
+                        return result.Output[i].Trim()[1..];
                     }
 #elif NETSTANDARD2_0
-                    if (result.Output[i].StartsWith("v"))
+                    if (result.Output[i].StartsWith("v") && result.Output[i].Length >= 2)
                     {
-                        return result.Output[i].Trim();
+                        return result.Output[i].Trim().Substring(1);
                     }
 #endif
                 }
@@ -416,29 +423,6 @@ namespace WGetNET
             }
 
             return string.Empty;
-        }
-
-        private Version GetVersionObject()
-        {
-            string versionString = CheckWinGetVersion();
-
-#if NETCOREAPP3_1_OR_GREATER
-            //Remove the first letter from the version string.
-            if (versionString.StartsWith('v'))
-            {
-                versionString = versionString[1..].Trim();
-
-            }
-#elif NETSTANDARD2_0
-            //Remove the first letter from the version string.
-            if (versionString.StartsWith("v"))
-            {
-                versionString = versionString.Substring(1).Trim();
-
-            }
-#endif
-
-            return VersionParser.Parse(versionString);
         }
     }
 }
