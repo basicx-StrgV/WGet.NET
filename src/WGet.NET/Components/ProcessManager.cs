@@ -7,7 +7,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using WGetNET.Models;
-using WGetNET.HelperClasses;
+using WGetNET.Extensions;
 
 namespace WGetNET
 {
@@ -165,7 +165,7 @@ namespace WGetNET
                     continue;
                 }
 
-                outputArray = ArrayManager.Add(outputArray, outputLine);
+                outputArray = outputArray.Add(outputLine);
             }
 
             return outputArray;
@@ -194,7 +194,7 @@ namespace WGetNET
                     continue;
                 }
 
-                outputArray = ArrayManager.Add(outputArray, outputLine);
+                outputArray = outputArray.Add(outputLine);
             }
 
             return outputArray;

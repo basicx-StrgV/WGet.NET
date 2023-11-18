@@ -7,6 +7,9 @@ using System.IO;
 
 namespace WGetNET.HelperClasses
 {
+    /// <summary>
+    /// Provides methods for argument checking and exception throwing.
+    /// </summary>
     internal static class ArgsHelper
     {
         /// <summary>

@@ -3996,6 +3996,79 @@
             that contains contextual information about the source or destination.
             </param>
         </member>
+        <member name="T:WGetNET.Extensions.ArrayExtensions">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.Extensions.ArrayExtensions"/> class,
+            provieds extension methods for generic and type specific arrays.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Extensions.ArrayExtensions.Add``1(``0[],``0)">
+            <summary>
+            Adds a new entry to a <see langword="array"/>.
+            </summary>
+            <typeparam name="T">
+            The type of the <see langword="array"/>.
+            </typeparam>
+            <param name="array">
+            The input <see langword="array"/> for the action.
+            </param>
+            <param name="value">
+            The value to add to the <see langword="array"/>.
+            </param>
+            <returns>
+            The <see langword="array"/> with the added entry.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Extensions.ArrayExtensions.RemoveRange``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            Removes a range of entrys from a <see langword="array"/>.
+            </summary>
+            <typeparam name="T">
+            The type of the <see langword="array"/>.
+            </typeparam>
+            <param name="array">
+            The input <see langword="array"/> for the action.
+            </param>
+            <param name="index">
+            A <see cref="T:System.Int32"/> representing the zero based start index.
+            </param>
+            <param name="count">
+            A <see cref="T:System.Int32"/> representing the number of elements to remove.
+            </param>
+            <returns>
+            The <see langword="array"/> with the range of entrys removed.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Extensions.ArrayExtensions.GetEntryContains(System.String[],System.String)">
+            <summary>
+            Searches for an entry in a <see langword="array"/> that contains the given string.
+            </summary>
+            <param name="array">
+            The input <see langword="array"/> for the action.
+            </param>
+            <param name="value">
+            A <see cref="T:System.String"/> representing the value to check for.
+            </param>
+            <returns>
+            A <see cref="T:System.Int32"/> representing the index of the entry (-1 if the entry is not found).
+            </returns>
+        </member>
+        <member name="M:WGetNET.Extensions.ArrayExtensions.RemoveEmptyEntries(System.String[])">
+            <summary>
+            Removes empty entries from a <see langword="array"/> of <see cref="T:System.String"/>'s.
+            </summary>
+            <param name="array">
+            The input <see langword="array"/> for the action.
+            </param>
+            <returns>
+            The <see langword="array"/> with empty entries removed.
+            </returns>
+        </member>
+        <member name="T:WGetNET.HelperClasses.ArgsHelper">
+            <summary>
+            Provides methods for argument checking and exception throwing.
+            </summary>
+        </member>
         <member name="M:WGetNET.HelperClasses.ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(System.String,System.String)">
             <summary>
             Throws an exception if the given string is <see langword="null"/> or empty/whitespace.
@@ -4063,92 +4136,6 @@
             <exception cref="T:System.UnauthorizedAccessException">
             The caller does not have the required permission.
             </exception>
-        </member>
-        <member name="T:WGetNET.HelperClasses.ArrayManager">
-            <summary>
-            The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.ArrayManager"/> class,
-            provieds methods to manage <see langword="array"/>'s.
-            </summary>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ArrayManager.Add``1(``0[],``0)">
-            <summary>
-            Adds a new entry to a <see langword="array"/>.
-            </summary>
-            <typeparam name="T">
-            The type of the <see langword="array"/>.
-            </typeparam>
-            <param name="inputArray">
-            The input <see langword="array"/>.
-            </param>
-            <param name="value">
-            The value to add to the <see langword="array"/>.
-            </param>
-            <returns>
-            The <see langword="array"/> with the added entry.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ArrayManager.RemoveRange``1(``0[],System.Int32,System.Int32)">
-            <summary>
-            Removes a range of entrys from a <see langword="array"/>.
-            </summary>
-            <typeparam name="T">
-            The type of the <see langword="array"/>.
-            </typeparam>
-            <param name="inputArray">
-            The input <see langword="array"/>.
-            </param>
-            <param name="index">
-            A <see cref="T:System.Int32"/> representing the zero based start index.
-            </param>
-            <param name="count">
-            A <see cref="T:System.Int32"/> representing the number of elements to remove.
-            </param>
-            <returns>
-            The <see langword="array"/> with the range of entrys removed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ArrayManager.GetEntryContains(System.String[],System.String)">
-            <summary>
-            Searches for an entry in a <see langword="array"/> that contains the given string.
-            </summary>
-            <param name="inputArray">
-            The input <see langword="array"/>.
-            </param>
-            <param name="value">
-            A <see cref="T:System.String"/> representing the value to check for.
-            </param>
-            <returns>
-            A <see cref="T:System.Int32"/> representing the index of the entry (-1 if the entry is not found).
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ArrayManager.RemoveEmptyEntries(System.String[])">
-            <summary>
-            Removes empty entries from a <see langword="array"/> of <see cref="T:System.String"/>'s.
-            </summary>
-            <param name="inputArray">The input <see langword="array"/>.</param>
-            <returns>
-            The <see langword="array"/> with empty entries removed.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.ArrayManager.CopyToWithoutRange``1(``0[],System.Int32,System.Int32)">
-            <summary>
-            Copys a <see langword="array"/> to a new one, but ignores the given range.
-            </summary>
-            <typeparam name="T">
-            The type of the array.
-            </typeparam>
-            <param name="inputArray">
-            The <see langword="array"/> that should be copyed.
-            </param>
-            <param name="startIndex">
-            A <see cref="T:System.Int32"/> representing a start index of the range that should be ignored.
-            </param>
-            <param name="count">
-            A <see cref="T:System.Int32"/> representing the range that should be ignored.
-            </param>
-            <returns>
-            The new <see langword="array"/>.
-            </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFile(System.String,WGetNET.Models.ProcessResult)">
             <summary>

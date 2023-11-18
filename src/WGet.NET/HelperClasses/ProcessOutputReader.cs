@@ -6,6 +6,7 @@ using System.Text;
 using System.Collections.Generic;
 using WGetNET.Models;
 using WGetNET.Builder;
+using WGetNET.Extensions;
 
 namespace WGetNET.HelperClasses
 {
@@ -38,7 +39,7 @@ namespace WGetNET.HelperClasses
             //The array should always contain this line.
             //If it dose not contain this line the resulting out of range exception,
             //that will be thrown later, will be catched in the calling method.
-            int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
+            int labelLine = output.GetEntryContains("------") - 1;
 
             if (labelLine < 0)
             {
@@ -49,7 +50,7 @@ namespace WGetNET.HelperClasses
             int[] columnList = GetColumnList(output[labelLine]);
 
             //Remove unneeded output Lines
-            output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
+            output = output.RemoveRange(0, labelLine + 2);
 
             return CreatePackageListFromOutput(output, columnList, action, sourceName);
         }
@@ -173,7 +174,7 @@ namespace WGetNET.HelperClasses
             }
 
             // Check for secondery list in output.
-            if (ArrayManager.GetEntryContains(output, "------") != -1)
+            if (output.GetEntryContains("------") != -1)
             {
                 List<WinGetPackage> seconderyList = ToPackageList(output, action);
                 resultList.AddRange(seconderyList);
@@ -200,7 +201,7 @@ namespace WGetNET.HelperClasses
             //The array should always contain this line.
             //If it dose not contain this line the resulting out of range exception,
             //that will be thrown later, will be catched in the calling method.
-            int labelLine = ArrayManager.GetEntryContains(output, "------") - 1;
+            int labelLine = output.GetEntryContains("------") - 1;
 
             if (labelLine < 0)
             {
@@ -211,7 +212,7 @@ namespace WGetNET.HelperClasses
             int[] columnList = GetColumnList(output[labelLine], true);
 
             //Remove unneeded output Lines
-            output = ArrayManager.RemoveRange(output, 0, labelLine + 2);
+            output = output.RemoveRange(0, labelLine + 2);
 
             return CreatePinnedPackageListFromOutput(output, columnList);
         }
@@ -313,7 +314,7 @@ namespace WGetNET.HelperClasses
             }
 
             // Check for secondery list in output.
-            if (ArrayManager.GetEntryContains(output, "------") != -1)
+            if (output.GetEntryContains("------") != -1)
             {
                 List<WinGetPinnedPackage> seconderyList = ToPinnedPackageList(output);
                 resultList.AddRange(seconderyList);
@@ -447,7 +448,7 @@ namespace WGetNET.HelperClasses
             }
 
             // Remove unnasesary range from output
-            output = ArrayManager.RemoveRange(output, 0, 11);
+            output = output.RemoveRange(0, 11);
 
             List<WinGetLink> links = ReadLinks(output);
 
@@ -485,7 +486,7 @@ namespace WGetNET.HelperClasses
             }
 
             // Remove unnasesary range from output
-            output = ArrayManager.RemoveRange(output, 0, 13);
+            output = output.RemoveRange(0, 13);
 
             List<WinGetLink> links = ReadLinks(output);
 
@@ -523,12 +524,12 @@ namespace WGetNET.HelperClasses
             }
 
             // Remove unnasesary range from output
-            output = ArrayManager.RemoveRange(output, 0, 13);
+            output = output.RemoveRange(0, 13);
 
             List<WinGetLink> links = ReadLinks(output);
 
             // Remove links area and admin settings header range from output
-            output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
+            output = output.RemoveRange(0, output.GetEntryContains("----") + 1);
 
             List<WinGetAdminOption> adminSetting = ReadAdminSettings(output);
 
@@ -553,17 +554,17 @@ namespace WGetNET.HelperClasses
             }
 
             // Remove unnasesary range from output
-            output = ArrayManager.RemoveRange(output, 0, 9);
+            output = output.RemoveRange(0, 9);
 
             List<WinGetDirectory> directories = ReadDirectories(output);
 
             // Remove directories area and links header range from output
-            output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
+            output = output.RemoveRange(0, output.GetEntryContains("----") + 1);
 
             List<WinGetLink> links = ReadLinks(output);
 
             // Remove links area and admin settings header range from output
-            output = ArrayManager.RemoveRange(output, 0, ArrayManager.GetEntryContains(output, "----") + 1);
+            output = output.RemoveRange(0, output.GetEntryContains("----") + 1);
 
             List<WinGetAdminOption> adminSetting = ReadAdminSettings(output);
 
@@ -621,7 +622,7 @@ namespace WGetNET.HelperClasses
                     break;
                 }
 
-                string[] directoryEntry = ArrayManager.RemoveEmptyEntries(output[i].Split((char)32));
+                string[] directoryEntry = output[i].Split((char)32).RemoveEmptyEntries();
 
                 nameBuilder.Clear();
                 int startOfDirectory = 0;
@@ -654,7 +655,7 @@ namespace WGetNET.HelperClasses
 
                 directoryBuilder.AddEntryName(nameBuilder.ToString());
 
-                directoryEntry = ArrayManager.RemoveRange(directoryEntry, 0, startOfDirectory);
+                directoryEntry = directoryEntry.RemoveRange(0, startOfDirectory);
 
                 contentBuilder.Clear();
                 for (int j = 0; j < directoryEntry.Length; j++)
@@ -707,7 +708,7 @@ namespace WGetNET.HelperClasses
                     break;
                 }
 
-                string[] linksEntry = ArrayManager.RemoveEmptyEntries(output[i].Split((char)32));
+                string[] linksEntry = output[i].Split((char)32).RemoveEmptyEntries();
 
 #if NETCOREAPP3_1_OR_GREATER
                 linkBuilder.AddRawContent(linksEntry[^1].Trim());
@@ -716,7 +717,7 @@ namespace WGetNET.HelperClasses
 #endif
 
                 // Remove link from entry, so it only contains the name
-                linksEntry = ArrayManager.RemoveRange(linksEntry, linksEntry.Length - 1, 1);
+                linksEntry = linksEntry.RemoveRange(linksEntry.Length - 1, 1);
 
                 nameBuilder.Clear();
                 for (int j = 0; j < linksEntry.Length; j++)
@@ -766,7 +767,7 @@ namespace WGetNET.HelperClasses
                     break;
                 }
 
-                string[] settingsEntry = ArrayManager.RemoveEmptyEntries(output[i].Split((char)32));
+                string[] settingsEntry = output[i].Split((char)32).RemoveEmptyEntries();
 
                 if (settingsEntry.Length == 2)
                 {
@@ -866,7 +867,7 @@ namespace WGetNET.HelperClasses
 
                 if (line[i] != ((char)32) && checkForColumn)
                 {
-                    columns = ArrayManager.Add(columns, i);
+                    columns = columns.Add(i);
                     checkForColumn = false;
                 }
                 else if (line[i] == ((char)32))
