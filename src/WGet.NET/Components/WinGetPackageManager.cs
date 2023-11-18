@@ -1317,7 +1317,7 @@ namespace WGetNET
                     return string.Empty;
                 }
 
-                return HashResultToHash(result);
+                return ProcessOutputReader.ResultToHash(result);
             }
             catch (Win32Exception)
             {
@@ -1372,7 +1372,7 @@ namespace WGetNET
                     return string.Empty;
                 }
 
-                return HashResultToHash(result);
+                return ProcessOutputReader.ResultToHash(result);
             }
             catch (Win32Exception)
             {
@@ -1428,7 +1428,7 @@ namespace WGetNET
                     return string.Empty;
                 }
 
-                return HashResultToHash(result);
+                return ProcessOutputReader.ResultToHash(result);
             }
             catch (Win32Exception)
             {
@@ -1484,7 +1484,7 @@ namespace WGetNET
                     return string.Empty;
                 }
 
-                return HashResultToHash(result);
+                return ProcessOutputReader.ResultToHash(result);
             }
             catch (Win32Exception)
             {
@@ -1494,30 +1494,6 @@ namespace WGetNET
             {
                 throw new WinGetActionFailedException("Hashing failed.", cmd, e);
             }
-        }
-
-        /// <summary>
-        /// Reads the hash from the WinGet hash action result.
-        /// </summary>
-        /// <param name="result">
-        /// The <see cref="WGetNET.Models.ProcessResult"/> object of the action.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.String"/> containing the hash value.
-        /// </returns>
-        private string HashResultToHash(ProcessResult result)
-        {
-            string hash = "";
-            if (result.Output.Length > 0 && result.Output[0].Contains(":"))
-            {
-                string[] splitOutput = result.Output[0].Split(':');
-                if (splitOutput.Length >= 2)
-                {
-                    hash = splitOutput[1].Trim();
-                }
-            }
-
-            return hash;
         }
         //---------------------------------------------------------------------------------------------
 

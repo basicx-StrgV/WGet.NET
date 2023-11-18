@@ -785,6 +785,32 @@ namespace WGetNET.HelperClasses
         }
         //------------------------------------------------------------------------------------------------------------
 
+        //---To Hash--------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Reads the hash from the winget hash action result.
+        /// </summary>
+        /// <param name="result">
+        /// The <see cref="WGetNET.Models.ProcessResult"/> object of the action.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the hash value.
+        /// </returns>
+        public static string ResultToHash(ProcessResult result)
+        {
+            string hash = "";
+            if (result.Output.Length > 0 && result.Output[0].Contains(":"))
+            {
+                string[] splitOutput = result.Output[0].Split(':');
+                if (splitOutput.Length >= 2)
+                {
+                    hash = splitOutput[1].Trim();
+                }
+            }
+
+            return hash;
+        }
+        //------------------------------------------------------------------------------------------------------------
+
         //---Other----------------------------------------------------------------------------------------------------
         /// <summary>
         /// Writes the export result to a <see cref="System.String"/>.

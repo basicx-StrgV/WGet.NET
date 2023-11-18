@@ -1419,17 +1419,6 @@
             Unable to find the specified file.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.HashResultToHash(WGetNET.Models.ProcessResult)">
-            <summary>
-            Reads the hash from the WinGet hash action result.
-            </summary>
-            <param name="result">
-            The <see cref="T:WGetNET.Models.ProcessResult"/> object of the action.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the hash value.
-            </returns>
-        </member>
         <member name="M:WGetNET.WinGetPackageManager.Download(System.String,System.String)">
             <summary>
             Downloads the installer of a package using winget.
@@ -4302,6 +4291,17 @@
             <param name="output">The <see langword="array"/> containing the winget output lines.</param>
             <returns>
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminOption"/> objects.
+            </returns>
+        </member>
+        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ResultToHash(WGetNET.Models.ProcessResult)">
+            <summary>
+            Reads the hash from the winget hash action result.
+            </summary>
+            <param name="result">
+            The <see cref="T:WGetNET.Models.ProcessResult"/> object of the action.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the hash value.
             </returns>
         </member>
         <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ExportOutputToString(WGetNET.Models.ProcessResult)">
