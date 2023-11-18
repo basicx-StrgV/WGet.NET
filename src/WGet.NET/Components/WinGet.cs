@@ -20,7 +20,7 @@ namespace WGetNET
         private const string _versionCmd = "--version";
         private const string _exportSettingsCmd = "settings export";
 
-        internal readonly ProcessManager _processManager;
+        private protected readonly ProcessManager _processManager;
 
         /// <summary>
         /// Gets if winget is installed on the system.
@@ -158,10 +158,12 @@ namespace WGetNET
         /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
         /// </exception>
         /// <exception cref="System.IO.DirectoryNotFoundException">
         /// The directory root does not exist.
@@ -221,26 +223,24 @@ namespace WGetNET
         /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
         /// </exception>
         /// <exception cref="System.IO.PathTooLongException">
         /// The specified path, file name, or both exceed the system-defined maximum length.
         /// </exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.IO.IOException">
         /// An I/O error occurred while opening the file
-        /// </exception>
-        /// <exception cref="System.UnauthorizedAccessException">
-        /// Path specified a file that is read-only. 
-        /// Or Path specified a file that is hidden.
-        /// Or This operation is not supported on the current platform. 
-        /// Or Path specified a directory. 
-        /// Or The caller does not have the required permission.
         /// </exception>
         /// <exception cref="System.NotSupportedException">
         /// Path is in an invalid format.

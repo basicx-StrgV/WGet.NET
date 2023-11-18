@@ -173,8 +173,11 @@ namespace WGetNET
         /// <returns>
         /// The created instance of the <see cref="WGetNET.WinGetPackage"/> class.
         /// </returns>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public static WinGetPackage Create(string name, string id, string version, string sourceName = "")
         {
@@ -204,8 +207,11 @@ namespace WGetNET
         /// <returns>
         /// The created instance of the <see cref="WGetNET.WinGetPackage"/> class.
         /// </returns>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public static WinGetPackage Create(string name, string id, string version, string availableVersion, string sourceName = "")
         {
@@ -236,8 +242,11 @@ namespace WGetNET
         /// <returns>
         /// The created instance of the <see cref="WGetNET.WinGetPackage"/> class.
         /// </returns>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public static WinGetPackage Create(string name, string id, Version version, string sourceName = "")
         {
@@ -267,8 +276,11 @@ namespace WGetNET
         /// <returns>
         /// The created instance of the <see cref="WGetNET.WinGetPackage"/> class.
         /// </returns>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public static WinGetPackage Create(string name, string id, Version version, Version availableVersion, string sourceName = "")
         {

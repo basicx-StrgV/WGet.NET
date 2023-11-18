@@ -47,9 +47,6 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
-        /// </exception>
         public List<WinGetSource> GetInstalledSources()
         {
             try
@@ -83,8 +80,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public List<WinGetSource> GetInstalledSources(string sourceName)
         {
@@ -123,9 +123,6 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
-        /// </exception>
         public async Task<List<WinGetSource>> GetInstalledSourcesAsync()
         {
             try
@@ -160,8 +157,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public async Task<List<WinGetSource>> GetInstalledSourcesAsync(string sourceName)
         {
@@ -207,8 +207,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -264,8 +267,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -316,8 +322,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -350,8 +359,8 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -392,8 +401,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -450,8 +462,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -503,8 +518,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -542,7 +560,7 @@ namespace WGetNET
         /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -653,10 +671,12 @@ namespace WGetNET
         /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
         /// </exception>
         /// <exception cref="System.IO.DirectoryNotFoundException">
         /// The directory root does not exist.
@@ -703,10 +723,12 @@ namespace WGetNET
         /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
         /// </exception>
         /// <exception cref="System.IO.DirectoryNotFoundException">
         /// The directory root does not exist.
@@ -758,10 +780,12 @@ namespace WGetNET
         /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
         /// </exception>
         /// <exception cref="System.IO.DirectoryNotFoundException">
         /// The directory root does not exist.
@@ -807,10 +831,12 @@ namespace WGetNET
         /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
         /// </exception>
         /// <exception cref="System.IO.DirectoryNotFoundException">
         /// The directory root does not exist.
@@ -859,10 +885,12 @@ namespace WGetNET
         /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
         /// </exception>
         /// <exception cref="System.IO.DirectoryNotFoundException">
         /// The directory root does not exist.
@@ -917,10 +945,12 @@ namespace WGetNET
         /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.ArgumentException">
-        /// The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
         /// </exception>
         /// <exception cref="System.IO.DirectoryNotFoundException">
         /// The directory root does not exist.
@@ -969,8 +999,11 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -1013,8 +1046,11 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -1150,8 +1186,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -1200,8 +1239,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -1230,8 +1272,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -1281,8 +1326,11 @@ namespace WGetNET
         /// The current action failed for an unexpected reason.
         /// Please see inner exception.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -1306,7 +1354,7 @@ namespace WGetNET
         /// A <see cref="System.String"/> containing the generated json.
         /// </returns>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public string SourcesToJson(IEnumerable<IWinGetSource> sources)
         {

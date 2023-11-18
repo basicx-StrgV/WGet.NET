@@ -10,7 +10,7 @@ namespace WGetNET.HelperClasses
     internal static class ArgsHelper
     {
         /// <summary>
-        /// Throws a <see cref="ArgumentNullException"/> if the given string is <see langword="null"/> or empty/whitespace.
+        /// Throws an exception if the given string is <see langword="null"/> or empty/whitespace.
         /// </summary>
         /// <param name="arg">
         /// The argument to check.
@@ -18,19 +18,26 @@ namespace WGetNET.HelperClasses
         /// <param name="name">
         /// The name of the arument.
         /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// The given string is null or empty/whitespace.
+        /// <exception cref="System.ArgumentException">
+        /// The given string empty/whitespace.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// The given string is null.
         /// </exception>
         public static void ThrowIfStringIsNullOrWhiteSpace(string arg, string name)
         {
-            if (string.IsNullOrWhiteSpace(arg))
+            if (arg == null)
             {
-                throw new ArgumentNullException(name, "Value cannot be null or empty.");
+                throw new ArgumentNullException(name);
+            }
+            else if (string.IsNullOrWhiteSpace(arg))
+            {
+                throw new ArgumentException("Value cannot be empty.", name);
             }
         }
 
         /// <summary>
-        /// Throws a <see cref="ArgumentNullException"/> if the given object is <see langword="null"/>.
+        /// Throws a <see cref="System.ArgumentNullException"/> if the given object is <see langword="null"/>.
         /// </summary>
         /// <param name="arg">
         /// The argument to check.
@@ -38,7 +45,7 @@ namespace WGetNET.HelperClasses
         /// <param name="name">
         /// The name of the arument.
         /// </param>
-        /// <exception cref="ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         /// The given object is <see langword="null"/>
         /// </exception>
         public static void ThrowIfObjectIsNull(object arg, string name)
@@ -50,7 +57,7 @@ namespace WGetNET.HelperClasses
         }
 
         /// <summary>
-        /// Throws a <see cref="ArgumentNullException"/> if the given winget object is <see langword="null"/> or empty.
+        /// Throws an exception if the given winget object is <see langword="null"/> or empty.
         /// </summary>
         /// <param name="arg">
         /// The argument to check.
@@ -58,14 +65,21 @@ namespace WGetNET.HelperClasses
         /// <param name="name">
         /// The name of the arument.
         /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// The given winget object is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// The given winget object is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// The given winget object is null.
         /// </exception>
         public static void ThrowIfWinGetObjectIsNullOrEmpty(IWinGetObject arg, string name)
         {
-            if (arg == null || arg.IsEmpty)
+            if (arg == null)
             {
                 throw new ArgumentNullException(name);
+            }
+            else if (arg.IsEmpty)
+            {
+                throw new ArgumentException("Object cannot be empty.", name);
             }
         }
 

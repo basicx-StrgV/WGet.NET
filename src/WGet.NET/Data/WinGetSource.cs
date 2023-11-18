@@ -122,8 +122,11 @@ namespace WGetNET
         /// <returns>
         /// The created instance of the <see cref="WGetNET.WinGetSource"/> class.
         /// </returns>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public WinGetSource Create(string name, string identifier, string arg, string type)
         {
@@ -146,8 +149,11 @@ namespace WGetNET
         /// <returns>
         /// The created instance of the <see cref="WGetNET.WinGetSource"/> class.
         /// </returns>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public WinGetSource Create(string name, string identifier, string arg, string type, string data)
         {
