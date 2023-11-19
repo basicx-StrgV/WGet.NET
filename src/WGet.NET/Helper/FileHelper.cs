@@ -4,7 +4,6 @@
 //--------------------------------------------------//
 using System.IO;
 using System.Threading.Tasks;
-using WGetNET.Models;
 
 namespace WGetNET.Helper
 {
@@ -13,95 +12,6 @@ namespace WGetNET.Helper
     /// </summary>
     internal static class FileHelper
     {
-        /// <summary>
-        /// Writes the export result to a file.
-        /// </summary>
-        /// <param name="path">
-        /// A <see cref="System.String"/> containing the file path and name.
-        /// </param>
-        /// <param name="result">
-        /// The <see cref="WGetNET.Models.ProcessResult"/> object containing the export data.
-        /// </param>
-        /// <returns>
-        /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="System.ArgumentException">
-        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
-        /// </exception>
-        /// <exception cref="System.IO.PathTooLongException">
-        /// The specified path, file name, or both exceed the system-defined maximum length.
-        /// </exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
-        /// </exception>
-        /// <exception cref="System.IO.IOException">
-        /// An I/O error occurred while opening the file
-        /// </exception>
-        /// <exception cref="System.UnauthorizedAccessException">
-        /// Path specified a file that is read-only. 
-        /// Or Path specified a file that is hidden.
-        /// Or This operation is not supported on the current platform. 
-        /// Or Path specified a directory. 
-        /// Or The caller does not have the required permission.
-        /// </exception>
-        /// <exception cref="System.NotSupportedException">
-        /// Path is in an invalid format.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The caller does not have the required permission.
-        /// </exception>
-        public static void ExportOutputToFile(string path, ProcessResult result)
-        {
-            string outputString = ProcessOutputReader.ExportOutputToString(result);
-
-            WriteTextToFile(path, outputString);
-        }
-
-        /// <summary>
-        /// Asynchronous writes the export result to a file.
-        /// </summary>
-        /// <param name="path">
-        /// A <see cref="System.String"/> containing the file path and name.
-        /// </param>
-        /// <param name="result">
-        /// The <see cref="WGetNET.Models.ProcessResult"/> object containing the export data.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="System.ArgumentException">
-        /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
-        /// </exception>
-        /// <exception cref="System.IO.PathTooLongException">
-        /// The specified path, file name, or both exceed the system-defined maximum length.
-        /// </exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">
-        /// The specified path is invalid (for example, it is on an unmapped drive).
-        /// </exception>
-        /// <exception cref="System.IO.IOException">
-        /// An I/O error occurred while opening the file
-        /// </exception>
-        /// <exception cref="System.UnauthorizedAccessException">
-        /// Path specified a file that is read-only. 
-        /// Or Path specified a file that is hidden.
-        /// Or This operation is not supported on the current platform. 
-        /// Or Path specified a directory. 
-        /// Or The caller does not have the required permission.
-        /// </exception>
-        /// <exception cref="System.NotSupportedException">
-        /// Path is in an invalid format.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The caller does not have the required permission.
-        /// </exception>
-        public static async Task ExportOutputToFileAsync(string path, ProcessResult result)
-        {
-            string outputString = ProcessOutputReader.ExportOutputToString(result);
-
-            await WriteTextToFileAsync(path, outputString);
-        }
-
         /// <summary>
         /// Writes the provided text to the given file.
         /// </summary>

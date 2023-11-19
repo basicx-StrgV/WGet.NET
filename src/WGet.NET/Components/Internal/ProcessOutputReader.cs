@@ -5,17 +5,26 @@
 using System.Text;
 using System.Collections.Generic;
 using WGetNET.Models;
+using WGetNET.Helper;
 using WGetNET.Builder;
 using WGetNET.Extensions;
 
-namespace WGetNET.Helper
+namespace WGetNET.Components.Internal
 {
     /// <summary>
-    /// The <see langword="static"/> <see cref="WGetNET.Helper.ProcessOutputReader"/> class,
-    /// provieds <see langword="static"/> methodes to process the output of the winget processes.
+    /// The <see cref="WGetNET.Components.Internal.ProcessOutputReader"/> class,
+    /// provieds methodes to read data from the output of the winget processes.
     /// </summary>
-    internal static class ProcessOutputReader
+    internal class ProcessOutputReader
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WGetNET.Components.Internal.ProcessOutputReader"/> class.
+        /// </summary>
+        public ProcessOutputReader()
+        {
+            // Provide empty constructor
+        }
+
         //---To Package List------------------------------------------------------------------------------------------
         /// <summary>
         /// Converts a <see cref="System.Collections.Generic.List{T}"/> 
@@ -33,7 +42,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
         /// </returns>
-        public static List<WinGetPackage> ToPackageList(string[] output, PackageAction action = PackageAction.Default, string? sourceName = null)
+        public List<WinGetPackage> ToPackageList(string[] output, PackageAction action = PackageAction.Default, string? sourceName = null)
         {
             //Get top line index.
             //The array should always contain this line.
@@ -73,7 +82,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/>'s.
         /// </returns>
-        private static List<WinGetPackage> CreatePackageListFromOutput(string[] output, int[] columnList, PackageAction action = PackageAction.Default, string? sourceName = null)
+        private List<WinGetPackage> CreatePackageListFromOutput(string[] output, int[] columnList, PackageAction action = PackageAction.Default, string? sourceName = null)
         {
             List<WinGetPackage> resultList = new();
 
@@ -195,7 +204,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPinnedPackage"/>'s.
         /// </returns>
-        public static List<WinGetPinnedPackage> ToPinnedPackageList(string[] output)
+        public List<WinGetPinnedPackage> ToPinnedPackageList(string[] output)
         {
             //Get top line index.
             //The array should always contain this line.
@@ -229,7 +238,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPinnedPackage"/>'s.
         /// </returns>
-        private static List<WinGetPinnedPackage> CreatePinnedPackageListFromOutput(string[] output, int[] columnList)
+        private List<WinGetPinnedPackage> CreatePinnedPackageListFromOutput(string[] output, int[] columnList)
         {
             List<WinGetPinnedPackage> resultList = new();
 
@@ -335,7 +344,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/>'s.
         /// </returns>
-        public static List<WinGetSource> ToSourceList(string[] output)
+        public List<WinGetSource> ToSourceList(string[] output)
         {
             List<WinGetSource> sourceList = new();
 
@@ -363,7 +372,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        public static WinGetInfo ToWingetInfo(string[] output, InfoActionVersionId actionVersionId)
+        public WinGetInfo ToWingetInfo(string[] output, InfoActionVersionId actionVersionId)
         {
             if (output.Length <= 0)
             {
@@ -378,7 +387,7 @@ namespace WGetNET.Helper
         /// </summary>
         /// <param name="output"></param>
         /// <returns></returns>
-        private static string ReadVersionFromData(string[] output)
+        private string ReadVersionFromData(string[] output)
         {
             string version = string.Empty;
 
@@ -411,7 +420,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        private static WinGetInfo ReadDataByRange(string[] output, InfoActionVersionId actionVersionId)
+        private WinGetInfo ReadDataByRange(string[] output, InfoActionVersionId actionVersionId)
         {
             return actionVersionId switch
             {
@@ -430,7 +439,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        private static WinGetInfo ReadDataForRange1(string[] output)
+        private WinGetInfo ReadDataForRange1(string[] output)
         {
             InfoSetBuilder builder = new();
 
@@ -462,7 +471,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        private static WinGetInfo ReadDataForRange2(string[] output)
+        private WinGetInfo ReadDataForRange2(string[] output)
         {
             InfoSetBuilder builder = new();
 
@@ -497,7 +506,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        private static WinGetInfo ReadDataForRange3(string[] output)
+        private WinGetInfo ReadDataForRange3(string[] output)
         {
             InfoSetBuilder builder = new();
 
@@ -537,7 +546,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// The <see cref="WGetNET.WinGetInfo"/> object created from the output.
         /// </returns>
-        private static WinGetInfo ReadDataForRange4(string[] output)
+        private WinGetInfo ReadDataForRange4(string[] output)
         {
             InfoSetBuilder builder = new();
 
@@ -577,7 +586,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="WinGetDirectory"/> instance if the action was successful, or null if it failed. 
         /// </returns>
-        private static WinGetDirectory? ReadSingleDirectoryEntry(string[] output, int index)
+        private WinGetDirectory? ReadSingleDirectoryEntry(string[] output, int index)
         {
             string[] entry = output[index].Split(':');
             if (entry.Length == 2)
@@ -602,7 +611,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetDirectory"/> objects.
         /// </returns>
-        private static List<WinGetDirectory> ReadDirectories(string[] output)
+        private List<WinGetDirectory> ReadDirectories(string[] output)
         {
             List<WinGetDirectory> directories = new();
 
@@ -689,7 +698,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetLink"/> objects.
         /// </returns>
-        private static List<WinGetLink> ReadLinks(string[] output)
+        private List<WinGetLink> ReadLinks(string[] output)
         {
             List<WinGetLink> links = new();
 
@@ -750,7 +759,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetAdminOption"/> objects.
         /// </returns>
-        private static List<WinGetAdminOption> ReadAdminSettings(string[] output)
+        private List<WinGetAdminOption> ReadAdminSettings(string[] output)
         {
             List<WinGetAdminOption> adminSetting = new();
 
@@ -794,7 +803,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="System.String"/> containing the hash value.
         /// </returns>
-        public static string ResultToHash(ProcessResult result)
+        public string ResultToHash(ProcessResult result)
         {
             string hash = "";
             if (result.Output.Length > 0 && result.Output[0].Contains(":"))
@@ -820,7 +829,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// The <see cref="System.String"/> containing the export result.
         /// </returns>
-        public static string ExportOutputToString(ProcessResult result)
+        public string ExportOutputToString(ProcessResult result)
         {
             if (result.Success)
             {
@@ -850,7 +859,7 @@ namespace WGetNET.Helper
         /// <returns>
         /// A <see cref="System.Int32"/> <see langword="array"/> containing the column start indexes.
         /// </returns>
-        private static int[] GetColumnList(string line, bool isPinnedPackageTable = false)
+        private int[] GetColumnList(string line, bool isPinnedPackageTable = false)
         {
             int[] columns = new int[0];
 

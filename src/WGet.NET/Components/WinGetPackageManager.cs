@@ -85,7 +85,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
+            return OutputReader.ToPackageList(result.Output, PackageAction.Search);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
+            return OutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace WGetNET
 
             ProcessResult result = await ExecuteAsync(cmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
+            return OutputReader.ToPackageList(result.Output, PackageAction.Search);
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace WGetNET
 
             ProcessResult result = await ExecuteAsync(cmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
+            return OutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -218,7 +218,7 @@ namespace WGetNET
         {
             ProcessResult result = Execute(_listCmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
+            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
+            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -292,7 +292,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
+            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
 
         /// <summary>
@@ -309,7 +309,7 @@ namespace WGetNET
         {
             ProcessResult result = await ExecuteAsync(_listCmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
+            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace WGetNET
 
             ProcessResult result = await ExecuteAsync(cmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
+            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -385,7 +385,7 @@ namespace WGetNET
 
             ProcessResult result = await ExecuteAsync(cmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
+            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
 
         /// <summary>
@@ -632,7 +632,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
+            return OutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
 
         /// <summary>
@@ -651,7 +651,7 @@ namespace WGetNET
 
             ProcessResult result = await ExecuteAsync(cmd);
 
-            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
+            return OutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
 
         /// <summary>
@@ -987,7 +987,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return ProcessOutputReader.ResultToHash(result);
+            return OutputReader.ResultToHash(result);
         }
 
         /// <summary>
@@ -1026,7 +1026,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return ProcessOutputReader.ResultToHash(result);
+            return OutputReader.ResultToHash(result);
         }
 
         /// <summary>
@@ -1069,7 +1069,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return ProcessOutputReader.ResultToHash(result);
+            return OutputReader.ResultToHash(result);
         }
 
         /// <summary>
@@ -1109,7 +1109,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return ProcessOutputReader.ResultToHash(result);
+            return OutputReader.ResultToHash(result);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1410,7 +1410,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(_pinListCmd);
 
-            return ProcessOutputReader.ToPinnedPackageList(result.Output);
+            return OutputReader.ToPinnedPackageList(result.Output);
         }
 
         /// <summary>
@@ -1435,7 +1435,7 @@ namespace WGetNET
 
             ProcessResult result = await ExecuteAsync(_pinListCmd);
 
-            return ProcessOutputReader.ToPinnedPackageList(result.Output);
+            return OutputReader.ToPinnedPackageList(result.Output);
         }
         //---------------------------------------------------------------------------------------------
 

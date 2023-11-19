@@ -20,6 +20,17 @@ namespace WGetNET
     /// </summary>
     public class WinGet
     {
+        /// <summary>
+        /// Gets the current output reader instance.
+        /// </summary>
+        private protected ProcessOutputReader OutputReader
+        {
+            get
+            {
+                return _outputReader;
+            }
+        }
+
         private const string _infoCmd = "--info";
         private const string _versionCmd = "--version";
         private const string _exportSettingsCmd = "settings export";
@@ -31,6 +42,7 @@ namespace WGetNET
         private Version _version;
 
         private readonly bool _administratorPrivileges;
+        private readonly ProcessOutputReader _outputReader;
 
         /// <summary>
         /// Gets if winget is installed on the system.
@@ -103,6 +115,8 @@ namespace WGetNET
         /// </summary>
         public WinGet()
         {
+            _outputReader = new ProcessOutputReader();
+
             // Check if the current process has administrator privileges
             _administratorPrivileges = CheckAdministratorPrivileges();
 
@@ -129,7 +143,7 @@ namespace WGetNET
         {
             ProcessResult result = Execute(_exportSettingsCmd);
 
-            return ProcessOutputReader.ExportOutputToString(result);
+            return _outputReader.ExportOutputToString(result);
         }
 
         /// <summary>
@@ -146,7 +160,7 @@ namespace WGetNET
         {
             ProcessResult result = await ExecuteAsync(_exportSettingsCmd);
 
-            return ProcessOutputReader.ExportOutputToString(result);
+            return _outputReader.ExportOutputToString(result);
         }
 
         /// <summary>
@@ -194,7 +208,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(_exportSettingsCmd);
 
-            FileHelper.ExportOutputToFile(file, result);
+            FileHelper.WriteTextToFile(file, OutputReader.ExportOutputToString(result));
         }
 
         /// <summary>
@@ -242,7 +256,7 @@ namespace WGetNET
 
             ProcessResult result = await ExecuteAsync(_exportSettingsCmd);
 
-            await FileHelper.ExportOutputToFileAsync(file, result);
+            await FileHelper.WriteTextToFileAsync(file, OutputReader.ExportOutputToString(result));
         }
 
         /// <summary>
@@ -272,7 +286,7 @@ namespace WGetNET
                 actionVersionId = InfoActionVersionId.VersionRange4;
             }
 
-            return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
+            return _outputReader.ToWingetInfo(result.Output, actionVersionId);
         }
 
         /// <summary>
@@ -303,7 +317,7 @@ namespace WGetNET
                 actionVersionId = InfoActionVersionId.VersionRange4;
             }
 
-            return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
+            return _outputReader.ToWingetInfo(result.Output, actionVersionId);
         }
 
         /// <summary>
@@ -447,7 +461,7 @@ namespace WGetNET
 #elif NETSTANDARD2_0
                 if (result.Output[i].StartsWith("v") && result.Output[i].Length >= 2)
                 {
-                // Return output without the 'v' at the start.
+                    // Return output without the 'v' at the start.
                     return result.Output[i].Trim().Substring(1);
                 }
 #endif

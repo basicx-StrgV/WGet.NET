@@ -43,7 +43,7 @@ namespace WGetNET
         {
             ProcessResult result = Execute(_sourceExportCmd);
 
-            return ProcessOutputReader.ToSourceList(result.Output);
+            return OutputReader.ToSourceList(result.Output);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return ProcessOutputReader.ToSourceList(result.Output);
+            return OutputReader.ToSourceList(result.Output);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace WGetNET
         {
             ProcessResult result = await ExecuteAsync(_sourceExportCmd);
 
-            return ProcessOutputReader.ToSourceList(result.Output);
+            return OutputReader.ToSourceList(result.Output);
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace WGetNET
 
             ProcessResult result = await ExecuteAsync(cmd);
 
-            return ProcessOutputReader.ToSourceList(result.Output);
+            return OutputReader.ToSourceList(result.Output);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -831,7 +831,7 @@ namespace WGetNET
             List<SourceModel> sources =
                 await JsonHelper.StringToObjectAsync<List<SourceModel>>(jsonString);
 #elif NETSTANDARD2_0
-            List<SourceModel> sources = 
+            List<SourceModel> sources =
                 JsonHelper.StringToObject<List<SourceModel>>(jsonString);
 #endif
 

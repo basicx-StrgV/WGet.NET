@@ -580,9 +580,244 @@
             containing the process output stream content by lines.
             </returns>
         </member>
+        <member name="T:WGetNET.Components.Internal.ProcessOutputReader">
+            <summary>
+            The <see cref="T:WGetNET.Components.Internal.ProcessOutputReader"/> class,
+            provieds methodes to read data from the output of the winget processes.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Components.Internal.ProcessOutputReader"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ToPackageList(System.String[],WGetNET.PackageAction,System.String)">
+            <summary>
+            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
+            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPackage"/>'s.
+            </summary>
+            <param name="output">
+            A <see cref="T:System.Collections.Generic.List`1"/> of output lines from a winget process.
+            </param>
+            <param name="action">
+            Sets info about the action that is executet.
+            </param>
+            <param name="sourceName">
+            Name of the source used in the search or list by source action.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.CreatePackageListFromOutput(System.String[],System.Int32[],WGetNET.PackageAction,System.String)">
+            <summary>
+            Creates a package list from output.
+            </summary>
+            <param name="output">
+            The <see langword="array"/> containing the output.
+            </param>
+            <param name="columnList">
+            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
+            </param>
+            <param name="action">
+            Sets info about the action that is executet.
+            </param>
+            <param name="sourceName">
+            Name of the source used in the search or list by source action.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ToPinnedPackageList(System.String[])">
+            <summary>
+            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
+            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
+            </summary>
+            <param name="output">
+            The <see langword="array"/> of output lines from a winget process.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.CreatePinnedPackageListFromOutput(System.String[],System.Int32[])">
+            <summary>
+            Creates a pinned package list from output.
+            </summary>
+            <param name="output">
+            The <see langword="array"/> containing the output.
+            </param>
+            <param name="columnList">
+            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ToSourceList(System.String[])">
+            <summary>
+            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
+            of output lines from a winget process, that contains the sources in json format, to a list of <see cref="T:WGetNET.WinGetSource"/>'s.
+            </summary>
+            <param name="output">
+            The <see langword="array"/> of output lines from a winget process.
+            </param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ToWingetInfo(System.String[],WGetNET.InfoActionVersionId)">
+            <summary>
+            Creates a <see cref="T:WGetNET.WinGetInfo"/> object from the winget output.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <param name="actionVersionId">Containes info about the winget version range for the output.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ReadVersionFromData(System.String[])">
+            <summary>
+            Reads the version number from the winget info output.
+            </summary>
+            <param name="output"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ReadDataByRange(System.String[],WGetNET.InfoActionVersionId)">
+            <summary>
+            Initializes the reading of the data for the specific version range.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <param name="actionVersionId">Containes info about the winget version range for the output.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ReadDataForRange1(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ReadDataForRange2(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ReadDataForRange3(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ReadDataForRange4(System.String[])">
+            <summary>
+            Reads the data from the winget info output for the version range 1.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ReadSingleDirectoryEntry(System.String[],System.Int32)">
+            <summary>
+            Reads a single directory entry from the winget info output.
+            </summary>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <param name="index">The index of the directory entry.</param>
+            <returns>
+            A <see cref="T:WGetNET.WinGetDirectory"/> instance if the action was successful, or null if it failed. 
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ReadDirectories(System.String[])">
+            <summary>
+            Reads all directories from the winget info output.
+            </summary>
+            <remarks>
+            The first output entry needs to be the first directory entry.
+            </remarks>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetDirectory"/> objects.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ReadLinks(System.String[])">
+            <summary>
+            Reads all links from the winget info output.
+            </summary>
+            <remarks>
+            The first output entry needs to be the first link entry.
+            </remarks>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetLink"/> objects.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ReadAdminSettings(System.String[])">
+            <summary>
+            Reads all admin options from the winget info output.
+            </summary>
+            <remarks>
+            The first output entry needs to be the first admin option entry.
+            </remarks>
+            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminOption"/> objects.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ResultToHash(WGetNET.Models.ProcessResult)">
+            <summary>
+            Reads the hash from the winget hash action result.
+            </summary>
+            <param name="result">
+            The <see cref="T:WGetNET.Models.ProcessResult"/> object of the action.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the hash value.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ExportOutputToString(WGetNET.Models.ProcessResult)">
+            <summary>
+            Writes the export result to a <see cref="T:System.String"/>.
+            </summary>
+            <param name="result">
+            The <see cref="T:WGetNET.Models.ProcessResult"/> object containing the export data.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/> containing the export result.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.GetColumnList(System.String,System.Boolean)">
+            <summary>
+            Gets all column start indexes from the input line.
+            </summary>
+            <param name="line">
+            A <see cref="T:System.String"/> containing the header, for column calculation.
+            </param>
+            <param name="isPinnedPackageTable">Activate workaround for the pinned package list.</param>
+            <returns>
+            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
+            </returns>
+        </member>
         <member name="T:WGetNET.WinGet">
             <summary>
             The <see cref="T:WGetNET.WinGet"/> class offers informations about the installed winget version.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGet.OutputReader">
+            <summary>
+            Gets the current output reader instance.
             </summary>
         </member>
         <member name="P:WGetNET.WinGet.IsInstalled">
@@ -3860,85 +4095,6 @@
             The <see langword="static"/> <see cref="T:WGetNET.Helper.FileHelper"/> class provides methods for working with files.
             </summary>
         </member>
-        <member name="M:WGetNET.Helper.FileHelper.ExportOutputToFile(System.String,WGetNET.Models.ProcessResult)">
-            <summary>
-            Writes the export result to a file.
-            </summary>
-            <param name="path">
-            A <see cref="T:System.String"/> containing the file path and name.
-            </param>
-            <param name="result">
-            The <see cref="T:WGetNET.Models.ProcessResult"/> object containing the export data.
-            </param>
-            <returns>
-            <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
-            </returns>
-            <exception cref="T:System.ArgumentException">
-            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
-            </exception>
-            <exception cref="T:System.IO.PathTooLongException">
-            The specified path, file name, or both exceed the system-defined maximum length.
-            </exception>
-            <exception cref="T:System.IO.DirectoryNotFoundException">
-            The specified path is invalid (for example, it is on an unmapped drive).
-            </exception>
-            <exception cref="T:System.IO.IOException">
-            An I/O error occurred while opening the file
-            </exception>
-            <exception cref="T:System.UnauthorizedAccessException">
-            Path specified a file that is read-only. 
-            Or Path specified a file that is hidden.
-            Or This operation is not supported on the current platform. 
-            Or Path specified a directory. 
-            Or The caller does not have the required permission.
-            </exception>
-            <exception cref="T:System.NotSupportedException">
-            Path is in an invalid format.
-            </exception>
-            <exception cref="T:System.Security.SecurityException">
-            The caller does not have the required permission.
-            </exception>
-        </member>
-        <member name="M:WGetNET.Helper.FileHelper.ExportOutputToFileAsync(System.String,WGetNET.Models.ProcessResult)">
-            <summary>
-            Asynchronous writes the export result to a file.
-            </summary>
-            <param name="path">
-            A <see cref="T:System.String"/> containing the file path and name.
-            </param>
-            <param name="result">
-            The <see cref="T:WGetNET.Models.ProcessResult"/> object containing the export data.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
-            </returns>
-            <exception cref="T:System.ArgumentException">
-            Path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.
-            </exception>
-            <exception cref="T:System.IO.PathTooLongException">
-            The specified path, file name, or both exceed the system-defined maximum length.
-            </exception>
-            <exception cref="T:System.IO.DirectoryNotFoundException">
-            The specified path is invalid (for example, it is on an unmapped drive).
-            </exception>
-            <exception cref="T:System.IO.IOException">
-            An I/O error occurred while opening the file
-            </exception>
-            <exception cref="T:System.UnauthorizedAccessException">
-            Path specified a file that is read-only. 
-            Or Path specified a file that is hidden.
-            Or This operation is not supported on the current platform. 
-            Or Path specified a directory. 
-            Or The caller does not have the required permission.
-            </exception>
-            <exception cref="T:System.NotSupportedException">
-            Path is in an invalid format.
-            </exception>
-            <exception cref="T:System.Security.SecurityException">
-            The caller does not have the required permission.
-            </exception>
-        </member>
         <member name="M:WGetNET.Helper.FileHelper.WriteTextToFile(System.String,System.String)">
             <summary>
             Writes the provided text to the given file.
@@ -4051,231 +4207,6 @@
             <param name="input">The object to serialize.</param>
             <returns>
             A <see cref="T:System.String"/> containing the generated json.
-            </returns>
-        </member>
-        <member name="T:WGetNET.Helper.ProcessOutputReader">
-            <summary>
-            The <see langword="static"/> <see cref="T:WGetNET.Helper.ProcessOutputReader"/> class,
-            provieds <see langword="static"/> methodes to process the output of the winget processes.
-            </summary>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ToPackageList(System.String[],WGetNET.PackageAction,System.String)">
-            <summary>
-            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
-            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPackage"/>'s.
-            </summary>
-            <param name="output">
-            A <see cref="T:System.Collections.Generic.List`1"/> of output lines from a winget process.
-            </param>
-            <param name="action">
-            Sets info about the action that is executet.
-            </param>
-            <param name="sourceName">
-            Name of the source used in the search or list by source action.
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.CreatePackageListFromOutput(System.String[],System.Int32[],WGetNET.PackageAction,System.String)">
-            <summary>
-            Creates a package list from output.
-            </summary>
-            <param name="output">
-            The <see langword="array"/> containing the output.
-            </param>
-            <param name="columnList">
-            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
-            </param>
-            <param name="action">
-            Sets info about the action that is executet.
-            </param>
-            <param name="sourceName">
-            Name of the source used in the search or list by source action.
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ToPinnedPackageList(System.String[])">
-            <summary>
-            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
-            of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
-            </summary>
-            <param name="output">
-            The <see langword="array"/> of output lines from a winget process.
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.CreatePinnedPackageListFromOutput(System.String[],System.Int32[])">
-            <summary>
-            Creates a pinned package list from output.
-            </summary>
-            <param name="output">
-            The <see langword="array"/> containing the output.
-            </param>
-            <param name="columnList">
-            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ToSourceList(System.String[])">
-            <summary>
-            Converts a <see cref="T:System.Collections.Generic.List`1"/> 
-            of output lines from a winget process, that contains the sources in json format, to a list of <see cref="T:WGetNET.WinGetSource"/>'s.
-            </summary>
-            <param name="output">
-            The <see langword="array"/> of output lines from a winget process.
-            </param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ToWingetInfo(System.String[],WGetNET.InfoActionVersionId)">
-            <summary>
-            Creates a <see cref="T:WGetNET.WinGetInfo"/> object from the winget output.
-            </summary>
-            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
-            <param name="actionVersionId">Containes info about the winget version range for the output.</param>
-            <returns>
-            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadVersionFromData(System.String[])">
-            <summary>
-            Reads the version number from the winget info output.
-            </summary>
-            <param name="output"></param>
-            <returns></returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDataByRange(System.String[],WGetNET.InfoActionVersionId)">
-            <summary>
-            Initializes the reading of the data for the specific version range.
-            </summary>
-            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
-            <param name="actionVersionId">Containes info about the winget version range for the output.</param>
-            <returns>
-            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDataForRange1(System.String[])">
-            <summary>
-            Reads the data from the winget info output for the version range 1.
-            </summary>
-            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
-            <returns>
-            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDataForRange2(System.String[])">
-            <summary>
-            Reads the data from the winget info output for the version range 1.
-            </summary>
-            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
-            <returns>
-            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDataForRange3(System.String[])">
-            <summary>
-            Reads the data from the winget info output for the version range 1.
-            </summary>
-            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
-            <returns>
-            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDataForRange4(System.String[])">
-            <summary>
-            Reads the data from the winget info output for the version range 1.
-            </summary>
-            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
-            <returns>
-            The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadSingleDirectoryEntry(System.String[],System.Int32)">
-            <summary>
-            Reads a single directory entry from the winget info output.
-            </summary>
-            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
-            <param name="index">The index of the directory entry.</param>
-            <returns>
-            A <see cref="T:WGetNET.WinGetDirectory"/> instance if the action was successful, or null if it failed. 
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDirectories(System.String[])">
-            <summary>
-            Reads all directories from the winget info output.
-            </summary>
-            <remarks>
-            The first output entry needs to be the first directory entry.
-            </remarks>
-            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetDirectory"/> objects.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadLinks(System.String[])">
-            <summary>
-            Reads all links from the winget info output.
-            </summary>
-            <remarks>
-            The first output entry needs to be the first link entry.
-            </remarks>
-            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetLink"/> objects.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadAdminSettings(System.String[])">
-            <summary>
-            Reads all admin options from the winget info output.
-            </summary>
-            <remarks>
-            The first output entry needs to be the first admin option entry.
-            </remarks>
-            <param name="output">The <see langword="array"/> containing the winget output lines.</param>
-            <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminOption"/> objects.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ResultToHash(WGetNET.Models.ProcessResult)">
-            <summary>
-            Reads the hash from the winget hash action result.
-            </summary>
-            <param name="result">
-            The <see cref="T:WGetNET.Models.ProcessResult"/> object of the action.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the hash value.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.ExportOutputToString(WGetNET.Models.ProcessResult)">
-            <summary>
-            Writes the export result to a <see cref="T:System.String"/>.
-            </summary>
-            <param name="result">
-            The <see cref="T:WGetNET.Models.ProcessResult"/> object containing the export data.
-            </param>
-            <returns>
-            The <see cref="T:System.String"/> containing the export result.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ProcessOutputReader.GetColumnList(System.String,System.Boolean)">
-            <summary>
-            Gets all column start indexes from the input line.
-            </summary>
-            <param name="line">
-            A <see cref="T:System.String"/> containing the header, for column calculation.
-            </param>
-            <param name="isPinnedPackageTable">Activate workaround for the pinned package list.</param>
-            <returns>
-            A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
             </returns>
         </member>
         <member name="T:WGetNET.IWinGetObject">
