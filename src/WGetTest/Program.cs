@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET;
+using System.Diagnostics;
 
 namespace WGetTest
 {
@@ -19,6 +20,7 @@ namespace WGetTest
 
         private void Run()
         {
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 WinGetPackageManager connector = new WinGetPackageManager();
@@ -101,6 +103,11 @@ namespace WGetTest
             catch (Exception e)
             {
                 Console.WriteLine(e);
+            }
+            finally
+            {
+                sw.Stop();
+                Console.WriteLine("Execution Time: " + sw.Elapsed);
             }
         }
     }
