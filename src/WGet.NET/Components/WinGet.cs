@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using WGetNET.Models;
 using WGetNET.Exceptions;
 using WGetNET.HelperClasses;
+using System.IO;
 
 namespace WGetNET
 {
@@ -32,11 +33,7 @@ namespace WGetNET
         {
             get
             {
-                if (CheckWinGetVersion() != string.Empty)
-                {
-                    return true;
-                }
-                return false;
+                return CheckInstallation();
             }
         }
 
@@ -396,33 +393,59 @@ namespace WGetNET
         /// </returns>
         private string CheckWinGetVersion()
         {
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_versionCmd);
-
-                for (int i = 0; i < result.Output.Length; i++)
-                {
-#if NETCOREAPP3_1_OR_GREATER
-                    if (result.Output[i].StartsWith('v') && result.Output[i].Length >= 2)
-                    {
-                        // Return output without the 'v' at the start.
-                        return result.Output[i].Trim()[1..];
-                    }
-#elif NETSTANDARD2_0
-                    if (result.Output[i].StartsWith("v") && result.Output[i].Length >= 2)
-                    {
-                        return result.Output[i].Trim().Substring(1);
-                    }
-#endif
-                }
-            }
-            catch
+            if (!IsInstalled)
             {
                 return string.Empty;
             }
 
+            ProcessResult result =
+                _processManager.ExecuteWingetProcess(_versionCmd);
+
+            for (int i = 0; i < result.Output.Length; i++)
+            {
+#if NETCOREAPP3_1_OR_GREATER
+                if (result.Output[i].StartsWith('v') && result.Output[i].Length >= 2)
+                {
+                    // Return output without the 'v' at the start.
+                    return result.Output[i].Trim()[1..];
+                }
+#elif NETSTANDARD2_0
+                if (result.Output[i].StartsWith("v") && result.Output[i].Length >= 2)
+                {
+                // Return output without the 'v' at the start.
+                    return result.Output[i].Trim().Substring(1);
+                }
+#endif
+            }
+
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Checks if winget is installed on the system.
+        /// </summary>
+        /// <returns>
+        /// <see langword="true"/> if the winget installation could be found and <see langword="false"/> if not.
+        /// </returns>
+        private bool CheckInstallation()
+        {
+            string? pathEnvVar = Environment.GetEnvironmentVariable("Path");
+            if (string.IsNullOrWhiteSpace(pathEnvVar))
+            {
+                return false;
+            }
+
+            string[] paths = pathEnvVar.Split(';');
+
+            for (int i = 0; i < paths.Length; i++)
+            {
+                if (File.Exists(Path.Combine(paths[i], "winget.exe")))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
