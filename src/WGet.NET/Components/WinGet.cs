@@ -16,14 +16,6 @@ namespace WGetNET
     /// </summary>
     public class WinGet
     {
-        private protected ProcessManager ProcessManager
-        {
-            get
-            {
-                return _processManager;
-            }
-        }
-
         private const string _infoCmd = "--info";
         private const string _versionCmd = "--version";
         private const string _exportSettingsCmd = "settings export";
@@ -126,10 +118,7 @@ namespace WGetNET
         /// </exception>
         public string ExportSettings()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                _processManager.ExecuteWingetProcess(_exportSettingsCmd);
+            ProcessResult result = Execute(_exportSettingsCmd);
 
             return ProcessOutputReader.ExportOutputToString(result);
         }
@@ -146,10 +135,7 @@ namespace WGetNET
         /// </exception>
         public async Task<string> ExportSettingsAsync()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
+            ProcessResult result = await ExecuteAsync(_exportSettingsCmd);
 
             return ProcessOutputReader.ExportOutputToString(result);
         }
@@ -197,9 +183,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            ThrowIfNotInstalled();
-
-            ProcessResult result = _processManager.ExecuteWingetProcess(_exportSettingsCmd);
+            ProcessResult result = Execute(_exportSettingsCmd);
 
             FileHandler.ExportOutputToFile(file, result);
         }
@@ -247,9 +231,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            ThrowIfNotInstalled();
-
-            ProcessResult result = await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
+            ProcessResult result = await ExecuteAsync(_exportSettingsCmd);
 
             await FileHandler.ExportOutputToFileAsync(file, result);
         }
@@ -265,10 +247,7 @@ namespace WGetNET
         /// </exception>
         public WinGetInfo GetInfo()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                _processManager.ExecuteWingetProcess(_infoCmd);
+            ProcessResult result = Execute(_infoCmd);
 
             InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
             if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
@@ -299,10 +278,7 @@ namespace WGetNET
         /// </exception>
         public async Task<WinGetInfo> GetInfoAsync()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                await _processManager.ExecuteWingetProcessAsync(_infoCmd);
+            ProcessResult result = await ExecuteAsync(_infoCmd);
 
             InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
             if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
@@ -346,12 +322,51 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Exectutes a WinGet action from the given cmd.
+        /// </summary>
+        /// <param name="args">
+        /// A <see cref="System.String"/> containing the arguments for the WinGet process.
+        /// </param>
+        /// <returns>
+        /// The <see cref="WGetNET.Models.ProcessResult"/> for the process.
+        /// </returns>
+        /// <exception cref="WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        private protected ProcessResult Execute(string args)
+        {
+            ThrowIfNotInstalled();
+
+            return _processManager.ExecuteWingetProcess(args);
+        }
+
+        /// <summary>
+        /// Asynchronously exectutes a WinGet action from the given cmd.
+        /// </summary>
+        /// <param name="args">
+        /// A <see cref="System.String"/> containing the arguments for the WinGet process.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is the <see cref="WGetNET.Models.ProcessResult"/> for the process.
+        /// </returns>
+        /// <exception cref="WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        private protected async Task<ProcessResult> ExecuteAsync(string args)
+        {
+            ThrowIfNotInstalled();
+
+            return await _processManager.ExecuteWingetProcessAsync(args);
+        }
+
+        /// <summary>
         /// Throws a <see cref="WGetNET.Exceptions.WinGetNotInstalledException"/> if winget installation could not be found.
         /// </summary>
         /// <exception cref="WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        protected void ThrowIfNotInstalled()
+        private void ThrowIfNotInstalled()
         {
             if (!IsInstalled)
             {
@@ -372,8 +387,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            ProcessResult result =
-                _processManager.ExecuteWingetProcess(_versionCmd);
+            ProcessResult result = Execute(_versionCmd);
 
             for (int i = 0; i < result.Output.Length; i++)
             {

@@ -76,8 +76,6 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_searchCmd, packageId);
 
             if (exact)
@@ -85,8 +83,7 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
         }
@@ -118,8 +115,6 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
 
             if (exact)
@@ -127,8 +122,7 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
         }
@@ -157,8 +151,6 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_searchCmd, packageId);
 
             if (exact)
@@ -166,8 +158,7 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
         }
@@ -200,8 +191,6 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
 
             if (exact)
@@ -209,8 +198,7 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
         }
@@ -228,10 +216,7 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(_listCmd);
+            ProcessResult result = Execute(_listCmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
@@ -259,8 +244,6 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_searchInstalledCmd, packageId);
 
             if (exact)
@@ -268,8 +251,7 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
@@ -301,8 +283,6 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
 
             if (exact)
@@ -310,8 +290,7 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
@@ -328,10 +307,7 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(_listCmd);
+            ProcessResult result = await ExecuteAsync(_listCmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
@@ -360,8 +336,6 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_searchInstalledCmd, packageId);
 
             if (exact)
@@ -369,8 +343,7 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
@@ -403,8 +376,6 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
 
             if (exact)
@@ -412,8 +383,7 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
@@ -438,12 +408,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_installCmd, packageId);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -497,12 +464,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_installCmd, packageId);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -558,12 +522,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_uninstallCmd, packageId);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -617,12 +578,10 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_uninstallCmd, packageId);
 
             ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+                await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -669,12 +628,9 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetUpgradeablePackages()
         {
-            ThrowIfNotInstalled();
-
             string cmd = AddArgumentByVersion(_getUpgradeableCmd);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
@@ -691,12 +647,9 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync()
         {
-            ThrowIfNotInstalled();
-
             string cmd = AddArgumentByVersion(_getUpgradeableCmd);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
@@ -721,12 +674,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_upgradeCmd, packageId);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -780,12 +730,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_upgradeCmd, packageId);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -833,10 +780,7 @@ namespace WGetNET
         /// </exception>
         public bool UpgradeAllPackages()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(_upgradeAllCmd);
+            ProcessResult result = Execute(_upgradeAllCmd);
 
             return result.Success;
         }
@@ -856,14 +800,21 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpgradeAllPackagesAsync()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(_upgradeAllCmd);
+            ProcessResult result = await ExecuteAsync(_upgradeAllCmd);
 
             return result.Success;
         }
 
+        /// <summary>
+        /// Adds the '--include-unknown' argument to the given <see cref="System.String"/> of aruments
+        /// when the winget version is higher then 1.4.0.
+        /// </summary>
+        /// <param name="argument">
+        /// <see cref="System.String"/> containing the arguments that should be extended.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the new process arguments.
+        /// </returns>
         private string AddArgumentByVersion(string argument)
         {
             // Checking version to determine if "--include-unknown" is necessary.
@@ -897,12 +848,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_exportCmd, file);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -928,12 +876,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_exportCmd, file);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -962,12 +907,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_importCmd, file);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -997,12 +939,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_importCmd, file);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -1034,8 +973,6 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            ThrowIfNotInstalled();
-
             if (!File.Exists(file))
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file}'");
@@ -1043,8 +980,7 @@ namespace WGetNET
 
             string cmd = string.Format(_hashCmd, file);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             if (!result.Success)
             {
@@ -1076,8 +1012,6 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfObjectIsNull(file, "file");
 
-            ThrowIfNotInstalled();
-
             if (!file.Exists)
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file.FullName}'");
@@ -1085,8 +1019,7 @@ namespace WGetNET
 
             string cmd = string.Format(_hashCmd, file.FullName);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             if (!result.Success)
             {
@@ -1122,8 +1055,6 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            ThrowIfNotInstalled();
-
             if (!File.Exists(file))
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file}'");
@@ -1131,8 +1062,7 @@ namespace WGetNET
 
             string cmd = string.Format(_hashCmd, file);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             if (!result.Success)
             {
@@ -1165,8 +1095,6 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfObjectIsNull(file, "file");
 
-            ThrowIfNotInstalled();
-
             if (!file.Exists)
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file.FullName}'");
@@ -1174,8 +1102,7 @@ namespace WGetNET
 
             string cmd = string.Format(_hashCmd, file.FullName);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             if (!result.Success)
             {
@@ -1217,12 +1144,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_downloadCmd, packageId, directory);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -1356,12 +1280,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_downloadCmd, packageId, directory);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -1487,10 +1408,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(_pinListCmd);
+            ProcessResult result = Execute(_pinListCmd);
 
             return ProcessOutputReader.ToPinnedPackageList(result.Output);
         }
@@ -1515,10 +1433,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(_pinListCmd);
+            ProcessResult result = await ExecuteAsync(_pinListCmd);
 
             return ProcessOutputReader.ToPinnedPackageList(result.Output);
         }
@@ -1554,8 +1469,6 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinAddCmd, packageId);
 
             if (blocking)
@@ -1563,8 +1476,7 @@ namespace WGetNET
                 cmd += " --blocking";
             }
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -1602,12 +1514,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -1709,8 +1618,6 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinAddCmd, packageId);
 
             if (blocking)
@@ -1718,8 +1625,7 @@ namespace WGetNET
                 cmd += " --blocking";
             }
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -1758,12 +1664,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -1866,8 +1769,6 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinAddInstalledCmd, packageId);
 
             if (blocking)
@@ -1875,8 +1776,7 @@ namespace WGetNET
                 cmd += " --blocking";
             }
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -1914,12 +1814,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -2021,8 +1918,6 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinAddInstalledCmd, packageId);
 
             if (blocking)
@@ -2030,8 +1925,7 @@ namespace WGetNET
                 cmd += " --blocking";
             }
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -2070,12 +1964,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -2179,12 +2070,9 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinRemoveCmd, packageId);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -2249,12 +2137,9 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinRemoveCmd, packageId);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -2319,12 +2204,9 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -2389,12 +2271,9 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -2455,10 +2334,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(_pinResetCmd);
+            ProcessResult result = Execute(_pinResetCmd);
 
             return result.Success;
         }
@@ -2486,10 +2362,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(_pinResetCmd);
+            ProcessResult result = await ExecuteAsync(_pinResetCmd);
 
             return result.Success;
         }

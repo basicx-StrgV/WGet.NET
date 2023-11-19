@@ -42,10 +42,7 @@ namespace WGetNET
         /// </exception>
         public List<WinGetSource> GetInstalledSources()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(_sourceExportCmd);
+            ProcessResult result = Execute(_sourceExportCmd);
 
             return ProcessOutputReader.ToSourceList(result.Output);
         }
@@ -70,12 +67,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            ThrowIfNotInstalled();
-
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToSourceList(result.Output);
         }
@@ -92,10 +86,7 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetSource>> GetInstalledSourcesAsync()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(_sourceExportCmd);
+            ProcessResult result = await ExecuteAsync(_sourceExportCmd);
 
             return ProcessOutputReader.ToSourceList(result.Output);
         }
@@ -121,12 +112,9 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            ThrowIfNotInstalled();
-
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return ProcessOutputReader.ToSourceList(result.Output);
         }
@@ -167,12 +155,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -215,12 +200,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -327,12 +309,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -376,12 +355,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
@@ -474,10 +450,7 @@ namespace WGetNET
         /// </exception>
         public bool UpdateSources()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(_sourceUpdateCmd);
+            ProcessResult result = Execute(_sourceUpdateCmd);
 
             return result.Success;
         }
@@ -497,10 +470,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpdateSourcesAsync()
         {
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(_sourceUpdateCmd);
+            ProcessResult result = await ExecuteAsync(_sourceUpdateCmd);
 
             return result.Success;
         }
@@ -922,10 +892,7 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(_sourceResetCmd);
+            ProcessResult result = Execute(_sourceResetCmd);
 
             return result.Success;
         }
@@ -953,10 +920,7 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
-            ThrowIfNotInstalled();
-
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(_sourceResetCmd);
+            ProcessResult result = await ExecuteAsync(_sourceResetCmd);
 
             return result.Success;
         }
@@ -993,12 +957,9 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_sourceRemoveCmd, name);
 
-            ProcessResult result =
-                ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -1062,12 +1023,9 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
-            ThrowIfNotInstalled();
-
             string cmd = string.Format(_sourceRemoveCmd, name);
 
-            ProcessResult result =
-                await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd);
 
             return result.Success;
         }
