@@ -95,7 +95,7 @@ namespace WGetNET.Helper
                     break;
                 }
 #elif NETSTANDARD2_0
-                if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[columnList.Length-1])
+                if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[columnList.Length - 1])
                 {
                     break;
                 }
@@ -251,7 +251,7 @@ namespace WGetNET.Helper
                     break;
                 }
 #elif NETSTANDARD2_0
-                if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[columnList.Length-1])
+                if (string.IsNullOrWhiteSpace(output[i]) || output[i].Length < columnList[columnList.Length - 1])
                 {
                     break;
                 }
@@ -432,6 +432,8 @@ namespace WGetNET.Helper
         /// </returns>
         private static WinGetInfo ReadDataForRange1(string[] output)
         {
+            InfoSetBuilder builder = new();
+
             string version = ReadVersionFromData(output);
 
             if (string.IsNullOrWhiteSpace(version))
@@ -440,19 +442,17 @@ namespace WGetNET.Helper
                 return WinGetInfo.Empty;
             }
 
-            List<WinGetDirectory> directories = new();
-            WinGetDirectory? logs = ReadSingleDirectoryEntry(output, 7);
-            if (logs != null)
-            {
-                directories.Add(logs);
-            }
+            builder.AddVersion(version);
+
+            // Logs directory
+            builder.AddDirectory(ReadSingleDirectoryEntry(output, 7));
 
             // Remove unnasesary range from output
             output = output.RemoveRange(0, 11);
 
-            List<WinGetLink> links = ReadLinks(output);
+            builder.AddLinks(ReadLinks(output));
 
-            return new WinGetInfo(version, directories, links, new List<WinGetAdminOption>());
+            return builder.GetInstance();
         }
 
         /// <summary>
@@ -464,6 +464,8 @@ namespace WGetNET.Helper
         /// </returns>
         private static WinGetInfo ReadDataForRange2(string[] output)
         {
+            InfoSetBuilder builder = new();
+
             string version = ReadVersionFromData(output);
 
             if (string.IsNullOrWhiteSpace(version))
@@ -472,25 +474,20 @@ namespace WGetNET.Helper
                 return WinGetInfo.Empty;
             }
 
-            List<WinGetDirectory> directories = new();
-            WinGetDirectory? logs = ReadSingleDirectoryEntry(output, 7);
-            if (logs != null)
-            {
-                directories.Add(logs);
-            }
+            builder.AddVersion(version);
 
-            WinGetDirectory? userSettings = ReadSingleDirectoryEntry(output, 9);
-            if (userSettings != null)
-            {
-                directories.Add(userSettings);
-            }
+            // Logs directory
+            builder.AddDirectory(ReadSingleDirectoryEntry(output, 7));
+
+            // User Settings directory
+            builder.AddDirectory(ReadSingleDirectoryEntry(output, 9));
 
             // Remove unnasesary range from output
             output = output.RemoveRange(0, 13);
 
-            List<WinGetLink> links = ReadLinks(output);
+            builder.AddLinks(ReadLinks(output));
 
-            return new WinGetInfo(version, directories, links, new List<WinGetAdminOption>());
+            return builder.GetInstance();
         }
 
         /// <summary>
@@ -502,6 +499,8 @@ namespace WGetNET.Helper
         /// </returns>
         private static WinGetInfo ReadDataForRange3(string[] output)
         {
+            InfoSetBuilder builder = new();
+
             string version = ReadVersionFromData(output);
 
             if (string.IsNullOrWhiteSpace(version))
@@ -510,30 +509,25 @@ namespace WGetNET.Helper
                 return WinGetInfo.Empty;
             }
 
-            List<WinGetDirectory> directories = new();
-            WinGetDirectory? logs = ReadSingleDirectoryEntry(output, 7);
-            if (logs != null)
-            {
-                directories.Add(logs);
-            }
+            builder.AddVersion(version);
 
-            WinGetDirectory? userSettings = ReadSingleDirectoryEntry(output, 9);
-            if (userSettings != null)
-            {
-                directories.Add(userSettings);
-            }
+            // Logs directory
+            builder.AddDirectory(ReadSingleDirectoryEntry(output, 7));
+
+            // User Settings directory
+            builder.AddDirectory(ReadSingleDirectoryEntry(output, 9));
 
             // Remove unnasesary range from output
             output = output.RemoveRange(0, 13);
 
-            List<WinGetLink> links = ReadLinks(output);
+            builder.AddLinks(ReadLinks(output));
 
             // Remove links area and admin settings header range from output
             output = output.RemoveRange(0, output.GetEntryContains("----") + 1);
 
-            List<WinGetAdminOption> adminSetting = ReadAdminSettings(output);
+            builder.AddAdminOptions(ReadAdminSettings(output));
 
-            return new WinGetInfo(version, directories, links, adminSetting);
+            return builder.GetInstance();
         }
 
         /// <summary>
@@ -545,6 +539,8 @@ namespace WGetNET.Helper
         /// </returns>
         private static WinGetInfo ReadDataForRange4(string[] output)
         {
+            InfoSetBuilder builder = new();
+
             string version = ReadVersionFromData(output);
 
             if (string.IsNullOrWhiteSpace(version))
@@ -553,22 +549,24 @@ namespace WGetNET.Helper
                 return WinGetInfo.Empty;
             }
 
+            builder.AddVersion(version);
+
             // Remove unnasesary range from output
             output = output.RemoveRange(0, 9);
 
-            List<WinGetDirectory> directories = ReadDirectories(output);
+            builder.AddDirectories(ReadDirectories(output));
 
             // Remove directories area and links header range from output
             output = output.RemoveRange(0, output.GetEntryContains("----") + 1);
 
-            List<WinGetLink> links = ReadLinks(output);
+            builder.AddLinks(ReadLinks(output));
 
             // Remove links area and admin settings header range from output
             output = output.RemoveRange(0, output.GetEntryContains("----") + 1);
 
-            List<WinGetAdminOption> adminSetting = ReadAdminSettings(output);
+            builder.AddAdminOptions(ReadAdminSettings(output));
 
-            return new WinGetInfo(version, directories, links, adminSetting);
+            return builder.GetInstance();
         }
 
         /// <summary>

@@ -172,6 +172,91 @@
             A <see cref="T:System.String"/> containing the trimed path.
             </returns>
         </member>
+        <member name="T:WGetNET.Builder.InfoSetBuilder">
+            <summary>
+            Builder to create a new <see cref="T:WGetNET.WinGetInfo"/> instance.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.InfoSetBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.AddVersion(System.String)">
+            <summary>
+            Adds the current winget version.
+            </summary>
+            <param name="version">
+            The current winget version contained in a <see cref="T:System.String"/>.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.AddVersion(System.Version)">
+            <summary>
+            Adds the current winget version.
+            </summary>
+            <param name="version">
+            The current winget version.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.AddDirectories(System.Collections.Generic.List{WGetNET.WinGetDirectory})">
+            <summary>
+            Adds a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetDirectory"/> objects.
+            </summary>
+            <param name="directories">
+            The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetDirectory"/> objects.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.AddDirectory(WGetNET.WinGetDirectory)">
+            <summary>
+            Adds a <see cref="T:WGetNET.WinGetDirectory"/> object.
+            </summary>
+            <param name="directory">
+            The <see cref="T:WGetNET.WinGetDirectory"/> object.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.AddLinks(System.Collections.Generic.List{WGetNET.WinGetLink})">
+            <summary>
+            Adds a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetLink"/> objects.
+            </summary>
+            <param name="links">
+            The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetLink"/> objects.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.AddLink(WGetNET.WinGetLink)">
+            <summary>
+            Adds a <see cref="T:WGetNET.WinGetLink"/> object.
+            </summary>
+            <param name="link">
+            The <see cref="T:WGetNET.WinGetLink"/> object.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.AddAdminOptions(System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
+            <summary>
+            Adds a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminOption"/> objects.
+            </summary>
+            <param name="adminOptions">
+            The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminOption"/> objects.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.AddAdminOption(WGetNET.WinGetAdminOption)">
+            <summary>
+            Adds a <see cref="T:WGetNET.WinGetAdminOption"/> object.
+            </summary>
+            <param name="adminOption">
+            The <see cref="T:WGetNET.WinGetAdminOption"/> object.
+            </param>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.GetInstance">
+            <summary>
+            Returns a <see cref="T:WGetNET.WinGetInfo"/> instance from data provided to the builder.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetInfo"/> instance.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Builder.InfoSetBuilder.Clear">
+            <inheritdoc/>
+        </member>
         <member name="T:WGetNET.Builder.LinkBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetLink"/> instance.
@@ -3104,10 +3189,11 @@
             Gets an empty instance of this object.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetInfo.#ctor(System.String,System.Collections.Generic.List{WGetNET.WinGetDirectory},System.Collections.Generic.List{WGetNET.WinGetLink},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
+        <member name="M:WGetNET.WinGetInfo.#ctor(System.String,System.Version,System.Collections.Generic.List{WGetNET.WinGetDirectory},System.Collections.Generic.List{WGetNET.WinGetLink},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.
             </summary>
+            <param name="versionString">The installed winget version as a <see cref="T:System.String"/>.</param>
             <param name="version">The installed winget version.</param>
             <param name="directories">
             <see cref="T:System.Collections.Generic.List`1"/> of info entries containing the WinGet directories.
@@ -3115,7 +3201,7 @@
             <param name="links">
             <see cref="T:System.Collections.Generic.List`1"/> of info entries containing WinGet related links.
             </param>
-            <param name="adminSetting">
+            <param name="adminSettings">
             <see cref="T:System.Collections.Generic.List`1"/> of info entries containing the WinGet admin setting states.
             </param>
         </member>

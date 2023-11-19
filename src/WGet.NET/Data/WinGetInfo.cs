@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using WGetNET.Parser;
 
 namespace WGetNET
 {
@@ -65,7 +64,7 @@ namespace WGetNET
         {
             get
             {
-                return _adminSetting;
+                return _adminSettings;
             }
         }
 
@@ -79,7 +78,7 @@ namespace WGetNET
                 if (string.IsNullOrWhiteSpace(_versionString) &&
                     (_directories == null || _directories.Count <= 0) &&
                     (_links == null || _links.Count <= 0) &&
-                    (_adminSetting == null || _adminSetting.Count <= 0))
+                    (_adminSettings == null || _adminSettings.Count <= 0))
                 {
                     return true;
                 }
@@ -94,7 +93,7 @@ namespace WGetNET
         {
             get
             {
-                return new WinGetInfo("", new List<WinGetDirectory>(), new List<WinGetLink>(), new List<WinGetAdminOption>());
+                return new WinGetInfo("", new Version(0, 0), new List<WinGetDirectory>(), new List<WinGetLink>(), new List<WinGetAdminOption>());
             }
         }
 
@@ -102,11 +101,12 @@ namespace WGetNET
         private readonly Version _version;
         private readonly ReadOnlyCollection<WinGetDirectory> _directories;
         private readonly ReadOnlyCollection<WinGetLink> _links;
-        private readonly ReadOnlyCollection<WinGetAdminOption> _adminSetting;
+        private readonly ReadOnlyCollection<WinGetAdminOption> _adminSettings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetInfo"/> class.
         /// </summary>
+        /// <param name="versionString">The installed winget version as a <see cref="System.String"/>.</param>
         /// <param name="version">The installed winget version.</param>
         /// <param name="directories">
         /// <see cref="System.Collections.Generic.List{T}"/> of info entries containing the WinGet directories.
@@ -114,16 +114,16 @@ namespace WGetNET
         /// <param name="links">
         /// <see cref="System.Collections.Generic.List{T}"/> of info entries containing WinGet related links.
         /// </param>
-        /// <param name="adminSetting">
+        /// <param name="adminSettings">
         /// <see cref="System.Collections.Generic.List{T}"/> of info entries containing the WinGet admin setting states.
         /// </param>
-        internal WinGetInfo(string version, List<WinGetDirectory> directories, List<WinGetLink> links, List<WinGetAdminOption> adminSetting)
+        internal WinGetInfo(string versionString, Version version, List<WinGetDirectory> directories, List<WinGetLink> links, List<WinGetAdminOption> adminSettings)
         {
-            _versionString = version;
-            _version = VersionParser.Parse(version);
+            _versionString = versionString;
+            _version = version;
             _directories = new ReadOnlyCollection<WinGetDirectory>(directories);
             _links = new ReadOnlyCollection<WinGetLink>(links);
-            _adminSetting = new ReadOnlyCollection<WinGetAdminOption>(adminSetting);
+            _adminSettings = new ReadOnlyCollection<WinGetAdminOption>(adminSettings);
         }
     }
 }
