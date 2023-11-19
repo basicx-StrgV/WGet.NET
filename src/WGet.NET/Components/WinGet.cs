@@ -22,6 +22,11 @@ namespace WGetNET
         private const string _exportSettingsCmd = "settings export";
 
         private protected readonly ProcessManager _processManager;
+        private protected readonly bool _isInstalled;
+
+        private readonly string _wingetExePath;
+        private readonly string _versionString;
+        private readonly Version _version;
 
         /// <summary>
         /// Gets if winget is installed on the system.
@@ -33,7 +38,7 @@ namespace WGetNET
         {
             get
             {
-                return CheckInstallation();
+                return _isInstalled;
             }
         }
 
@@ -47,7 +52,7 @@ namespace WGetNET
         {
             get
             {
-                return CheckWinGetVersion();
+                return _versionString;
             }
         }
 
@@ -61,7 +66,7 @@ namespace WGetNET
         {
             get
             {
-                return VersionParser.Parse(CheckWinGetVersion());
+                return _version;
             }
         }
 
@@ -70,7 +75,21 @@ namespace WGetNET
         /// </summary>
         public WinGet()
         {
-            _processManager = new ProcessManager("winget");
+            _wingetExePath = CheckInstallation();
+
+            if (string.IsNullOrWhiteSpace(_wingetExePath))
+            {
+                _isInstalled = false;
+                _processManager = new ProcessManager("winget");
+            }
+            else
+            {
+                _isInstalled = true;
+                _processManager = new ProcessManager(_wingetExePath);
+            }
+
+            _versionString = CheckWinGetVersion();
+            _version = VersionParser.Parse(_versionString);
         }
 
         /// <summary>
@@ -393,7 +412,7 @@ namespace WGetNET
         /// </returns>
         private string CheckWinGetVersion()
         {
-            if (!IsInstalled)
+            if (!_isInstalled)
             {
                 return string.Empty;
             }
@@ -422,30 +441,32 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Checks if winget is installed on the system.
+        /// Checks if winget is installed on the system and returns the path to the executable.
         /// </summary>
         /// <returns>
-        /// <see langword="true"/> if the winget installation could be found and <see langword="false"/> if not.
+        /// <see cref="System.String"/> containing the executable path if it was found or <see cref="System.String.Empty"/> if not. 
         /// </returns>
-        private bool CheckInstallation()
+        private string CheckInstallation()
         {
             string? pathEnvVar = Environment.GetEnvironmentVariable("Path");
             if (string.IsNullOrWhiteSpace(pathEnvVar))
             {
-                return false;
+                return string.Empty;
             }
 
             string[] paths = pathEnvVar.Split(';');
 
+            string exePath;
             for (int i = 0; i < paths.Length; i++)
             {
-                if (File.Exists(Path.Combine(paths[i], "winget.exe")))
+                exePath = Path.Combine(paths[i], "winget.exe");
+                if (File.Exists(exePath))
                 {
-                    return true;
+                    return exePath;
                 }
             }
 
-            return false;
+            return string.Empty;
         }
     }
 }

@@ -29,8 +29,6 @@ namespace WGetTest
 
                 Version winGetVersionObject = connector.Version;
 
-                bool uriTest = Uri.TryCreate("", UriKind.Absolute, out Uri? uri);
-
                 WinGetInfo info = winget.GetInfo();
                 Console.WriteLine(info.Version);
 
