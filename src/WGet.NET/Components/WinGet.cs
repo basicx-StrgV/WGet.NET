@@ -5,9 +5,12 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Security.Principal;
 using WGetNET.Models;
 using WGetNET.Exceptions;
 using WGetNET.HelperClasses;
+using WGetNET.Components.Internal;
+using System.Security;
 
 namespace WGetNET
 {
@@ -25,6 +28,8 @@ namespace WGetNET
         private DateTime _wingetExeModificationData;
         private string _versionString;
         private Version _version;
+
+        private readonly bool _administratorPrivileges;
 
         /// <summary>
         /// Gets if winget is installed on the system.
@@ -97,6 +102,9 @@ namespace WGetNET
         /// </summary>
         public WinGet()
         {
+            // Check if the current process has administrator privileges
+            _administratorPrivileges = CheckAdministratorPrivileges();
+
             // Set inital values
             _processManager = new ProcessManager("winget");
             _wingetExePath = string.Empty;
@@ -327,15 +335,27 @@ namespace WGetNET
         /// <param name="args">
         /// A <see cref="System.String"/> containing the arguments for the WinGet process.
         /// </param>
+        /// <param name="needsAdminRights">
+        /// Sets if the process that should be executed needs administrator privileges.
+        /// </param>
         /// <returns>
         /// The <see cref="WGetNET.Models.ProcessResult"/> for the process.
         /// </returns>
-        /// <exception cref="WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        private protected ProcessResult Execute(string args)
+        /// <exception cref="System.Security.SecurityException">
+        /// The current process does not have administrator privileges. 
+        /// (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
+        /// </exception>
+        private protected ProcessResult Execute(string args, bool needsAdminRights = false)
         {
             ThrowIfNotInstalled();
+
+            if (needsAdminRights)
+            {
+                ThrowIfNotAdmin();
+            }
 
             return _processManager.ExecuteWingetProcess(args);
         }
@@ -346,16 +366,28 @@ namespace WGetNET
         /// <param name="args">
         /// A <see cref="System.String"/> containing the arguments for the WinGet process.
         /// </param>
+        /// <param name="needsAdminRights">
+        /// Sets if the process that should be executed needs administrator privileges.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is the <see cref="WGetNET.Models.ProcessResult"/> for the process.
         /// </returns>
-        /// <exception cref="WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        private protected async Task<ProcessResult> ExecuteAsync(string args)
+        /// <exception cref="System.Security.SecurityException">
+        /// The current process does not have administrator privileges.
+        /// (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
+        /// </exception>
+        private protected async Task<ProcessResult> ExecuteAsync(string args, bool needsAdminRights = false)
         {
             ThrowIfNotInstalled();
+
+            if (needsAdminRights)
+            {
+                ThrowIfNotAdmin();
+            }
 
             return await _processManager.ExecuteWingetProcessAsync(args);
         }
@@ -371,6 +403,20 @@ namespace WGetNET
             if (!IsInstalled)
             {
                 throw new WinGetNotInstalledException();
+            }
+        }
+
+        /// <summary>
+        /// Throws a <see cref="System.Security.SecurityException"/> if the current process does not have administrator privileges.
+        /// </summary>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current process does not have administrator privileges.
+        /// </exception>
+        private void ThrowIfNotAdmin()
+        {
+            if (!_administratorPrivileges)
+            {
+                throw new SecurityException("Administrator privileges are missing.");
             }
         }
 
@@ -483,6 +529,32 @@ namespace WGetNET
             _version = VersionParser.Parse(_versionString);
 
             return isInstalled;
+        }
+
+        /// <summary>
+        /// Check if the current user has administrator privileges.
+        /// </summary>
+        /// <returns>
+        /// <see langword="true"/> if the current user has administrator privileges and
+        /// <see langword="false"/> if not.
+        /// </returns>
+        private bool CheckAdministratorPrivileges()
+        {
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                // Making sure windows related functions dont get called on none windows systems.
+                return true;
+            }
+
+            using WindowsIdentity? identity = WindowsIdentity.GetCurrent(false);
+
+            if (identity != null)
+            {
+                return new WindowsPrincipal(identity)
+                    .IsInRole(WindowsBuiltInRole.Administrator);
+            }
+
+            return false;
         }
     }
 }

@@ -2,7 +2,6 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-using System.Security;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET.Models;
@@ -147,17 +146,12 @@ namespace WGetNET
         /// </exception>
         public bool AddSource(string name, string arg)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
-            ProcessResult result = Execute(cmd);
+            ProcessResult result = Execute(cmd, true);
 
             return result.Success;
         }
@@ -191,18 +185,13 @@ namespace WGetNET
         /// </exception>
         public bool AddSource(string name, string arg, string type)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
-            ProcessResult result = Execute(cmd);
+            ProcessResult result = Execute(cmd, true);
 
             return result.Success;
         }
@@ -301,17 +290,12 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> AddSourceAsync(string name, string arg)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, true);
 
             return result.Success;
         }
@@ -346,18 +330,13 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> AddSourceAsync(string name, string arg, string type)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, true);
 
             return result.Success;
         }
@@ -887,12 +866,7 @@ namespace WGetNET
         /// </exception>
         public bool ResetSources()
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
-            ProcessResult result = Execute(_sourceResetCmd);
+            ProcessResult result = Execute(_sourceResetCmd, true);
 
             return result.Success;
         }
@@ -915,12 +889,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ResetSourcesAsync()
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
-            ProcessResult result = await ExecuteAsync(_sourceResetCmd);
+            ProcessResult result = await ExecuteAsync(_sourceResetCmd, true);
 
             return result.Success;
         }
@@ -950,16 +919,11 @@ namespace WGetNET
         /// </exception>
         public bool RemoveSources(string name)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
             string cmd = string.Format(_sourceRemoveCmd, name);
 
-            ProcessResult result = Execute(cmd);
+            ProcessResult result = Execute(cmd, true);
 
             return result.Success;
         }
@@ -1016,16 +980,11 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> RemoveSourcesAsync(string name)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
             string cmd = string.Format(_sourceRemoveCmd, name);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, true);
 
             return result.Success;
         }

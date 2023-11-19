@@ -404,21 +404,21 @@
         <member name="M:WGetNET.Builder.PinnedPackageBuilder.Clear">
             <inheritdoc/>
         </member>
-        <member name="T:WGetNET.ProcessManager">
+        <member name="T:WGetNET.Components.Internal.ProcessManager">
             <summary>
-            The <see langword="internal"/> class <see cref="T:WGetNET.ProcessManager"/> 
+            The <see langword="internal"/> class <see cref="T:WGetNET.Components.Internal.ProcessManager"/> 
             provides the winget process execution.
             </summary>
         </member>
-        <member name="M:WGetNET.ProcessManager.#ctor(System.String)">
+        <member name="M:WGetNET.Components.Internal.ProcessManager.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.ProcessManager"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.Components.Internal.ProcessManager"/> class.
             </summary>
             <param name="processName">
             The name of the process to execute.
             </param>
         </member>
-        <member name="M:WGetNET.ProcessManager.ExecuteWingetProcess(System.String)">
+        <member name="M:WGetNET.Components.Internal.ProcessManager.ExecuteWingetProcess(System.String)">
             <summary>
             Executes a winget process with the given command and returns the result.
             </summary>
@@ -430,7 +430,7 @@
             containing the output an exit id of the process.
             </returns>
         </member>
-        <member name="M:WGetNET.ProcessManager.ExecuteWingetProcessAsync(System.String)">
+        <member name="M:WGetNET.Components.Internal.ProcessManager.ExecuteWingetProcessAsync(System.String)">
             <summary>
             Asynchronous executes a winget process with the given command and returns the result.
             </summary>
@@ -442,7 +442,7 @@
             containing the output an exit id of the process.
             </returns>
         </member>
-        <member name="M:WGetNET.ProcessManager.GetStartInfo(System.String)">
+        <member name="M:WGetNET.Components.Internal.ProcessManager.GetStartInfo(System.String)">
             <summary>
             Gets the start info for a process.
             </summary>
@@ -453,7 +453,7 @@
             A <see cref="T:System.Diagnostics.ProcessStartInfo"/> object, for the process.
             </returns>
         </member>
-        <member name="M:WGetNET.ProcessManager.RunProcess(System.Diagnostics.ProcessStartInfo)">
+        <member name="M:WGetNET.Components.Internal.ProcessManager.RunProcess(System.Diagnostics.ProcessStartInfo)">
             <summary>
             Runs a process with the current start informations.
             </summary>
@@ -462,7 +462,7 @@
             containing the output an exit id of the process.
             </returns>
         </member>
-        <member name="M:WGetNET.ProcessManager.RunProcessAsync(System.Diagnostics.ProcessStartInfo)">
+        <member name="M:WGetNET.Components.Internal.ProcessManager.RunProcessAsync(System.Diagnostics.ProcessStartInfo)">
             <summary>
             Asynchronous runs a process with the current start informations.
             </summary>
@@ -471,7 +471,7 @@
             containing the output an exit id of the process.
             </returns>
         </member>
-        <member name="M:WGetNET.ProcessManager.ReadSreamOutput(System.IO.StreamReader)">
+        <member name="M:WGetNET.Components.Internal.ProcessManager.ReadSreamOutput(System.IO.StreamReader)">
             <summary>
             Reads the data from the process output to a string array.
             </summary>
@@ -483,7 +483,7 @@
             containing the process output stream content by lines.
             </returns>
         </member>
-        <member name="M:WGetNET.ProcessManager.ReadSreamOutputAsync(System.IO.StreamReader)">
+        <member name="M:WGetNET.Components.Internal.ProcessManager.ReadSreamOutputAsync(System.IO.StreamReader)">
             <summary>
             Asynchronous reads the data from the process output to a string array.
             </summary>
@@ -668,12 +668,15 @@
             <see langword="true"/> if the installed WinGet version matches the check, or <see langword="false"/> if not.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGet.Execute(System.String)">
+        <member name="M:WGetNET.WinGet.Execute(System.String,System.Boolean)">
             <summary>
             Exectutes a WinGet action from the given cmd.
             </summary>
             <param name="args">
             A <see cref="T:System.String"/> containing the arguments for the WinGet process.
+            </param>
+            <param name="needsAdminRights">
+            Sets if the process that should be executed needs administrator privileges.
             </param>
             <returns>
             The <see cref="T:WGetNET.Models.ProcessResult"/> for the process.
@@ -681,13 +684,20 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current process does not have administrator privileges. 
+            (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
+            </exception>
         </member>
-        <member name="M:WGetNET.WinGet.ExecuteAsync(System.String)">
+        <member name="M:WGetNET.WinGet.ExecuteAsync(System.String,System.Boolean)">
             <summary>
             Asynchronously exectutes a WinGet action from the given cmd.
             </summary>
             <param name="args">
             A <see cref="T:System.String"/> containing the arguments for the WinGet process.
+            </param>
+            <param name="needsAdminRights">
+            Sets if the process that should be executed needs administrator privileges.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -696,6 +706,10 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current process does not have administrator privileges.
+            (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.ThrowIfNotInstalled">
             <summary>
@@ -703,6 +717,14 @@
             </summary>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.ThrowIfNotAdmin">
+            <summary>
+            Throws a <see cref="T:System.Security.SecurityException"/> if the current process does not have administrator privileges.
+            </summary>
+            <exception cref="T:System.Security.SecurityException">
+            The current process does not have administrator privileges.
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.CheckWinGetVersion">
@@ -735,6 +757,15 @@
             </summary>
             <returns>
             <see langword="true"/> if the installation was found and <see langword="false"/> if not.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGet.CheckAdministratorPrivileges">
+            <summary>
+            Check if the current user has administrator privileges.
+            </summary>
+            <returns>
+            <see langword="true"/> if the current user has administrator privileges and
+            <see langword="false"/> if not.
             </returns>
         </member>
         <member name="T:WGetNET.WinGetPackageManager">
@@ -3929,29 +3960,6 @@
             <param name="input">The object to serialize.</param>
             <returns>
             A <see cref="T:System.String"/> containing the generated json.
-            </returns>
-        </member>
-        <member name="T:WGetNET.HelperClasses.PrivilegeChecker">
-            <summary>
-            The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.PrivilegeChecker"/> class,
-            provides methods for checking user privileges.
-            </summary>
-        </member>
-        <member name="M:WGetNET.HelperClasses.PrivilegeChecker.CheckAdministratorPrivileges">
-            <summary>
-            Check if the current user has administrator privileges.
-            </summary>
-            <returns>
-            <see langword="true"/> if the current user has administrator privileges and
-            <see langword="false"/> if not.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.PrivilegeChecker.CurrentUserIsAdmin">
-            <summary>
-            Checks if the current user is an administrator.
-            </summary>
-            <returns>
-            <see langword="true"/> if the user is a admin and <see langword="false"/> if not.
             </returns>
         </member>
         <member name="T:WGetNET.HelperClasses.ProcessOutputReader">

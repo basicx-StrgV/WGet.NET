@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 using WGetNET.Models;
 using WGetNET.Extensions;
 
-namespace WGetNET
+namespace WGetNET.Components.Internal
 {
     /// <summary>
-    /// The <see langword="internal"/> class <see cref="WGetNET.ProcessManager"/> 
+    /// The <see langword="internal"/> class <see cref="ProcessManager"/> 
     /// provides the winget process execution.
     /// </summary>
     internal class ProcessManager
@@ -20,7 +20,7 @@ namespace WGetNET
         private readonly ProcessStartInfo _winGetStartInfoTemplate;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.ProcessManager"/> class.
+        /// Initializes a new instance of the <see cref="ProcessManager"/> class.
         /// </summary>
         /// <param name="processName">
         /// The name of the process to execute.
@@ -41,10 +41,10 @@ namespace WGetNET
         /// Executes a winget process with the given command and returns the result.
         /// </summary>
         /// <param name="cmd">
-        /// A <see cref="System.String"/> representing the command that winget should be executed with.
+        /// A <see cref="string"/> representing the command that winget should be executed with.
         /// </param>
         /// <returns>
-        /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
+        /// A <see cref="ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
         public ProcessResult ExecuteWingetProcess(string cmd)
@@ -56,10 +56,10 @@ namespace WGetNET
         /// Asynchronous executes a winget process with the given command and returns the result.
         /// </summary>
         /// <param name="cmd">
-        /// A <see cref="System.String"/> representing the command that winget should be executed with.
+        /// A <see cref="string"/> representing the command that winget should be executed with.
         /// </param>
         /// <returns>
-        /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
+        /// A <see cref="ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
         public async Task<ProcessResult> ExecuteWingetProcessAsync(string cmd)
@@ -74,7 +74,7 @@ namespace WGetNET
         /// String containig the arguments for the action.
         /// </param>
         /// <returns>
-        /// A <see cref="System.Diagnostics.ProcessStartInfo"/> object, for the process.
+        /// A <see cref="ProcessStartInfo"/> object, for the process.
         /// </returns>
         private ProcessStartInfo GetStartInfo(string cmd)
         {
@@ -94,7 +94,7 @@ namespace WGetNET
         /// Runs a process with the current start informations.
         /// </summary>
         /// <returns>
-        /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
+        /// A <see cref="ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
         private ProcessResult RunProcess(ProcessStartInfo processStartInfo)
@@ -120,7 +120,7 @@ namespace WGetNET
         /// Asynchronous runs a process with the current start informations.
         /// </summary>
         /// <returns>
-        /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
+        /// A <see cref="ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
         private async Task<ProcessResult> RunProcessAsync(ProcessStartInfo processStartInfo)
@@ -146,10 +146,10 @@ namespace WGetNET
         /// Reads the data from the process output to a string array.
         /// </summary>
         /// <param name="output">
-        /// The <see cref="System.IO.StreamReader"/> with the process output.
+        /// The <see cref="StreamReader"/> with the process output.
         /// </param>
         /// <returns>
-        /// A <see cref="System.String"/> array 
+        /// A <see cref="string"/> array 
         /// containing the process output stream content by lines.
         /// </returns>
         private string[] ReadSreamOutput(StreamReader output)
@@ -175,10 +175,10 @@ namespace WGetNET
         /// Asynchronous reads the data from the process output to a string array.
         /// </summary>
         /// <param name="output">
-        /// The <see cref="System.IO.StreamReader"/> with the process output.
+        /// The <see cref="StreamReader"/> with the process output.
         /// </param>
         /// <returns>
-        /// A <see cref="System.String"/> array 
+        /// A <see cref="string"/> array 
         /// containing the process output stream content by lines.
         /// </returns>
         private async Task<string[]> ReadSreamOutputAsync(StreamReader output)
