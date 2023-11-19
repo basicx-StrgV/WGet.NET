@@ -108,6 +108,9 @@ namespace WGetTest
             {
                 sw.Stop();
                 Console.WriteLine("Execution Time: " + sw.Elapsed);
+
+                Console.WriteLine("\nEnd of Test! Press any button to exit.");
+                Console.Read();
             }
         }
     }

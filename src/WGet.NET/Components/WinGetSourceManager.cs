@@ -2,12 +2,10 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-using System;
 using System.Security;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET.Models;
-using WGetNET.Exceptions;
 using WGetNET.HelperClasses;
 
 namespace WGetNET
@@ -42,25 +40,14 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         public List<WinGetSource> GetInstalledSources()
         {
             ThrowIfNotInstalled();
 
-            try
-            {
-                ProcessResult result =
-                    ProcessManager.ExecuteWingetProcess(_sourceExportCmd);
+            ProcessResult result =
+                ProcessManager.ExecuteWingetProcess(_sourceExportCmd);
 
-                return ProcessOutputReader.ToSourceList(result.Output);
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceExportCmd, e);
-            }
+            return ProcessOutputReader.ToSourceList(result.Output);
         }
 
         /// <summary>
@@ -72,10 +59,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -91,17 +74,10 @@ namespace WGetNET
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
-            try
-            {
-                ProcessResult result =
-                    ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result =
+                ProcessManager.ExecuteWingetProcess(cmd);
 
-                return ProcessOutputReader.ToSourceList(result.Output);
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
-            }
+            return ProcessOutputReader.ToSourceList(result.Output);
         }
 
         /// <summary>
@@ -114,25 +90,14 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         public async Task<List<WinGetSource>> GetInstalledSourcesAsync()
         {
             ThrowIfNotInstalled();
 
-            try
-            {
-                ProcessResult result =
-                    await ProcessManager.ExecuteWingetProcessAsync(_sourceExportCmd);
+            ProcessResult result =
+                await ProcessManager.ExecuteWingetProcessAsync(_sourceExportCmd);
 
-                return ProcessOutputReader.ToSourceList(result.Output);
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceExportCmd, e);
-            }
+            return ProcessOutputReader.ToSourceList(result.Output);
         }
 
         /// <summary>
@@ -145,10 +110,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -164,17 +125,10 @@ namespace WGetNET
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
-            try
-            {
-                ProcessResult result =
-                    await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result =
+                await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
-                return ProcessOutputReader.ToSourceList(result.Output);
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
-            }
+            return ProcessOutputReader.ToSourceList(result.Output);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -193,10 +147,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -221,17 +171,10 @@ namespace WGetNET
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
-            try
-            {
-                ProcessResult result =
-                    ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result =
+                ProcessManager.ExecuteWingetProcess(cmd);
 
-                return result.Success;
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -251,10 +194,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -280,17 +219,10 @@ namespace WGetNET
 
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
-            try
-            {
-                ProcessResult result =
-                    ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result =
+                ProcessManager.ExecuteWingetProcess(cmd);
 
-                return result.Success;
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -304,10 +236,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -341,10 +269,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -384,10 +308,6 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
         /// </exception>
@@ -411,17 +331,10 @@ namespace WGetNET
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
-            try
-            {
-                ProcessResult result =
-                    await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result =
+                await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
-                return result.Success;
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -442,10 +355,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -471,17 +380,10 @@ namespace WGetNET
 
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
-            try
-            {
-                ProcessResult result =
-                    await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result =
+                await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
-                return result.Success;
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -496,10 +398,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -538,10 +436,6 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
@@ -578,25 +472,14 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         public bool UpdateSources()
         {
             ThrowIfNotInstalled();
 
-            try
-            {
-                ProcessResult result =
-                    ProcessManager.ExecuteWingetProcess(_sourceUpdateCmd);
+            ProcessResult result =
+                ProcessManager.ExecuteWingetProcess(_sourceUpdateCmd);
 
-                return result.Success;
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Updating sources failed.", _sourceUpdateCmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -612,25 +495,14 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         public async Task<bool> UpdateSourcesAsync()
         {
             ThrowIfNotInstalled();
 
-            try
-            {
-                ProcessResult result =
-                    await ProcessManager.ExecuteWingetProcessAsync(_sourceUpdateCmd);
+            ProcessResult result =
+                await ProcessManager.ExecuteWingetProcessAsync(_sourceUpdateCmd);
 
-                return result.Success;
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Updating sources failed.", _sourceUpdateCmd, e);
-            }
+            return result.Success;
         }
         //---------------------------------------------------------------------------------------------
 
@@ -644,10 +516,6 @@ namespace WGetNET
         /// <param name="file">The file for the export.</param>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
@@ -696,10 +564,6 @@ namespace WGetNET
         /// <param name="sourceName">The name of the source for the export.</param>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
@@ -754,10 +618,6 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
@@ -804,10 +664,6 @@ namespace WGetNET
         /// <param name="file">The file for the export.</param>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
@@ -858,10 +714,6 @@ namespace WGetNET
         /// <param name="sourceName">The name of the source for the export.</param>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
@@ -919,10 +771,6 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
@@ -971,10 +819,6 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
@@ -1017,10 +861,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
@@ -1072,10 +912,6 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -1088,17 +924,10 @@ namespace WGetNET
 
             ThrowIfNotInstalled();
 
-            try
-            {
-                ProcessResult result =
-                    ProcessManager.ExecuteWingetProcess(_sourceResetCmd);
+            ProcessResult result =
+                ProcessManager.ExecuteWingetProcess(_sourceResetCmd);
 
-                return result.Success;
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Reset sources failed.", _sourceResetCmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -1114,10 +943,6 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
@@ -1130,17 +955,10 @@ namespace WGetNET
 
             ThrowIfNotInstalled();
 
-            try
-            {
-                ProcessResult result =
-                    await ProcessManager.ExecuteWingetProcessAsync(_sourceResetCmd);
+            ProcessResult result =
+                await ProcessManager.ExecuteWingetProcessAsync(_sourceResetCmd);
 
-                return result.Success;
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Reset sources failed.", _sourceResetCmd, e);
-            }
+            return result.Success;
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1156,10 +974,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -1183,17 +997,10 @@ namespace WGetNET
 
             string cmd = string.Format(_sourceRemoveCmd, name);
 
-            try
-            {
-                ProcessResult result =
-                    ProcessManager.ExecuteWingetProcess(cmd);
+            ProcessResult result =
+                ProcessManager.ExecuteWingetProcess(cmd);
 
-                return result.Success;
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Removing source failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -1207,10 +1014,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -1241,10 +1044,6 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
         /// </exception>
@@ -1267,17 +1066,10 @@ namespace WGetNET
 
             string cmd = string.Format(_sourceRemoveCmd, name);
 
-            try
-            {
-                ProcessResult result =
-                    await ProcessManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result =
+                await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
-                return result.Success;
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Removing source failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -1292,10 +1084,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.

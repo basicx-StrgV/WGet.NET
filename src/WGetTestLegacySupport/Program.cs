@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET;
+using System.Diagnostics;
 
 namespace WGetTestLegacySupport
 {
@@ -19,6 +20,7 @@ namespace WGetTestLegacySupport
 
         private void Run()
         {
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 WinGetPackageManager connector = new WinGetPackageManager();
@@ -49,21 +51,28 @@ namespace WGetTestLegacySupport
                 bool sourceUpdateStatus = sourceManager.UpdateSources();
                 //bool sourceResetStatus = sourceManager.ResetSources();
 
-                Task sorceJson3Task = sourceManager.ExportSourcesToFileAsync("C:\\Test\\AllSources.json");
-                sorceJson3Task.Wait();
+                string json = sourceManager.SourcesToJson(sourceList);
+                Console.WriteLine(json);
+
+                sourceManager.ExportSourcesToFile("C:\\Test\\AllSources.json");
                 sourceManager.ExportSourcesToFile("C:\\Test\\msstoreSources.json", "msstore");
                 //bool addSuccess = sourceManager.AddSource("msstore", "https://storeedgefd.dsx.mp.microsoft.com/v9.0", "Microsoft.Rest");
 
                 string hash = connector.Hash("C:\\Test\\HashTest.txt");
                 Console.WriteLine(hash);
 
-                string settings = connector.ExportSettings();
-                Task settingExportStatusTask = connector.ExportSettingsToFileAsync("C:\\Test\\Settings.json");
-                settingExportStatusTask.Wait();
+                Task<string> settingsTask = connector.ExportSettingsAsync();
+                settingsTask.Wait();
+                string settings = settingsTask.Result;
+                connector.ExportSettingsToFile("C:\\Test\\Settings.json");
 
                 //bool upAllresult = connector.UpgradeAllPackages();
 
-                bool downloadResult = connector.Download("7zip.7zip", "C:\\Test");
+                List<WinGetPackage> packageList = connector.SearchPackage("7zip.7zip", "winget");
+                if (packageList.Count > 0)
+                {
+                    bool downloadResult = connector.Download(packageList[0], "C:\\Test");
+                }
 
                 Console.WriteLine(connector.PinAdd("7zip.7zip", true));
                 List<WinGetPinnedPackage> pinnedList1 = connector.GetPinnedPackages();
@@ -79,12 +88,29 @@ namespace WGetTestLegacySupport
                 Console.WriteLine(connector.PinAddInstalled("7zip.7zip", "23.*"));
                 Console.WriteLine(connector.PinRemoveInstalled("7zip.7zip"));
 
-                Console.WriteLine("\nEnd of Test! Press any button to exit.");
-                Console.Read();
+                Console.WriteLine(connector.ResetPins());
+
+                Console.WriteLine("Package Equals:");
+
+                WinGetPackage p1 = WinGetPackage.Create("SampleP1", "SampleId1", "1.0.0", "SampleSource");
+                WinGetPackage p2 = WinGetPackage.Create("SampleP2", "SampleId2", "2.0.0", "3.0.0", "");
+
+                Console.WriteLine(p1.Equals(p1));
+                Console.WriteLine(p1.Equals(p2));
+                Console.WriteLine(p2.Equals(p2));
+                Console.WriteLine(p2.Equals(p1));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+            }
+            finally
+            {
+                sw.Stop();
+                Console.WriteLine("Execution Time: " + sw.Elapsed);
+
+                Console.WriteLine("\nEnd of Test! Press any button to exit.");
+                Console.Read();
             }
         }
     }

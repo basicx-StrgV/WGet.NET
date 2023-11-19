@@ -539,10 +539,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExportSettingsAsync">
             <summary>
@@ -554,10 +550,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExportSettingsToFile(System.String)">
@@ -572,10 +564,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
@@ -617,10 +605,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
@@ -658,10 +642,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGet.GetInfoAsync">
             <summary>
@@ -673,10 +653,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.CheckWinGetVersion(System.Version,System.Version)">
@@ -756,10 +732,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -784,10 +756,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -809,10 +777,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -839,10 +803,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -860,10 +820,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages(System.String,System.Boolean)">
             <summary>
@@ -878,10 +834,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -907,10 +859,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -929,10 +877,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync(System.String,System.Boolean)">
             <summary>
@@ -948,10 +892,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -978,10 +918,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1000,10 +936,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1021,10 +953,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1045,10 +973,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1068,10 +992,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1090,10 +1010,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1111,10 +1027,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1135,10 +1047,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1158,10 +1066,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1179,10 +1083,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackagesAsync">
             <summary>
@@ -1195,10 +1095,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(System.String)">
             <summary>
@@ -1210,10 +1106,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1232,10 +1124,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1256,10 +1144,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1278,10 +1162,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1303,10 +1183,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradeAllPackagesAsync">
             <summary>
@@ -1322,10 +1198,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFile(System.String)">
             <summary>
@@ -1337,10 +1209,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1360,10 +1228,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1386,10 +1250,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1414,10 +1274,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1437,10 +1293,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1465,10 +1317,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
@@ -1489,10 +1337,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1518,10 +1362,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
@@ -1540,10 +1380,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -1570,10 +1406,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -1595,10 +1427,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -1625,10 +1453,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -1651,10 +1475,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -1682,10 +1502,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1708,10 +1524,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -1738,10 +1550,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -1762,10 +1570,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -1780,10 +1584,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -1800,10 +1600,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -1830,10 +1626,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -1855,10 +1647,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -1885,10 +1673,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -1911,10 +1695,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -1942,10 +1722,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -1968,10 +1744,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -1999,10 +1771,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2024,10 +1792,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -2054,10 +1818,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2079,10 +1839,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -2109,10 +1865,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2135,10 +1887,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -2166,10 +1914,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2192,10 +1936,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -2223,10 +1963,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2248,10 +1984,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2272,10 +2004,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -2299,10 +2027,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2325,10 +2049,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2350,10 +2070,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2374,10 +2090,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -2401,10 +2113,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2426,10 +2134,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -2454,10 +2158,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
@@ -2475,10 +2175,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
@@ -2504,10 +2200,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.GetInstalledSources(System.String)">
             <summary>
@@ -2519,10 +2211,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -2542,10 +2230,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.GetInstalledSourcesAsync(System.String)">
             <summary>
@@ -2558,10 +2242,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -2585,10 +2265,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -2619,10 +2295,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -2645,10 +2317,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -2673,10 +2341,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -2700,10 +2364,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -2735,10 +2395,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -2762,10 +2418,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -2794,10 +2446,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
@@ -2818,10 +2466,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.UpdateSourcesAsync">
             <summary>
@@ -2837,10 +2481,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String)">
             <summary>
@@ -2852,10 +2492,6 @@
             <param name="file">The file for the export.</param>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
@@ -2895,10 +2531,6 @@
             <param name="sourceName">The name of the source for the export.</param>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
@@ -2943,10 +2575,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
@@ -2988,10 +2616,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
@@ -3019,52 +2643,7 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,System.String)">
-            <summary>
-            Asynchronously exports the winget sources in json format to a file.
-            </summary>
-            <remarks>
-            If the provided file and/or path does not exist, they will be created.
-            </remarks>
-            <returns>
-            The <see cref="T:System.Threading.Tasks.Task"/> for the action.
-            </returns>
-            <param name="file">The file for the export.</param>
-            <param name="sourceName">The name of the source for the export.</param>
-            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
-            WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
-            <exception cref="T:System.ArgumentNullException">
-            A provided argument is null.
-            </exception>
-            <exception cref="T:System.ArgumentException">
-            <para>A provided argument is empty.</para>
-            <para>-or-</para>
-            <para>The path contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars"/>.</para>
-            </exception>
-            <exception cref="T:System.IO.DirectoryNotFoundException">
-            The directory root does not exist.
-            </exception>
-            <exception cref="T:System.IO.PathTooLongException">
-            The specified path, file name, or both exceed the system-defined maximum length.
-            </exception>
-            <exception cref="T:System.UnauthorizedAccessException">
-            The caller does not have the required permission.
-            </exception>
-            <exception cref="T:System.IO.IOException">
-            An I/O error occurred while opening the file
-            </exception>
-            <exception cref="T:System.NotSupportedException">
-            Path is in an invalid format.
-            </exception>
-            <exception cref="T:System.Security.SecurityException">
-            The caller does not have the required permission.
-            </exception>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,System.String)" -->
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,WGetNET.IWinGetSource)">
             <summary>
             Asynchronously exports the winget sources in json format to a file.
@@ -3083,10 +2662,6 @@
             </param>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
@@ -3128,10 +2703,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
             The provided JSON could not be deserialized.
             </exception>
@@ -3159,10 +2730,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
             The provided JSON could not be deserialized.
             </exception>
@@ -3189,10 +2756,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
@@ -3211,10 +2774,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
@@ -3231,10 +2790,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -3258,10 +2813,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -3287,10 +2838,6 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
-            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -3314,10 +2861,6 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
-            </exception>
-            <exception cref="T:WGetNET.Exceptions.WinGetActionFailedException">
-            The current action failed for an unexpected reason.
-            Please see inner exception.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -3885,62 +3428,6 @@
         <member name="M:WGetNET.Exceptions.InvalidJsonException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.Exceptions.InvalidJsonException"/> class with serialized data.
-            </summary>
-            <param name="info">
-            The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> 
-            that holds the serialized object data about the exception being thrown.
-            </param>
-            <param name="context">
-            The <see cref="T:System.Runtime.Serialization.StreamingContext"/> 
-            that contains contextual information about the source or destination.
-            </param>
-        </member>
-        <member name="T:WGetNET.Exceptions.WinGetActionFailedException">
-            <summary>
-            Exception that gets thrown if a winget action failed.
-            </summary>
-        </member>
-        <member name="P:WGetNET.Exceptions.WinGetActionFailedException.Message">
-            <summary>
-            Gets a message that describes the current exception.
-            </summary>
-        </member>
-        <member name="M:WGetNET.Exceptions.WinGetActionFailedException.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.WinGetActionFailedException"/> class.
-            </summary>
-        </member>
-        <member name="M:WGetNET.Exceptions.WinGetActionFailedException.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.WinGetActionFailedException"/> class.
-            </summary>
-            <param name="message">Message of the exception</param>
-        </member>
-        <member name="M:WGetNET.Exceptions.WinGetActionFailedException.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.WinGetActionFailedException"/> class.
-            </summary>
-            <param name="message">Message of the exception</param>
-            <param name="action">The winget action that was executed</param>
-        </member>
-        <member name="M:WGetNET.Exceptions.WinGetActionFailedException.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.WinGetActionFailedException"/> class.
-            </summary>
-            <param name="message">Message of the exception</param>
-            <param name="innerException">The inner exception</param>
-        </member>
-        <member name="M:WGetNET.Exceptions.WinGetActionFailedException.#ctor(System.String,System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.WinGetActionFailedException"/> class.
-            </summary>
-            <param name="message">Message of the exception</param>
-            <param name="action">The winget action that was executed</param>
-            <param name="innerException">The inner exception</param>
-        </member>
-        <member name="M:WGetNET.Exceptions.WinGetActionFailedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Exceptions.WinGetActionFailedException"/> class with serialized data.
             </summary>
             <param name="info">
             The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> 

@@ -124,25 +124,14 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         public string ExportSettings()
         {
             ThrowIfNotInstalled();
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_exportSettingsCmd);
+            ProcessResult result =
+                _processManager.ExecuteWingetProcess(_exportSettingsCmd);
 
-                return ProcessOutputReader.ExportOutputToString(result);
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", _exportSettingsCmd, e);
-            }
+            return ProcessOutputReader.ExportOutputToString(result);
         }
 
         /// <summary>
@@ -155,25 +144,14 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         public async Task<string> ExportSettingsAsync()
         {
             ThrowIfNotInstalled();
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
+            ProcessResult result =
+                await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
 
-                return ProcessOutputReader.ExportOutputToString(result);
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", _exportSettingsCmd, e);
-            }
+            return ProcessOutputReader.ExportOutputToString(result);
         }
 
         /// <summary>
@@ -187,10 +165,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
@@ -225,16 +199,7 @@ namespace WGetNET
 
             ThrowIfNotInstalled();
 
-            ProcessResult result;
-
-            try
-            {
-                result = _processManager.ExecuteWingetProcess(_exportSettingsCmd);
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", _exportSettingsCmd, e);
-            }
+            ProcessResult result = _processManager.ExecuteWingetProcess(_exportSettingsCmd);
 
             FileHandler.ExportOutputToFile(file, result);
         }
@@ -250,10 +215,6 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
@@ -288,16 +249,7 @@ namespace WGetNET
 
             ThrowIfNotInstalled();
 
-            ProcessResult result;
-
-            try
-            {
-                result = await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", _exportSettingsCmd, e);
-            }
+            ProcessResult result = await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
 
             await FileHandler.ExportOutputToFileAsync(file, result);
         }
@@ -311,39 +263,28 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         public WinGetInfo GetInfo()
         {
             ThrowIfNotInstalled();
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_infoCmd);
+            ProcessResult result =
+                _processManager.ExecuteWingetProcess(_infoCmd);
 
-                InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
-                if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
-                {
-                    actionVersionId = InfoActionVersionId.VersionRange2;
-                }
-                else if (CheckWinGetVersion(new Version(1, 5, 441), new Version(1, 5, 441)))
-                {
-                    actionVersionId = InfoActionVersionId.VersionRange3;
-                }
-                else if (CheckWinGetVersion(new Version(1, 5, 1081)))
-                {
-                    actionVersionId = InfoActionVersionId.VersionRange4;
-                }
-
-                return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
-            }
-            catch (Exception e)
+            InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
+            if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
             {
-                throw new WinGetActionFailedException("Getting data failed.", _infoCmd, e);
+                actionVersionId = InfoActionVersionId.VersionRange2;
             }
+            else if (CheckWinGetVersion(new Version(1, 5, 441), new Version(1, 5, 441)))
+            {
+                actionVersionId = InfoActionVersionId.VersionRange3;
+            }
+            else if (CheckWinGetVersion(new Version(1, 5, 1081)))
+            {
+                actionVersionId = InfoActionVersionId.VersionRange4;
+            }
+
+            return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
         }
 
         /// <summary>
@@ -356,39 +297,28 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         public async Task<WinGetInfo> GetInfoAsync()
         {
             ThrowIfNotInstalled();
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_infoCmd);
+            ProcessResult result =
+                await _processManager.ExecuteWingetProcessAsync(_infoCmd);
 
-                InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
-                if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
-                {
-                    actionVersionId = InfoActionVersionId.VersionRange2;
-                }
-                else if (CheckWinGetVersion(new Version(1, 5, 441), new Version(1, 5, 441)))
-                {
-                    actionVersionId = InfoActionVersionId.VersionRange3;
-                }
-                else if (CheckWinGetVersion(new Version(1, 5, 1081)))
-                {
-                    actionVersionId = InfoActionVersionId.VersionRange4;
-                }
-
-                return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
-            }
-            catch (Exception e)
+            InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
+            if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
             {
-                throw new WinGetActionFailedException("Getting data failed.", _infoCmd, e);
+                actionVersionId = InfoActionVersionId.VersionRange2;
             }
+            else if (CheckWinGetVersion(new Version(1, 5, 441), new Version(1, 5, 441)))
+            {
+                actionVersionId = InfoActionVersionId.VersionRange3;
+            }
+            else if (CheckWinGetVersion(new Version(1, 5, 1081)))
+            {
+                actionVersionId = InfoActionVersionId.VersionRange4;
+            }
+
+            return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
         }
 
         /// <summary>
