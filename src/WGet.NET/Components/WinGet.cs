@@ -4,13 +4,14 @@
 //--------------------------------------------------//
 using System;
 using System.IO;
+using System.Security;
 using System.Threading.Tasks;
 using System.Security.Principal;
 using WGetNET.Models;
+using WGetNET.Helper;
+using WGetNET.Parser;
 using WGetNET.Exceptions;
-using WGetNET.HelperClasses;
 using WGetNET.Components.Internal;
-using System.Security;
 
 namespace WGetNET
 {
@@ -193,7 +194,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(_exportSettingsCmd);
 
-            FileHandler.ExportOutputToFile(file, result);
+            FileHelper.ExportOutputToFile(file, result);
         }
 
         /// <summary>
@@ -241,7 +242,7 @@ namespace WGetNET
 
             ProcessResult result = await ExecuteAsync(_exportSettingsCmd);
 
-            await FileHandler.ExportOutputToFileAsync(file, result);
+            await FileHelper.ExportOutputToFileAsync(file, result);
         }
 
         /// <summary>

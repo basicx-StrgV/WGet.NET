@@ -13,13 +13,13 @@ using Newtonsoft.Json;
 #endif
 using WGetNET.Exceptions;
 
-namespace WGetNET.HelperClasses
+namespace WGetNET.Helper
 {
     /// <summary>
-    /// The <see langword="static"/> <see cref="WGetNET.HelperClasses.JsonHandler"/> class,
-    /// provieds methods handle json actions.
+    /// The <see langword="static"/> <see cref="WGetNET.Helper.JsonHelper"/> class,
+    /// provieds methods for working with json.
     /// </summary>
-    internal static class JsonHandler
+    internal static class JsonHelper
     {
         /// <summary>
         /// Deserializes a given json <see cref="System.String"/> to a object of the given class.
@@ -36,7 +36,7 @@ namespace WGetNET.HelperClasses
         /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
-        public static T StringToObject<T>(string jsonString) where T: class
+        public static T StringToObject<T>(string jsonString) where T : class
         {
             T? instance = null;
 
@@ -114,7 +114,7 @@ namespace WGetNET.HelperClasses
             string json = string.Empty;
 
 #if NETCOREAPP3_1_OR_GREATER
-                json = JsonSerializer.Serialize(input);
+            json = JsonSerializer.Serialize(input);
 #elif NETSTANDARD2_0
                 json = JsonConvert.SerializeObject(input);
 #endif

@@ -6,9 +6,12 @@ using System.IO;
 using System.Threading.Tasks;
 using WGetNET.Models;
 
-namespace WGetNET.HelperClasses
+namespace WGetNET.Helper
 {
-    internal static class FileHandler
+    /// <summary>
+    /// The <see langword="static"/> <see cref="WGetNET.Helper.FileHelper"/> class provides methods for working with files.
+    /// </summary>
+    internal static class FileHelper
     {
         /// <summary>
         /// Writes the export result to a file.

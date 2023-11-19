@@ -5,19 +5,19 @@
 using System;
 using System.Text;
 
-namespace WGetNET.HelperClasses
+namespace WGetNET.Parser
 {
     /// <summary>
-    /// Handels the parsing of strings to a <see cref="System.Version"/> instance.
+    /// Handels the parsing of strings to a <see cref="Version"/> instance.
     /// </summary>
     internal static class VersionParser
     {
         /// <summary>
-        /// Parses a <see cref="System.String"/> to a <see cref="System.Version"/> instance as best as possible.
+        /// Parses a <see cref="string"/> to a <see cref="Version"/> instance as best as possible.
         /// </summary>
-        /// <param name="input">The <see cref="System.String"/> to parse.</param>
+        /// <param name="input">The <see cref="string"/> to parse.</param>
         /// <returns>
-        /// The created <see cref="System.Version"/> instance.
+        /// The created <see cref="Version"/> instance.
         /// </returns>
         public static Version Parse(string input)
         {
@@ -35,14 +35,14 @@ namespace WGetNET.HelperClasses
         }
 
         /// <summary>
-        /// Parses a <see cref="System.String"/> to a <see cref="System.Version"/> instance as best as possible.
+        /// Parses a <see cref="string"/> to a <see cref="Version"/> instance as best as possible.
         /// </summary>
         /// <remarks>
         /// This tries to resolve the string one by one to parse it.
         /// </remarks>
-        /// <param name="input">The <see cref="System.String"/> to parse.</param>
+        /// <param name="input">The <see cref="string"/> to parse.</param>
         /// <returns>
-        /// The created <see cref="System.Version"/> instance.
+        /// The created <see cref="Version"/> instance.
         /// </returns>
         private static Version CleanParse(string input)
         {
@@ -88,12 +88,12 @@ namespace WGetNET.HelperClasses
         }
 
         /// <summary>
-        /// Parses a <see cref="System.String"/> to a <see cref="System.Int32"/> as best as possible.
+        /// Parses a <see cref="string"/> to a <see cref="int"/> as best as possible.
         /// </summary>
-        /// <param name="input">The <see cref="System.String"/> to parse.</param>
+        /// <param name="input">The <see cref="string"/> to parse.</param>
         /// <param name="defaultValue">Default value that is used if the input can't be parsed.</param>
         /// <returns>
-        /// The created <see cref="System.Int32"/>.
+        /// The created <see cref="int"/>.
         /// </returns>
         private static int ParseToInt(string input, int defaultValue = 0)
         {
@@ -106,16 +106,16 @@ namespace WGetNET.HelperClasses
         }
 
         /// <summary>
-        /// Parses a <see cref="System.String"/> to a <see cref="System.Int32"/> as best as possible.
+        /// Parses a <see cref="string"/> to a <see cref="int"/> as best as possible.
         /// </summary>
         /// <remarks>
-        /// This tries to clean the provided input <see cref="System.String"/>, 
-        /// with minimal data loss, so it can be parsed to a <see cref="System.Int32"/>
+        /// This tries to clean the provided input <see cref="string"/>, 
+        /// with minimal data loss, so it can be parsed to a <see cref="int"/>
         /// </remarks>
-        /// <param name="input">The <see cref="System.String"/> to parse.</param>
+        /// <param name="input">The <see cref="string"/> to parse.</param>
         /// <param name="defaultValue">Default value that is used if the input can't be parsed.</param>
         /// <returns>
-        /// The created <see cref="System.Int32"/>.
+        /// The created <see cref="int"/>.
         /// </returns>
         private static int CleanParseToInt(string input, int defaultValue = 0)
         {
@@ -130,14 +130,14 @@ namespace WGetNET.HelperClasses
         }
 
         /// <summary>
-        /// Cleans a <see cref="System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="System.Int32"/>.
+        /// Cleans a <see cref="string"/>, with minimal version information loss, so it can be parsed to a <see cref="int"/>.
         /// </summary>
         /// <remarks>
-        /// If the <see cref="System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
+        /// If the <see cref="string"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
         /// </remarks>
-        /// <param name="input">The <see cref="System.String"/> to clean up.</param>
+        /// <param name="input">The <see cref="string"/> to clean up.</param>
         /// <returns>
-        /// The processed <see cref="System.String"/>:
+        /// The processed <see cref="string"/>:
         /// </returns>
         private static string CleanupNumberString(string input)
         {
@@ -176,9 +176,9 @@ namespace WGetNET.HelperClasses
         /// <remarks>
         /// An version appendix could look like this: '-preview', '-beta2' or '-pre'.
         /// </remarks>
-        /// <param name="input">The <see cref="System.String"/> to process.</param>
+        /// <param name="input">The <see cref="string"/> to process.</param>
         /// <returns>
-        /// The processed <see cref="System.String"/>.
+        /// The processed <see cref="string"/>.
         /// </returns>
         private static string RemoveAppendix(string input)
         {

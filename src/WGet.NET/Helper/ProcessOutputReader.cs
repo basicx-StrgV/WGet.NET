@@ -8,10 +8,10 @@ using WGetNET.Models;
 using WGetNET.Builder;
 using WGetNET.Extensions;
 
-namespace WGetNET.HelperClasses
+namespace WGetNET.Helper
 {
     /// <summary>
-    /// The <see langword="static"/> <see cref="WGetNET.HelperClasses.ProcessOutputReader"/> class,
+    /// The <see langword="static"/> <see cref="WGetNET.Helper.ProcessOutputReader"/> class,
     /// provieds <see langword="static"/> methodes to process the output of the winget processes.
     /// </summary>
     internal static class ProcessOutputReader
@@ -342,7 +342,7 @@ namespace WGetNET.HelperClasses
             for (int i = 0; i < output.Length; i++)
             {
                 SourceModel? source =
-                    JsonHandler.StringToObject<SourceModel>(output[i]);
+                    JsonHelper.StringToObject<SourceModel>(output[i]);
 
                 if (source != null)
                 {

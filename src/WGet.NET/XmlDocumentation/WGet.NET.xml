@@ -3696,12 +3696,12 @@
             The <see langword="array"/> with empty entries removed.
             </returns>
         </member>
-        <member name="T:WGetNET.HelperClasses.ArgsHelper">
+        <member name="T:WGetNET.Helper.ArgsHelper">
             <summary>
             Provides methods for argument checking and exception throwing.
             </summary>
         </member>
-        <member name="M:WGetNET.HelperClasses.ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(System.String,System.String)">
+        <member name="M:WGetNET.Helper.ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(System.String,System.String)">
             <summary>
             Throws an exception if the given string is <see langword="null"/> or empty/whitespace.
             </summary>
@@ -3718,7 +3718,7 @@
             The given string is null.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.ArgsHelper.ThrowIfObjectIsNull(System.Object,System.String)">
+        <member name="M:WGetNET.Helper.ArgsHelper.ThrowIfObjectIsNull(System.Object,System.String)">
             <summary>
             Throws a <see cref="T:System.ArgumentNullException"/> if the given object is <see langword="null"/>.
             </summary>
@@ -3732,7 +3732,7 @@
             The given object is <see langword="null"/>
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(WGetNET.IWinGetObject,System.String)">
+        <member name="M:WGetNET.Helper.ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(WGetNET.IWinGetObject,System.String)">
             <summary>
             Throws an exception if the given winget object is <see langword="null"/> or empty.
             </summary>
@@ -3749,7 +3749,7 @@
             The given winget object is null.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.ArgsHelper.ThrowIfPathIsInvalid(System.String)">
+        <member name="M:WGetNET.Helper.ArgsHelper.ThrowIfPathIsInvalid(System.String)">
             <summary>
             Throws one of the listet exception if the path is invalid or cant be accessed.
             </summary>
@@ -3769,7 +3769,12 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFile(System.String,WGetNET.Models.ProcessResult)">
+        <member name="T:WGetNET.Helper.FileHelper">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.Helper.FileHelper"/> class provides methods for working with files.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Helper.FileHelper.ExportOutputToFile(System.String,WGetNET.Models.ProcessResult)">
             <summary>
             Writes the export result to a file.
             </summary>
@@ -3808,7 +3813,7 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.FileHandler.ExportOutputToFileAsync(System.String,WGetNET.Models.ProcessResult)">
+        <member name="M:WGetNET.Helper.FileHelper.ExportOutputToFileAsync(System.String,WGetNET.Models.ProcessResult)">
             <summary>
             Asynchronous writes the export result to a file.
             </summary>
@@ -3848,7 +3853,7 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.FileHandler.WriteTextToFile(System.String,System.String)">
+        <member name="M:WGetNET.Helper.FileHelper.WriteTextToFile(System.String,System.String)">
             <summary>
             Writes the provided text to the given file.
             </summary>
@@ -3880,7 +3885,7 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.FileHandler.WriteTextToFileAsync(System.String,System.String)">
+        <member name="M:WGetNET.Helper.FileHelper.WriteTextToFileAsync(System.String,System.String)">
             <summary>
             Asyncounes writes the provided text to the given file.
             </summary>
@@ -3912,13 +3917,13 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="T:WGetNET.HelperClasses.JsonHandler">
+        <member name="T:WGetNET.Helper.JsonHelper">
             <summary>
-            The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.JsonHandler"/> class,
-            provieds methods handle json actions.
+            The <see langword="static"/> <see cref="T:WGetNET.Helper.JsonHelper"/> class,
+            provieds methods for working with json.
             </summary>
         </member>
-        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObject``1(System.String)">
+        <member name="M:WGetNET.Helper.JsonHelper.StringToObject``1(System.String)">
             <summary>
             Deserializes a given json <see cref="T:System.String"/> to a object of the given class.
             </summary>
@@ -3935,7 +3940,7 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.JsonHandler.StringToObjectAsync``1(System.String)">
+        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String)">
             <summary>
             Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
             </summary>
@@ -3953,7 +3958,7 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
-        <member name="M:WGetNET.HelperClasses.JsonHandler.GetJson(System.Object)">
+        <member name="M:WGetNET.Helper.JsonHelper.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
             </summary>
@@ -3962,13 +3967,13 @@
             A <see cref="T:System.String"/> containing the generated json.
             </returns>
         </member>
-        <member name="T:WGetNET.HelperClasses.ProcessOutputReader">
+        <member name="T:WGetNET.Helper.ProcessOutputReader">
             <summary>
-            The <see langword="static"/> <see cref="T:WGetNET.HelperClasses.ProcessOutputReader"/> class,
+            The <see langword="static"/> <see cref="T:WGetNET.Helper.ProcessOutputReader"/> class,
             provieds <see langword="static"/> methodes to process the output of the winget processes.
             </summary>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToPackageList(System.String[],WGetNET.PackageAction,System.String)">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ToPackageList(System.String[],WGetNET.PackageAction,System.String)">
             <summary>
             Converts a <see cref="T:System.Collections.Generic.List`1"/> 
             of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPackage"/>'s.
@@ -3986,7 +3991,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePackageListFromOutput(System.String[],System.Int32[],WGetNET.PackageAction,System.String)">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.CreatePackageListFromOutput(System.String[],System.Int32[],WGetNET.PackageAction,System.String)">
             <summary>
             Creates a package list from output.
             </summary>
@@ -4006,7 +4011,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPackage"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToPinnedPackageList(System.String[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ToPinnedPackageList(System.String[])">
             <summary>
             Converts a <see cref="T:System.Collections.Generic.List`1"/> 
             of output lines from a winget process to a list of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
@@ -4018,7 +4023,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.CreatePinnedPackageListFromOutput(System.String[],System.Int32[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.CreatePinnedPackageListFromOutput(System.String[],System.Int32[])">
             <summary>
             Creates a pinned package list from output.
             </summary>
@@ -4032,7 +4037,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetPinnedPackage"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToSourceList(System.String[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ToSourceList(System.String[])">
             <summary>
             Converts a <see cref="T:System.Collections.Generic.List`1"/> 
             of output lines from a winget process, that contains the sources in json format, to a list of <see cref="T:WGetNET.WinGetSource"/>'s.
@@ -4044,7 +4049,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetSource"/>'s.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ToWingetInfo(System.String[],WGetNET.InfoActionVersionId)">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ToWingetInfo(System.String[],WGetNET.InfoActionVersionId)">
             <summary>
             Creates a <see cref="T:WGetNET.WinGetInfo"/> object from the winget output.
             </summary>
@@ -4054,14 +4059,14 @@
             The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadVersionFromData(System.String[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadVersionFromData(System.String[])">
             <summary>
             Reads the version number from the winget info output.
             </summary>
             <param name="output"></param>
             <returns></returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataByRange(System.String[],WGetNET.InfoActionVersionId)">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDataByRange(System.String[],WGetNET.InfoActionVersionId)">
             <summary>
             Initializes the reading of the data for the specific version range.
             </summary>
@@ -4071,7 +4076,7 @@
             The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange1(System.String[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDataForRange1(System.String[])">
             <summary>
             Reads the data from the winget info output for the version range 1.
             </summary>
@@ -4080,7 +4085,7 @@
             The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange2(System.String[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDataForRange2(System.String[])">
             <summary>
             Reads the data from the winget info output for the version range 1.
             </summary>
@@ -4089,7 +4094,7 @@
             The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange3(System.String[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDataForRange3(System.String[])">
             <summary>
             Reads the data from the winget info output for the version range 1.
             </summary>
@@ -4098,7 +4103,7 @@
             The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDataForRange4(System.String[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDataForRange4(System.String[])">
             <summary>
             Reads the data from the winget info output for the version range 1.
             </summary>
@@ -4107,7 +4112,7 @@
             The <see cref="T:WGetNET.WinGetInfo"/> object created from the output.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadSingleDirectoryEntry(System.String[],System.Int32)">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadSingleDirectoryEntry(System.String[],System.Int32)">
             <summary>
             Reads a single directory entry from the winget info output.
             </summary>
@@ -4117,7 +4122,7 @@
             A <see cref="T:WGetNET.WinGetDirectory"/> instance if the action was successful, or null if it failed. 
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadDirectories(System.String[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadDirectories(System.String[])">
             <summary>
             Reads all directories from the winget info output.
             </summary>
@@ -4129,7 +4134,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetDirectory"/> objects.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadLinks(System.String[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadLinks(System.String[])">
             <summary>
             Reads all links from the winget info output.
             </summary>
@@ -4141,7 +4146,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetLink"/> objects.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ReadAdminSettings(System.String[])">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ReadAdminSettings(System.String[])">
             <summary>
             Reads all admin options from the winget info output.
             </summary>
@@ -4153,7 +4158,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminOption"/> objects.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ResultToHash(WGetNET.Models.ProcessResult)">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ResultToHash(WGetNET.Models.ProcessResult)">
             <summary>
             Reads the hash from the winget hash action result.
             </summary>
@@ -4164,7 +4169,7 @@
             A <see cref="T:System.String"/> containing the hash value.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.ExportOutputToString(WGetNET.Models.ProcessResult)">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.ExportOutputToString(WGetNET.Models.ProcessResult)">
             <summary>
             Writes the export result to a <see cref="T:System.String"/>.
             </summary>
@@ -4175,7 +4180,7 @@
             The <see cref="T:System.String"/> containing the export result.
             </returns>
         </member>
-        <member name="M:WGetNET.HelperClasses.ProcessOutputReader.GetColumnList(System.String,System.Boolean)">
+        <member name="M:WGetNET.Helper.ProcessOutputReader.GetColumnList(System.String,System.Boolean)">
             <summary>
             Gets all column start indexes from the input line.
             </summary>
@@ -4185,80 +4190,6 @@
             <param name="isPinnedPackageTable">Activate workaround for the pinned package list.</param>
             <returns>
             A <see cref="T:System.Int32"/> <see langword="array"/> containing the column start indexes.
-            </returns>
-        </member>
-        <member name="T:WGetNET.HelperClasses.VersionParser">
-            <summary>
-            Handels the parsing of strings to a <see cref="T:System.Version"/> instance.
-            </summary>
-        </member>
-        <member name="M:WGetNET.HelperClasses.VersionParser.Parse(System.String)">
-            <summary>
-            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Version"/> instance as best as possible.
-            </summary>
-            <param name="input">The <see cref="T:System.String"/> to parse.</param>
-            <returns>
-            The created <see cref="T:System.Version"/> instance.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.VersionParser.CleanParse(System.String)">
-            <summary>
-            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Version"/> instance as best as possible.
-            </summary>
-            <remarks>
-            This tries to resolve the string one by one to parse it.
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to parse.</param>
-            <returns>
-            The created <see cref="T:System.Version"/> instance.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.VersionParser.ParseToInt(System.String,System.Int32)">
-            <summary>
-            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Int32"/> as best as possible.
-            </summary>
-            <param name="input">The <see cref="T:System.String"/> to parse.</param>
-            <param name="defaultValue">Default value that is used if the input can't be parsed.</param>
-            <returns>
-            The created <see cref="T:System.Int32"/>.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.VersionParser.CleanParseToInt(System.String,System.Int32)">
-            <summary>
-            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Int32"/> as best as possible.
-            </summary>
-            <remarks>
-            This tries to clean the provided input <see cref="T:System.String"/>, 
-            with minimal data loss, so it can be parsed to a <see cref="T:System.Int32"/>
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to parse.</param>
-            <param name="defaultValue">Default value that is used if the input can't be parsed.</param>
-            <returns>
-            The created <see cref="T:System.Int32"/>.
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.VersionParser.CleanupNumberString(System.String)">
-            <summary>
-            Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
-            </summary>
-            <remarks>
-            If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
-            <returns>
-            The processed <see cref="T:System.String"/>:
-            </returns>
-        </member>
-        <member name="M:WGetNET.HelperClasses.VersionParser.RemoveAppendix(System.String)">
-            <summary>
-            Removes version appendixes from the string.
-            </summary>
-            <remarks>
-            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to process.</param>
-            <returns>
-            The processed <see cref="T:System.String"/>.
             </returns>
         </member>
         <member name="T:WGetNET.IWinGetObject">
@@ -4404,6 +4335,80 @@
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
             </summary>
+        </member>
+        <member name="T:WGetNET.Parser.VersionParser">
+            <summary>
+            Handels the parsing of strings to a <see cref="T:System.Version"/> instance.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.Parse(System.String)">
+            <summary>
+            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Version"/> instance as best as possible.
+            </summary>
+            <param name="input">The <see cref="T:System.String"/> to parse.</param>
+            <returns>
+            The created <see cref="T:System.Version"/> instance.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.CleanParse(System.String)">
+            <summary>
+            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Version"/> instance as best as possible.
+            </summary>
+            <remarks>
+            This tries to resolve the string one by one to parse it.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to parse.</param>
+            <returns>
+            The created <see cref="T:System.Version"/> instance.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.ParseToInt(System.String,System.Int32)">
+            <summary>
+            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Int32"/> as best as possible.
+            </summary>
+            <param name="input">The <see cref="T:System.String"/> to parse.</param>
+            <param name="defaultValue">Default value that is used if the input can't be parsed.</param>
+            <returns>
+            The created <see cref="T:System.Int32"/>.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.CleanParseToInt(System.String,System.Int32)">
+            <summary>
+            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Int32"/> as best as possible.
+            </summary>
+            <remarks>
+            This tries to clean the provided input <see cref="T:System.String"/>, 
+            with minimal data loss, so it can be parsed to a <see cref="T:System.Int32"/>
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to parse.</param>
+            <param name="defaultValue">Default value that is used if the input can't be parsed.</param>
+            <returns>
+            The created <see cref="T:System.Int32"/>.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.CleanupNumberString(System.String)">
+            <summary>
+            Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
+            </summary>
+            <remarks>
+            If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>:
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.RemoveAppendix(System.String)">
+            <summary>
+            Removes version appendixes from the string.
+            </summary>
+            <remarks>
+            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to process.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>.
+            </returns>
         </member>
     </members>
 </doc>

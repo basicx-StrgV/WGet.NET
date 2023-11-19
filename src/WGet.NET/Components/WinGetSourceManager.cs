@@ -5,7 +5,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET.Models;
-using WGetNET.HelperClasses;
+using WGetNET.Helper;
 
 namespace WGetNET
 {
@@ -497,7 +497,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            FileHandler.WriteTextToFile(
+            FileHelper.WriteTextToFile(
                 file,
                 SourcesToJson(
                     GetInstalledSources()));
@@ -546,7 +546,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            FileHandler.WriteTextToFile(
+            FileHelper.WriteTextToFile(
                 file,
                 SourcesToJson(
                     GetInstalledSources(sourceName)));
@@ -645,7 +645,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            await FileHandler.WriteTextToFileAsync(
+            await FileHelper.WriteTextToFileAsync(
                 file, SourcesToJson(
                     await GetInstalledSourcesAsync()));
         }
@@ -696,7 +696,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            await FileHandler.WriteTextToFileAsync(
+            await FileHelper.WriteTextToFileAsync(
                 file,
                 SourcesToJson(
                     await GetInstalledSourcesAsync(sourceName)));
@@ -784,7 +784,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
-            List<SourceModel> sources = JsonHandler.StringToObject<List<SourceModel>>(jsonString);
+            List<SourceModel> sources = JsonHelper.StringToObject<List<SourceModel>>(jsonString);
 
             bool success = true;
             for (int i = 0; i < sources.Count; i++)
@@ -829,10 +829,10 @@ namespace WGetNET
 
 #if NETCOREAPP3_1_OR_GREATER
             List<SourceModel> sources =
-                await JsonHandler.StringToObjectAsync<List<SourceModel>>(jsonString);
+                await JsonHelper.StringToObjectAsync<List<SourceModel>>(jsonString);
 #elif NETSTANDARD2_0
             List<SourceModel> sources = 
-                JsonHandler.StringToObject<List<SourceModel>>(jsonString);
+                JsonHelper.StringToObject<List<SourceModel>>(jsonString);
 #endif
 
             bool success = true;
@@ -1036,7 +1036,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
-            return JsonHandler.GetJson(sources);
+            return JsonHelper.GetJson(sources);
         }
         //---------------------------------------------------------------------------------------------
     }

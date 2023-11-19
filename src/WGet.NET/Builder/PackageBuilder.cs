@@ -3,8 +3,8 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
+using WGetNET.Parser;
 using WGetNET.Abstractions;
-using WGetNET.HelperClasses;
 
 namespace WGetNET.Builder
 {

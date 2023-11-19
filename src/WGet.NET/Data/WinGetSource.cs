@@ -2,14 +2,14 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System;
 #if NETCOREAPP3_1_OR_GREATER
 using System.Text.Json.Serialization;
 #elif NETSTANDARD2_0
 using Newtonsoft.Json;
 #endif
 using WGetNET.Models;
-using WGetNET.HelperClasses;
-using System;
+using WGetNET.Helper;
 
 namespace WGetNET
 {

@@ -5,7 +5,7 @@
 using System;
 using System.IO;
 
-namespace WGetNET.HelperClasses
+namespace WGetNET.Helper
 {
     /// <summary>
     /// Provides methods for argument checking and exception throwing.

@@ -7,8 +7,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET.Models;
+using WGetNET.Helper;
 using WGetNET.Exceptions;
-using WGetNET.HelperClasses;
 
 namespace WGetNET
 {
