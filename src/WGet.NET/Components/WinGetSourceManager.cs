@@ -4,7 +4,6 @@
 //--------------------------------------------------//
 using System;
 using System.Security;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET.Models;
@@ -49,16 +48,14 @@ namespace WGetNET
         /// </exception>
         public List<WinGetSource> GetInstalledSources()
         {
+            ThrowIfNotInstalled();
+
             try
             {
                 ProcessResult result =
                     ProcessManager.ExecuteWingetProcess(_sourceExportCmd);
 
                 return ProcessOutputReader.ToSourceList(result.Output);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -90,6 +87,8 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
+            ThrowIfNotInstalled();
+
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
             try
@@ -98,10 +97,6 @@ namespace WGetNET
                     ProcessManager.ExecuteWingetProcess(cmd);
 
                 return ProcessOutputReader.ToSourceList(result.Output);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -125,16 +120,14 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetSource>> GetInstalledSourcesAsync()
         {
+            ThrowIfNotInstalled();
+
             try
             {
                 ProcessResult result =
                     await ProcessManager.ExecuteWingetProcessAsync(_sourceExportCmd);
 
                 return ProcessOutputReader.ToSourceList(result.Output);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -167,6 +160,8 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
+            ThrowIfNotInstalled();
+
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
             try
@@ -175,10 +170,6 @@ namespace WGetNET
                     await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
                 return ProcessOutputReader.ToSourceList(result.Output);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -226,6 +217,8 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
+            ThrowIfNotInstalled();
+
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
             try
@@ -234,10 +227,6 @@ namespace WGetNET
                     ProcessManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -287,6 +276,8 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
+            ThrowIfNotInstalled();
+
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
             try
@@ -295,10 +286,6 @@ namespace WGetNET
                     ProcessManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -420,6 +407,8 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
+            ThrowIfNotInstalled();
+
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
             try
@@ -428,10 +417,6 @@ namespace WGetNET
                     await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -482,6 +467,8 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
+            ThrowIfNotInstalled();
+
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
             try
@@ -490,10 +477,6 @@ namespace WGetNET
                     await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -601,16 +584,14 @@ namespace WGetNET
         /// </exception>
         public bool UpdateSources()
         {
+            ThrowIfNotInstalled();
+
             try
             {
                 ProcessResult result =
                     ProcessManager.ExecuteWingetProcess(_sourceUpdateCmd);
 
                 return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -637,16 +618,14 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpdateSourcesAsync()
         {
+            ThrowIfNotInstalled();
+
             try
             {
                 ProcessResult result =
                     await ProcessManager.ExecuteWingetProcessAsync(_sourceUpdateCmd);
 
                 return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -1107,16 +1086,14 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
+            ThrowIfNotInstalled();
+
             try
             {
                 ProcessResult result =
                     ProcessManager.ExecuteWingetProcess(_sourceResetCmd);
 
                 return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -1151,16 +1128,14 @@ namespace WGetNET
                 throw new SecurityException("Administrator privileges are missing.");
             }
 
+            ThrowIfNotInstalled();
+
             try
             {
                 ProcessResult result =
                     await ProcessManager.ExecuteWingetProcessAsync(_sourceResetCmd);
 
                 return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -1204,6 +1179,8 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
+            ThrowIfNotInstalled();
+
             string cmd = string.Format(_sourceRemoveCmd, name);
 
             try
@@ -1212,10 +1189,6 @@ namespace WGetNET
                     ProcessManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -1290,6 +1263,8 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
+            ThrowIfNotInstalled();
+
             string cmd = string.Format(_sourceRemoveCmd, name);
 
             try
@@ -1298,10 +1273,6 @@ namespace WGetNET
                     await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {

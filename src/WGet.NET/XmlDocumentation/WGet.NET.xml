@@ -704,6 +704,14 @@
             <see langword="true"/> if the installed WinGet version matches the check, or <see langword="false"/> if not.
             </returns>
         </member>
+        <member name="M:WGetNET.WinGet.ThrowIfNotInstalled">
+            <summary>
+            Throws a <see cref="T:WGetNET.Exceptions.WinGetNotInstalledException"/> if winget installation could not be found.
+            </summary>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGet.CheckWinGetVersion">
             <summary>
             Checks the winget version and returns it as a <see cref="T:System.String"/>.

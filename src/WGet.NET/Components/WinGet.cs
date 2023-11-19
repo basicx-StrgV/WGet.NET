@@ -3,7 +3,6 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using WGetNET.Models;
 using WGetNET.Exceptions;
@@ -145,16 +144,14 @@ namespace WGetNET
         /// </exception>
         public string ExportSettings()
         {
+            ThrowIfNotInstalled();
+
             try
             {
                 ProcessResult result =
                     _processManager.ExecuteWingetProcess(_exportSettingsCmd);
 
                 return ProcessOutputReader.ExportOutputToString(result);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -178,16 +175,14 @@ namespace WGetNET
         /// </exception>
         public async Task<string> ExportSettingsAsync()
         {
+            ThrowIfNotInstalled();
+
             try
             {
                 ProcessResult result =
                     await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
 
                 return ProcessOutputReader.ExportOutputToString(result);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -242,15 +237,13 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
+            ThrowIfNotInstalled();
+
             ProcessResult result;
 
             try
             {
                 result = _processManager.ExecuteWingetProcess(_exportSettingsCmd);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -307,15 +300,13 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
+            ThrowIfNotInstalled();
+
             ProcessResult result;
 
             try
             {
                 result = await _processManager.ExecuteWingetProcessAsync(_exportSettingsCmd);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -340,6 +331,8 @@ namespace WGetNET
         /// </exception>
         public WinGetInfo GetInfo()
         {
+            ThrowIfNotInstalled();
+
             try
             {
                 ProcessResult result =
@@ -360,10 +353,6 @@ namespace WGetNET
                 }
 
                 return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -387,6 +376,8 @@ namespace WGetNET
         /// </exception>
         public async Task<WinGetInfo> GetInfoAsync()
         {
+            ThrowIfNotInstalled();
+
             try
             {
                 ProcessResult result =
@@ -407,10 +398,6 @@ namespace WGetNET
                 }
 
                 return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
             }
             catch (Exception e)
             {
@@ -440,6 +427,20 @@ namespace WGetNET
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Throws a <see cref="WGetNET.Exceptions.WinGetNotInstalledException"/> if winget installation could not be found.
+        /// </summary>
+        /// <exception cref="WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        protected void ThrowIfNotInstalled()
+        {
+            if (!_isInstalled)
+            {
+                throw new WinGetNotInstalledException();
+            }
         }
 
         /// <summary>
