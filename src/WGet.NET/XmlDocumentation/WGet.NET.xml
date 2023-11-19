@@ -716,6 +716,14 @@
             <see cref="T:System.String"/> containing the executable path if it was found or <see cref="F:System.String.Empty"/> if not. 
             </returns>
         </member>
+        <member name="M:WGetNET.WinGet.GetLastModificationData">
+            <summary>
+            Gets the last modification date (UTC) of the currently set winget executable.
+            </summary>
+            <returns>
+            <see cref="T:System.DateTime"/> object of the last modification date (UTC).
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGet.QueryInstallation">
             <summary>
             Checks the system for a winget installation.

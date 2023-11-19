@@ -30,6 +30,7 @@ namespace WGetNET
 
         private ProcessManager _processManager;
         private string _wingetExePath;
+        private DateTime _wingetExeModificationData;
         private string _versionString;
         private Version _version;
 
@@ -67,6 +68,13 @@ namespace WGetNET
         {
             get
             {
+                // Check if winget got modefied or removed while the application is running.
+                if (_wingetExeModificationData != GetLastModificationData())
+                {
+                    // Re-query installation if a change was detected.
+                    QueryInstallation();
+                }
+
                 return _versionString;
             }
         }
@@ -81,6 +89,13 @@ namespace WGetNET
         {
             get
             {
+                // Check if winget got modefied or removed while the application is running.
+                if (_wingetExeModificationData != GetLastModificationData())
+                {
+                    // Re-query installation if a change was detected.
+                    QueryInstallation();
+                }
+
                 return _version;
             }
         }
@@ -90,19 +105,14 @@ namespace WGetNET
         /// </summary>
         public WinGet()
         {
-            _wingetExePath = CheckInstallation();
+            // Set inital values
+            _processManager = new ProcessManager("winget");
+            _wingetExePath = string.Empty;
+            _wingetExeModificationData = DateTime.MinValue;
+            _versionString = string.Empty;
+            _version = new Version(0, 0);
 
-            if (string.IsNullOrWhiteSpace(_wingetExePath))
-            {
-                _processManager = new ProcessManager("winget");
-            }
-            else
-            {
-                _processManager = new ProcessManager(_wingetExePath);
-            }
-
-            _versionString = CheckWinGetVersion();
-            _version = VersionParser.Parse(_versionString);
+            QueryInstallation();
         }
 
         /// <summary>
@@ -485,6 +495,22 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Gets the last modification date (UTC) of the currently set winget executable.
+        /// </summary>
+        /// <returns>
+        /// <see cref="System.DateTime"/> object of the last modification date (UTC).
+        /// </returns>
+        private DateTime GetLastModificationData()
+        {
+            if (string.IsNullOrWhiteSpace(_wingetExePath) || !File.Exists(_wingetExePath))
+            {
+                return DateTime.MinValue;
+            }
+
+            return File.GetLastWriteTimeUtc(_wingetExePath);
+        }
+
+        /// <summary>
         /// Checks the system for a winget installation.
         /// </summary>
         /// <returns>
@@ -506,6 +532,8 @@ namespace WGetNET
                 isInstalled = true;
                 _processManager = new ProcessManager(_wingetExePath);
             }
+
+            _wingetExeModificationData = GetLastModificationData();
 
             _versionString = CheckWinGetVersion();
             _version = VersionParser.Parse(_versionString);
