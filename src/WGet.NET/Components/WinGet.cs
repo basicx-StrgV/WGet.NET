@@ -21,12 +21,12 @@ namespace WGetNET
         private const string _versionCmd = "--version";
         private const string _exportSettingsCmd = "settings export";
 
-        private protected readonly ProcessManager _processManager;
-        private protected readonly bool _isInstalled;
+        private protected ProcessManager _processManager;
+        private protected bool _isInstalled;
 
-        private readonly string _wingetExePath;
-        private readonly string _versionString;
-        private readonly Version _version;
+        private string _wingetExePath;
+        private string _versionString;
+        private Version _version;
 
         /// <summary>
         /// Gets if winget is installed on the system.
@@ -90,6 +90,37 @@ namespace WGetNET
 
             _versionString = CheckWinGetVersion();
             _version = VersionParser.Parse(_versionString);
+        }
+
+        /// <summary>
+        /// Checks the system for a winget installation.
+        /// </summary>
+        /// <remarks>
+        /// <para>Can be used to check if winget got installed will the installation is running without needing to restart it.</para>
+        /// <para>This needs to be called manually, because a re-query for the installation will not be done automatically by the library.</para>
+        /// </remarks>
+        /// <returns>
+        /// <see langword="true"/> if the installation was found and <see langword="false"/> if not.
+        /// </returns>
+        public bool ReQueryInstallation()
+        {
+            _wingetExePath = CheckInstallation();
+
+            if (string.IsNullOrWhiteSpace(_wingetExePath))
+            {
+                _isInstalled = false;
+                _processManager = new ProcessManager("winget");
+            }
+            else
+            {
+                _isInstalled = true;
+                _processManager = new ProcessManager(_wingetExePath);
+            }
+
+            _versionString = CheckWinGetVersion();
+            _version = VersionParser.Parse(_versionString);
+
+            return _isInstalled;
         }
 
         /// <summary>
