@@ -17,13 +17,20 @@ namespace WGetNET
     /// </summary>
     public class WinGet
     {
+        private protected ProcessManager ProcessManager
+        {
+            get
+            {
+                return _processManager;
+            }
+        }
+
         private const string _infoCmd = "--info";
         private const string _versionCmd = "--version";
         private const string _exportSettingsCmd = "settings export";
 
-        private protected ProcessManager _processManager;
-        private protected bool _isInstalled;
-
+        private ProcessManager _processManager;
+        private bool _isInstalled;
         private string _wingetExePath;
         private string _versionString;
         private Version _version;

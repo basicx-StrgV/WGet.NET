@@ -52,7 +52,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceExportCmd);
+                    ProcessManager.ExecuteWingetProcess(_sourceExportCmd);
 
                 return ProcessOutputReader.ToSourceList(result.Output);
             }
@@ -95,7 +95,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+                    ProcessManager.ExecuteWingetProcess(cmd);
 
                 return ProcessOutputReader.ToSourceList(result.Output);
             }
@@ -128,7 +128,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_sourceExportCmd);
+                    await ProcessManager.ExecuteWingetProcessAsync(_sourceExportCmd);
 
                 return ProcessOutputReader.ToSourceList(result.Output);
             }
@@ -172,7 +172,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+                    await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
                 return ProcessOutputReader.ToSourceList(result.Output);
             }
@@ -231,7 +231,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+                    ProcessManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -292,7 +292,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+                    ProcessManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -425,7 +425,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+                    await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -487,7 +487,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+                    await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }
@@ -604,7 +604,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceUpdateCmd);
+                    ProcessManager.ExecuteWingetProcess(_sourceUpdateCmd);
 
                 return result.Success;
             }
@@ -640,7 +640,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_sourceUpdateCmd);
+                    await ProcessManager.ExecuteWingetProcessAsync(_sourceUpdateCmd);
 
                 return result.Success;
             }
@@ -1110,7 +1110,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceResetCmd);
+                    ProcessManager.ExecuteWingetProcess(_sourceResetCmd);
 
                 return result.Success;
             }
@@ -1154,7 +1154,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_sourceResetCmd);
+                    await ProcessManager.ExecuteWingetProcessAsync(_sourceResetCmd);
 
                 return result.Success;
             }
@@ -1209,7 +1209,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+                    ProcessManager.ExecuteWingetProcess(cmd);
 
                 return result.Success;
             }
@@ -1295,7 +1295,7 @@ namespace WGetNET
             try
             {
                 ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+                    await ProcessManager.ExecuteWingetProcessAsync(cmd);
 
                 return result.Success;
             }

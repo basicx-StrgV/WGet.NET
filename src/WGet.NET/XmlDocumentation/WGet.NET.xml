@@ -529,6 +529,18 @@
             Initializes a new instance of the <see cref="T:WGetNET.WinGet"/> class.
             </summary>
         </member>
+        <member name="M:WGetNET.WinGet.ReQueryInstallation">
+            <summary>
+            Checks the system for a winget installation.
+            </summary>
+            <remarks>
+            <para>Can be used to check if winget got installed will the installation is running without needing to restart it.</para>
+            <para>This needs to be called manually, because a re-query for the installation will not be done automatically by the library.</para>
+            </remarks>
+            <returns>
+            <see langword="true"/> if the installation was found and <see langword="false"/> if not.
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGet.ExportSettings">
             <summary>
             Exports the WinGet settings to a json string.
