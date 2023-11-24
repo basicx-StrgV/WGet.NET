@@ -11,7 +11,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget package.
     /// </summary>
-    public sealed class WinGetPackage : IWinGetPackage, IEquatable<WinGetPackage>, ICloneable
+    public class WinGetPackage : IWinGetObject, ICloneable
     {
         /// <inheritdoc/>
         public string Name
@@ -118,15 +118,15 @@ namespace WGetNET
             }
         }
 
-        private readonly string _name;
-        private readonly string _id;
-        private readonly string _versionString;
-        private readonly Version _version;
-        private readonly string _availableVersionString;
-        private readonly Version _availableVersion;
-        private readonly string _sourceName;
+        private protected readonly string _name;
+        private protected readonly string _id;
+        private protected readonly string _versionString;
+        private protected readonly Version _version;
+        private protected readonly string _availableVersionString;
+        private protected readonly Version _availableVersion;
+        private protected readonly string _sourceName;
 
-        private readonly bool _hasShortenedId = false;
+        private protected readonly bool _hasShortenedId = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackage"/> class.
@@ -302,31 +302,7 @@ namespace WGetNET
         }
 
         /// <inheritdoc/>
-        public bool Equals(WinGetPackage? other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (_name.Equals(other.Name) && _id.Equals(other.Id) &&
-                _versionString.Equals(other.VersionString) && _version.Equals(other.Version) &&
-                _availableVersionString.Equals(other.AvailableVersionString) && _availableVersion.Equals(other.AvailableVersion) &&
-                _sourceName.Equals(other.SourceName) && _hasShortenedId.Equals(other.HasShortenedId))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <inheritdoc/>
-        public object Clone()
+        public virtual object Clone()
         {
             return new WinGetPackage(
                     _name,

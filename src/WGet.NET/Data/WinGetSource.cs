@@ -16,7 +16,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget source.
     /// </summary>
-    public sealed class WinGetSource : IWinGetSource, IEquatable<WinGetSource>, ICloneable
+    public class WinGetSource : IWinGetObject, ICloneable
     {
         /// <inheritdoc/>
         public string Name
@@ -176,28 +176,6 @@ namespace WGetNET
         internal static WinGetSource FromSourceModel(SourceModel model)
         {
             return new WinGetSource(model.Name, model.Arg, model.Type, model.Identifier, model.Data);
-        }
-
-        /// <inheritdoc/>
-        public bool Equals(WinGetSource? other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (_name.Equals(other.Name) && _identifier.Equals(other.Identifier) &&
-                _arg.Equals(other.Arg) && _type.Equals(other.Type) && _data.Equals(other.Data))
-            {
-                return true;
-            }
-
-            return false;
         }
 
         /// <inheritdoc/>
