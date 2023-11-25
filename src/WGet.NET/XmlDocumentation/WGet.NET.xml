@@ -79,23 +79,23 @@
             <see langword="true"/> if the value is shortened or <see langword="false"/> if not.
             </returns>
         </member>
-        <member name="T:WGetNET.Builder.AdminOptionBuilder">
+        <member name="T:WGetNET.Builder.AdminSettingBuilder">
             <summary>
-            Builder to create a new <see cref="T:WGetNET.WinGetAdminOption"/> instance.
+            Builder to create a new <see cref="T:WGetNET.WinGetAdminSetting"/> instance.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.AdminOptionBuilder.#ctor">
+        <member name="M:WGetNET.Builder.AdminSettingBuilder.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Builder.AdminOptionBuilder"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.AdminSettingBuilder"/> class.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.AdminOptionBuilder.AddEntryName(System.String)">
+        <member name="M:WGetNET.Builder.AdminSettingBuilder.AddEntryName(System.String)">
             <summary>
             Addes the entry name for the winget info entry.
             </summary>
             <param name="entryName">The name of the info entry.</param>
         </member>
-        <member name="M:WGetNET.Builder.AdminOptionBuilder.AddRawContent(System.String)">
+        <member name="M:WGetNET.Builder.AdminSettingBuilder.AddRawContent(System.String)">
             <summary>
             Adds the raw content of the winget info entry.
             </summary>
@@ -104,16 +104,30 @@
             </remarks>
             <param name="rawContent">The raw data of the info entry as a <see cref="T:System.String"/></param>
         </member>
-        <member name="M:WGetNET.Builder.AdminOptionBuilder.GetInstance">
+        <member name="M:WGetNET.Builder.AdminSettingBuilder.GetInstance">
             <summary>
-            Returns a <see cref="T:WGetNET.WinGetAdminOption"/> instance from data provided to the builder.
+            Returns a <see cref="T:WGetNET.WinGetAdminSetting"/> instance from data provided to the builder.
             </summary>
             <returns>
-            The created <see cref="T:WGetNET.WinGetAdminOption"/> instance, or <see langword="null"/> if the provided data failed to be parsed.
+            The created <see cref="T:WGetNET.WinGetAdminSetting"/> instance, or <see langword="null"/> if the provided data failed to be parsed.
             </returns>
         </member>
-        <member name="M:WGetNET.Builder.AdminOptionBuilder.Clear">
+        <member name="M:WGetNET.Builder.AdminSettingBuilder.Clear">
             <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.Builder.AdminSettingBuilder.ParseToBool(System.String,System.Boolean)">
+            <summary>
+            Parses the raw content to a <see cref="T:System.Boolean"/> value.
+            </summary>
+            <param name="rawContent">
+            A <see cref="T:System.String"/> containing the raw content.
+            </param>
+            <param name="hasShortenedContent">
+            Indicates if the content is shortened or not.
+            </param>
+            <returns>
+            The paresed <see cref="T:System.Boolean"/> value or <see langword="null"/> if parsing failed.
+            </returns>
         </member>
         <member name="T:WGetNET.Builder.DirectoryBuilder">
             <summary>
@@ -230,20 +244,20 @@
             The <see cref="T:WGetNET.WinGetLink"/> object.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.AddAdminOptions(System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
+        <member name="M:WGetNET.Builder.InfoSetBuilder.AddAdminOptions(System.Collections.Generic.List{WGetNET.WinGetAdminSetting})">
             <summary>
-            Adds a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminOption"/> objects.
+            Adds a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminSetting"/> objects.
             </summary>
             <param name="adminOptions">
-            The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminOption"/> objects.
+            The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminSetting"/> objects.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.AddAdminOption(WGetNET.WinGetAdminOption)">
+        <member name="M:WGetNET.Builder.InfoSetBuilder.AddAdminOption(WGetNET.WinGetAdminSetting)">
             <summary>
-            Adds a <see cref="T:WGetNET.WinGetAdminOption"/> object.
+            Adds a <see cref="T:WGetNET.WinGetAdminSetting"/> object.
             </summary>
             <param name="adminOption">
-            The <see cref="T:WGetNET.WinGetAdminOption"/> object.
+            The <see cref="T:WGetNET.WinGetAdminSetting"/> object.
             </param>
         </member>
         <member name="M:WGetNET.Builder.InfoSetBuilder.GetInstance">
@@ -773,7 +787,7 @@
             </remarks>
             <param name="output">The <see langword="array"/> containing the winget output lines.</param>
             <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminOption"/> objects.
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminSetting"/> objects.
             </returns>
         </member>
         <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ResultToHash(WGetNET.Models.ProcessResult)">
@@ -975,12 +989,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGet.EnableAdminSetting(WGetNET.WinGetAdminOption)">
+        <member name="M:WGetNET.WinGet.EnableAdminSetting(WGetNET.WinGetAdminSetting)">
             <summary>
             Enables the provided admin setting (Needs administrator rights).
             </summary>
             <param name="setting">
-            The <see cref="T:WGetNET.WinGetAdminOption"/> to enable.
+            The <see cref="T:WGetNET.WinGetAdminSetting"/> to enable.
             </param>
             <returns>
             <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -1022,12 +1036,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGet.EnableAdminSettingAsynv(WGetNET.WinGetAdminOption)">
+        <member name="M:WGetNET.WinGet.EnableAdminSettingAsynv(WGetNET.WinGetAdminSetting)">
             <summary>
             Asynchronously enables the provided admin setting (Needs administrator rights).
             </summary>
             <param name="setting">
-            The <see cref="T:WGetNET.WinGetAdminOption"/> to enable.
+            The <see cref="T:WGetNET.WinGetAdminSetting"/> to enable.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -1069,12 +1083,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGet.DisableAdminSetting(WGetNET.WinGetAdminOption)">
+        <member name="M:WGetNET.WinGet.DisableAdminSetting(WGetNET.WinGetAdminSetting)">
             <summary>
             Disables the provided admin setting (Needs administrator rights).
             </summary>
             <param name="setting">
-            The <see cref="T:WGetNET.WinGetAdminOption"/> to disable.
+            The <see cref="T:WGetNET.WinGetAdminSetting"/> to disable.
             </param>
             <returns>
             <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -1116,12 +1130,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGet.DisableAdminSettingAsync(WGetNET.WinGetAdminOption)">
+        <member name="M:WGetNET.WinGet.DisableAdminSettingAsync(WGetNET.WinGetAdminSetting)">
             <summary>
             Asynchronously disables the provided admin setting (Needs administrator rights).
             </summary>
             <param name="setting">
-            The <see cref="T:WGetNET.WinGetAdminOption"/> to disable.
+            The <see cref="T:WGetNET.WinGetAdminSetting"/> to disable.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -3507,29 +3521,29 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="T:WGetNET.WinGetAdminOption">
+        <member name="T:WGetNET.WinGetAdminSetting">
             <summary>
             Represents a winget admin settings entry.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetAdminOption.IsEnabled">
+        <member name="P:WGetNET.WinGetAdminSetting.IsEnabled">
             <summary>
             Gets if the admin option is enabled.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetAdminOption.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
+        <member name="M:WGetNET.WinGetAdminSetting.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.WinGetAdminOption"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetAdminSetting"/> class.
             </summary>
             <param name="entryName">The name of the settings entry.</param>
             <param name="rawContent">The content of the settings entry.</param>
             <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
             <param name="isEnabled">Idicator for the setting state.</param>
         </member>
-        <member name="M:WGetNET.WinGetAdminOption.Equals(WGetNET.WinGetAdminOption)">
+        <member name="M:WGetNET.WinGetAdminSetting.Equals(WGetNET.WinGetAdminSetting)">
             <inheritdoc/>
         </member>
-        <member name="M:WGetNET.WinGetAdminOption.Clone">
+        <member name="M:WGetNET.WinGetAdminSetting.Clone">
             <inheritdoc/>
         </member>
         <member name="T:WGetNET.WinGetDirectory">
@@ -3612,7 +3626,7 @@
             Gets an empty instance of this object.
             </summary>
         </member>
-        <member name="M:WGetNET.WinGetInfo.#ctor(System.String,System.Version,System.Collections.Generic.List{WGetNET.WinGetDirectory},System.Collections.Generic.List{WGetNET.WinGetLink},System.Collections.Generic.List{WGetNET.WinGetAdminOption})">
+        <member name="M:WGetNET.WinGetInfo.#ctor(System.String,System.Version,System.Collections.Generic.List{WGetNET.WinGetDirectory},System.Collections.Generic.List{WGetNET.WinGetLink},System.Collections.Generic.List{WGetNET.WinGetAdminSetting})">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetInfo"/> class.
             </summary>
@@ -4385,6 +4399,24 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
+        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
         <member name="M:WGetNET.Helper.JsonHelper.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -4519,27 +4551,6 @@
             </summary>
             <remarks>
             If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
-            <returns>
-            The processed <see cref="T:System.String"/>:
-            </returns>
-        </member>
-        <member name="M:WGetNET.Parser.VersionParser.RemoveAppendix(System.String)">
-            <summary>
-            Removes version appendixes from the string.
-            </summary>
-            <remarks>
-            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to process.</param>
-            <returns>
-            The processed <see cref="T:System.String"/>.
-            </returns>
-        </member>
-    </members>
-</doc>
-C456' it will not be cleaned, because to much information will be lost.
             </remarks>
             <param name="input">The <see cref="T:System.String"/> to clean up.</param>
             <returns>

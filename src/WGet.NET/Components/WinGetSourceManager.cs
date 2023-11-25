@@ -1037,7 +1037,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
             // Create source models for json parsing
-            List<SourceModel> models = new List<SourceModel>();
+            List<SourceModel> models = new();
             foreach (WinGetSource source in sources)
             {
                 models.Add(SourceModel.FromWinGetSource(source));

@@ -300,7 +300,7 @@ namespace WGetNET
         /// Enables the provided admin setting (Needs administrator rights).
         /// </summary>
         /// <param name="setting">
-        /// The <see cref="WGetNET.WinGetAdminOption"/> to enable.
+        /// The <see cref="WGetNET.WinGetAdminSetting"/> to enable.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -317,7 +317,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public bool EnableAdminSetting(WinGetAdminOption setting)
+        public bool EnableAdminSetting(WinGetAdminSetting setting)
         {
             ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
 
@@ -361,7 +361,7 @@ namespace WGetNET
         /// Asynchronously enables the provided admin setting (Needs administrator rights).
         /// </summary>
         /// <param name="setting">
-        /// The <see cref="WGetNET.WinGetAdminOption"/> to enable.
+        /// The <see cref="WGetNET.WinGetAdminSetting"/> to enable.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -379,7 +379,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> EnableAdminSettingAsynv(WinGetAdminOption setting)
+        public async Task<bool> EnableAdminSettingAsynv(WinGetAdminSetting setting)
         {
             ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
 
@@ -422,7 +422,7 @@ namespace WGetNET
         /// Disables the provided admin setting (Needs administrator rights).
         /// </summary>
         /// <param name="setting">
-        /// The <see cref="WGetNET.WinGetAdminOption"/> to disable.
+        /// The <see cref="WGetNET.WinGetAdminSetting"/> to disable.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -439,7 +439,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public bool DisableAdminSetting(WinGetAdminOption setting)
+        public bool DisableAdminSetting(WinGetAdminSetting setting)
         {
             ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
 
@@ -483,7 +483,7 @@ namespace WGetNET
         /// Asynchronously disables the provided admin setting (Needs administrator rights).
         /// </summary>
         /// <param name="setting">
-        /// The <see cref="WGetNET.WinGetAdminOption"/> to disable.
+        /// The <see cref="WGetNET.WinGetAdminSetting"/> to disable.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -501,7 +501,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> DisableAdminSettingAsync(WinGetAdminOption setting)
+        public async Task<bool> DisableAdminSettingAsync(WinGetAdminSetting setting)
         {
             ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
 

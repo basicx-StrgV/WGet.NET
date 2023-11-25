@@ -7,9 +7,9 @@ using WGetNET.Abstractions;
 namespace WGetNET.Builder
 {
     /// <summary>
-    /// Builder to create a new <see cref="WGetNET.WinGetAdminOption"/> instance.
+    /// Builder to create a new <see cref="WGetNET.WinGetAdminSetting"/> instance.
     /// </summary>
-    internal class AdminOptionBuilder : WinGetObjectBuilder<WinGetAdminOption?>
+    internal class AdminSettingBuilder : WinGetObjectBuilder<WinGetAdminSetting?>
     {
         private string _entryName = string.Empty;
         private string _rawContent = string.Empty;
@@ -19,9 +19,9 @@ namespace WGetNET.Builder
         private bool _parsed = false;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.Builder.AdminOptionBuilder"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Builder.AdminSettingBuilder"/> class.
         /// </summary>
-        public AdminOptionBuilder()
+        public AdminSettingBuilder()
         {
             // Provide empty constructor
         }
@@ -65,19 +65,19 @@ namespace WGetNET.Builder
         }
 
         /// <summary>
-        /// Returns a <see cref="WGetNET.WinGetAdminOption"/> instance from data provided to the builder.
+        /// Returns a <see cref="WGetNET.WinGetAdminSetting"/> instance from data provided to the builder.
         /// </summary>
         /// <returns>
-        /// The created <see cref="WGetNET.WinGetAdminOption"/> instance, or <see langword="null"/> if the provided data failed to be parsed.
+        /// The created <see cref="WGetNET.WinGetAdminSetting"/> instance, or <see langword="null"/> if the provided data failed to be parsed.
         /// </returns>
-        public override WinGetAdminOption? GetInstance()
+        public override WinGetAdminSetting? GetInstance()
         {
             if (!_parsed)
             {
                 return null;
             }
 
-            return new WinGetAdminOption(_entryName, _rawContent, _hasShortenedContent, _isEnabled);
+            return new WinGetAdminSetting(_entryName, _rawContent, _hasShortenedContent, _isEnabled);
         }
 
         /// <inheritdoc/>
@@ -89,6 +89,18 @@ namespace WGetNET.Builder
             _isEnabled = false;
         }
 
+        /// <summary>
+        /// Parses the raw content to a <see cref="System.Boolean"/> value.
+        /// </summary>
+        /// <param name="rawContent">
+        /// A <see cref="System.String"/> containing the raw content.
+        /// </param>
+        /// <param name="hasShortenedContent">
+        /// Indicates if the content is shortened or not.
+        /// </param>
+        /// <returns>
+        /// The paresed <see cref="System.Boolean"/> value or <see langword="null"/> if parsing failed.
+        /// </returns>
         private bool? ParseToBool(string rawContent, bool hasShortenedContent)
         {
             bool isEnabled = false;

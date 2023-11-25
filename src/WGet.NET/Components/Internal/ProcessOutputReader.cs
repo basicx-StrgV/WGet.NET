@@ -757,13 +757,13 @@ namespace WGetNET.Components.Internal
         /// </remarks>
         /// <param name="output">The <see langword="array"/> containing the winget output lines.</param>
         /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetAdminOption"/> objects.
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetAdminSetting"/> objects.
         /// </returns>
-        private List<WinGetAdminOption> ReadAdminSettings(string[] output)
+        private List<WinGetAdminSetting> ReadAdminSettings(string[] output)
         {
-            List<WinGetAdminOption> adminSetting = new();
+            List<WinGetAdminSetting> adminSetting = new();
 
-            AdminOptionBuilder adminOptionBuilder = new();
+            AdminSettingBuilder adminOptionBuilder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -781,7 +781,7 @@ namespace WGetNET.Components.Internal
                     adminOptionBuilder.AddEntryName(settingsEntry[0].Trim());
                     adminOptionBuilder.AddRawContent(settingsEntry[1].Trim());
 
-                    WinGetAdminOption? adminOption = adminOptionBuilder.GetInstance();
+                    WinGetAdminSetting? adminOption = adminOptionBuilder.GetInstance();
                     if (adminOption != null)
                     {
                         adminSetting.Add(adminOption);

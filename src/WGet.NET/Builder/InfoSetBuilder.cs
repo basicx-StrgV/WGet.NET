@@ -18,7 +18,7 @@ namespace WGetNET.Builder
         private Version? _version = null;
         private List<WinGetDirectory> _directories = new();
         private List<WinGetLink> _links = new();
-        private List<WinGetAdminOption> _adminSettings = new();
+        private List<WinGetAdminSetting> _adminSettings = new();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.Builder.InfoSetBuilder"/> class.
@@ -103,23 +103,23 @@ namespace WGetNET.Builder
         }
 
         /// <summary>
-        /// Adds a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WinGetAdminOption"/> objects.
+        /// Adds a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WinGetAdminSetting"/> objects.
         /// </summary>
         /// <param name="adminOptions">
-        /// The <see cref="System.Collections.Generic.List{T}"/> of <see cref="WinGetAdminOption"/> objects.
+        /// The <see cref="System.Collections.Generic.List{T}"/> of <see cref="WinGetAdminSetting"/> objects.
         /// </param>
-        public void AddAdminOptions(List<WinGetAdminOption> adminOptions)
+        public void AddAdminOptions(List<WinGetAdminSetting> adminOptions)
         {
             _adminSettings.AddRange(adminOptions);
         }
 
         /// <summary>
-        /// Adds a <see cref="WinGetAdminOption"/> object.
+        /// Adds a <see cref="WinGetAdminSetting"/> object.
         /// </summary>
         /// <param name="adminOption">
-        /// The <see cref="WinGetAdminOption"/> object.
+        /// The <see cref="WinGetAdminSetting"/> object.
         /// </param>
-        public void AddAdminOption(WinGetAdminOption? adminOption)
+        public void AddAdminOption(WinGetAdminSetting? adminOption)
         {
             if (adminOption != null)
             {
@@ -150,7 +150,7 @@ namespace WGetNET.Builder
             _version = null;
             _directories = new List<WinGetDirectory>();
             _links = new List<WinGetLink>();
-            _adminSettings = new List<WinGetAdminOption>();
+            _adminSettings = new List<WinGetAdminSetting>();
         }
     }
 }

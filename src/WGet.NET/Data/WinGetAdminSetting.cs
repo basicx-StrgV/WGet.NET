@@ -9,7 +9,7 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget admin settings entry.
     /// </summary>
-    public sealed class WinGetAdminOption : WinGetInfoEntry<WinGetAdminOption>
+    public sealed class WinGetAdminSetting : WinGetInfoEntry<WinGetAdminSetting>
     {
         /// <summary>
         /// Gets if the admin option is enabled.
@@ -25,19 +25,19 @@ namespace WGetNET
         private readonly bool _isEnabled;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.WinGetAdminOption"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.WinGetAdminSetting"/> class.
         /// </summary>
         /// <param name="entryName">The name of the settings entry.</param>
         /// <param name="rawContent">The content of the settings entry.</param>
         /// <param name="hasShortenedContent">Sets if the content is shortened or not.</param>
         /// <param name="isEnabled">Idicator for the setting state.</param>
-        internal WinGetAdminOption(string entryName, string rawContent, bool hasShortenedContent, bool isEnabled) : base(entryName, rawContent, hasShortenedContent)
+        internal WinGetAdminSetting(string entryName, string rawContent, bool hasShortenedContent, bool isEnabled) : base(entryName, rawContent, hasShortenedContent)
         {
             _isEnabled = isEnabled;
         }
 
         /// <inheritdoc/>
-        public override bool Equals(WinGetAdminOption? other)
+        public override bool Equals(WinGetAdminSetting? other)
         {
             if (other == null)
             {
@@ -62,7 +62,7 @@ namespace WGetNET
         /// <inheritdoc/>
         public override object Clone()
         {
-            return new WinGetAdminOption(
+            return new WinGetAdminSetting(
                     _entryName,
                     _rawContent,
                     _hasShortenedContent,

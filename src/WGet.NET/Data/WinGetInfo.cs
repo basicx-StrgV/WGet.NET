@@ -60,7 +60,7 @@ namespace WGetNET
         /// <summary>
         /// Gets a collection of the winget admin settings.
         /// </summary>
-        public ReadOnlyCollection<WinGetAdminOption> AdminSettings
+        public ReadOnlyCollection<WinGetAdminSetting> AdminSettings
         {
             get
             {
@@ -93,7 +93,7 @@ namespace WGetNET
         {
             get
             {
-                return new WinGetInfo("", new Version(0, 0), new List<WinGetDirectory>(), new List<WinGetLink>(), new List<WinGetAdminOption>());
+                return new WinGetInfo("", new Version(0, 0), new List<WinGetDirectory>(), new List<WinGetLink>(), new List<WinGetAdminSetting>());
             }
         }
 
@@ -101,7 +101,7 @@ namespace WGetNET
         private readonly Version _version;
         private readonly ReadOnlyCollection<WinGetDirectory> _directories;
         private readonly ReadOnlyCollection<WinGetLink> _links;
-        private readonly ReadOnlyCollection<WinGetAdminOption> _adminSettings;
+        private readonly ReadOnlyCollection<WinGetAdminSetting> _adminSettings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetInfo"/> class.
@@ -117,13 +117,13 @@ namespace WGetNET
         /// <param name="adminSettings">
         /// <see cref="System.Collections.Generic.List{T}"/> of info entries containing the WinGet admin setting states.
         /// </param>
-        internal WinGetInfo(string versionString, Version version, List<WinGetDirectory> directories, List<WinGetLink> links, List<WinGetAdminOption> adminSettings)
+        internal WinGetInfo(string versionString, Version version, List<WinGetDirectory> directories, List<WinGetLink> links, List<WinGetAdminSetting> adminSettings)
         {
             _versionString = versionString;
             _version = version;
             _directories = new ReadOnlyCollection<WinGetDirectory>(directories);
             _links = new ReadOnlyCollection<WinGetLink>(links);
-            _adminSettings = new ReadOnlyCollection<WinGetAdminOption>(adminSettings);
+            _adminSettings = new ReadOnlyCollection<WinGetAdminSetting>(adminSettings);
         }
     }
 }
