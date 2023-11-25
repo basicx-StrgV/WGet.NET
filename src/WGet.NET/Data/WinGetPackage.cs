@@ -125,6 +125,22 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Gets if the package can be upgraded.
+        /// </summary>
+        public bool HasUpgrade
+        {
+            get
+            {
+                if (_availableVersion > _version)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets if the object is empty.
         /// </summary>
         /// <remarks>
