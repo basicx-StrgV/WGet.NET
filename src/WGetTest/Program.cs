@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Collections.Generic;
 using WGetNET;
-using System.Diagnostics;
 
 namespace WGetTest
 {
@@ -35,6 +35,8 @@ namespace WGetTest
                 Console.WriteLine(info.Version);
 
                 //---Tests-----------------------------------------------------------------------------
+                List<WinGetAdminSetting> adminSettings = connector.GetAdminSettings();
+
                 //bool enableResult = winget.EnableAdminSetting("LocalManifestFiles");
                 //bool disableResult = winget.DisableAdminSetting("LocalManifestFiles");
 

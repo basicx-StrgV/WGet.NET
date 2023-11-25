@@ -14,9 +14,7 @@ namespace WGetNET.Builder
         private string _entryName = string.Empty;
         private string _rawContent = string.Empty;
         private bool _hasShortenedContent = false;
-        private bool _isEnabled = false;
-
-        private bool _parsed = false;
+        private bool? _isEnabled = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.Builder.AdminSettingBuilder"/> class.
@@ -56,11 +54,31 @@ namespace WGetNET.Builder
                 _rawContent = rawContent;
             }
 
-            bool? isEnabled = ParseToBool(_rawContent, _hasShortenedContent);
-            if (isEnabled != null)
+            _isEnabled = ParseToBool(_rawContent, _hasShortenedContent);
+        }
+
+        /// <summary>
+        /// Adds the status of admin settings.
+        /// </summary>
+        /// <remarks>
+        /// There is no need to add raw content after using this method.
+        /// Using <see cref="AdminSettingBuilder.AddRawContent(string)"/> will override this value again.
+        /// </remarks>
+        /// <param name="status">
+        /// The status of the admin setting.
+        /// </param>
+        public void AddStatus(bool status)
+        {
+            _isEnabled = status;
+
+            // Set the raw content to a value that could be parsed.
+            if (_isEnabled.Value)
             {
-                _isEnabled = isEnabled.Value;
-                _parsed = true;
+                _rawContent = "Enabled";
+            }
+            else
+            {
+                _rawContent = "Disabled";
             }
         }
 
@@ -72,12 +90,12 @@ namespace WGetNET.Builder
         /// </returns>
         public override WinGetAdminSetting? GetInstance()
         {
-            if (!_parsed)
+            if (!_isEnabled.HasValue)
             {
                 return null;
             }
 
-            return new WinGetAdminSetting(_entryName, _rawContent, _hasShortenedContent, _isEnabled);
+            return new WinGetAdminSetting(_entryName, _rawContent, _hasShortenedContent, _isEnabled.Value);
         }
 
         /// <inheritdoc/>

@@ -104,6 +104,18 @@
             </remarks>
             <param name="rawContent">The raw data of the info entry as a <see cref="T:System.String"/></param>
         </member>
+        <member name="M:WGetNET.Builder.AdminSettingBuilder.AddStatus(System.Boolean)">
+            <summary>
+            Adds the status of admin settings.
+            </summary>
+            <remarks>
+            There is no need to add raw content after using this method.
+            Using <see cref="M:WGetNET.Builder.AdminSettingBuilder.AddRawContent(System.String)"/> will override this value again.
+            </remarks>
+            <param name="status">
+            The status of the admin setting.
+            </param>
+        </member>
         <member name="M:WGetNET.Builder.AdminSettingBuilder.GetInstance">
             <summary>
             Returns a <see cref="T:WGetNET.WinGetAdminSetting"/> instance from data provided to the builder.
@@ -964,6 +976,29 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The caller does not have the required permission.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.GetAdminSettings">
+            <summary>
+            Gets all winget admin settings.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminSetting"/> object.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.GetAdminSettingsAsync">
+            <summary>
+            Asynchronously gets all winget admin settings.
+            </summary>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminSetting"/> object.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.EnableAdminSetting(System.String)">
@@ -4449,6 +4484,21 @@
         <member name="P:WGetNET.Models.ProcessResult.Success">
             <summary>
             Gets if the process finished successfully.
+            </summary>
+        </member>
+        <member name="T:WGetNET.Models.SettingsModel">
+            <summary>
+            Represents the global winget settings for parsing.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SettingsModel.AdminSettings">
+            <summary>
+            Gets or sets a <see cref="T:System.Collections.Generic.Dictionary`2"/> of admin settings.
+            </summary>
+        </member>
+        <member name="P:WGetNET.Models.SettingsModel.UserSettingsFile">
+            <summary>
+            Gets or sets the user settings file path.
             </summary>
         </member>
         <member name="T:WGetNET.Models.SourceModel">

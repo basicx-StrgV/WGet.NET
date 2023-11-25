@@ -7,9 +7,11 @@ using System.IO;
 using System.Security;
 using System.Threading.Tasks;
 using System.Security.Principal;
+using System.Collections.Generic;
 using WGetNET.Models;
 using WGetNET.Helper;
 using WGetNET.Parser;
+using WGetNET.Builder;
 using WGetNET.Exceptions;
 using WGetNET.Components.Internal;
 
@@ -263,7 +265,90 @@ namespace WGetNET
         }
         //---------------------------------------------------------------------------------------------
 
-        //---Manage Settings---------------------------------------------------------------------------
+        //---Admin Settings----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets all winget admin settings.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetAdminSetting"/> object.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        public List<WinGetAdminSetting> GetAdminSettings()
+        {
+            List<WinGetAdminSetting> adminSettings = new List<WinGetAdminSetting>();
+
+            string settingsJson = ExportSettings();
+
+            SettingsModel settings = JsonHelper.StringToObject<SettingsModel>(settingsJson);
+            if (settings == null)
+            {
+                return adminSettings;
+            }
+
+            AdminSettingBuilder builder = new AdminSettingBuilder();
+            foreach (KeyValuePair<string, bool> entry in settings.AdminSettings)
+            {
+                builder.Clear();
+
+                builder.AddEntryName(entry.Key);
+                builder.AddStatus(entry.Value);
+
+                WinGetAdminSetting? adminSetting = builder.GetInstance();
+                if (adminSetting != null)
+                {
+                    adminSettings.Add(adminSetting);
+                }
+            }
+
+            return adminSettings;
+        }
+
+        /// <summary>
+        /// Asynchronously gets all winget admin settings.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetAdminSetting"/> object.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        public async Task<List<WinGetAdminSetting>> GetAdminSettingsAsync()
+        {
+            List<WinGetAdminSetting> adminSettings = new List<WinGetAdminSetting>();
+
+            string settingsJson = await ExportSettingsAsync();
+
+#if NETCOREAPP3_1_OR_GREATER
+            SettingsModel settings = await JsonHelper.StringToObjectAsync<SettingsModel>(settingsJson);
+#elif NETSTANDARD2_0
+            SettingsModel settings = JsonHelper.StringToObject<SettingsModel>(settingsJson);
+#endif
+            if (settings == null)
+            {
+                return adminSettings;
+            }
+
+            AdminSettingBuilder builder = new AdminSettingBuilder();
+            foreach (KeyValuePair<string, bool> entry in settings.AdminSettings)
+            {
+                builder.Clear();
+
+                builder.AddEntryName(entry.Key);
+                builder.AddStatus(entry.Value);
+
+                WinGetAdminSetting? adminSetting = builder.GetInstance();
+                if (adminSetting != null)
+                {
+                    adminSettings.Add(adminSetting);
+                }
+            }
+
+            return adminSettings;
+        }
+
         /// <summary>
         /// Enables the provided admin setting (Needs administrator rights).
         /// </summary>

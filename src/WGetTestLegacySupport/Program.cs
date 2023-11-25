@@ -35,6 +35,8 @@ namespace WGetTestLegacySupport
                 Console.WriteLine(info.Version);
 
                 //---Tests-----------------------------------------------------------------------------
+                List<WinGetAdminSetting> adminSettings = connector.GetAdminSettings();
+
                 //bool enableResult = winget.EnableAdminSetting("LocalManifestFiles");
                 //bool disableResult = winget.DisableAdminSetting("LocalManifestFiles");
 
