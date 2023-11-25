@@ -18,7 +18,9 @@ namespace WGetNET
     /// </summary>
     public class WinGetSource : IWinGetObject, ICloneable
     {
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the name of the source.
+        /// </summary>
         public string Name
         {
             get
@@ -27,7 +29,9 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the URL/UNC of the source.
+        /// </summary>
         public string Arg
         {
             get
@@ -36,7 +40,9 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the type of the source.
+        /// </summary>
         public string Type
         {
             get
@@ -45,7 +51,9 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the data of the source.
+        /// </summary>
         public string Data
         {
             get
@@ -54,7 +62,9 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the identifier of the source.
+        /// </summary>
         public string Identifier
         {
             get

@@ -13,7 +13,9 @@ namespace WGetNET
     /// </summary>
     public class WinGetPackage : IWinGetObject, ICloneable
     {
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the name of the package.
+        /// </summary>
         public string Name
         {
             get
@@ -22,7 +24,9 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the id of the package.
+        /// </summary>
         public string Id
         {
             get
@@ -31,7 +35,9 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the version of the package.
+        /// </summary>
         public string VersionString
         {
             get
@@ -40,7 +46,9 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the version of the package.
+        /// </summary>
         public Version Version
         {
             get
@@ -49,7 +57,9 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the newest available version of the package.
+        /// </summary>
         public string AvailableVersionString
         {
             get
@@ -58,7 +68,9 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the newest available version of the package.
+        /// </summary>
         public Version AvailableVersion
         {
             get
@@ -67,7 +79,9 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the source name for the package.
+        /// </summary>
         public string SourceName
         {
             get
@@ -76,7 +90,12 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets if id of the package is shortened.
+        /// </summary>
+        /// <remarks>
+        /// The name of the package will be used for all actions performd with this package.
+        /// </remarks>
         public bool HasShortenedId
         {
             get
@@ -85,7 +104,13 @@ namespace WGetNET
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets if the package does not provide an id.
+        /// </summary>
+        /// <remarks>
+        /// If this is true somthing whent wrong in the creation of the package.
+        /// The name of the package will be used for all actions performd with this package.
+        /// </remarks>
         public bool HasNoId
         {
             get
