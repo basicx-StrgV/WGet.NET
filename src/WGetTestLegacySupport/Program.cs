@@ -90,15 +90,19 @@ namespace WGetTestLegacySupport
 
                 Console.WriteLine(connector.ResetPins());
 
-                Console.WriteLine("Package Equals:");
+                Console.WriteLine("Same Package:");
 
                 WinGetPackage p1 = WinGetPackage.Create("SampleP1", "SampleId1", "1.0.0", "SampleSource");
                 WinGetPackage p2 = WinGetPackage.Create("SampleP2", "SampleId2", "2.0.0", "3.0.0", "");
+                WinGetPackage p3 = WinGetPackage.Create("SampleP1", "SampleId1", "2.0.0", "SampleSource");
 
-                Console.WriteLine(p1.Equals(p1));
-                Console.WriteLine(p1.Equals(p2));
-                Console.WriteLine(p2.Equals(p2));
-                Console.WriteLine(p2.Equals(p1));
+                Console.WriteLine(p1.SamePackage(p1)); // true
+                Console.WriteLine(p1.SamePackage(p2)); // false
+                Console.WriteLine(p1.SamePackage(p3)); // true
+                Console.WriteLine(p1.SamePackage(p3, true)); // false
+                Console.WriteLine(p2.SamePackage(p2)); // true
+                Console.WriteLine(p2.SamePackage(p1)); // false
+                Console.WriteLine(p2.SamePackage(p3)); // false
             }
             catch (Exception e)
             {

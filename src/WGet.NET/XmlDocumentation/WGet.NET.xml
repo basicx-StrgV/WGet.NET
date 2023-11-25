@@ -1323,11 +1323,11 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.IWinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage)">
             <summary>
             Install a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> for the installation.</param>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
             <returns>
             <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
             </returns>
@@ -1360,11 +1360,11 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.IWinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage)">
             <summary>
             Asynchronously install a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> for the installation.</param>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
@@ -1397,11 +1397,11 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.IWinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.WinGetPackage)">
             <summary>
             Uninstall a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> for the uninstallation.</param>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the uninstallation.</param>
             <returns>
             <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
             </returns>
@@ -1434,11 +1434,11 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.IWinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.WinGetPackage)">
             <summary>
             Asynchronously uninstall a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> for the uninstallation.</param>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the uninstallation.</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
@@ -1494,11 +1494,11 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(WGetNET.IWinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(WGetNET.WinGetPackage)">
             <summary>
             Upgrades a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> that for the upgrade</param>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> that for the upgrade</param>
             <returns>
             <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
             </returns>
@@ -1531,11 +1531,11 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.IWinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.WinGetPackage)">
             <summary>
             Asynchronously upgrades a package using winget.
             </summary>
-            <param name="package">The <see cref="T:WGetNET.IWinGetPackage"/> that for the upgrade</param>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> that for the upgrade</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
@@ -1808,7 +1808,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.IWinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.WinGetPackage,System.String)">
             <summary>
             Downloads the installer of a package using winget.
             </summary>
@@ -1830,7 +1830,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.IWinGetPackage,System.IO.DirectoryInfo)">
+        <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.WinGetPackage,System.IO.DirectoryInfo)">
             <summary>
             Downloads the installer of a package using winget.
             </summary>
@@ -1904,7 +1904,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.IWinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.WinGetPackage,System.String)">
             <summary>
             Asynchronously downloads the installer of a package using winget.
             </summary>
@@ -1927,7 +1927,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.IWinGetPackage,System.IO.DirectoryInfo)">
+        <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.WinGetPackage,System.IO.DirectoryInfo)">
             <summary>
             Asynchronously downloads the installer of a package using winget.
             </summary>
@@ -2028,7 +2028,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.IWinGetPackage,System.Boolean)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
             Adds a pinned package to winget.
             </summary>
@@ -2050,7 +2050,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.IWinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.WinGetPackage,System.String)">
             <summary>
             Adds a pinned package to winget.
             </summary>
@@ -2124,7 +2124,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.IWinGetPackage,System.Boolean)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
             Asynchronously adds a pinned package to winget.
             </summary>
@@ -2147,7 +2147,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.IWinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.WinGetPackage,System.String)">
             <summary>
             Asynchronously adds a pinned package to winget.
             </summary>
@@ -2220,7 +2220,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.IWinGetPackage,System.Boolean)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
             Adds a pinned installed package to winget.
             </summary>
@@ -2242,7 +2242,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.IWinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.String)">
             <summary>
             Adds a pinned installed package to winget.
             </summary>
@@ -2316,7 +2316,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.IWinGetPackage,System.Boolean)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
             Asynchronously adds a pinned installed package to winget.
             </summary>
@@ -2339,7 +2339,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.IWinGetPackage,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.String)">
             <summary>
             Asynchronously adds a pinned installed package to winget.
             </summary>
@@ -2386,7 +2386,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinRemove(WGetNET.IWinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.PinRemove(WGetNET.WinGetPackage)">
             <summary>
             Removes a pinned package from winget.
             </summary>
@@ -2429,7 +2429,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinRemoveAsync(WGetNET.IWinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.PinRemoveAsync(WGetNET.WinGetPackage)">
             <summary>
             Asynchronously removes a pinned package from winget.
             </summary>
@@ -2472,7 +2472,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalled(WGetNET.IWinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalled(WGetNET.WinGetPackage)">
             <summary>
             Removes a pinned package from winget.
             </summary>
@@ -2515,7 +2515,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalledAsync(WGetNET.IWinGetPackage)">
+        <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalledAsync(WGetNET.WinGetPackage)">
             <summary>
             Asynchronously removes a pinned package from winget.
             </summary>
@@ -2697,12 +2697,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSource(WGetNET.IWinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.AddSource(WGetNET.WinGetSource)">
             <summary>
             Adds a new source to winget (Needs administrator rights).
             </summary>
             <param name="source">
-            The <see cref="T:WGetNET.IWinGetSource"/> to add.
+            The <see cref="T:WGetNET.WinGetSource"/> to add.
             </param>
             <returns>
             <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -2720,12 +2720,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSource(System.Collections.Generic.IEnumerable{WGetNET.IWinGetSource})">
+        <member name="M:WGetNET.WinGetSourceManager.AddSource(System.Collections.Generic.IEnumerable{WGetNET.WinGetSource})">
             <summary>
             Adds multiple new sources to winget (Needs administrator rights).
             </summary>
             <param name="sources">
-            A <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects to add.
+            A <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects to add.
             </param>
             <returns>
             <see langword="true"/> if adding all sources was succesfull and <see langword="false"/> if one or more failed.
@@ -2797,12 +2797,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(WGetNET.IWinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(WGetNET.WinGetSource)">
             <summary>
             Asynchronously adds a new source to winget (Needs administrator rights).
             </summary>
             <param name="source">
-            The <see cref="T:WGetNET.IWinGetSource"/> to add.
+            The <see cref="T:WGetNET.WinGetSource"/> to add.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -2821,7 +2821,7 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.Collections.Generic.IEnumerable{WGetNET.IWinGetSource})">
+        <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.Collections.Generic.IEnumerable{WGetNET.WinGetSource})">
             <summary>
             Asynchronously adds multiple new sources to winget (Needs administrator rights).
             </summary>
@@ -2829,7 +2829,7 @@
             The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
             </remarks>
             <param name="sources">
-            A <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects to add.
+            A <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects to add.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -2951,7 +2951,7 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,WGetNET.IWinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,WGetNET.WinGetSource)">
             <summary>
             Exports the winget sources in json format to a file.
             </summary>
@@ -2962,7 +2962,7 @@
             The file for the export.
             </param>
             <param name="source">
-            The <see cref="T:WGetNET.IWinGetSource"/> for the export.
+            The <see cref="T:WGetNET.WinGetSource"/> for the export.
             </param>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -3077,7 +3077,7 @@
             The caller does not have the required permission.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,WGetNET.IWinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,WGetNET.WinGetSource)">
             <summary>
             Asynchronously exports the winget sources in json format to a file.
             </summary>
@@ -3091,7 +3091,7 @@
             The file for the export.
             </param>
             <param name="source">
-            The <see cref="T:WGetNET.IWinGetSource"/> for the export.
+            The <see cref="T:WGetNET.WinGetSource"/> for the export.
             </param>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
@@ -3234,12 +3234,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.RemoveSources(WGetNET.IWinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.RemoveSources(WGetNET.WinGetSource)">
             <summary>
             Removes a source from winget (Needs administrator rights).
             </summary>
             <param name="source">
-            The <see cref="T:WGetNET.IWinGetSource"/> to remove.
+            The <see cref="T:WGetNET.WinGetSource"/> to remove.
             </param>
             <returns>
             <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
@@ -3281,12 +3281,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.RemoveSourcesAsync(WGetNET.IWinGetSource)">
+        <member name="M:WGetNET.WinGetSourceManager.RemoveSourcesAsync(WGetNET.WinGetSource)">
             <summary>
             Asynchronously removes a source from winget (Needs administrator rights).
             </summary>
             <param name="source">
-            The <see cref="T:WGetNET.IWinGetSource"/> to remove.
+            The <see cref="T:WGetNET.WinGetSource"/> to remove.
             </param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
@@ -3305,12 +3305,12 @@
             The current user is missing administrator privileges for this call.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetSourceManager.SourcesToJson(System.Collections.Generic.IEnumerable{WGetNET.IWinGetSource})">
+        <member name="M:WGetNET.WinGetSourceManager.SourcesToJson(System.Collections.Generic.IEnumerable{WGetNET.WinGetSource})">
             <summary>
             Generates a valid json string from the provided sources.
             </summary>
             <param name="sources">
-            The <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:WGetNET.IWinGetSource"/> objects.
+            The <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:WGetNET.WinGetSource"/> objects.
             </param>
             <returns>
             A <see cref="T:System.String"/> containing the generated json.
@@ -3593,8 +3593,19 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackage.Equals(WGetNET.WinGetPackage)">
-            <inheritdoc/>
+        <member name="M:WGetNET.WinGetPackage.SamePackage(WGetNET.WinGetPackage,System.Boolean)">
+            <summary>
+            Checks if two packages are the same and optionally if they also have the same version. 
+            </summary>
+            <param name="other">
+            The <see cref="T:WGetNET.WinGetPackage"/> to compare with.
+            </param>
+            <param name="sameVersion">
+            Set to <see langword="true"/> to also check for the same version.
+            </param>
+            <returns>
+            <see langword="true"/> if both packages are the same and <see langword="false"/> if not.
+            </returns>
         </member>
         <member name="M:WGetNET.WinGetPackage.Clone">
             <inheritdoc/>
@@ -3622,42 +3633,6 @@
             Gets the pin type of the package.
             </summary>
         </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.Name">
-            <inheritdoc/>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.Id">
-            <inheritdoc/>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.VersionString">
-            <inheritdoc/>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.Version">
-            <inheritdoc/>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.AvailableVersionString">
-            <inheritdoc/>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.AvailableVersion">
-            <inheritdoc/>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.SourceName">
-            <inheritdoc/>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.HasShortenedId">
-            <inheritdoc/>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.HasNoId">
-            <inheritdoc/>
-        </member>
-        <member name="P:WGetNET.WinGetPinnedPackage.IsEmpty">
-            <summary>
-            Gets if the object is empty.
-            </summary>
-            <remarks>
-            A package object counts as empty if it does not contain a id and name.
-            Because the rest of the information is useless in this state.
-            </remarks>
-        </member>
         <member name="M:WGetNET.WinGetPinnedPackage.#ctor(System.String,WGetNET.PinType,System.String,System.String,System.String,System.String,System.Version,System.String,System.Version,System.String,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetPinnedPackage"/> class.
@@ -3674,13 +3649,7 @@
             <param name="availableVersion">Heighest available version of the package.</param>
             <param name="sourceName">Name of the source the package comes from.</param>
         </member>
-        <member name="M:WGetNET.WinGetPinnedPackage.Equals(WGetNET.WinGetPinnedPackage)">
-            <inheritdoc/>
-        </member>
         <member name="M:WGetNET.WinGetPinnedPackage.Clone">
-            <inheritdoc/>
-        </member>
-        <member name="M:WGetNET.WinGetPinnedPackage.ToString">
             <inheritdoc/>
         </member>
         <member name="T:WGetNET.WinGetSource">
@@ -3761,9 +3730,6 @@
             <returns>
             The created <see cref="T:WGetNET.WinGetSource"/> instance.
             </returns>
-        </member>
-        <member name="M:WGetNET.WinGetSource.Equals(WGetNET.WinGetSource)">
-            <inheritdoc/>
         </member>
         <member name="M:WGetNET.WinGetSource.Clone">
             <inheritdoc/>
@@ -4217,90 +4183,6 @@
         <member name="P:WGetNET.IWinGetObject.IsEmpty">
             <summary>
             Gets if the object is empty.
-            </summary>
-        </member>
-        <member name="T:WGetNET.IWinGetPackage">
-            <summary>
-            Represents a winget package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetPackage.Name">
-            <summary>
-            Gets the name of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetPackage.Id">
-            <summary>
-            Gets the id of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetPackage.VersionString">
-            <summary>
-            Gets the version of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetPackage.Version">
-            <summary>
-            Gets the version of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetPackage.AvailableVersionString">
-            <summary>
-            Gets the newest available version of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetPackage.AvailableVersion">
-            <summary>
-            Gets the newest available version of the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetPackage.SourceName">
-            <summary>
-            Gets the source name for the package.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetPackage.HasShortenedId">
-            <summary>
-            Gets if id of the package is shortened.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetPackage.HasNoId">
-            <summary>
-            Gets if the package does not provide an id.
-            </summary>
-            <remarks>
-            If this is true somthing whent wrong in the creation of the package.
-            The name of the package will be used for all actions performd with this package.
-            </remarks>
-        </member>
-        <member name="T:WGetNET.IWinGetSource">
-            <summary>
-            Represents a winget source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetSource.Name">
-            <summary>
-            Gets the name of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetSource.Arg">
-            <summary>
-            Gets the URL/UNC of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetSource.Type">
-            <summary>
-            Gets the type of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetSource.Data">
-            <summary>
-            Gets the data of the source.
-            </summary>
-        </member>
-        <member name="P:WGetNET.IWinGetSource.Identifier">
-            <summary>
-            Gets the identifier of the source.
             </summary>
         </member>
         <member name="P:WGetNET.Models.ProcessResult.ExitCode">

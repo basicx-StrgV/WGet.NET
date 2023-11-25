@@ -301,6 +301,39 @@ namespace WGetNET
             return builder.GetInstance();
         }
 
+        /// <summary>
+        /// Checks if two packages are the same and optionally if they also have the same version. 
+        /// </summary>
+        /// <param name="other">
+        /// The <see cref="WGetNET.WinGetPackage"/> to compare with.
+        /// </param>
+        /// <param name="sameVersion">
+        /// Set to <see langword="true"/> to also check for the same version.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if both packages are the same and <see langword="false"/> if not.
+        /// </returns>
+        public bool SamePackage(WinGetPackage other, bool sameVersion = false)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (_id.Equals(other.Id) && _sourceName.Equals(other.SourceName) &&
+                (!sameVersion || (_versionString.Equals(other.VersionString) && _version.Equals(other.Version))))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         /// <inheritdoc/>
         public virtual object Clone()
         {
