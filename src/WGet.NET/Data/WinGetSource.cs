@@ -36,6 +36,20 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Gets the uri of the source.
+        /// </summary>
+        /// <remarks>
+        /// <see langword="null"/> if <see cref="WGetNET.WinGetSource.Arg"/> can't be parsed to a <see cref="System.Uri"/> instance.
+        /// </remarks>
+        public Uri? Uri
+        {
+            get
+            {
+                return _uri;
+            }
+        }
+
+        /// <summary>
         /// Gets the type of the source.
         /// </summary>
         public string Type
@@ -87,6 +101,7 @@ namespace WGetNET
 
         private readonly string _name;
         private readonly string _arg;
+        private readonly Uri? _uri;
         private readonly string _type;
         private readonly string _data;
         private readonly string _identifier;
@@ -96,13 +111,15 @@ namespace WGetNET
         /// </summary>
         /// <param name="name">The name of the source.</param>
         /// <param name="arg">The URL or UNC of the source.</param>
+        /// <param name="uri">The URI of the source.</param>
         /// <param name="type">Type identifier of the source.</param>
         /// <param name="data">Data of the source source. This field is only used by some sources.</param>
         /// <param name="identifier">The identifier of the package</param>
-        internal WinGetSource(string name, string arg, string type, string identifier, string? data = null)
+        internal WinGetSource(string name, string arg, Uri? uri, string type, string identifier, string? data = null)
         {
             _name = name;
             _arg = arg;
+            _uri = uri;
             _type = type;
             _identifier = identifier;
 
@@ -139,7 +156,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
-            return new WinGetSource(name, arg, type, identifier);
+            Uri.TryCreate(arg, UriKind.Absolute, out Uri? uri);
+
+            return new WinGetSource(name, arg, uri, type, identifier);
         }
 
         /// <summary>
@@ -167,7 +186,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(data, "data");
 
-            return new WinGetSource(name, arg, type, identifier, data);
+            Uri.TryCreate(arg, UriKind.Absolute, out Uri? uri);
+
+            return new WinGetSource(name, arg, uri, type, identifier, data);
         }
 
         /// <summary>
@@ -179,7 +200,9 @@ namespace WGetNET
         /// </returns>
         internal static WinGetSource FromSourceModel(SourceModel model)
         {
-            return new WinGetSource(model.Name, model.Arg, model.Type, model.Identifier, model.Data);
+            Uri.TryCreate(model.Arg, UriKind.Absolute, out Uri? uri);
+
+            return new WinGetSource(model.Name, model.Arg, uri, model.Type, model.Identifier, model.Data);
         }
 
         /// <inheritdoc/>
@@ -188,6 +211,7 @@ namespace WGetNET
             return new WinGetSource(
                     _name,
                     _arg,
+                    _uri,
                     _type,
                     _identifier,
                     _data

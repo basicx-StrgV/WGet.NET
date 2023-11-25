@@ -3697,6 +3697,14 @@
             Gets the URL/UNC of the source.
             </summary>
         </member>
+        <member name="P:WGetNET.WinGetSource.Uri">
+            <summary>
+            Gets the uri of the source.
+            </summary>
+            <remarks>
+            <see langword="null"/> if <see cref="P:WGetNET.WinGetSource.Arg"/> can't be parsed to a <see cref="T:System.Uri"/> instance.
+            </remarks>
+        </member>
         <member name="P:WGetNET.WinGetSource.Type">
             <summary>
             Gets the type of the source.
@@ -3715,12 +3723,13 @@
         <member name="P:WGetNET.WinGetSource.IsEmpty">
             <inheritdoc/>
         </member>
-        <member name="M:WGetNET.WinGetSource.#ctor(System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:WGetNET.WinGetSource.#ctor(System.String,System.String,System.Uri,System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetSource"/> class.
             </summary>
             <param name="name">The name of the source.</param>
             <param name="arg">The URL or UNC of the source.</param>
+            <param name="uri">The URI of the source.</param>
             <param name="type">Type identifier of the source.</param>
             <param name="data">Data of the source source. This field is only used by some sources.</param>
             <param name="identifier">The identifier of the package</param>
@@ -4182,24 +4191,6 @@
             A <see cref="T:System.String"/> containing the json to deserialize.
             </param>
             <returns>
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
-        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             Object of the given class type.
             </returns>
             <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
