@@ -34,6 +34,8 @@ namespace WGetNET
         private const string _infoCmd = "--info";
         private const string _versionCmd = "--version";
         private const string _exportSettingsCmd = "settings export";
+        private const string _settingsEnableCmd = "settings --enable \"{0}\"";
+        private const string _settingsDisableCmd = "settings --disable \"{0}\"";
 
         private ProcessManager _processManager;
         private string _wingetExePath;
@@ -130,6 +132,7 @@ namespace WGetNET
             QueryInstallation();
         }
 
+        //---Settings Export---------------------------------------------------------------------------
         /// <summary>
         /// Exports the WinGet settings to a json string.
         /// </summary>
@@ -258,7 +261,255 @@ namespace WGetNET
 
             await FileHelper.WriteTextToFileAsync(file, OutputReader.ExportOutputToString(result));
         }
+        //---------------------------------------------------------------------------------------------
 
+        //---Manage Settings---------------------------------------------------------------------------
+        /// <summary>
+        /// Enables the provided admin setting (Needs administrator rights).
+        /// </summary>
+        /// <param name="settingName">
+        /// Name of the admin setting to enable.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public bool EnableAdminSetting(string settingName)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
+
+            string cmd = string.Format(_settingsEnableCmd, settingName);
+
+            ProcessResult result = Execute(cmd, true);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Enables the provided admin setting (Needs administrator rights).
+        /// </summary>
+        /// <param name="setting">
+        /// The <see cref="WGetNET.WinGetAdminOption"/> to enable.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public bool EnableAdminSetting(WinGetAdminOption setting)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
+
+            return EnableAdminSetting(setting.EntryName);
+        }
+
+        /// <summary>
+        /// Asynchronously enables the provided admin setting (Needs administrator rights).
+        /// </summary>
+        /// <param name="settingName">
+        /// Name of the admin setting to enable.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> EnableAdminSettingAsync(string settingName)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
+
+            string cmd = string.Format(_settingsEnableCmd, settingName);
+
+            ProcessResult result = await ExecuteAsync(cmd, true);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously enables the provided admin setting (Needs administrator rights).
+        /// </summary>
+        /// <param name="setting">
+        /// The <see cref="WGetNET.WinGetAdminOption"/> to enable.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> EnableAdminSettingAsynv(WinGetAdminOption setting)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
+
+            return await EnableAdminSettingAsync(setting.EntryName);
+        }
+
+        /// <summary>
+        /// Disables the provided admin setting (Needs administrator rights).
+        /// </summary>
+        /// <param name="settingName">
+        /// Name of the admin setting to disable.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public bool DisableAdminSetting(string settingName)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
+
+            string cmd = string.Format(_settingsDisableCmd, settingName);
+
+            ProcessResult result = Execute(cmd, true);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Disables the provided admin setting (Needs administrator rights).
+        /// </summary>
+        /// <param name="setting">
+        /// The <see cref="WGetNET.WinGetAdminOption"/> to disable.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public bool DisableAdminSetting(WinGetAdminOption setting)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
+
+            return DisableAdminSetting(setting.EntryName);
+        }
+
+        /// <summary>
+        /// Asynchronously disables the provided admin setting (Needs administrator rights).
+        /// </summary>
+        /// <param name="settingName">
+        /// Name of the admin setting to disable.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> DisableAdminSettingAsync(string settingName)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
+
+            string cmd = string.Format(_settingsDisableCmd, settingName);
+
+            ProcessResult result = await ExecuteAsync(cmd, true);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously disables the provided admin setting (Needs administrator rights).
+        /// </summary>
+        /// <param name="setting">
+        /// The <see cref="WGetNET.WinGetAdminOption"/> to disable.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> DisableAdminSettingAsync(WinGetAdminOption setting)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
+
+            return await DisableAdminSettingAsync(setting.EntryName);
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Info--------------------------------------------------------------------------------------
         /// <summary>
         /// Gets all WinGet related data provided by the WinGet info action.
         /// </summary>
@@ -319,7 +570,9 @@ namespace WGetNET
 
             return _outputReader.ToWingetInfo(result.Output, actionVersionId);
         }
+        //---------------------------------------------------------------------------------------------
 
+        //---Protected Functions-----------------------------------------------------------------------
         /// <summary>
         /// Checks if the installed WinGet version is between the given versions or the same.
         /// </summary>
@@ -406,7 +659,9 @@ namespace WGetNET
 
             return await _processManager.ExecuteWingetProcessAsync(args);
         }
+        //---------------------------------------------------------------------------------------------
 
+        //---Other-------------------------------------------------------------------------------------
         /// <summary>
         /// Throws a <see cref="WGetNET.Exceptions.WinGetNotInstalledException"/> if winget installation could not be found.
         /// </summary>
@@ -571,5 +826,6 @@ namespace WGetNET
 
             return false;
         }
+        //---------------------------------------------------------------------------------------------
     }
 }

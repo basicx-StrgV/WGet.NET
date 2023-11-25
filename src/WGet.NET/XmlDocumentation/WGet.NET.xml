@@ -952,6 +952,194 @@
             The caller does not have the required permission.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGet.EnableAdminSetting(System.String)">
+            <summary>
+            Enables the provided admin setting (Needs administrator rights).
+            </summary>
+            <param name="settingName">
+            Name of the admin setting to enable.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.EnableAdminSetting(WGetNET.WinGetAdminOption)">
+            <summary>
+            Enables the provided admin setting (Needs administrator rights).
+            </summary>
+            <param name="setting">
+            The <see cref="T:WGetNET.WinGetAdminOption"/> to enable.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.EnableAdminSettingAsync(System.String)">
+            <summary>
+            Asynchronously enables the provided admin setting (Needs administrator rights).
+            </summary>
+            <param name="settingName">
+            Name of the admin setting to enable.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.EnableAdminSettingAsynv(WGetNET.WinGetAdminOption)">
+            <summary>
+            Asynchronously enables the provided admin setting (Needs administrator rights).
+            </summary>
+            <param name="setting">
+            The <see cref="T:WGetNET.WinGetAdminOption"/> to enable.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.DisableAdminSetting(System.String)">
+            <summary>
+            Disables the provided admin setting (Needs administrator rights).
+            </summary>
+            <param name="settingName">
+            Name of the admin setting to disable.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.DisableAdminSetting(WGetNET.WinGetAdminOption)">
+            <summary>
+            Disables the provided admin setting (Needs administrator rights).
+            </summary>
+            <param name="setting">
+            The <see cref="T:WGetNET.WinGetAdminOption"/> to disable.
+            </param>
+            <returns>
+            <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.DisableAdminSettingAsync(System.String)">
+            <summary>
+            Asynchronously disables the provided admin setting (Needs administrator rights).
+            </summary>
+            <param name="settingName">
+            Name of the admin setting to disable.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.DisableAdminSettingAsync(WGetNET.WinGetAdminOption)">
+            <summary>
+            Asynchronously disables the provided admin setting (Needs administrator rights).
+            </summary>
+            <param name="setting">
+            The <see cref="T:WGetNET.WinGetAdminOption"/> to disable.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            The current user is missing administrator privileges for this call.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGet.GetInfo">
             <summary>
             Gets all WinGet related data provided by the WinGet info action.
@@ -4331,6 +4519,27 @@
             </summary>
             <remarks>
             If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>:
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.RemoveAppendix(System.String)">
+            <summary>
+            Removes version appendixes from the string.
+            </summary>
+            <remarks>
+            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to process.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>.
+            </returns>
+        </member>
+    </members>
+</doc>
+C456' it will not be cleaned, because to much information will be lost.
             </remarks>
             <param name="input">The <see cref="T:System.String"/> to clean up.</param>
             <returns>

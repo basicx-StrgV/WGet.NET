@@ -35,6 +35,9 @@ namespace WGetTestLegacySupport
                 Console.WriteLine(info.Version);
 
                 //---Tests-----------------------------------------------------------------------------
+                //bool enableResult = winget.EnableAdminSetting("LocalManifestFiles");
+                //bool disableResult = winget.DisableAdminSetting("LocalManifestFiles");
+
                 List<WinGetPackage> test = connector.SearchPackage("git", "winget");
                 Console.WriteLine(test[3].Name);
                 Console.WriteLine(test[3].Id);
