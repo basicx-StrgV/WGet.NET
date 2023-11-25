@@ -3471,31 +3471,61 @@
             </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.Name">
-            <inheritdoc/>
+            <summary>
+            Gets the name of the package.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.Id">
-            <inheritdoc/>
+            <summary>
+            Gets the id of the package.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.VersionString">
-            <inheritdoc/>
+            <summary>
+            Gets the version of the package.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.Version">
-            <inheritdoc/>
+            <summary>
+            Gets the version of the package.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.AvailableVersionString">
-            <inheritdoc/>
+            <summary>
+            Gets the newest available version of the package.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.AvailableVersion">
-            <inheritdoc/>
+            <summary>
+            Gets the newest available version of the package.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.SourceName">
-            <inheritdoc/>
+            <summary>
+            Gets the source name for the package.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.HasShortenedId">
-            <inheritdoc/>
+            <summary>
+            Gets if id of the package is shortened.
+            </summary>
+            <remarks>
+            The name of the package will be used for all actions performd with this package.
+            </remarks>
         </member>
         <member name="P:WGetNET.WinGetPackage.HasNoId">
-            <inheritdoc/>
+            <summary>
+            Gets if the package does not provide an id.
+            </summary>
+            <remarks>
+            If this is true somthing whent wrong in the creation of the package.
+            The name of the package will be used for all actions performd with this package.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetPackage.HasUpgrade">
+            <summary>
+            Gets if the package can be upgraded.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetPackage.IsEmpty">
             <summary>
@@ -3658,19 +3688,29 @@
             </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.Name">
-            <inheritdoc/>
+            <summary>
+            Gets the name of the source.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.Arg">
-            <inheritdoc/>
+            <summary>
+            Gets the URL/UNC of the source.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.Type">
-            <inheritdoc/>
+            <summary>
+            Gets the type of the source.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.Data">
-            <inheritdoc/>
+            <summary>
+            Gets the data of the source.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.Identifier">
-            <inheritdoc/>
+            <summary>
+            Gets the identifier of the source.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetSource.IsEmpty">
             <inheritdoc/>
@@ -4234,6 +4274,15 @@
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.Models.SourceModel"/> class.
             </summary>
+        </member>
+        <member name="M:WGetNET.Models.SourceModel.FromWinGetSource(WGetNET.WinGetSource)">
+            <summary>
+            Creates a <see cref="T:WGetNET.Models.SourceModel"/> instance from a <see cref="T:WGetNET.WinGetSource"/> instance.
+            </summary>
+            <param name="source">The <see cref="T:WGetNET.WinGetSource"/> instance.</param>
+            <returns>
+            The created <see cref="T:WGetNET.Models.SourceModel"/> instance.
+            </returns>
         </member>
         <member name="T:WGetNET.Parser.VersionParser">
             <summary>

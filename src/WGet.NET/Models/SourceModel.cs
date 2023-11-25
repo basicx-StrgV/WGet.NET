@@ -132,5 +132,24 @@ namespace WGetNET.Models
         {
             // Empty constructor for json parsing.
         }
+
+        /// <summary>
+        /// Creates a <see cref="WGetNET.Models.SourceModel"/> instance from a <see cref="WGetNET.WinGetSource"/> instance.
+        /// </summary>
+        /// <param name="source">The <see cref="WGetNET.WinGetSource"/> instance.</param>
+        /// <returns>
+        /// The created <see cref="WGetNET.Models.SourceModel"/> instance.
+        /// </returns>
+        public static SourceModel FromWinGetSource(WinGetSource source)
+        {
+            return new SourceModel()
+            {
+                Name = source.Name,
+                Arg = source.Arg,
+                Type = source.Type,
+                Data = source.Data,
+                Identifier = source.Identifier
+            };
+        }
     }
 }
