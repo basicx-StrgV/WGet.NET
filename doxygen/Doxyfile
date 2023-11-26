@@ -1355,7 +1355,7 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            =
+HTML_HEADER            = html/header.html
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard
@@ -1406,7 +1406,10 @@ HTML_EXTRA_STYLESHEET  = stylesheets/doxygen-awesome.css \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = assets/github-mark-white.svg
+HTML_EXTRA_FILES       = assets/github-mark-white.svg \
+                         js/doxygen-awesome-darkmode-toggle.js \
+                         js/doxygen-awesome-fragment-copy-button.js \
+                         js/doxygen-awesome-interactive-toc.js
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.
