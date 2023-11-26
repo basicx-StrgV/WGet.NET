@@ -62,6 +62,7 @@ namespace WGetNET.Abstractions
             }
         }
 
+        // \cond PRIVATE
         private protected readonly string _entryName;
         private protected readonly string _rawContent;
         private protected readonly bool _hasShortenedContent;
@@ -78,6 +79,7 @@ namespace WGetNET.Abstractions
             _rawContent = rawContent;
             _hasShortenedContent = hasShortenedContent;
         }
+        // \endcond
 
         /// <inheritdoc/>
         public override string ToString()

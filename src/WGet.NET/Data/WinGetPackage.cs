@@ -159,6 +159,7 @@ namespace WGetNET
             }
         }
 
+        // \cond PRIVATE
         private protected readonly string _name;
         private protected readonly string _id;
         private protected readonly string _versionString;
@@ -168,6 +169,7 @@ namespace WGetNET
         private protected readonly string _sourceName;
 
         private protected readonly bool _hasShortenedId = false;
+        // \endcond
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackage"/> class.

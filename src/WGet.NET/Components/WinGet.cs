@@ -658,6 +658,7 @@ namespace WGetNET
         //---------------------------------------------------------------------------------------------
 
         //---Protected Functions-----------------------------------------------------------------------
+        // \cond PRIVATE
         /// <summary>
         /// Checks if the installed WinGet version is between the given versions or the same.
         /// </summary>
@@ -669,7 +670,7 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the installed WinGet version matches the check, or <see langword="false"/> if not.
         /// </returns>
-        protected bool CheckWinGetVersion(Version minVersion, Version? maxVersion = null)
+        private protected bool CheckWinGetVersion(Version minVersion, Version? maxVersion = null)
         {
             Version winGetVersion = Version;
             if ((winGetVersion.Major >= minVersion.Major && winGetVersion.Minor >= minVersion.Minor &&
@@ -744,6 +745,7 @@ namespace WGetNET
 
             return await _processManager.ExecuteWingetProcessAsync(args);
         }
+        // \endcond
         //---------------------------------------------------------------------------------------------
 
         //---Other-------------------------------------------------------------------------------------
