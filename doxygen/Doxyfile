@@ -1409,7 +1409,8 @@ HTML_EXTRA_STYLESHEET  = stylesheets/doxygen-awesome.css \
 HTML_EXTRA_FILES       = assets/github-mark-white.svg \
                          js/doxygen-awesome-darkmode-toggle.js \
                          js/doxygen-awesome-fragment-copy-button.js \
-                         js/doxygen-awesome-interactive-toc.js
+                         js/doxygen-awesome-interactive-toc.js \
+                         assets/github-mark.svg
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.

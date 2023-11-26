@@ -30,6 +30,28 @@ $extrastylesheet
 	DoxygenAwesomeDarkModeToggle.init();
 	DoxygenAwesomeFragmentCopyButton.init();
 	DoxygenAwesomeInteractiveToc.init();
+
+  addEventListener("DOMContentLoaded", event => { 
+    // Set the correct icon for the current mode when the site is loaded
+    if (DoxygenAwesomeDarkModeToggle.userPreference) {
+      document.getElementById("github-icon-dark").style.display = "block";
+    }
+    else {
+      document.getElementById("github-icon-light").style.display = "block";
+    }
+
+    DoxygenAwesomeDarkModeToggle.onModeChange(() => {
+      // Update the icons when the mode is changed
+      if (DoxygenAwesomeDarkModeToggle.userPreference) {
+        document.getElementById("github-icon-light").style.display = "none";
+        document.getElementById("github-icon-dark").style.display = "block";
+      }
+      else {
+        document.getElementById("github-icon-dark").style.display = "none";
+        document.getElementById("github-icon-light").style.display = "block";
+      }
+    });
+  });
 </script>
 </head>
 <body>
