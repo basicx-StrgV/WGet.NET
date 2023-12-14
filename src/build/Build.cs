@@ -3,11 +3,9 @@ using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
 using Serilog;
-//using System.Collections.Generic;
 
 namespace BuildTool
 {
-
     class Build : NukeBuild
     {
         public static int Main() => Execute<Build>(x => x.Pack);
@@ -22,11 +20,9 @@ namespace BuildTool
         private readonly Configuration _configuration = Configuration.Release;
 
         private static AbsolutePath _packages => RootDirectory / "nuget" / "packages";
-        private static AbsolutePath _sourceDirectory => RootDirectory / "src";
 
         Target Info => _ => _
             .Unlisted()
-            //.Before(Clean)
             .Before(Restore)
             .Before(Compile)
             .Before(Pack)
@@ -37,20 +33,6 @@ namespace BuildTool
                 Log.Information("Output directory: {dir}", _packages);
             });
 
-        /*Target Clean => _ => _
-            .Unlisted()
-            .Before(Restore)
-            .Executes(() =>
-            {*/
-        //IReadOnlyCollection<AbsolutePath> directories = _sourceDirectory.GlobDirectories("**/bin", "**/obj");
-
-        /*foreach (AbsolutePath directory in directories)
-        {
-            Log.Information($"{directory}");
-            directory.DeleteDirectory();
-        }
-    });*/
-
         Target Restore => _ => _
             .Unlisted()
             .Executes(() =>
@@ -60,7 +42,6 @@ namespace BuildTool
             });
 
         Target Compile => _ => _
-            //.DependsOn(Clean)
             .DependsOn(Restore)
             .Executes(() =>
             {
@@ -77,6 +58,8 @@ namespace BuildTool
             {
                 DotNetTasks.DotNetPack(s => s
                     .SetProject(Solution.GetProject("WGet.NET"))
+                    .SetConfiguration(_configuration)
+                    .SetNoBuild(true)
                     .SetOutputDirectory(_packages)
                     .SetVersion(Version)
                     .SetFileVersion(Version)
