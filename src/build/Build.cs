@@ -1,8 +1,9 @@
+using System.IO;
+using Serilog;
 using Nuke.Common;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
-using Serilog;
 
 namespace BuildTool
 {
@@ -13,6 +14,12 @@ namespace BuildTool
         [Parameter("Version of the package")]
         public readonly string Version = "0.0.0";
 
+        [Parameter("The path of the doxygen bin directory (Default: C:\\Program Files\\doxygen\\bin)")]
+        public readonly string DoxygenBin = "C:\\Program Files\\doxygen\\bin";
+
+        [Parameter("Sets that no docs should be created")]
+        public readonly bool NoDocs = false;
+
         [Solution]
         public readonly Solution Solution;
 
@@ -20,6 +27,8 @@ namespace BuildTool
         private readonly Configuration _configuration = Configuration.Release;
 
         private static AbsolutePath _packages => RootDirectory / "nuget" / "packages";
+        private static AbsolutePath _doxygenWorkingDir => RootDirectory / "doxygen";
+        private static AbsolutePath _doxyfile => _doxygenWorkingDir / "Doxyfile";
 
         Target Info => _ => _
             .Unlisted()
@@ -54,6 +63,7 @@ namespace BuildTool
         Target Pack => _ => _
             .DependsOn(Info)
             .DependsOn(Compile)
+            .Triggers(Docs)
             .Executes(() =>
             {
                 DotNetTasks.DotNetPack(s => s
@@ -64,7 +74,43 @@ namespace BuildTool
                     .SetVersion(Version)
                     .SetFileVersion(Version)
                     .SetAssemblyVersion(Version)
-                    .SetProperty("PackageReleaseNotes", "https://github.com/basicx-StrgV/WGet.NET/releases/tag/" + Version));
+                    .SetProperty("PackageReleaseNotes", $"https://github.com/basicx-StrgV/WGet.NET/releases/tag/{Version}"));
             });
+
+        Target Docs => _ => _
+        .OnlyWhenDynamic(() => !NoDocs)
+        .Executes(() =>
+        {
+            if (!Directory.Exists(DoxygenBin))
+            {
+                Assert.Fail($"The doxygen bin directory does not exist ({DoxygenBin})");
+            }
+
+            if (!Directory.Exists(_doxygenWorkingDir))
+            {
+                Assert.Fail($"The doxygen process working directory does not exist ({_doxygenWorkingDir})");
+            }
+
+            string doxygenExe = DoxygenBin + Path.DirectorySeparatorChar + "doxygen.exe";
+
+            if (!File.Exists(doxygenExe))
+            {
+                Assert.Fail($"The doxygen executable does not exist ({doxygenExe})");
+            }
+
+            if (!File.Exists(_doxyfile))
+            {
+                Assert.Fail($"The doxyfile does not exist ({_doxyfile})");
+            }
+
+            DoxygenHandler doxygen = new DoxygenHandler(_doxyfile, doxygenExe, _doxygenWorkingDir);
+
+            bool result = doxygen.GenerateDocs(Version);
+
+            if (!result)
+            {
+                Assert.Fail("Failed to generate docs");
+            }
+        });
     }
 }
