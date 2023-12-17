@@ -294,7 +294,7 @@ namespace WGetNET
                 return adminSettings;
             }
 
-            AdminSettingBuilder builder = new();
+            WinGetAdminSettingBuilder builder = new();
             foreach (KeyValuePair<string, bool> entry in settings.AdminSettings)
             {
                 builder.Clear();
@@ -341,7 +341,7 @@ namespace WGetNET
                 return adminSettings;
             }
 
-            AdminSettingBuilder builder = new();
+            WinGetAdminSettingBuilder builder = new();
             foreach (KeyValuePair<string, bool> entry in settings.AdminSettings)
             {
                 if (cancellationToken.IsCancellationRequested)

@@ -9,7 +9,7 @@ namespace WGetNET.Builder
     /// <summary>
     /// Builder to create a new <see cref="WGetNET.WinGetAdminSetting"/> instance.
     /// </summary>
-    internal class AdminSettingBuilder : WinGetObjectBuilder<WinGetAdminSetting?>
+    internal class WinGetAdminSettingBuilder : WinGetObjectBuilder<WinGetAdminSetting?>
     {
         private string _entryName = string.Empty;
         private string _rawContent = string.Empty;
@@ -17,9 +17,9 @@ namespace WGetNET.Builder
         private bool? _isEnabled = false;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.Builder.AdminSettingBuilder"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Builder.WinGetAdminSettingBuilder"/> class.
         /// </summary>
-        public AdminSettingBuilder()
+        public WinGetAdminSettingBuilder()
         {
             // Provide empty constructor
         }
@@ -62,7 +62,7 @@ namespace WGetNET.Builder
         /// </summary>
         /// <remarks>
         /// There is no need to add raw content after using this method.
-        /// Using <see cref="AdminSettingBuilder.AddRawContent(string)"/> will override this value again.
+        /// Using <see cref="WinGetAdminSettingBuilder.AddRawContent(string)"/> will override this value again.
         /// </remarks>
         /// <param name="status">
         /// The status of the admin setting.

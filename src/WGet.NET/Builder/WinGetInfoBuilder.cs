@@ -12,7 +12,7 @@ namespace WGetNET.Builder
     /// <summary>
     /// Builder to create a new <see cref="WGetNET.WinGetInfo"/> instance.
     /// </summary>
-    internal class InfoSetBuilder : WinGetObjectBuilder<WinGetInfo>
+    internal class WinGetInfoBuilder : WinGetObjectBuilder<WinGetInfo>
     {
         private string _versionString = string.Empty;
         private Version? _version = null;
@@ -21,9 +21,9 @@ namespace WGetNET.Builder
         private List<WinGetAdminSetting> _adminSettings = new();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.Builder.InfoSetBuilder"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Builder.WinGetInfoBuilder"/> class.
         /// </summary>
-        public InfoSetBuilder()
+        public WinGetInfoBuilder()
         {
             // Provide empty constructor
         }

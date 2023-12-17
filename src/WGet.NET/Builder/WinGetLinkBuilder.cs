@@ -10,7 +10,7 @@ namespace WGetNET.Builder
     /// <summary>
     /// Builder to create a new <see cref="WGetNET.WinGetLink"/> instance.
     /// </summary>
-    internal class LinkBuilder : WinGetObjectBuilder<WinGetLink?>
+    internal class WinGetLinkBuilder : WinGetObjectBuilder<WinGetLink?>
     {
         private string _entryName = string.Empty;
         private string _rawContent = string.Empty;
@@ -18,9 +18,9 @@ namespace WGetNET.Builder
         private Uri? _url = null;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.Builder.LinkBuilder"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Builder.WinGetLinkBuilder"/> class.
         /// </summary>
-        public LinkBuilder()
+        public WinGetLinkBuilder()
         {
             // Provide empty constructor
         }

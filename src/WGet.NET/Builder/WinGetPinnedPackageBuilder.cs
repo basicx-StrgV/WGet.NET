@@ -11,7 +11,7 @@ namespace WGetNET.Builder
     /// <summary>
     /// Builder to create a new <see cref="WGetNET.WinGetPinnedPackage"/> instance.
     /// </summary>
-    internal class PinnedPackageBuilder : WinGetObjectBuilder<WinGetPinnedPackage>
+    internal class WinGetPinnedPackageBuilder : WinGetObjectBuilder<WinGetPinnedPackage>
     {
         private string _pinTypeString = string.Empty;
         private string _pinnedVersionString = string.Empty;
@@ -27,9 +27,9 @@ namespace WGetNET.Builder
         private bool _hasShortenedId = false;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.Builder.PinnedPackageBuilder"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Builder.WinGetPinnedPackageBuilder"/> class.
         /// </summary>
-        public PinnedPackageBuilder()
+        public WinGetPinnedPackageBuilder()
         {
             // Provide empty constructor
         }

@@ -79,23 +79,23 @@
             <see langword="true"/> if the value is shortened or <see langword="false"/> if not.
             </returns>
         </member>
-        <member name="T:WGetNET.Builder.AdminSettingBuilder">
+        <member name="T:WGetNET.Builder.WinGetAdminSettingBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetAdminSetting"/> instance.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.AdminSettingBuilder.#ctor">
+        <member name="M:WGetNET.Builder.WinGetAdminSettingBuilder.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Builder.AdminSettingBuilder"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.WinGetAdminSettingBuilder"/> class.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.AdminSettingBuilder.AddEntryName(System.String)">
+        <member name="M:WGetNET.Builder.WinGetAdminSettingBuilder.AddEntryName(System.String)">
             <summary>
             Addes the entry name for the winget info entry.
             </summary>
             <param name="entryName">The name of the info entry.</param>
         </member>
-        <member name="M:WGetNET.Builder.AdminSettingBuilder.AddRawContent(System.String)">
+        <member name="M:WGetNET.Builder.WinGetAdminSettingBuilder.AddRawContent(System.String)">
             <summary>
             Adds the raw content of the winget info entry.
             </summary>
@@ -104,19 +104,19 @@
             </remarks>
             <param name="rawContent">The raw data of the info entry as a <see cref="T:System.String"/></param>
         </member>
-        <member name="M:WGetNET.Builder.AdminSettingBuilder.AddStatus(System.Boolean)">
+        <member name="M:WGetNET.Builder.WinGetAdminSettingBuilder.AddStatus(System.Boolean)">
             <summary>
             Adds the status of admin settings.
             </summary>
             <remarks>
             There is no need to add raw content after using this method.
-            Using <see cref="M:WGetNET.Builder.AdminSettingBuilder.AddRawContent(System.String)"/> will override this value again.
+            Using <see cref="M:WGetNET.Builder.WinGetAdminSettingBuilder.AddRawContent(System.String)"/> will override this value again.
             </remarks>
             <param name="status">
             The status of the admin setting.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.AdminSettingBuilder.GetInstance">
+        <member name="M:WGetNET.Builder.WinGetAdminSettingBuilder.GetInstance">
             <summary>
             Returns a <see cref="T:WGetNET.WinGetAdminSetting"/> instance from data provided to the builder.
             </summary>
@@ -124,10 +124,10 @@
             The created <see cref="T:WGetNET.WinGetAdminSetting"/> instance, or <see langword="null"/> if the provided data failed to be parsed.
             </returns>
         </member>
-        <member name="M:WGetNET.Builder.AdminSettingBuilder.Clear">
+        <member name="M:WGetNET.Builder.WinGetAdminSettingBuilder.Clear">
             <inheritdoc/>
         </member>
-        <member name="M:WGetNET.Builder.AdminSettingBuilder.ParseToBool(System.String,System.Boolean)">
+        <member name="M:WGetNET.Builder.WinGetAdminSettingBuilder.ParseToBool(System.String,System.Boolean)">
             <summary>
             Parses the raw content to a <see cref="T:System.Boolean"/> value.
             </summary>
@@ -141,23 +141,23 @@
             The paresed <see cref="T:System.Boolean"/> value or <see langword="null"/> if parsing failed.
             </returns>
         </member>
-        <member name="T:WGetNET.Builder.DirectoryBuilder">
+        <member name="T:WGetNET.Builder.WinGetDirectoryBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetDirectory"/> instance.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.DirectoryBuilder.#ctor">
+        <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Builder.DirectoryBuilder"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.WinGetDirectoryBuilder"/> class.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.DirectoryBuilder.AddEntryName(System.String)">
+        <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.AddEntryName(System.String)">
             <summary>
             Addes the entry name for the winget info entry.
             </summary>
             <param name="entryName">The name of the info entry.</param>
         </member>
-        <member name="M:WGetNET.Builder.DirectoryBuilder.AddRawContent(System.String)">
+        <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.AddRawContent(System.String)">
             <summary>
             Adds the raw content of the winget info entry.
             </summary>
@@ -166,7 +166,7 @@
             </remarks>
             <param name="rawContent">The raw data of the info entry as a <see cref="T:System.String"/></param>
         </member>
-        <member name="M:WGetNET.Builder.DirectoryBuilder.GetInstance">
+        <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.GetInstance">
             <summary>
             Returns a <see cref="T:WGetNET.WinGetDirectory"/> instance from data provided to the builder.
             </summary>
@@ -174,10 +174,10 @@
             The created <see cref="T:WGetNET.WinGetDirectory"/> instance, or <see langword="null"/> if the provided data failed to be parsed.
             </returns>
         </member>
-        <member name="M:WGetNET.Builder.DirectoryBuilder.Clear">
+        <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.Clear">
             <inheritdoc/>
         </member>
-        <member name="M:WGetNET.Builder.DirectoryBuilder.CreateDirectoryInfo(System.String,System.Boolean)">
+        <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.CreateDirectoryInfo(System.String,System.Boolean)">
             <summary>
             Creates and returns a <see cref="T:System.IO.DirectoryInfo"/> instance from the raw content.
             </summary>
@@ -187,7 +187,7 @@
             The created <see cref="T:System.IO.DirectoryInfo"/> instance, or <see langword="null"/> if parsing the raw content failed.
             </returns>
         </member>
-        <member name="M:WGetNET.Builder.DirectoryBuilder.TrimLastDirectory(System.String)">
+        <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.TrimLastDirectory(System.String)">
             <summary>
             Removes the last directory from the given path.
             </summary>
@@ -198,17 +198,17 @@
             A <see cref="T:System.String"/> containing the trimed path.
             </returns>
         </member>
-        <member name="T:WGetNET.Builder.InfoSetBuilder">
+        <member name="T:WGetNET.Builder.WinGetInfoBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetInfo"/> instance.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.#ctor">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Builder.InfoSetBuilder"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.WinGetInfoBuilder"/> class.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.AddVersion(System.String)">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.AddVersion(System.String)">
             <summary>
             Adds the current winget version.
             </summary>
@@ -216,7 +216,7 @@
             The current winget version contained in a <see cref="T:System.String"/>.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.AddVersion(System.Version)">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.AddVersion(System.Version)">
             <summary>
             Adds the current winget version.
             </summary>
@@ -224,7 +224,7 @@
             The current winget version.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.AddDirectories(System.Collections.Generic.List{WGetNET.WinGetDirectory})">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.AddDirectories(System.Collections.Generic.List{WGetNET.WinGetDirectory})">
             <summary>
             Adds a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetDirectory"/> objects.
             </summary>
@@ -232,7 +232,7 @@
             The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetDirectory"/> objects.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.AddDirectory(WGetNET.WinGetDirectory)">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.AddDirectory(WGetNET.WinGetDirectory)">
             <summary>
             Adds a <see cref="T:WGetNET.WinGetDirectory"/> object.
             </summary>
@@ -240,7 +240,7 @@
             The <see cref="T:WGetNET.WinGetDirectory"/> object.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.AddLinks(System.Collections.Generic.List{WGetNET.WinGetLink})">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.AddLinks(System.Collections.Generic.List{WGetNET.WinGetLink})">
             <summary>
             Adds a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetLink"/> objects.
             </summary>
@@ -248,7 +248,7 @@
             The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetLink"/> objects.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.AddLink(WGetNET.WinGetLink)">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.AddLink(WGetNET.WinGetLink)">
             <summary>
             Adds a <see cref="T:WGetNET.WinGetLink"/> object.
             </summary>
@@ -256,7 +256,7 @@
             The <see cref="T:WGetNET.WinGetLink"/> object.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.AddAdminOptions(System.Collections.Generic.List{WGetNET.WinGetAdminSetting})">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.AddAdminOptions(System.Collections.Generic.List{WGetNET.WinGetAdminSetting})">
             <summary>
             Adds a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminSetting"/> objects.
             </summary>
@@ -264,7 +264,7 @@
             The <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:WGetNET.WinGetAdminSetting"/> objects.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.AddAdminOption(WGetNET.WinGetAdminSetting)">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.AddAdminOption(WGetNET.WinGetAdminSetting)">
             <summary>
             Adds a <see cref="T:WGetNET.WinGetAdminSetting"/> object.
             </summary>
@@ -272,7 +272,7 @@
             The <see cref="T:WGetNET.WinGetAdminSetting"/> object.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.GetInstance">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.GetInstance">
             <summary>
             Returns a <see cref="T:WGetNET.WinGetInfo"/> instance from data provided to the builder.
             </summary>
@@ -280,26 +280,26 @@
             The created <see cref="T:WGetNET.WinGetInfo"/> instance.
             </returns>
         </member>
-        <member name="M:WGetNET.Builder.InfoSetBuilder.Clear">
+        <member name="M:WGetNET.Builder.WinGetInfoBuilder.Clear">
             <inheritdoc/>
         </member>
-        <member name="T:WGetNET.Builder.LinkBuilder">
+        <member name="T:WGetNET.Builder.WinGetLinkBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetLink"/> instance.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.LinkBuilder.#ctor">
+        <member name="M:WGetNET.Builder.WinGetLinkBuilder.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Builder.LinkBuilder"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.WinGetLinkBuilder"/> class.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.LinkBuilder.AddEntryName(System.String)">
+        <member name="M:WGetNET.Builder.WinGetLinkBuilder.AddEntryName(System.String)">
             <summary>
             Addes the entry name for the winget info entry.
             </summary>
             <param name="entryName">The name of the info entry.</param>
         </member>
-        <member name="M:WGetNET.Builder.LinkBuilder.AddRawContent(System.String)">
+        <member name="M:WGetNET.Builder.WinGetLinkBuilder.AddRawContent(System.String)">
             <summary>
             Adds the raw content of the winget info entry.
             </summary>
@@ -308,7 +308,7 @@
             </remarks>
             <param name="rawContent">The raw data of the info entry as a <see cref="T:System.String"/></param>
         </member>
-        <member name="M:WGetNET.Builder.LinkBuilder.GetInstance">
+        <member name="M:WGetNET.Builder.WinGetLinkBuilder.GetInstance">
             <summary>
             Returns a <see cref="T:WGetNET.WinGetLink"/> instance from data provided to the builder.
             </summary>
@@ -316,10 +316,10 @@
             The created <see cref="T:WGetNET.WinGetLink"/> instance, or <see langword="null"/> if the provided data failed to be parsed.
             </returns>
         </member>
-        <member name="M:WGetNET.Builder.LinkBuilder.Clear">
+        <member name="M:WGetNET.Builder.WinGetLinkBuilder.Clear">
             <inheritdoc/>
         </member>
-        <member name="M:WGetNET.Builder.LinkBuilder.CreateUri(System.String,System.Boolean)">
+        <member name="M:WGetNET.Builder.WinGetLinkBuilder.CreateUri(System.String,System.Boolean)">
             <summary>
             Creates and returns a <see cref="T:System.Uri"/> instance from the raw content.
             </summary>
@@ -329,7 +329,7 @@
             The created <see cref="T:System.Uri"/> instance.
             </returns>
         </member>
-        <member name="M:WGetNET.Builder.LinkBuilder.TrimLastUriPart(System.String)">
+        <member name="M:WGetNET.Builder.WinGetLinkBuilder.TrimLastUriPart(System.String)">
             <summary>
             Removes the last part from the given URI.
             </summary>
@@ -340,17 +340,17 @@
             A <see cref="T:System.String"/> containing the trimed URI.
             </returns>
         </member>
-        <member name="T:WGetNET.Builder.PackageBuilder">
+        <member name="T:WGetNET.Builder.WinGetPackageBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetPackage"/> instance.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.PackageBuilder.#ctor">
+        <member name="M:WGetNET.Builder.WinGetPackageBuilder.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Builder.PackageBuilder"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.WinGetPackageBuilder"/> class.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.PackageBuilder.AddName(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPackageBuilder.AddName(System.String)">
             <summary>
             Addss the name of the package.
             </summary>
@@ -358,7 +358,7 @@
             The name of the package.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PackageBuilder.AddId(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPackageBuilder.AddId(System.String)">
             <summary>
             Addss the id of the package.
             </summary>
@@ -369,7 +369,7 @@
             The id of the package.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PackageBuilder.AddVersion(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPackageBuilder.AddVersion(System.String)">
             <summary>
             Adds the current version of the package.
             </summary>
@@ -377,7 +377,7 @@
             The current version of the package contained in a <see cref="T:System.String"/>.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PackageBuilder.AddVersion(System.Version)">
+        <member name="M:WGetNET.Builder.WinGetPackageBuilder.AddVersion(System.Version)">
             <summary>
             Adds the current version of the package.
             </summary>
@@ -385,7 +385,7 @@
             The current version of the package.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PackageBuilder.AddAvailableVersion(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPackageBuilder.AddAvailableVersion(System.String)">
             <summary>
             Adds the heigest available version of the package.
             </summary>
@@ -393,7 +393,7 @@
             The heigest available version of the package contained in a <see cref="T:System.String"/>.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PackageBuilder.AddAvailableVersion(System.Version)">
+        <member name="M:WGetNET.Builder.WinGetPackageBuilder.AddAvailableVersion(System.Version)">
             <summary>
             Adds the heigest available version of the package.
             </summary>
@@ -401,7 +401,7 @@
             The heigest available version of the package.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PackageBuilder.AddSourceName(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPackageBuilder.AddSourceName(System.String)">
             <summary>
             Adds the source name of the package.
             </summary>
@@ -409,7 +409,7 @@
             The name of the source for the package.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PackageBuilder.GetInstance">
+        <member name="M:WGetNET.Builder.WinGetPackageBuilder.GetInstance">
             <summary>
             Returns a <see cref="T:WGetNET.WinGetPackage"/> instance from data provided to the builder.
             </summary>
@@ -417,26 +417,26 @@
             The created <see cref="T:WGetNET.WinGetPackage"/> instance.
             </returns>
         </member>
-        <member name="M:WGetNET.Builder.PackageBuilder.Clear">
+        <member name="M:WGetNET.Builder.WinGetPackageBuilder.Clear">
             <inheritdoc/>
         </member>
-        <member name="T:WGetNET.Builder.PinnedPackageBuilder">
+        <member name="T:WGetNET.Builder.WinGetPinnedPackageBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetPinnedPackage"/> instance.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.#ctor">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Builder.PinnedPackageBuilder"/> class.
+            Initializes a new instance of the <see cref="T:WGetNET.Builder.WinGetPinnedPackageBuilder"/> class.
             </summary>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddPinType(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.AddPinType(System.String)">
             <summary>
             Adds the pin type of the package.
             </summary>
             <param name="pinType">The packag pin type as a <see cref="T:System.String"/></param>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddPinnedVersion(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.AddPinnedVersion(System.String)">
             <summary>
             Adds the pinned version for the package.
             </summary>
@@ -445,7 +445,7 @@
             This could be a single version or a version range.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddName(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.AddName(System.String)">
             <summary>
             Addss the name of the package.
             </summary>
@@ -453,7 +453,7 @@
             The name of the package.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddId(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.AddId(System.String)">
             <summary>
             Addss the id of the package.
             </summary>
@@ -464,7 +464,7 @@
             The id of the package.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddVersion(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.AddVersion(System.String)">
             <summary>
             Adds the current version of the package.
             </summary>
@@ -472,7 +472,7 @@
             The current version of the package contained in a <see cref="T:System.String"/>.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddVersion(System.Version)">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.AddVersion(System.Version)">
             <summary>
             Adds the current version of the package.
             </summary>
@@ -480,7 +480,7 @@
             The current version of the package.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddAvailableVersion(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.AddAvailableVersion(System.String)">
             <summary>
             Adds the heigest available version of the package.
             </summary>
@@ -488,7 +488,7 @@
             The heigest available version of the package contained in a <see cref="T:System.String"/>.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddAvailableVersion(System.Version)">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.AddAvailableVersion(System.Version)">
             <summary>
             Adds the heigest available version of the package.
             </summary>
@@ -496,7 +496,7 @@
             The heigest available version of the package.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.AddSourceName(System.String)">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.AddSourceName(System.String)">
             <summary>
             Adds the source name of the package.
             </summary>
@@ -504,7 +504,7 @@
             The name of the source for the package.
             </param>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.GetInstance">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.GetInstance">
             <summary>
             Returns a <see cref="T:WGetNET.WinGetPinnedPackage"/> instance from data provided to the builder.
             </summary>
@@ -512,7 +512,7 @@
             The created <see cref="T:WGetNET.WinGetPinnedPackage"/> instance.
             </returns>
         </member>
-        <member name="M:WGetNET.Builder.PinnedPackageBuilder.Clear">
+        <member name="M:WGetNET.Builder.WinGetPinnedPackageBuilder.Clear">
             <inheritdoc/>
         </member>
         <member name="T:WGetNET.Components.Internal.ProcessManager">

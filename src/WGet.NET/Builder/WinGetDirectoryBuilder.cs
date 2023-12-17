@@ -11,7 +11,7 @@ namespace WGetNET.Builder
     /// <summary>
     /// Builder to create a new <see cref="WGetNET.WinGetDirectory"/> instance.
     /// </summary>
-    internal class DirectoryBuilder : WinGetObjectBuilder<WinGetDirectory?>
+    internal class WinGetDirectoryBuilder : WinGetObjectBuilder<WinGetDirectory?>
     {
         private string _entryName = string.Empty;
         private string _rawContent = string.Empty;
@@ -19,9 +19,9 @@ namespace WGetNET.Builder
         private DirectoryInfo? _directoryInfo = null;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.Builder.DirectoryBuilder"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Builder.WinGetDirectoryBuilder"/> class.
         /// </summary>
-        public DirectoryBuilder()
+        public WinGetDirectoryBuilder()
         {
             // Provide empty constructor
         }

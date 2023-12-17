@@ -11,7 +11,7 @@ namespace WGetNET.Builder
     /// <summary>
     /// Builder to create a new <see cref="WGetNET.WinGetPackage"/> instance.
     /// </summary>
-    internal class PackageBuilder : WinGetObjectBuilder<WinGetPackage>
+    internal class WinGetPackageBuilder : WinGetObjectBuilder<WinGetPackage>
     {
         private string _name = string.Empty;
         private string _id = string.Empty;
@@ -23,9 +23,9 @@ namespace WGetNET.Builder
         private bool _hasShortenedId = false;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.Builder.PackageBuilder"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Builder.WinGetPackageBuilder"/> class.
         /// </summary>
-        public PackageBuilder()
+        public WinGetPackageBuilder()
         {
             // Provide empty constructor
         }

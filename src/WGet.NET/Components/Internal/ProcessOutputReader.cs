@@ -91,7 +91,7 @@ namespace WGetNET.Components.Internal
                 return resultList;
             }
 
-            PackageBuilder builder = new();
+            WinGetPackageBuilder builder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -247,7 +247,7 @@ namespace WGetNET.Components.Internal
                 return resultList;
             }
 
-            PinnedPackageBuilder builder = new();
+            WinGetPinnedPackageBuilder builder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -441,7 +441,7 @@ namespace WGetNET.Components.Internal
         /// </returns>
         private WinGetInfo ReadDataForRange1(string[] output)
         {
-            InfoSetBuilder builder = new();
+            WinGetInfoBuilder builder = new();
 
             string version = ReadVersionFromData(output);
 
@@ -473,7 +473,7 @@ namespace WGetNET.Components.Internal
         /// </returns>
         private WinGetInfo ReadDataForRange2(string[] output)
         {
-            InfoSetBuilder builder = new();
+            WinGetInfoBuilder builder = new();
 
             string version = ReadVersionFromData(output);
 
@@ -508,7 +508,7 @@ namespace WGetNET.Components.Internal
         /// </returns>
         private WinGetInfo ReadDataForRange3(string[] output)
         {
-            InfoSetBuilder builder = new();
+            WinGetInfoBuilder builder = new();
 
             string version = ReadVersionFromData(output);
 
@@ -548,7 +548,7 @@ namespace WGetNET.Components.Internal
         /// </returns>
         private WinGetInfo ReadDataForRange4(string[] output)
         {
-            InfoSetBuilder builder = new();
+            WinGetInfoBuilder builder = new();
 
             string version = ReadVersionFromData(output);
 
@@ -591,7 +591,7 @@ namespace WGetNET.Components.Internal
             string[] entry = output[index].Split(':');
             if (entry.Length == 2)
             {
-                DirectoryBuilder builder = new();
+                WinGetDirectoryBuilder builder = new();
 
                 builder.AddEntryName(entry[0].Trim());
                 builder.AddRawContent(entry[1].Trim());
@@ -618,7 +618,7 @@ namespace WGetNET.Components.Internal
             StringBuilder nameBuilder = new();
             StringBuilder contentBuilder = new();
 
-            DirectoryBuilder directoryBuilder = new();
+            WinGetDirectoryBuilder directoryBuilder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -704,7 +704,7 @@ namespace WGetNET.Components.Internal
 
             StringBuilder nameBuilder = new();
 
-            LinkBuilder linkBuilder = new();
+            WinGetLinkBuilder linkBuilder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
@@ -763,7 +763,7 @@ namespace WGetNET.Components.Internal
         {
             List<WinGetAdminSetting> adminSetting = new();
 
-            AdminSettingBuilder adminOptionBuilder = new();
+            WinGetAdminSettingBuilder adminOptionBuilder = new();
 
             for (int i = 0; i < output.Length; i++)
             {
