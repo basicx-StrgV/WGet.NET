@@ -32,9 +32,7 @@ namespace BuildTool
 
         Target Info => _ => _
             .Unlisted()
-            .Before(Restore)
-            .Before(Compile)
-            .Before(Pack)
+            .Before(Restore, Compile, Pack)
             .Executes(() =>
             {
                 Log.Information("Creating \"WGet.NET\" nuget package");
@@ -57,12 +55,14 @@ namespace BuildTool
                 DotNetTasks.DotNetBuild(s => s
                     .SetProjectFile(Solution.GetProject("WGet.NET"))
                     .SetConfiguration(_configuration)
-                    .EnableNoRestore());
+                    .EnableNoRestore()
+                    .SetVersion(Version)
+                    .SetFileVersion(Version)
+                    .SetAssemblyVersion(Version));
             });
 
         Target Pack => _ => _
-            .DependsOn(Info)
-            .DependsOn(Compile)
+            .DependsOn(Info, Compile)
             .Triggers(Docs)
             .Executes(() =>
             {
@@ -78,6 +78,7 @@ namespace BuildTool
             });
 
         Target Docs => _ => _
+        .Unlisted()
         .OnlyWhenDynamic(() => !NoDocs)
         .Executes(() =>
         {
