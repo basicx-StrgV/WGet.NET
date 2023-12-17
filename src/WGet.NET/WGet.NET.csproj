@@ -11,15 +11,15 @@
     <RepositoryUrl>https://github.com/basicx-StrgV/WGet.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>winget, winget-cli, dotnet, dotnetcore, dotnet-core, dotnet-standard, dotnet-framework, library, windows, wrapper, package-manager</PackageTags>
-    <PackageReleaseNotes>https://github.com/basicx-StrgV/WGet.NET/releases/tag/4.0.0</PackageReleaseNotes>
+    <PackageReleaseNotes>---</PackageReleaseNotes>
     <Description>A winget wrapper library for .Net.
 Easily install, update, uninstall and more, from your application. </Description>
     <Copyright>basicx-StrgV</Copyright>
     <SignAssembly>false</SignAssembly>
     <RootNamespace>WGetNET</RootNamespace>
-    <Version>4.0.0</Version>
+    <Version>0.0.0</Version>
 	<Deterministic>false</Deterministic>
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <AssemblyName>WGet.NET</AssemblyName>
     <PackageId>WGet.NET</PackageId>
     <Product>WGet.NET</Product>

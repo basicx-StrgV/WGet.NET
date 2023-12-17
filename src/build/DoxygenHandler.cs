@@ -70,7 +70,7 @@ namespace BuildTool
 
         private int ExecuteDoxygen()
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo()
+            ProcessStartInfo startInfo = new()
             {
                 FileName = _doxygen,
                 Arguments = $"\"{_doxyfile}\"",
@@ -81,8 +81,10 @@ namespace BuildTool
                 RedirectStandardOutput = true,
             };
 
-            Process doxygenProc = new Process();
-            doxygenProc.StartInfo = startInfo;
+            Process doxygenProc = new()
+            {
+                StartInfo = startInfo
+            };
 
             doxygenProc.Start();
 

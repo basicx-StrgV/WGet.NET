@@ -277,7 +277,7 @@ namespace WGetNET
         /// </exception>
         public List<WinGetAdminSetting> GetAdminSettings()
         {
-            List<WinGetAdminSetting> adminSettings = new List<WinGetAdminSetting>();
+            List<WinGetAdminSetting> adminSettings = new();
 
             string settingsJson = ExportSettings();
 
@@ -287,7 +287,7 @@ namespace WGetNET
                 return adminSettings;
             }
 
-            AdminSettingBuilder builder = new AdminSettingBuilder();
+            AdminSettingBuilder builder = new();
             foreach (KeyValuePair<string, bool> entry in settings.AdminSettings)
             {
                 builder.Clear();
@@ -317,7 +317,7 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetAdminSetting>> GetAdminSettingsAsync()
         {
-            List<WinGetAdminSetting> adminSettings = new List<WinGetAdminSetting>();
+            List<WinGetAdminSetting> adminSettings = new();
 
             string settingsJson = await ExportSettingsAsync();
 
@@ -331,7 +331,7 @@ namespace WGetNET
                 return adminSettings;
             }
 
-            AdminSettingBuilder builder = new AdminSettingBuilder();
+            AdminSettingBuilder builder = new();
             foreach (KeyValuePair<string, bool> entry in settings.AdminSettings)
             {
                 builder.Clear();

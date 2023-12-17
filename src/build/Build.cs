@@ -103,7 +103,7 @@ namespace BuildTool
                 Assert.Fail($"The doxyfile does not exist ({_doxyfile})");
             }
 
-            DoxygenHandler doxygen = new DoxygenHandler(_doxyfile, doxygenExe, _doxygenWorkingDir);
+            DoxygenHandler doxygen = new(_doxyfile, doxygenExe, _doxygenWorkingDir);
 
             bool result = doxygen.GenerateDocs(Version);
 
