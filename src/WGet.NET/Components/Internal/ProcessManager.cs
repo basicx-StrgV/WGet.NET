@@ -4,6 +4,7 @@
 //--------------------------------------------------//
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using WGetNET.Models;
@@ -58,13 +59,16 @@ namespace WGetNET.Components.Internal
         /// <param name="cmd">
         /// A <see cref="string"/> representing the command that winget should be executed with.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
-        public async Task<ProcessResult> ExecuteWingetProcessAsync(string cmd)
+        public async Task<ProcessResult> ExecuteWingetProcessAsync(string cmd, CancellationToken cancellationToken = default)
         {
-            return await RunProcessAsync(GetStartInfo(cmd));
+            return await RunProcessAsync(GetStartInfo(cmd), cancellationToken);
         }
 
         /// <summary>
@@ -93,8 +97,11 @@ namespace WGetNET.Components.Internal
         /// <summary>
         /// Runs a process with the current start informations.
         /// </summary>
+        /// <param name="processStartInfo">
+        /// The <see cref="System.Diagnostics.ProcessStartInfo"/> for process that should be executed.
+        /// </param>
         /// <returns>
-        /// A <see cref="ProcessResult"/> object, 
+        /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
         private ProcessResult RunProcess(ProcessStartInfo processStartInfo)
@@ -119,11 +126,17 @@ namespace WGetNET.Components.Internal
         /// <summary>
         /// Asynchronous runs a process with the current start informations.
         /// </summary>
+        /// <param name="processStartInfo">
+        /// The <see cref="System.Diagnostics.ProcessStartInfo"/> for process that should be executed.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// A <see cref="ProcessResult"/> object, 
+        /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
-        private async Task<ProcessResult> RunProcessAsync(ProcessStartInfo processStartInfo)
+        private async Task<ProcessResult> RunProcessAsync(ProcessStartInfo processStartInfo, CancellationToken cancellationToken = default)
         {
             ProcessResult result = new();
 
@@ -132,10 +145,27 @@ namespace WGetNET.Components.Internal
             {
                 proc.Start();
 
-                result.Output = await ReadSreamOutputAsync(proc.StandardOutput);
+                result.Output = await ReadSreamOutputAsync(proc.StandardOutput, cancellationToken);
 
-                //Wait till end and get exit code
+                // Kill the process and return, if the task is canceled
+                if (cancellationToken.IsCancellationRequested && !proc.HasExited)
+                {
+                    proc.Kill();
+
+                    result.ExitCode = -1;
+
+                    return result;
+                }
+
+                //Wait for the processs to exit
                 proc.WaitForExit();
+
+                // Make sure the process has exited
+                if (!proc.HasExited)
+                {
+                    proc.Kill();
+                }
+
                 result.ExitCode = proc.ExitCode;
             }
 
@@ -175,19 +205,27 @@ namespace WGetNET.Components.Internal
         /// Asynchronous reads the data from the process output to a string array.
         /// </summary>
         /// <param name="output">
-        /// The <see cref="StreamReader"/> with the process output.
+        /// The <see cref="System.IO.StreamReader"/> with the process output.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="string"/> array 
         /// containing the process output stream content by lines.
         /// </returns>
-        private async Task<string[]> ReadSreamOutputAsync(StreamReader output)
+        private async Task<string[]> ReadSreamOutputAsync(StreamReader output, CancellationToken cancellationToken = default)
         {
             string[] outputArray = new string[0];
 
             //Read output to list
             while (!output.EndOfStream)
             {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    break;
+                }
+
                 string? outputLine = await output.ReadLineAsync();
                 if (outputLine is null)
                 {

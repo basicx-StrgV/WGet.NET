@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET;
-using System.Diagnostics;
 
 namespace WGetTestLegacySupport
 {

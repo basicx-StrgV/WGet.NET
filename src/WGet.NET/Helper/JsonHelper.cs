@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 #elif NETSTANDARD2_0
 using Newtonsoft.Json;
@@ -71,6 +72,9 @@ namespace WGetNET.Helper
         /// <param name="jsonString">
         /// A <see cref="System.String"/> containing the json to deserialize.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// Object of the given class type.
@@ -78,7 +82,7 @@ namespace WGetNET.Helper
         /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
-        public static async Task<T> StringToObjectAsync<T>(string jsonString) where T : class
+        public static async Task<T> StringToObjectAsync<T>(string jsonString, CancellationToken cancellationToken = default) where T : class
         {
             T? instance = null;
 
@@ -86,7 +90,7 @@ namespace WGetNET.Helper
             {
                 using MemoryStream dataStream = new(Encoding.UTF8.GetBytes(jsonString));
 
-                instance = await JsonSerializer.DeserializeAsync<T>(dataStream);
+                instance = await JsonSerializer.DeserializeAsync<T>(dataStream, null, cancellationToken);
             }
             catch (Exception e)
             {

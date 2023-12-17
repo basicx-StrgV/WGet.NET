@@ -3,6 +3,7 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WGetNET.Helper
@@ -58,6 +59,9 @@ namespace WGetNET.Helper
         /// </summary>
         /// <param name="path">The file path.</param>
         /// <param name="text">The text to write to the file.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <exception cref="System.ArgumentException">
         /// Path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.
         /// </exception>
@@ -83,8 +87,13 @@ namespace WGetNET.Helper
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permission.
         /// </exception>
-        public static async Task WriteTextToFileAsync(string path, string text)
+        public static async Task WriteTextToFileAsync(string path, string text, CancellationToken cancellationToken = default)
         {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
+
             string? directory = Path.GetDirectoryName(path);
             if (!Directory.Exists(directory))
             {
@@ -92,7 +101,7 @@ namespace WGetNET.Helper
             }
 
 #if NETCOREAPP3_1_OR_GREATER
-            await File.WriteAllTextAsync(path, text);
+            await File.WriteAllTextAsync(path, text, cancellationToken);
 #elif NETSTANDARD2_0
             // Delete file to recreate it
             if (File.Exists(path))

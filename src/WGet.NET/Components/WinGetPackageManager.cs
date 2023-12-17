@@ -4,6 +4,7 @@
 //--------------------------------------------------//
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET.Models;
@@ -134,6 +135,9 @@ namespace WGetNET
         /// The id or name of the package for the search.
         /// </param>
         /// <param name="exact">Use exact match.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -147,7 +151,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, bool exact = false)
+        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, bool exact = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
@@ -158,7 +162,13 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return new List<WinGetPackage>();
+            }
 
             return OutputReader.ToPackageList(result.Output, PackageAction.Search);
         }
@@ -173,6 +183,9 @@ namespace WGetNET
         /// The name of the source for the search.
         /// </param>
         /// <param name="exact">Use exact match.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -186,7 +199,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, string sourceName, bool exact = false)
+        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, string sourceName, bool exact = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
@@ -198,7 +211,13 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return new List<WinGetPackage>();
+            }
 
             return OutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
         }
@@ -298,6 +317,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously gets a list of all installed packages.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -305,9 +327,15 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync()
+        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_listCmd);
+            ProcessResult result = await ExecuteAsync(_listCmd, false, cancellationToken);
+
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return new List<WinGetPackage>();
+            }
 
             return OutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
@@ -319,6 +347,9 @@ namespace WGetNET
         /// The id or name of the package for the search.
         /// </param>
         /// <param name="exact">Use exact match.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -332,7 +363,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, bool exact = false)
+        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, bool exact = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
@@ -343,7 +374,13 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return new List<WinGetPackage>();
+            }
 
             return OutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
@@ -358,6 +395,9 @@ namespace WGetNET
         /// The name of the source for the search.
         /// </param>
         /// <param name="exact">Use exact match.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -371,7 +411,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, string sourceName, bool exact = false)
+        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, string sourceName, bool exact = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
@@ -383,7 +423,13 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return new List<WinGetPackage>();
+            }
 
             return OutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
@@ -447,6 +493,9 @@ namespace WGetNET
         /// Asynchronously install a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package for the installation.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
@@ -460,13 +509,13 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> InstallPackageAsync(string packageId)
+        public async Task<bool> InstallPackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_installCmd, packageId);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -475,6 +524,9 @@ namespace WGetNET
         /// Asynchronously install a package using winget.
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
@@ -488,16 +540,16 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> InstallPackageAsync(WinGetPackage package)
+        public async Task<bool> InstallPackageAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId || package.HasNoId)
             {
-                return await InstallPackageAsync(package.Name);
+                return await InstallPackageAsync(package.Name, cancellationToken);
             }
 
-            return await InstallPackageAsync(package.Id);
+            return await InstallPackageAsync(package.Id, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -561,6 +613,9 @@ namespace WGetNET
         /// Asynchronously uninsatll a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package for uninstallation.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
@@ -574,14 +629,14 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> UninstallPackageAsync(string packageId)
+        public async Task<bool> UninstallPackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_uninstallCmd, packageId);
 
             ProcessResult result =
-                await ExecuteAsync(cmd);
+                await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -590,6 +645,9 @@ namespace WGetNET
         /// Asynchronously uninstall a package using winget.
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
@@ -603,16 +661,16 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> UninstallPackageAsync(WinGetPackage package)
+        public async Task<bool> UninstallPackageAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId || package.HasNoId)
             {
-                return await UninstallPackageAsync(package.Name);
+                return await UninstallPackageAsync(package.Name, cancellationToken);
             }
 
-            return await UninstallPackageAsync(package.Id);
+            return await UninstallPackageAsync(package.Id, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -638,6 +696,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously get all upgradeable packages.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -645,11 +706,17 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync()
+        public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync(CancellationToken cancellationToken = default)
         {
             string cmd = AddArgumentByVersion(_getUpgradeableCmd);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return new List<WinGetPackage>();
+            }
 
             return OutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
@@ -713,6 +780,9 @@ namespace WGetNET
         /// Asynchronously upgrades a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package for upgrade.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
@@ -726,13 +796,13 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> UpgradePackageAsync(string packageId)
+        public async Task<bool> UpgradePackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_upgradeCmd, packageId);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -741,6 +811,9 @@ namespace WGetNET
         /// Asynchronously upgrades a package using winget.
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
@@ -754,16 +827,16 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> UpgradePackageAsync(WinGetPackage package)
+        public async Task<bool> UpgradePackageAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId || package.HasNoId)
             {
-                return await UpgradePackageAsync(package.Name);
+                return await UpgradePackageAsync(package.Name, cancellationToken);
             }
 
-            return await UpgradePackageAsync(package.Id);
+            return await UpgradePackageAsync(package.Id, cancellationToken);
         }
 
         /// <summary>
@@ -788,6 +861,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously tries to upgrade all packages using winget.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// The action might run succesfully without upgrading every or even any package.
         /// </remarks>
@@ -798,9 +874,9 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        public async Task<bool> UpgradeAllPackagesAsync()
+        public async Task<bool> UpgradeAllPackagesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_upgradeAllCmd);
+            ProcessResult result = await ExecuteAsync(_upgradeAllCmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -859,6 +935,9 @@ namespace WGetNET
         /// Asynchronously exports a list of all installed winget packages as json to the given file.
         /// </summary>
         /// <param name="file">The file for the export.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if it failed.
@@ -872,13 +951,13 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> ExportPackagesToFileAsync(string file)
+        public async Task<bool> ExportPackagesToFileAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             string cmd = string.Format(_exportCmd, file);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -921,6 +1000,9 @@ namespace WGetNET
         /// This may take some time and winget may not install/upgrade all packages.
         /// </remarks>
         /// <param name="file">The file with the package data for the import.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the import was compleatly successful or 
@@ -935,13 +1017,13 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> ImportPackagesFromFileAsync(string file)
+        public async Task<bool> ImportPackagesFromFileAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             string cmd = string.Format(_importCmd, file);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -1035,6 +1117,9 @@ namespace WGetNET
         /// <param name="file">
         /// A <see cref="System.String"/> containing the path to the file.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> containing the hash.
@@ -1051,7 +1136,7 @@ namespace WGetNET
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
-        public async Task<string> HashAsync(string file)
+        public async Task<string> HashAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
@@ -1062,9 +1147,9 @@ namespace WGetNET
 
             string cmd = string.Format(_hashCmd, file);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-            if (!result.Success)
+            if (!result.Success || cancellationToken.IsCancellationRequested)
             {
                 return string.Empty;
             }
@@ -1077,6 +1162,9 @@ namespace WGetNET
         /// </summary>
         /// <param name="file">
         /// A <see cref="System.IO.FileInfo"/> object, of the file the hash should be calculated for.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -1091,7 +1179,7 @@ namespace WGetNET
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
-        public async Task<string> HashAsync(FileInfo file)
+        public async Task<string> HashAsync(FileInfo file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(file, "file");
 
@@ -1102,9 +1190,9 @@ namespace WGetNET
 
             string cmd = string.Format(_hashCmd, file.FullName);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-            if (!result.Success)
+            if (!result.Success || cancellationToken.IsCancellationRequested)
             {
                 return string.Empty;
             }
@@ -1254,6 +1342,9 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package to download.</param>
         /// <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
@@ -1270,7 +1361,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> DownloadAsync(string packageId, string directory)
+        public async Task<bool> DownloadAsync(string packageId, string directory, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_downloadMinVersion))
             {
@@ -1282,7 +1373,7 @@ namespace WGetNET
 
             string cmd = string.Format(_downloadCmd, packageId, directory);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -1294,6 +1385,9 @@ namespace WGetNET
         /// <param name="directory">
         /// A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
         /// It will be created if it does not exist.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -1311,11 +1405,11 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> DownloadAsync(string packageId, DirectoryInfo directory)
+        public async Task<bool> DownloadAsync(string packageId, DirectoryInfo directory, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
-            return await DownloadAsync(packageId, directory.FullName);
+            return await DownloadAsync(packageId, directory.FullName, cancellationToken);
         }
 
         /// <summary>
@@ -1323,6 +1417,9 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The package to download.</param>
         /// <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
@@ -1339,16 +1436,16 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> DownloadAsync(WinGetPackage package, string directory)
+        public async Task<bool> DownloadAsync(WinGetPackage package, string directory, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId || package.HasNoId)
             {
-                return await DownloadAsync(package.Name, directory);
+                return await DownloadAsync(package.Name, directory, cancellationToken);
             }
 
-            return await DownloadAsync(package.Id, directory);
+            return await DownloadAsync(package.Id, directory, cancellationToken);
         }
 
         /// <summary>
@@ -1357,7 +1454,11 @@ namespace WGetNET
         /// <param name="package">The package to download.</param>
         /// <param name="directory">
         /// A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
-        /// It will be created if it does not exist.</param>
+        /// It will be created if it does not exist.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
@@ -1374,17 +1475,17 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory)
+        public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
             if (package.HasShortenedId || package.HasNoId)
             {
-                return await DownloadAsync(package.Name, directory.FullName);
+                return await DownloadAsync(package.Name, directory.FullName, cancellationToken);
             }
 
-            return await DownloadAsync(package.Id, directory.FullName);
+            return await DownloadAsync(package.Id, directory.FullName, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1416,6 +1517,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously gets a list of all pinned packages.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
@@ -1426,14 +1530,20 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        public async Task<List<WinGetPinnedPackage>> GetPinnedPackagesAsync()
+        public async Task<List<WinGetPinnedPackage>> GetPinnedPackagesAsync(CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ProcessResult result = await ExecuteAsync(_pinListCmd);
+            ProcessResult result = await ExecuteAsync(_pinListCmd, false, cancellationToken);
+
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return new List<WinGetPinnedPackage>();
+            }
 
             return OutputReader.ToPinnedPackageList(result.Output);
         }
@@ -1593,6 +1703,9 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package to pin.</param>
         /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
@@ -1609,7 +1722,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> PinAddAsync(string packageId, bool blocking = false)
+        public async Task<bool> PinAddAsync(string packageId, bool blocking = false, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
@@ -1625,7 +1738,7 @@ namespace WGetNET
                 cmd += " --blocking";
             }
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -1638,79 +1751,8 @@ namespace WGetNET
         /// <see cref="System.String"/> representing the version to pin. 
         /// Please refer to the WinGet documentation for more info about version pinning.
         /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
-        /// This feature is not supported in the installed WinGet version.
-        /// </exception>
-        /// <exception cref="System.ArgumentException">
-        /// A provided argument is empty.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null.
-        /// </exception>
-        public async Task<bool> PinAddAsync(string packageId, string version)
-        {
-            if (!CheckWinGetVersion(_pinMinVersion))
-            {
-                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
-            }
-
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
-
-            string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
-
-            ProcessResult result = await ExecuteAsync(cmd);
-
-            return result.Success;
-        }
-
-        /// <summary>
-        /// Asynchronously adds a pinned package to winget.
-        /// </summary>
-        /// <param name="package">The package to pin.</param>
-        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
-        /// This feature is not supported in the installed WinGet version.
-        /// </exception>
-        /// <exception cref="System.ArgumentException">
-        /// A provided argument is empty.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null.
-        /// </exception>
-        public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false)
-        {
-            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
-
-            if (package.HasShortenedId || package.HasNoId)
-            {
-                return await PinAddAsync(package.Name, blocking);
-            }
-
-            return await PinAddAsync(package.Id, blocking);
-        }
-
-        /// <summary>
-        /// Asynchronously adds a pinned package to winget.
-        /// </summary>
-        /// <param name="package">The package to pin.</param>
-        /// <param name="version">
-        /// <see cref="System.String"/> representing the version to pin. 
-        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -1728,16 +1770,96 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> PinAddAsync(WinGetPackage package, string version)
+        public async Task<bool> PinAddAsync(string packageId, string version, CancellationToken cancellationToken = default)
+        {
+            if (!CheckWinGetVersion(_pinMinVersion))
+            {
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
+
+            string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
+
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId || package.HasNoId)
             {
-                return await PinAddAsync(package.Name, version);
+                return await PinAddAsync(package.Name, blocking, cancellationToken);
             }
 
-            return await PinAddAsync(package.Id, version);
+            return await PinAddAsync(package.Id, blocking, cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="version">
+        /// <see cref="System.String"/> representing the version to pin. 
+        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddAsync(WinGetPackage package, string version, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
+
+            if (package.HasShortenedId || package.HasNoId)
+            {
+                return await PinAddAsync(package.Name, version, cancellationToken);
+            }
+
+            return await PinAddAsync(package.Id, version, cancellationToken);
         }
 
         /// <summary>
@@ -1893,6 +2015,9 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package to pin.</param>
         /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
@@ -1909,7 +2034,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> PinAddInstalledAsync(string packageId, bool blocking = false)
+        public async Task<bool> PinAddInstalledAsync(string packageId, bool blocking = false, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
@@ -1925,7 +2050,7 @@ namespace WGetNET
                 cmd += " --blocking";
             }
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -1938,79 +2063,8 @@ namespace WGetNET
         /// <see cref="System.String"/> representing the version to pin. 
         /// Please refer to the WinGet documentation for more info about version pinning.
         /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
-        /// This feature is not supported in the installed WinGet version.
-        /// </exception>
-        /// <exception cref="System.ArgumentException">
-        /// A provided argument is empty.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null.
-        /// </exception>
-        public async Task<bool> PinAddInstalledAsync(string packageId, string version)
-        {
-            if (!CheckWinGetVersion(_pinMinVersion))
-            {
-                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
-            }
-
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
-
-            string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
-
-            ProcessResult result = await ExecuteAsync(cmd);
-
-            return result.Success;
-        }
-
-        /// <summary>
-        /// Asynchronously adds a pinned installed package to winget.
-        /// </summary>
-        /// <param name="package">The package to pin.</param>
-        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
-        /// This feature is not supported in the installed WinGet version.
-        /// </exception>
-        /// <exception cref="System.ArgumentException">
-        /// A provided argument is empty.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null.
-        /// </exception>
-        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, bool blocking = false)
-        {
-            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
-
-            if (package.HasShortenedId || package.HasNoId)
-            {
-                return await PinAddInstalledAsync(package.Name, blocking);
-            }
-
-            return await PinAddInstalledAsync(package.Id, blocking);
-        }
-
-        /// <summary>
-        /// Asynchronously adds a pinned installed package to winget.
-        /// </summary>
-        /// <param name="package">The package to pin.</param>
-        /// <param name="version">
-        /// <see cref="System.String"/> representing the version to pin. 
-        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -2028,16 +2082,96 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, string version)
+        public async Task<bool> PinAddInstalledAsync(string packageId, string version, CancellationToken cancellationToken = default)
+        {
+            if (!CheckWinGetVersion(_pinMinVersion))
+            {
+                throw new WinGetFeatureNotSupportedException(_pinMinVersion);
+            }
+
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
+
+            string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
+
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned installed package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, bool blocking = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId || package.HasNoId)
             {
-                return await PinAddInstalledAsync(package.Name, version);
+                return await PinAddInstalledAsync(package.Name, blocking, cancellationToken);
             }
 
-            return await PinAddInstalledAsync(package.Id, version);
+            return await PinAddInstalledAsync(package.Id, blocking, cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously adds a pinned installed package to winget.
+        /// </summary>
+        /// <param name="package">The package to pin.</param>
+        /// <param name="version">
+        /// <see cref="System.String"/> representing the version to pin. 
+        /// Please refer to the WinGet documentation for more info about version pinning.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, string version, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
+
+            if (package.HasShortenedId || package.HasNoId)
+            {
+                return await PinAddInstalledAsync(package.Name, version, cancellationToken);
+            }
+
+            return await PinAddInstalledAsync(package.Id, version, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -2112,6 +2246,9 @@ namespace WGetNET
         /// Asynchronously removes a pinned package from winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package to unpin.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
@@ -2128,7 +2265,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> PinRemoveAsync(string packageId)
+        public async Task<bool> PinRemoveAsync(string packageId, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
@@ -2139,7 +2276,7 @@ namespace WGetNET
 
             string cmd = string.Format(_pinRemoveCmd, packageId);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -2148,6 +2285,9 @@ namespace WGetNET
         /// Asynchronously removes a pinned package from winget.
         /// </summary>
         /// <param name="package">The package to unpin.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
@@ -2164,16 +2304,16 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> PinRemoveAsync(WinGetPackage package)
+        public async Task<bool> PinRemoveAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId || package.HasNoId)
             {
-                return await PinRemoveAsync(package.Name);
+                return await PinRemoveAsync(package.Name, cancellationToken);
             }
 
-            return await PinRemoveAsync(package.Id);
+            return await PinRemoveAsync(package.Id, cancellationToken);
         }
 
         /// <summary>
@@ -2246,6 +2386,9 @@ namespace WGetNET
         /// Asynchronously removes a pinned package from winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package to unpin.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
@@ -2262,7 +2405,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> PinRemoveInstalledAsync(string packageId)
+        public async Task<bool> PinRemoveInstalledAsync(string packageId, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
@@ -2273,7 +2416,7 @@ namespace WGetNET
 
             string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -2282,6 +2425,9 @@ namespace WGetNET
         /// Asynchronously removes a pinned package from winget.
         /// </summary>
         /// <param name="package">The package to unpin.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
@@ -2298,16 +2444,16 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<bool> PinRemoveInstalledAsync(WinGetPackage package)
+        public async Task<bool> PinRemoveInstalledAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
             if (package.HasShortenedId || package.HasNoId)
             {
-                return await PinRemoveInstalledAsync(package.Name);
+                return await PinRemoveInstalledAsync(package.Name, cancellationToken);
             }
 
-            return await PinRemoveInstalledAsync(package.Id);
+            return await PinRemoveInstalledAsync(package.Id, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -2342,6 +2488,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously resets all pinned packages.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// This will remove all pins and it is not possible to restore them.
         /// </remarks>
@@ -2355,14 +2504,14 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        public async Task<bool> ResetPinsAsync()
+        public async Task<bool> ResetPinsAsync(CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ProcessResult result = await ExecuteAsync(_pinResetCmd);
+            ProcessResult result = await ExecuteAsync(_pinResetCmd, false, cancellationToken);
 
             return result.Success;
         }

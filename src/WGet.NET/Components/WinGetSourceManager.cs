@@ -2,6 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET.Models;
@@ -76,6 +77,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously gets a list of all sources that are installed in winget.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
@@ -83,9 +87,15 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        public async Task<List<WinGetSource>> GetInstalledSourcesAsync()
+        public async Task<List<WinGetSource>> GetInstalledSourcesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_sourceExportCmd);
+            ProcessResult result = await ExecuteAsync(_sourceExportCmd, false, cancellationToken);
+
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return new List<WinGetSource>();
+            }
 
             return OutputReader.ToSourceList(result.Output);
         }
@@ -94,6 +104,9 @@ namespace WGetNET
         /// Asynchronously gets a list of installed sources that matches the provided name.
         /// </summary>
         /// <param name="sourceName">Name of the sources to export.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
@@ -107,13 +120,19 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<List<WinGetSource>> GetInstalledSourcesAsync(string sourceName)
+        public async Task<List<WinGetSource>> GetInstalledSourcesAsync(string sourceName, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
             string cmd = $"{_sourceExportCmd} -n {sourceName}";
 
-            ProcessResult result = await ExecuteAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return new List<WinGetSource>();
+            }
 
             return OutputReader.ToSourceList(result.Output);
         }
@@ -272,6 +291,9 @@ namespace WGetNET
         /// <param name="arg">
         /// A <see cref="System.String"/> representing the sources URL or UNC.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
@@ -288,14 +310,14 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> AddSourceAsync(string name, string arg)
+        public async Task<bool> AddSourceAsync(string name, string arg, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
-            ProcessResult result = await ExecuteAsync(cmd, true);
+            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
 
             return result.Success;
         }
@@ -312,40 +334,8 @@ namespace WGetNET
         /// <param name="type">
         /// A <see cref="System.String"/> representing the source type.
         /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="System.ArgumentException">
-        /// A provided argument is empty.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public async Task<bool> AddSourceAsync(string name, string arg, string type)
-        {
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
-
-            string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
-
-            ProcessResult result = await ExecuteAsync(cmd, true);
-
-            return result.Success;
-        }
-
-        /// <summary>
-        /// Asynchronously adds a new source to winget (Needs administrator rights).
-        /// </summary>
-        /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> to add.
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -363,16 +353,54 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> AddSourceAsync(WinGetSource source)
+        public async Task<bool> AddSourceAsync(string name, string arg, string type, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
+
+            string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
+
+            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously adds a new source to winget (Needs administrator rights).
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="WGetNET.WinGetSource"/> to add.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> AddSourceAsync(WinGetSource source, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
-                return await AddSourceAsync(source.Name, source.Arg);
+                return await AddSourceAsync(source.Name, source.Arg, cancellationToken);
             }
 
-            return await AddSourceAsync(source.Name, source.Arg, source.Type);
+            return await AddSourceAsync(source.Name, source.Arg, source.Type, cancellationToken);
         }
 
         /// <summary>
@@ -383,6 +411,9 @@ namespace WGetNET
         /// </remarks>
         /// <param name="sources">
         /// A <see cref="System.Collections.Generic.IEnumerable{T}"/> of <see cref="WGetNET.WinGetSource"/> objects to add.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -397,14 +428,19 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> AddSourceAsync(IEnumerable<WinGetSource> sources)
+        public async Task<bool> AddSourceAsync(IEnumerable<WinGetSource> sources, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
             bool succes = true;
             foreach (WinGetSource source in sources)
             {
-                if (!(await AddSourceAsync(sources)))
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return false;
+                }
+
+                if (!(await AddSourceAsync(sources, cancellationToken)))
                 {
                     succes = false;
                 }
@@ -437,6 +473,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously updates all sources that are installed in winget.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// This may take a while depending on the sources.
         /// </remarks>
@@ -447,9 +486,9 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        public async Task<bool> UpdateSourcesAsync()
+        public async Task<bool> UpdateSourcesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_sourceUpdateCmd);
+            ProcessResult result = await ExecuteAsync(_sourceUpdateCmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -604,6 +643,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// If the provided file and/or path does not exist, they will be created.
         /// </remarks>
@@ -640,19 +682,23 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permission.
         /// </exception>
-        public async Task ExportSourcesToFileAsync(string file)
+        public async Task ExportSourcesToFileAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
             await FileHelper.WriteTextToFileAsync(
                 file, SourcesToJson(
-                    await GetInstalledSourcesAsync()));
+                    await GetInstalledSourcesAsync(cancellationToken)),
+                cancellationToken);
         }
 
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// If the provided file and/or path does not exist, they will be created.
         /// </remarks>
@@ -690,7 +736,7 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permission.
         /// </exception>
-        public async Task ExportSourcesToFileAsync(string file, string sourceName)
+        public async Task ExportSourcesToFileAsync(string file, string sourceName, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
@@ -699,12 +745,16 @@ namespace WGetNET
             await FileHelper.WriteTextToFileAsync(
                 file,
                 SourcesToJson(
-                    await GetInstalledSourcesAsync(sourceName)));
+                    await GetInstalledSourcesAsync(sourceName, cancellationToken)),
+                cancellationToken);
         }
 
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// If the provided file and/or path does not exist, they will be created.
         /// </remarks>
@@ -746,12 +796,12 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permission.
         /// </exception>
-        public async Task ExportSourcesToFileAsync(string file, WinGetSource source)
+        public async Task ExportSourcesToFileAsync(string file, WinGetSource source, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            await ExportSourcesToFileAsync(file, source.Name);
+            await ExportSourcesToFileAsync(file, source.Name, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -804,6 +854,9 @@ namespace WGetNET
         /// <param name="jsonString">
         /// A <see cref="System.String"/> containing the json for multiple sources.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if importing all sources was successful and <see langword="false"/> if on or more failed.
@@ -823,13 +876,13 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> ImportSourcesFromJsonAsync(string jsonString)
+        public async Task<bool> ImportSourcesFromJsonAsync(string jsonString, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
 #if NETCOREAPP3_1_OR_GREATER
             List<SourceModel> sources =
-                await JsonHelper.StringToObjectAsync<List<SourceModel>>(jsonString);
+                await JsonHelper.StringToObjectAsync<List<SourceModel>>(jsonString, cancellationToken);
 #elif NETSTANDARD2_0
             List<SourceModel> sources =
                 JsonHelper.StringToObject<List<SourceModel>>(jsonString);
@@ -838,7 +891,12 @@ namespace WGetNET
             bool success = true;
             for (int i = 0; i < sources.Count; i++)
             {
-                if (!(await AddSourceAsync(WinGetSource.FromSourceModel(sources[i]))))
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return false;
+                }
+
+                if (!(await AddSourceAsync(WinGetSource.FromSourceModel(sources[i]), cancellationToken)))
                 {
                     success = false;
                 }
@@ -874,6 +932,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously resets all sources that are installed in winget (Needs administrator rights).
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// This may take a while depending on the sources.
         /// </remarks>
@@ -887,9 +948,9 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> ResetSourcesAsync()
+        public async Task<bool> ResetSourcesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_sourceResetCmd, true);
+            ProcessResult result = await ExecuteAsync(_sourceResetCmd, true, cancellationToken);
 
             return result.Success;
         }
@@ -962,38 +1023,8 @@ namespace WGetNET
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source.
         /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="System.ArgumentException">
-        /// A provided argument is empty.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public async Task<bool> RemoveSourcesAsync(string name)
-        {
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
-
-            string cmd = string.Format(_sourceRemoveCmd, name);
-
-            ProcessResult result = await ExecuteAsync(cmd, true);
-
-            return result.Success;
-        }
-
-        /// <summary>
-        /// Asynchronously removes a source from winget (Needs administrator rights).
-        /// </summary>
-        /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> to remove.
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -1011,11 +1042,47 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> RemoveSourcesAsync(WinGetSource source)
+        public async Task<bool> RemoveSourcesAsync(string name, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+
+            string cmd = string.Format(_sourceRemoveCmd, name);
+
+            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously removes a source from winget (Needs administrator rights).
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="WGetNET.WinGetSource"/> to remove.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> RemoveSourcesAsync(WinGetSource source, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
-            return await RemoveSourcesAsync(source.Name);
+            return await RemoveSourcesAsync(source.Name, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 

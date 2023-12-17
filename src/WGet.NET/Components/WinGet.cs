@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Security;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Security.Principal;
 using System.Collections.Generic;
@@ -154,6 +155,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronous exports the WinGet settings to a json string.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> containing the settings json.
@@ -161,9 +165,9 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        public async Task<string> ExportSettingsAsync()
+        public async Task<string> ExportSettingsAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_exportSettingsCmd);
+            ProcessResult result = await ExecuteAsync(_exportSettingsCmd, false, cancellationToken);
 
             return _outputReader.ExportOutputToString(result);
         }
@@ -222,6 +226,9 @@ namespace WGetNET
         /// <param name="file">
         /// The file for the export.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// The <see cref="System.Threading.Tasks.Task"/> for the action.
         /// </returns>
@@ -254,14 +261,14 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permission.
         /// </exception>
-        public async Task ExportSettingsToFileAsync(string file)
+        public async Task ExportSettingsToFileAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            ProcessResult result = await ExecuteAsync(_exportSettingsCmd);
+            ProcessResult result = await ExecuteAsync(_exportSettingsCmd, false, cancellationToken);
 
-            await FileHelper.WriteTextToFileAsync(file, OutputReader.ExportOutputToString(result));
+            await FileHelper.WriteTextToFileAsync(file, OutputReader.ExportOutputToString(result), cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -308,6 +315,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously gets all winget admin settings.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetAdminSetting"/> object.
@@ -315,14 +325,14 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        public async Task<List<WinGetAdminSetting>> GetAdminSettingsAsync()
+        public async Task<List<WinGetAdminSetting>> GetAdminSettingsAsync(CancellationToken cancellationToken = default)
         {
             List<WinGetAdminSetting> adminSettings = new();
 
-            string settingsJson = await ExportSettingsAsync();
+            string settingsJson = await ExportSettingsAsync(cancellationToken);
 
 #if NETCOREAPP3_1_OR_GREATER
-            SettingsModel settings = await JsonHelper.StringToObjectAsync<SettingsModel>(settingsJson);
+            SettingsModel settings = await JsonHelper.StringToObjectAsync<SettingsModel>(settingsJson, cancellationToken);
 #elif NETSTANDARD2_0
             SettingsModel settings = JsonHelper.StringToObject<SettingsModel>(settingsJson);
 #endif
@@ -334,6 +344,11 @@ namespace WGetNET
             AdminSettingBuilder builder = new();
             foreach (KeyValuePair<string, bool> entry in settings.AdminSettings)
             {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return adminSettings;
+                }
+
                 builder.Clear();
 
                 builder.AddEntryName(entry.Key);
@@ -415,38 +430,8 @@ namespace WGetNET
         /// <param name="settingName">
         /// Name of the admin setting to enable.
         /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null.
-        /// </exception>
-        /// <exception cref="System.ArgumentException">
-        /// A provided argument is empty.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public async Task<bool> EnableAdminSettingAsync(string settingName)
-        {
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
-
-            string cmd = string.Format(_settingsEnableCmd, settingName);
-
-            ProcessResult result = await ExecuteAsync(cmd, true);
-
-            return result.Success;
-        }
-
-        /// <summary>
-        /// Asynchronously enables the provided admin setting (Needs administrator rights).
-        /// </summary>
-        /// <param name="setting">
-        /// The <see cref="WGetNET.WinGetAdminSetting"/> to enable.
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -464,11 +449,47 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> EnableAdminSettingAsynv(WinGetAdminSetting setting)
+        public async Task<bool> EnableAdminSettingAsync(string settingName, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
+
+            string cmd = string.Format(_settingsEnableCmd, settingName);
+
+            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously enables the provided admin setting (Needs administrator rights).
+        /// </summary>
+        /// <param name="setting">
+        /// The <see cref="WGetNET.WinGetAdminSetting"/> to enable.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> EnableAdminSettingAsync(WinGetAdminSetting setting, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
 
-            return await EnableAdminSettingAsync(setting.EntryName);
+            return await EnableAdminSettingAsync(setting.EntryName, cancellationToken);
         }
 
         /// <summary>
@@ -537,38 +558,8 @@ namespace WGetNET
         /// <param name="settingName">
         /// Name of the admin setting to disable.
         /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null.
-        /// </exception>
-        /// <exception cref="System.ArgumentException">
-        /// A provided argument is empty.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public async Task<bool> DisableAdminSettingAsync(string settingName)
-        {
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
-
-            string cmd = string.Format(_settingsDisableCmd, settingName);
-
-            ProcessResult result = await ExecuteAsync(cmd, true);
-
-            return result.Success;
-        }
-
-        /// <summary>
-        /// Asynchronously disables the provided admin setting (Needs administrator rights).
-        /// </summary>
-        /// <param name="setting">
-        /// The <see cref="WGetNET.WinGetAdminSetting"/> to disable.
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
@@ -586,11 +577,47 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> DisableAdminSettingAsync(WinGetAdminSetting setting)
+        public async Task<bool> DisableAdminSettingAsync(string settingName, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
+
+            string cmd = string.Format(_settingsDisableCmd, settingName);
+
+            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously disables the provided admin setting (Needs administrator rights).
+        /// </summary>
+        /// <param name="setting">
+        /// The <see cref="WGetNET.WinGetAdminSetting"/> to disable.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> DisableAdminSettingAsync(WinGetAdminSetting setting, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
 
-            return await DisableAdminSettingAsync(setting.EntryName);
+            return await DisableAdminSettingAsync(setting.EntryName, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -628,6 +655,9 @@ namespace WGetNET
         /// <summary>
         /// Asynchronous gets all WinGet related data provided by the WinGet info action.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="WGetNET.WinGetInfo"/> object containing winget related information.
@@ -635,10 +665,11 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        public async Task<WinGetInfo> GetInfoAsync()
+        public async Task<WinGetInfo> GetInfoAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_infoCmd);
+            ProcessResult result = await ExecuteAsync(_infoCmd, false, cancellationToken);
 
+            // Check the version range the action should be performed for
             InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
             if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
             {
@@ -651,6 +682,12 @@ namespace WGetNET
             else if (CheckWinGetVersion(new Version(1, 5, 1081)))
             {
                 actionVersionId = InfoActionVersionId.VersionRange4;
+            }
+
+            // Return empty data if the task was canceled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return WinGetInfo.Empty;
             }
 
             return _outputReader.ToWingetInfo(result.Output, actionVersionId);
@@ -723,6 +760,9 @@ namespace WGetNET
         /// <param name="needsAdminRights">
         /// Sets if the process that should be executed needs administrator privileges.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is the <see cref="WGetNET.Models.ProcessResult"/> for the process.
@@ -734,7 +774,7 @@ namespace WGetNET
         /// The current process does not have administrator privileges.
         /// (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
         /// </exception>
-        private protected async Task<ProcessResult> ExecuteAsync(string args, bool needsAdminRights = false)
+        private protected async Task<ProcessResult> ExecuteAsync(string args, bool needsAdminRights = false, CancellationToken cancellationToken = default)
         {
             ThrowIfNotInstalled();
 
@@ -743,7 +783,7 @@ namespace WGetNET
                 ThrowIfNotAdmin();
             }
 
-            return await _processManager.ExecuteWingetProcessAsync(args);
+            return await _processManager.ExecuteWingetProcessAsync(args, cancellationToken);
         }
         // \endcond
         //---------------------------------------------------------------------------------------------
