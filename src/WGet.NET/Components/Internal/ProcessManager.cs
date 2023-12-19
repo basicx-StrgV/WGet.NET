@@ -118,6 +118,13 @@ namespace WGetNET.Components.Internal
 
                 //Wait till end and get exit code
                 proc.WaitForExit();
+
+                // Make sure the process has exited
+                if (!proc.HasExited)
+                {
+                    proc.Kill();
+                }
+
                 result.ExitCode = proc.ExitCode;
             }
 

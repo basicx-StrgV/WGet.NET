@@ -127,9 +127,9 @@
         <member name="M:WGetNET.Builder.WinGetAdminSettingBuilder.Clear">
             <inheritdoc/>
         </member>
-        <member name="M:WGetNET.Builder.WinGetAdminSettingBuilder.ParseToBool(System.String,System.Boolean)">
+        <member name="M:WGetNET.Builder.WinGetAdminSettingBuilder.SetIsEnabled(System.String,System.Boolean)">
             <summary>
-            Parses the raw content to a <see cref="T:System.Boolean"/> value.
+            Sets the is anabled value by parsing the raw content to a <see cref="T:System.Boolean"/> value.
             </summary>
             <param name="rawContent">
             A <see cref="T:System.String"/> containing the raw content.
@@ -137,9 +137,6 @@
             <param name="hasShortenedContent">
             Indicates if the content is shortened or not.
             </param>
-            <returns>
-            The paresed <see cref="T:System.Boolean"/> value or <see langword="null"/> if parsing failed.
-            </returns>
         </member>
         <member name="T:WGetNET.Builder.WinGetDirectoryBuilder">
             <summary>
@@ -177,15 +174,12 @@
         <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.Clear">
             <inheritdoc/>
         </member>
-        <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.CreateDirectoryInfo(System.String,System.Boolean)">
+        <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.SetDirectoryInfo(System.String,System.Boolean)">
             <summary>
-            Creates and returns a <see cref="T:System.IO.DirectoryInfo"/> instance from the raw content.
+            Creates and sets the <see cref="T:System.IO.DirectoryInfo"/> instance from the raw content.
             </summary>
             <param name="rawContent"><see cref="T:System.String"/> containing the raw data that should get parsed.</param>
             <param name="hasShortenedContent">Indcates if the information in the raw content is shortened.</param>
-            <returns>
-            The created <see cref="T:System.IO.DirectoryInfo"/> instance, or <see langword="null"/> if parsing the raw content failed.
-            </returns>
         </member>
         <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.TrimLastDirectory(System.String)">
             <summary>
@@ -319,15 +313,12 @@
         <member name="M:WGetNET.Builder.WinGetLinkBuilder.Clear">
             <inheritdoc/>
         </member>
-        <member name="M:WGetNET.Builder.WinGetLinkBuilder.CreateUri(System.String,System.Boolean)">
+        <member name="M:WGetNET.Builder.WinGetLinkBuilder.SetUri(System.String,System.Boolean)">
             <summary>
-            Creates and returns a <see cref="T:System.Uri"/> instance from the raw content.
+            Creates and sets the <see cref="T:System.Uri"/> instance from the raw content.
             </summary>
             <param name="rawContent"><see cref="T:System.String"/> containing the raw data that should get parsed.</param>
             <param name="hasShortenedContent">Indcates if the information in the raw content is shortened.</param>
-            <returns>
-            The created <see cref="T:System.Uri"/> instance.
-            </returns>
         </member>
         <member name="M:WGetNET.Builder.WinGetLinkBuilder.TrimLastUriPart(System.String)">
             <summary>
@@ -627,11 +618,6 @@
             provieds methodes to read data from the output of the winget processes.
             </summary>
         </member>
-        <member name="M:WGetNET.Components.Internal.ProcessOutputReader.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WGetNET.Components.Internal.ProcessOutputReader"/> class.
-            </summary>
-        </member>
         <member name="M:WGetNET.Components.Internal.ProcessOutputReader.ToPackageList(System.String[],WGetNET.PackageAction,System.String)">
             <summary>
             Converts a <see cref="T:System.Collections.Generic.List`1"/> 
@@ -854,11 +840,6 @@
         <member name="T:WGetNET.WinGet">
             <summary>
             The <see cref="T:WGetNET.WinGet"/> class offers informations about the installed winget version.
-            </summary>
-        </member>
-        <member name="P:WGetNET.WinGet.OutputReader">
-            <summary>
-            Gets the current output reader instance.
             </summary>
         </member>
         <member name="P:WGetNET.WinGet.IsInstalled">
@@ -4627,27 +4608,6 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
-        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <param name="cancellationToken">
-            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
         <member name="M:WGetNET.Helper.JsonHelper.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -4794,6 +4754,30 @@
         <member name="M:WGetNET.Parser.VersionParser.CleanupNumberString(System.String)">
             <summary>
             Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
+            </summary>
+            <remarks>
+            If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>:
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.RemoveAppendix(System.String)">
+            <summary>
+            Removes version appendixes from the string.
+            </summary>
+            <remarks>
+            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to process.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>.
+            </returns>
+        </member>
+    </members>
+</doc>
+String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
             </summary>
             <remarks>
             If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
