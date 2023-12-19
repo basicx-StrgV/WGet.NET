@@ -23,17 +23,6 @@ namespace WGetNET
     /// </summary>
     public class WinGet
     {
-        /// <summary>
-        /// Gets the current output reader instance.
-        /// </summary>
-        private protected ProcessOutputReader OutputReader
-        {
-            get
-            {
-                return _outputReader;
-            }
-        }
-
         private const string _infoCmd = "--info";
         private const string _versionCmd = "--version";
         private const string _exportSettingsCmd = "settings export";
@@ -47,7 +36,6 @@ namespace WGetNET
         private Version _version;
 
         private readonly bool _administratorPrivileges;
-        private readonly ProcessOutputReader _outputReader;
 
         /// <summary>
         /// Gets if winget is installed on the system.
@@ -120,8 +108,6 @@ namespace WGetNET
         /// </summary>
         public WinGet()
         {
-            _outputReader = new ProcessOutputReader();
-
             // Check if the current process has administrator privileges
             _administratorPrivileges = CheckAdministratorPrivileges();
 
@@ -149,7 +135,7 @@ namespace WGetNET
         {
             ProcessResult result = Execute(_exportSettingsCmd);
 
-            return _outputReader.ExportOutputToString(result);
+            return ProcessOutputReader.ExportOutputToString(result);
         }
 
         /// <summary>
@@ -169,7 +155,7 @@ namespace WGetNET
         {
             ProcessResult result = await ExecuteAsync(_exportSettingsCmd, false, cancellationToken);
 
-            return _outputReader.ExportOutputToString(result);
+            return ProcessOutputReader.ExportOutputToString(result);
         }
 
         /// <summary>
@@ -217,7 +203,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(_exportSettingsCmd);
 
-            FileHelper.WriteTextToFile(file, OutputReader.ExportOutputToString(result));
+            FileHelper.WriteTextToFile(file, ProcessOutputReader.ExportOutputToString(result));
         }
 
         /// <summary>
@@ -268,7 +254,7 @@ namespace WGetNET
 
             ProcessResult result = await ExecuteAsync(_exportSettingsCmd, false, cancellationToken);
 
-            await FileHelper.WriteTextToFileAsync(file, OutputReader.ExportOutputToString(result), cancellationToken);
+            await FileHelper.WriteTextToFileAsync(file, ProcessOutputReader.ExportOutputToString(result), cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -649,7 +635,7 @@ namespace WGetNET
                 actionVersionId = InfoActionVersionId.VersionRange4;
             }
 
-            return _outputReader.ToWingetInfo(result.Output, actionVersionId);
+            return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
         }
 
         /// <summary>
@@ -690,7 +676,7 @@ namespace WGetNET
                 return WinGetInfo.Empty;
             }
 
-            return _outputReader.ToWingetInfo(result.Output, actionVersionId);
+            return ProcessOutputReader.ToWingetInfo(result.Output, actionVersionId);
         }
         //---------------------------------------------------------------------------------------------
 

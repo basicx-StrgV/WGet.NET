@@ -2,6 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -184,7 +185,7 @@ namespace WGetNET.Components.Internal
         /// </returns>
         private string[] ReadSreamOutput(StreamReader output)
         {
-            string[] outputArray = new string[0];
+            string[] outputArray = Array.Empty<string>();
 
             //Read output to list
             while (!output.EndOfStream)
@@ -216,7 +217,7 @@ namespace WGetNET.Components.Internal
         /// </returns>
         private async Task<string[]> ReadSreamOutputAsync(StreamReader output, CancellationToken cancellationToken = default)
         {
-            string[] outputArray = new string[0];
+            string[] outputArray = Array.Empty<string>();
 
             //Read output to list
             while (!output.EndOfStream)

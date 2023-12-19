@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using WGetNET.Models;
 using WGetNET.Helper;
 using WGetNET.Exceptions;
+using WGetNET.Components.Internal;
 
 namespace WGetNET
 {
@@ -86,7 +87,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.Search);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
         }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
         }
 
         /// <summary>
@@ -170,7 +171,7 @@ namespace WGetNET
                 return new List<WinGetPackage>();
             }
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.Search);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
         }
 
         /// <summary>
@@ -219,7 +220,7 @@ namespace WGetNET
                 return new List<WinGetPackage>();
             }
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -237,7 +238,7 @@ namespace WGetNET
         {
             ProcessResult result = Execute(_listCmd);
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -272,7 +273,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -311,7 +312,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
 
         /// <summary>
@@ -337,7 +338,7 @@ namespace WGetNET
                 return new List<WinGetPackage>();
             }
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -382,7 +383,7 @@ namespace WGetNET
                 return new List<WinGetPackage>();
             }
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -431,7 +432,7 @@ namespace WGetNET
                 return new List<WinGetPackage>();
             }
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
 
         /// <summary>
@@ -690,7 +691,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
 
         /// <summary>
@@ -718,7 +719,7 @@ namespace WGetNET
                 return new List<WinGetPackage>();
             }
 
-            return OutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
 
         /// <summary>
@@ -1069,7 +1070,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return OutputReader.ResultToHash(result);
+            return ProcessOutputReader.ResultToHash(result);
         }
 
         /// <summary>
@@ -1108,7 +1109,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return OutputReader.ResultToHash(result);
+            return ProcessOutputReader.ResultToHash(result);
         }
 
         /// <summary>
@@ -1154,7 +1155,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return OutputReader.ResultToHash(result);
+            return ProcessOutputReader.ResultToHash(result);
         }
 
         /// <summary>
@@ -1197,7 +1198,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            return OutputReader.ResultToHash(result);
+            return ProcessOutputReader.ResultToHash(result);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1511,7 +1512,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(_pinListCmd);
 
-            return OutputReader.ToPinnedPackageList(result.Output);
+            return ProcessOutputReader.ToPinnedPackageList(result.Output);
         }
 
         /// <summary>
@@ -1545,7 +1546,7 @@ namespace WGetNET
                 return new List<WinGetPinnedPackage>();
             }
 
-            return OutputReader.ToPinnedPackageList(result.Output);
+            return ProcessOutputReader.ToPinnedPackageList(result.Output);
         }
         //---------------------------------------------------------------------------------------------
 

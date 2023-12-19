@@ -149,7 +149,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public WinGetSource Create(string name, string identifier, string arg, string type)
+        public static WinGetSource Create(string name, string identifier, string arg, string type)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(identifier, "identifier");
@@ -178,7 +178,7 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public WinGetSource Create(string name, string identifier, string arg, string type, string data)
+        public static WinGetSource Create(string name, string identifier, string arg, string type, string data)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(identifier, "identifier");

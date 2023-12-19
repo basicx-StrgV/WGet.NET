@@ -55,7 +55,7 @@ namespace WGetNET.Builder
                 _rawContent = rawContent;
             }
 
-            _url = CreateUri(_rawContent, _hasShortenedContent);
+            SetUri(_rawContent, _hasShortenedContent);
         }
 
         /// <summary>
@@ -84,24 +84,21 @@ namespace WGetNET.Builder
         }
 
         /// <summary>
-        /// Creates and returns a <see cref="System.Uri"/> instance from the raw content.
+        /// Creates and sets the <see cref="System.Uri"/> instance from the raw content.
         /// </summary>
         /// <param name="rawContent"><see cref="System.String"/> containing the raw data that should get parsed.</param>
         /// <param name="hasShortenedContent">Indcates if the information in the raw content is shortened.</param>
-        /// <returns>
-        /// The created <see cref="System.Uri"/> instance.
-        /// </returns>
-        private Uri? CreateUri(string rawContent, bool hasShortenedContent)
+        private void SetUri(string rawContent, bool hasShortenedContent)
         {
             if (!hasShortenedContent)
             {
                 Uri.TryCreate(rawContent, UriKind.Absolute, out Uri? uri);
-                return uri;
+                _url = uri;
             }
 
             // Fallback for an incomplete uri.
             Uri.TryCreate(TrimLastUriPart(rawContent), UriKind.Absolute, out Uri? shortenedUri);
-            return shortenedUri;
+            _url = shortenedUri;
         }
 
         /// <summary>

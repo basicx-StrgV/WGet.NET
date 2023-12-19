@@ -46,7 +46,7 @@ namespace WGetNET.Helper
         public static void WriteTextToFile(string path, string text)
         {
             string? directory = Path.GetDirectoryName(path);
-            if (!Directory.Exists(directory))
+            if (directory != null && !Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
             }
@@ -95,7 +95,7 @@ namespace WGetNET.Helper
             }
 
             string? directory = Path.GetDirectoryName(path);
-            if (!Directory.Exists(directory))
+            if (directory != null && !Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
             }

@@ -56,7 +56,7 @@ namespace WGetNET.Builder
                 _rawContent = rawContent;
             }
 
-            _directoryInfo = CreateDirectoryInfo(_rawContent, _hasShortenedContent);
+            SetDirectoryInfo(_rawContent, _hasShortenedContent);
         }
 
         /// <summary>
@@ -85,14 +85,11 @@ namespace WGetNET.Builder
         }
 
         /// <summary>
-        /// Creates and returns a <see cref="System.IO.DirectoryInfo"/> instance from the raw content.
+        /// Creates and sets the <see cref="System.IO.DirectoryInfo"/> instance from the raw content.
         /// </summary>
         /// <param name="rawContent"><see cref="System.String"/> containing the raw data that should get parsed.</param>
         /// <param name="hasShortenedContent">Indcates if the information in the raw content is shortened.</param>
-        /// <returns>
-        /// The created <see cref="System.IO.DirectoryInfo"/> instance, or <see langword="null"/> if parsing the raw content failed.
-        /// </returns>
-        private DirectoryInfo? CreateDirectoryInfo(string rawContent, bool hasShortenedContent)
+        private void SetDirectoryInfo(string rawContent, bool hasShortenedContent)
         {
             try
             {
@@ -112,15 +109,15 @@ namespace WGetNET.Builder
 
                 if (!hasShortenedContent)
                 {
-                    return new DirectoryInfo(path);
+                    _directoryInfo = new DirectoryInfo(path);
                 }
 
                 // Fallback for an incomplete directory path.
-                return new DirectoryInfo(TrimLastDirectory(path));
+                _directoryInfo = new DirectoryInfo(TrimLastDirectory(path));
             }
             catch
             {
-                return null;
+                _directoryInfo = null;
             }
         }
 

@@ -127,7 +127,7 @@ namespace WGetNET.Extensions
         /// </returns>
         public static string[] RemoveEmptyEntries(this string[] array)
         {
-            string[] newArray = new string[0];
+            string[] newArray = Array.Empty<string>();
 
             for (int i = 0; i < array.Length; i++)
             {

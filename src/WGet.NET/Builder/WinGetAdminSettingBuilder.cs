@@ -54,7 +54,7 @@ namespace WGetNET.Builder
                 _rawContent = rawContent;
             }
 
-            _isEnabled = ParseToBool(_rawContent, _hasShortenedContent);
+            SetIsEnabled(_rawContent, _hasShortenedContent);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace WGetNET.Builder
         }
 
         /// <summary>
-        /// Parses the raw content to a <see cref="System.Boolean"/> value.
+        /// Sets the is anabled value by parsing the raw content to a <see cref="System.Boolean"/> value.
         /// </summary>
         /// <param name="rawContent">
         /// A <see cref="System.String"/> containing the raw content.
@@ -116,25 +116,19 @@ namespace WGetNET.Builder
         /// <param name="hasShortenedContent">
         /// Indicates if the content is shortened or not.
         /// </param>
-        /// <returns>
-        /// The paresed <see cref="System.Boolean"/> value or <see langword="null"/> if parsing failed.
-        /// </returns>
-        private bool? ParseToBool(string rawContent, bool hasShortenedContent)
+        private void SetIsEnabled(string rawContent, bool hasShortenedContent)
         {
-            bool isEnabled = false;
-            bool parsed = false;
+            _isEnabled = null;
 
             if (!hasShortenedContent)
             {
                 switch (rawContent.ToUpper())
                 {
                     case "ENABLED":
-                        isEnabled = true;
-                        parsed = true;
+                        _isEnabled = true;
                         break;
                     case "DISABLED":
-                        isEnabled = false;
-                        parsed = true;
+                        _isEnabled = false;
                         break;
                 }
             }
@@ -145,34 +139,23 @@ namespace WGetNET.Builder
 #if NETCOREAPP3_1_OR_GREATER
                 if (rawContent.ToUpper().StartsWith('E'))
                 {
-                    isEnabled = true;
-                    parsed = true;
+                    _isEnabled = true;
                 }
                 else if (rawContent.ToUpper().StartsWith('D'))
                 {
-                    isEnabled = false;
-                    parsed = true;
+                    _isEnabled = false;
                 }
 #elif NETSTANDARD2_0
                 if (rawContent.ToUpper().StartsWith("E"))
                 {
-                    isEnabled = true;
-                    parsed = true;
+                    _isEnabled = true;
                 }
                 else if (rawContent.ToUpper().StartsWith("D"))
                 {
-                    isEnabled = false;
-                    parsed = true;
+                    _isEnabled = false;
                 }
 #endif
             }
-
-            if (!parsed)
-            {
-                return null;
-            }
-
-            return isEnabled;
         }
     }
 }

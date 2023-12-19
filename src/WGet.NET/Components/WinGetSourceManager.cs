@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using WGetNET.Models;
 using WGetNET.Helper;
+using WGetNET.Components.Internal;
 
 namespace WGetNET
 {
@@ -44,7 +45,7 @@ namespace WGetNET
         {
             ProcessResult result = Execute(_sourceExportCmd);
 
-            return OutputReader.ToSourceList(result.Output);
+            return ProcessOutputReader.ToSourceList(result.Output);
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace WGetNET
 
             ProcessResult result = Execute(cmd);
 
-            return OutputReader.ToSourceList(result.Output);
+            return ProcessOutputReader.ToSourceList(result.Output);
         }
 
         /// <summary>
@@ -97,7 +98,7 @@ namespace WGetNET
                 return new List<WinGetSource>();
             }
 
-            return OutputReader.ToSourceList(result.Output);
+            return ProcessOutputReader.ToSourceList(result.Output);
         }
 
         /// <summary>
@@ -134,7 +135,7 @@ namespace WGetNET
                 return new List<WinGetSource>();
             }
 
-            return OutputReader.ToSourceList(result.Output);
+            return ProcessOutputReader.ToSourceList(result.Output);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -432,7 +433,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
-            bool succes = true;
+            bool success = true;
             foreach (WinGetSource source in sources)
             {
                 if (cancellationToken.IsCancellationRequested)
@@ -440,13 +441,13 @@ namespace WGetNET
                     return false;
                 }
 
-                if (!(await AddSourceAsync(sources, cancellationToken)))
+                if (!(await AddSourceAsync(source, cancellationToken)))
                 {
-                    succes = false;
+                    success = false;
                 }
             }
 
-            return succes;
+            return success;
         }
         //---------------------------------------------------------------------------------------------
 
