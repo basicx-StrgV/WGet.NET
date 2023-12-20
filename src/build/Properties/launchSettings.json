@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "_build": {
-      "commandName": "Project",
-      "commandLineArgs": "--no-docs"
-    }
-  }
-}
