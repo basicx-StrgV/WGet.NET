@@ -1,11 +1,15 @@
-﻿using Serilog;
+﻿//--------------------------------------------------//
+// Created by basicx-StrgV                          //
+// https://github.com/basicx-StrgV/                 //
+//--------------------------------------------------//
+using Serilog;
 using System;
 using System.IO;
 using System.Diagnostics;
 
 namespace BuildTool
 {
-    public class DoxygenHandler
+    internal class DoxygenHandler
     {
         private readonly string _doxyfile;
         private readonly string _doxygen;
@@ -91,7 +95,17 @@ namespace BuildTool
             using (StreamReader output = doxygenProc.StandardOutput)
             {
                 // Log the doxygen output
-                Log.Information(output.ReadLine());
+                while (!output.EndOfStream)
+                {
+                    string? line = output.ReadLine();
+
+                    if (line == null)
+                    {
+                        continue;
+                    }
+
+                    Log.Information(line);
+                }
             }
 
             // Wait for process exit with a timeout of 10 min

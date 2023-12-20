@@ -12,7 +12,7 @@
         },
         "DoxygenBin": {
           "type": "string",
-          "description": "The path of the doxygen bin directory (Default: C:\\Program Files\\doxygen\\bin)"
+          "description": "[Optional] The path of the doxygen bin directory (Default: C:\\Program Files\\doxygen\\bin)"
         },
         "Help": {
           "type": "boolean",
@@ -39,9 +39,13 @@
             "VSCode"
           ]
         },
+        "Major": {
+          "type": "boolean",
+          "description": "[Optional] Update the major version (Default: Minor version will be updated)"
+        },
         "NoDocs": {
           "type": "boolean",
-          "description": "Sets that no docs should be created"
+          "description": "[Optional] Sets that no docs should be created"
         },
         "NoLogo": {
           "type": "boolean",
@@ -50,6 +54,10 @@
         "Partition": {
           "type": "string",
           "description": "Partition to use on CI"
+        },
+        "Patch": {
+          "type": "boolean",
+          "description": "[Optional] Update the patch version (Default: Minor version will be updated)"
         },
         "Plan": {
           "type": "boolean",
@@ -75,6 +83,7 @@
               "Compile",
               "Docs",
               "Info",
+              "LoadConfig",
               "Pack",
               "Restore"
             ]
@@ -93,6 +102,7 @@
               "Compile",
               "Docs",
               "Info",
+              "LoadConfig",
               "Pack",
               "Restore"
             ]
@@ -110,7 +120,7 @@
         },
         "Version": {
           "type": "string",
-          "description": "Version of the package"
+          "description": "[Optional] Provide a new version for the package"
         }
       }
     }
