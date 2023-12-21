@@ -21,13 +21,16 @@ namespace BuildTool
         [Parameter("Update the patch version (Default: Minor version will be updated)")]
         public bool Patch = false;
 
+        [Parameter("Don't update the version (Default: Minor version will be updated)")]
+        public bool KeepVersion = false;
+
         [Parameter("Provide a new version for the package")]
         public readonly string? Version = null;
 
         [Parameter("The path of the doxygen bin directory (Default: C:\\Program Files\\doxygen\\bin)")]
         public readonly string DoxygenBin = "C:\\Program Files\\doxygen\\bin";
 
-        [Parameter("Sets that no docs should be created (Default: Automaticly updating the version from the build config)")]
+        [Parameter("Sets that no docs should be created (Default: Automatically updating the version from the build config)")]
         public readonly bool NoDocs = false;
 
         [Solution]
@@ -108,13 +111,19 @@ namespace BuildTool
                     return;
                 }
 
+                if (KeepVersion)
+                {
+                    _workingVersion = version.ToString();
+                    return;
+                }
+
                 if (Major && Patch)
                 {
                     // Cancel the build process
                     Assert.Fail("Can't update major and patch at the same time");
                 }
 
-                if (Major || Patch)
+                if ((Major || Patch))
                 {
                     if (Major)
                     {
