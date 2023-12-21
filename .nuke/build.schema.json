@@ -85,7 +85,8 @@
               "Info",
               "LoadConfig",
               "Pack",
-              "Restore"
+              "Restore",
+              "UpdateConfig"
             ]
           }
         },
@@ -104,7 +105,8 @@
               "Info",
               "LoadConfig",
               "Pack",
-              "Restore"
+              "Restore",
+              "UpdateConfig"
             ]
           }
         },

@@ -29,5 +29,24 @@ namespace BuildTool
                 return null;
             }
         }
+
+        public static bool SaveConfig(string configFile, BuildConfig config)
+        {
+            try
+            {
+                string configJson = JsonSerializer.Serialize(config, new JsonSerializerOptions()
+                {
+                    WriteIndented = true
+                });
+
+                File.WriteAllText(configFile, configJson);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

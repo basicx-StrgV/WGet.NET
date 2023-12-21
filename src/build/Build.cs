@@ -15,19 +15,19 @@ namespace BuildTool
     {
         public static int Main() => Execute<Build>(x => x.Pack);
 
-        [Parameter("[Optional] Update the major version (Default: Minor version will be updated)")]
+        [Parameter("Update the major version (Default: Minor version will be updated)")]
         public bool Major = false;
 
-        [Parameter("[Optional] Update the patch version (Default: Minor version will be updated)")]
+        [Parameter("Update the patch version (Default: Minor version will be updated)")]
         public bool Patch = false;
 
-        [Parameter("[Optional] Provide a new version for the package")]
+        [Parameter("Provide a new version for the package")]
         public readonly string? Version = null;
 
-        [Parameter("[Optional] The path of the doxygen bin directory (Default: C:\\Program Files\\doxygen\\bin)")]
+        [Parameter("The path of the doxygen bin directory (Default: C:\\Program Files\\doxygen\\bin)")]
         public readonly string DoxygenBin = "C:\\Program Files\\doxygen\\bin";
 
-        [Parameter("[Optional] Sets that no docs should be created")]
+        [Parameter("Sets that no docs should be created (Default: Automaticly updating the version from the build config)")]
         public readonly bool NoDocs = false;
 
         [Solution]
@@ -50,6 +50,7 @@ namespace BuildTool
             .Executes(() =>
             {
                 Log.Information("Loading the build config");
+                Log.Information("File: {configFile}", _configFile);
 
                 // Check if config exist
                 if (!File.Exists(_configFile))
@@ -181,7 +182,7 @@ namespace BuildTool
 
         Target Pack => _ => _
             .DependsOn(Info, Compile)
-            .Triggers(Docs)
+            .Triggers(Docs, UpdateConfig)
             .Executes(() =>
             {
                 if (Solution == null)
@@ -204,6 +205,7 @@ namespace BuildTool
         Target Docs => _ => _
         .Unlisted()
         .OnlyWhenDynamic(() => !NoDocs)
+        .ProceedAfterFailure()
         .Executes(() =>
         {
             if (_workingVersion == null)
@@ -243,5 +245,33 @@ namespace BuildTool
                 Assert.Fail("Failed to generate docs");
             }
         });
+
+        Target UpdateConfig => _ => _
+            .Unlisted()
+            .After(Pack, Docs)
+            .TriggeredBy(Pack)
+            .ProceedAfterFailure()
+            .Executes(() =>
+            {
+                Log.Information("Updating the build config");
+                Log.Information("File: {configFile}", _configFile);
+
+                if (!File.Exists(_configFile))
+                {
+                    Log.Information("The config file does not exist, it will be created");
+                }
+
+                bool saveResult = ConfigHandler.SaveConfig(
+                    _configFile,
+                    new ConfigHandler.BuildConfig()
+                    {
+                        CurrentVersion = _workingVersion
+                    });
+
+                if (!saveResult)
+                {
+                    Assert.Fail("Failed to update the build config");
+                }
+            });
     }
 }
