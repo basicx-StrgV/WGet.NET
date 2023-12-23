@@ -2,7 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-// Version: 1.0.1                                   //
+// Version: 1.0.2                                   //
 //--------------------------------------------------//
 document.addEventListener("DOMContentLoaded", () => {
   // Get the injection wrapper element and nav to value
@@ -16,8 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Get url for index page
-  let url = window.location.origin + "/index.html";
+  // Get current url
+  let currentLocation = String(window.location);
+  // Find the last url separator
+  let lastUrlSeperator = 0;
+  for (let i = 0; i < currentLocation.length; i++) {
+    // Save index of the current url separator
+    if (currentLocation[i] == "/") {
+      lastUrlSeperator = i;
+    }
+  }
+  // Extract root url
+  let rootUrl = currentLocation.slice(0, lastUrlSeperator);
+  // Set index.html url
+  let url = rootUrl + "/index.html";
 
   // Request html content from the index page
   const htmlReq = new XMLHttpRequest();
