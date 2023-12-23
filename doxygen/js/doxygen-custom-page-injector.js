@@ -2,7 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-// Version: 1.0.0                                   //
+// Version: 1.0.1                                   //
 //--------------------------------------------------//
 document.addEventListener("DOMContentLoaded", () => {
   // Get the injection wrapper element and nav to value
@@ -39,27 +39,32 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Get the div that contains the content
-      let containerChildren = document.getElementById("doc-content").children;
-      let contentDiv;
-      for (let i = 0; i < containerChildren.length; i++) {
-        if (
-          containerChildren[i].classList.length <= 0 &&
-          containerChildren[i].id.trim() == ""
-        ) {
-          // The content div has no classes or id
-          contentDiv = containerChildren[i];
-        }
-      }
+      let contentContainer = document.getElementById("doc-content");
 
       // Exit if no content div was found and display error message
-      if (contentDiv == null) {
+      if (contentContainer == null) {
         document.body.innerHTML = "";
         document.body.innerText = "Failed to load custom page";
         return;
       }
 
-      // Replace document content
-      contentDiv.innerHTML = injectionWrapper.innerHTML;
+      // Clear the content div
+      for (let i = 0; i < contentContainer.children.length; i++) {
+        if (
+          contentContainer.children[i].id.trim() != "MSearchSelectWindow" &&
+          contentContainer.children[i].id.trim() != "MSearchResultsWindow"
+        ) {
+          // Remove element from content if it does not belong to the layout
+          contentContainer.removeChild(contentContainer.children[i]);
+        }
+      }
+
+      // Create a content wrapper element and add the custom content
+      let contentWrapper = document.createElement("div");
+      contentWrapper.innerHTML = injectionWrapper.innerHTML;
+
+      // Appand the content wrapper to the content container
+      contentContainer.appendChild(contentWrapper);
     });
 
     // Replace and close document
