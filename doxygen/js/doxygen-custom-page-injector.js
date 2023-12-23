@@ -2,6 +2,8 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+// Version: 1.0.0                                   //
+//--------------------------------------------------//
 document.addEventListener("DOMContentLoaded", () => {
   // Get the injection wrapper element and nav to value
   let injectionWrapper = document.getElementById("injection-wrapper");
