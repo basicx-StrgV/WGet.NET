@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['pinnedversion_0',['PinnedVersion',['../d6/d7d/a00161.html#ae439038be7b34612b0e4c58ae3b79ef2',1,'WGetNET::WinGetPinnedPackage']]],
-  ['pintype_1',['PinType',['../d6/d7d/a00161.html#ac197be9bb8f3b5c3dc8f4606ebf67a2a',1,'WGetNET::WinGetPinnedPackage']]],
-  ['pintypestring_2',['PinTypeString',['../d6/d7d/a00161.html#a87b9793ff80822e5435f3ad88121b469',1,'WGetNET::WinGetPinnedPackage']]]
+  ['name_0',['Name',['../d7/d6e/a00190.html#ae15a9a9b940e94e494795ef83d72007c',1,'WGetNET.WinGetDirectory.Name'],['../db/d53/a00202.html#a7281f82c71873c28eb79d7ff5e3b2bf1',1,'WGetNET.WinGetPackage.Name'],['../da/de7/a00210.html#a1d053127af0878398f20c9a156deeee5',1,'WGetNET.WinGetSource.Name']]]
 ];

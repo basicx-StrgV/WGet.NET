@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name_0',['Name',['../da/d01/a00153.html#a37790d2deee491ca041b7c16905d9fc3',1,'WGetNET.WinGetInfoEntry.Name'],['../d1/db7/a00157.html#a7281f82c71873c28eb79d7ff5e3b2bf1',1,'WGetNET.WinGetPackage.Name'],['../d0/d48/a00165.html#a1d053127af0878398f20c9a156deeee5',1,'WGetNET.WinGetSource.Name']]]
+  ['message_0',['Message',['../d3/dd1/a00214.html#a5976a3d19ed35b462865daa806cf9cc4',1,'WGetNET.Exceptions.InvalidJsonException.Message'],['../dc/d9a/a00218.html#a75334f29889765aaf99ec16bfe0df745',1,'WGetNET.Exceptions.WinGetFeatureNotSupportedException.Message'],['../d0/d24/a00222.html#ae68da497b0d2d2e64d4b75db9068899e',1,'WGetNET.Exceptions.WinGetNotInstalledException.Message']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['data_0',['Data',['../d0/d48/a00165.html#afc675d53ec85af4640f325f817784f31',1,'WGetNET::WinGetSource']]],
-  ['directories_1',['Directories',['../da/d1e/a00149.html#a8c610b938c1c06ba2c3d63a8b642d726',1,'WGetNET::WinGetData']]]
+  ['entryname_0',['EntryName',['../de/d76/a00134.html#ac111115e21aecf68f18f533cdd1dfc55',1,'WGetNET::Abstractions::WinGetInfoEntry']]],
+  ['exists_1',['Exists',['../d7/d6e/a00190.html#afcf848ad09dc3754e24225f28577be21',1,'WGetNET::WinGetDirectory']]]
 ];

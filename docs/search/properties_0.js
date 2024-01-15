@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['adminsetting_0',['AdminSetting',['../da/d1e/a00149.html#a45fb90b0da81e500fe6d9b3279ead62c',1,'WGetNET::WinGetData']]],
-  ['availableversion_1',['AvailableVersion',['../d1/db7/a00157.html#a95f814ae9984c0458c4a85c0f34a8290',1,'WGetNET::WinGetPackage']]],
-  ['availableversionobject_2',['AvailableVersionObject',['../d1/db7/a00157.html#a83dc22bc10b829eb6857061f0af3a181',1,'WGetNET::WinGetPackage']]]
+  ['adminsettings_0',['AdminSettings',['../dc/d57/a00194.html#ab13310a2ce0bfd8362c263935b4f12ba',1,'WGetNET::WinGetInfo']]],
+  ['arg_1',['Arg',['../da/de7/a00210.html#ac403a5bb6a2265416f93c3933f7bb14c',1,'WGetNET::WinGetSource']]],
+  ['availableversion_2',['AvailableVersion',['../db/d53/a00202.html#a97a8e0c4a4eeac5e3ed0471920ed1a3c',1,'WGetNET::WinGetPackage']]],
+  ['availableversionstring_3',['AvailableVersionString',['../db/d53/a00202.html#a796d89fefad310ee4c6b8a6ab5283daa',1,'WGetNET::WinGetPackage']]]
 ];

@@ -55,7 +55,7 @@ https://basicx-strgv.github.io/WGet.NET/
   - [x] Reset sources
   - [x] Calculate file hash
   - [x] Export Settings
-  - [x] Download package installer
+  - [x] Download package installers
   - [x] Manage pinned packages
   - [x] Access info of the WinGet installation
 - Other

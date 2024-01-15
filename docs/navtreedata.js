@@ -26,15 +26,16 @@ var NAVTREE =
 [
   [ "WGet.NET", "index.html", [
     [ "❓ What is WGet.NET", "index.html#autotoc_md1", null ],
-    [ "📓 Documentation", "index.html#autotoc_md2", null ],
-    [ "⚡ Features", "index.html#autotoc_md3", null ],
-    [ "📦 NuGet Package", "index.html#autotoc_md4", null ],
-    [ "❗ Requirements", "index.html#autotoc_md5", null ],
-    [ "💡 Getting started", "index.html#autotoc_md6", [
-      [ "WinGetInfo:", "index.html#autotoc_md7", null ],
-      [ "WinGetPackageManager:", "index.html#autotoc_md8", null ],
-      [ "WinGetSourceManager:", "index.html#autotoc_md9", null ],
-      [ "Find Latest Versions of a Package:", "index.html#autotoc_md10", null ]
+    [ "✨ Version 4.0", "index.html#autotoc_md2", null ],
+    [ "📓 Documentation", "index.html#autotoc_md3", null ],
+    [ "⚡ Features", "index.html#autotoc_md4", null ],
+    [ "📦 NuGet Package", "index.html#autotoc_md5", null ],
+    [ "❗ Requirements", "index.html#autotoc_md6", null ],
+    [ "💡 Getting started", "index.html#autotoc_md7", [
+      [ "WinGetInfo:", "index.html#autotoc_md8", null ],
+      [ "WinGetPackageManager:", "index.html#autotoc_md9", null ],
+      [ "WinGetSourceManager:", "index.html#autotoc_md10", null ],
+      [ "Find Latest Versions of a Package:", "index.html#autotoc_md11", null ]
     ] ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ],
@@ -53,16 +54,14 @@ var NAVTREE =
         [ "Properties", "functions_prop.html", null ]
       ] ]
     ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
-    ] ]
+    [ "About", "about.html", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"d4/d3a/a00101.html#a7f8375fc861659bf4ee973d969320661"
+"about.html",
+"d9/d90/a00178.html#a679bc41649652d2365bf36f015aa1b87"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
