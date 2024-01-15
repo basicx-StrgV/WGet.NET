@@ -2,7 +2,9 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-namespace WGetNET
+using System;
+
+namespace WGetNET.Models
 {
     internal class ProcessResult
     {
@@ -13,8 +15,8 @@ namespace WGetNET
         /// <summary>
         /// Gets or sets the output of the process.
         /// </summary>
-        public string[] Output 
-        { 
+        public string[] Output
+        {
             get
             {
                 return _output;
@@ -23,7 +25,7 @@ namespace WGetNET
             {
                 if (value is null)
                 {
-                    _output = new string[0];
+                    _output = Array.Empty<string>();
                 }
                 else
                 {
@@ -49,6 +51,6 @@ namespace WGetNET
             }
         }
 
-        private string[] _output = new string[0];
+        private string[] _output = Array.Empty<string>();
     }
 }

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['url_0',['Url',['../d0/d48/a00165.html#af9120eb8344ba2a226f4b850d0f3c95e',1,'WGetNET::WinGetSource']]]
+  ['sourcename_0',['SourceName',['../db/d53/a00202.html#a80d528912eff3dbcb9d09add2670a657',1,'WGetNET::WinGetPackage']]]
 ];

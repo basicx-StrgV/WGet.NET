@@ -5,7 +5,7 @@
 namespace WGetNET
 {
     /// <summary>
-    /// Interface for all WinGet related objects.
+    /// Interface for all winget related objects.
     /// </summary>
     public interface IWinGetObject
     {

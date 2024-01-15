@@ -1,0 +1,35 @@
+.custom-footer-container {
+    height: 3em;
+    border-top: 1px solid var(--separator-color);
+}
+
+.custom-footer {
+    height: 3em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: end;
+    align-items: center;
+    align-content: center;
+}
+
+.custom-footer-entry {
+    height: max-content;
+    margin-right: 1em;
+}
+
+.custom-footer-icon {
+    height: 2em;
+}
+
+.footer-text-link, .footer-text-link:link, .footer-text-link:visited, .footer-text-link:focus, .footer-text-link:active {
+    color: var(--page-foreground-color) !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+
+.footer-text-link:hover {
+    color: var(--page-secondary-foreground-color) !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}

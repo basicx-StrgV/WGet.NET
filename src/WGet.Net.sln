@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WGet.NET", "WGet.NET\WGet.N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WGetTestLegacySupport", "WGetTestLegacySupport\WGetTestLegacySupport.csproj", "{E95FDAF2-A9E8-4BDF-94FF-0C72561E32E2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{24811039-65CA-46B2-A324-422F5522CD05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,8 @@ Global
 		{E95FDAF2-A9E8-4BDF-94FF-0C72561E32E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E95FDAF2-A9E8-4BDF-94FF-0C72561E32E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E95FDAF2-A9E8-4BDF-94FF-0C72561E32E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24811039-65CA-46B2-A324-422F5522CD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24811039-65CA-46B2-A324-422F5522CD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

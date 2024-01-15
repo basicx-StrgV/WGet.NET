@@ -5,7 +5,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace WGetNET
+namespace WGetNET.Exceptions
 {
     /// <summary>
     /// Exception that gets thrown if the provided json string could not be deserialized.
@@ -19,14 +19,14 @@ namespace WGetNET
         public override string Message { get; } = "The provided JSON could not be deserialized.";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.InvalidJsonException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.InvalidJsonException"/> class.
         /// </summary>
         public InvalidJsonException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.InvalidJsonException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.InvalidJsonException"/> class.
         /// </summary>
         /// <param name="message">Message of the exception</param>
         public InvalidJsonException(string message) : base(message)
@@ -35,7 +35,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.InvalidJsonException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.InvalidJsonException"/> class.
         /// </summary>
         /// <param name="innerException">The inner exception</param>
         public InvalidJsonException(Exception innerException) : base(string.Empty, innerException)
@@ -43,7 +43,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.InvalidJsonException"/> class.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.InvalidJsonException"/> class.
         /// </summary>
         /// <param name="message">Message of the exception</param>
         /// <param name="innerException">The inner exception</param>
@@ -53,7 +53,7 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WGetNET.InvalidJsonException"/> class with serialized data.
+        /// Initializes a new instance of the <see cref="WGetNET.Exceptions.InvalidJsonException"/> class with serialized data.
         /// </summary>
         /// <param name="info">
         /// The <see cref="System.Runtime.Serialization.SerializationInfo"/> 

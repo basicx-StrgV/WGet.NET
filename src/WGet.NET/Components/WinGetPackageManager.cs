@@ -4,17 +4,20 @@
 //--------------------------------------------------//
 using System;
 using System.IO;
-using System.ComponentModel;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using WGetNET.HelperClasses;
+using WGetNET.Models;
+using WGetNET.Helper;
+using WGetNET.Exceptions;
+using WGetNET.Components.Internal;
 
 namespace WGetNET
 {
     /// <summary>
     /// The <see cref="WGetNET.WinGetPackageManager"/> class offers methods to manage packages with winget.
     /// </summary>
-    public class WinGetPackageManager : WinGetInfo
+    public class WinGetPackageManager : WinGet
     {
         private const string _listCmd = "list";
         private const string _searchInstalledCmd = "list \"{0}\"";
@@ -22,15 +25,15 @@ namespace WGetNET
         private const string _searchCmd = "search \"{0}\" --accept-source-agreements";
         private const string _searchBySourceCmd = "search \"{0}\" --source {1} --accept-source-agreements";
         private const string _installCmd = "install \"{0}\"";
-        private const string _upgradeCmd = "upgrade \"{0}\"";
-        private const string _upgradeAllCmd = "upgrade --all";
+        private const string _upgradeCmd = "upgrade \"{0}\" --accept-source-agreements";
+        private const string _upgradeAllCmd = "upgrade --al --accept-source-agreementsl";
         private const string _getUpgradeableCmd = "upgrade";
         private const string _includeUnknown = "--include-unknown";
         private const string _uninstallCmd = "uninstall \"{0}\"";
         private const string _exportCmd = "export -o {0}";
         private const string _importCmd = "import -i {0} --ignore-unavailable";
         private const string _hashCmd = "hash {0}";
-        private const string _downloadCmd = "download {0} --download-directory {1}";
+        private const string _downloadCmd = "download {0} --download-directory {1} --accept-source-agreements";
         private const string _pinListCmd = "pin list";
         private const string _pinAddCmd = "pin add \"{0}\"";
         private const string _pinAddByVersionCmd = "pin add \"{0}\" --version \"{1}\"";
@@ -62,42 +65,29 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public List<WinGetPackage> SearchPackage(string packageId, bool exact = false)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_searchCmd, packageId);
-            
+
             if (exact)
             {
                 cmd += " --exact";
             }
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The package search failed.", cmd, e);
-            }
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
         }
 
         /// <summary>
@@ -113,15 +103,14 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public List<WinGetPackage> SearchPackage(string packageId, string sourceName, bool exact = false)
         {
@@ -135,21 +124,9 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The package search failed.", cmd, e);
-            }
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
         }
 
         /// <summary>
@@ -159,21 +136,23 @@ namespace WGetNET
         /// The id or name of the package for the search.
         /// </param>
         /// <param name="exact">Use exact match.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, bool exact = false)
+        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, bool exact = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
@@ -184,21 +163,15 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
-            }
-            catch (Win32Exception)
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
             {
-                throw new WinGetNotInstalledException();
+                return new List<WinGetPackage>();
             }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The package search failed.", cmd, e);
-            }
+
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
         }
 
         /// <summary>
@@ -211,21 +184,23 @@ namespace WGetNET
         /// The name of the source for the search.
         /// </param>
         /// <param name="exact">Use exact match.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, string sourceName, bool exact = false)
+        public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, string sourceName, bool exact = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
@@ -237,21 +212,15 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
-            }
-            catch (Win32Exception)
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
             {
-                throw new WinGetNotInstalledException();
+                return new List<WinGetPackage>();
             }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The package search failed.", cmd, e);
-            }
+
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -262,30 +231,14 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages()
         {
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_listCmd);
+            ProcessResult result = Execute(_listCmd);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The search of installed packages failed.", _listCmd, e);
-            }
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -298,15 +251,14 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages(string packageId, bool exact = false)
         {
@@ -319,21 +271,9 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The search of installed packages failed.", cmd, e);
-            }
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -349,15 +289,14 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages(string packageId, string sourceName, bool exact = false)
         {
@@ -371,54 +310,35 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The search of installed packages failed.", cmd, e);
-            }
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
 
         /// <summary>
         /// Asynchronously gets a list of all installed packages.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync()
+        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(CancellationToken cancellationToken = default)
         {
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_listCmd);
+            ProcessResult result = await ExecuteAsync(_listCmd, false, cancellationToken);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
-            }
-            catch (Win32Exception)
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
             {
-                throw new WinGetNotInstalledException();
+                return new List<WinGetPackage>();
             }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The search of installed packages failed.", _listCmd, e);
-            }
+
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -428,21 +348,23 @@ namespace WGetNET
         /// The id or name of the package for the search.
         /// </param>
         /// <param name="exact">Use exact match.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, bool exact = false)
+        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, bool exact = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
@@ -453,21 +375,15 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
-            }
-            catch (Win32Exception)
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
             {
-                throw new WinGetNotInstalledException();
+                return new List<WinGetPackage>();
             }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The search of installed packages failed.", cmd, e);
-            }
+
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
 
         /// <summary>
@@ -480,21 +396,23 @@ namespace WGetNET
         /// The name of the source for the search.
         /// </param>
         /// <param name="exact">Use exact match.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, string sourceName, bool exact = false)
+        public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, string sourceName, bool exact = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
@@ -506,21 +424,15 @@ namespace WGetNET
                 cmd += " --exact";
             }
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
-            }
-            catch (Win32Exception)
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
             {
-                throw new WinGetNotInstalledException();
+                return new List<WinGetPackage>();
             }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The search of installed packages failed.", cmd, e);
-            }
+
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
 
         /// <summary>
@@ -530,15 +442,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool InstallPackage(string packageId)
         {
@@ -546,21 +457,9 @@ namespace WGetNET
 
             string cmd = string.Format(_installCmd, packageId);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The package installtion failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -570,21 +469,20 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool InstallPackage(WinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return InstallPackage(package.Name);
             }
@@ -596,71 +494,63 @@ namespace WGetNET
         /// Asynchronously install a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package for the installation.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> InstallPackageAsync(string packageId)
+        public async Task<bool> InstallPackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_installCmd, packageId);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The package installtion failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously install a package using winget.
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> InstallPackageAsync(WinGetPackage package)
+        public async Task<bool> InstallPackageAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await InstallPackageAsync(package.Name);
+                return await InstallPackageAsync(package.Name, cancellationToken);
             }
 
-            return await InstallPackageAsync(package.Id);
+            return await InstallPackageAsync(package.Id, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -672,15 +562,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool UninstallPackage(string packageId)
         {
@@ -688,21 +577,9 @@ namespace WGetNET
 
             string cmd = string.Format(_uninstallCmd, packageId);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The package uninstalltion failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -712,21 +589,20 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool UninstallPackage(WinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return UninstallPackage(package.Name);
             }
@@ -738,71 +614,64 @@ namespace WGetNET
         /// Asynchronously uninsatll a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package for uninstallation.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> UninstallPackageAsync(string packageId)
+        public async Task<bool> UninstallPackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_uninstallCmd, packageId);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result =
+                await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("The package uninstalltion failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously uninstall a package using winget.
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> UninstallPackageAsync(WinGetPackage package)
+        public async Task<bool> UninstallPackageAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await UninstallPackageAsync(package.Name);
+                return await UninstallPackageAsync(package.Name, cancellationToken);
             }
 
-            return await UninstallPackageAsync(package.Id);
+            return await UninstallPackageAsync(package.Id, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -813,67 +682,44 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         public List<WinGetPackage> GetUpgradeablePackages()
         {
             string cmd = AddArgumentByVersion(_getUpgradeableCmd);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting updateable packages failed.", cmd, e);
-            }
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
 
         /// <summary>
         /// Asynchronously get all upgradeable packages.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync()
+        public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync(CancellationToken cancellationToken = default)
         {
             string cmd = AddArgumentByVersion(_getUpgradeableCmd);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
-            }
-            catch (Win32Exception)
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
             {
-                throw new WinGetNotInstalledException();
+                return new List<WinGetPackage>();
             }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting updateable packages failed.", cmd, e);
-            }
+
+            return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
 
         /// <summary>
@@ -883,15 +729,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool UpgradePackage(string packageId)
         {
@@ -899,21 +744,9 @@ namespace WGetNET
 
             string cmd = string.Format(_upgradeCmd, packageId);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Upgrading the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -923,21 +756,20 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool UpgradePackage(WinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return UpgradePackage(package.Name);
             }
@@ -949,71 +781,63 @@ namespace WGetNET
         /// Asynchronously upgrades a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package for upgrade.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> UpgradePackageAsync(string packageId)
+        public async Task<bool> UpgradePackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_upgradeCmd, packageId);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Upgrading the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously upgrades a package using winget.
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> UpgradePackageAsync(WinGetPackage package)
+        public async Task<bool> UpgradePackageAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await UpgradePackageAsync(package.Name);
+                return await UpgradePackageAsync(package.Name, cancellationToken);
             }
 
-            return await UpgradePackageAsync(package.Id);
+            return await UpgradePackageAsync(package.Id, cancellationToken);
         }
 
         /// <summary>
@@ -1025,67 +849,49 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         public bool UpgradeAllPackages()
         {
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_upgradeAllCmd);
+            ProcessResult result = Execute(_upgradeAllCmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Upgrading all packages failed.", _upgradeAllCmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously tries to upgrade all packages using winget.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// The action might run succesfully without upgrading every or even any package.
         /// </remarks>
         /// <returns>
-        /// <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        public async Task<bool> UpgradeAllPackagesAsync()
+        public async Task<bool> UpgradeAllPackagesAsync(CancellationToken cancellationToken = default)
         {
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_upgradeAllCmd);
+            ProcessResult result = await ExecuteAsync(_upgradeAllCmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Upgrading all packages failed.", _upgradeAllCmd, e);
-            }
+            return result.Success;
         }
 
+        /// <summary>
+        /// Adds the '--include-unknown' argument to the given <see cref="System.String"/> of aruments
+        /// when the winget version is higher then 1.4.0.
+        /// </summary>
+        /// <param name="argument">
+        /// <see cref="System.String"/> containing the arguments that should be extended.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the new process arguments.
+        /// </returns>
         private string AddArgumentByVersion(string argument)
         {
             // Checking version to determine if "--include-unknown" is necessary.
@@ -1106,15 +912,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the export was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool ExportPackagesToFile(string file)
         {
@@ -1122,62 +927,40 @@ namespace WGetNET
 
             string cmd = string.Format(_exportCmd, file);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting packages failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously exports a list of all installed winget packages as json to the given file.
         /// </summary>
         /// <param name="file">The file for the export.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> ExportPackagesToFileAsync(string file)
+        public async Task<bool> ExportPackagesToFileAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             string cmd = string.Format(_exportCmd, file);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting packages failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -1191,15 +974,14 @@ namespace WGetNET
         /// <see langword="true"/> if the import was compleatly successful or 
         /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool ImportPackagesFromFile(string file)
         {
@@ -1207,21 +989,9 @@ namespace WGetNET
 
             string cmd = string.Format(_importCmd, file);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Importing packages failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -1231,42 +1001,32 @@ namespace WGetNET
         /// This may take some time and winget may not install/upgrade all packages.
         /// </remarks>
         /// <param name="file">The file with the package data for the import.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the import was compleatly successful or 
         /// <see langword="false"/> if some or all packages failed to install.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> ImportPackagesFromFileAsync(string file)
+        public async Task<bool> ImportPackagesFromFileAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             string cmd = string.Format(_importCmd, file);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Importing packages failed.", cmd, e);
-            }
+            return result.Success;
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1280,15 +1040,14 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> containing the hash.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
@@ -1304,26 +1063,14 @@ namespace WGetNET
 
             string cmd = string.Format(_hashCmd, file);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                if (!result.Success)
-                {
-                    return string.Empty;
-                }
+            if (!result.Success)
+            {
+                return string.Empty;
+            }
 
-                return HashResultToHash(result);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Hashing failed.", cmd, e);
-            }
+            return ProcessOutputReader.ResultToHash(result);
         }
 
         /// <summary>
@@ -1335,15 +1082,11 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.String"/> containing the hash.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
@@ -1359,26 +1102,14 @@ namespace WGetNET
 
             string cmd = string.Format(_hashCmd, file.FullName);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                if (!result.Success)
-                {
-                    return string.Empty;
-                }
+            if (!result.Success)
+            {
+                return string.Empty;
+            }
 
-                return HashResultToHash(result);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Hashing failed.", cmd, e);
-            }
+            return ProcessOutputReader.ResultToHash(result);
         }
 
         /// <summary>
@@ -1387,24 +1118,26 @@ namespace WGetNET
         /// <param name="file">
         /// A <see cref="System.String"/> containing the path to the file.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> containing the hash.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
-        public async Task<string> HashAsync(string file)
+        public async Task<string> HashAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
@@ -1415,26 +1148,14 @@ namespace WGetNET
 
             string cmd = string.Format(_hashCmd, file);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                if (!result.Success)
-                {
-                    return string.Empty;
-                }
+            if (!result.Success || cancellationToken.IsCancellationRequested)
+            {
+                return string.Empty;
+            }
 
-                return HashResultToHash(result);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Hashing failed.", cmd, e);
-            }
+            return ProcessOutputReader.ResultToHash(result);
         }
 
         /// <summary>
@@ -1443,24 +1164,23 @@ namespace WGetNET
         /// <param name="file">
         /// A <see cref="System.IO.FileInfo"/> object, of the file the hash should be calculated for.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.String"/> containing the hash.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
-        public async Task<string> HashAsync(FileInfo file)
+        public async Task<string> HashAsync(FileInfo file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(file, "file");
 
@@ -1471,50 +1191,14 @@ namespace WGetNET
 
             string cmd = string.Format(_hashCmd, file.FullName);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                if (!result.Success)
-                {
-                    return string.Empty;
-                }
-
-                return HashResultToHash(result);
-            }
-            catch (Win32Exception)
+            if (!result.Success || cancellationToken.IsCancellationRequested)
             {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Hashing failed.", cmd, e);
-            }
-        }
-
-        /// <summary>
-        /// Reads the hash from the WinGet hash action result.
-        /// </summary>
-        /// <param name="result">
-        /// The <see cref="WGetNET.ProcessResult"/> object of the action.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.String"/> containing the hash value.
-        /// </returns>
-        private string HashResultToHash(ProcessResult result)
-        {
-            string hash = "";
-            if (result.Output.Length > 0 && result.Output[0].Contains(":"))
-            {
-                string[] splitOutput = result.Output[0].Split(':');
-                if (splitOutput.Length >= 2)
-                {
-                    hash = splitOutput[1].Trim();
-                }
+                return string.Empty;
             }
 
-            return hash;
+            return ProcessOutputReader.ResultToHash(result);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1527,18 +1211,17 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool Download(string packageId, string directory)
         {
@@ -1552,21 +1235,9 @@ namespace WGetNET
 
             string cmd = string.Format(_downloadCmd, packageId, directory);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Download failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -1580,18 +1251,17 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool Download(string packageId, DirectoryInfo directory)
         {
@@ -1608,24 +1278,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool Download(WinGetPackage package, string directory)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return Download(package.Name, directory);
             }
@@ -1644,25 +1313,24 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool Download(WinGetPackage package, DirectoryInfo directory)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return Download(package.Name, directory.FullName);
             }
@@ -1675,23 +1343,26 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package to download.</param>
         /// <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> DownloadAsync(string packageId, string directory)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> DownloadAsync(string packageId, string directory, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_downloadMinVersion))
             {
@@ -1703,21 +1374,9 @@ namespace WGetNET
 
             string cmd = string.Format(_downloadCmd, packageId, directory);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Download failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -1728,27 +1387,30 @@ namespace WGetNET
         /// A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
         /// It will be created if it does not exist.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> DownloadAsync(string packageId, DirectoryInfo directory)
+        public async Task<bool> DownloadAsync(string packageId, DirectoryInfo directory, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
-            return await DownloadAsync(packageId, directory.FullName);
+            return await DownloadAsync(packageId, directory.FullName, cancellationToken);
         }
 
         /// <summary>
@@ -1756,32 +1418,35 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The package to download.</param>
         /// <param name="directory">Directory path the files will be downloaded to. It will be created if it does not exist.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> DownloadAsync(WinGetPackage package, string directory)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> DownloadAsync(WinGetPackage package, string directory, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await DownloadAsync(package.Name, directory);
+                return await DownloadAsync(package.Name, directory, cancellationToken);
             }
 
-            return await DownloadAsync(package.Id, directory);
+            return await DownloadAsync(package.Id, directory, cancellationToken);
         }
 
         /// <summary>
@@ -1790,34 +1455,38 @@ namespace WGetNET
         /// <param name="package">The package to download.</param>
         /// <param name="directory">
         /// A <see cref="System.IO.DirectoryInfo"/> object of the directory the files will be downloaded to. 
-        /// It will be created if it does not exist.</param>
+        /// It will be created if it does not exist.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the download was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await DownloadAsync(package.Name, directory.FullName);
+                return await DownloadAsync(package.Name, directory.FullName, cancellationToken);
             }
 
-            return await DownloadAsync(package.Id, directory.FullName);
+            return await DownloadAsync(package.Id, directory.FullName, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1828,14 +1497,10 @@ namespace WGetNET
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         public List<WinGetPinnedPackage> GetPinnedPackages()
@@ -1845,61 +1510,43 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_pinListCmd);
+            ProcessResult result = Execute(_pinListCmd);
 
-                return ProcessOutputReader.ToPinnedPackageList(result.Output);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Listing all pinned packages failed.", _pinListCmd, e);
-            }
+            return ProcessOutputReader.ToPinnedPackageList(result.Output);
         }
 
         /// <summary>
         /// Asynchronously gets a list of all pinned packages.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetPackage"/> instances.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        public async Task<List<WinGetPinnedPackage>> GetPinnedPackagesAsync()
+        public async Task<List<WinGetPinnedPackage>> GetPinnedPackagesAsync(CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_pinListCmd);
+            ProcessResult result = await ExecuteAsync(_pinListCmd, false, cancellationToken);
 
-                return ProcessOutputReader.ToPinnedPackageList(result.Output);
-            }
-            catch (Win32Exception)
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
             {
-                throw new WinGetNotInstalledException();
+                return new List<WinGetPinnedPackage>();
             }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Listing all pinned packages failed.", _pinListCmd, e);
-            }
+
+            return ProcessOutputReader.ToPinnedPackageList(result.Output);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1912,18 +1559,17 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinAdd(string packageId, bool blocking = false)
         {
@@ -1941,21 +1587,9 @@ namespace WGetNET
                 cmd += " --blocking";
             }
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -1969,18 +1603,17 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinAdd(string packageId, string version)
         {
@@ -1994,21 +1627,9 @@ namespace WGetNET
 
             string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -2019,24 +1640,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinAdd(WinGetPackage package, bool blocking = false)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinAdd(package.Name, blocking);
             }
@@ -2055,24 +1675,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinAdd(WinGetPackage package, string version)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinAdd(package.Name, version);
             }
@@ -2085,23 +1704,26 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package to pin.</param>
         /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinAddAsync(string packageId, bool blocking = false)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddAsync(string packageId, bool blocking = false, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
@@ -2117,21 +1739,9 @@ namespace WGetNET
                 cmd += " --blocking";
             }
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -2142,23 +1752,26 @@ namespace WGetNET
         /// <see cref="System.String"/> representing the version to pin. 
         /// Please refer to the WinGet documentation for more info about version pinning.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinAddAsync(string packageId, string version)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddAsync(string packageId, string version, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
@@ -2170,21 +1783,9 @@ namespace WGetNET
 
             string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -2192,32 +1793,35 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The package to pin.</param>
         /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await PinAddAsync(package.Name, blocking);
+                return await PinAddAsync(package.Name, blocking, cancellationToken);
             }
 
-            return await PinAddAsync(package.Id, blocking);
+            return await PinAddAsync(package.Id, blocking, cancellationToken);
         }
 
         /// <summary>
@@ -2228,32 +1832,35 @@ namespace WGetNET
         /// <see cref="System.String"/> representing the version to pin. 
         /// Please refer to the WinGet documentation for more info about version pinning.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinAddAsync(WinGetPackage package, string version)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddAsync(WinGetPackage package, string version, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await PinAddAsync(package.Name, version);
+                return await PinAddAsync(package.Name, version, cancellationToken);
             }
 
-            return await PinAddAsync(package.Id, version);
+            return await PinAddAsync(package.Id, version, cancellationToken);
         }
 
         /// <summary>
@@ -2264,18 +1871,17 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinAddInstalled(string packageId, bool blocking = false)
         {
@@ -2293,21 +1899,9 @@ namespace WGetNET
                 cmd += " --blocking";
             }
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -2321,18 +1915,17 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinAddInstalled(string packageId, string version)
         {
@@ -2346,21 +1939,9 @@ namespace WGetNET
 
             string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -2371,24 +1952,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinAddInstalled(WinGetPackage package, bool blocking = false)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinAddInstalled(package.Name, blocking);
             }
@@ -2407,24 +1987,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinAddInstalled(WinGetPackage package, string version)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinAddInstalled(package.Name, version);
             }
@@ -2437,23 +2016,26 @@ namespace WGetNET
         /// </summary>
         /// <param name="packageId">The id or name of the package to pin.</param>
         /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinAddInstalledAsync(string packageId, bool blocking = false)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddInstalledAsync(string packageId, bool blocking = false, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
@@ -2469,21 +2051,9 @@ namespace WGetNET
                 cmd += " --blocking";
             }
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -2494,23 +2064,26 @@ namespace WGetNET
         /// <see cref="System.String"/> representing the version to pin. 
         /// Please refer to the WinGet documentation for more info about version pinning.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinAddInstalledAsync(string packageId, string version)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddInstalledAsync(string packageId, string version, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
@@ -2522,21 +2095,9 @@ namespace WGetNET
 
             string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Pinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -2544,32 +2105,35 @@ namespace WGetNET
         /// </summary>
         /// <param name="package">The package to pin.</param>
         /// <param name="blocking">Set to <see langword="true"/> if updating of pinned package should be fully blocked.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, bool blocking = false)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, bool blocking = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await PinAddInstalledAsync(package.Name, blocking);
+                return await PinAddInstalledAsync(package.Name, blocking, cancellationToken);
             }
 
-            return await PinAddInstalledAsync(package.Id, blocking);
+            return await PinAddInstalledAsync(package.Id, blocking, cancellationToken);
         }
 
         /// <summary>
@@ -2580,32 +2144,35 @@ namespace WGetNET
         /// <see cref="System.String"/> representing the version to pin. 
         /// Please refer to the WinGet documentation for more info about version pinning.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the pin was added successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, string version)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinAddInstalledAsync(WinGetPackage package, string version, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await PinAddInstalledAsync(package.Name, version);
+                return await PinAddInstalledAsync(package.Name, version, cancellationToken);
             }
 
-            return await PinAddInstalledAsync(package.Id, version);
+            return await PinAddInstalledAsync(package.Id, version, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -2617,18 +2184,17 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinRemove(string packageId)
         {
@@ -2641,21 +2207,9 @@ namespace WGetNET
 
             string cmd = string.Format(_pinRemoveCmd, packageId);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Unpinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -2665,24 +2219,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinRemove(WinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinRemove(package.Name);
             }
@@ -2694,23 +2247,26 @@ namespace WGetNET
         /// Asynchronously removes a pinned package from winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package to unpin.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinRemoveAsync(string packageId)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinRemoveAsync(string packageId, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
@@ -2721,53 +2277,44 @@ namespace WGetNET
 
             string cmd = string.Format(_pinRemoveCmd, packageId);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Unpinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously removes a pinned package from winget.
         /// </summary>
         /// <param name="package">The package to unpin.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinRemoveAsync(WinGetPackage package)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinRemoveAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await PinRemoveAsync(package.Name);
+                return await PinRemoveAsync(package.Name, cancellationToken);
             }
 
-            return await PinRemoveAsync(package.Id);
+            return await PinRemoveAsync(package.Id, cancellationToken);
         }
 
         /// <summary>
@@ -2777,18 +2324,17 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinRemoveInstalled(string packageId)
         {
@@ -2801,21 +2347,9 @@ namespace WGetNET
 
             string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
-                
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Unpinning the package failed.", cmd, e);
-            }
+            ProcessResult result = Execute(cmd);
+
+            return result.Success;
         }
 
         /// <summary>
@@ -2825,24 +2359,23 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         public bool PinRemoveInstalled(WinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
                 return PinRemoveInstalled(package.Name);
             }
@@ -2854,23 +2387,26 @@ namespace WGetNET
         /// Asynchronously removes a pinned package from winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package to unpin.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinRemoveInstalledAsync(string packageId)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinRemoveInstalledAsync(string packageId, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
@@ -2881,53 +2417,44 @@ namespace WGetNET
 
             string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Unpinning the package failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously removes a pinned package from winget.
         /// </summary>
         /// <param name="package">The package to unpin.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
-        /// <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the removal of the pin was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
-        public async Task<bool> PinRemoveInstalledAsync(WinGetPackage package)
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> PinRemoveInstalledAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
 
-            if (package.HasShortenedId)
+            if (package.HasShortenedId || package.HasNoId)
             {
-                return await PinRemoveInstalledAsync(package.Name);
+                return await PinRemoveInstalledAsync(package.Name, cancellationToken);
             }
 
-            return await PinRemoveInstalledAsync(package.Id);
+            return await PinRemoveInstalledAsync(package.Id, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -2941,14 +2468,10 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
         public bool ResetPins()
@@ -2958,64 +2481,40 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_pinResetCmd);
+            ProcessResult result = Execute(_pinResetCmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Reseting of pins failed.", _pinResetCmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously resets all pinned packages.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// This will remove all pins and it is not possible to restore them.
         /// </remarks>
         /// <returns>
-        /// <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the reset was successful or <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetFeatureNotSupportedException">
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
         /// </exception>
-        public async Task<bool> ResetPinsAsync()
+        public async Task<bool> ResetPinsAsync(CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
             {
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_pinResetCmd);
+            ProcessResult result = await ExecuteAsync(_pinResetCmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Reseting of pins failed.", _pinResetCmd, e);
-            }
+            return result.Success;
         }
         //---------------------------------------------------------------------------------------------
     }

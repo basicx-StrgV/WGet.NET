@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['message_0',['Message',['../d3/d32/a00105.html#ab391872ae374f2b4e03d4095496a4ef8',1,'WGetNET.WinGetActionFailedException.Message'],['../dd/d42/a00109.html#ace1d017b0e26fcdf9129537d5642f2b8',1,'WGetNET.WinGetFeatureNotSupportedException.Message'],['../d3/d00/a00113.html#a452794df8251510bd13a7366e8aae737',1,'WGetNET.WinGetNotInstalledException.Message']]]
+  ['hash_0',['Hash',['../d9/d90/a00178.html#af3342eb112d1e286760fb7dca295d8aa',1,'WGetNET.WinGetPackageManager.Hash(string file)'],['../d9/d90/a00178.html#a58c8ce64746fec64af84bf4e19df008b',1,'WGetNET.WinGetPackageManager.Hash(FileInfo file)']]],
+  ['hashasync_1',['HashAsync',['../d9/d90/a00178.html#af3cbdccd90aa79ec8592465b48b8ffa8',1,'WGetNET.WinGetPackageManager.HashAsync(string file, CancellationToken cancellationToken=default)'],['../d9/d90/a00178.html#abb1d808a6ab66150142ca970f10aee43',1,'WGetNET.WinGetPackageManager.HashAsync(FileInfo file, CancellationToken cancellationToken=default)']]],
+  ['hasnoid_2',['HasNoId',['../db/d53/a00202.html#af362695f57830eecd1842b942aa2841e',1,'WGetNET::WinGetPackage']]],
+  ['hasshortenedcontent_3',['HasShortenedContent',['../de/d76/a00134.html#a1bcd147a9640fa6214c2538d6525553b',1,'WGetNET::Abstractions::WinGetInfoEntry']]],
+  ['hasshortenedid_4',['HasShortenedId',['../db/d53/a00202.html#aa01bb448e1cdd8513799d6a23a11c06e',1,'WGetNET::WinGetPackage']]],
+  ['hasupgrade_5',['HasUpgrade',['../db/d53/a00202.html#a2662fe30e8ed9a3e0691bc43261d127b',1,'WGetNET::WinGetPackage']]]
 ];

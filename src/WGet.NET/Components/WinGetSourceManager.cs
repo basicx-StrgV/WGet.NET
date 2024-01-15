@@ -2,22 +2,20 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-using System;
-using System.Text;
-using System.Security;
-using System.ComponentModel;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using WGetNET.HelperClasses;
+using WGetNET.Models;
+using WGetNET.Helper;
+using WGetNET.Components.Internal;
 
 namespace WGetNET
 {
     /// <summary>
     /// The <see cref="WGetNET.WinGetSourceManager"/> class offers methods to manage the sources used by winget.
     /// </summary>
-    public class WinGetSourceManager : WinGetInfo
+    public class WinGetSourceManager : WinGet
     {
-        private const string _sourceListCmd = "source list";
         private const string _sourceAddCmd = "source add -n {0} -a {1} --accept-source-agreements";
         private const string _sourceAddWithTypeCmd = "source add -n {0} -a {1} -t {2} --accept-source-agreements";
         private const string _sourceUpdateCmd = "source update";
@@ -37,60 +35,107 @@ namespace WGetNET
         /// <summary>
         /// Gets a list of all sources that are installed in winget.
         /// </summary>
-        /// <remarks>
-        /// Because the list source output is limited it is recommanded to use 
-        /// <see cref="WGetNET.WinGetSourceManager.ExportSourcesToObject()"/> instead.
-        /// </remarks>
         /// <returns>
         /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
         /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
         public List<WinGetSource> GetInstalledSources()
         {
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceListCmd);
+            ProcessResult result = Execute(_sourceExportCmd);
 
-                return ProcessOutputReader.ToSourceList(result.Output);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceListCmd, e);
-            }
+            return ProcessOutputReader.ToSourceList(result.Output);
+        }
+
+        /// <summary>
+        /// Gets a list of installed sources that matches the provided name.
+        /// </summary>
+        /// <param name="sourceName">Name of the sources to export.</param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public List<WinGetSource> GetInstalledSources(string sourceName)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
+
+            ProcessResult result = Execute(cmd);
+
+            return ProcessOutputReader.ToSourceList(result.Output);
         }
 
         /// <summary>
         /// Asynchronously gets a list of all sources that are installed in winget.
         /// </summary>
-        /// <remarks>
-        /// Because the list source output is limited it is recommanded to use 
-        /// <see cref="WGetNET.WinGetSourceManager.ExportSourcesToObject()"/> instead.
-        /// </remarks>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
         /// </returns>
-        public async Task<List<WinGetSource>> GetInstalledSourcesAsync()
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        public async Task<List<WinGetSource>> GetInstalledSourcesAsync(CancellationToken cancellationToken = default)
         {
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_sourceListCmd);
+            ProcessResult result = await ExecuteAsync(_sourceExportCmd, false, cancellationToken);
 
-                return ProcessOutputReader.ToSourceList(result.Output);
-            }
-            catch (Win32Exception)
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
             {
-                throw new WinGetNotInstalledException();
+                return new List<WinGetSource>();
             }
-            catch (Exception e)
+
+            return ProcessOutputReader.ToSourceList(result.Output);
+        }
+
+        /// <summary>
+        /// Asynchronously gets a list of installed sources that matches the provided name.
+        /// </summary>
+        /// <param name="sourceName">Name of the sources to export.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> instances.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<List<WinGetSource>> GetInstalledSourcesAsync(string sourceName, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+
+            string cmd = $"{_sourceExportCmd} -n {sourceName}";
+
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            // Return empty list if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
             {
-                throw new WinGetActionFailedException("Getting installed sources failed.", _sourceListCmd, e);
+                return new List<WinGetSource>();
             }
+
+            return ProcessOutputReader.ToSourceList(result.Output);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -98,71 +143,47 @@ namespace WGetNET
         /// <summary>
         /// Adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
         /// <param name="arg">
-        /// A <see cref="System.String"/> representing the source (eg. URL).
+        /// A <see cref="System.String"/> representing the sources URL or UNC.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public bool AddSource(string name, string arg)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd, true);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
         /// <param name="arg">
-        /// A <see cref="System.String"/> representing the source (eg. URL).
+        /// A <see cref="System.String"/> representing the sources URL or UNC.
         /// </param>
         /// <param name="type">
         /// A <see cref="System.String"/> representing the source type.
@@ -170,70 +191,48 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public bool AddSource(string name, string arg, string type)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd, true);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="source">
         /// The <see cref="WGetNET.WinGetSource"/> to add.
         /// </param>
         /// <returns>
         /// <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -244,168 +243,211 @@ namespace WGetNET
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
-                return AddSource(source.Name, source.Url);
+                return AddSource(source.Name, source.Arg);
             }
 
-            return AddSource(source.Name, source.Url, source.Type);
+            return AddSource(source.Name, source.Arg, source.Type);
+        }
+
+        /// <summary>
+        /// Adds multiple new sources to winget (Needs administrator rights).
+        /// </summary>
+        /// <param name="sources">
+        /// A <see cref="System.Collections.Generic.IEnumerable{T}"/> of <see cref="WGetNET.WinGetSource"/> objects to add.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if adding all sources was succesfull and <see langword="false"/> if one or more failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public bool AddSource(IEnumerable<WinGetSource> sources)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
+
+            bool succes = true;
+            foreach (WinGetSource source in sources)
+            {
+                if (!AddSource(source))
+                {
+                    succes = false;
+                }
+            }
+
+            return succes;
         }
 
         /// <summary>
         /// Asynchronously adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
         /// <param name="arg">
-        /// A <see cref="System.String"/> representing the source (eg. URL).
+        /// A <see cref="System.String"/> representing the sources URL or UNC.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> AddSourceAsync(string name, string arg)
+        public async Task<bool> AddSourceAsync(string name, string arg, CancellationToken cancellationToken = default)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
             string cmd = string.Format(_sourceAddCmd, name, arg);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source to add.
         /// </param>
         /// <param name="arg">
-        /// A <see cref="System.String"/> representing the source (eg. URL).
+        /// A <see cref="System.String"/> representing the sources URL or UNC.
         /// </param>
         /// <param name="type">
         /// A <see cref="System.String"/> representing the source type.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> AddSourceAsync(string name, string arg, string type)
+        public async Task<bool> AddSourceAsync(string name, string arg, string type, CancellationToken cancellationToken = default)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
             string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Getting installed sources failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously adds a new source to winget (Needs administrator rights).
         /// </summary>
-        /// <remarks>
-        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
-        /// </remarks>
         /// <param name="source">
         /// The <see cref="WGetNET.WinGetSource"/> to add.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the action was succesfull and <see langword="false"/> if it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> AddSourceAsync(WinGetSource source)
+        public async Task<bool> AddSourceAsync(WinGetSource source, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
             if (string.IsNullOrWhiteSpace(source.Type))
             {
-                return await AddSourceAsync(source.Name, source.Url);
+                return await AddSourceAsync(source.Name, source.Arg, cancellationToken);
             }
 
-            return await AddSourceAsync(source.Name, source.Url, source.Type);
+            return await AddSourceAsync(source.Name, source.Arg, source.Type, cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously adds multiple new sources to winget (Needs administrator rights).
+        /// </summary>
+        /// <remarks>
+        /// The source type is optional but some sources like the "msstore" need it or adding it wil throw an error.
+        /// </remarks>
+        /// <param name="sources">
+        /// A <see cref="System.Collections.Generic.IEnumerable{T}"/> of <see cref="WGetNET.WinGetSource"/> objects to add.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if adding all sources was succesfull and <see langword="false"/> if one or more failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        public async Task<bool> AddSourceAsync(IEnumerable<WinGetSource> sources, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
+
+            bool success = true;
+            foreach (WinGetSource source in sources)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return false;
+                }
+
+                if (!(await AddSourceAsync(source, cancellationToken)))
+                {
+                    success = false;
+                }
+            }
+
+            return success;
         }
         //---------------------------------------------------------------------------------------------
 
@@ -419,35 +461,22 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the update was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         public bool UpdateSources()
         {
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceUpdateCmd);
+            ProcessResult result = Execute(_sourceUpdateCmd);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Updating sources failed.", _sourceUpdateCmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously updates all sources that are installed in winget.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// This may take a while depending on the sources.
         /// </remarks>
@@ -455,848 +484,426 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the update was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        public async Task<bool> UpdateSourcesAsync()
+        public async Task<bool> UpdateSourcesAsync(CancellationToken cancellationToken = default)
         {
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_sourceUpdateCmd);
+            ProcessResult result = await ExecuteAsync(_sourceUpdateCmd, false, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Updating sources failed.", _sourceUpdateCmd, e);
-            }
+            return result.Success;
         }
         //---------------------------------------------------------------------------------------------
 
         //---Export------------------------------------------------------------------------------------
         /// <summary>
-        /// Exports the winget sources as a json string.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String"/> that contains the winget sorces in json format.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        public string ExportSources()
-        {
-            try
-            {
-                ProcessResult result = 
-                    _processManager.ExecuteWingetProcess(_sourceExportCmd);
-
-                return ProcessOutputReader.ExportOutputToString(result);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
-            }
-        }
-
-        /// <summary>
-        /// Exports the winget sources as a json string.
-        /// </summary>
-        /// <param name="sourceName">The name of the source for the export.</param>
-        /// <returns>
-        /// A <see cref="System.String"/> that contains the winget sorces in json format.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
-        /// </exception>
-        public string ExportSources(string sourceName)
-        {
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
-
-            string cmd = $"{_sourceExportCmd} -n {sourceName}";
-
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
-
-                return ProcessOutputReader.ExportOutputToString(result);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
-            }
-        }
-
-        /// <summary>
-        /// Exports the winget sources as a json string.
-        /// </summary>
-        /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> for the export.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.String"/> that contains the winget sorces in json format.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
-        /// </exception>
-        public string ExportSources(WinGetSource source)
-        {
-            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
-
-            return ExportSources(source.Name);
-        }
-
-        /// <summary>
-        /// Asynchronously exports the winget sources as a json string.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is a <see cref="System.String"/> that contains the winget sorces in json format.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        public async Task<string> ExportSourcesAsync()
-        {
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_sourceExportCmd);
-
-                return ProcessOutputReader.ExportOutputToString(result);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
-            }
-        }
-
-        /// <summary>
-        /// Asynchronously exports the winget sources as a json string.
-        /// </summary>
-        /// <param name="sourceName">The name of the source for the export.</param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is a <see cref="System.String"/> that contains the winget sorces in json format.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
-        /// </exception>
-        public async Task<string> ExportSourcesAsync(string sourceName)
-        {
-            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
-
-            string cmd = $"{_sourceExportCmd} -n {sourceName}";
-
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
-
-                return ProcessOutputReader.ExportOutputToString(result);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
-            }
-        }
-
-        /// <summary>
-        /// Asynchronously exports the winget sources as a json string.
-        /// </summary>
-        /// <param name="source">
-        /// The <see cref="WGetNET.WinGetSource"/> for the export.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is a <see cref="System.String"/> that contains the winget sorces in json format.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
-        /// </exception>
-        public async Task<string> ExportSourcesAsync(WinGetSource source)
-        {
-            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
-
-            return await ExportSourcesAsync(source.Name);
-        }
-
-        /// <summary>
-        /// Exports the winget sources to a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        public List<WinGetSource> ExportSourcesToObject()
-        {
-            return ExportStringToSources(ExportSources());
-        }
-
-        /// <summary>
-        /// Exports the winget sources to a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        public List<WinGetSource> ExportSourcesToObject(string sourceName)
-        {
-            return ExportStringToSources(ExportSources(sourceName));
-        }
-
-        /// <summary>
-        /// Asynchronously exports the winget sources to a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        public async Task<List<WinGetSource>> ExportSourcesToObjectAsync()
-        {
-#if NETCOREAPP3_1_OR_GREATER
-            return await ExportStringToSourcesAsync(await ExportSourcesAsync());
-#elif NETSTANDARD2_0
-            return ExportStringToSources(await ExportSourcesAsync());
-#endif
-        }
-
-        /// <summary>
-        /// Asynchronously exports the winget sources to a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        public async Task<List<WinGetSource>> ExportSourcesToObjectAsync(string sourceName)
-        {
-#if NETCOREAPP3_1_OR_GREATER
-            return await ExportStringToSourcesAsync(await ExportSourcesAsync(sourceName));
-#elif NETSTANDARD2_0
-            return ExportStringToSources(await ExportSourcesAsync(sourceName));
-#endif
-        }
-
-        /// <summary>
         /// Exports the winget sources in json format to a file.
         /// </summary>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
         /// <param name="file">The file for the export.</param>
-        /// <returns>
-        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public bool ExportSourcesToFile(string file)
+        /// <exception cref="System.ArgumentException">
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public void ExportSourcesToFile(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceExportCmd);
-
-                return FileHandler.ExportOutputToFile(result, file);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
-            }
+            FileHelper.WriteTextToFile(
+                file,
+                SourcesToJson(
+                    GetInstalledSources()));
         }
 
         /// <summary>
         /// Exports the winget sources in json format to a file.
         /// </summary>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
         /// <param name="file">The file for the export.</param>
         /// <param name="sourceName">The name of the source for the export.</param>
-        /// <returns>
-        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public bool ExportSourcesToFile(string file, string sourceName)
+        /// <exception cref="System.ArgumentException">
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public void ExportSourcesToFile(string file, string sourceName)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            string cmd = $"{_sourceExportCmd} -n {sourceName}";
-
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
-
-                return FileHandler.ExportOutputToFile(result, file);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
-            }
+            FileHelper.WriteTextToFile(
+                file,
+                SourcesToJson(
+                    GetInstalledSources(sourceName)));
         }
 
         /// <summary>
         /// Exports the winget sources in json format to a file.
         /// </summary>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
         /// <param name="file">
         /// The file for the export.
         /// </param>
         /// <param name="source">
         /// The <see cref="WGetNET.WinGetSource"/> for the export.
         /// </param>
-        /// <returns>
-        /// <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public bool ExportSourcesToFile(string file, WinGetSource source)
+        /// <exception cref="System.ArgumentException">
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public void ExportSourcesToFile(string file, WinGetSource source)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            return ExportSourcesToFile(file, source.Name);
+            ExportSourcesToFile(file, source.Name);
         }
 
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
-        /// <param name="file">The file for the export.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
         /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
+        /// The <see cref="System.Threading.Tasks.Task"/> for the action.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <param name="file">The file for the export.</param>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> ExportSourcesToFileAsync(string file)
+        /// <exception cref="System.ArgumentException">
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public async Task ExportSourcesToFileAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_sourceExportCmd);
-
-                return await FileHandler.ExportOutputToFileAsync(result, file);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", _sourceExportCmd, e);
-            }
+            await FileHelper.WriteTextToFileAsync(
+                file, SourcesToJson(
+                    await GetInstalledSourcesAsync(cancellationToken)),
+                cancellationToken);
         }
 
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
+        /// <returns>
+        /// The <see cref="System.Threading.Tasks.Task"/> for the action.
+        /// </returns>
         /// <param name="file">The file for the export.</param>
         /// <param name="sourceName">The name of the source for the export.</param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> ExportSourcesToFileAsync(string file, string sourceName)
+        /// <exception cref="System.ArgumentException">
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public async Task ExportSourcesToFileAsync(string file, string sourceName, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            string cmd = $"{_sourceExportCmd} -n {sourceName}";
-
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
-
-                return await FileHandler.ExportOutputToFileAsync(result, file);
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Exporting sources failed.", cmd, e);
-            }
+            await FileHelper.WriteTextToFileAsync(
+                file,
+                SourcesToJson(
+                    await GetInstalledSourcesAsync(sourceName, cancellationToken)),
+                cancellationToken);
         }
 
         /// <summary>
         /// Asynchronously exports the winget sources in json format to a file.
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <remarks>
+        /// If the provided file and/or path does not exist, they will be created.
+        /// </remarks>
+        /// <returns>
+        /// The <see cref="System.Threading.Tasks.Task"/> for the action.
+        /// </returns>
         /// <param name="file">
         /// The file for the export.
         /// </param>
         /// <param name="source">
         /// The <see cref="WGetNET.WinGetSource"/> for the export.
         /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the export was successful or <see langword="false"/> if the it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
-        public async Task<bool> ExportSourcesToFileAsync(string file, WinGetSource source)
+        /// <exception cref="System.ArgumentException">
+        /// <para>A provided argument is empty.</para>
+        /// <para>-or-</para>
+        /// <para>The path contains one or more invalid characters as defined by <see cref="System.IO.Path.InvalidPathChars"/>.</para>
+        /// </exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">
+        /// The directory root does not exist.
+        /// </exception>
+        /// <exception cref="System.IO.PathTooLongException">
+        /// The specified path, file name, or both exceed the system-defined maximum length.
+        /// </exception>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="System.IO.IOException">
+        /// An I/O error occurred while opening the file
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// Path is in an invalid format.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permission.
+        /// </exception>
+        public async Task ExportSourcesToFileAsync(string file, WinGetSource source, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
+            ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            return await ExportSourcesToFileAsync(file, source.Name);
+            await ExportSourcesToFileAsync(file, source.Name, cancellationToken);
         }
-
-        /// <summary>
-        /// Convert the string output from winget source export to a 
-        /// <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </summary>
-        /// <param name="exportString">
-        /// A <see cref="System.String"/> containing the winget source export content.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </returns>
-        private List<WinGetSource> ExportStringToSources(string exportString)
-        {
-            List<WinGetSource> sourceList = new();
-
-#if NETCOREAPP3_1_OR_GREATER
-            string[] jsonStrings = exportString.Split("}{");
-#elif NETSTANDARD2_0
-            string[] jsonStrings = exportString.Split(new string[1]{ "}{" }, StringSplitOptions.None);
-#endif
-
-            StringBuilder jsonString = new();
-            for (int i = 0; i < jsonStrings.Length; i++)
-            {
-#if NETCOREAPP3_1_OR_GREATER
-                if (!jsonStrings[i].StartsWith('{'))
-                {
-                    jsonString.Append("{");
-                }
-#elif NETSTANDARD2_0
-                if (!jsonStrings[i].StartsWith("{"))
-                {
-                    jsonString.Append("{");
-                }
-#endif
-
-                jsonString.Append(jsonStrings[i]);
-
-#if NETCOREAPP3_1_OR_GREATER
-                if (!jsonStrings[i].EndsWith('}'))
-                {
-                    jsonString.Append("}");
-                }
-#elif NETSTANDARD2_0
-                if (!jsonStrings[i].EndsWith("}"))
-                {
-                    jsonString.Append("}");
-                }
-#endif
-
-                WinGetSource? source =
-                    JsonHandler.StringToObject<WinGetSource>(jsonString.ToString());
-
-                if (source != null)
-                {
-                    sourceList.Add(source);
-                }
-
-                jsonString.Clear();
-            }
-
-            return sourceList;
-        }
-
-#if NETCOREAPP3_1_OR_GREATER
-        /// <summary>
-        /// Asynchronously convert the string output from winget source export to a 
-        /// <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </summary>
-        /// <param name="exportString">
-        /// A <see cref="System.String"/> containing the winget source export content.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is a <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </returns>
-        private async Task<List<WinGetSource>> ExportStringToSourcesAsync(string exportString)
-        {
-            List<WinGetSource> sourceList = new();
-
-            string[] jsonStrings = exportString.Split("}{");
-
-            StringBuilder jsonString = new();
-            for (int i = 0; i < jsonStrings.Length; i++)
-            {
-                if (!jsonStrings[i].StartsWith('{'))
-                {
-                    jsonString.Append("{");
-                }
-
-                jsonString.Append(jsonStrings[i]);
-
-                if (!jsonStrings[i].EndsWith('}'))
-                {
-                    jsonString.Append("}");
-                }
-
-                WinGetSource? source =
-                    await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString.ToString());
-
-                if (source != null)
-                {
-                    sourceList.Add(source);
-                }
-
-                jsonString.Clear();
-            }
-
-            return sourceList;
-        }
-#endif
         //---------------------------------------------------------------------------------------------
 
         //---Import------------------------------------------------------------------------------------
         /// <summary>
-        /// Imports sources into winget.
-        /// </summary>
-        /// <param name="sources">
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </param>
-        /// <returns>
-        /// <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public bool ImportSource(List<WinGetSource> sources)
-        {
-            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
-
-            bool status = true;
-            for (int i = 0; i < sources.Count; i++)
-            {
-                if (!AddSource(sources[i]))
-                {
-                    status = false;
-                }
-            }
-
-            return status;
-        }
-
-        /// <summary>
-        /// Imports a source into winget.
-        /// </summary>
-        /// <param name="source">
-        /// A <see cref="WGetNET.WinGetSource"/> objects.
-        /// </param>
-        /// <returns>
-        /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public bool ImportSource(WinGetSource source)
-        {
-            return AddSource(source);
-        }
-
-        /// <summary>
-        /// Imports a source into winget.
+        /// Imports sources into winget from a json string.
         /// </summary>
         /// <param name="jsonString">
-        /// A <see cref="System.String"/> containing the json for ONE source.
+        /// A <see cref="System.String"/> containing the json for multiple sources.
         /// </param>
         /// <returns>
-        /// <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
+        /// <see langword="true"/> if importing all sources was successful and <see langword="false"/> if on or more failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.InvalidJsonException">
+        /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public bool ImportSource(string jsonString)
+        public bool ImportSourcesFromJson(string jsonString)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
-            WinGetSource source = JsonHandler.StringToObject<WinGetSource>(jsonString);
-            
-            return AddSource(source);
-        }
+            List<SourceModel> sources = JsonHelper.StringToObject<List<SourceModel>>(jsonString);
 
-        /// <summary>
-        /// Asynchronously imports sources into winget.
-        /// </summary>
-        /// <param name="sources">
-        /// A <see cref="System.Collections.Generic.List{T}"/> of <see cref="WGetNET.WinGetSource"/> objects.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if on or more sorces failed.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public async Task<bool> ImportSourceAsync(List<WinGetSource> sources)
-        {
-            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
-
-            bool status = true;
+            bool success = true;
             for (int i = 0; i < sources.Count; i++)
             {
-                if (!await AddSourceAsync(sources[i]))
+                if (!AddSource(WinGetSource.FromSourceModel(sources[i])))
                 {
-                    status = false;
+                    success = false;
                 }
             }
 
-            return status;
+            return success;
         }
 
         /// <summary>
-        /// Asynchronously imports a source into winget.
-        /// </summary>
-        /// <param name="source">
-        /// A <see cref="WGetNET.WinGetSource"/> objects.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
-        /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
-        /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
-        /// </exception>
-        public async Task<bool> ImportSourceAsync(WinGetSource source)
-        {
-            return await AddSourceAsync(source);
-        }
-
-        /// <summary>
-        /// Asynchronously imports a source into winget.
+        /// Asynchronously imports sources into winget from a json string.
         /// </summary>
         /// <param name="jsonString">
-        /// A <see cref="System.String"/> containing the json for ONE source.
+        /// A <see cref="System.String"/> containing the json for multiple sources.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
-        /// The result is <see langword="true"/> if the action was successful and <see langword="false"/> if it failed.
+        /// The result is <see langword="true"/> if importing all sources was successful and <see langword="false"/> if on or more failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
-        /// </exception>
-        /// <exception cref="WGetNET.InvalidJsonException">
+        /// <exception cref="WGetNET.Exceptions.InvalidJsonException">
         /// The provided JSON could not be deserialized.
         /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> ImportSourceAsync(string jsonString)
+        public async Task<bool> ImportSourcesFromJsonAsync(string jsonString, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(jsonString, "jsonString");
 
 #if NETCOREAPP3_1_OR_GREATER
-            WinGetSource source = 
-                await JsonHandler.StringToObjectAsync<WinGetSource>(jsonString);
+            List<SourceModel> sources =
+                await JsonHelper.StringToObjectAsync<List<SourceModel>>(jsonString, cancellationToken);
 #elif NETSTANDARD2_0
-            WinGetSource source = 
-                JsonHandler.StringToObject<WinGetSource>(jsonString);
+            List<SourceModel> sources =
+                JsonHelper.StringToObject<List<SourceModel>>(jsonString);
 #endif
 
-            return await AddSourceAsync(source);
+            bool success = true;
+            for (int i = 0; i < sources.Count; i++)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return false;
+                }
+
+                if (!(await AddSourceAsync(WinGetSource.FromSourceModel(sources[i]), cancellationToken)))
+                {
+                    success = false;
+                }
+            }
+
+            return success;
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1310,43 +917,25 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the reset was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public bool ResetSources()
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
+            ProcessResult result = Execute(_sourceResetCmd, true);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(_sourceResetCmd);
-
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Reset sources failed.", _sourceResetCmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
         /// Asynchronously resets all sources that are installed in winget (Needs administrator rights).
         /// </summary>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <remarks>
         /// This may take a while depending on the sources.
         /// </remarks>
@@ -1354,38 +943,17 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the reset was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
-        /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> ResetSourcesAsync()
+        public async Task<bool> ResetSourcesAsync(CancellationToken cancellationToken = default)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
+            ProcessResult result = await ExecuteAsync(_sourceResetCmd, true, cancellationToken);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(_sourceResetCmd);
-
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Reset sources failed.", _sourceResetCmd, e);
-            }
+            return result.Success;
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1399,45 +967,27 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
         public bool RemoveSources(string name)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
             string cmd = string.Format(_sourceRemoveCmd, name);
 
-            try
-            {
-                ProcessResult result =
-                    _processManager.ExecuteWingetProcess(cmd);
+            ProcessResult result = Execute(cmd, true);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Removing source failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -1449,15 +999,14 @@ namespace WGetNET
         /// <returns>
         /// <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
@@ -1475,49 +1024,34 @@ namespace WGetNET
         /// <param name="name">
         /// A <see cref="System.String"/> representing the name of the source.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> RemoveSourcesAsync(string name)
+        public async Task<bool> RemoveSourcesAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (!PrivilegeChecker.CheckAdministratorPrivileges())
-            {
-                throw new SecurityException("Administrator privileges are missing.");
-            }
-
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
             string cmd = string.Format(_sourceRemoveCmd, name);
 
-            try
-            {
-                ProcessResult result =
-                    await _processManager.ExecuteWingetProcessAsync(cmd);
+            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
 
-                return result.Success;
-            }
-            catch (Win32Exception)
-            {
-                throw new WinGetNotInstalledException();
-            }
-            catch (Exception e)
-            {
-                throw new WinGetActionFailedException("Removing source failed.", cmd, e);
-            }
+            return result.Success;
         }
 
         /// <summary>
@@ -1526,28 +1060,58 @@ namespace WGetNET
         /// <param name="source">
         /// The <see cref="WGetNET.WinGetSource"/> to remove.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is <see langword="true"/> if the remove was successful or <see langword="false"/> if the it failed.
         /// </returns>
-        /// <exception cref="WGetNET.WinGetNotInstalledException">
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
-        /// <exception cref="WGetNET.WinGetActionFailedException">
-        /// The current action failed for an unexpected reason.
-        /// Please see inner exception.
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
-        /// A provided argument is null or empty.
+        /// A provided argument is null.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
-        public async Task<bool> RemoveSourcesAsync(WinGetSource source)
+        public async Task<bool> RemoveSourcesAsync(WinGetSource source, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(source, "source");
 
-            return await RemoveSourcesAsync(source.Name);
+            return await RemoveSourcesAsync(source.Name, cancellationToken);
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Other-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Generates a valid json string from the provided sources.
+        /// </summary>
+        /// <param name="sources">
+        /// The <see cref="System.Collections.Generic.IEnumerable{T}"/> of <see cref="WinGetSource"/> objects.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the generated json.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public string SourcesToJson(IEnumerable<WinGetSource> sources)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
+
+            // Create source models for json parsing
+            List<SourceModel> models = new();
+            foreach (WinGetSource source in sources)
+            {
+                models.Add(SourceModel.FromWinGetSource(source));
+            }
+
+            return JsonHelper.GetJson(models);
         }
         //---------------------------------------------------------------------------------------------
     }
