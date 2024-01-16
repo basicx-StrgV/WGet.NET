@@ -7,7 +7,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Get the injection wrapper element and nav to value
   let injectionWrapper = document.getElementById("injection-wrapper");
-  var navToValue = injectionWrapper.getAttribute("nav-to");
+  let navToValue = injectionWrapper.getAttribute("nav-to");
 
   // Exit if there is no injection wrapper element and display error message
   if (injectionWrapper == null) {
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Proceed if the new document is loaded
     document.addEventListener("DOMContentLoaded", () => {
       // Check if a value for nav to is provided
-      if (navToValue != null && navTo != null) {
+      if (navToValue !== undefined && navToValue !== null && navTo !== undefined && navTo !== null) {
         // Wrap the original navTo function from doxygen into custom function
         let originalNavToFunc = navTo;
         navTo = (o, root, hash, relpath) => {
