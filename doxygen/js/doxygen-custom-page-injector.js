@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Proceed if the new document is loaded
     document.addEventListener("DOMContentLoaded", () => {
       // Check if a value for nav to is provided
-      if (navToValue != null) {
+      if (navToValue != null && navTo != null) {
         // Wrap the original navTo function from doxygen into custom function
         let originalNavToFunc = navTo;
         navTo = (o, root, hash, relpath) => {
