@@ -7,7 +7,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Get the injection wrapper element and nav to value
   let injectionWrapper = document.getElementById("injection-wrapper");
-  let navToValue = injectionWrapper.getAttribute("nav-to");
+  var navToValue = injectionWrapper.getAttribute("nav-to");
 
   // Exit if there is no injection wrapper element and display error message
   if (injectionWrapper == null) {
