@@ -59,7 +59,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../WGet.NET_Icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.0.0</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.0.1</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -163,7 +163,7 @@ $(function(){initNavTree('d4/d8c/a00035_source.html','../../'); initResizable();
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keyword">private</span> ProcessManager _processManager;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> _wingetExePath;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">private</span> DateTime _wingetExeModificationData;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">private</span> DateTime _wingetExeModificationDate;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> _versionString;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keyword">private</span> <a class="code hl_property" href="../../d8/df1/a00174.html#a5d2adac69f2611a01946050733b3d10e">Version</a> _version;</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
@@ -195,7 +195,7 @@ $(function(){initNavTree('d4/d8c/a00035_source.html','../../'); initResizable();
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keyword">get</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            {</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                <span class="comment">// Check if winget got modefied or removed while the application is running.</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                <span class="keywordflow">if</span> (_wingetExeModificationData != GetLastModificationData())</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                <span class="keywordflow">if</span> (_wingetExeModificationDate != GetLastModificationData())</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                {</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                    <span class="comment">// Re-query installation if a change was detected.</span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                    QueryInstallation();</div>
@@ -212,7 +212,7 @@ $(function(){initNavTree('d4/d8c/a00035_source.html','../../'); initResizable();
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <span class="keyword">get</span></div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            {</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <span class="comment">// Check if winget got modefied or removed while the application is running.</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                <span class="keywordflow">if</span> (_wingetExeModificationData != GetLastModificationData())</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                <span class="keywordflow">if</span> (_wingetExeModificationDate != GetLastModificationData())</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                {</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                    <span class="comment">// Re-query installation if a change was detected.</span></div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    QueryInstallation();</div>
@@ -232,7 +232,7 @@ $(function(){initNavTree('d4/d8c/a00035_source.html','../../'); initResizable();
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <span class="comment">// Set inital values</span></div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            _processManager = <span class="keyword">new</span> ProcessManager(<span class="stringliteral">&quot;winget&quot;</span>);</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            _wingetExePath = <span class="keywordtype">string</span>.Empty;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            _wingetExeModificationData = DateTime.MinValue;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            _wingetExeModificationDate = DateTime.MinValue;</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            _versionString = <span class="keywordtype">string</span>.Empty;</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            _version = <span class="keyword">new</span> <a class="code hl_property" href="../../d8/df1/a00174.html#a5d2adac69f2611a01946050733b3d10e">Version</a>(0, 0);</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
@@ -591,7 +591,7 @@ $(function(){initNavTree('d4/d8c/a00035_source.html','../../'); initResizable();
 <div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span> </div>
 <div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> CheckInstallation()</div>
 <div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>        {</div>
-<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>            <span class="keywordtype">string</span>? pathEnvVar = Environment.GetEnvironmentVariable(<span class="stringliteral">&quot;Path&quot;</span>);</div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>            <span class="keywordtype">string</span>? pathEnvVar = Environment.GetEnvironmentVariable(<span class="stringliteral">&quot;Path&quot;</span>, EnvironmentVariableTarget.User);</div>
 <div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>            <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(pathEnvVar))</div>
 <div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>            {</div>
 <div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>                <span class="keywordflow">return</span> <span class="keywordtype">string</span>.Empty;</div>
@@ -639,36 +639,44 @@ $(function(){initNavTree('d4/d8c/a00035_source.html','../../'); initResizable();
 <div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>                _processManager = <span class="keyword">new</span> ProcessManager(_wingetExePath);</div>
 <div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>            }</div>
 <div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span> </div>
-<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>            _wingetExeModificationData = GetLastModificationData();</div>
+<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>            _wingetExeModificationDate = GetLastModificationData();</div>
 <div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span> </div>
-<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>            _versionString = CheckWinGetVersion();</div>
-<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>            _version = VersionParser.Parse(_versionString);</div>
-<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span> </div>
-<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>            <span class="keywordflow">return</span> isInstalled;</div>
-<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>        }</div>
-<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span> </div>
-<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span>        <span class="keyword">private</span> <span class="keywordtype">bool</span> CheckAdministratorPrivileges()</div>
-<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>        {</div>
-<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>            <span class="keywordflow">if</span> (Environment.OSVersion.Platform == PlatformID.Unix)</div>
-<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>            {</div>
-<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>                <span class="comment">// Making sure windows related functions dont get called on none windows systems.</span></div>
-<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span>            }</div>
-<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span> </div>
-<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>            <span class="keyword">using </span>WindowsIdentity? identity = WindowsIdentity.GetCurrent(<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span> </div>
-<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>            <span class="keywordflow">if</span> (identity != <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>            <span class="keywordflow">if</span> (isInstalled)</div>
+<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>            {</div>
+<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>                _versionString = CheckWinGetVersion();</div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>            }</div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>            {</div>
+<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>                _versionString = <span class="keywordtype">string</span>.Empty;</div>
+<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span>            }</div>
+<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span> </div>
+<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span>            _version = VersionParser.Parse(_versionString);</div>
+<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span> </div>
+<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>            <span class="keywordflow">return</span> isInstalled;</div>
+<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>        }</div>
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span> </div>
+<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>        <span class="keyword">private</span> <span class="keywordtype">bool</span> CheckAdministratorPrivileges()</div>
+<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>        {</div>
+<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>            <span class="keywordflow">if</span> (Environment.OSVersion.Platform == PlatformID.Unix)</div>
 <div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>            {</div>
-<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>                <span class="keywordflow">return</span> <span class="keyword">new</span> WindowsPrincipal(identity)</div>
-<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>                    .IsInRole(WindowsBuiltInRole.Administrator);</div>
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>                <span class="comment">// Making sure windows related functions dont get called on none windows systems.</span></div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>            }</div>
 <div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span> </div>
-<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>        }</div>
-<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span>        <span class="comment">//---------------------------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>    }</div>
+<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>            <span class="keyword">using </span>WindowsIdentity? identity = WindowsIdentity.GetCurrent(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span> </div>
+<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span>            <span class="keywordflow">if</span> (identity != <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>            {</div>
+<div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span>                <span class="keywordflow">return</span> <span class="keyword">new</span> WindowsPrincipal(identity)</div>
+<div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span>                    .IsInRole(WindowsBuiltInRole.Administrator);</div>
+<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>            }</div>
+<div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span> </div>
+<div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span>        }</div>
+<div class="line"><a id="l00950" name="l00950"></a><span class="lineno">  950</span>        <span class="comment">//---------------------------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>    }</div>
 </div>
-<div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span>}</div>
+<div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>}</div>
 <div class="ttc" id="aa00110_html"><div class="ttname"><a href="../../d4/d81/a00110.html">WGetNET</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/dad/a00005_source.html#l00007">WinGetInfoEntry.cs:8</a></div></div>
 <div class="ttc" id="aa00112_html"><div class="ttname"><a href="../../db/d57/a00112.html">WGetNET.Builder</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d45/a00011_source.html#l00007">WinGetAdminSettingBuilder.cs:8</a></div></div>
 <div class="ttc" id="aa00114_html"><div class="ttname"><a href="../../d8/d17/a00114.html">WGetNET.Components.Internal</a></div><div class="ttdef"><b>Definition</b> <a href="../../d5/d16/a00029_source.html#l00014">ProcessManager.cs:15</a></div></div>
