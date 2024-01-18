@@ -2,7 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-// Version: 1.0.2                                   //
+// Version: 1.0.3                                   //
 //--------------------------------------------------//
 document.addEventListener("DOMContentLoaded", () => {
   // Get the injection wrapper element and nav to value
@@ -40,15 +40,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Proceed if the new document is loaded
     document.addEventListener("DOMContentLoaded", () => {
-      // Check if a value for nav to is provided
-      /*if (navToValue !== null && navTo !== null) {
-        // Wrap the original navTo function from doxygen into custom function
-        let originalNavToFunc = navTo;
-        navTo = (o, root, hash, relpath) => {
-          // Ignore the root value and parse or nav to value instead
-          originalNavToFunc(o, navToValue, hash, relpath);
-        };
-      }*/
+      try {
+        // Check if a value for nav to is provided
+        if (navToValue !== null && navTo !== null) {
+          // Wrap the original navTo function from doxygen into custom function
+          let originalNavToFunc = navTo;
+          navTo = (o, root, hash, relpath) => {
+            // Ignore the root value and parse or nav to value instead
+            originalNavToFunc(o, navToValue, hash, relpath);
+          };
+        }
+      } catch {
+        console.log(
+          "[doxygen-custom-page-injector.js] Setting the correct nav item does not work with doxygen 1.10.0 or higher"
+        );
+      }
 
       // Get the div that contains the content
       let contentContainer = document.getElementById("doc-content");
