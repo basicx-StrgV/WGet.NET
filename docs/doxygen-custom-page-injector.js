@@ -41,14 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Proceed if the new document is loaded
     document.addEventListener("DOMContentLoaded", () => {
       // Check if a value for nav to is provided
-      if (navToValue !== undefined && navToValue !== null && navTo !== undefined && navTo !== null) {
+      /*if (navToValue !== null && navTo !== null) {
         // Wrap the original navTo function from doxygen into custom function
         let originalNavToFunc = navTo;
         navTo = (o, root, hash, relpath) => {
           // Ignore the root value and parse or nav to value instead
           originalNavToFunc(o, navToValue, hash, relpath);
         };
-      }
+      }*/
 
       // Get the div that contains the content
       let contentContainer = document.getElementById("doc-content");
