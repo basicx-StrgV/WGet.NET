@@ -2,7 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-// Version: 1.0.3                                   //
+// Version: 1.0.4                                   //
 //--------------------------------------------------//
 document.addEventListener("DOMContentLoaded", () => {
   // Get the injection wrapper element and nav to value
@@ -41,18 +41,51 @@ document.addEventListener("DOMContentLoaded", () => {
     // Proceed if the new document is loaded
     document.addEventListener("DOMContentLoaded", () => {
       try {
-        // Check if a value for nav to is provided
-        if (navToValue !== null && navTo !== null) {
-          // Wrap the original navTo function from doxygen into custom function
-          let originalNavToFunc = navTo;
-          navTo = (o, root, hash, relpath) => {
-            // Ignore the root value and parse or nav to value instead
-            originalNavToFunc(o, navToValue, hash, relpath);
-          };
+        if (navToValue != null && navToValue.trim() != "") {
+          // Get doxygen nav content
+          let navContent = document.getElementById("nav-tree-contents");
+
+          if (navContent == null) {
+            // Log error if content could not be found
+            console.error(
+              "[doxygen-custom-page-injector.js] The navigation can not be set to the current page, because the doxygen nav content could not be located"
+            );
+          } else {
+            // Add event to check the nav content to remove the default nav and initiate the correct nav,
+            // after the default nav was loaded
+            let customNavInserted = false;
+            navContent.addEventListener("DOMNodeInserted", (event) => {
+              if (
+                customNavInserted == false &&
+                event.relatedNode == navContent
+              ) {
+                // Clean up of the nac default content
+                for (let i = 0; i < navContent.children.length; i++) {
+                  // Remove elements from the nav content, that are initalized with the nav
+                  if (navContent.children[i].id != "nav-sync") {
+                    navContent.removeChild(navContent.children[i]);
+                  }
+                }
+
+                // Set the flag that indicates that the custom nav was inserted
+                customNavInserted = true;
+
+                // Initiate custom nav tree
+                // (The "initNavTree(...)" function comes from the folowing doxygen script: "navtree.js")
+                initNavTree(navToValue, "");
+              }
+            });
+          }
+        } else {
+          console.error(
+            "[doxygen-custom-page-injector.js] The navigation can not be set to the current page, bacause no 'nav-to' value provided."
+          );
+          return;
         }
-      } catch {
+      } catch (e) {
         console.log(
-          "[doxygen-custom-page-injector.js] Setting the correct nav item does not work with doxygen 1.10.0 or higher"
+          "[doxygen-custom-page-injector.js] An error occured while trying to set the doxygeen nav:",
+          e
         );
       }
 
@@ -62,7 +95,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // Exit if no content div was found and display error message
       if (contentContainer == null) {
         document.body.innerHTML = "";
-        document.body.innerText = "Failed to load custom page";
+        document.body.innerText = "Failed to load custom page.";
+        console.error(
+          "[doxygen-custom-page-injector.js] Failed to inject custom html content, because the doxygen content container could not be found."
+        );
         return;
       }
 
