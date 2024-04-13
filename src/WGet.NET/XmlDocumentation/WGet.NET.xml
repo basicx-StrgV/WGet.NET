@@ -850,6 +850,14 @@
             <see langword="true"/> if winget is installed or <see langword="false"/> if not.
             </returns>
         </member>
+        <member name="P:WGetNET.WinGet.IsPreview">
+            <summary>
+            Gets if the version of winget is a preview version.
+            </summary>
+            <returns>
+            <see langword="true"/> if the winget version is a preview version or <see langword="false"/> if not.
+            </returns>
+        </member>
         <member name="P:WGetNET.WinGet.VersionString">
             <summary>
             Gets the version number of the winget installation.
@@ -4726,6 +4734,15 @@
             <summary>
             Handels the parsing of strings to a <see cref="T:System.Version"/> instance.
             </summary>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.CheckPreviewStatus(System.String)">
+            <summary>
+            Checks is the version <see cref="T:System.String"/> is a preview version.
+            </summary>
+            <param name="input">The <see cref="T:System.String"/> to check.</param>
+            <returns>
+            <see langword="true"/> if the winget version is a preview version or <see langword="false"/> if not.
+            </returns>
         </member>
         <member name="M:WGetNET.Parser.VersionParser.Parse(System.String)">
             <summary>

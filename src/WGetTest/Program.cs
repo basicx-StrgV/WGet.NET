@@ -27,7 +27,8 @@ namespace WGetTest
                 WinGetSourceManager sourceManager = new WinGetSourceManager();
                 WinGet winget = new WinGet();
                 Console.WriteLine("Winget Installed: " + winget.IsInstalled +
-                                    "\nWinget Version: " + winget.VersionString + "\n");
+                                    "\nWinget Version: " + winget.VersionString +
+                                    "\nIs Preview: " + winget.IsPreview + "\n");
 
                 Version winGetVersionObject = connector.Version;
 
