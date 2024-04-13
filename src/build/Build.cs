@@ -142,7 +142,7 @@ namespace BuildTool
                 }
 
                 _workingVersion =
-                    new System.Version(version.Major, version.Minor + 1, version.Build)
+                    new System.Version(version.Major, version.Minor + 1, 0)
                     .ToString();
             });
 
