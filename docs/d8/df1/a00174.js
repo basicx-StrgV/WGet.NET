@@ -18,6 +18,7 @@ var a00174 =
     [ "GetInfo", "d8/df1/a00174.html#ab4d04f4713635f03fdb52073a8568279", null ],
     [ "GetInfoAsync", "d8/df1/a00174.html#abe4d810a468d1dfa5b5e6eff9d998904", null ],
     [ "IsInstalled", "d8/df1/a00174.html#a12db89d97980f50f44668f34f0db1ca3", null ],
+    [ "IsPreview", "d8/df1/a00174.html#a0c3fb7499a18595abf999337b6486924", null ],
     [ "Version", "d8/df1/a00174.html#a5d2adac69f2611a01946050733b3d10e", null ],
     [ "VersionString", "d8/df1/a00174.html#aaca3fc255bb501e49c72f9bc67b9d7ac", null ]
 ];

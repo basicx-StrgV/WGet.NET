@@ -13,6 +13,29 @@ namespace WGetNET.Parser
     internal static class VersionParser
     {
         /// <summary>
+        /// Checks is the version <see cref="string"/> is a preview version.
+        /// </summary>
+        /// <param name="input">The <see cref="string"/> to check.</param>
+        /// <returns>
+        /// <see langword="true"/> if the winget version is a preview version or <see langword="false"/> if not.
+        /// </returns>
+        public static bool CheckPreviewStatus(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input) || input.Length < 7)
+            {
+                // Return if the string is null, empty or to short for a preview version
+                return false;
+            }
+
+            if (input.EndsWith("PREVIEW", StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Parses a <see cref="string"/> to a <see cref="Version"/> instance as best as possible.
         /// </summary>
         /// <param name="input">The <see cref="string"/> to parse.</param>

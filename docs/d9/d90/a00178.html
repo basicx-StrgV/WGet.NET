@@ -59,7 +59,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../WGet.NET_Icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.0.1</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.1.0</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -226,6 +226,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa9febb5dc44beeda14f3cdac9b602990" id="r_aa9febb5dc44beeda14f3cdac9b602990"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9febb5dc44beeda14f3cdac9b602990">UpgradeAllPackagesAsync</a> (CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:aa9febb5dc44beeda14f3cdac9b602990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously tries to upgrade all packages using winget.  <br /></td></tr>
 <tr class="separator:aa9febb5dc44beeda14f3cdac9b602990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d69b650aa8bbf56e18e407ae0668238" id="r_a2d69b650aa8bbf56e18e407ae0668238"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d69b650aa8bbf56e18e407ae0668238">RepairPackage</a> (string packageId)</td></tr>
+<tr class="memdesc:a2d69b650aa8bbf56e18e407ae0668238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repairs a package using winget.  <br /></td></tr>
+<tr class="separator:a2d69b650aa8bbf56e18e407ae0668238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c2329513e04238450a9ad17cdd0c638" id="r_a1c2329513e04238450a9ad17cdd0c638"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c2329513e04238450a9ad17cdd0c638">RepairPackage</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package)</td></tr>
+<tr class="memdesc:a1c2329513e04238450a9ad17cdd0c638"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repairs a package using winget.  <br /></td></tr>
+<tr class="separator:a1c2329513e04238450a9ad17cdd0c638"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f280a08a9fa9b6cbfd6cadd3cfe311d" id="r_a0f280a08a9fa9b6cbfd6cadd3cfe311d"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f280a08a9fa9b6cbfd6cadd3cfe311d">RepairPackageAsync</a> (string packageId, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a0f280a08a9fa9b6cbfd6cadd3cfe311d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously repairs a package using winget.  <br /></td></tr>
+<tr class="separator:a0f280a08a9fa9b6cbfd6cadd3cfe311d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11f0bbf6d597902167dadad9ec257847" id="r_a11f0bbf6d597902167dadad9ec257847"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11f0bbf6d597902167dadad9ec257847">RepairPackageAsync</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a11f0bbf6d597902167dadad9ec257847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously repair a package using winget.  <br /></td></tr>
+<tr class="separator:a11f0bbf6d597902167dadad9ec257847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a610eae49c0a365b120ae254eee061551" id="r_a610eae49c0a365b120ae254eee061551"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a610eae49c0a365b120ae254eee061551">ExportPackagesToFile</a> (string file)</td></tr>
 <tr class="memdesc:a610eae49c0a365b120ae254eee061551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports a list of all installed winget packages as json to the given file.  <br /></td></tr>
 <tr class="separator:a610eae49c0a365b120ae254eee061551"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -417,6 +429,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a12db89d97980f50f44668f34f0db1ca3 inherit properties_a00174" id="r_a12db89d97980f50f44668f34f0db1ca3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df1/a00174.html#a12db89d97980f50f44668f34f0db1ca3">IsInstalled</a><code> [get]</code></td></tr>
 <tr class="memdesc:a12db89d97980f50f44668f34f0db1ca3 inherit properties_a00174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets if winget is installed on the system.  <br /></td></tr>
 <tr class="separator:a12db89d97980f50f44668f34f0db1ca3 inherit properties_a00174"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c3fb7499a18595abf999337b6486924 inherit properties_a00174" id="r_a0c3fb7499a18595abf999337b6486924"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df1/a00174.html#a0c3fb7499a18595abf999337b6486924">IsPreview</a><code> [get]</code></td></tr>
+<tr class="memdesc:a0c3fb7499a18595abf999337b6486924 inherit properties_a00174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets if the version of winget is a preview version.  <br /></td></tr>
+<tr class="separator:a0c3fb7499a18595abf999337b6486924 inherit properties_a00174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaca3fc255bb501e49c72f9bc67b9d7ac inherit properties_a00174" id="r_aaca3fc255bb501e49c72f9bc67b9d7ac"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df1/a00174.html#aaca3fc255bb501e49c72f9bc67b9d7ac">VersionString</a><code> [get]</code></td></tr>
 <tr class="memdesc:aaca3fc255bb501e49c72f9bc67b9d7ac inherit properties_a00174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the version number of the winget installation.  <br /></td></tr>
 <tr class="separator:aaca3fc255bb501e49c72f9bc67b9d7ac inherit properties_a00174"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -446,7 +461,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Initializes a new instance of the <a class="el" href="../../d9/d90/a00178.html" title="The WGetNET.WinGetPackageManager class offers methods to manage packages with winget.">WGetNET.WinGetPackageManager</a> class. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00052">52</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00053">53</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -489,7 +504,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01266">1266</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01391">1391</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -531,7 +546,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01226">1226</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01351">1351</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -573,7 +588,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01328">1328</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01453">1453</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -615,7 +630,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01293">1293</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01418">1418</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -663,7 +678,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01409">1409</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01534">1534</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -711,7 +726,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01365">1365</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01490">1490</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -759,7 +774,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01479">1479</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01604">1604</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -807,7 +822,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01440">1440</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01565">1565</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -843,7 +858,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00924">924</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01049">1049</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -884,7 +899,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00955">955</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01080">1080</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -912,7 +927,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00237">237</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00238">238</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -953,7 +968,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00263">263</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00264">264</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1000,7 +1015,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00301">301</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00302">302</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1034,7 +1049,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00331">331</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00332">332</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1081,7 +1096,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00367">367</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00368">368</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1134,7 +1149,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00415">415</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00416">416</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1163,7 +1178,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01506">1506</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01631">1631</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1198,7 +1213,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01534">1534</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01659">1659</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1226,7 +1241,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00688">688</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00689">689</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1260,7 +1275,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00710">710</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00711">711</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1296,7 +1311,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01094">1094</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01219">1219</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1333,7 +1348,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01055">1055</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01180">1180</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1374,7 +1389,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01183">1183</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01308">1308</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1416,7 +1431,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01140">1140</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01265">1265</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1453,7 +1468,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00986">986</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01111">1111</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1495,7 +1510,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01021">1021</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01146">1146</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1531,7 +1546,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00454">454</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00455">455</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1567,7 +1582,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00481">481</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00482">482</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1608,7 +1623,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00513">513</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00514">514</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1649,7 +1664,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00544">544</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00545">545</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1691,7 +1706,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01574">1574</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01699">1699</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1733,7 +1748,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01618">1618</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01743">1743</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1775,7 +1790,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01655">1655</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01780">1780</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1817,7 +1832,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01690">1690</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01815">1815</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1865,7 +1880,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01726">1726</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01851">1851</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1913,7 +1928,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01774">1774</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01899">1899</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1961,7 +1976,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01815">1815</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01940">1940</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2009,7 +2024,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01854">1854</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01979">1979</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2051,7 +2066,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01886">1886</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02011">2011</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2093,7 +2108,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01930">1930</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02055">2055</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2135,7 +2150,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01967">1967</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02092">2092</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2177,7 +2192,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02002">2002</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02127">2127</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2225,7 +2240,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02038">2038</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02163">2163</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2273,7 +2288,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02086">2086</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02211">2211</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2321,7 +2336,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02127">2127</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02252">2252</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2369,7 +2384,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02166">2166</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02291">2291</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2406,7 +2421,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02199">2199</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02324">2324</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2443,7 +2458,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02234">2234</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02359">2359</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2485,7 +2500,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02269">2269</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02394">2394</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2527,7 +2542,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02308">2308</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02433">2433</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2564,7 +2579,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02339">2339</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02464">2464</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2601,7 +2616,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02374">2374</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02499">2499</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2643,7 +2658,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02409">2409</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02534">2534</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2685,7 +2700,165 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02448">2448</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02573">2573</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a2d69b650aa8bbf56e18e407ae0668238" name="a2d69b650aa8bbf56e18e407ae0668238"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d69b650aa8bbf56e18e407ae0668238">&#9670;&#160;</a></span>RepairPackage() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.RepairPackage </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Repairs a package using winget. </p>
+<p>Limited to packages with an installer that supports this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for the repair action.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the repair action was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td>WinGet is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00926">926</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a1c2329513e04238450a9ad17cdd0c638" name="a1c2329513e04238450a9ad17cdd0c638"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c2329513e04238450a9ad17cdd0c638">&#9670;&#160;</a></span>RepairPackage() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.RepairPackage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a></td>          <td class="paramname"><span class="paramname"><em>package</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Repairs a package using winget. </p>
+<p>Limited to packages with an installer that supports this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> for the repair action.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the repair action was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td>WinGet is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00954">954</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a0f280a08a9fa9b6cbfd6cadd3cfe311d" name="a0f280a08a9fa9b6cbfd6cadd3cfe311d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f280a08a9fa9b6cbfd6cadd3cfe311d">&#9670;&#160;</a></span>RepairPackageAsync() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.RepairPackageAsync </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em><span class="paramdefsep"> = </span><span class="paramdefval">default</span></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously repairs a package using winget. </p>
+<p>Limited to packages with an installer that supports this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for the repair action.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the repair action was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td>WinGet is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00987">987</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a11f0bbf6d597902167dadad9ec257847" name="a11f0bbf6d597902167dadad9ec257847"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11f0bbf6d597902167dadad9ec257847">&#9670;&#160;</a></span>RepairPackageAsync() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.RepairPackageAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a></td>          <td class="paramname"><span class="paramname"><em>package</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em><span class="paramdefsep"> = </span><span class="paramdefval">default</span></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously repair a package using winget. </p>
+<p>Limited to packages with an installer that supports this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> for the repair action.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the repair action was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td>WinGet is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01019">1019</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2715,7 +2888,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02477">2477</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02602">2602</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2751,7 +2924,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02508">2508</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02633">2633</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2792,7 +2965,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00077">77</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00078">78</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2839,7 +3012,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00115">115</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00116">116</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2886,7 +3059,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00155">155</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00156">156</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2939,7 +3112,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00203">203</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00204">204</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2975,7 +3148,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00574">574</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00575">575</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3011,7 +3184,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00601">601</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00602">602</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3052,7 +3225,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00633">633</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00634">634</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3093,7 +3266,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00665">665</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00666">666</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3122,7 +3295,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00855">855</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00856">856</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3157,7 +3330,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00878">878</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00879">879</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3193,7 +3366,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00741">741</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00742">742</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3229,7 +3402,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00768">768</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00769">769</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3270,7 +3443,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00800">800</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00801">801</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3311,7 +3484,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00831">831</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00832">832</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>

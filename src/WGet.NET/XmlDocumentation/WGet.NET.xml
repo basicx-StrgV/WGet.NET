@@ -850,6 +850,14 @@
             <see langword="true"/> if winget is installed or <see langword="false"/> if not.
             </returns>
         </member>
+        <member name="P:WGetNET.WinGet.IsPreview">
+            <summary>
+            Gets if the version of winget is a preview version.
+            </summary>
+            <returns>
+            <see langword="true"/> if the winget version is a preview version or <see langword="false"/> if not.
+            </returns>
+        </member>
         <member name="P:WGetNET.WinGet.VersionString">
             <summary>
             Gets the version number of the winget installation.
@@ -1889,6 +1897,90 @@
             <returns>
             A <see cref="T:System.String"/> containing the new process arguments.
             </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.RepairPackage(System.String)">
+            <summary>
+            Repairs a package using winget.
+            </summary>
+            <remarks>Limited to packages with an installer that supports this function.</remarks>
+            <param name="packageId">The id or name of the package for the repair action.</param>
+            <returns>
+            <see langword="true"/> if the repair action was successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.RepairPackage(WGetNET.WinGetPackage)">
+            <summary>
+            Repairs a package using winget.
+            </summary>
+            <remarks>Limited to packages with an installer that supports this function.</remarks>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the repair action.</param>
+            <returns>
+            <see langword="true"/> if the repair action was successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.RepairPackageAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously repairs a package using winget.
+            </summary>
+            <remarks>Limited to packages with an installer that supports this function.</remarks>
+            <param name="packageId">The id or name of the package for the repair action.</param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the repair action was successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.RepairPackageAsync(WGetNET.WinGetPackage,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously repair a package using winget.
+            </summary>
+            <remarks>Limited to packages with an installer that supports this function.</remarks>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the repair action.</param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the repair action was successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFile(System.String)">
             <summary>
@@ -4726,6 +4818,15 @@
             <summary>
             Handels the parsing of strings to a <see cref="T:System.Version"/> instance.
             </summary>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.CheckPreviewStatus(System.String)">
+            <summary>
+            Checks is the version <see cref="T:System.String"/> is a preview version.
+            </summary>
+            <param name="input">The <see cref="T:System.String"/> to check.</param>
+            <returns>
+            <see langword="true"/> if the winget version is a preview version or <see langword="false"/> if not.
+            </returns>
         </member>
         <member name="M:WGetNET.Parser.VersionParser.Parse(System.String)">
             <summary>

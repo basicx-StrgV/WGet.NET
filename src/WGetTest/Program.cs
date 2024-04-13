@@ -27,7 +27,8 @@ namespace WGetTest
                 WinGetSourceManager sourceManager = new WinGetSourceManager();
                 WinGet winget = new WinGet();
                 Console.WriteLine("Winget Installed: " + winget.IsInstalled +
-                                    "\nWinget Version: " + winget.VersionString + "\n");
+                                    "\nWinget Version: " + winget.VersionString +
+                                    "\nIs Preview: " + winget.IsPreview + "\n");
 
                 Version winGetVersionObject = connector.Version;
 
@@ -51,6 +52,9 @@ namespace WGetTest
                 List<WinGetPackage> test3 = connector.GetInstalledPackages();
                 Console.WriteLine(test3[0].Name);
                 Console.WriteLine(test3[0].Id);
+
+                /*bool repairResult = connector.RepairPackage("7zip.7zip");
+                Console.WriteLine("Repair Test result: ", repairResult);*/
 
                 List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
                 bool sourceUpdateStatus = sourceManager.UpdateSources();

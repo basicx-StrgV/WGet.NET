@@ -34,6 +34,7 @@ namespace WGetNET
         private DateTime _wingetExeModificationDate;
         private string _versionString;
         private Version _version;
+        private bool _isPreview;
 
         private readonly bool _administratorPrivileges;
 
@@ -58,6 +59,27 @@ namespace WGetNET
                     // Re-query installation and return the result to allow instalation of winget while the application is running.
                     return QueryInstallation();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets if the version of winget is a preview version.
+        /// </summary>
+        /// <returns>
+        /// <see langword="true"/> if the winget version is a preview version or <see langword="false"/> if not.
+        /// </returns>
+        public bool IsPreview
+        {
+            get
+            {
+                // Check if winget got modefied or removed while the application is running.
+                if (_wingetExeModificationDate != GetLastModificationData())
+                {
+                    // Re-query installation if a change was detected.
+                    QueryInstallation();
+                }
+
+                return _isPreview;
             }
         }
 
@@ -918,6 +940,8 @@ namespace WGetNET
             }
 
             _version = VersionParser.Parse(_versionString);
+
+            _isPreview = VersionParser.CheckPreviewStatus(_versionString);
 
             return isInstalled;
         }
