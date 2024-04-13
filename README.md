@@ -43,6 +43,7 @@ https://basicx-strgv.github.io/WGet.NET/
   - [x] Install packages
   - [x] Uninstall packages
   - [x] Upgrade packages
+  - [x] Repair packages
   - [x] Get a list of upgradeable packages
   - [x] Export and Import packages
   - [x] Check if WinGet is installed
