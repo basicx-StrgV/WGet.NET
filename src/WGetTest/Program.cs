@@ -53,6 +53,9 @@ namespace WGetTest
                 Console.WriteLine(test3[0].Name);
                 Console.WriteLine(test3[0].Id);
 
+                /*bool repairResult = connector.RepairPackage("7zip.7zip");
+                Console.WriteLine("Repair Test result: ", repairResult);*/
+
                 List<WinGetSource> sourceList = sourceManager.GetInstalledSources();
                 bool sourceUpdateStatus = sourceManager.UpdateSources();
                 //bool sourceResetStatus = sourceManager.ResetSources();
