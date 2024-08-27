@@ -692,7 +692,7 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetUpgradeablePackages()
         {
-            string cmd = IncludeUnknownbyVersion(_getUpgradeableCmd);
+            string cmd = IncludeUnknownbyVersion(AcceptSourceAgreements(_getUpgradeableCmd));
 
             ProcessResult result = Execute(cmd);
 
@@ -714,7 +714,7 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync(CancellationToken cancellationToken = default)
         {
-            string cmd = IncludeUnknownbyVersion(_getUpgradeableCmd);
+            string cmd = IncludeUnknownbyVersion(AcceptSourceAgreements(_getUpgradeableCmd));
 
             ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
