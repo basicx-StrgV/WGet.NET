@@ -241,7 +241,7 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages()
         {
-            ProcessResult result = Execute(_listCmd);
+            ProcessResult result = Execute(AcceptSourceAgreements(_listCmd));
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
@@ -269,7 +269,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_searchInstalledCmd, packageId);
+            string cmd = string.Format(AcceptSourceAgreements(_searchInstalledCmd), packageId);
 
             if (exact)
             {
@@ -308,7 +308,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
+            string cmd = string.Format(AcceptSourceAgreements(_searchInstalledBySourceCmd), packageId, sourceName);
 
             if (exact)
             {
@@ -335,7 +335,7 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_listCmd, false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(AcceptSourceAgreements(_listCmd), false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -373,7 +373,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_searchInstalledCmd, packageId);
+            string cmd = string.Format(AcceptSourceAgreements(_searchInstalledCmd), packageId);
 
             if (exact)
             {
@@ -422,7 +422,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            string cmd = string.Format(_searchInstalledBySourceCmd, packageId, sourceName);
+            string cmd = string.Format(AcceptSourceAgreements(_searchInstalledBySourceCmd), packageId, sourceName);
 
             if (exact)
             {
