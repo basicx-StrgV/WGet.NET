@@ -19,21 +19,21 @@ namespace WGetNET
     /// </summary>
     public class WinGetPackageManager : WinGet
     {
+        // Commands
         private const string _listCmd = "list";
         private const string _searchInstalledCmd = "list \"{0}\"";
         private const string _searchInstalledBySourceCmd = "list \"{0}\" --source {1}";
-        private const string _searchCmd = "search \"{0}\" --accept-source-agreements";
-        private const string _searchBySourceCmd = "search \"{0}\" --source {1} --accept-source-agreements";
+        private const string _searchCmd = "search \"{0}\"";
+        private const string _searchBySourceCmd = "search \"{0}\" --source {1}";
         private const string _installCmd = "install \"{0}\"";
-        private const string _upgradeCmd = "upgrade \"{0}\" --accept-source-agreements";
-        private const string _upgradeAllCmd = "upgrade --al --accept-source-agreements";
+        private const string _upgradeCmd = "upgrade \"{0}\"";
+        private const string _upgradeAllCmd = "upgrade --all";
         private const string _getUpgradeableCmd = "upgrade";
-        private const string _includeUnknown = "--include-unknown";
         private const string _uninstallCmd = "uninstall \"{0}\"";
         private const string _exportCmd = "export -o {0}";
         private const string _importCmd = "import -i {0} --ignore-unavailable";
         private const string _hashCmd = "hash {0}";
-        private const string _downloadCmd = "download {0} --download-directory {1} --accept-source-agreements";
+        private const string _downloadCmd = "download {0} --download-directory {1}";
         private const string _pinListCmd = "pin list";
         private const string _pinAddCmd = "pin add \"{0}\"";
         private const string _pinAddByVersionCmd = "pin add \"{0}\" --version \"{1}\"";
@@ -43,6 +43,9 @@ namespace WGetNET
         private const string _pinRemoveInstalledCmd = "pin remove \"{0}\" --installed";
         private const string _pinResetCmd = "pin reset --force";
         private const string _repairCmd = "repair \"{0}\"";
+        // Parameters
+        private const string _includeUnknown = "--include-unknown";
+        private const string _acceptSourceAgreements = "--accept-source-agreements";
 
         private readonly Version _downloadMinVersion = new(1, 6, 0);
         private readonly Version _pinMinVersion = new(1, 5, 0);
@@ -79,7 +82,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_searchCmd, packageId);
+            string cmd = AcceptSourceAgreements(string.Format(_searchCmd, packageId));
 
             if (exact)
             {
@@ -118,7 +121,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
+            string cmd = AcceptSourceAgreements(string.Format(_searchBySourceCmd, packageId, sourceName));
 
             if (exact)
             {
@@ -157,7 +160,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_searchCmd, packageId);
+            string cmd = AcceptSourceAgreements(string.Format(_searchCmd, packageId));
 
             if (exact)
             {
@@ -206,7 +209,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            string cmd = string.Format(_searchBySourceCmd, packageId, sourceName);
+            string cmd = AcceptSourceAgreements(string.Format(_searchBySourceCmd, packageId, sourceName));
 
             if (exact)
             {
@@ -688,7 +691,7 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetUpgradeablePackages()
         {
-            string cmd = AddArgumentByVersion(_getUpgradeableCmd);
+            string cmd = IncludeUnknownbyVersion(_getUpgradeableCmd);
 
             ProcessResult result = Execute(cmd);
 
@@ -710,7 +713,7 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync(CancellationToken cancellationToken = default)
         {
-            string cmd = AddArgumentByVersion(_getUpgradeableCmd);
+            string cmd = IncludeUnknownbyVersion(_getUpgradeableCmd);
 
             ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
@@ -743,7 +746,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_upgradeCmd, packageId);
+            string cmd = AcceptSourceAgreements(string.Format(_upgradeCmd, packageId));
 
             ProcessResult result = Execute(cmd);
 
@@ -802,7 +805,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_upgradeCmd, packageId);
+            string cmd = AcceptSourceAgreements(string.Format(_upgradeCmd, packageId));
 
             ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
@@ -855,7 +858,7 @@ namespace WGetNET
         /// </exception>
         public bool UpgradeAllPackages()
         {
-            ProcessResult result = Execute(_upgradeAllCmd);
+            ProcessResult result = Execute(AcceptSourceAgreements(_upgradeAllCmd));
 
             return result.Success;
         }
@@ -878,30 +881,9 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpgradeAllPackagesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_upgradeAllCmd, false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(AcceptSourceAgreements(_upgradeAllCmd), false, cancellationToken);
 
             return result.Success;
-        }
-
-        /// <summary>
-        /// Adds the '--include-unknown' argument to the given <see cref="System.String"/> of aruments
-        /// when the winget version is higher then 1.4.0.
-        /// </summary>
-        /// <param name="argument">
-        /// <see cref="System.String"/> containing the arguments that should be extended.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.String"/> containing the new process arguments.
-        /// </returns>
-        private string AddArgumentByVersion(string argument)
-        {
-            // Checking version to determine if "--include-unknown" is necessary.
-            if (CheckWinGetVersion(new Version(1, 4, 0)))
-            {
-                // Winget version supports new argument, add "--include-unknown" to arguments
-                argument += $" {_includeUnknown}";
-            }
-            return argument;
         }
         //---------------------------------------------------------------------------------------------
 
@@ -1358,7 +1340,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
 
-            string cmd = string.Format(_downloadCmd, packageId, directory);
+            string cmd = string.Format(AcceptSourceAgreements(_downloadCmd), packageId, directory);
 
             ProcessResult result = Execute(cmd);
 
@@ -1497,7 +1479,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
 
-            string cmd = string.Format(_downloadCmd, packageId, directory);
+            string cmd = string.Format(AcceptSourceAgreements(_downloadCmd), packageId, directory);
 
             ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
@@ -2640,6 +2622,45 @@ namespace WGetNET
             ProcessResult result = await ExecuteAsync(_pinResetCmd, false, cancellationToken);
 
             return result.Success;
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Helper Functions--------------------------------------------------------------------------
+        /// <summary>
+        /// Adds the '--include-unknown' argument to the given <see cref="System.String"/> of arguments
+        /// when the winget version is higher then 1.4.0.
+        /// </summary>
+        /// <param name="argument">
+        /// <see cref="System.String"/> containing the arguments that should be extended.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the new process arguments.
+        /// </returns>
+        private string IncludeUnknownbyVersion(string argument)
+        {
+            // Checking version to determine if "--include-unknown" is necessary.
+            if (CheckWinGetVersion(new Version(1, 4, 0)))
+            {
+                // Winget version supports new argument, add "--include-unknown" to arguments
+                argument += $" {_includeUnknown}";
+            }
+            return argument;
+        }
+
+        /// <summary>
+        /// Adds the '--accept-source-agreements' argument to the given <see cref="System.String"/> of arguments.
+        /// </summary>
+        /// <param name="argument">
+        /// <see cref="System.String"/> containing the arguments that should be extended.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the new process arguments.
+        /// </returns>
+        private string AcceptSourceAgreements(string argument)
+        {
+            argument += $" {_acceptSourceAgreements}";
+
+            return argument;
         }
         //---------------------------------------------------------------------------------------------
     }
