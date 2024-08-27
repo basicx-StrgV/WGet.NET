@@ -3,14 +3,14 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using WGetNET.Models;
-using WGetNET.Helper;
-using WGetNET.Exceptions;
 using WGetNET.Components.Internal;
+using WGetNET.Exceptions;
+using WGetNET.Helper;
+using WGetNET.Models;
 
 namespace WGetNET
 {
@@ -26,7 +26,7 @@ namespace WGetNET
         private const string _searchBySourceCmd = "search \"{0}\" --source {1} --accept-source-agreements";
         private const string _installCmd = "install \"{0}\"";
         private const string _upgradeCmd = "upgrade \"{0}\" --accept-source-agreements";
-        private const string _upgradeAllCmd = "upgrade --al --accept-source-agreementsl";
+        private const string _upgradeAllCmd = "upgrade --al --accept-source-agreements";
         private const string _getUpgradeableCmd = "upgrade";
         private const string _includeUnknown = "--include-unknown";
         private const string _uninstallCmd = "uninstall \"{0}\"";
