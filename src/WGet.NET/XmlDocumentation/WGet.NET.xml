@@ -1886,18 +1886,6 @@
             WinGet is not installed or not found on the system.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.AddArgumentByVersion(System.String)">
-            <summary>
-            Adds the '--include-unknown' argument to the given <see cref="T:System.String"/> of aruments
-            when the winget version is higher then 1.4.0.
-            </summary>
-            <param name="argument">
-            <see cref="T:System.String"/> containing the arguments that should be extended.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the new process arguments.
-            </returns>
-        </member>
         <member name="M:WGetNET.WinGetPackageManager.RepairPackage(System.String)">
             <summary>
             Repairs a package using winget.
@@ -1909,6 +1897,9 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1928,6 +1919,9 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -1952,6 +1946,9 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
+            <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
+            </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
@@ -1974,6 +1971,9 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+            This feature is not supported in the installed WinGet version.
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
@@ -3029,6 +3029,29 @@
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
             </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.IncludeUnknownbyVersion(System.String)">
+            <summary>
+            Adds the '--include-unknown' argument to the given <see cref="T:System.String"/> of arguments
+            when the winget version is higher then 1.4.0.
+            </summary>
+            <param name="argument">
+            <see cref="T:System.String"/> containing the arguments that should be extended.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the new process arguments.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.AcceptSourceAgreements(System.String)">
+            <summary>
+            Adds the '--accept-source-agreements' argument to the given <see cref="T:System.String"/> of arguments.
+            </summary>
+            <param name="argument">
+            <see cref="T:System.String"/> containing the arguments that should be extended.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the new process arguments.
+            </returns>
         </member>
         <member name="T:WGetNET.WinGetSourceManager">
             <summary>
@@ -4700,27 +4723,6 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
-        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <param name="cancellationToken">
-            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
         <member name="M:WGetNET.Helper.JsonHelper.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -4876,6 +4878,30 @@
         <member name="M:WGetNET.Parser.VersionParser.CleanupNumberString(System.String)">
             <summary>
             Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
+            </summary>
+            <remarks>
+            If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>:
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.RemoveAppendix(System.String)">
+            <summary>
+            Removes version appendixes from the string.
+            </summary>
+            <remarks>
+            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to process.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>.
+            </returns>
+        </member>
+    </members>
+</doc>
+String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
             </summary>
             <remarks>
             If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.

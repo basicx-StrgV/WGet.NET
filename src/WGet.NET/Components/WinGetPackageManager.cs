@@ -48,6 +48,7 @@ namespace WGetNET
         private const string _acceptSourceAgreements = "--accept-source-agreements";
 
         private readonly Version _downloadMinVersion = new(1, 6, 0);
+        private readonly Version _repairMinVersion = new(1, 7, 0);
         private readonly Version _pinMinVersion = new(1, 5, 0);
 
         /// <summary>
@@ -899,6 +900,9 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
         /// </exception>
@@ -907,6 +911,11 @@ namespace WGetNET
         /// </exception>
         public bool RepairPackage(string packageId)
         {
+            if (!CheckWinGetVersion(_repairMinVersion))
+            {
+                throw new WinGetFeatureNotSupportedException(_repairMinVersion);
+            }
+
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_repairCmd, packageId);
@@ -926,6 +935,9 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
@@ -960,6 +972,9 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
         /// </exception>
@@ -968,6 +983,11 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> RepairPackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
+            if (!CheckWinGetVersion(_repairMinVersion))
+            {
+                throw new WinGetFeatureNotSupportedException(_repairMinVersion);
+            }
+
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_repairCmd, packageId);
@@ -991,6 +1011,9 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
