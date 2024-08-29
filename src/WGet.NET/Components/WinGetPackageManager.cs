@@ -229,7 +229,7 @@ namespace WGetNET
         }
         //---------------------------------------------------------------------------------------------
 
-        //---Install-----------------------------------------------------------------------------------
+        //---List--------------------------------------------------------------------------------------
         /// <summary>
         /// Gets a list of all installed packages.
         /// </summary>
@@ -440,6 +440,148 @@ namespace WGetNET
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
 
+        /// <summary>
+        /// Gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.
+        /// </summary>
+        /// <remarks>
+        /// This method does an internal match and does not use the winget "exact" functionality.
+        /// </remarks>
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
+        /// </param>
+        /// <returns>
+        /// A <see cref="WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public WinGetPackage? GetExactInstalledPackage(string packageId)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+
+            ProcessResult result = Execute(string.Format(AcceptSourceAgreements(_searchInstalledCmd), packageId));
+
+            return MatchExact(
+                ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList),
+                packageId.Trim()
+            );
+        }
+
+        /// <summary>
+        /// Gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.
+        /// </summary>
+        /// <remarks>
+        /// This method does an internal match and does not use the winget "exact" functionality.
+        /// </remarks>
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
+        /// </param>
+        /// <param name="sourceName">
+        /// The name of the source for the search.
+        /// </param>
+        /// <returns>
+        /// A <see cref="WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public WinGetPackage? GetExactInstalledPackage(string packageId, string sourceName)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+
+            ProcessResult result = Execute(string.Format(AcceptSourceAgreements(_searchInstalledBySourceCmd), packageId, sourceName));
+
+            return MatchExact(
+                ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList),
+                packageId.Trim()
+            );
+        }
+
+        /// <summary>
+        /// Asynchronously gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.
+        /// </summary>
+        /// <remarks>
+        /// This method does an internal match and does not use the winget "exact" functionality.
+        /// </remarks>
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
+        /// </param>
+        /// <returns>
+        /// A <see cref="WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<WinGetPackage?> GetExactInstalledPackageAsync(string packageId)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+
+            ProcessResult result = await ExecuteAsync(string.Format(AcceptSourceAgreements(_searchInstalledCmd), packageId));
+
+            return MatchExact(
+                ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList),
+                packageId.Trim()
+            );
+        }
+
+        /// <summary>
+        /// Asynchronously gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.
+        /// </summary>
+        /// <remarks>
+        /// This method does an internal match and does not use the winget "exact" functionality.
+        /// </remarks>
+        /// <param name="packageId">
+        /// The id or name of the package for the search.
+        /// </param>
+        /// <param name="sourceName">
+        /// The name of the source for the search.
+        /// </param>
+        /// <returns>
+        /// A <see cref="WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<WinGetPackage?> GetExactInstalledPackageAsync(string packageId, string sourceName)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
+
+            ProcessResult result = await ExecuteAsync(string.Format(AcceptSourceAgreements(_searchInstalledBySourceCmd), packageId, sourceName));
+
+            return MatchExact(
+                ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList),
+                packageId.Trim()
+            );
+        }
+        //---------------------------------------------------------------------------------------------
+
+        //---Install-----------------------------------------------------------------------------------
         /// <summary>
         /// Install a package using winget.
         /// </summary>
@@ -2684,6 +2826,36 @@ namespace WGetNET
             argument += $" {_acceptSourceAgreements}";
 
             return argument;
+        }
+
+        /// <summary>
+        /// Tries to match a <see cref="WGetNET.WinGetPackage"/> to the provided search criteria.
+        /// </summary>
+        /// <param name="matchList">
+        /// The list to try and finde match in.
+        /// </param>
+        /// <param name="matchString">
+        /// The search criteria, that will be tried to be matched againts the package id and/or name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="WGetNET.WinGetPackage"/> that matches the search criteria, or <see langword="null"/> if no package matches.
+        /// </returns>
+        private WinGetPackage? MatchExact(List<WinGetPackage> matchList, string matchString)
+        {
+            if (matchList == null || matchList.Count <= 0 || string.IsNullOrWhiteSpace(matchString))
+            {
+                return null;
+            }
+
+            for (int i = 0; i < matchList.Count; i++)
+            {
+                if (string.Equals(matchList[i].Id, matchString) || string.Equals(matchList[i].Name, matchString))
+                {
+                    return matchList[i];
+                }
+            }
+
+            return null;
         }
         //---------------------------------------------------------------------------------------------
     }

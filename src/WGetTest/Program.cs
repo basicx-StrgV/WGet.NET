@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using WGetNET;
 
 namespace WGetTest
@@ -52,6 +52,8 @@ namespace WGetTest
                 List<WinGetPackage> test3 = connector.GetInstalledPackages();
                 Console.WriteLine(test3[0].Name);
                 Console.WriteLine(test3[0].Id);
+
+                WinGetPackage? test4 = connector.GetExactInstalledPackage("Microsoft Edge");
 
                 /*bool repairResult = connector.RepairPackage("7zip.7zip");
                 Console.WriteLine("Repair Test result: ", repairResult);*/

@@ -1588,6 +1588,104 @@
             A provided argument is null.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackage(System.String)">
+            <summary>
+            Gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.
+            </summary>
+            <remarks>
+            This method does an internal match and does not use the winget "exact" functionality.
+            </remarks>
+            <param name="packageId">
+            The id or name of the package for the search.
+            </param>
+            <returns>
+            A <see cref="T:WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackage(System.String,System.String)">
+            <summary>
+            Gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.
+            </summary>
+            <remarks>
+            This method does an internal match and does not use the winget "exact" functionality.
+            </remarks>
+            <param name="packageId">
+            The id or name of the package for the search.
+            </param>
+            <param name="sourceName">
+            The name of the source for the search.
+            </param>
+            <returns>
+            A <see cref="T:WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackageAsync(System.String)">
+            <summary>
+            Asynchronously gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.
+            </summary>
+            <remarks>
+            This method does an internal match and does not use the winget "exact" functionality.
+            </remarks>
+            <param name="packageId">
+            The id or name of the package for the search.
+            </param>
+            <returns>
+            A <see cref="T:WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackageAsync(System.String,System.String)">
+            <summary>
+            Asynchronously gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.
+            </summary>
+            <remarks>
+            This method does an internal match and does not use the winget "exact" functionality.
+            </remarks>
+            <param name="packageId">
+            The id or name of the package for the search.
+            </param>
+            <param name="sourceName">
+            The name of the source for the search.
+            </param>
+            <returns>
+            A <see cref="T:WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(System.String)">
             <summary>
             Install a package using winget.
@@ -3051,6 +3149,20 @@
             </param>
             <returns>
             A <see cref="T:System.String"/> containing the new process arguments.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.MatchExact(System.Collections.Generic.List{WGetNET.WinGetPackage},System.String)">
+            <summary>
+            Tries to match a <see cref="T:WGetNET.WinGetPackage"/> to the provided search criteria.
+            </summary>
+            <param name="matchList">
+            The list to try and finde match in.
+            </param>
+            <param name="matchString">
+            The search criteria, that will be tried to be matched againts the package id and/or name.
+            </param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetPackage"/> that matches the search criteria, or <see langword="null"/> if no package matches.
             </returns>
         </member>
         <member name="T:WGetNET.WinGetSourceManager">
@@ -4723,6 +4835,27 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
+        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
         <member name="M:WGetNET.Helper.JsonHelper.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -4878,30 +5011,6 @@
         <member name="M:WGetNET.Parser.VersionParser.CleanupNumberString(System.String)">
             <summary>
             Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
-            </summary>
-            <remarks>
-            If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
-            <returns>
-            The processed <see cref="T:System.String"/>:
-            </returns>
-        </member>
-        <member name="M:WGetNET.Parser.VersionParser.RemoveAppendix(System.String)">
-            <summary>
-            Removes version appendixes from the string.
-            </summary>
-            <remarks>
-            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to process.</param>
-            <returns>
-            The processed <see cref="T:System.String"/>.
-            </returns>
-        </member>
-    </members>
-</doc>
-String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
             </summary>
             <remarks>
             If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
