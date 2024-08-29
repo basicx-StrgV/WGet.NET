@@ -4,8 +4,8 @@
 //--------------------------------------------------//
 using Serilog;
 using System;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 
 namespace BuildTool
 {
@@ -40,13 +40,13 @@ namespace BuildTool
 
                 if (exitCode != 0)
                 {
-                    Log.Error("The doxygen process failed with the exit code \"{exitCode}\"", exitCode);
+                    Log.Error("The doxygen process failed with the exit code \"{ExitCode}\"", exitCode);
                     return false;
                 }
             }
             catch (Exception e)
             {
-                Log.Error("Exception thrown on docs generation: {ex}", e);
+                Log.Error(e, "Exception thrown on docs generation");
                 return false;
             }
 

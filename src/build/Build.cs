@@ -2,12 +2,12 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
-using System.IO;
-using Serilog;
 using Nuke.Common;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
+using Serilog;
+using System.IO;
 
 namespace BuildTool
 {
@@ -53,14 +53,14 @@ namespace BuildTool
             .Executes(() =>
             {
                 Log.Information("Loading the build config");
-                Log.Information("File: {configFile}", _configFile);
+                Log.Information("File: {ConfigFile}", _configFile);
 
                 // Check if config exist
                 if (!File.Exists(_configFile))
                 {
                     if (Version != null)
                     {
-                        Log.Warning("Config file not found. The provided version ({version}) will still be used", Version);
+                        Log.Warning("Config file not found. The provided version ({Version}) will still be used", Version);
                         _workingVersion = Version;
                     }
                     else
@@ -79,7 +79,7 @@ namespace BuildTool
                 {
                     if (Version != null)
                     {
-                        Log.Warning("Failed to load the config file. The provided version ({version}) will still be used", Version);
+                        Log.Warning("Failed to load the config file. The provided version ({Version}) will still be used", Version);
                         _workingVersion = Version;
                     }
                     else
@@ -98,12 +98,12 @@ namespace BuildTool
                 {
                     if (Version != null)
                     {
-                        Log.Warning("The version provided by the config file ({configVersion}) is invalid. The provided version ({version}) will still be used", version, Version);
+                        Log.Warning("The version provided by the config file ({ConfigVersion}) is invalid. The provided version ({Version}) will still be used", version, Version);
                         _workingVersion = Version;
                     }
                     else
                     {
-                        Log.Warning("The version provided by the config file ({configVersion}) is invalid. The version \"1.0.0\" will be used as a fallback", version);
+                        Log.Warning("The version provided by the config file ({ConfigVersion}) is invalid. The version \"1.0.0\" will be used as a fallback", version);
                         _workingVersion = "1.0.0";
                     }
 
@@ -152,8 +152,8 @@ namespace BuildTool
             .Executes(() =>
             {
                 Log.Information("Creating \"WGet.NET\" nuget package");
-                Log.Information("Version: {version}", _workingVersion);
-                Log.Information("Output directory: {dir}", _packages);
+                Log.Information("Version: {Version}", _workingVersion);
+                Log.Information("Output directory: {Dir}", _packages);
             });
 
         Target Restore => _ => _
@@ -263,7 +263,7 @@ namespace BuildTool
             .Executes(() =>
             {
                 Log.Information("Updating the build config");
-                Log.Information("File: {configFile}", _configFile);
+                Log.Information("File: {ConfigFile}", _configFile);
 
                 if (!File.Exists(_configFile))
                 {

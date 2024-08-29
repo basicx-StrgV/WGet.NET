@@ -3,12 +3,12 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
-using System.Text;
 using System.Collections.Generic;
-using WGetNET.Models;
-using WGetNET.Helper;
+using System.Text;
 using WGetNET.Builder;
 using WGetNET.Extensions;
+using WGetNET.Helper;
+using WGetNET.Models;
 
 namespace WGetNET.Components.Internal
 {
@@ -165,10 +165,10 @@ namespace WGetNET.Components.Internal
 #endif
                 }
                 else if ((action == PackageAction.SearchBySource || action == PackageAction.InstalledListBySource)
-                    && !string.IsNullOrWhiteSpace(sourceName) && sourceName != null)
+                    && sourceName != null && !string.IsNullOrWhiteSpace(sourceName))
                 {
                     // "sourceName" source name cant't be null here because of the following check "!string.IsNullOrWhiteSpace(sourceName)".
-                    // But .NET Standard 2.0 thinks it knows better (Or I'm stupid). Therefore a second null check comes after it.
+                    // But .NET Standard 2.0 thinks it knows better (Or I'm stupid). Therefore a second null check comes befor it.
                     builder.AddSourceName(sourceName);
                 }
 
