@@ -1704,11 +1704,49 @@
             A provided argument is null.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackage(System.String,System.Boolean)">
+            <summary>
+            Install a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for the installation.</param>
+            <param name="silent">Request silent installation of packages.</param>
+            <returns>
+            <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage)">
             <summary>
             Install a package using winget.
             </summary>
             <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
+            <returns>
+            <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage,System.Boolean)">
+            <summary>
+            Install a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
+            <param name="silent">Request silent installation of packages.</param>
             <returns>
             <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
             </returns>
@@ -1744,11 +1782,57 @@
             A provided argument is null.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously install a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for the installation.</param>
+            <param name="silent">Request silent installation of packages.</param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage,System.Threading.CancellationToken)">
             <summary>
             Asynchronously install a package using winget.
             </summary>
             <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously install a package using winget.
+            </summary>
+            <param name="package">The <see cref="T:WGetNET.WinGetPackage"/> for the installation.</param>
+            <param name="silent">Request silent installation of packages.</param>
             <param name="cancellationToken">
             The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
             </param>
@@ -1877,6 +1961,25 @@
             Upgrades a package using winget.
             </summary>
             <param name="packageId">The id or name of the package for upgrade.</param>
+            <returns>
+            <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(System.String,System.Boolean)">
+            <summary>
+            Upgrades a package using winget.
+            </summary>
+            <param name="packageId">The id or name of the package for upgrade.</param>
+            <param name="silent">Request silent upgrade of packages.</param>
             <returns>
             <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
             </returns>
@@ -3143,6 +3246,17 @@
         <member name="M:WGetNET.WinGetPackageManager.AcceptSourceAgreements(System.String)">
             <summary>
             Adds the '--accept-source-agreements' argument to the given <see cref="T:System.String"/> of arguments.
+            </summary>
+            <param name="argument">
+            <see cref="T:System.String"/> containing the arguments that should be extended.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the new process arguments.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetPackageManager.Silent(System.String)">
+            <summary>
+            Adds the '--silent' argument to the given <see cref="T:System.String"/> of arguments.
             </summary>
             <param name="argument">
             <see cref="T:System.String"/> containing the arguments that should be extended.
@@ -4829,6 +4943,27 @@
             A <see cref="T:System.String"/> containing the json to deserialize.
             </param>
             <returns>
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
+        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             Object of the given class type.
             </returns>
             <exception cref="T:WGetNET.Exceptions.InvalidJsonException">

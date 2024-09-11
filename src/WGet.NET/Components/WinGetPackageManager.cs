@@ -955,7 +955,7 @@ namespace WGetNET
         }
         //---------------------------------------------------------------------------------------------
 
-        //---Upgrade-----------------------------------------------------------------------------------
+        //---List Upgrades-----------------------------------------------------------------------------
         /// <summary>
         /// Get all upgradeable packages.
         /// </summary>
@@ -1001,11 +1001,13 @@ namespace WGetNET
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
+        //---------------------------------------------------------------------------------------------
 
+        //---Upgrade-----------------------------------------------------------------------------------
         /// <summary>
         /// Upgrades a package using winget.
         /// </summary>
-        /// <param name="packageId">The id or name of the package for upgrade.</param>
+        /// <param name="packageId">The id or name of the package that should be upgraded.</param>
         /// <returns>
         /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -1032,7 +1034,40 @@ namespace WGetNET
         /// <summary>
         /// Upgrades a package using winget.
         /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
+        /// <param name="packageId">The id or name of the package that should be upgraded.</param>
+        /// <param name="silent">Request silent upgrade of packages.</param>
+        /// <returns>
+        /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public bool UpgradePackage(string packageId, bool silent)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+
+            string cmd = AcceptSourceAgreements(string.Format(_upgradeCmd, packageId));
+
+            if (silent)
+            {
+                cmd = Silent(cmd);
+            }
+
+            ProcessResult result = Execute(cmd);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Upgrades a package using winget.
+        /// </summary>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that should be upgraded.</param>
         /// <returns>
         /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
         /// </returns>
@@ -1058,9 +1093,38 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Upgrades a package using winget.
+        /// </summary>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that should be upgraded.</param>
+        /// <param name="silent">Request silent upgrade of packages.</param>
+        /// <returns>
+        /// <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public bool UpgradePackage(WinGetPackage package, bool silent)
+        {
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
+
+            if (package.HasShortenedId || package.HasNoId)
+            {
+                return UpgradePackage(package.Name, silent);
+            }
+
+            return UpgradePackage(package.Id, silent);
+        }
+
+        /// <summary>
         /// Asynchronously upgrades a package using winget.
         /// </summary>
-        /// <param name="packageId">The id or name of the package for upgrade.</param>
+        /// <param name="packageId">The id or name of the package that should be upgraded.</param>
         /// <param name="cancellationToken">
         /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
@@ -1091,7 +1155,44 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously upgrades a package using winget.
         /// </summary>
-        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that for the upgrade</param>
+        /// <param name="packageId">The id or name of the package that should be upgraded.</param>
+        /// <param name="silent">Request silent upgrade of packages.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> UpgradePackageAsync(string packageId, bool silent, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+
+            string cmd = AcceptSourceAgreements(string.Format(_upgradeCmd, packageId));
+
+            if (silent)
+            {
+                cmd = Silent(cmd);
+            }
+
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously upgrades a package using winget.
+        /// </summary>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that should be upgraded.</param>
         /// <param name="cancellationToken">
         /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
         /// </param>
@@ -1121,6 +1222,39 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Asynchronously upgrades a package using winget.
+        /// </summary>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> that should be upgraded.</param>
+        /// <param name="silent">Request silent upgrade of packages.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the upgrade was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> UpgradePackageAsync(WinGetPackage package, bool silent, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
+
+            if (package.HasShortenedId || package.HasNoId)
+            {
+                return await UpgradePackageAsync(package.Name, silent, cancellationToken);
+            }
+
+            return await UpgradePackageAsync(package.Id, silent, cancellationToken);
+        }
+
+        /// <summary>
         /// Tries to upgrade all packages using winget.
         /// </summary>
         /// <remarks>
@@ -1135,6 +1269,32 @@ namespace WGetNET
         public bool UpgradeAllPackages()
         {
             ProcessResult result = Execute(AcceptSourceAgreements(_upgradeAllCmd));
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Tries to upgrade all packages using winget.
+        /// </summary>
+        /// <remarks>
+        /// The action might run succesfully without upgrading every or even any package.
+        /// </remarks>
+        /// <param name="silent">Request silent upgrade of packages.</param>
+        /// <returns>
+        /// <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        public bool UpgradeAllPackages(bool silent)
+        {
+            string cmd = AcceptSourceAgreements(_upgradeAllCmd);
+            if (silent)
+            {
+                cmd = Silent(cmd);
+            }
+
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -1158,6 +1318,36 @@ namespace WGetNET
         public async Task<bool> UpgradeAllPackagesAsync(CancellationToken cancellationToken = default)
         {
             ProcessResult result = await ExecuteAsync(AcceptSourceAgreements(_upgradeAllCmd), false, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously tries to upgrade all packages using winget.
+        /// </summary>
+        /// <param name="silent">Request silent upgrade of packages.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <remarks>
+        /// The action might run succesfully without upgrading every or even any package.
+        /// </remarks>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the action run successfully or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        public async Task<bool> UpgradeAllPackagesAsync(bool silent, CancellationToken cancellationToken = default)
+        {
+            string cmd = AcceptSourceAgreements(_upgradeAllCmd);
+            if (silent)
+            {
+                cmd = Silent(cmd);
+            }
+
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
