@@ -863,6 +863,39 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Uninsatll a package using winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package for uninstallation.</param>
+        /// <param name="silent">Request silent package uninstall.</param>
+        /// <returns>
+        /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public bool UninstallPackage(string packageId, bool silent)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+
+            string cmd = string.Format(_uninstallCmd, packageId);
+
+            if (silent)
+            {
+                cmd = Silent(cmd);
+            }
+
+            ProcessResult result = Execute(cmd);
+
+            return result.Success;
+        }
+
+        /// <summary>
         /// Uninstall a package using winget.
         /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
@@ -891,6 +924,35 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Uninstall a package using winget.
+        /// </summary>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
+        /// <param name="silent" > Request silent package uninstall.</param>
+        /// <returns>
+        /// <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public bool UninstallPackage(WinGetPackage package, bool silent)
+        {
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
+
+            if (package.HasShortenedId || package.HasNoId)
+            {
+                return UninstallPackage(package.Name, silent);
+            }
+
+            return UninstallPackage(package.Id, silent);
+        }
+
+        /// <summary>
         /// Asynchronously uninsatll a package using winget.
         /// </summary>
         /// <param name="packageId">The id or name of the package for uninstallation.</param>
@@ -915,6 +977,44 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
             string cmd = string.Format(_uninstallCmd, packageId);
+
+            ProcessResult result =
+                await ExecuteAsync(cmd, false, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously uninsatll a package using winget.
+        /// </summary>
+        /// <param name="packageId">The id or name of the package for uninstallation.</param>
+        /// <param name="silent" > Request silent package uninstall.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> UninstallPackageAsync(string packageId, bool silent, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+
+            string cmd = string.Format(_uninstallCmd, packageId);
+
+            if (silent)
+            {
+                cmd = Silent(cmd);
+            }
 
             ProcessResult result =
                 await ExecuteAsync(cmd, false, cancellationToken);
@@ -952,6 +1052,39 @@ namespace WGetNET
             }
 
             return await UninstallPackageAsync(package.Id, cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously uninstall a package using winget.
+        /// </summary>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the uninstallation.</param>
+        /// <param name="silent" > Request silent package uninstall.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the uninstallation was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> UninstallPackageAsync(WinGetPackage package, bool silent, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
+
+            if (package.HasShortenedId || package.HasNoId)
+            {
+                return await UninstallPackageAsync(package.Name, silent, cancellationToken);
+            }
+
+            return await UninstallPackageAsync(package.Id, silent, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
