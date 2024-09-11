@@ -1394,6 +1394,48 @@ namespace WGetNET
         /// Repairs a package using winget.
         /// </summary>
         /// <remarks>Limited to packages with an installer that supports this function.</remarks>
+        /// <param name="packageId">The id or name of the package for the repair action.</param>
+        /// <param name="silent">Request silent package repair.</param>
+        /// <returns>
+        /// <see langword="true"/> if the repair action was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public bool RepairPackage(string packageId, bool silent)
+        {
+            if (!CheckWinGetVersion(_repairMinVersion))
+            {
+                throw new WinGetFeatureNotSupportedException(_repairMinVersion);
+            }
+
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+
+            string cmd = string.Format(_repairCmd, packageId);
+
+            if (silent)
+            {
+                cmd = Silent(cmd);
+            }
+
+            ProcessResult result = Execute(cmd);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Repairs a package using winget.
+        /// </summary>
+        /// <remarks>Limited to packages with an installer that supports this function.</remarks>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the repair action.</param>
         /// <returns>
         /// <see langword="true"/> if the repair action was successful or <see langword="false"/> if it failed.
@@ -1420,6 +1462,39 @@ namespace WGetNET
             }
 
             return RepairPackage(package.Id);
+        }
+
+        /// <summary>
+        /// Repairs a package using winget.
+        /// </summary>
+        /// <remarks>Limited to packages with an installer that supports this function.</remarks>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the repair action.</param>
+        /// <param name="silent">Request silent package repair.</param>
+        /// <returns>
+        /// <see langword="true"/> if the repair action was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public bool RepairPackage(WinGetPackage package, bool silent)
+        {
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
+
+            if (package.HasShortenedId || package.HasNoId)
+            {
+                return RepairPackage(package.Name, silent);
+            }
+
+            return RepairPackage(package.Id, silent);
         }
 
         /// <summary>
@@ -1463,6 +1538,52 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Asynchronously repairs a package using winget.
+        /// </summary>
+        /// <remarks>Limited to packages with an installer that supports this function.</remarks>
+        /// <param name="packageId">The id or name of the package for the repair action.</param>
+        /// <param name="silent">Request silent package repair.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the repair action was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> RepairPackageAsync(string packageId, bool silent, CancellationToken cancellationToken = default)
+        {
+            if (!CheckWinGetVersion(_repairMinVersion))
+            {
+                throw new WinGetFeatureNotSupportedException(_repairMinVersion);
+            }
+
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+
+            string cmd = string.Format(_repairCmd, packageId);
+
+            if (silent)
+            {
+                cmd = Silent(cmd);
+            }
+
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
         /// Asynchronously repair a package using winget.
         /// </summary>
         /// <remarks>Limited to packages with an installer that supports this function.</remarks>
@@ -1496,6 +1617,43 @@ namespace WGetNET
             }
 
             return await RepairPackageAsync(package.Id, cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously repair a package using winget.
+        /// </summary>
+        /// <remarks>Limited to packages with an installer that supports this function.</remarks>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the repair action.</param>
+        /// <param name="silent">Request silent package repair.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the repair action was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
+        /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> RepairPackageAsync(WinGetPackage package, bool silent, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
+
+            if (package.HasShortenedId || package.HasNoId)
+            {
+                return await RepairPackageAsync(package.Name, silent, cancellationToken);
+            }
+
+            return await RepairPackageAsync(package.Id, silent, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
