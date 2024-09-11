@@ -46,6 +46,7 @@ namespace WGetNET
         // Parameters
         private const string _includeUnknown = "--include-unknown";
         private const string _acceptSourceAgreements = "--accept-source-agreements";
+        private const string _silent = "--silent";
 
         private readonly Version _downloadMinVersion = new(1, 6, 0);
         private readonly Version _repairMinVersion = new(1, 7, 0);
@@ -612,6 +613,39 @@ namespace WGetNET
         /// <summary>
         /// Install a package using winget.
         /// </summary>
+        /// <param name="packageId">The id or name of the package for the installation.</param>
+        /// <param name="silent">Request silent installation of packages.</param>
+        /// <returns>
+        /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public bool InstallPackage(string packageId, bool silent)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+
+            string cmd = string.Format(_installCmd, packageId);
+
+            if (silent)
+            {
+                cmd = Silent(cmd);
+            }
+
+            ProcessResult result = Execute(cmd);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Install a package using winget.
+        /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
         /// <returns>
         /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
@@ -635,6 +669,35 @@ namespace WGetNET
             }
 
             return InstallPackage(package.Id);
+        }
+
+        /// <summary>
+        /// Install a package using winget.
+        /// </summary>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
+        /// <param name="silent">Request silent installation of packages.</param>
+        /// <returns>
+        /// <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public bool InstallPackage(WinGetPackage package, bool silent)
+        {
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
+
+            if (package.HasShortenedId || package.HasNoId)
+            {
+                return InstallPackage(package.Name, silent);
+            }
+
+            return InstallPackage(package.Id, silent);
         }
 
         /// <summary>
@@ -671,6 +734,43 @@ namespace WGetNET
         /// <summary>
         /// Asynchronously install a package using winget.
         /// </summary>
+        /// <param name="packageId">The id or name of the package for the installation.</param>
+        /// <param name="silent">Request silent installation of packages.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> InstallPackageAsync(string packageId, bool silent, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
+
+            string cmd = string.Format(_installCmd, packageId);
+
+            if (silent)
+            {
+                cmd = Silent(cmd);
+            }
+
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+
+            return result.Success;
+        }
+
+        /// <summary>
+        /// Asynchronously install a package using winget.
+        /// </summary>
         /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
         /// <param name="cancellationToken">
         /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
@@ -698,6 +798,39 @@ namespace WGetNET
             }
 
             return await InstallPackageAsync(package.Id, cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously install a package using winget.
+        /// </summary>
+        /// <param name="package">The <see cref="WGetNET.WinGetPackage"/> for the installation.</param>
+        /// <param name="silent">Request silent installation of packages.</param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is <see langword="true"/> if the installation was successful or <see langword="false"/> if it failed.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public async Task<bool> InstallPackageAsync(WinGetPackage package, bool silent, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
+
+            if (package.HasShortenedId || package.HasNoId)
+            {
+                return await InstallPackageAsync(package.Name, silent, cancellationToken);
+            }
+
+            return await InstallPackageAsync(package.Id, silent, cancellationToken);
         }
         //---------------------------------------------------------------------------------------------
 
@@ -2803,6 +2936,11 @@ namespace WGetNET
         /// </returns>
         private string IncludeUnknownbyVersion(string argument)
         {
+            if (string.IsNullOrWhiteSpace(argument))
+            {
+                return argument;
+            }
+
             // Checking version to determine if "--include-unknown" is necessary.
             if (CheckWinGetVersion(new Version(1, 4, 0)))
             {
@@ -2823,7 +2961,33 @@ namespace WGetNET
         /// </returns>
         private string AcceptSourceAgreements(string argument)
         {
+            if (string.IsNullOrWhiteSpace(argument))
+            {
+                return argument;
+            }
+
             argument += $" {_acceptSourceAgreements}";
+
+            return argument;
+        }
+
+        /// <summary>
+        /// Adds the '--silent' argument to the given <see cref="System.String"/> of arguments.
+        /// </summary>
+        /// <param name="argument">
+        /// <see cref="System.String"/> containing the arguments that should be extended.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the new process arguments.
+        /// </returns>
+        private string Silent(string argument)
+        {
+            if (string.IsNullOrWhiteSpace(argument))
+            {
+                return argument;
+            }
+
+            argument += $" {_silent}";
 
             return argument;
         }
