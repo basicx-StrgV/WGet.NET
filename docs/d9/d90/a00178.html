@@ -59,7 +59,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../WGet.NET_Icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.1.1</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.2.0</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -183,30 +183,66 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7ba50c880358802901376cceb9e086f3" id="r_a7ba50c880358802901376cceb9e086f3"><td class="memItemLeft" align="right" valign="top">async Task&lt; List&lt; <a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ba50c880358802901376cceb9e086f3">GetInstalledPackagesAsync</a> (string packageId, string sourceName, bool exact=false, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:a7ba50c880358802901376cceb9e086f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously gets a list of all installed packages. That match the provided name.  <br /></td></tr>
 <tr class="separator:a7ba50c880358802901376cceb9e086f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add27616dd851109e93e8903c65b7fdbb" id="r_add27616dd851109e93e8903c65b7fdbb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a>?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add27616dd851109e93e8903c65b7fdbb">GetExactInstalledPackage</a> (string packageId)</td></tr>
+<tr class="memdesc:add27616dd851109e93e8903c65b7fdbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.  <br /></td></tr>
+<tr class="separator:add27616dd851109e93e8903c65b7fdbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5b6ef26813f834dec7c7b16c305c3bd" id="r_ac5b6ef26813f834dec7c7b16c305c3bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a>?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5b6ef26813f834dec7c7b16c305c3bd">GetExactInstalledPackage</a> (string packageId, string sourceName)</td></tr>
+<tr class="memdesc:ac5b6ef26813f834dec7c7b16c305c3bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.  <br /></td></tr>
+<tr class="separator:ac5b6ef26813f834dec7c7b16c305c3bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c52545f1387d0593d73f599aa5814fc" id="r_a3c52545f1387d0593d73f599aa5814fc"><td class="memItemLeft" align="right" valign="top">async Task&lt; <a class="el" href="../../db/d53/a00202.html">WinGetPackage</a>?&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c52545f1387d0593d73f599aa5814fc">GetExactInstalledPackageAsync</a> (string packageId)</td></tr>
+<tr class="memdesc:a3c52545f1387d0593d73f599aa5814fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.  <br /></td></tr>
+<tr class="separator:a3c52545f1387d0593d73f599aa5814fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c9898ed555d6bb1910a2ffe09f58866" id="r_a4c9898ed555d6bb1910a2ffe09f58866"><td class="memItemLeft" align="right" valign="top">async Task&lt; <a class="el" href="../../db/d53/a00202.html">WinGetPackage</a>?&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c9898ed555d6bb1910a2ffe09f58866">GetExactInstalledPackageAsync</a> (string packageId, string sourceName)</td></tr>
+<tr class="memdesc:a4c9898ed555d6bb1910a2ffe09f58866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.  <br /></td></tr>
+<tr class="separator:a4c9898ed555d6bb1910a2ffe09f58866"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78d6fc774df217bf5b477b3b1b5dfd5e" id="r_a78d6fc774df217bf5b477b3b1b5dfd5e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78d6fc774df217bf5b477b3b1b5dfd5e">InstallPackage</a> (string packageId)</td></tr>
 <tr class="memdesc:a78d6fc774df217bf5b477b3b1b5dfd5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Install a package using winget.  <br /></td></tr>
 <tr class="separator:a78d6fc774df217bf5b477b3b1b5dfd5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a891f3db33de4a3f9e627ea7194145020" id="r_a891f3db33de4a3f9e627ea7194145020"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a891f3db33de4a3f9e627ea7194145020">InstallPackage</a> (string packageId, bool silent)</td></tr>
+<tr class="memdesc:a891f3db33de4a3f9e627ea7194145020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Install a package using winget.  <br /></td></tr>
+<tr class="separator:a891f3db33de4a3f9e627ea7194145020"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af267d5bc2caaa031760a471b3299f98c" id="r_af267d5bc2caaa031760a471b3299f98c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af267d5bc2caaa031760a471b3299f98c">InstallPackage</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package)</td></tr>
 <tr class="memdesc:af267d5bc2caaa031760a471b3299f98c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Install a package using winget.  <br /></td></tr>
 <tr class="separator:af267d5bc2caaa031760a471b3299f98c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14bb146770459cba0fd34270466d7bb1" id="r_a14bb146770459cba0fd34270466d7bb1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14bb146770459cba0fd34270466d7bb1">InstallPackage</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, bool silent)</td></tr>
+<tr class="memdesc:a14bb146770459cba0fd34270466d7bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Install a package using winget.  <br /></td></tr>
+<tr class="separator:a14bb146770459cba0fd34270466d7bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47eb8e75de6fd9f5e0c8fbe4ca6793c5" id="r_a47eb8e75de6fd9f5e0c8fbe4ca6793c5"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47eb8e75de6fd9f5e0c8fbe4ca6793c5">InstallPackageAsync</a> (string packageId, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:a47eb8e75de6fd9f5e0c8fbe4ca6793c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously install a package using winget.  <br /></td></tr>
 <tr class="separator:a47eb8e75de6fd9f5e0c8fbe4ca6793c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1051e30b3577d94097a26dc7ffaaccd7" id="r_a1051e30b3577d94097a26dc7ffaaccd7"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1051e30b3577d94097a26dc7ffaaccd7">InstallPackageAsync</a> (string packageId, bool silent, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a1051e30b3577d94097a26dc7ffaaccd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously install a package using winget.  <br /></td></tr>
+<tr class="separator:a1051e30b3577d94097a26dc7ffaaccd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37f3458ccf6864bd1c3a822bfed72343" id="r_a37f3458ccf6864bd1c3a822bfed72343"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37f3458ccf6864bd1c3a822bfed72343">InstallPackageAsync</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:a37f3458ccf6864bd1c3a822bfed72343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously install a package using winget.  <br /></td></tr>
 <tr class="separator:a37f3458ccf6864bd1c3a822bfed72343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae72eddc7940b86d32ce03ddbd49f4cb5" id="r_ae72eddc7940b86d32ce03ddbd49f4cb5"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae72eddc7940b86d32ce03ddbd49f4cb5">InstallPackageAsync</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, bool silent, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:ae72eddc7940b86d32ce03ddbd49f4cb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously install a package using winget.  <br /></td></tr>
+<tr class="separator:ae72eddc7940b86d32ce03ddbd49f4cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a160ebb01ede07b6890c3f5be8761543b" id="r_a160ebb01ede07b6890c3f5be8761543b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a160ebb01ede07b6890c3f5be8761543b">UninstallPackage</a> (string packageId)</td></tr>
 <tr class="memdesc:a160ebb01ede07b6890c3f5be8761543b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uninsatll a package using winget.  <br /></td></tr>
 <tr class="separator:a160ebb01ede07b6890c3f5be8761543b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d292293e760b04ff30f1f4a20ce2433" id="r_a2d292293e760b04ff30f1f4a20ce2433"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d292293e760b04ff30f1f4a20ce2433">UninstallPackage</a> (string packageId, bool silent)</td></tr>
+<tr class="memdesc:a2d292293e760b04ff30f1f4a20ce2433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uninsatll a package using winget.  <br /></td></tr>
+<tr class="separator:a2d292293e760b04ff30f1f4a20ce2433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93e38becbed4c726b01e2fe54cb74eb8" id="r_a93e38becbed4c726b01e2fe54cb74eb8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93e38becbed4c726b01e2fe54cb74eb8">UninstallPackage</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package)</td></tr>
 <tr class="memdesc:a93e38becbed4c726b01e2fe54cb74eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uninstall a package using winget.  <br /></td></tr>
 <tr class="separator:a93e38becbed4c726b01e2fe54cb74eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88e084fdfa605ec35f1712c15b937441" id="r_a88e084fdfa605ec35f1712c15b937441"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88e084fdfa605ec35f1712c15b937441">UninstallPackage</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, bool silent)</td></tr>
+<tr class="memdesc:a88e084fdfa605ec35f1712c15b937441"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uninstall a package using winget.  <br /></td></tr>
+<tr class="separator:a88e084fdfa605ec35f1712c15b937441"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd0a7cd3255472fbaac28361673cadc1" id="r_afd0a7cd3255472fbaac28361673cadc1"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd0a7cd3255472fbaac28361673cadc1">UninstallPackageAsync</a> (string packageId, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:afd0a7cd3255472fbaac28361673cadc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously uninsatll a package using winget.  <br /></td></tr>
 <tr class="separator:afd0a7cd3255472fbaac28361673cadc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ec9e177e5bd9e3988e9afb1ee7002f0" id="r_a7ec9e177e5bd9e3988e9afb1ee7002f0"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ec9e177e5bd9e3988e9afb1ee7002f0">UninstallPackageAsync</a> (string packageId, bool silent, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a7ec9e177e5bd9e3988e9afb1ee7002f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously uninsatll a package using winget.  <br /></td></tr>
+<tr class="separator:a7ec9e177e5bd9e3988e9afb1ee7002f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5226fd205eab36894afa679742647ab1" id="r_a5226fd205eab36894afa679742647ab1"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5226fd205eab36894afa679742647ab1">UninstallPackageAsync</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:a5226fd205eab36894afa679742647ab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously uninstall a package using winget.  <br /></td></tr>
 <tr class="separator:a5226fd205eab36894afa679742647ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac76d302e23a9009c79ee6fa2c7bdb94a" id="r_ac76d302e23a9009c79ee6fa2c7bdb94a"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac76d302e23a9009c79ee6fa2c7bdb94a">UninstallPackageAsync</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, bool silent, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:ac76d302e23a9009c79ee6fa2c7bdb94a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously uninstall a package using winget.  <br /></td></tr>
+<tr class="separator:ac76d302e23a9009c79ee6fa2c7bdb94a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecebfc38c8c15959b843056378b69f46" id="r_aecebfc38c8c15959b843056378b69f46"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aecebfc38c8c15959b843056378b69f46">GetUpgradeablePackages</a> ()</td></tr>
 <tr class="memdesc:aecebfc38c8c15959b843056378b69f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all upgradeable packages.  <br /></td></tr>
 <tr class="separator:aecebfc38c8c15959b843056378b69f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -216,33 +252,63 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a427c2ee1e91ab3f312817b26ac7ad667" id="r_a427c2ee1e91ab3f312817b26ac7ad667"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a427c2ee1e91ab3f312817b26ac7ad667">UpgradePackage</a> (string packageId)</td></tr>
 <tr class="memdesc:a427c2ee1e91ab3f312817b26ac7ad667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upgrades a package using winget.  <br /></td></tr>
 <tr class="separator:a427c2ee1e91ab3f312817b26ac7ad667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af93ab2a3a09df4cf886b04eb60ebf061" id="r_af93ab2a3a09df4cf886b04eb60ebf061"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af93ab2a3a09df4cf886b04eb60ebf061">UpgradePackage</a> (string packageId, bool silent)</td></tr>
+<tr class="memdesc:af93ab2a3a09df4cf886b04eb60ebf061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upgrades a package using winget.  <br /></td></tr>
+<tr class="separator:af93ab2a3a09df4cf886b04eb60ebf061"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a679bc41649652d2365bf36f015aa1b87" id="r_a679bc41649652d2365bf36f015aa1b87"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a679bc41649652d2365bf36f015aa1b87">UpgradePackage</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package)</td></tr>
 <tr class="memdesc:a679bc41649652d2365bf36f015aa1b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upgrades a package using winget.  <br /></td></tr>
 <tr class="separator:a679bc41649652d2365bf36f015aa1b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7a3dd92d25daaee37849e08a7f1d28d" id="r_ad7a3dd92d25daaee37849e08a7f1d28d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7a3dd92d25daaee37849e08a7f1d28d">UpgradePackage</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, bool silent)</td></tr>
+<tr class="memdesc:ad7a3dd92d25daaee37849e08a7f1d28d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upgrades a package using winget.  <br /></td></tr>
+<tr class="separator:ad7a3dd92d25daaee37849e08a7f1d28d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d5c1d92f8fada43ed425e0053880a1c" id="r_a0d5c1d92f8fada43ed425e0053880a1c"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d5c1d92f8fada43ed425e0053880a1c">UpgradePackageAsync</a> (string packageId, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:a0d5c1d92f8fada43ed425e0053880a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously upgrades a package using winget.  <br /></td></tr>
 <tr class="separator:a0d5c1d92f8fada43ed425e0053880a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6174ef725bd6c70dc2b4b80f4ee5494c" id="r_a6174ef725bd6c70dc2b4b80f4ee5494c"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6174ef725bd6c70dc2b4b80f4ee5494c">UpgradePackageAsync</a> (string packageId, bool silent, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a6174ef725bd6c70dc2b4b80f4ee5494c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously upgrades a package using winget.  <br /></td></tr>
+<tr class="separator:a6174ef725bd6c70dc2b4b80f4ee5494c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fb1864c9a33a0a7d9d10b6a4f09cf29" id="r_a4fb1864c9a33a0a7d9d10b6a4f09cf29"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fb1864c9a33a0a7d9d10b6a4f09cf29">UpgradePackageAsync</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:a4fb1864c9a33a0a7d9d10b6a4f09cf29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously upgrades a package using winget.  <br /></td></tr>
 <tr class="separator:a4fb1864c9a33a0a7d9d10b6a4f09cf29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00f06fbc617ed446c7ad128d047bc8bf" id="r_a00f06fbc617ed446c7ad128d047bc8bf"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00f06fbc617ed446c7ad128d047bc8bf">UpgradePackageAsync</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, bool silent, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a00f06fbc617ed446c7ad128d047bc8bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously upgrades a package using winget.  <br /></td></tr>
+<tr class="separator:a00f06fbc617ed446c7ad128d047bc8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a182135738f091e75bbdbf30b62ee3886" id="r_a182135738f091e75bbdbf30b62ee3886"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a182135738f091e75bbdbf30b62ee3886">UpgradeAllPackages</a> ()</td></tr>
 <tr class="memdesc:a182135738f091e75bbdbf30b62ee3886"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to upgrade all packages using winget.  <br /></td></tr>
 <tr class="separator:a182135738f091e75bbdbf30b62ee3886"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba4551b25c3df204ee3b768af22e94ba" id="r_aba4551b25c3df204ee3b768af22e94ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba4551b25c3df204ee3b768af22e94ba">UpgradeAllPackages</a> (bool silent)</td></tr>
+<tr class="memdesc:aba4551b25c3df204ee3b768af22e94ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to upgrade all packages using winget.  <br /></td></tr>
+<tr class="separator:aba4551b25c3df204ee3b768af22e94ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9febb5dc44beeda14f3cdac9b602990" id="r_aa9febb5dc44beeda14f3cdac9b602990"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9febb5dc44beeda14f3cdac9b602990">UpgradeAllPackagesAsync</a> (CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:aa9febb5dc44beeda14f3cdac9b602990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously tries to upgrade all packages using winget.  <br /></td></tr>
 <tr class="separator:aa9febb5dc44beeda14f3cdac9b602990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fb9f724372cc306f0431a8fd3290461" id="r_a8fb9f724372cc306f0431a8fd3290461"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fb9f724372cc306f0431a8fd3290461">UpgradeAllPackagesAsync</a> (bool silent, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a8fb9f724372cc306f0431a8fd3290461"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously tries to upgrade all packages using winget.  <br /></td></tr>
+<tr class="separator:a8fb9f724372cc306f0431a8fd3290461"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d69b650aa8bbf56e18e407ae0668238" id="r_a2d69b650aa8bbf56e18e407ae0668238"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d69b650aa8bbf56e18e407ae0668238">RepairPackage</a> (string packageId)</td></tr>
 <tr class="memdesc:a2d69b650aa8bbf56e18e407ae0668238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repairs a package using winget.  <br /></td></tr>
 <tr class="separator:a2d69b650aa8bbf56e18e407ae0668238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abde55517ceadb0375aa787207b4885b5" id="r_abde55517ceadb0375aa787207b4885b5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abde55517ceadb0375aa787207b4885b5">RepairPackage</a> (string packageId, bool silent)</td></tr>
+<tr class="memdesc:abde55517ceadb0375aa787207b4885b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repairs a package using winget.  <br /></td></tr>
+<tr class="separator:abde55517ceadb0375aa787207b4885b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c2329513e04238450a9ad17cdd0c638" id="r_a1c2329513e04238450a9ad17cdd0c638"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c2329513e04238450a9ad17cdd0c638">RepairPackage</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package)</td></tr>
 <tr class="memdesc:a1c2329513e04238450a9ad17cdd0c638"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repairs a package using winget.  <br /></td></tr>
 <tr class="separator:a1c2329513e04238450a9ad17cdd0c638"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa95c183d2ebf8ee5a1c760d1cbd96a63" id="r_aa95c183d2ebf8ee5a1c760d1cbd96a63"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa95c183d2ebf8ee5a1c760d1cbd96a63">RepairPackage</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, bool silent)</td></tr>
+<tr class="memdesc:aa95c183d2ebf8ee5a1c760d1cbd96a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repairs a package using winget.  <br /></td></tr>
+<tr class="separator:aa95c183d2ebf8ee5a1c760d1cbd96a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f280a08a9fa9b6cbfd6cadd3cfe311d" id="r_a0f280a08a9fa9b6cbfd6cadd3cfe311d"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f280a08a9fa9b6cbfd6cadd3cfe311d">RepairPackageAsync</a> (string packageId, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:a0f280a08a9fa9b6cbfd6cadd3cfe311d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously repairs a package using winget.  <br /></td></tr>
 <tr class="separator:a0f280a08a9fa9b6cbfd6cadd3cfe311d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a396acda8193347547c616f3d11337f1d" id="r_a396acda8193347547c616f3d11337f1d"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a396acda8193347547c616f3d11337f1d">RepairPackageAsync</a> (string packageId, bool silent, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a396acda8193347547c616f3d11337f1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously repairs a package using winget.  <br /></td></tr>
+<tr class="separator:a396acda8193347547c616f3d11337f1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11f0bbf6d597902167dadad9ec257847" id="r_a11f0bbf6d597902167dadad9ec257847"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11f0bbf6d597902167dadad9ec257847">RepairPackageAsync</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:a11f0bbf6d597902167dadad9ec257847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously repair a package using winget.  <br /></td></tr>
 <tr class="separator:a11f0bbf6d597902167dadad9ec257847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a900b63e6c271b09c0718ef5b1959fb6d" id="r_a900b63e6c271b09c0718ef5b1959fb6d"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a900b63e6c271b09c0718ef5b1959fb6d">RepairPackageAsync</a> (<a class="el" href="../../db/d53/a00202.html">WinGetPackage</a> package, bool silent, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a900b63e6c271b09c0718ef5b1959fb6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronously repair a package using winget.  <br /></td></tr>
+<tr class="separator:a900b63e6c271b09c0718ef5b1959fb6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a610eae49c0a365b120ae254eee061551" id="r_a610eae49c0a365b120ae254eee061551"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a610eae49c0a365b120ae254eee061551">ExportPackagesToFile</a> (string file)</td></tr>
 <tr class="memdesc:a610eae49c0a365b120ae254eee061551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports a list of all installed winget packages as json to the given file.  <br /></td></tr>
 <tr class="separator:a610eae49c0a365b120ae254eee061551"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -466,7 +532,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Initializes a new instance of the <a class="el" href="../../d9/d90/a00178.html" title="The WGetNET.WinGetPackageManager class offers methods to manage packages with winget.">WGetNET.WinGetPackageManager</a> class. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00057">57</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00058">58</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -509,7 +575,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01396">1396</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02152">2152</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -551,7 +617,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01356">1356</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02112">2112</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -593,7 +659,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01458">1458</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02214">2214</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -635,7 +701,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01423">1423</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02179">2179</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -683,7 +749,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01539">1539</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02295">2295</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -731,7 +797,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01495">1495</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02251">2251</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -779,7 +845,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01609">1609</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02365">2365</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -827,7 +893,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01570">1570</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02326">2326</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -863,7 +929,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01054">1054</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01810">1810</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -904,7 +970,165 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01085">1085</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01841">1841</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="add27616dd851109e93e8903c65b7fdbb" name="add27616dd851109e93e8903c65b7fdbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add27616dd851109e93e8903c65b7fdbb">&#9670;&#160;</a></span>GetExactInstalledPackage() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a>? WGetNET.WinGetPackageManager.GetExactInstalledPackage </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned. </p>
+<p>This method does an internal match and does not use the winget "exact" functionality. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for the search. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> instances or <code>null</code> if no match was found. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00465">465</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="ac5b6ef26813f834dec7c7b16c305c3bd" name="ac5b6ef26813f834dec7c7b16c305c3bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5b6ef26813f834dec7c7b16c305c3bd">&#9670;&#160;</a></span>GetExactInstalledPackage() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a>? WGetNET.WinGetPackageManager.GetExactInstalledPackage </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>sourceName</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned. </p>
+<p>This method does an internal match and does not use the winget "exact" functionality. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for the search. </td></tr>
+    <tr><td class="paramname">sourceName</td><td>The name of the source for the search. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> instances or <code>null</code> if no match was found. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00501">501</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a3c52545f1387d0593d73f599aa5814fc" name="a3c52545f1387d0593d73f599aa5814fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c52545f1387d0593d73f599aa5814fc">&#9670;&#160;</a></span>GetExactInstalledPackageAsync() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="../../db/d53/a00202.html">WinGetPackage</a>?&gt; WGetNET.WinGetPackageManager.GetExactInstalledPackageAsync </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned. </p>
+<p>This method does an internal match and does not use the winget "exact" functionality. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for the search. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> instances or <code>null</code> if no match was found. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00535">535</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a4c9898ed555d6bb1910a2ffe09f58866" name="a4c9898ed555d6bb1910a2ffe09f58866"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c9898ed555d6bb1910a2ffe09f58866">&#9670;&#160;</a></span>GetExactInstalledPackageAsync() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="../../db/d53/a00202.html">WinGetPackage</a>?&gt; WGetNET.WinGetPackageManager.GetExactInstalledPackageAsync </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>sourceName</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned. </p>
+<p>This method does an internal match and does not use the winget "exact" functionality. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for the search. </td></tr>
+    <tr><td class="paramname">sourceName</td><td>The name of the source for the search. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> instances or <code>null</code> if no match was found. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00571">571</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -932,7 +1156,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00242">242</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00243">243</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -973,7 +1197,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00268">268</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00269">269</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1020,7 +1244,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00306">306</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00307">307</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1054,7 +1278,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00336">336</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00337">337</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1101,7 +1325,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00372">372</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00373">373</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1154,7 +1378,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00420">420</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00421">421</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1183,7 +1407,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01636">1636</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02392">2392</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1218,7 +1442,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01664">1664</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02420">2420</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1246,7 +1470,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00693">693</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01101">1101</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1280,7 +1504,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00715">715</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01123">1123</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1316,7 +1540,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01224">1224</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01980">1980</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1353,7 +1577,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01185">1185</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01941">1941</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1394,7 +1618,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01313">1313</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02069">2069</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1436,7 +1660,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01270">1270</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02026">2026</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1473,7 +1697,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01116">1116</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01872">1872</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1515,12 +1739,12 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01151">1151</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01907">1907</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a78d6fc774df217bf5b477b3b1b5dfd5e" name="a78d6fc774df217bf5b477b3b1b5dfd5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78d6fc774df217bf5b477b3b1b5dfd5e">&#9670;&#160;</a></span>InstallPackage() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a78d6fc774df217bf5b477b3b1b5dfd5e">&#9670;&#160;</a></span>InstallPackage() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1551,12 +1775,53 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00459">459</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00602">602</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a891f3db33de4a3f9e627ea7194145020" name="a891f3db33de4a3f9e627ea7194145020"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a891f3db33de4a3f9e627ea7194145020">&#9670;&#160;</a></span>InstallPackage() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.InstallPackage </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Install a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for the installation.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent installation of packages.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the installation was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00630">630</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="af267d5bc2caaa031760a471b3299f98c" name="af267d5bc2caaa031760a471b3299f98c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af267d5bc2caaa031760a471b3299f98c">&#9670;&#160;</a></span>InstallPackage() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af267d5bc2caaa031760a471b3299f98c">&#9670;&#160;</a></span>InstallPackage() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1587,12 +1852,100 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00486">486</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00662">662</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a14bb146770459cba0fd34270466d7bb1" name="a14bb146770459cba0fd34270466d7bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14bb146770459cba0fd34270466d7bb1">&#9670;&#160;</a></span>InstallPackage() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.InstallPackage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a></td>          <td class="paramname"><span class="paramname"><em>package</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Install a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> for the installation.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent installation of packages.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the installation was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00691">691</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a1051e30b3577d94097a26dc7ffaaccd7" name="a1051e30b3577d94097a26dc7ffaaccd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1051e30b3577d94097a26dc7ffaaccd7">&#9670;&#160;</a></span>InstallPackageAsync() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.InstallPackageAsync </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously install a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for the installation.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent installation of packages.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the installation was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00755">755</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a47eb8e75de6fd9f5e0c8fbe4ca6793c5" name="a47eb8e75de6fd9f5e0c8fbe4ca6793c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47eb8e75de6fd9f5e0c8fbe4ca6793c5">&#9670;&#160;</a></span>InstallPackageAsync() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a47eb8e75de6fd9f5e0c8fbe4ca6793c5">&#9670;&#160;</a></span>InstallPackageAsync() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1628,12 +1981,59 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00518">518</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00723">723</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="ae72eddc7940b86d32ce03ddbd49f4cb5" name="ae72eddc7940b86d32ce03ddbd49f4cb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae72eddc7940b86d32ce03ddbd49f4cb5">&#9670;&#160;</a></span>InstallPackageAsync() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.InstallPackageAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a></td>          <td class="paramname"><span class="paramname"><em>package</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously install a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> for the installation.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent installation of packages.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the installation was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00824">824</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a37f3458ccf6864bd1c3a822bfed72343" name="a37f3458ccf6864bd1c3a822bfed72343"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37f3458ccf6864bd1c3a822bfed72343">&#9670;&#160;</a></span>InstallPackageAsync() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a37f3458ccf6864bd1c3a822bfed72343">&#9670;&#160;</a></span>InstallPackageAsync() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1669,7 +2069,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00549">549</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00791">791</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1711,7 +2111,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01704">1704</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02460">2460</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1753,7 +2153,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01748">1748</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02504">2504</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1795,7 +2195,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01785">1785</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02541">2541</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1837,7 +2237,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01820">1820</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02576">2576</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1885,7 +2285,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01856">1856</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02612">2612</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1933,7 +2333,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01904">1904</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02660">2660</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -1981,7 +2381,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01945">1945</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02701">2701</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2029,7 +2429,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01984">1984</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02740">2740</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2071,7 +2471,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02016">2016</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02772">2772</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2113,7 +2513,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02060">2060</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02816">2816</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2155,7 +2555,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02097">2097</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02853">2853</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2197,7 +2597,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02132">2132</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02888">2888</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2245,7 +2645,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02168">2168</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02924">2924</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2293,7 +2693,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02216">2216</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02972">2972</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2341,7 +2741,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02257">2257</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03013">3013</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2389,7 +2789,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02296">2296</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03052">3052</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2426,7 +2826,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02329">2329</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03085">3085</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2463,7 +2863,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02364">2364</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03120">3120</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2505,7 +2905,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02399">2399</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03155">3155</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2547,7 +2947,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02438">2438</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03194">3194</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2584,7 +2984,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02469">2469</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03225">3225</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2621,7 +3021,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02504">2504</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03260">3260</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2663,7 +3063,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02539">2539</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03295">3295</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2705,12 +3105,12 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02578">2578</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03334">3334</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a2d69b650aa8bbf56e18e407ae0668238" name="a2d69b650aa8bbf56e18e407ae0668238"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d69b650aa8bbf56e18e407ae0668238">&#9670;&#160;</a></span>RepairPackage() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d69b650aa8bbf56e18e407ae0668238">&#9670;&#160;</a></span>RepairPackage() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2743,12 +3143,55 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00912">912</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01510">1510</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="abde55517ceadb0375aa787207b4885b5" name="abde55517ceadb0375aa787207b4885b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abde55517ceadb0375aa787207b4885b5">&#9670;&#160;</a></span>RepairPackage() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.RepairPackage </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Repairs a package using winget. </p>
+<p>Limited to packages with an installer that supports this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for the repair action.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent package repair.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the repair action was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname"><a class="el" href="../../dc/d9a/a00218.html" title="Exception that gets thrown if a winget feature is not supportet in the installed winget version.">WGetNET.Exceptions.WinGetFeatureNotSupportedException</a></td><td>This feature is not supported in the installed <a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> version. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01547">1547</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a1c2329513e04238450a9ad17cdd0c638" name="a1c2329513e04238450a9ad17cdd0c638"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c2329513e04238450a9ad17cdd0c638">&#9670;&#160;</a></span>RepairPackage() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c2329513e04238450a9ad17cdd0c638">&#9670;&#160;</a></span>RepairPackage() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2781,12 +3224,104 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00948">948</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01588">1588</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="aa95c183d2ebf8ee5a1c760d1cbd96a63" name="aa95c183d2ebf8ee5a1c760d1cbd96a63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa95c183d2ebf8ee5a1c760d1cbd96a63">&#9670;&#160;</a></span>RepairPackage() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.RepairPackage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a></td>          <td class="paramname"><span class="paramname"><em>package</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Repairs a package using winget. </p>
+<p>Limited to packages with an installer that supports this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> for the repair action.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent package repair.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the repair action was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname"><a class="el" href="../../dc/d9a/a00218.html" title="Exception that gets thrown if a winget feature is not supportet in the installed winget version.">WGetNET.Exceptions.WinGetFeatureNotSupportedException</a></td><td>This feature is not supported in the installed <a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> version. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01621">1621</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a396acda8193347547c616f3d11337f1d" name="a396acda8193347547c616f3d11337f1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a396acda8193347547c616f3d11337f1d">&#9670;&#160;</a></span>RepairPackageAsync() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.RepairPackageAsync </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously repairs a package using winget. </p>
+<p>Limited to packages with an installer that supports this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for the repair action.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent package repair.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the repair action was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname"><a class="el" href="../../dc/d9a/a00218.html" title="Exception that gets thrown if a winget feature is not supportet in the installed winget version.">WGetNET.Exceptions.WinGetFeatureNotSupportedException</a></td><td>This feature is not supported in the installed <a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> version. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01698">1698</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a0f280a08a9fa9b6cbfd6cadd3cfe311d" name="a0f280a08a9fa9b6cbfd6cadd3cfe311d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f280a08a9fa9b6cbfd6cadd3cfe311d">&#9670;&#160;</a></span>RepairPackageAsync() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f280a08a9fa9b6cbfd6cadd3cfe311d">&#9670;&#160;</a></span>RepairPackageAsync() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2824,12 +3359,61 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00984">984</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01657">1657</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a900b63e6c271b09c0718ef5b1959fb6d" name="a900b63e6c271b09c0718ef5b1959fb6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a900b63e6c271b09c0718ef5b1959fb6d">&#9670;&#160;</a></span>RepairPackageAsync() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.RepairPackageAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a></td>          <td class="paramname"><span class="paramname"><em>package</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously repair a package using winget. </p>
+<p>Limited to packages with an installer that supports this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> for the repair action.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent package repair.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the repair action was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname"><a class="el" href="../../dc/d9a/a00218.html" title="Exception that gets thrown if a winget feature is not supportet in the installed winget version.">WGetNET.Exceptions.WinGetFeatureNotSupportedException</a></td><td>This feature is not supported in the installed <a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> version. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01780">1780</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a11f0bbf6d597902167dadad9ec257847" name="a11f0bbf6d597902167dadad9ec257847"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11f0bbf6d597902167dadad9ec257847">&#9670;&#160;</a></span>RepairPackageAsync() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a11f0bbf6d597902167dadad9ec257847">&#9670;&#160;</a></span>RepairPackageAsync() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2867,7 +3451,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01024">1024</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01743">1743</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2897,7 +3481,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02607">2607</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03363">3363</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2933,7 +3517,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l02638">2638</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l03394">3394</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -2974,7 +3558,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00082">82</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00083">83</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3021,7 +3605,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00120">120</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00121">121</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3068,7 +3652,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00160">160</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00161">161</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
@@ -3121,12 +3705,12 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00208">208</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00209">209</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a160ebb01ede07b6890c3f5be8761543b" name="a160ebb01ede07b6890c3f5be8761543b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a160ebb01ede07b6890c3f5be8761543b">&#9670;&#160;</a></span>UninstallPackage() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a160ebb01ede07b6890c3f5be8761543b">&#9670;&#160;</a></span>UninstallPackage() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3157,12 +3741,53 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00579">579</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00854">854</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a2d292293e760b04ff30f1f4a20ce2433" name="a2d292293e760b04ff30f1f4a20ce2433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d292293e760b04ff30f1f4a20ce2433">&#9670;&#160;</a></span>UninstallPackage() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.UninstallPackage </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Uninsatll a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for uninstallation.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent package uninstall.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the uninstallation was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00882">882</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a93e38becbed4c726b01e2fe54cb74eb8" name="a93e38becbed4c726b01e2fe54cb74eb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93e38becbed4c726b01e2fe54cb74eb8">&#9670;&#160;</a></span>UninstallPackage() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a93e38becbed4c726b01e2fe54cb74eb8">&#9670;&#160;</a></span>UninstallPackage() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3193,12 +3818,100 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00606">606</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00914">914</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a88e084fdfa605ec35f1712c15b937441" name="a88e084fdfa605ec35f1712c15b937441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88e084fdfa605ec35f1712c15b937441">&#9670;&#160;</a></span>UninstallPackage() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.UninstallPackage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a></td>          <td class="paramname"><span class="paramname"><em>package</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Uninstall a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> for the uninstallation.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent package uninstall.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the uninstallation was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00943">943</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a7ec9e177e5bd9e3988e9afb1ee7002f0" name="a7ec9e177e5bd9e3988e9afb1ee7002f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ec9e177e5bd9e3988e9afb1ee7002f0">&#9670;&#160;</a></span>UninstallPackageAsync() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.UninstallPackageAsync </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously uninsatll a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package for uninstallation.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent package uninstall.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the uninstallation was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01008">1008</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="afd0a7cd3255472fbaac28361673cadc1" name="afd0a7cd3255472fbaac28361673cadc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd0a7cd3255472fbaac28361673cadc1">&#9670;&#160;</a></span>UninstallPackageAsync() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afd0a7cd3255472fbaac28361673cadc1">&#9670;&#160;</a></span>UninstallPackageAsync() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3234,12 +3947,59 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00638">638</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00975">975</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="ac76d302e23a9009c79ee6fa2c7bdb94a" name="ac76d302e23a9009c79ee6fa2c7bdb94a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac76d302e23a9009c79ee6fa2c7bdb94a">&#9670;&#160;</a></span>UninstallPackageAsync() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.UninstallPackageAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a></td>          <td class="paramname"><span class="paramname"><em>package</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously uninstall a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> for the uninstallation.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent package uninstall.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the uninstallation was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01078">1078</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a5226fd205eab36894afa679742647ab1" name="a5226fd205eab36894afa679742647ab1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5226fd205eab36894afa679742647ab1">&#9670;&#160;</a></span>UninstallPackageAsync() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5226fd205eab36894afa679742647ab1">&#9670;&#160;</a></span>UninstallPackageAsync() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3275,12 +4035,12 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00670">670</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01045">1045</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a182135738f091e75bbdbf30b62ee3886" name="a182135738f091e75bbdbf30b62ee3886"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a182135738f091e75bbdbf30b62ee3886">&#9670;&#160;</a></span>UpgradeAllPackages()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a182135738f091e75bbdbf30b62ee3886">&#9670;&#160;</a></span>UpgradeAllPackages() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3304,12 +4064,87 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00860">860</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01402">1402</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="aba4551b25c3df204ee3b768af22e94ba" name="aba4551b25c3df204ee3b768af22e94ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba4551b25c3df204ee3b768af22e94ba">&#9670;&#160;</a></span>UpgradeAllPackages() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.UpgradeAllPackages </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tries to upgrade all packages using winget. </p>
+<p>The action might run succesfully without upgrading every or even any package. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">silent</td><td>Request silent upgrade of packages.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the action run successfully or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01422">1422</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a8fb9f724372cc306f0431a8fd3290461" name="a8fb9f724372cc306f0431a8fd3290461"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fb9f724372cc306f0431a8fd3290461">&#9670;&#160;</a></span>UpgradeAllPackagesAsync() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.UpgradeAllPackagesAsync </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously tries to upgrade all packages using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">silent</td><td>Request silent upgrade of packages.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The action might run succesfully without upgrading every or even any package. </p>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the action run successfully or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01475">1475</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="aa9febb5dc44beeda14f3cdac9b602990" name="aa9febb5dc44beeda14f3cdac9b602990"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9febb5dc44beeda14f3cdac9b602990">&#9670;&#160;</a></span>UpgradeAllPackagesAsync()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9febb5dc44beeda14f3cdac9b602990">&#9670;&#160;</a></span>UpgradeAllPackagesAsync() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3339,12 +4174,12 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00883">883</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01451">1451</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a427c2ee1e91ab3f312817b26ac7ad667" name="a427c2ee1e91ab3f312817b26ac7ad667"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a427c2ee1e91ab3f312817b26ac7ad667">&#9670;&#160;</a></span>UpgradePackage() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a427c2ee1e91ab3f312817b26ac7ad667">&#9670;&#160;</a></span>UpgradePackage() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3361,7 +4196,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Upgrades a package using winget. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">packageId</td><td>The id or name of the package for upgrade.</td></tr>
+    <tr><td class="paramname">packageId</td><td>The id or name of the package that should be upgraded.</td></tr>
   </table>
   </dd>
 </dl>
@@ -3375,12 +4210,53 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00746">746</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01156">1156</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="af93ab2a3a09df4cf886b04eb60ebf061" name="af93ab2a3a09df4cf886b04eb60ebf061"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af93ab2a3a09df4cf886b04eb60ebf061">&#9670;&#160;</a></span>UpgradePackage() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.UpgradePackage </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Upgrades a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package that should be upgraded.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent upgrade of packages.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the upgrade was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01184">1184</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a679bc41649652d2365bf36f015aa1b87" name="a679bc41649652d2365bf36f015aa1b87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a679bc41649652d2365bf36f015aa1b87">&#9670;&#160;</a></span>UpgradePackage() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a679bc41649652d2365bf36f015aa1b87">&#9670;&#160;</a></span>UpgradePackage() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3397,7 +4273,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Upgrades a package using winget. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> that for the upgrade</td></tr>
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> that should be upgraded.</td></tr>
   </table>
   </dd>
 </dl>
@@ -3411,12 +4287,100 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00773">773</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01216">1216</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="ad7a3dd92d25daaee37849e08a7f1d28d" name="ad7a3dd92d25daaee37849e08a7f1d28d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7a3dd92d25daaee37849e08a7f1d28d">&#9670;&#160;</a></span>UpgradePackage() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool WGetNET.WinGetPackageManager.UpgradePackage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a></td>          <td class="paramname"><span class="paramname"><em>package</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Upgrades a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> that should be upgraded.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent upgrade of packages.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the upgrade was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01245">1245</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a6174ef725bd6c70dc2b4b80f4ee5494c" name="a6174ef725bd6c70dc2b4b80f4ee5494c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6174ef725bd6c70dc2b4b80f4ee5494c">&#9670;&#160;</a></span>UpgradePackageAsync() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.UpgradePackageAsync </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>packageId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously upgrades a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packageId</td><td>The id or name of the package that should be upgraded.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent upgrade of packages.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the upgrade was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01309">1309</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a0d5c1d92f8fada43ed425e0053880a1c" name="a0d5c1d92f8fada43ed425e0053880a1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d5c1d92f8fada43ed425e0053880a1c">&#9670;&#160;</a></span>UpgradePackageAsync() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d5c1d92f8fada43ed425e0053880a1c">&#9670;&#160;</a></span>UpgradePackageAsync() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3437,7 +4401,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Asynchronously upgrades a package using winget. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">packageId</td><td>The id or name of the package for upgrade.</td></tr>
+    <tr><td class="paramname">packageId</td><td>The id or name of the package that should be upgraded.</td></tr>
     <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
   </table>
   </dd>
@@ -3452,12 +4416,59 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00805">805</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01277">1277</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a00f06fbc617ed446c7ad128d047bc8bf" name="a00f06fbc617ed446c7ad128d047bc8bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00f06fbc617ed446c7ad128d047bc8bf">&#9670;&#160;</a></span>UpgradePackageAsync() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; WGetNET.WinGetPackageManager.UpgradePackageAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d53/a00202.html">WinGetPackage</a></td>          <td class="paramname"><span class="paramname"><em>package</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously upgrades a package using winget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> that should be upgraded.</td></tr>
+    <tr><td class="paramname">silent</td><td>Request silent upgrade of packages.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A System.Threading.Tasks.Task, containing the result. The result is <code>true</code> if the upgrade was successful or <code>false</code> if it failed. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d0/d24/a00222.html" title="Exception that gets thrown if winget is not installed.">WGetNET.Exceptions.WinGetNotInstalledException</a></td><td><a class="el" href="../../d8/df1/a00174.html" title="The WGetNET.WinGet class offers informations about the installed winget version.">WinGet</a> is not installed or not found on the system. </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>A provided argument is empty. </td></tr>
+    <tr><td class="paramname">System.ArgumentNullException</td><td>A provided argument is null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01378">1378</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
 <a id="a4fb1864c9a33a0a7d9d10b6a4f09cf29" name="a4fb1864c9a33a0a7d9d10b6a4f09cf29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4fb1864c9a33a0a7d9d10b6a4f09cf29">&#9670;&#160;</a></span>UpgradePackageAsync() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fb1864c9a33a0a7d9d10b6a4f09cf29">&#9670;&#160;</a></span>UpgradePackageAsync() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3478,7 +4489,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Asynchronously upgrades a package using winget. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> that for the upgrade</td></tr>
+    <tr><td class="paramname">package</td><td>The <a class="el" href="../../db/d53/a00202.html" title="Represents a winget package.">WGetNET.WinGetPackage</a> that should be upgraded.</td></tr>
     <tr><td class="paramname">cancellationToken</td><td>The System.Threading.CancellationToken for the System.Threading.Tasks.Task. </td></tr>
   </table>
   </dd>
@@ -3493,7 +4504,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l00836">836</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d41/a00038_source.html#l01345">1345</a> of file <a class="el" href="../../d8/d41/a00038_source.html">WinGetPackageManager.cs</a>.</p>
 
 </div>
 </div>
