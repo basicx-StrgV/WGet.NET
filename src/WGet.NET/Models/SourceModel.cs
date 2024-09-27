@@ -2,10 +2,12 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System.Collections.Generic;
+
 namespace WGetNET.Models
 {
     /// <summary>
-    /// Represents a winget source for json parsing.
+    /// Represents a winget source for JSON parsing.
     /// </summary>
     internal class SourceModel
     {
@@ -54,7 +56,7 @@ namespace WGetNET.Models
         }
 
         /// <summary>
-        /// Gets sets the type of the source.
+        /// Gets or sets the type of the source.
         /// </summary>
         public string Type
         {
@@ -119,18 +121,57 @@ namespace WGetNET.Models
             }
         }
 
+        /// <summary>
+        /// Gets or sets whether the source was explicitly added.
+        /// </summary>
+        public bool Explicit
+        {
+            get
+            {
+                return _explicit;
+            }
+            set
+            {
+                _explicit = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the trust level of the source.
+        /// </summary>
+        public List<string> TrustLevel
+        {
+            get
+            {
+                return _trustLevel;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    _trustLevel = value;
+                }
+                else
+                {
+                    _trustLevel = new List<string>();
+                }
+            }
+        }
+
         private string _name = string.Empty;
         private string _arg = string.Empty;
         private string _type = string.Empty;
         private string _data = string.Empty;
         private string _identifier = string.Empty;
+        private bool _explicit;
+        private List<string> _trustLevel = new List<string>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.Models.SourceModel"/> class.
         /// </summary>
         internal SourceModel()
         {
-            // Empty constructor for json parsing.
+            // Empty constructor for JSON parsing.
         }
 
         /// <summary>
@@ -148,7 +189,9 @@ namespace WGetNET.Models
                 Arg = source.Arg,
                 Type = source.Type,
                 Data = source.Data,
-                Identifier = source.Identifier
+                Identifier = source.Identifier,
+                Explicit = source.Explicit,
+                TrustLevel = source.TrustLevel
             };
         }
     }
