@@ -146,7 +146,6 @@ namespace WGetTest
                 string hash = connector.Hash(@"Tests\AllSources.json");
                 Console.WriteLine($"Hash of 'AllSources.json': {hash}");
 
-
                 // Package comparison examples with more information
                 Console.WriteLine("\n=== Package Comparison Tests ===");
                 WinGetPackage p1 = WinGetPackage.Create("SampleP1", "SampleId1", "1.0.0", "SampleSource");
@@ -160,7 +159,7 @@ namespace WGetTest
                 PackageTests = PackageTests && p2.SamePackage(p2);
                 PackageTests = PackageTests && !p2.SamePackage(p1);
                 PackageTests = PackageTests && !p2.SamePackage(p3);
-                Console.WriteLine($"Package Comparison Tests: {PackageTests}");
+                Console.WriteLine($"Result: {PackageTests}");
             }
             catch (Exception e)
             {
