@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using WGetNET;
 
 namespace WGetTest
@@ -42,7 +41,9 @@ namespace WGetTest
                 List<WinGetAdminSetting> adminSettings = connector.GetAdminSettings();
                 Console.WriteLine($"Total Admin Settings: {adminSettings.Count}");
                 if (adminSettings.Count > 0)
+                {
                     Console.WriteLine($"Sample Admin Setting: {adminSettings[0].EntryName}");
+                }
 
                 // Package Search Test
                 Console.WriteLine("\n=== Package Search Test ===");
@@ -78,7 +79,9 @@ namespace WGetTest
                 Console.WriteLine("\n=== Exact Installed Package Test ===");
                 WinGetPackage? test4 = connector.GetExactInstalledPackage("Microsoft Edge");
                 if (test4 != null)
+                {
                     Console.WriteLine($"Microsoft Edge Package Found: {test4.Name}");
+                }
 
                 // Package Download Test
                 Console.WriteLine("\n=== Package Download Test ===");
@@ -90,21 +93,27 @@ namespace WGetTest
                     Console.WriteLine($"Download Result for {packageList[0].Name}: {downloadResult}");
                 }
 
-
-
                 // Pinning Tests
                 Console.WriteLine("\n=== Pinning Tests ===");
                 Console.WriteLine($"Adding 7Zip as Pinned: {connector.PinAdd("7zip.7zip", true)}");
+
                 List<WinGetPinnedPackage> pinnedList1 = connector.GetPinnedPackages();
                 Console.WriteLine($"Total Pinned Packages: {pinnedList1.Count}");
                 if (pinnedList1.Count > 0)
+                {
                     Console.WriteLine($"{pinnedList1[0].Name}: {pinnedList1[0].PinTypeString}");
+                }
+
                 Console.WriteLine($"Removing 7Zip as Pinned: {connector.PinRemove("7zip.7zip")}");
                 Console.WriteLine($"Adding 7Zip as Pinned: {connector.PinAdd("7zip.7zip", "23.*")}");
+
                 List<WinGetPinnedPackage> pinnedList2 = connector.GetPinnedPackages();
                 Console.WriteLine($"Total Pinned Packages after version-specific pin: {pinnedList2.Count}");
                 if (pinnedList2.Count > 0)
+                {
                     Console.WriteLine($"{pinnedList2[0].Name}: {pinnedList2[0].PinTypeString}");
+                }
+
                 Console.WriteLine($"Removing 7Zip as Pinned: {connector.PinRemove("7zip.7zip")}");
 
                 Console.WriteLine($"Adding 7Zip as Pinned for Install: {connector.PinAddInstalled("7zip.7zip", true)}");
@@ -144,14 +153,14 @@ namespace WGetTest
                 WinGetPackage p2 = WinGetPackage.Create("SampleP2", "SampleId2", "2.0.0", "3.0.0", "");
                 WinGetPackage p3 = WinGetPackage.Create("SampleP1", "SampleId1", "2.0.0", "SampleSource");
                 bool PackageTests = true;
-                PackageTests = PackageTests && p1.Equals(p1);
-                PackageTests = PackageTests && !p1.Equals(p2);
-                PackageTests = PackageTests && !p1.Equals(p3);
-                PackageTests = PackageTests && p2.SamePackage(p2);
-                PackageTests = PackageTests && !p2.Equals(p1);
-                PackageTests = PackageTests && !p2.Equals(p3);
+                PackageTests = PackageTests && p1.SamePackage(p1);
+                PackageTests = PackageTests && !p1.SamePackage(p2);
+                PackageTests = PackageTests && p1.SamePackage(p3);
                 PackageTests = PackageTests && !p1.SamePackage(p3, true);
-                Console.WriteLine($"Package Tests: {PackageTests}");
+                PackageTests = PackageTests && p2.SamePackage(p2);
+                PackageTests = PackageTests && !p2.SamePackage(p1);
+                PackageTests = PackageTests && !p2.SamePackage(p3);
+                Console.WriteLine($"Package Comparison Tests: {PackageTests}");
             }
             catch (Exception e)
             {
