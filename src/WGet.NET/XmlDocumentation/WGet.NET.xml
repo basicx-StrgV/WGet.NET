@@ -5244,27 +5244,6 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
-        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <param name="cancellationToken">
-            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
         <member name="M:WGetNET.Helper.JsonHelper.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -5413,6 +5392,25 @@
             The created <see cref="T:System.Int32"/>.
             </returns>
         </member>
+        <member name="M:WGetNET.Parser.VersionParser.CleanParseToInt(System.String,System.Int32)">
+            <summary>
+            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Int32"/> as best as possible.
+            </summary>
+            <remarks>
+            This tries to clean the provided input <see cref="T:System.String"/>, 
+            with minimal data loss, so it can be parsed to a <see cref="T:System.Int32"/>
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to parse.</param>
+            <param name="defaultValue">Default value that is used if the input can't be parsed.</param>
+            <returns>
+            The created <see cref="T:System.Int32"/>.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.CleanupNumberString(System.String)">
+            <summary>
+            Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
+            </summary>
+            <rber>
         <member name="M:WGetNET.Parser.VersionParser.CleanParseToInt(System.String,System.Int32)">
             <summary>
             Parses a <see cref="T:System.String"/> to a <see cref="T:System.Int32"/> as best as possible.

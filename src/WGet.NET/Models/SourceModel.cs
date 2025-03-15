@@ -124,17 +124,7 @@ namespace WGetNET.Models
         /// <summary>
         /// Gets or sets whether the source was explicitly added.
         /// </summary>
-        public bool Explicit
-        {
-            get
-            {
-                return _explicit;
-            }
-            set
-            {
-                _explicit = value;
-            }
-        }
+        public bool Explicit { get; set; }
 
         /// <summary>
         /// Gets or sets the trust level of the source.
@@ -163,7 +153,6 @@ namespace WGetNET.Models
         private string _type = string.Empty;
         private string _data = string.Empty;
         private string _identifier = string.Empty;
-        private bool _explicit;
         private List<string> _trustLevel = new List<string>();
 
         /// <summary>

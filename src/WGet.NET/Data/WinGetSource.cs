@@ -3,9 +3,9 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
-using WGetNET.Models;
-using WGetNET.Helper;
 using System.Collections.Generic;
+using WGetNET.Helper;
+using WGetNET.Models;
 
 namespace WGetNET
 {
@@ -143,7 +143,7 @@ namespace WGetNET
         /// <param name="identifier">The identifier of the package</param>
         /// <param name="explicitSource">Indicates if the source was explicitly added.</param>
         /// <param name="trustLevel">Trust level of the source.</param>
-        internal WinGetSource(string name, string arg, Uri? uri, string type, string identifier, bool explicitSource = false, List<string>? trustLevel = default, string? data = null)
+        internal WinGetSource(string name, string arg, Uri? uri, string type, string identifier, bool explicitSource = false, List<string>? trustLevel = null, string? data = null)
         {
             _name = name;
             _arg = arg;
@@ -151,7 +151,15 @@ namespace WGetNET
             _type = type;
             _identifier = identifier;
             _explicit = explicitSource;
-            _trustLevel = trustLevel;
+
+            if (trustLevel != null)
+            {
+                _trustLevel = trustLevel;
+            }
+            else
+            {
+                _trustLevel = new List<string>();
+            }
 
             if (data != null)
             {
@@ -218,7 +226,7 @@ namespace WGetNET
 
             Uri.TryCreate(arg, UriKind.Absolute, out Uri? uri);
 
-            return new WinGetSource(name, arg, uri, type, identifier,data: data);
+            return new WinGetSource(name, arg, uri, type, identifier, data: data);
         }
 
         /// <summary>
@@ -232,7 +240,7 @@ namespace WGetNET
         {
             Uri.TryCreate(model.Arg, UriKind.Absolute, out Uri? uri);
 
-            return new WinGetSource(model.Name, model.Arg, uri, model.Type, model.Identifier,model.Explicit, model.TrustLevel, model.Data);
+            return new WinGetSource(model.Name, model.Arg, uri, model.Type, model.Identifier, model.Explicit, model.TrustLevel, model.Data);
         }
 
         /// <inheritdoc/>
