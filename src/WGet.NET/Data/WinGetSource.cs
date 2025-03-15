@@ -3,8 +3,9 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
-using WGetNET.Models;
+using System.Collections.Generic;
 using WGetNET.Helper;
+using WGetNET.Models;
 
 namespace WGetNET
 {
@@ -82,6 +83,29 @@ namespace WGetNET
             }
         }
 
+        /// <summary>
+        /// Gets whether the source was explicitly added.
+        /// </summary>
+        public bool Explicit
+        {
+            get
+            {
+                return _explicit;
+            }
+        }
+
+        /// <summary>
+        /// Gets the trust level of the source.
+        /// </summary>
+        public List<string> TrustLevel
+        {
+            get
+            {
+                return _trustLevel;
+            }
+        }
+
+
         /// <inheritdoc/>
         public bool IsEmpty
         {
@@ -105,6 +129,8 @@ namespace WGetNET
         private readonly string _type;
         private readonly string _data;
         private readonly string _identifier;
+        private readonly bool _explicit;
+        private readonly List<string> _trustLevel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetSource"/> class.
@@ -115,13 +141,25 @@ namespace WGetNET
         /// <param name="type">Type identifier of the source.</param>
         /// <param name="data">Data of the source source. This field is only used by some sources.</param>
         /// <param name="identifier">The identifier of the package</param>
-        internal WinGetSource(string name, string arg, Uri? uri, string type, string identifier, string? data = null)
+        /// <param name="explicitSource">Indicates if the source was explicitly added.</param>
+        /// <param name="trustLevel">Trust level of the source.</param>
+        internal WinGetSource(string name, string arg, Uri? uri, string type, string identifier, bool explicitSource = false, List<string>? trustLevel = null, string? data = null)
         {
             _name = name;
             _arg = arg;
             _uri = uri;
             _type = type;
             _identifier = identifier;
+            _explicit = explicitSource;
+
+            if (trustLevel != null)
+            {
+                _trustLevel = trustLevel;
+            }
+            else
+            {
+                _trustLevel = new List<string>();
+            }
 
             if (data != null)
             {
@@ -188,7 +226,7 @@ namespace WGetNET
 
             Uri.TryCreate(arg, UriKind.Absolute, out Uri? uri);
 
-            return new WinGetSource(name, arg, uri, type, identifier, data);
+            return new WinGetSource(name, arg, uri, type, identifier, data: data);
         }
 
         /// <summary>
@@ -202,7 +240,7 @@ namespace WGetNET
         {
             Uri.TryCreate(model.Arg, UriKind.Absolute, out Uri? uri);
 
-            return new WinGetSource(model.Name, model.Arg, uri, model.Type, model.Identifier, model.Data);
+            return new WinGetSource(model.Name, model.Arg, uri, model.Type, model.Identifier, model.Explicit, model.TrustLevel, model.Data);
         }
 
         /// <inheritdoc/>
@@ -214,6 +252,8 @@ namespace WGetNET
                     _uri,
                     _type,
                     _identifier,
+                    _explicit,
+                    _trustLevel,
                     _data
                 );
         }
