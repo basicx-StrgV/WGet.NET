@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
-using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using WGetNET.Builder;
@@ -131,7 +130,7 @@ namespace WGetNET
         public WinGet()
         {
             // Check if the current process has administrator privileges
-            _administratorPrivileges = CheckAdministratorPrivileges();
+            _administratorPrivileges = SystemHelper.CheckAdministratorPrivileges();
 
             // Set inital values
             _processManager = new ProcessManager("winget");
@@ -861,35 +860,6 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Checks if winget is installed on the system and returns the path to the executable.
-        /// </summary>
-        /// <returns>
-        /// <see cref="System.String"/> containing the executable path if it was found or <see cref="System.String.Empty"/> if not. 
-        /// </returns>
-        private string CheckInstallation()
-        {
-            string? pathEnvVar = Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
-            if (string.IsNullOrWhiteSpace(pathEnvVar))
-            {
-                return string.Empty;
-            }
-
-            string[] paths = pathEnvVar.Split(';');
-
-            string exePath;
-            for (int i = 0; i < paths.Length; i++)
-            {
-                exePath = Path.Combine(paths[i], "winget.exe");
-                if (File.Exists(exePath))
-                {
-                    return exePath;
-                }
-            }
-
-            return string.Empty;
-        }
-
-        /// <summary>
         /// Gets the last modification date (UTC) of the currently set winget executable.
         /// </summary>
         /// <returns>
@@ -915,7 +885,7 @@ namespace WGetNET
         {
             bool isInstalled;
 
-            _wingetExePath = CheckInstallation();
+            _wingetExePath = SystemHelper.CheckWingetInstallation();
 
             if (string.IsNullOrWhiteSpace(_wingetExePath))
             {
@@ -944,32 +914,6 @@ namespace WGetNET
             _isPreview = VersionParser.CheckPreviewStatus(_versionString);
 
             return isInstalled;
-        }
-
-        /// <summary>
-        /// Check if the current user has administrator privileges.
-        /// </summary>
-        /// <returns>
-        /// <see langword="true"/> if the current user has administrator privileges and
-        /// <see langword="false"/> if not.
-        /// </returns>
-        private bool CheckAdministratorPrivileges()
-        {
-            if (Environment.OSVersion.Platform == PlatformID.Unix)
-            {
-                // Making sure windows related functions dont get called on none windows systems.
-                return true;
-            }
-
-            using WindowsIdentity? identity = WindowsIdentity.GetCurrent(false);
-
-            if (identity != null)
-            {
-                return new WindowsPrincipal(identity)
-                    .IsInRole(WindowsBuiltInRole.Administrator);
-            }
-
-            return false;
         }
         //---------------------------------------------------------------------------------------------
     }

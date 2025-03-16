@@ -1298,15 +1298,6 @@
             <see langword="true"/> if the installation was found and <see langword="false"/> if not.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGet.CheckAdministratorPrivileges">
-            <summary>
-            Check if the current user has administrator privileges.
-            </summary>
-            <returns>
-            <see langword="true"/> if the current user has administrator privileges and
-            <see langword="false"/> if not.
-            </returns>
-        </member>
         <member name="T:WGetNET.WinGetPackageManager">
             <summary>
             The <see cref="T:WGetNET.WinGetPackageManager"/> class offers methods to manage packages with winget.
@@ -5312,6 +5303,20 @@
             </param>
             <returns>
             A <see cref="T:System.String"/> containing the trimed path.
+            </returns>
+        </member>
+        <member name="T:WGetNET.Helper.WindowsIdentityHelper">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.Helper.WindowsIdentityHelper"/> class provides methods for working with windows identity.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Helper.WindowsIdentityHelper.CheckAdministratorPrivileges">
+            <summary>
+            Check if the current user has administrator privileges.
+            </summary>
+            <returns>
+            <see langword="true"/> if the current user has administrator privileges and
+            <see langword="false"/> if not.
             </returns>
         </member>
         <member name="T:WGetNET.IWinGetObject">
