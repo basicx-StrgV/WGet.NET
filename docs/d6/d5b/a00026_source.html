@@ -59,7 +59,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../WGet.NET_Icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.3.0</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.3.1</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -137,16 +137,16 @@ $(function(){initNavTree('d6/d5b/a00026_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// https://github.com/basicx-StrgV/                 //</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//--------------------------------------------------//</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using </span>System;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using </span><a class="code hl_namespace" href="../../df/d6a/a00119.html">WGetNET.Parser</a>;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using </span><a class="code hl_namespace" href="../../dd/d6d/a00111.html">WGetNET.Abstractions</a>;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using </span><a class="code hl_namespace" href="../../d7/d06/a00131.html">WGetNET.Parser</a>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using </span><a class="code hl_namespace" href="../../de/d36/a00123.html">WGetNET.Abstractions</a>;</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../db/d57/a00112.html">WGetNET.Builder</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../da/d72/a00124.html">WGetNET.Builder</a></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">internal</span> <span class="keyword">class </span>WinGetPinnedPackageBuilder : WinGetObjectBuilder&lt;WinGetPinnedPackage&gt;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    {</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> _pinTypeString = <span class="keywordtype">string</span>.Empty;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> _pinnedVersionString = <span class="keywordtype">string</span>.Empty;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keyword">private</span> <a class="code hl_enumeration" href="../../d4/d81/a00110.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a> _pinType = <a class="code hl_enumeration" href="../../d4/d81/a00110.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keyword">private</span> <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a> _pinType = <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> _name = <span class="keywordtype">string</span>.Empty;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> _id = <span class="keywordtype">string</span>.Empty;</div>
@@ -168,10 +168,10 @@ $(function(){initNavTree('d6/d5b/a00026_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            _pinType = _pinTypeString.ToUpper() <span class="keywordflow">switch</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                <span class="stringliteral">&quot;PINNING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../d4/d81/a00110.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning,</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                <span class="stringliteral">&quot;BLOCKING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../d4/d81/a00110.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Blocking,</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                <span class="stringliteral">&quot;GATING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../d4/d81/a00110.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Gating,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                _ =&gt; <a class="code hl_enumeration" href="../../d4/d81/a00110.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                <span class="stringliteral">&quot;PINNING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                <span class="stringliteral">&quot;BLOCKING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Blocking,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                <span class="stringliteral">&quot;GATING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Gating,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                _ =&gt; <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning,</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            };</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
@@ -256,7 +256,7 @@ $(function(){initNavTree('d6/d5b/a00026_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            _sourceName = sourceName;</div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        }</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keyword">public</span> <span class="keyword">override</span> <a class="code hl_class" href="../../d5/df1/a00206.html">WinGetPinnedPackage</a> GetInstance()</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keyword">public</span> <span class="keyword">override</span> <a class="code hl_class" href="../../dc/d9a/a00218.html">WinGetPinnedPackage</a> GetInstance()</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        {</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            <span class="keywordflow">if</span> (_version == <span class="keyword">null</span>)</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            {</div>
@@ -268,7 +268,7 @@ $(function(){initNavTree('d6/d5b/a00026_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                _availableVersion = VersionParser.Parse(_availableVersionString);</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            }</div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="../../d5/df1/a00206.html">WinGetPinnedPackage</a>(</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="../../dc/d9a/a00218.html">WinGetPinnedPackage</a>(</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                _pinTypeString,</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                _pinType,</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                _pinnedVersionString,</div>
@@ -295,11 +295,11 @@ $(function(){initNavTree('d6/d5b/a00026_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        }</div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    }</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>}</div>
-<div class="ttc" id="aa00110_html_a6463096e9a46a5fca424de0c0639f69d"><div class="ttname"><a href="../../d4/d81/a00110.html#a6463096e9a46a5fca424de0c0639f69d">WGetNET.PinType</a></div><div class="ttdeci">PinType</div><div class="ttdoc">Enum of winget pin types.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d89/a00071_source.html#l00010">PinType.cs:11</a></div></div>
-<div class="ttc" id="aa00111_html"><div class="ttname"><a href="../../dd/d6d/a00111.html">WGetNET.Abstractions</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/dad/a00005_source.html#l00007">WinGetInfoEntry.cs:8</a></div></div>
-<div class="ttc" id="aa00112_html"><div class="ttname"><a href="../../db/d57/a00112.html">WGetNET.Builder</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d45/a00011_source.html#l00007">WinGetAdminSettingBuilder.cs:8</a></div></div>
-<div class="ttc" id="aa00119_html"><div class="ttname"><a href="../../df/d6a/a00119.html">WGetNET.Parser</a></div><div class="ttdef"><b>Definition</b> <a href="../../df/d98/a00107_source.html#l00008">VersionParser.cs:9</a></div></div>
-<div class="ttc" id="aa00206_html"><div class="ttname"><a href="../../d5/df1/a00206.html">WGetNET.WinGetPinnedPackage</a></div><div class="ttdoc">Represents a winget pinned package.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d8b/a00059_source.html#l00012">WinGetPinnedPackage.cs:13</a></div></div>
+<div class="ttc" id="aa00122_html_a6463096e9a46a5fca424de0c0639f69d"><div class="ttname"><a href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">WGetNET.PinType</a></div><div class="ttdeci">PinType</div><div class="ttdoc">Enum of winget pin types.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d89/a00071_source.html#l00010">PinType.cs:11</a></div></div>
+<div class="ttc" id="aa00123_html"><div class="ttname"><a href="../../de/d36/a00123.html">WGetNET.Abstractions</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/dad/a00005_source.html#l00007">WinGetInfoEntry.cs:8</a></div></div>
+<div class="ttc" id="aa00124_html"><div class="ttname"><a href="../../da/d72/a00124.html">WGetNET.Builder</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d45/a00011_source.html#l00007">WinGetAdminSettingBuilder.cs:8</a></div></div>
+<div class="ttc" id="aa00131_html"><div class="ttname"><a href="../../d7/d06/a00131.html">WGetNET.Parser</a></div><div class="ttdef"><b>Definition</b> <a href="../../df/d6a/a00119_source.html#l00008">VersionParser.cs:9</a></div></div>
+<div class="ttc" id="aa00218_html"><div class="ttname"><a href="../../dc/d9a/a00218.html">WGetNET.WinGetPinnedPackage</a></div><div class="ttdoc">Represents a winget pinned package.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d8b/a00059_source.html#l00012">WinGetPinnedPackage.cs:13</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath custom-footer-container">

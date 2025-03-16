@@ -1,24 +1,24 @@
 var annotated_dup =
 [
-    [ "WGetNET", "d4/d81/a00110.html", [
-      [ "Abstractions", "dd/d6d/a00111.html", [
-        [ "WinGetInfoEntry", "de/d76/a00134.html", "de/d76/a00134" ]
+    [ "WGetNET", "df/dc8/a00122.html", [
+      [ "Abstractions", "de/d36/a00123.html", [
+        [ "WinGetInfoEntry", "d9/db6/a00146.html", "d9/db6/a00146" ]
       ] ],
-      [ "Exceptions", "d2/da3/a00115.html", [
-        [ "InvalidJsonException", "d3/dd1/a00214.html", "d3/dd1/a00214" ],
-        [ "WinGetFeatureNotSupportedException", "dc/d9a/a00218.html", "dc/d9a/a00218" ],
-        [ "WinGetNotInstalledException", "d0/d24/a00222.html", "d0/d24/a00222" ]
+      [ "Exceptions", "df/dcd/a00127.html", [
+        [ "InvalidJsonException", "dc/d55/a00226.html", "dc/d55/a00226" ],
+        [ "WinGetFeatureNotSupportedException", "d1/da8/a00230.html", "d1/da8/a00230" ],
+        [ "WinGetNotInstalledException", "da/d31/a00234.html", "da/d31/a00234" ]
       ] ],
-      [ "IWinGetObject", "d2/dc8/a00242.html", "d2/dc8/a00242" ],
-      [ "WinGet", "d8/df1/a00174.html", "d8/df1/a00174" ],
-      [ "WinGetAdminSetting", "d8/d00/a00186.html", "d8/d00/a00186" ],
-      [ "WinGetDirectory", "d7/d6e/a00190.html", "d7/d6e/a00190" ],
-      [ "WinGetInfo", "dc/d57/a00194.html", "dc/d57/a00194" ],
-      [ "WinGetLink", "d7/da0/a00198.html", "d7/da0/a00198" ],
-      [ "WinGetPackage", "db/d53/a00202.html", "db/d53/a00202" ],
-      [ "WinGetPackageManager", "d9/d90/a00178.html", "d9/d90/a00178" ],
-      [ "WinGetPinnedPackage", "d5/df1/a00206.html", "d5/df1/a00206" ],
-      [ "WinGetSource", "da/de7/a00210.html", "da/de7/a00210" ],
-      [ "WinGetSourceManager", "d7/d25/a00182.html", "d7/d25/a00182" ]
+      [ "IWinGetObject", "d9/d2a/a00270.html", "d9/d2a/a00270" ],
+      [ "WinGet", "d8/d00/a00186.html", "d8/d00/a00186" ],
+      [ "WinGetAdminSetting", "d7/da0/a00198.html", "d7/da0/a00198" ],
+      [ "WinGetDirectory", "db/d53/a00202.html", "db/d53/a00202" ],
+      [ "WinGetInfo", "d5/df1/a00206.html", "d5/df1/a00206" ],
+      [ "WinGetLink", "da/de7/a00210.html", "da/de7/a00210" ],
+      [ "WinGetPackage", "d3/dd1/a00214.html", "d3/dd1/a00214" ],
+      [ "WinGetPackageManager", "d7/d6e/a00190.html", "d7/d6e/a00190" ],
+      [ "WinGetPinnedPackage", "dc/d9a/a00218.html", "dc/d9a/a00218" ],
+      [ "WinGetSource", "d0/d24/a00222.html", "d0/d24/a00222" ],
+      [ "WinGetSourceManager", "dc/d57/a00194.html", "dc/d57/a00194" ]
     ] ]
 ];

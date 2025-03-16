@@ -59,7 +59,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../WGet.NET_Icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.3.0</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.3.1</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -139,14 +139,14 @@ $(function(){initNavTree('d1/d09/a00077_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using </span>System;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using </span>System.Runtime.Serialization;</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../d2/da3/a00115.html">WGetNET.Exceptions</a></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../df/dcd/a00127.html">WGetNET.Exceptions</a></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    [Serializable]</div>
 <div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="../../dc/d9a/a00218.html">   14</a></span>    <span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="../../dc/d9a/a00218.html">WinGetFeatureNotSupportedException</a> : Exception</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="../../d1/da8/a00230.html">   14</a></span>    <span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="../../d1/da8/a00230.html">WinGetFeatureNotSupportedException</a> : Exception</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    {</div>
 <div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="../../dc/d9a/a00218.html#a75334f29889765aaf99ec16bfe0df745">   19</a></span>        <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">string</span> <a class="code hl_property" href="../../dc/d9a/a00218.html#a75334f29889765aaf99ec16bfe0df745">Message</a> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="../../d1/da8/a00230.html#a75334f29889765aaf99ec16bfe0df745">   19</a></span>        <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">string</span> <a class="code hl_property" href="../../d1/da8/a00230.html#a75334f29889765aaf99ec16bfe0df745">Message</a> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        { </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            <span class="keyword">get</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            {</div>
@@ -164,33 +164,33 @@ $(function(){initNavTree('d1/d09/a00077_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keyword">private</span> readonly Version? _minVersion;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="../../dc/d9a/a00218.html#af92a8369c06c339285ff5e81cacc0f0d">   39</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="../../dc/d9a/a00218.html#af92a8369c06c339285ff5e81cacc0f0d">WinGetFeatureNotSupportedException</a>(Version minVersion)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="../../d1/da8/a00230.html#af92a8369c06c339285ff5e81cacc0f0d">   39</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="../../d1/da8/a00230.html#af92a8369c06c339285ff5e81cacc0f0d">WinGetFeatureNotSupportedException</a>(Version minVersion)</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        {</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            _minVersion = minVersion;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        }</div>
 </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="../../dc/d9a/a00218.html#ab15dfd7d2017a365f40318cfecc0287c">   49</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="../../dc/d9a/a00218.html#ab15dfd7d2017a365f40318cfecc0287c">WinGetFeatureNotSupportedException</a>(Version minVersion, Exception innerException) : base(null, innerException)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="../../d1/da8/a00230.html#ab15dfd7d2017a365f40318cfecc0287c">   49</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="../../d1/da8/a00230.html#ab15dfd7d2017a365f40318cfecc0287c">WinGetFeatureNotSupportedException</a>(Version minVersion, Exception innerException) : base(null, innerException)</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        {</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            _minVersion = minVersion;</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
 </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="foldopen" id="foldopen00065" data-start="{" data-end="}">
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="../../dc/d9a/a00218.html#a870130b656bd90fcb53f258e43e9c8fc">   65</a></span>        <span class="keyword">protected</span> <a class="code hl_function" href="../../dc/d9a/a00218.html#a870130b656bd90fcb53f258e43e9c8fc">WinGetFeatureNotSupportedException</a>(SerializationInfo info, StreamingContext context) : base(info, context)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="../../d1/da8/a00230.html#a870130b656bd90fcb53f258e43e9c8fc">   65</a></span>        <span class="keyword">protected</span> <a class="code hl_function" href="../../d1/da8/a00230.html#a870130b656bd90fcb53f258e43e9c8fc">WinGetFeatureNotSupportedException</a>(SerializationInfo info, StreamingContext context) : base(info, context)</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        {</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        }</div>
 </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    }</div>
 </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
-<div class="ttc" id="aa00115_html"><div class="ttname"><a href="../../d2/da3/a00115.html">WGetNET.Exceptions</a></div><div class="ttdef"><b>Definition</b> <a href="../../db/db6/a00074_source.html#l00008">InvalidJsonException.cs:9</a></div></div>
-<div class="ttc" id="aa00218_html"><div class="ttname"><a href="../../dc/d9a/a00218.html">WGetNET.Exceptions.WinGetFeatureNotSupportedException</a></div><div class="ttdoc">Exception that gets thrown if a winget feature is not supportet in the installed winget version.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">WinGetFeatureNotSupportedException.cs:15</a></div></div>
-<div class="ttc" id="aa00218_html_a75334f29889765aaf99ec16bfe0df745"><div class="ttname"><a href="../../dc/d9a/a00218.html#a75334f29889765aaf99ec16bfe0df745">WGetNET.Exceptions.WinGetFeatureNotSupportedException.Message</a></div><div class="ttdeci">override string Message</div><div class="ttdoc">Gets a message that describes the current exception.</div><div class="ttdef"><b>Definition</b> <a href="#l00019">WinGetFeatureNotSupportedException.cs:20</a></div></div>
-<div class="ttc" id="aa00218_html_a870130b656bd90fcb53f258e43e9c8fc"><div class="ttname"><a href="../../dc/d9a/a00218.html#a870130b656bd90fcb53f258e43e9c8fc">WGetNET.Exceptions.WinGetFeatureNotSupportedException.WinGetFeatureNotSupportedException</a></div><div class="ttdeci">WinGetFeatureNotSupportedException(SerializationInfo info, StreamingContext context)</div><div class="ttdoc">Initializes a new instance of the WGetNET.Exceptions.WinGetFeatureNotSupportedException class with se...</div><div class="ttdef"><b>Definition</b> <a href="#l00065">WinGetFeatureNotSupportedException.cs:65</a></div></div>
-<div class="ttc" id="aa00218_html_ab15dfd7d2017a365f40318cfecc0287c"><div class="ttname"><a href="../../dc/d9a/a00218.html#ab15dfd7d2017a365f40318cfecc0287c">WGetNET.Exceptions.WinGetFeatureNotSupportedException.WinGetFeatureNotSupportedException</a></div><div class="ttdeci">WinGetFeatureNotSupportedException(Version minVersion, Exception innerException)</div><div class="ttdoc">Initializes a new instance of the WGetNET.Exceptions.WinGetFeatureNotSupportedException class.</div><div class="ttdef"><b>Definition</b> <a href="#l00049">WinGetFeatureNotSupportedException.cs:49</a></div></div>
-<div class="ttc" id="aa00218_html_af92a8369c06c339285ff5e81cacc0f0d"><div class="ttname"><a href="../../dc/d9a/a00218.html#af92a8369c06c339285ff5e81cacc0f0d">WGetNET.Exceptions.WinGetFeatureNotSupportedException.WinGetFeatureNotSupportedException</a></div><div class="ttdeci">WinGetFeatureNotSupportedException(Version minVersion)</div><div class="ttdoc">Initializes a new instance of the WGetNET.Exceptions.WinGetFeatureNotSupportedException class.</div><div class="ttdef"><b>Definition</b> <a href="#l00039">WinGetFeatureNotSupportedException.cs:39</a></div></div>
+<div class="ttc" id="aa00127_html"><div class="ttname"><a href="../../df/dcd/a00127.html">WGetNET.Exceptions</a></div><div class="ttdef"><b>Definition</b> <a href="../../db/db6/a00074_source.html#l00008">InvalidJsonException.cs:9</a></div></div>
+<div class="ttc" id="aa00230_html"><div class="ttname"><a href="../../d1/da8/a00230.html">WGetNET.Exceptions.WinGetFeatureNotSupportedException</a></div><div class="ttdoc">Exception that gets thrown if a winget feature is not supportet in the installed winget version.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">WinGetFeatureNotSupportedException.cs:15</a></div></div>
+<div class="ttc" id="aa00230_html_a75334f29889765aaf99ec16bfe0df745"><div class="ttname"><a href="../../d1/da8/a00230.html#a75334f29889765aaf99ec16bfe0df745">WGetNET.Exceptions.WinGetFeatureNotSupportedException.Message</a></div><div class="ttdeci">override string Message</div><div class="ttdoc">Gets a message that describes the current exception.</div><div class="ttdef"><b>Definition</b> <a href="#l00019">WinGetFeatureNotSupportedException.cs:20</a></div></div>
+<div class="ttc" id="aa00230_html_a870130b656bd90fcb53f258e43e9c8fc"><div class="ttname"><a href="../../d1/da8/a00230.html#a870130b656bd90fcb53f258e43e9c8fc">WGetNET.Exceptions.WinGetFeatureNotSupportedException.WinGetFeatureNotSupportedException</a></div><div class="ttdeci">WinGetFeatureNotSupportedException(SerializationInfo info, StreamingContext context)</div><div class="ttdoc">Initializes a new instance of the WGetNET.Exceptions.WinGetFeatureNotSupportedException class with se...</div><div class="ttdef"><b>Definition</b> <a href="#l00065">WinGetFeatureNotSupportedException.cs:65</a></div></div>
+<div class="ttc" id="aa00230_html_ab15dfd7d2017a365f40318cfecc0287c"><div class="ttname"><a href="../../d1/da8/a00230.html#ab15dfd7d2017a365f40318cfecc0287c">WGetNET.Exceptions.WinGetFeatureNotSupportedException.WinGetFeatureNotSupportedException</a></div><div class="ttdeci">WinGetFeatureNotSupportedException(Version minVersion, Exception innerException)</div><div class="ttdoc">Initializes a new instance of the WGetNET.Exceptions.WinGetFeatureNotSupportedException class.</div><div class="ttdef"><b>Definition</b> <a href="#l00049">WinGetFeatureNotSupportedException.cs:49</a></div></div>
+<div class="ttc" id="aa00230_html_af92a8369c06c339285ff5e81cacc0f0d"><div class="ttname"><a href="../../d1/da8/a00230.html#af92a8369c06c339285ff5e81cacc0f0d">WGetNET.Exceptions.WinGetFeatureNotSupportedException.WinGetFeatureNotSupportedException</a></div><div class="ttdeci">WinGetFeatureNotSupportedException(Version minVersion)</div><div class="ttdoc">Initializes a new instance of the WGetNET.Exceptions.WinGetFeatureNotSupportedException class.</div><div class="ttdef"><b>Definition</b> <a href="#l00039">WinGetFeatureNotSupportedException.cs:39</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath custom-footer-container">

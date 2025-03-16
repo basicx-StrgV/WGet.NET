@@ -1,7 +1,7 @@
 var a00218 =
 [
-    [ "WinGetFeatureNotSupportedException", "dc/d9a/a00218.html#af92a8369c06c339285ff5e81cacc0f0d", null ],
-    [ "WinGetFeatureNotSupportedException", "dc/d9a/a00218.html#ab15dfd7d2017a365f40318cfecc0287c", null ],
-    [ "WinGetFeatureNotSupportedException", "dc/d9a/a00218.html#a870130b656bd90fcb53f258e43e9c8fc", null ],
-    [ "Message", "dc/d9a/a00218.html#a75334f29889765aaf99ec16bfe0df745", null ]
+    [ "Clone", "dc/d9a/a00218.html#a170ae01252d46e2d62faee453759b550", null ],
+    [ "PinnedVersion", "dc/d9a/a00218.html#ae439038be7b34612b0e4c58ae3b79ef2", null ],
+    [ "PinType", "dc/d9a/a00218.html#ac197be9bb8f3b5c3dc8f4606ebf67a2a", null ],
+    [ "PinTypeString", "dc/d9a/a00218.html#a87b9793ff80822e5435f3ad88121b469", null ]
 ];
