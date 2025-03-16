@@ -563,33 +563,6 @@
             containing the output an exit id of the process.
             </returns>
         </member>
-        <member name="M:WGetNET.Components.Internal.ProcessManager.ReadSreamOutput(System.IO.StreamReader)">
-            <summary>
-            Reads the data from the process output to a string array.
-            </summary>
-            <param name="output">
-            The <see cref="T:System.IO.StreamReader"/> with the process output.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> array 
-            containing the process output stream content by lines.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Components.Internal.ProcessManager.ReadSreamOutputAsync(System.IO.StreamReader,System.Threading.CancellationToken)">
-            <summary>
-            Asynchronous reads the data from the process output to a string array.
-            </summary>
-            <param name="output">
-            The <see cref="T:System.IO.StreamReader"/> with the process output.
-            </param>
-            <param name="cancellationToken">
-            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> array 
-            containing the process output stream content by lines.
-            </returns>
-        </member>
         <member name="T:WGetNET.Components.Internal.ProcessOutputReader">
             <summary>
             The <see cref="T:WGetNET.Components.Internal.ProcessOutputReader"/> class,
@@ -5016,6 +4989,39 @@
             </param>
             <returns>
             The <see langword="array"/> with empty entries removed.
+            </returns>
+        </member>
+        <member name="T:WGetNET.Extensions.StreamReaderExtensions">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.Extensions.StreamReaderExtensions"/> class,
+            provieds extension methods for the <see cref="T:System.IO.StringReader"/>.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Extensions.StreamReaderExtensions.ReadSreamOutputByLine(System.IO.StreamReader)">
+            <summary>
+            Reads the data from the process output to a string array.
+            </summary>
+            <param name="output">
+            The <see cref="T:System.IO.StreamReader"/> with the process output.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> array 
+            containing the process output stream content by lines.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Extensions.StreamReaderExtensions.ReadSreamOutputByLineAsync(System.IO.StreamReader,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronous reads the data from the process output to a string array.
+            </summary>
+            <param name="output">
+            The <see cref="T:System.IO.StreamReader"/> with the process output.
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> array 
+            containing the process output stream content by lines.
             </returns>
         </member>
         <member name="T:WGetNET.Helper.ArgsHelper">
