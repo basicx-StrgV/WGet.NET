@@ -181,17 +181,6 @@
             <param name="rawContent"><see cref="T:System.String"/> containing the raw data that should get parsed.</param>
             <param name="hasShortenedContent">Indcates if the information in the raw content is shortened.</param>
         </member>
-        <member name="M:WGetNET.Builder.WinGetDirectoryBuilder.TrimLastDirectory(System.String)">
-            <summary>
-            Removes the last directory from the given path.
-            </summary>
-            <param name="path">
-            <see cref="T:System.String"/> containing the path that sould be trimed.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the trimed path.
-            </returns>
-        </member>
         <member name="T:WGetNET.Builder.WinGetInfoBuilder">
             <summary>
             Builder to create a new <see cref="T:WGetNET.WinGetInfo"/> instance.
@@ -319,17 +308,6 @@
             </summary>
             <param name="rawContent"><see cref="T:System.String"/> containing the raw data that should get parsed.</param>
             <param name="hasShortenedContent">Indcates if the information in the raw content is shortened.</param>
-        </member>
-        <member name="M:WGetNET.Builder.WinGetLinkBuilder.TrimLastUriPart(System.String)">
-            <summary>
-            Removes the last part from the given URI.
-            </summary>
-            <param name="uri">
-            <see cref="T:System.String"/> containing the URI that sould be trimed.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the trimed URI.
-            </returns>
         </member>
         <member name="T:WGetNET.Builder.WinGetPackageBuilder">
             <summary>
@@ -3526,42 +3504,6 @@
             A <see cref="T:System.String"/> containing the new process arguments.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.AcceptSourceAgreements(System.String)">
-            <summary>
-            Adds the '--accept-source-agreements' argument to the given <see cref="T:System.String"/> of arguments.
-            </summary>
-            <param name="argument">
-            <see cref="T:System.String"/> containing the arguments that should be extended.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the new process arguments.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.Silent(System.String)">
-            <summary>
-            Adds the '--silent' argument to the given <see cref="T:System.String"/> of arguments.
-            </summary>
-            <param name="argument">
-            <see cref="T:System.String"/> containing the arguments that should be extended.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the new process arguments.
-            </returns>
-        </member>
-        <member name="M:WGetNET.WinGetPackageManager.MatchExact(System.Collections.Generic.List{WGetNET.WinGetPackage},System.String)">
-            <summary>
-            Tries to match a <see cref="T:WGetNET.WinGetPackage"/> to the provided search criteria.
-            </summary>
-            <param name="matchList">
-            The list to try and finde match in.
-            </param>
-            <param name="matchString">
-            The search criteria, that will be tried to be matched againts the package id and/or name.
-            </param>
-            <returns>
-            The <see cref="T:WGetNET.WinGetPackage"/> that matches the search criteria, or <see langword="null"/> if no package matches.
-            </returns>
-        </member>
         <member name="T:WGetNET.WinGetSourceManager">
             <summary>
             The <see cref="T:WGetNET.WinGetSourceManager"/> class offers methods to manage the sources used by winget.
@@ -5244,6 +5186,27 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
+        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
         <member name="M:WGetNET.Helper.JsonHelper.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -5251,6 +5214,87 @@
             <param name="input">The object to serialize.</param>
             <returns>
             A <see cref="T:System.String"/> containing the generated json.
+            </returns>
+        </member>
+        <member name="T:WGetNET.Helper.PackageHelper">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.Helper.PackageHelper"/> class provides methods for winget package processing.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Helper.PackageHelper.MatchExact(System.Collections.Generic.List{WGetNET.WinGetPackage},System.String)">
+            <summary>
+            Tries to match a <see cref="T:WGetNET.WinGetPackage"/> to the provided search criteria.
+            </summary>
+            <param name="matchList">
+            The list to try and finde match in.
+            </param>
+            <param name="matchString">
+            The search criteria, that will be tried to be matched againts the package id and/or name.
+            </param>
+            <returns>
+            The <see cref="T:WGetNET.WinGetPackage"/> that matches the search criteria, or <see langword="null"/> if no package matches.
+            </returns>
+        </member>
+        <member name="T:WGetNET.Helper.ParameterHelper">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.Helper.ParameterHelper"/> class provides methods for winget call parameter extensions.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Helper.ParameterHelper.IncludeUnknown(System.String)">
+            <summary>
+            Adds the '--include-unknown' argument to the given <see cref="T:System.String"/> of arguments.
+            </summary>
+            <param name="argument">
+            <see cref="T:System.String"/> containing the arguments that should be extended.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the new process arguments.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Helper.ParameterHelper.AcceptSourceAgreements(System.String)">
+            <summary>
+            Adds the '--accept-source-agreements' argument to the given <see cref="T:System.String"/> of arguments.
+            </summary>
+            <param name="argument">
+            <see cref="T:System.String"/> containing the arguments that should be extended.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the new process arguments.
+            </returns>
+        </member>
+        <member name="M:WGetNET.Helper.ParameterHelper.Silent(System.String)">
+            <summary>
+            Adds the '--silent' argument to the given <see cref="T:System.String"/> of arguments.
+            </summary>
+            <param name="argument">
+            <see cref="T:System.String"/> containing the arguments that should be extended.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the new process arguments.
+            </returns>
+        </member>
+        <member name="T:WGetNET.Helper.PathHelper">
+            <summary>
+            The <see langword="static"/> <see cref="T:WGetNET.Helper.PathHelper"/> class provides methods for working with different path types.
+            </summary>
+        </member>
+        <member name="T:WGetNET.Helper.PathHelper.PathType">
+            <summary>
+            Enum for the selecetion of defferent path types.
+            </summary>
+        </member>
+        <member name="M:WGetNET.Helper.PathHelper.TrimLastPathPart(System.String,WGetNET.Helper.PathHelper.PathType)">
+            <summary>
+            Removes the last directory from the given path.
+            </summary>
+            <param name="path">
+            <see cref="T:System.String"/> containing the path that sould be trimed.
+            </param>
+            <param name="type">
+            Selection of the path type for correct separator allocation.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the trimed path.
             </returns>
         </member>
         <member name="T:WGetNET.IWinGetObject">
@@ -5392,25 +5436,6 @@
             The created <see cref="T:System.Int32"/>.
             </returns>
         </member>
-        <member name="M:WGetNET.Parser.VersionParser.CleanParseToInt(System.String,System.Int32)">
-            <summary>
-            Parses a <see cref="T:System.String"/> to a <see cref="T:System.Int32"/> as best as possible.
-            </summary>
-            <remarks>
-            This tries to clean the provided input <see cref="T:System.String"/>, 
-            with minimal data loss, so it can be parsed to a <see cref="T:System.Int32"/>
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to parse.</param>
-            <param name="defaultValue">Default value that is used if the input can't be parsed.</param>
-            <returns>
-            The created <see cref="T:System.Int32"/>.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Parser.VersionParser.CleanupNumberString(System.String)">
-            <summary>
-            Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
-            </summary>
-            <rber>
         <member name="M:WGetNET.Parser.VersionParser.CleanParseToInt(System.String,System.Int32)">
             <summary>
             Parses a <see cref="T:System.String"/> to a <see cref="T:System.Int32"/> as best as possible.

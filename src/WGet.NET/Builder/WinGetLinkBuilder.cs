@@ -4,6 +4,7 @@
 //--------------------------------------------------//
 using System;
 using WGetNET.Abstractions;
+using WGetNET.Helper;
 
 namespace WGetNET.Builder
 {
@@ -97,36 +98,8 @@ namespace WGetNET.Builder
             }
 
             // Fallback for an incomplete uri.
-            Uri.TryCreate(TrimLastUriPart(rawContent), UriKind.Absolute, out Uri? shortenedUri);
+            Uri.TryCreate(PathHelper.TrimLastPathPart(rawContent, PathHelper.PathType.URI), UriKind.Absolute, out Uri? shortenedUri);
             _url = shortenedUri;
-        }
-
-        /// <summary>
-        /// Removes the last part from the given URI.
-        /// </summary>
-        /// <param name="uri">
-        /// <see cref="System.String"/> containing the URI that sould be trimed.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.String"/> containing the trimed URI.
-        /// </returns>
-        private string TrimLastUriPart(string uri)
-        {
-            int lastSeparatorIndex = -1;
-            for (int i = 0; i < uri.Length; i++)
-            {
-                if (uri[i].Equals('/'))
-                {
-                    lastSeparatorIndex = i;
-                }
-            }
-
-            if (lastSeparatorIndex > -1)
-            {
-                return uri.Remove(lastSeparatorIndex);
-            }
-
-            return uri;
         }
     }
 }

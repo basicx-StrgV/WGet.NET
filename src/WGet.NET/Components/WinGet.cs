@@ -3,18 +3,18 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security;
+using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Security.Principal;
-using System.Collections.Generic;
-using WGetNET.Models;
-using WGetNET.Helper;
-using WGetNET.Parser;
 using WGetNET.Builder;
-using WGetNET.Exceptions;
 using WGetNET.Components.Internal;
+using WGetNET.Exceptions;
+using WGetNET.Helper;
+using WGetNET.Models;
+using WGetNET.Parser;
 
 namespace WGetNET
 {

@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using WGetNET.Abstractions;
+using WGetNET.Helper;
 
 namespace WGetNET.Builder
 {
@@ -113,40 +114,12 @@ namespace WGetNET.Builder
                 }
 
                 // Fallback for an incomplete directory path.
-                _directoryInfo = new DirectoryInfo(TrimLastDirectory(path));
+                _directoryInfo = new DirectoryInfo(PathHelper.TrimLastPathPart(path, PathHelper.PathType.Directory));
             }
             catch
             {
                 _directoryInfo = null;
             }
-        }
-
-        /// <summary>
-        /// Removes the last directory from the given path.
-        /// </summary>
-        /// <param name="path">
-        /// <see cref="System.String"/> containing the path that sould be trimed.
-        /// </param>
-        /// <returns>
-        /// A <see cref="System.String"/> containing the trimed path.
-        /// </returns>
-        private string TrimLastDirectory(string path)
-        {
-            int lastSeparatorIndex = -1;
-            for (int i = 0; i < path.Length; i++)
-            {
-                if (path[i].Equals(Path.DirectorySeparatorChar))
-                {
-                    lastSeparatorIndex = i;
-                }
-            }
-
-            if (lastSeparatorIndex > -1)
-            {
-                return path.Remove(lastSeparatorIndex);
-            }
-
-            return path;
         }
     }
 }
