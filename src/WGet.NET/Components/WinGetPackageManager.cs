@@ -599,7 +599,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_installCmd, packageId);
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_installCmd, packageId)));
 
             ProcessResult result = Execute(cmd);
 
@@ -627,7 +627,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_installCmd, packageId);
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_installCmd, packageId)));
 
             if (silent)
             {
@@ -720,7 +720,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_installCmd, packageId);
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_installCmd, packageId)));
 
             ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
@@ -752,7 +752,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_installCmd, packageId);
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_installCmd, packageId)));
 
             if (silent)
             {
@@ -1153,7 +1153,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = ParameterHelper.AcceptSourceAgreements(string.Format(_upgradeCmd, packageId));
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_upgradeCmd, packageId)));
 
             ProcessResult result = Execute(cmd);
 
@@ -1181,7 +1181,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = ParameterHelper.AcceptSourceAgreements(string.Format(_upgradeCmd, packageId));
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_upgradeCmd, packageId)));
 
             if (silent)
             {
@@ -1274,7 +1274,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = ParameterHelper.AcceptSourceAgreements(string.Format(_upgradeCmd, packageId));
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_upgradeCmd, packageId)));
 
             ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
@@ -1306,7 +1306,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = ParameterHelper.AcceptSourceAgreements(string.Format(_upgradeCmd, packageId));
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_upgradeCmd, packageId)));
 
             if (silent)
             {
@@ -1397,7 +1397,7 @@ namespace WGetNET
         /// </exception>
         public bool UpgradeAllPackages()
         {
-            ProcessResult result = Execute(ParameterHelper.AcceptSourceAgreements(_upgradeAllCmd));
+            ProcessResult result = Execute(ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(_upgradeAllCmd)));
 
             return result.Success;
         }
@@ -1417,7 +1417,7 @@ namespace WGetNET
         /// </exception>
         public bool UpgradeAllPackages(bool silent)
         {
-            string cmd = ParameterHelper.AcceptSourceAgreements(_upgradeAllCmd);
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(_upgradeAllCmd));
             if (silent)
             {
                 cmd = ParameterHelper.Silent(cmd);
@@ -1446,7 +1446,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpgradeAllPackagesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(ParameterHelper.AcceptSourceAgreements(_upgradeAllCmd), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(_upgradeAllCmd)), false, cancellationToken);
 
             return result.Success;
         }
@@ -1470,7 +1470,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpgradeAllPackagesAsync(bool silent, CancellationToken cancellationToken = default)
         {
-            string cmd = ParameterHelper.AcceptSourceAgreements(_upgradeAllCmd);
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(_upgradeAllCmd));
             if (silent)
             {
                 cmd = ParameterHelper.Silent(cmd);
@@ -1512,7 +1512,7 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_repairCmd, packageId);
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_repairCmd, packageId)));
 
             ProcessResult result = Execute(cmd);
 
@@ -1549,7 +1549,7 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_repairCmd, packageId);
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_repairCmd, packageId)));
 
             if (silent)
             {
@@ -1659,7 +1659,7 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_repairCmd, packageId);
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_repairCmd, packageId)));
 
             ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
@@ -1700,7 +1700,7 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_repairCmd, packageId);
+            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_repairCmd, packageId)));
 
             if (silent)
             {
@@ -2115,7 +2115,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
 
-            string cmd = string.Format(ParameterHelper.AcceptSourceAgreements(_downloadCmd), packageId, directory);
+            string cmd = string.Format(
+                ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(_downloadCmd)),
+                packageId, directory);
 
             ProcessResult result = Execute(cmd);
 
@@ -2254,7 +2256,9 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
 
-            string cmd = string.Format(ParameterHelper.AcceptSourceAgreements(_downloadCmd), packageId, directory);
+            string cmd = string.Format(
+                ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(_downloadCmd)),
+                packageId, directory);
 
             ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 

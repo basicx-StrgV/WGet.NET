@@ -11,6 +11,7 @@ namespace WGetNET.Helper
     {
         private const string _includeUnknown = "--include-unknown";
         private const string _acceptSourceAgreements = "--accept-source-agreements";
+        private const string _acceptPackageAgreements = "--accept-package-agreements";
         private const string _silent = "--silent";
 
         /// <summary>
@@ -51,6 +52,27 @@ namespace WGetNET.Helper
             }
 
             argument += $" {_acceptSourceAgreements}";
+
+            return argument;
+        }
+
+        /// <summary>
+        /// Adds the '--accept-package-agreements' argument to the given <see cref="System.String"/> of arguments.
+        /// </summary>
+        /// <param name="argument">
+        /// <see cref="System.String"/> containing the arguments that should be extended.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.String"/> containing the new process arguments.
+        /// </returns>
+        public static string AcceptPackageAgreements(string argument)
+        {
+            if (string.IsNullOrWhiteSpace(argument))
+            {
+                return argument;
+            }
+
+            argument += $" {_acceptPackageAgreements}";
 
             return argument;
         }

@@ -5268,6 +5268,17 @@
             A <see cref="T:System.String"/> containing the new process arguments.
             </returns>
         </member>
+        <member name="M:WGetNET.Helper.ParameterHelper.AcceptPackageAgreements(System.String)">
+            <summary>
+            Adds the '--accept-package-agreements' argument to the given <see cref="T:System.String"/> of arguments.
+            </summary>
+            <param name="argument">
+            <see cref="T:System.String"/> containing the arguments that should be extended.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> containing the new process arguments.
+            </returns>
+        </member>
         <member name="M:WGetNET.Helper.ParameterHelper.Silent(System.String)">
             <summary>
             Adds the '--silent' argument to the given <see cref="T:System.String"/> of arguments.
