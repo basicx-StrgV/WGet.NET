@@ -75,6 +75,15 @@ namespace WGetTestLegacySupport
                     Console.WriteLine($"Sample Installed Package ID: {test3[0].Id}");
                 }
 
+                Console.WriteLine("\n=== Search Installed Packages Test ===");
+                List<WinGetPackage> test5 = connector.GetInstalledPackages("Notepad");
+                Console.WriteLine($"Total Installed Packages: {test5.Count}");
+                if (test3.Count > 0)
+                {
+                    Console.WriteLine($"Sample Installed Package Name: {test5[0].Name}");
+                    Console.WriteLine($"Sample Installed Package ID: {test5[0].Id}");
+                }
+
                 // Exact Installed Package Test
                 Console.WriteLine("\n=== Exact Installed Package Test ===");
                 WinGetPackage test4 = connector.GetExactInstalledPackage("Microsoft Edge");
