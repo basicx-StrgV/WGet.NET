@@ -399,7 +399,7 @@ namespace WGetNET
 #if NETCOREAPP3_1_OR_GREATER
             while (directory.EndsWith('\\'))
             {
-                directory = directory.Substring(0, directory.Length - 1);
+                directory = directory[..^1];
             }
 #elif NETSTANDARD2_0
             while (directory.EndsWith("\\"))

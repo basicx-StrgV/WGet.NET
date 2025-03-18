@@ -148,11 +148,7 @@ namespace WGetNET
         /// </exception>
         public string ExportSettings()
         {
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .SettingsExport()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.SettingsExport());
 
             return ProcessOutputReader.ExportOutputToString(result);
         }
@@ -172,12 +168,7 @@ namespace WGetNET
         /// </exception>
         public async Task<string> ExportSettingsAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .SettingsExport()
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.SettingsExport(), false, cancellationToken);
 
             return ProcessOutputReader.ExportOutputToString(result);
         }
@@ -225,11 +216,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .SettingsExport()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.SettingsExport());
 
             FileHelper.WriteTextToFile(file, ProcessOutputReader.ExportOutputToString(result));
         }
@@ -280,12 +267,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .SettingsExport()
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.SettingsExport(), false, cancellationToken);
 
             await FileHelper.WriteTextToFileAsync(file, ProcessOutputReader.ExportOutputToString(result), cancellationToken);
         }
@@ -408,13 +390,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .Settings()
-                    .Enable(settingName)
-                    .ToString(),
-                    true);
+            ProcessResult result = Execute(WinGetArguments.Settings().Enable(settingName), true);
 
             return result.Success;
         }
@@ -476,13 +452,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .Settings()
-                    .Enable(settingName)
-                    .ToString(),
-                    true, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.Settings().Enable(settingName), true, cancellationToken);
 
             return result.Success;
         }
@@ -544,13 +514,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .Settings()
-                    .Disable(settingName)
-                    .ToString(),
-                    true);
+            ProcessResult result = Execute(WinGetArguments.Settings().Disable(settingName), true);
 
             return result.Success;
         }
@@ -612,13 +576,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .Settings()
-                    .Disable(settingName)
-                    .ToString(),
-                    true, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.Settings().Disable(settingName), true, cancellationToken);
 
             return result.Success;
         }
@@ -668,12 +626,7 @@ namespace WGetNET
         /// </exception>
         public WinGetInfo GetInfo()
         {
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .WinGet()
-                    .Info()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.WinGet().Info());
 
             InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
             if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
@@ -707,13 +660,7 @@ namespace WGetNET
         /// </exception>
         public async Task<WinGetInfo> GetInfoAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .WinGet()
-                    .Info()
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.WinGet().Info(), false, cancellationToken);
 
             // Check the version range the action should be performed for
             InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
@@ -770,7 +717,7 @@ namespace WGetNET
         /// Exectutes a WinGet action from the given cmd.
         /// </summary>
         /// <param name="args">
-        /// A <see cref="System.String"/> containing the arguments for the WinGet process.
+        /// A <see cref="WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
         /// </param>
         /// <param name="needsAdminRights">
         /// Sets if the process that should be executed needs administrator privileges.
@@ -785,7 +732,7 @@ namespace WGetNET
         /// The current process does not have administrator privileges. 
         /// (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
         /// </exception>
-        private protected ProcessResult Execute(string args, bool needsAdminRights = false)
+        private protected ProcessResult Execute(WinGetArguments args, bool needsAdminRights = false)
         {
             ThrowIfNotInstalled();
 
@@ -794,14 +741,14 @@ namespace WGetNET
                 ThrowIfNotAdmin();
             }
 
-            return _processManager.ExecuteWingetProcess(args);
+            return _processManager.ExecuteWingetProcess(args.Arguments);
         }
 
         /// <summary>
         /// Asynchronously exectutes a WinGet action from the given cmd.
         /// </summary>
         /// <param name="args">
-        /// A <see cref="System.String"/> containing the arguments for the WinGet process.
+        /// A <see cref="WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
         /// </param>
         /// <param name="needsAdminRights">
         /// Sets if the process that should be executed needs administrator privileges.
@@ -820,7 +767,7 @@ namespace WGetNET
         /// The current process does not have administrator privileges.
         /// (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
         /// </exception>
-        private protected async Task<ProcessResult> ExecuteAsync(string args, bool needsAdminRights = false, CancellationToken cancellationToken = default)
+        private protected async Task<ProcessResult> ExecuteAsync(WinGetArguments args, bool needsAdminRights = false, CancellationToken cancellationToken = default)
         {
             ThrowIfNotInstalled();
 
@@ -829,7 +776,7 @@ namespace WGetNET
                 ThrowIfNotAdmin();
             }
 
-            return await _processManager.ExecuteWingetProcessAsync(args, cancellationToken);
+            return await _processManager.ExecuteWingetProcessAsync(args.Arguments, cancellationToken);
         }
         // \endcond
         //---------------------------------------------------------------------------------------------
@@ -876,12 +823,7 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .WinGet()
-                    .Version()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.WinGet().Version());
 
             for (int i = 0; i < result.Output.Length; i++)
             {

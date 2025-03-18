@@ -36,11 +36,7 @@ namespace WGetNET
         /// </exception>
         public List<WinGetSource> GetInstalledSources()
         {
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .SourceExport()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.SourceExport());
 
             return ProcessOutputReader.ToSourceList(result.Output);
         }
@@ -65,12 +61,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .SourceExport()
-                    .Name(sourceName)
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.SourceExport().Name(sourceName));
 
             return ProcessOutputReader.ToSourceList(result.Output);
         }
@@ -90,12 +81,7 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetSource>> GetInstalledSourcesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .SourceExport()
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.SourceExport(), false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -130,13 +116,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .SourceExport()
-                    .Name(sourceName)
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.SourceExport().Name(sourceName), false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -184,8 +164,7 @@ namespace WGetNET
                     .SourceAdd()
                     .Name(name)
                     .Arg(arg)
-                    .AcceptSourceAgreements()
-                    .ToString(),
+                    .AcceptSourceAgreements(),
                     true);
 
             return result.Success;
@@ -231,8 +210,7 @@ namespace WGetNET
                     .Name(name)
                     .Arg(arg)
                     .Type(type)
-                    .AcceptSourceAgreements()
-                    .ToString(),
+                    .AcceptSourceAgreements(),
                     true);
 
             return result.Success;
@@ -344,8 +322,7 @@ namespace WGetNET
                     .SourceAdd()
                     .Name(name)
                     .Arg(arg)
-                    .AcceptSourceAgreements()
-                    .ToString(),
+                    .AcceptSourceAgreements(),
                     true, cancellationToken);
 
             return result.Success;
@@ -395,8 +372,7 @@ namespace WGetNET
                     .Name(name)
                     .Arg(arg)
                     .Type(type)
-                    .AcceptSourceAgreements()
-                    .ToString(),
+                    .AcceptSourceAgreements(),
                     true, cancellationToken);
 
             return result.Success;
@@ -501,11 +477,7 @@ namespace WGetNET
         /// </exception>
         public bool UpdateSources()
         {
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .SourceUpdate()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.SourceUpdate());
 
             return result.Success;
         }
@@ -528,12 +500,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpdateSourcesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .SourceUpdate()
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.SourceUpdate(), false, cancellationToken);
 
             return result.Success;
         }
@@ -969,13 +936,7 @@ namespace WGetNET
         /// </exception>
         public bool ResetSources()
         {
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .SourceReset()
-                    .Force()
-                    .ToString(),
-                    true);
+            ProcessResult result = Execute(WinGetArguments.SourceReset().Force(), true);
 
             return result.Success;
         }
@@ -1001,13 +962,7 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ResetSourcesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .SourceReset()
-                    .Force()
-                    .ToString(),
-                    true, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.SourceReset().Force(), true, cancellationToken);
 
             return result.Success;
         }
@@ -1039,13 +994,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .SourceRemove()
-                    .Name(name)
-                    .ToString(),
-                    true);
+            ProcessResult result = Execute(WinGetArguments.SourceRemove().Name(name), true);
 
             return result.Success;
         }
@@ -1107,13 +1056,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .SourceRemove()
-                    .Name(name)
-                    .ToString(),
-                    true, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.SourceRemove().Name(name), true, cancellationToken);
 
             return result.Success;
         }

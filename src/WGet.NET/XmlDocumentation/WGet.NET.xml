@@ -1204,12 +1204,12 @@
             <see langword="true"/> if the installed WinGet version matches the check, or <see langword="false"/> if not.
             </returns>
         </member>
-        <member name="M:WGetNET.WinGet.Execute(System.String,System.Boolean)">
+        <member name="M:WGetNET.WinGet.Execute(WGetNET.WinGetArguments,System.Boolean)">
             <summary>
             Exectutes a WinGet action from the given cmd.
             </summary>
             <param name="args">
-            A <see cref="T:System.String"/> containing the arguments for the WinGet process.
+            A <see cref="T:WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
             </param>
             <param name="needsAdminRights">
             Sets if the process that should be executed needs administrator privileges.
@@ -1225,12 +1225,12 @@
             (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
             </exception>
         </member>
-        <member name="M:WGetNET.WinGet.ExecuteAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:WGetNET.WinGet.ExecuteAsync(WGetNET.WinGetArguments,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Asynchronously exectutes a WinGet action from the given cmd.
             </summary>
             <param name="args">
-            A <see cref="T:System.String"/> containing the arguments for the WinGet process.
+            A <see cref="T:WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
             </param>
             <param name="needsAdminRights">
             Sets if the process that should be executed needs administrator privileges.
@@ -5821,6 +5821,30 @@
         <member name="M:WGetNET.Parser.VersionParser.CleanupNumberString(System.String)">
             <summary>
             Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
+            </summary>
+            <remarks>
+            If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>:
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.RemoveAppendix(System.String)">
+            <summary>
+            Removes version appendixes from the string.
+            </summary>
+            <remarks>
+            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to process.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>.
+            </returns>
+        </member>
+    </members>
+</doc>
+String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
             </summary>
             <remarks>
             If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.

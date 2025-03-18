@@ -55,18 +55,14 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Search()
-                .Query(packageId)
-                .AcceptSourceAgreements();
+            WinGetArguments cmd = WinGetArguments.Search().Query(packageId).AcceptSourceAgreements();
 
             if (exact)
             {
                 cmd.Exact();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.Search);
         }
@@ -98,19 +94,14 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Search()
-                .Query(packageId)
-                .Source(sourceName)
-                .AcceptSourceAgreements();
+            WinGetArguments cmd = WinGetArguments.Search().Query(packageId).Source(sourceName).AcceptSourceAgreements();
 
             if (exact)
             {
                 cmd.Exact();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.SearchBySource, sourceName);
         }
@@ -142,18 +133,14 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Search()
-                .Query(packageId)
-                .AcceptSourceAgreements();
+            WinGetArguments cmd = WinGetArguments.Search().Query(packageId).AcceptSourceAgreements();
 
             if (exact)
             {
                 cmd.Exact();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -195,19 +182,14 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Search()
-                .Query(packageId)
-                .Source(sourceName)
-                .AcceptSourceAgreements();
+            WinGetArguments cmd = WinGetArguments.Search().Query(packageId).Source(sourceName).AcceptSourceAgreements();
 
             if (exact)
             {
                 cmd.Exact();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -231,12 +213,7 @@ namespace WGetNET
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages()
         {
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .List()
-                    .AcceptSourceAgreements()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.List().AcceptSourceAgreements());
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
@@ -264,18 +241,14 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .List()
-                .Query(packageId)
-                .AcceptSourceAgreements();
+            WinGetArguments cmd = WinGetArguments.List().Query(packageId).AcceptSourceAgreements();
 
             if (exact)
             {
                 cmd.Exact();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList);
         }
@@ -307,19 +280,14 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .List()
-                .Query(packageId)
-                .Source(sourceName)
-                .AcceptSourceAgreements();
+            WinGetArguments cmd = WinGetArguments.List().Query(packageId).Source(sourceName).AcceptSourceAgreements();
 
             if (exact)
             {
                 cmd.Exact();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledListBySource, sourceName);
         }
@@ -339,13 +307,7 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .List()
-                    .AcceptSourceAgreements()
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.List().AcceptSourceAgreements(), false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -383,18 +345,14 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .List()
-                .Query(packageId)
-                .AcceptSourceAgreements();
+            WinGetArguments cmd = WinGetArguments.List().Query(packageId).AcceptSourceAgreements();
 
             if (exact)
             {
                 cmd.Exact();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -436,19 +394,14 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .List()
-                .Query(packageId)
-                .Source(sourceName)
-                .AcceptSourceAgreements();
+            WinGetArguments cmd = WinGetArguments.List().Query(packageId).Source(sourceName).AcceptSourceAgreements();
 
             if (exact)
             {
                 cmd.Exact();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -484,12 +437,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .List()
-                    .AcceptSourceAgreements()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.List().AcceptSourceAgreements());
 
             return PackageHelper.MatchExact(
                 ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList),
@@ -526,14 +474,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .List()
-                    .Query(packageId)
-                    .Source(sourceName)
-                    .AcceptSourceAgreements()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.List().Query(packageId).Source(sourceName).AcceptSourceAgreements());
 
             return PackageHelper.MatchExact(
                 ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList),
@@ -566,12 +507,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             //TODO: Add cancellation token
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .List()
-                    .AcceptSourceAgreements()
-                    .ToString());
+            ProcessResult result = await ExecuteAsync(WinGetArguments.List().AcceptSourceAgreements());
 
             return PackageHelper.MatchExact(
                 ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList),
@@ -610,12 +546,7 @@ namespace WGetNET
             //TODO: Add cancellation token
             ProcessResult result =
                 await ExecuteAsync(
-                    WinGetArguments
-                    .List()
-                    .Query(packageId)
-                    .Source(sourceName)
-                    .AcceptSourceAgreements()
-                    .ToString());
+                    WinGetArguments.List().Query(packageId).Source(sourceName).AcceptSourceAgreements());
 
             return PackageHelper.MatchExact(
                 ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList),
@@ -645,14 +576,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .Install()
-                    .Query(packageId)
-                    .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.Install().Query(packageId).AcceptSourceAgreements().AcceptPackageAgreements());
 
             return result.Success;
         }
@@ -685,7 +609,7 @@ namespace WGetNET
                 cmd.Silent();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -773,12 +697,7 @@ namespace WGetNET
 
             ProcessResult result =
                 await ExecuteAsync(
-                    WinGetArguments
-                    .Install()
-                    .Query(packageId)
-                    .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString(),
+                    WinGetArguments.Install().Query(packageId).AcceptSourceAgreements().AcceptPackageAgreements(),
                     false, cancellationToken);
 
             return result.Success;
@@ -809,19 +728,14 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Install()
-                .Query(packageId)
-                .AcceptSourceAgreements()
-                .AcceptPackageAgreements();
+            WinGetArguments cmd = WinGetArguments.Install().Query(packageId).AcceptSourceAgreements().AcceptPackageAgreements();
 
             if (silent)
             {
                 cmd.Silent();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -913,12 +827,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .Uninstall()
-                    .Query(packageId)
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.Uninstall().Query(packageId));
 
             return result.Success;
         }
@@ -944,17 +853,14 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Uninstall()
-                .Query(packageId);
+            WinGetArguments cmd = WinGetArguments.Uninstall().Query(packageId);
 
             if (silent)
             {
                 cmd.Silent();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -1040,13 +946,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .Uninstall()
-                    .Query(packageId)
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.Uninstall().Query(packageId), false, cancellationToken);
 
             return result.Success;
         }
@@ -1076,10 +976,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Uninstall()
-                .Query(packageId);
+            WinGetArguments cmd = WinGetArguments.Uninstall().Query(packageId);
 
             if (silent)
             {
@@ -1087,7 +984,7 @@ namespace WGetNET
             }
 
             ProcessResult result =
-                await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+                await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -1172,11 +1069,9 @@ namespace WGetNET
         {
             WinGetArguments cmd =
                 IncludeUnknownbyVersion(
-                    WinGetArguments
-                    .Upgrade()
-                    .AcceptSourceAgreements());
+                    WinGetArguments.Upgrade().AcceptSourceAgreements());
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return ProcessOutputReader.ToPackageList(result.Output, PackageAction.UpgradeList);
         }
@@ -1198,11 +1093,9 @@ namespace WGetNET
         {
             WinGetArguments cmd =
                 IncludeUnknownbyVersion(
-                    WinGetArguments
-                    .Upgrade()
-                    .AcceptSourceAgreements());
+                    WinGetArguments.Upgrade().AcceptSourceAgreements());
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -1235,14 +1128,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .Upgrade()
-                    .Query(packageId)
-                    .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.Upgrade().Query(packageId).AcceptSourceAgreements().AcceptPackageAgreements());
 
             return result.Success;
         }
@@ -1268,19 +1154,14 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Upgrade()
-                .Query(packageId)
-                .AcceptSourceAgreements()
-                .AcceptPackageAgreements();
+            WinGetArguments cmd = WinGetArguments.Upgrade().Query(packageId).AcceptSourceAgreements().AcceptPackageAgreements();
 
             if (silent)
             {
                 cmd.Silent();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -1368,12 +1249,7 @@ namespace WGetNET
 
             ProcessResult result =
                 await ExecuteAsync(
-                    WinGetArguments
-                    .Upgrade()
-                    .Query(packageId)
-                    .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString(),
+                    WinGetArguments.Upgrade().Query(packageId).AcceptSourceAgreements().AcceptPackageAgreements(),
                     false, cancellationToken);
 
             return result.Success;
@@ -1404,19 +1280,14 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Upgrade()
-                .Query(packageId)
-                .AcceptSourceAgreements()
-                .AcceptPackageAgreements();
+            WinGetArguments cmd = WinGetArguments.Upgrade().Query(packageId).AcceptSourceAgreements().AcceptPackageAgreements();
 
             if (silent)
             {
                 cmd.Silent();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -1500,14 +1371,7 @@ namespace WGetNET
         /// </exception>
         public bool UpgradeAllPackages()
         {
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .Upgrade()
-                    .All()
-                    .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.Upgrade().All().AcceptSourceAgreements().AcceptPackageAgreements());
 
             return result.Success;
         }
@@ -1527,19 +1391,14 @@ namespace WGetNET
         /// </exception>
         public bool UpgradeAllPackages(bool silent)
         {
-            WinGetArguments cmd =
-                WinGetArguments
-                .Upgrade()
-                .All()
-                .AcceptSourceAgreements()
-                .AcceptPackageAgreements();
+            WinGetArguments cmd = WinGetArguments.Upgrade().All().AcceptSourceAgreements().AcceptPackageAgreements();
 
             if (silent)
             {
                 cmd.Silent();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -1564,12 +1423,7 @@ namespace WGetNET
         {
             ProcessResult result =
                 await ExecuteAsync(
-                    WinGetArguments
-                    .Upgrade()
-                    .All()
-                    .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString(),
+                    WinGetArguments.Upgrade().All().AcceptSourceAgreements().AcceptPackageAgreements(),
                     false, cancellationToken);
 
             return result.Success;
@@ -1594,19 +1448,14 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpgradeAllPackagesAsync(bool silent, CancellationToken cancellationToken = default)
         {
-            WinGetArguments cmd =
-                WinGetArguments
-                .Upgrade()
-                .All()
-                .AcceptSourceAgreements()
-                .AcceptPackageAgreements();
+            WinGetArguments cmd = WinGetArguments.Upgrade().All().AcceptSourceAgreements().AcceptPackageAgreements();
 
             if (silent)
             {
                 cmd.Silent();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -1642,14 +1491,7 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .Repair()
-                    .Query(packageId)
-                    .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.Repair().Query(packageId).AcceptSourceAgreements().AcceptPackageAgreements());
 
             return result.Success;
         }
@@ -1684,19 +1526,14 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Repair()
-                .Query(packageId)
-                .AcceptSourceAgreements()
-                .AcceptPackageAgreements();
+            WinGetArguments cmd = WinGetArguments.Repair().Query(packageId).AcceptSourceAgreements().AcceptPackageAgreements();
 
             if (silent)
             {
                 cmd.Silent();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -1805,8 +1642,7 @@ namespace WGetNET
                     .Repair()
                     .Query(packageId)
                     .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString(),
+                    .AcceptPackageAgreements(),
                     false, cancellationToken);
 
             return result.Success;
@@ -1846,19 +1682,14 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .Repair()
-                .Query(packageId)
-                .AcceptSourceAgreements()
-                .AcceptPackageAgreements();
+            WinGetArguments cmd = WinGetArguments.Repair().Query(packageId).AcceptSourceAgreements().AcceptPackageAgreements();
 
             if (silent)
             {
                 cmd.Silent();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -1958,13 +1789,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .Export()
-                    .File(file)
-                    .AcceptSourceAgreements()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.Export().File(file).AcceptSourceAgreements());
 
             return result.Success;
         }
@@ -1994,13 +1819,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
             ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .Export()
-                    .File(file)
-                    .AcceptSourceAgreements()
-                    .ToString(),
-                    false, cancellationToken);
+                await ExecuteAsync(WinGetArguments.Export().File(file).AcceptSourceAgreements(), false, cancellationToken);
 
             return result.Success;
         }
@@ -2036,8 +1855,7 @@ namespace WGetNET
                     .File(file)
                     .IgnoreUnavailable()
                     .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString());
+                    .AcceptPackageAgreements());
 
             return result.Success;
         }
@@ -2077,8 +1895,7 @@ namespace WGetNET
                     .File(file)
                     .IgnoreUnavailable()
                     .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString(),
+                    .AcceptPackageAgreements(),
                     false, cancellationToken);
 
             return result.Success;
@@ -2116,12 +1933,7 @@ namespace WGetNET
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file}'");
             }
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .Hash()
-                    .File(file)
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.Hash().File(file));
 
             if (!result.Success)
             {
@@ -2195,13 +2007,7 @@ namespace WGetNET
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file}'");
             }
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .Hash()
-                    .File(file)
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.Hash().File(file), false, cancellationToken);
 
             if (!result.Success || cancellationToken.IsCancellationRequested)
             {
@@ -2284,8 +2090,7 @@ namespace WGetNET
                     .Query(packageId)
                     .Directory(directory)
                     .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString());
+                    .AcceptPackageAgreements());
 
             return result.Success;
         }
@@ -2429,8 +2234,7 @@ namespace WGetNET
                     .Query(packageId)
                     .Directory(directory)
                     .AcceptSourceAgreements()
-                    .AcceptPackageAgreements()
-                    .ToString(),
+                    .AcceptPackageAgreements(),
                     false, cancellationToken);
 
             return result.Success;
@@ -2567,11 +2371,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .PinList()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.PinList());
 
             return ProcessOutputReader.ToPinnedPackageList(result.Output);
         }
@@ -2599,12 +2399,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .PinList()
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.PinList(), false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -2646,17 +2441,14 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .PinAdd()
-                .Query(packageId);
+            WinGetArguments cmd = WinGetArguments.PinAdd().Query(packageId);
 
             if (blocking)
             {
                 cmd.Blocking();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -2694,13 +2486,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .PinAdd()
-                    .Query(packageId)
-                    .Version(version)
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.PinAdd().Query(packageId).Version(version));
 
             return result.Success;
         }
@@ -2805,17 +2591,14 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .PinAdd()
-                .Query(packageId);
+            WinGetArguments cmd = WinGetArguments.PinAdd().Query(packageId);
 
             if (blocking)
             {
                 cmd.Blocking();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -2857,14 +2640,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .PinAdd()
-                    .Query(packageId)
-                    .Version(version)
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.PinAdd().Query(packageId).Version(version), false, cancellationToken);
 
             return result.Success;
         }
@@ -2973,18 +2749,14 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .PinAdd()
-                .Query(packageId)
-                .Installed();
+            WinGetArguments cmd = WinGetArguments.PinAdd().Query(packageId).Installed();
 
             if (blocking)
             {
                 cmd.Blocking();
             }
 
-            ProcessResult result = Execute(cmd.ToString());
+            ProcessResult result = Execute(cmd);
 
             return result.Success;
         }
@@ -3022,14 +2794,7 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .PinAdd()
-                    .Query(packageId)
-                    .Installed()
-                    .Version(version)
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.PinAdd().Query(packageId).Installed().Version(version));
 
             return result.Success;
         }
@@ -3134,18 +2899,14 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            WinGetArguments cmd =
-                WinGetArguments
-                .PinAdd()
-                .Query(packageId)
-                .Installed();
+            WinGetArguments cmd = WinGetArguments.PinAdd().Query(packageId).Installed();
 
             if (blocking)
             {
                 cmd.Blocking();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
 
             return result.Success;
         }
@@ -3189,12 +2950,7 @@ namespace WGetNET
 
             ProcessResult result =
                 await ExecuteAsync(
-                    WinGetArguments
-                    .PinAdd()
-                    .Query(packageId)
-                    .Installed()
-                    .Version(version)
-                    .ToString(),
+                    WinGetArguments.PinAdd().Query(packageId).Installed().Version(version),
                     false, cancellationToken);
 
             return result.Success;
@@ -3305,12 +3061,7 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .PinRemove()
-                    .Query(packageId)
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.PinRemove().Query(packageId));
 
             return result.Success;
         }
@@ -3378,13 +3129,7 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .PinRemove()
-                    .Query(packageId)
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.PinRemove().Query(packageId), false, cancellationToken);
 
             return result.Success;
         }
@@ -3452,13 +3197,7 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .PinRemove()
-                    .Query(packageId)
-                    .Installed()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.PinRemove().Query(packageId).Installed());
 
             return result.Success;
         }
@@ -3526,14 +3265,7 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .PinRemove()
-                    .Query(packageId)
-                    .Installed()
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.PinRemove().Query(packageId).Installed(), false, cancellationToken);
 
             return result.Success;
         }
@@ -3597,12 +3329,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ProcessResult result =
-                Execute(
-                    WinGetArguments
-                    .PinReset()
-                    .Force()
-                    .ToString());
+            ProcessResult result = Execute(WinGetArguments.PinReset().Force());
 
             return result.Success;
         }
@@ -3633,13 +3360,7 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ProcessResult result =
-                await ExecuteAsync(
-                    WinGetArguments
-                    .PinReset()
-                    .Force()
-                    .ToString(),
-                    false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(WinGetArguments.PinReset().Force(), false, cancellationToken);
 
             return result.Success;
         }
