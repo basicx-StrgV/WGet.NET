@@ -77,7 +77,7 @@ namespace WGetTest
 
                 Console.WriteLine("\n=== Search Installed Packages Test ===");
                 List<WinGetPackage> test5 = connector.GetInstalledPackages("Notepad");
-                Console.WriteLine($"Total Installed Packages: {test5.Count}");
+                Console.WriteLine($"Total Installed Packages Found for 'Notepad': {test5.Count}");
                 if (test3.Count > 0)
                 {
                     Console.WriteLine($"Sample Installed Package Name: {test5[0].Name}");

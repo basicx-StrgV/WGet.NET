@@ -9,12 +9,22 @@ namespace WGetNET
     /// </summary>
     internal class WinGetArguments : IWinGetObject
     {
-        internal enum FileType
+        internal enum WinGetAction
         {
-            None,
-            Normal,
-            ImportFile,
-            ExportFile
+            List,
+            Search,
+            Install,
+            Upgrade,
+            Uninstall,
+            Download,
+            Repair,
+            Export,
+            Import,
+            Hash,
+            PinList,
+            PinAdd,
+            PinRemove,
+            PinReset
         }
 
         /// <summary>
@@ -37,7 +47,7 @@ namespace WGetNET
             }
         }
 
-        private readonly FileType _fileType;
+        private readonly WinGetAction _action;
 
         private string _arguments;
 
@@ -47,13 +57,13 @@ namespace WGetNET
         /// <param name="baseCmd">
         /// The base cmd of the arguments.
         /// </param>
-        /// <param name="fileType">
-        /// File type for file based cmd's. The given value will influence the output of the 'File()' method;
+        /// <param name="action">
+        /// The WinGet action that will be executet. Changes the behavier of some flags.
         /// </param>
-        internal WinGetArguments(string baseCmd, FileType fileType = FileType.None)
+        internal WinGetArguments(string baseCmd, WinGetAction action)
         {
             _arguments = baseCmd;
-            _fileType = fileType;
+            _action = action;
         }
 
         //---Base Cmd's--------------------------------------------------------------------------------
@@ -65,7 +75,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments List()
         {
-            return new WinGetArguments("list");
+            return new WinGetArguments("list", WinGetAction.List);
         }
 
         /// <summary>
@@ -76,7 +86,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Search()
         {
-            return new WinGetArguments("search");
+            return new WinGetArguments("search", WinGetAction.Search);
         }
 
         /// <summary>
@@ -87,7 +97,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Install()
         {
-            return new WinGetArguments("install");
+            return new WinGetArguments("install", WinGetAction.Install);
         }
 
         /// <summary>
@@ -98,7 +108,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Upgrade()
         {
-            return new WinGetArguments("upgrade");
+            return new WinGetArguments("upgrade", WinGetAction.Upgrade);
         }
 
         /// <summary>
@@ -109,7 +119,29 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Uninstall()
         {
-            return new WinGetArguments("uninstall");
+            return new WinGetArguments("uninstall", WinGetAction.Uninstall);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "download" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments Download()
+        {
+            return new WinGetArguments("download", WinGetAction.Download);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "repair" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments Repair()
+        {
+            return new WinGetArguments("repair", WinGetAction.Repair);
         }
 
         /// <summary>
@@ -120,7 +152,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Export()
         {
-            return new WinGetArguments("export", FileType.ExportFile);
+            return new WinGetArguments("export", WinGetAction.Export);
         }
 
         /// <summary>
@@ -131,7 +163,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Import()
         {
-            return new WinGetArguments("import", FileType.ImportFile);
+            return new WinGetArguments("import", WinGetAction.Import);
         }
 
         /// <summary>
@@ -142,7 +174,51 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Hash()
         {
-            return new WinGetArguments("hash", FileType.Normal);
+            return new WinGetArguments("hash", WinGetAction.Hash);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "pin list" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments PinList()
+        {
+            return new WinGetArguments("pin list", WinGetAction.PinList);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "pin add" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments PinAdd()
+        {
+            return new WinGetArguments("pin add", WinGetAction.PinAdd);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "pin remove" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments PinRemove()
+        {
+            return new WinGetArguments("pin remove", WinGetAction.PinRemove);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "pin reset" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments PinReset()
+        {
+            return new WinGetArguments("pin reset", WinGetAction.PinReset);
         }
 
         //---Flags-------------------------------------------------------------------------------------
@@ -179,27 +255,84 @@ namespace WGetNET
         /// <summary>
         /// Adds a file path to the arguments.
         /// </summary>
+        /// <remarks>
+        /// Behavior depends on base cmd. If the base cmd does not read or write from or to a file, the function will do nothing.
+        /// </remarks>
         /// <param name="file">
-        /// The <see cref="System.String"/> that contains the source name.
+        /// The <see cref="System.String"/> that contains the file path.
         /// </param>
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
         public WinGetArguments File(string file)
         {
-            switch (_fileType)
+            switch (_action)
             {
-                case FileType.Normal:
+                case WinGetAction.Hash:
                     _arguments += $" --file \"{file}\"";
                     break;
-                case FileType.ImportFile:
+                case WinGetAction.Import:
                     _arguments += $" --import-file \"{file}\"";
                     break;
-                case FileType.ExportFile:
+                case WinGetAction.Export:
                     _arguments += $" --output \"{file}\"";
                     break;
             }
 
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a directory path to the arguments.
+        /// </summary>
+        /// <remarks>
+        /// Behavior depends on base cmd. If the base cmd does not need a directory, the function will do nothing.
+        /// </remarks>
+        /// <param name="directory">
+        /// The <see cref="System.String"/> that contains the directory.
+        /// </param>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Directory(string directory)
+        {
+            // Remove backslash chars at the end of the path,
+            // because they are not needed and will interfere with winget argument string by negating the last quotation mark char,
+            // used for encasing the directory path.
+#if NETCOREAPP3_1_OR_GREATER
+            while (directory.EndsWith('\\'))
+            {
+                directory = directory.Substring(0, directory.Length - 1);
+            }
+#elif NETSTANDARD2_0
+            while (directory.EndsWith("\\"))
+            {
+                directory = directory.Substring(0, directory.Length - 1);
+            }
+#endif
+
+            switch (_action)
+            {
+                case WinGetAction.Download:
+                    _arguments += $" --download-directory \"{directory}\"";
+                    break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a version query to the arguments.
+        /// </summary>
+        /// <param name="version">
+        /// The <see cref="System.String"/> that contains the version.
+        /// </param>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Version(string version)
+        {
+            _arguments += $" --version \"{version}\"";
             return this;
         }
 
@@ -287,6 +420,41 @@ namespace WGetNET
             return this;
         }
 
+        /// <summary>
+        /// Adds the '--installed' flag to the arguments.
+        /// </summary>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Installed()
+        {
+            _arguments += " --installed";
+            return this;
+        }
+
+        /// <summary>
+        /// Adds the '--blocking' flag to the arguments.
+        /// </summary>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Blocking()
+        {
+            _arguments += " --blocking";
+            return this;
+        }
+
+        /// <summary>
+        /// Adds the '--force' flag to the arguments.
+        /// </summary>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Force()
+        {
+            _arguments += " --force";
+            return this;
+        }
 
         //---Others------------------------------------------------------------------------------------
         /// <inheritdoc/>

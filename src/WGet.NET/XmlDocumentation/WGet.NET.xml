@@ -3448,16 +3448,16 @@
             This feature is not supported in the installed WinGet version.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.IncludeUnknownbyVersion(System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.IncludeUnknownbyVersion(WGetNET.WinGetArguments)">
             <summary>
-            Adds the '--include-unknown' argument to the given <see cref="T:System.String"/> of arguments
+            Adds the '--include-unknown' flag to the given <see cref="T:WGetNET.WinGetArguments"/>
             when the winget version is higher then 1.4.0.
             </summary>
-            <param name="argument">
-            <see cref="T:System.String"/> containing the arguments that should be extended.
+            <param name="arguments">
+            <see cref="T:WGetNET.WinGetArguments"/> object to process.
             </param>
             <returns>
-            A <see cref="T:System.String"/> containing the new process arguments.
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
         </member>
         <member name="T:WGetNET.WinGetSourceManager">
@@ -4287,12 +4287,15 @@
         <member name="P:WGetNET.WinGetArguments.IsEmpty">
             <inheritdoc/>
         </member>
-        <member name="M:WGetNET.WinGetArguments.#ctor(System.String)">
+        <member name="M:WGetNET.WinGetArguments.#ctor(System.String,WGetNET.WinGetArguments.WinGetAction)">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGetArguments"/> class.
             </summary>
             <param name="baseCmd">
             The base cmd of the arguments.
+            </param>
+            <param name="action">
+            The WinGet action that will be executet. Changes the behavier of some flags.
             </param>
         </member>
         <member name="M:WGetNET.WinGetArguments.List">
@@ -4306,6 +4309,102 @@
         <member name="M:WGetNET.WinGetArguments.Search">
             <summary>
             Creates a new winget arguments object with "search" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Install">
+            <summary>
+            Creates a new winget arguments object with "install" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Upgrade">
+            <summary>
+            Creates a new winget arguments object with "upgrade" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Uninstall">
+            <summary>
+            Creates a new winget arguments object with "uninstall" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Download">
+            <summary>
+            Creates a new winget arguments object with "download" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Repair">
+            <summary>
+            Creates a new winget arguments object with "repair" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Export">
+            <summary>
+            Creates a new winget arguments object with "export" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Import">
+            <summary>
+            Creates a new winget arguments object with "import" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Hash">
+            <summary>
+            Creates a new winget arguments object with "hash" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.PinList">
+            <summary>
+            Creates a new winget arguments object with "pin list" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.PinAdd">
+            <summary>
+            Creates a new winget arguments object with "pin add" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.PinRemove">
+            <summary>
+            Creates a new winget arguments object with "pin remove" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.PinReset">
+            <summary>
+            Creates a new winget arguments object with "pin reset" as the base cmd.
             </summary>
             <returns>
             The created <see cref="T:WGetNET.WinGetArguments"/> object.
@@ -4333,9 +4432,72 @@
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
         </member>
+        <member name="M:WGetNET.WinGetArguments.File(System.String)">
+            <summary>
+            Adds a file path to the arguments.
+            </summary>
+            <remarks>
+            Behavior depends on base cmd. If the base cmd does not read or write from or to a file, the function will do nothing.
+            </remarks>
+            <param name="file">
+            The <see cref="T:System.String"/> that contains the file path.
+            </param>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Directory(System.String)">
+            <summary>
+            Adds a directory path to the arguments.
+            </summary>
+            <remarks>
+            Behavior depends on base cmd. If the base cmd does not need a directory, the function will do nothing.
+            </remarks>
+            <param name="directory">
+            The <see cref="T:System.String"/> that contains the directory.
+            </param>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Version(System.String)">
+            <summary>
+            Adds a version query to the arguments.
+            </summary>
+            <param name="version">
+            The <see cref="T:System.String"/> that contains the version.
+            </param>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGetArguments.Exact">
             <summary>
             Adds the '--exact' flag to the arguments.
+            </summary>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Silent">
+            <summary>
+            Adds the '--silent' flag to the arguments.
+            </summary>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.All">
+            <summary>
+            Adds the '--all' flag to the arguments.
+            </summary>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.IncludeUnknown">
+            <summary>
+            Adds the '--include-unknown' flag to the arguments.
             </summary>
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
@@ -4352,6 +4514,38 @@
         <member name="M:WGetNET.WinGetArguments.AcceptPackageAgreements">
             <summary>
             Adds the '--accept-package-agreements' flag to the arguments.
+            </summary>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.IgnoreUnavailable">
+            <summary>
+            Adds the '--ignore-unavailable' flag to the arguments.
+            </summary>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Installed">
+            <summary>
+            Adds the '--installed' flag to the arguments.
+            </summary>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Blocking">
+            <summary>
+            Adds the '--blocking' flag to the arguments.
+            </summary>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Force">
+            <summary>
+            Adds the '--force' flag to the arguments.
             </summary>
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
@@ -5287,55 +5481,6 @@
             </param>
             <returns>
             The <see cref="T:WGetNET.WinGetPackage"/> that matches the search criteria, or <see langword="null"/> if no package matches.
-            </returns>
-        </member>
-        <member name="T:WGetNET.Helper.ParameterHelper">
-            <summary>
-            The <see langword="static"/> <see cref="T:WGetNET.Helper.ParameterHelper"/> class provides methods for winget call parameter extensions.
-            </summary>
-        </member>
-        <member name="M:WGetNET.Helper.ParameterHelper.IncludeUnknown(System.String)">
-            <summary>
-            Adds the '--include-unknown' argument to the given <see cref="T:System.String"/> of arguments.
-            </summary>
-            <param name="argument">
-            <see cref="T:System.String"/> containing the arguments that should be extended.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the new process arguments.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ParameterHelper.AcceptSourceAgreements(System.String)">
-            <summary>
-            Adds the '--accept-source-agreements' argument to the given <see cref="T:System.String"/> of arguments.
-            </summary>
-            <param name="argument">
-            <see cref="T:System.String"/> containing the arguments that should be extended.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the new process arguments.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ParameterHelper.AcceptPackageAgreements(System.String)">
-            <summary>
-            Adds the '--accept-package-agreements' argument to the given <see cref="T:System.String"/> of arguments.
-            </summary>
-            <param name="argument">
-            <see cref="T:System.String"/> containing the arguments that should be extended.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the new process arguments.
-            </returns>
-        </member>
-        <member name="M:WGetNET.Helper.ParameterHelper.Silent(System.String)">
-            <summary>
-            Adds the '--silent' argument to the given <see cref="T:System.String"/> of arguments.
-            </summary>
-            <param name="argument">
-            <see cref="T:System.String"/> containing the arguments that should be extended.
-            </param>
-            <returns>
-            A <see cref="T:System.String"/> containing the new process arguments.
             </returns>
         </member>
         <member name="T:WGetNET.Helper.PathHelper">

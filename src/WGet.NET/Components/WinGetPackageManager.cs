@@ -19,18 +19,6 @@ namespace WGetNET
     /// </summary>
     public class WinGetPackageManager : WinGet
     {
-        // Commands
-        private const string _downloadCmd = "download {0} --download-directory {1}";
-        private const string _pinListCmd = "pin list";
-        private const string _pinAddCmd = "pin add \"{0}\"";
-        private const string _pinAddByVersionCmd = "pin add \"{0}\" --version \"{1}\"";
-        private const string _pinRemoveCmd = "pin remove \"{0}\"";
-        private const string _pinAddInstalledCmd = "pin add \"{0}\" --installed";
-        private const string _pinAddInstalledByVersionCmd = "pin add \"{0}\" --installed --version \"{1}\"";
-        private const string _pinRemoveInstalledCmd = "pin remove \"{0}\" --installed";
-        private const string _pinResetCmd = "pin reset --force";
-        private const string _repairCmd = "repair \"{0}\"";
-
         private readonly Version _downloadMinVersion = new(1, 6, 0);
         private readonly Version _repairMinVersion = new(1, 7, 0);
         private readonly Version _pinMinVersion = new(1, 5, 0);
@@ -1654,9 +1642,14 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_repairCmd, packageId)));
-
-            ProcessResult result = Execute(cmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .Repair()
+                    .Query(packageId)
+                    .AcceptSourceAgreements()
+                    .AcceptPackageAgreements()
+                    .ToString());
 
             return result.Success;
         }
@@ -1691,14 +1684,19 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_repairCmd, packageId)));
+            WinGetArguments cmd =
+                WinGetArguments
+                .Repair()
+                .Query(packageId)
+                .AcceptSourceAgreements()
+                .AcceptPackageAgreements();
 
             if (silent)
             {
-                cmd = ParameterHelper.Silent(cmd);
+                cmd.Silent();
             }
 
-            ProcessResult result = Execute(cmd);
+            ProcessResult result = Execute(cmd.ToString());
 
             return result.Success;
         }
@@ -1801,9 +1799,15 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_repairCmd, packageId)));
-
-            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .Repair()
+                    .Query(packageId)
+                    .AcceptSourceAgreements()
+                    .AcceptPackageAgreements()
+                    .ToString(),
+                    false, cancellationToken);
 
             return result.Success;
         }
@@ -1842,14 +1846,19 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(string.Format(_repairCmd, packageId)));
+            WinGetArguments cmd =
+                WinGetArguments
+                .Repair()
+                .Query(packageId)
+                .AcceptSourceAgreements()
+                .AcceptPackageAgreements();
 
             if (silent)
             {
-                cmd = ParameterHelper.Silent(cmd);
+                cmd.Silent();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
 
             return result.Success;
         }
@@ -2268,11 +2277,15 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
 
-            string cmd = string.Format(
-                ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(_downloadCmd)),
-                packageId, directory);
-
-            ProcessResult result = Execute(cmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .Download()
+                    .Query(packageId)
+                    .Directory(directory)
+                    .AcceptSourceAgreements()
+                    .AcceptPackageAgreements()
+                    .ToString());
 
             return result.Success;
         }
@@ -2409,11 +2422,16 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
 
-            string cmd = string.Format(
-                ParameterHelper.AcceptPackageAgreements(ParameterHelper.AcceptSourceAgreements(_downloadCmd)),
-                packageId, directory);
-
-            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .Download()
+                    .Query(packageId)
+                    .Directory(directory)
+                    .AcceptSourceAgreements()
+                    .AcceptPackageAgreements()
+                    .ToString(),
+                    false, cancellationToken);
 
             return result.Success;
         }
@@ -2549,7 +2567,11 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ProcessResult result = Execute(_pinListCmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .PinList()
+                    .ToString());
 
             return ProcessOutputReader.ToPinnedPackageList(result.Output);
         }
@@ -2577,7 +2599,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ProcessResult result = await ExecuteAsync(_pinListCmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .PinList()
+                    .ToString(),
+                    false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -2619,14 +2646,17 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_pinAddCmd, packageId);
+            WinGetArguments cmd =
+                WinGetArguments
+                .PinAdd()
+                .Query(packageId);
 
             if (blocking)
             {
-                cmd += " --blocking";
+                cmd.Blocking();
             }
 
-            ProcessResult result = Execute(cmd);
+            ProcessResult result = Execute(cmd.ToString());
 
             return result.Success;
         }
@@ -2664,9 +2694,13 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
-
-            ProcessResult result = Execute(cmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .PinAdd()
+                    .Query(packageId)
+                    .Version(version)
+                    .ToString());
 
             return result.Success;
         }
@@ -2771,14 +2805,17 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_pinAddCmd, packageId);
+            WinGetArguments cmd =
+                WinGetArguments
+                .PinAdd()
+                .Query(packageId);
 
             if (blocking)
             {
-                cmd += " --blocking";
+                cmd.Blocking();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
 
             return result.Success;
         }
@@ -2820,9 +2857,14 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            string cmd = string.Format(_pinAddByVersionCmd, packageId, version);
-
-            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .PinAdd()
+                    .Query(packageId)
+                    .Version(version)
+                    .ToString(),
+                    false, cancellationToken);
 
             return result.Success;
         }
@@ -2931,14 +2973,18 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_pinAddInstalledCmd, packageId);
+            WinGetArguments cmd =
+                WinGetArguments
+                .PinAdd()
+                .Query(packageId)
+                .Installed();
 
             if (blocking)
             {
-                cmd += " --blocking";
+                cmd.Blocking();
             }
 
-            ProcessResult result = Execute(cmd);
+            ProcessResult result = Execute(cmd.ToString());
 
             return result.Success;
         }
@@ -2976,9 +3022,14 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
-
-            ProcessResult result = Execute(cmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .PinAdd()
+                    .Query(packageId)
+                    .Installed()
+                    .Version(version)
+                    .ToString());
 
             return result.Success;
         }
@@ -3083,14 +3134,18 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_pinAddInstalledCmd, packageId);
+            WinGetArguments cmd =
+                WinGetArguments
+                .PinAdd()
+                .Query(packageId)
+                .Installed();
 
             if (blocking)
             {
-                cmd += " --blocking";
+                cmd.Blocking();
             }
 
-            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+            ProcessResult result = await ExecuteAsync(cmd.ToString(), false, cancellationToken);
 
             return result.Success;
         }
@@ -3132,9 +3187,15 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
 
-            string cmd = string.Format(_pinAddInstalledByVersionCmd, packageId, version);
-
-            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .PinAdd()
+                    .Query(packageId)
+                    .Installed()
+                    .Version(version)
+                    .ToString(),
+                    false, cancellationToken);
 
             return result.Success;
         }
@@ -3244,9 +3305,12 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_pinRemoveCmd, packageId);
-
-            ProcessResult result = Execute(cmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .PinRemove()
+                    .Query(packageId)
+                    .ToString());
 
             return result.Success;
         }
@@ -3314,9 +3378,13 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_pinRemoveCmd, packageId);
-
-            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .PinRemove()
+                    .Query(packageId)
+                    .ToString(),
+                    false, cancellationToken);
 
             return result.Success;
         }
@@ -3384,9 +3452,13 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
-
-            ProcessResult result = Execute(cmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .PinRemove()
+                    .Query(packageId)
+                    .Installed()
+                    .ToString());
 
             return result.Success;
         }
@@ -3454,9 +3526,14 @@ namespace WGetNET
 
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
 
-            string cmd = string.Format(_pinRemoveInstalledCmd, packageId);
-
-            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .PinRemove()
+                    .Query(packageId)
+                    .Installed()
+                    .ToString(),
+                    false, cancellationToken);
 
             return result.Success;
         }
@@ -3520,7 +3597,12 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ProcessResult result = Execute(_pinResetCmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .PinReset()
+                    .Force()
+                    .ToString());
 
             return result.Success;
         }
@@ -3551,7 +3633,13 @@ namespace WGetNET
                 throw new WinGetFeatureNotSupportedException(_pinMinVersion);
             }
 
-            ProcessResult result = await ExecuteAsync(_pinResetCmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .PinReset()
+                    .Force()
+                    .ToString(),
+                    false, cancellationToken);
 
             return result.Success;
         }
