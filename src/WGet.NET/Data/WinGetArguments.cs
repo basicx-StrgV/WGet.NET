@@ -322,6 +322,9 @@ namespace WGetNET
         /// <summary>
         /// Adds a query to the arguments.
         /// </summary>
+        /// <remarks>
+        /// Mainly used for Package based actions.
+        /// </remarks>
         /// <param name="query">
         /// The <see cref="System.String"/> that should be added as a query.
         /// </param>
@@ -451,6 +454,9 @@ namespace WGetNET
         /// <summary>
         /// Adds name data to the arguments.
         /// </summary>
+        /// <remarks>
+        /// Mainly used for Source based actions.
+        /// </remarks>
         /// <param name="name">
         /// A <see cref="System.String"/> containing the name to add to the arguments.
         /// </param>
@@ -466,6 +472,9 @@ namespace WGetNET
         /// <summary>
         /// Adds arg (Source argument) data to the arguments.
         /// </summary>
+        /// <remarks>
+        /// Mainly used for Source based actions.
+        /// </remarks>
         /// <param name="arg">
         /// A <see cref="System.String"/> containing the arg (Source argument) to add to the arguments.
         /// </param>
@@ -481,6 +490,9 @@ namespace WGetNET
         /// <summary>
         /// Adds type data to the arguments.
         /// </summary>
+        /// <remarks>
+        /// Mainly used for Source based actions.
+        /// </remarks>
         /// <param name="type">
         /// A <see cref="System.String"/> containing the type data to add to the arguments.
         /// </param>
