@@ -27,7 +27,12 @@ namespace WGetNET
             PinList,
             PinAdd,
             PinRemove,
-            PinReset
+            PinReset,
+            SourceAdd,
+            SourceRemove,
+            SourceUpdate,
+            SourceReset,
+            SourceExport
         }
 
         /// <summary>
@@ -258,6 +263,61 @@ namespace WGetNET
             return new WinGetArguments("pin reset", WinGetAction.PinReset);
         }
 
+        /// <summary>
+        /// Creates a new winget arguments object with "source add" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments SourceAdd()
+        {
+            return new WinGetArguments("source add", WinGetAction.SourceAdd);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "source remove" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments SourceRemove()
+        {
+            return new WinGetArguments("source remove", WinGetAction.SourceRemove);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "source update" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments SourceUpdate()
+        {
+            return new WinGetArguments("source update", WinGetAction.SourceUpdate);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "source reset" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments SourceReset()
+        {
+            return new WinGetArguments("source reset", WinGetAction.SourceReset);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "source export" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments SourceExport()
+        {
+            return new WinGetArguments("source export", WinGetAction.SourceExport);
+        }
+
         //---Flags-------------------------------------------------------------------------------------
         /// <summary>
         /// Adds a query to the arguments.
@@ -385,6 +445,51 @@ namespace WGetNET
         public WinGetArguments Disable(string query)
         {
             _arguments += $" --disable \"{query}\"";
+            return this;
+        }
+
+        /// <summary>
+        /// Adds name data to the arguments.
+        /// </summary>
+        /// <param name="name">
+        /// A <see cref="System.String"/> containing the name to add to the arguments.
+        /// </param>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Name(string name)
+        {
+            _arguments += $" --name \"{name}\"";
+            return this;
+        }
+
+        /// <summary>
+        /// Adds arg (Source argument) data to the arguments.
+        /// </summary>
+        /// <param name="arg">
+        /// A <see cref="System.String"/> containing the arg (Source argument) to add to the arguments.
+        /// </param>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Arg(string arg)
+        {
+            _arguments += $" --arg \"{arg}\"";
+            return this;
+        }
+
+        /// <summary>
+        /// Adds type data to the arguments.
+        /// </summary>
+        /// <param name="type">
+        /// A <see cref="System.String"/> containing the type data to add to the arguments.
+        /// </param>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Type(string type)
+        {
+            _arguments += $" --type \"{type}\"";
             return this;
         }
 

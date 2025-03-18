@@ -2,12 +2,12 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using WGetNET.Models;
-using WGetNET.Helper;
 using WGetNET.Components.Internal;
+using WGetNET.Helper;
+using WGetNET.Models;
 
 namespace WGetNET
 {
@@ -16,13 +16,6 @@ namespace WGetNET
     /// </summary>
     public class WinGetSourceManager : WinGet
     {
-        private const string _sourceAddCmd = "source add -n {0} -a {1} --accept-source-agreements";
-        private const string _sourceAddWithTypeCmd = "source add -n {0} -a {1} -t {2} --accept-source-agreements";
-        private const string _sourceUpdateCmd = "source update";
-        private const string _sourceExportCmd = "source export";
-        private const string _sourceResetCmd = "source reset --force";
-        private const string _sourceRemoveCmd = "source remove -n {0}";
-
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetSourceManager"/> class.
         /// </summary>
@@ -43,7 +36,11 @@ namespace WGetNET
         /// </exception>
         public List<WinGetSource> GetInstalledSources()
         {
-            ProcessResult result = Execute(_sourceExportCmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .SourceExport()
+                    .ToString());
 
             return ProcessOutputReader.ToSourceList(result.Output);
         }
@@ -68,9 +65,12 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            string cmd = $"{_sourceExportCmd} -n {sourceName}";
-
-            ProcessResult result = Execute(cmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .SourceExport()
+                    .Name(sourceName)
+                    .ToString());
 
             return ProcessOutputReader.ToSourceList(result.Output);
         }
@@ -90,7 +90,12 @@ namespace WGetNET
         /// </exception>
         public async Task<List<WinGetSource>> GetInstalledSourcesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_sourceExportCmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .SourceExport()
+                    .ToString(),
+                    false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -125,9 +130,13 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
 
-            string cmd = $"{_sourceExportCmd} -n {sourceName}";
-
-            ProcessResult result = await ExecuteAsync(cmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .SourceExport()
+                    .Name(sourceName)
+                    .ToString(),
+                    false, cancellationToken);
 
             // Return empty list if the task was cancled
             if (cancellationToken.IsCancellationRequested)
@@ -169,9 +178,15 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
-            string cmd = string.Format(_sourceAddCmd, name, arg);
-
-            ProcessResult result = Execute(cmd, true);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .SourceAdd()
+                    .Name(name)
+                    .Arg(arg)
+                    .AcceptSourceAgreements()
+                    .ToString(),
+                    true);
 
             return result.Success;
         }
@@ -209,9 +224,16 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
-            string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
-
-            ProcessResult result = Execute(cmd, true);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .SourceAdd()
+                    .Name(name)
+                    .Arg(arg)
+                    .Type(type)
+                    .AcceptSourceAgreements()
+                    .ToString(),
+                    true);
 
             return result.Success;
         }
@@ -316,9 +338,15 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
 
-            string cmd = string.Format(_sourceAddCmd, name, arg);
-
-            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .SourceAdd()
+                    .Name(name)
+                    .Arg(arg)
+                    .AcceptSourceAgreements()
+                    .ToString(),
+                    true, cancellationToken);
 
             return result.Success;
         }
@@ -360,9 +388,16 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
 
-            string cmd = string.Format(_sourceAddWithTypeCmd, name, arg, type);
-
-            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .SourceAdd()
+                    .Name(name)
+                    .Arg(arg)
+                    .Type(type)
+                    .AcceptSourceAgreements()
+                    .ToString(),
+                    true, cancellationToken);
 
             return result.Success;
         }
@@ -466,7 +501,11 @@ namespace WGetNET
         /// </exception>
         public bool UpdateSources()
         {
-            ProcessResult result = Execute(_sourceUpdateCmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .SourceUpdate()
+                    .ToString());
 
             return result.Success;
         }
@@ -489,7 +528,12 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> UpdateSourcesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_sourceUpdateCmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .SourceUpdate()
+                    .ToString(),
+                    false, cancellationToken);
 
             return result.Success;
         }
@@ -925,7 +969,13 @@ namespace WGetNET
         /// </exception>
         public bool ResetSources()
         {
-            ProcessResult result = Execute(_sourceResetCmd, true);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .SourceReset()
+                    .Force()
+                    .ToString(),
+                    true);
 
             return result.Success;
         }
@@ -951,7 +1001,13 @@ namespace WGetNET
         /// </exception>
         public async Task<bool> ResetSourcesAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_sourceResetCmd, true, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .SourceReset()
+                    .Force()
+                    .ToString(),
+                    true, cancellationToken);
 
             return result.Success;
         }
@@ -983,9 +1039,13 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
-            string cmd = string.Format(_sourceRemoveCmd, name);
-
-            ProcessResult result = Execute(cmd, true);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .SourceRemove()
+                    .Name(name)
+                    .ToString(),
+                    true);
 
             return result.Success;
         }
@@ -1047,9 +1107,13 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
 
-            string cmd = string.Format(_sourceRemoveCmd, name);
-
-            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .SourceRemove()
+                    .Name(name)
+                    .ToString(),
+                    true, cancellationToken);
 
             return result.Success;
         }

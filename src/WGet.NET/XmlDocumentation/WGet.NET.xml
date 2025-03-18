@@ -4435,6 +4435,46 @@
             The created <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
         </member>
+        <member name="M:WGetNET.WinGetArguments.SourceAdd">
+            <summary>
+            Creates a new winget arguments object with "source add" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.SourceRemove">
+            <summary>
+            Creates a new winget arguments object with "source remove" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.SourceUpdate">
+            <summary>
+            Creates a new winget arguments object with "source update" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.SourceReset">
+            <summary>
+            Creates a new winget arguments object with "source reset" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.SourceExport">
+            <summary>
+            Creates a new winget arguments object with "source export" as the base cmd.
+            </summary>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
         <member name="M:WGetNET.WinGetArguments.Query(System.String)">
             <summary>
             Adds a query to the arguments.
@@ -4502,6 +4542,39 @@
             </summary>
             <param name="query">
             A <see cref="T:System.String"/> containing the option to disable.
+            </param>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Name(System.String)">
+            <summary>
+            Adds name data to the arguments.
+            </summary>
+            <param name="name">
+            A <see cref="T:System.String"/> containing the name to add to the arguments.
+            </param>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Arg(System.String)">
+            <summary>
+            Adds arg (Source argument) data to the arguments.
+            </summary>
+            <param name="arg">
+            A <see cref="T:System.String"/> containing the arg (Source argument) to add to the arguments.
+            </param>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Type(System.String)">
+            <summary>
+            Adds type data to the arguments.
+            </summary>
+            <param name="type">
+            A <see cref="T:System.String"/> containing the type data to add to the arguments.
             </param>
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
@@ -5512,27 +5585,6 @@
             A <see cref="T:System.String"/> containing the json to deserialize.
             </param>
             <returns>
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
-        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <param name="cancellationToken">
-            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             Object of the given class type.
             </returns>
             <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
