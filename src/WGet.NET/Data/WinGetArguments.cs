@@ -11,6 +11,9 @@ namespace WGetNET
     {
         internal enum WinGetAction
         {
+            None,
+            Settings,
+            SettingsExport,
             List,
             Search,
             Install,
@@ -34,7 +37,7 @@ namespace WGetNET
         {
             get
             {
-                return _arguments;
+                return _arguments.Trim();
             }
         }
 
@@ -67,6 +70,40 @@ namespace WGetNET
         }
 
         //---Base Cmd's--------------------------------------------------------------------------------
+        /// <summary>
+        /// Creates a new winget arguments object with no base cmd. 
+        /// Used for direct callin of the winget cmd with flags.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments WinGet()
+        {
+            return new WinGetArguments("", WinGetAction.None);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "settings" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments Settings()
+        {
+            return new WinGetArguments("settings", WinGetAction.Settings);
+        }
+
+        /// <summary>
+        /// Creates a new winget arguments object with "settings export" as the base cmd.
+        /// </summary>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments SettingsExport()
+        {
+            return new WinGetArguments("settings export", WinGetAction.SettingsExport);
+        }
+
         /// <summary>
         /// Creates a new winget arguments object with "list" as the base cmd.
         /// </summary>
@@ -322,6 +359,36 @@ namespace WGetNET
         }
 
         /// <summary>
+        /// Adds a enable action to the arguments.
+        /// </summary>
+        /// <param name="query">
+        /// A <see cref="System.String"/> containing the option to enable.
+        /// </param>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Enable(string query)
+        {
+            _arguments += $" --enable \"{query}\"";
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a disable action to the arguments.
+        /// </summary>
+        /// <param name="query">
+        /// A <see cref="System.String"/> containing the option to disable.
+        /// </param>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Disable(string query)
+        {
+            _arguments += $" --disable \"{query}\"";
+            return this;
+        }
+
+        /// <summary>
         /// Adds a version query to the arguments.
         /// </summary>
         /// <param name="version">
@@ -333,6 +400,18 @@ namespace WGetNET
         public WinGetArguments Version(string version)
         {
             _arguments += $" --version \"{version}\"";
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a version query to the arguments.
+        /// </summary>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Version()
+        {
+            _arguments += $" --version";
             return this;
         }
 
@@ -456,11 +535,23 @@ namespace WGetNET
             return this;
         }
 
+        /// <summary>
+        /// Adds the '--info' flag to the arguments.
+        /// </summary>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Info()
+        {
+            _arguments += " --info";
+            return this;
+        }
+
         //---Others------------------------------------------------------------------------------------
         /// <inheritdoc/>
         public override string ToString()
         {
-            return _arguments;
+            return _arguments.Trim();
         }
     }
 }

@@ -22,12 +22,6 @@ namespace WGetNET
     /// </summary>
     public class WinGet
     {
-        private const string _infoCmd = "--info";
-        private const string _versionCmd = "--version";
-        private const string _exportSettingsCmd = "settings export";
-        private const string _settingsEnableCmd = "settings --enable \"{0}\"";
-        private const string _settingsDisableCmd = "settings --disable \"{0}\"";
-
         private ProcessManager _processManager;
         private string _wingetExePath;
         private DateTime _wingetExeModificationDate;
@@ -154,7 +148,11 @@ namespace WGetNET
         /// </exception>
         public string ExportSettings()
         {
-            ProcessResult result = Execute(_exportSettingsCmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .SettingsExport()
+                    .ToString());
 
             return ProcessOutputReader.ExportOutputToString(result);
         }
@@ -174,7 +172,12 @@ namespace WGetNET
         /// </exception>
         public async Task<string> ExportSettingsAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_exportSettingsCmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .SettingsExport()
+                    .ToString(),
+                    false, cancellationToken);
 
             return ProcessOutputReader.ExportOutputToString(result);
         }
@@ -222,7 +225,11 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            ProcessResult result = Execute(_exportSettingsCmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .SettingsExport()
+                    .ToString());
 
             FileHelper.WriteTextToFile(file, ProcessOutputReader.ExportOutputToString(result));
         }
@@ -273,7 +280,12 @@ namespace WGetNET
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
             ArgsHelper.ThrowIfPathIsInvalid(file);
 
-            ProcessResult result = await ExecuteAsync(_exportSettingsCmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .SettingsExport()
+                    .ToString(),
+                    false, cancellationToken);
 
             await FileHelper.WriteTextToFileAsync(file, ProcessOutputReader.ExportOutputToString(result), cancellationToken);
         }
@@ -396,9 +408,13 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
 
-            string cmd = string.Format(_settingsEnableCmd, settingName);
-
-            ProcessResult result = Execute(cmd, true);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .Settings()
+                    .Enable(settingName)
+                    .ToString(),
+                    true);
 
             return result.Success;
         }
@@ -460,9 +476,13 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
 
-            string cmd = string.Format(_settingsEnableCmd, settingName);
-
-            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .Settings()
+                    .Enable(settingName)
+                    .ToString(),
+                    true, cancellationToken);
 
             return result.Success;
         }
@@ -524,9 +544,13 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
 
-            string cmd = string.Format(_settingsDisableCmd, settingName);
-
-            ProcessResult result = Execute(cmd, true);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .Settings()
+                    .Disable(settingName)
+                    .ToString(),
+                    true);
 
             return result.Success;
         }
@@ -588,9 +612,13 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
 
-            string cmd = string.Format(_settingsDisableCmd, settingName);
-
-            ProcessResult result = await ExecuteAsync(cmd, true, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .Settings()
+                    .Disable(settingName)
+                    .ToString(),
+                    true, cancellationToken);
 
             return result.Success;
         }
@@ -640,7 +668,12 @@ namespace WGetNET
         /// </exception>
         public WinGetInfo GetInfo()
         {
-            ProcessResult result = Execute(_infoCmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .WinGet()
+                    .Info()
+                    .ToString());
 
             InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
             if (CheckWinGetVersion(new Version(1, 4, 3531), new Version(1, 5, 101)))
@@ -674,7 +707,13 @@ namespace WGetNET
         /// </exception>
         public async Task<WinGetInfo> GetInfoAsync(CancellationToken cancellationToken = default)
         {
-            ProcessResult result = await ExecuteAsync(_infoCmd, false, cancellationToken);
+            ProcessResult result =
+                await ExecuteAsync(
+                    WinGetArguments
+                    .WinGet()
+                    .Info()
+                    .ToString(),
+                    false, cancellationToken);
 
             // Check the version range the action should be performed for
             InfoActionVersionId actionVersionId = InfoActionVersionId.VersionRange1;
@@ -837,7 +876,12 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            ProcessResult result = Execute(_versionCmd);
+            ProcessResult result =
+                Execute(
+                    WinGetArguments
+                    .WinGet()
+                    .Version()
+                    .ToString());
 
             for (int i = 0; i < result.Output.Length; i++)
             {
