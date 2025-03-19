@@ -9,30 +9,17 @@ namespace WGetNET
     /// </summary>
     internal class WinGetArguments : IWinGetObject
     {
+        /// <summary>
+        /// The <see cref="WGetNET.WinGetArguments.WinGetAction"/> <see langword="enum"/> can be used to specify the winget action, 
+        /// to influence the arguments generation with some flags.
+        /// </summary>
         internal enum WinGetAction
         {
-            None,
-            Settings,
-            SettingsExport,
-            List,
-            Search,
-            Install,
-            Upgrade,
-            Uninstall,
+            Unspecified,
             Download,
-            Repair,
             Export,
             Import,
             Hash,
-            PinList,
-            PinAdd,
-            PinRemove,
-            PinReset,
-            SourceAdd,
-            SourceRemove,
-            SourceUpdate,
-            SourceReset,
-            SourceExport
         }
 
         /// <summary>
@@ -66,9 +53,11 @@ namespace WGetNET
         /// The base cmd of the arguments.
         /// </param>
         /// <param name="action">
-        /// The WinGet action that will be executet. Changes the behavier of some flags.
+        /// Specifies the base cmd to change the behavior of some flags. 
+        /// For most base cmd’s, no specification is needed. 
+        /// Default Value = "Unspecified"
         /// </param>
-        internal WinGetArguments(string baseCmd, WinGetAction action)
+        internal WinGetArguments(string baseCmd, WinGetAction action = WinGetAction.Unspecified)
         {
             _arguments = baseCmd;
             _action = action;
@@ -84,7 +73,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments WinGet()
         {
-            return new WinGetArguments("", WinGetAction.None);
+            return new WinGetArguments("");
         }
 
         /// <summary>
@@ -95,7 +84,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Settings()
         {
-            return new WinGetArguments("settings", WinGetAction.Settings);
+            return new WinGetArguments("settings");
         }
 
         /// <summary>
@@ -106,7 +95,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments SettingsExport()
         {
-            return new WinGetArguments("settings export", WinGetAction.SettingsExport);
+            return new WinGetArguments("settings export");
         }
 
         /// <summary>
@@ -117,7 +106,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments List()
         {
-            return new WinGetArguments("list", WinGetAction.List);
+            return new WinGetArguments("list");
         }
 
         /// <summary>
@@ -128,7 +117,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Search()
         {
-            return new WinGetArguments("search", WinGetAction.Search);
+            return new WinGetArguments("search");
         }
 
         /// <summary>
@@ -139,7 +128,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Install()
         {
-            return new WinGetArguments("install", WinGetAction.Install);
+            return new WinGetArguments("install");
         }
 
         /// <summary>
@@ -150,7 +139,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Upgrade()
         {
-            return new WinGetArguments("upgrade", WinGetAction.Upgrade);
+            return new WinGetArguments("upgrade");
         }
 
         /// <summary>
@@ -161,7 +150,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Uninstall()
         {
-            return new WinGetArguments("uninstall", WinGetAction.Uninstall);
+            return new WinGetArguments("uninstall");
         }
 
         /// <summary>
@@ -183,7 +172,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments Repair()
         {
-            return new WinGetArguments("repair", WinGetAction.Repair);
+            return new WinGetArguments("repair");
         }
 
         /// <summary>
@@ -227,7 +216,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments PinList()
         {
-            return new WinGetArguments("pin list", WinGetAction.PinList);
+            return new WinGetArguments("pin list");
         }
 
         /// <summary>
@@ -238,7 +227,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments PinAdd()
         {
-            return new WinGetArguments("pin add", WinGetAction.PinAdd);
+            return new WinGetArguments("pin add");
         }
 
         /// <summary>
@@ -249,7 +238,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments PinRemove()
         {
-            return new WinGetArguments("pin remove", WinGetAction.PinRemove);
+            return new WinGetArguments("pin remove");
         }
 
         /// <summary>
@@ -260,7 +249,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments PinReset()
         {
-            return new WinGetArguments("pin reset", WinGetAction.PinReset);
+            return new WinGetArguments("pin reset");
         }
 
         /// <summary>
@@ -271,7 +260,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments SourceAdd()
         {
-            return new WinGetArguments("source add", WinGetAction.SourceAdd);
+            return new WinGetArguments("source add");
         }
 
         /// <summary>
@@ -282,7 +271,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments SourceRemove()
         {
-            return new WinGetArguments("source remove", WinGetAction.SourceRemove);
+            return new WinGetArguments("source remove");
         }
 
         /// <summary>
@@ -293,7 +282,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments SourceUpdate()
         {
-            return new WinGetArguments("source update", WinGetAction.SourceUpdate);
+            return new WinGetArguments("source update");
         }
 
         /// <summary>
@@ -304,7 +293,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments SourceReset()
         {
-            return new WinGetArguments("source reset", WinGetAction.SourceReset);
+            return new WinGetArguments("source reset");
         }
 
         /// <summary>
@@ -315,7 +304,7 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments SourceExport()
         {
-            return new WinGetArguments("source export", WinGetAction.SourceExport);
+            return new WinGetArguments("source export");
         }
 
         //---Flags-------------------------------------------------------------------------------------
