@@ -7,7 +7,10 @@ namespace WGetNET
     /// <summary>
     /// Represents a winget arguments string for different winget actions.
     /// </summary>
-    internal class WinGetArguments : IWinGetObject
+    /// <remarks>
+    /// Used to easily generate arguments for winget execution.
+    /// </remarks>
+    public class WinGetArguments : IWinGetObject
     {
         /// <summary>
         /// The <see cref="WGetNET.WinGetArguments.WinGetAction"/> <see langword="enum"/> can be used to specify the winget action, 
@@ -307,7 +310,36 @@ namespace WGetNET
             return new WinGetArguments("source export");
         }
 
+        /// <summary>
+        /// Creates a new winget arguments object with a custom base cmd.
+        /// </summary>
+        /// <param name="cmd">
+        /// A <see cref="System.String"/> containing the custom cmd.
+        /// </param>
+        /// <returns>
+        /// The created <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public static WinGetArguments CustomCmd(string cmd)
+        {
+            return new WinGetArguments(cmd);
+        }
+
         //---Flags-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Adds a custom flag/parameter to the arguments.
+        /// </summary>
+        /// <param name="custom">
+        /// The <see cref="System.String"/> that should be added to the arguments.
+        /// </param>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        public WinGetArguments Custom(string custom)
+        {
+            _arguments += custom;
+            return this;
+        }
+
         /// <summary>
         /// Adds a query to the arguments.
         /// </summary>

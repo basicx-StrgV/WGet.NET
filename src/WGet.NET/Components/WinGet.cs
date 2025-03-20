@@ -687,6 +687,53 @@ namespace WGetNET
         }
         //---------------------------------------------------------------------------------------------
 
+        //---Custom execute----------------------------------------------------------------------------
+        /// <summary>
+        /// Exectutes WinGet with the provided arguments.
+        /// </summary>
+        /// <param name="args">
+        /// A <see cref="WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
+        /// </param>
+        /// <returns>
+        /// A <see cref="WGetNET.WinGetResult"/> object.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        public WinGetResult ExecuteCustom(WinGetArguments args)
+        {
+            ThrowIfNotInstalled();
+
+            WinGetResult result = new(Execute(args), args);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Asynchronously exectutes WinGet with the provided arguments.
+        /// </summary>
+        /// <param name="args">
+        /// A <see cref="WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/> containing the <see cref="WGetNET.WinGetResult"/> object.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        public async Task<WinGetResult> ExecuteCustomAsync(WinGetArguments args, CancellationToken cancellationToken = default)
+        {
+            ThrowIfNotInstalled();
+
+            WinGetResult result = new(await ExecuteAsync(args, false, cancellationToken), args);
+
+            return result;
+        }
+        //---------------------------------------------------------------------------------------------
+
         //---Protected Functions-----------------------------------------------------------------------
         // \cond PRIVATE
         /// <summary>

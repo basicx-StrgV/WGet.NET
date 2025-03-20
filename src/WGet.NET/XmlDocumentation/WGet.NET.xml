@@ -1191,6 +1191,37 @@
             WinGet is not installed or not found on the system.
             </exception>
         </member>
+        <member name="M:WGetNET.WinGet.ExecuteCustom(WGetNET.WinGetArguments)">
+            <summary>
+            Exectutes WinGet with the provided arguments.
+            </summary>
+            <param name="args">
+            A <see cref="T:WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
+            </param>
+            <returns>
+            A <see cref="T:WGetNET.WinGetResult"/> object.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGet.ExecuteCustomAsync(WGetNET.WinGetArguments,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously exectutes WinGet with the provided arguments.
+            </summary>
+            <param name="args">
+            A <see cref="T:WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/> containing the <see cref="T:WGetNET.WinGetResult"/> object.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+        </member>
         <member name="M:WGetNET.WinGet.CheckWinGetVersion(System.Version,System.Version)">
             <summary>
             Checks if the installed WinGet version is between the given versions or the same.
@@ -4278,6 +4309,15 @@
             <summary>
             Represents a winget arguments string for different winget actions.
             </summary>
+            <remarks>
+            Used to easily generate arguments for winget execution.
+            </remarks>
+        </member>
+        <member name="T:WGetNET.WinGetArguments.WinGetAction">
+            <summary>
+            The <see cref="T:WGetNET.WinGetArguments.WinGetAction"/> <see langword="enum"/> can be used to specify the winget action, 
+            to influence the arguments generation with some flags.
+            </summary>
         </member>
         <member name="P:WGetNET.WinGetArguments.Arguments">
             <summary>
@@ -4295,7 +4335,9 @@
             The base cmd of the arguments.
             </param>
             <param name="action">
-            The WinGet action that will be executet. Changes the behavier of some flags.
+            Specifies the base cmd to change the behavior of some flags. 
+            For most base cmd’s, no specification is needed. 
+            Default Value = "Unspecified"
             </param>
         </member>
         <member name="M:WGetNET.WinGetArguments.WinGet">
@@ -4473,6 +4515,28 @@
             </summary>
             <returns>
             The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.CustomCmd(System.String)">
+            <summary>
+            Creates a new winget arguments object with a custom base cmd.
+            </summary>
+            <param name="cmd">
+            A <see cref="T:System.String"/> containing the custom cmd.
+            </param>
+            <returns>
+            The created <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Custom(System.String)">
+            <summary>
+            Adds a custom flag/parameter to the arguments.
+            </summary>
+            <param name="custom">
+            The <see cref="T:System.String"/> that should be added to the arguments.
+            </param>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
         </member>
         <member name="M:WGetNET.WinGetArguments.Query(System.String)">
@@ -5039,6 +5103,48 @@
         </member>
         <member name="M:WGetNET.WinGetPinnedPackage.Clone">
             <inheritdoc/>
+        </member>
+        <member name="T:WGetNET.WinGetResult">
+            <summary>
+            Represents a winget execution result.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetResult.ExitCode">
+            <summary>
+            Gets the exit code of the process.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetResult.Output">
+            <summary>
+            Gets the output of the process as a <see cref="T:System.String"/> array.
+            </summary>
+            <remarks>
+            Each entry in the array contains a line from the output stream.
+            </remarks>
+        </member>
+        <member name="P:WGetNET.WinGetResult.Success">
+            <summary>
+            Gets if the process finished successfully.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetResult.ExecutedCmd">
+            <summary>
+            Gets the cmd that was executed.
+            </summary>
+        </member>
+        <member name="P:WGetNET.WinGetResult.IsEmpty">
+            <inheritdoc/>
+        </member>
+        <member name="M:WGetNET.WinGetResult.#ctor(WGetNET.Models.ProcessResult,WGetNET.WinGetArguments)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WGetNET.WinGetResult"/> class.
+            </summary>
+            <param name="processResult">
+            The process result object generated by the <see cref="T:WGetNET.Components.Internal.ProcessManager"/>.
+            </param>
+            <param name="arguments">
+            The <see cref="T:WGetNET.WinGetArguments"/> object containing the executed cmd.
+            </param>
         </member>
         <member name="T:WGetNET.WinGetSource">
             <summary>

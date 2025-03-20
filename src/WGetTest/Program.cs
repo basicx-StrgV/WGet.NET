@@ -169,6 +169,13 @@ namespace WGetTest
                 PackageTests = PackageTests && !p2.SamePackage(p1);
                 PackageTests = PackageTests && !p2.SamePackage(p3);
                 Console.WriteLine($"Result: {PackageTests}");
+
+                // Custom Execute Test
+                Console.WriteLine("\n=== Custom Execute Test ===");
+                WinGetResult test6 = connector.ExecuteCustom(WinGetArguments.List().Query("git"));
+                Console.WriteLine($"Executed cmd: {test6.ExecutedCmd}");
+                Console.WriteLine($"Exit Code: {test6.ExitCode}");
+                Console.WriteLine($"Success: {test6.Success}");
             }
             catch (Exception e)
             {
