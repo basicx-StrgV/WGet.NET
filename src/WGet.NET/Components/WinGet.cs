@@ -700,11 +700,47 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
         public WinGetResult ExecuteCustom(WinGetArguments args)
         {
+            ArgsHelper.ThrowIfObjectIsNull(args, "args");
+
             ThrowIfNotInstalled();
 
             WinGetResult result = new(Execute(args), args);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Exectutes WinGet with the provided arguments.
+        /// </summary>
+        /// <param name="args">
+        /// A <see cref="System.String"/> containing the arguments for the WinGet process.
+        /// </param>
+        /// <returns>
+        /// A <see cref="WGetNET.WinGetResult"/> object.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        public WinGetResult ExecuteCustom(string args)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(args, "args");
+
+            ThrowIfNotInstalled();
+
+            WinGetArguments argsObj = WinGetArguments.CustomCmd(args);
+
+            WinGetResult result = new(Execute(argsObj), argsObj);
 
             return result;
         }
@@ -724,11 +760,50 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
         public async Task<WinGetResult> ExecuteCustomAsync(WinGetArguments args, CancellationToken cancellationToken = default)
         {
+            ArgsHelper.ThrowIfObjectIsNull(args, "args");
+
             ThrowIfNotInstalled();
 
             WinGetResult result = new(await ExecuteAsync(args, false, cancellationToken), args);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Asynchronously exectutes WinGet with the provided arguments.
+        /// </summary>
+        /// <param name="args">
+        /// A <see cref="System.String"/> containing the arguments for the WinGet process.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/> containing the <see cref="WGetNET.WinGetResult"/> object.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
+        public async Task<WinGetResult> ExecuteCustomAsync(string args, CancellationToken cancellationToken = default)
+        {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(args, "args");
+
+            ThrowIfNotInstalled();
+
+            WinGetArguments argsObj = WinGetArguments.CustomCmd(args);
+
+            WinGetResult result = new(await ExecuteAsync(argsObj, false, cancellationToken), argsObj);
 
             return result;
         }

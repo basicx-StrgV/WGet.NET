@@ -321,6 +321,16 @@ namespace WGetNET
         /// </returns>
         public static WinGetArguments CustomCmd(string cmd)
         {
+            cmd = cmd.ToLower().Trim();
+            if (cmd.StartsWith("winget"))
+            {
+#if NETCOREAPP3_1_OR_GREATER
+                cmd = cmd[6..];
+#elif NETSTANDARD2_0
+                cmd = cmd.Substring(6);
+#endif
+            }
+
             return new WinGetArguments(cmd);
         }
 
@@ -336,7 +346,7 @@ namespace WGetNET
         /// </returns>
         public WinGetArguments Custom(string custom)
         {
-            _arguments += custom;
+            _arguments += $" {custom.ToLower().Trim()}";
             return this;
         }
 

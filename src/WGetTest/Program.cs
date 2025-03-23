@@ -22,6 +22,8 @@ namespace WGetTest
             Stopwatch sw = Stopwatch.StartNew();
             try
             {
+                Console.WriteLine("TEST APP NETCORE 3.1\n\n");
+
                 Console.WriteLine("=== Winget Information ===");
                 WinGetPackageManager connector = new WinGetPackageManager();
                 WinGetSourceManager sourceManager = new WinGetSourceManager();
@@ -172,10 +174,16 @@ namespace WGetTest
 
                 // Custom Execute Test
                 Console.WriteLine("\n=== Custom Execute Test ===");
+                Console.WriteLine("TEST 1:");
                 WinGetResult test6 = connector.ExecuteCustom(WinGetArguments.List().Query("git"));
                 Console.WriteLine($"Executed cmd: {test6.ExecutedCmd}");
                 Console.WriteLine($"Exit Code: {test6.ExitCode}");
                 Console.WriteLine($"Success: {test6.Success}");
+                Console.WriteLine("\nTEST 2:");
+                WinGetResult test7 = connector.ExecuteCustom(WinGetArguments.CustomCmd("list").Custom("-q git"));
+                Console.WriteLine($"Executed cmd: {test7.ExecutedCmd}");
+                Console.WriteLine($"Exit Code: {test7.ExitCode}");
+                Console.WriteLine($"Success: {test7.Success}");
             }
             catch (Exception e)
             {
