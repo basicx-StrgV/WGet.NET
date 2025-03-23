@@ -1107,7 +1107,9 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+#pragma warning disable S2325 // Ignore warning for now because changing it will be an API braking change.
         public string SourcesToJson(IEnumerable<WinGetSource> sources)
+#pragma warning restore S2325
         {
             ArgsHelper.ThrowIfObjectIsNull(sources, "sources");
 
