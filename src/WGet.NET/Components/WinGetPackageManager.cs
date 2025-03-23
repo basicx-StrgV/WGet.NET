@@ -491,6 +491,9 @@ namespace WGetNET
         /// <param name="packageId">
         /// The id or name of the package for the search.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
         /// </returns>
@@ -503,11 +506,17 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<WinGetPackage?> GetExactInstalledPackageAsync(string packageId)
+        public async Task<WinGetPackage?> GetExactInstalledPackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
-            //TODO: Add cancellation token
-            ProcessResult result = await ExecuteAsync(WinGetArguments.List().AcceptSourceAgreements());
+
+            ProcessResult result = await ExecuteAsync(WinGetArguments.List().AcceptSourceAgreements(), false, cancellationToken);
+
+            // Return null if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return null;
+            }
 
             return PackageHelper.MatchExact(
                 ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList),
@@ -527,6 +536,9 @@ namespace WGetNET
         /// <param name="sourceName">
         /// The name of the source for the search.
         /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
         /// <returns>
         /// A <see cref="WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
         /// </returns>
@@ -539,14 +551,21 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
-        public async Task<WinGetPackage?> GetExactInstalledPackageAsync(string packageId, string sourceName)
+        public async Task<WinGetPackage?> GetExactInstalledPackageAsync(string packageId, string sourceName, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(sourceName, "sourceName");
-            //TODO: Add cancellation token
+
             ProcessResult result =
                 await ExecuteAsync(
-                    WinGetArguments.List().Query(packageId).Source(sourceName).AcceptSourceAgreements());
+                    WinGetArguments.List().Query(packageId).Source(sourceName).AcceptSourceAgreements(),
+                    false, cancellationToken);
+
+            // Return null if the task was cancled
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return null;
+            }
 
             return PackageHelper.MatchExact(
                 ProcessOutputReader.ToPackageList(result.Output, PackageAction.InstalledList),
