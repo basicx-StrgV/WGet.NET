@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>WGet.NET: WinGetPinnedPackage.cs Source File</title>
+<title>WGet.NET: WinGetPackage.cs Source File</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -59,7 +59,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../WGet.NET_Icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.3.1</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.4.0</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -129,7 +129,7 @@ $(function(){initNavTree('d3/d8b/a00059_source.html','../../'); initResizable(tr
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">WinGetPinnedPackage.cs</div></div>
+  <div class="headertitle"><div class="title">WinGetPackage.cs</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//--------------------------------------------------//</span></div>
@@ -137,94 +137,325 @@ $(function(){initNavTree('d3/d8b/a00059_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// https://github.com/basicx-StrgV/                 //</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//--------------------------------------------------//</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using </span>System;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../df/dc8/a00122.html">WGetNET</a></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="../../dc/d9a/a00218.html">   12</a></span>    <span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="../../dc/d9a/a00218.html">WinGetPinnedPackage</a> : <a class="code hl_class" href="../../d3/dd1/a00214.html">WinGetPackage</a></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    {</div>
-<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="../../dc/d9a/a00218.html#a87b9793ff80822e5435f3ad88121b469">   17</a></span>        <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_property" href="../../dc/d9a/a00218.html#a87b9793ff80822e5435f3ad88121b469">PinTypeString</a></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            <span class="keyword">get</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                <span class="keywordflow">return</span> _pinTypeString;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            }</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        }</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using </span><a class="code hl_namespace" href="../../d5/d5b/a00135.html">WGetNET.Helper</a>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using </span><a class="code hl_namespace" href="../../d6/db3/a00130.html">WGetNET.Builder</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../d1/d88/a00128.html">WGetNET</a></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html">   14</a></span>    <span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="../../d5/ddf/a00224.html">WinGetPackage</a> : <a class="code hl_interface" href="../../db/dc3/a00284.html">IWinGetObject</a>, ICloneable</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    {</div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a7281f82c71873c28eb79d7ff5e3b2bf1">   19</a></span>        <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#a7281f82c71873c28eb79d7ff5e3b2bf1">Name</a></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                <span class="keywordflow">return</span> _name;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        }</div>
 </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="../../dc/d9a/a00218.html#ae439038be7b34612b0e4c58ae3b79ef2">   28</a></span>        <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_property" href="../../dc/d9a/a00218.html#ae439038be7b34612b0e4c58ae3b79ef2">PinnedVersion</a></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            <span class="keyword">get</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                <span class="keywordflow">return</span> _pinnedVersionString;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            }</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        }</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a45b8861e8baff1792ea278e396bafdfd">   30</a></span>        <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#a45b8861e8baff1792ea278e396bafdfd">Id</a></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                <span class="keywordflow">return</span> _id;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        }</div>
 </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="../../dc/d9a/a00218.html#ac197be9bb8f3b5c3dc8f4606ebf67a2a">   39</a></span>        <span class="keyword">public</span> <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a> <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <span class="keyword">get</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                <span class="keywordflow">return</span> _pinType;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="};">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a1a261df7051f6497f7c10a214a28968f">   41</a></span>        <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#a1a261df7051f6497f7c10a214a28968f">VersionString</a></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                <span class="keywordflow">return</span> _versionString;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        }</div>
 </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keyword">private</span> readonly <span class="keywordtype">string</span> _pinTypeString;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keyword">private</span> readonly <span class="keywordtype">string</span> _pinnedVersionString;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keyword">private</span> readonly <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a> _pinType;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">internal</span> <a class="code hl_class" href="../../dc/d9a/a00218.html">WinGetPinnedPackage</a>(</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            <span class="keywordtype">string</span> pinTypeString,</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a> pinType,</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <span class="keywordtype">string</span> pinnedVersion,</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordtype">string</span> name,</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keywordtype">string</span> <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordtype">string</span> versionString,</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <a class="code hl_property" href="../../d3/dd1/a00214.html#ad965f10addf3cb5644ab0b102e598409">Version</a> version,</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="keywordtype">string</span> availableVersionString,</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <a class="code hl_property" href="../../d3/dd1/a00214.html#ad965f10addf3cb5644ab0b102e598409">Version</a> availableVersion,</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keywordtype">string</span> sourceName,</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordtype">bool</span> hasShortenedId) : base(name, id, versionString, version, availableVersionString, availableVersion, sourceName, hasShortenedId)</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            _pinTypeString = pinTypeString;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            _pinnedVersionString = pinnedVersion;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            _pinType = pinType;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="../../dc/d9a/a00218.html#a170ae01252d46e2d62faee453759b550">   85</a></span>        <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">object</span> <a class="code hl_function" href="../../dc/d9a/a00218.html#a170ae01252d46e2d62faee453759b550">Clone</a>()</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="};">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">   52</a></span>        <span class="keyword">public</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a> <a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                <span class="keywordflow">return</span> _version;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        }</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="};">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a796d89fefad310ee4c6b8a6ab5283daa">   63</a></span>        <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#a796d89fefad310ee4c6b8a6ab5283daa">AvailableVersionString</a></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                <span class="keywordflow">return</span> _availableVersionString;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        }</div>
+</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="};">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a97a8e0c4a4eeac5e3ed0471920ed1a3c">   74</a></span>        <span class="keyword">public</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a> <a class="code hl_property" href="../../d5/ddf/a00224.html#a97a8e0c4a4eeac5e3ed0471920ed1a3c">AvailableVersion</a></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                <span class="keywordflow">return</span> _availableVersion;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        }</div>
+</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="};">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a80d528912eff3dbcb9d09add2670a657">   85</a></span>        <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#a80d528912eff3dbcb9d09add2670a657">SourceName</a></div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="../../dc/d9a/a00218.html">WinGetPinnedPackage</a>(</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                    _pinTypeString,</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                    _pinType,</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                    _pinnedVersionString,</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                    _name,</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                    _id,</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                    _versionString,</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                    _version,</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                    _availableVersionString,</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    _availableVersion,</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                    _sourceName,</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                    _hasShortenedId</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                );</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                <span class="keywordflow">return</span> _sourceName;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        }</div>
 </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="foldopen" id="foldopen00099" data-start="{" data-end="};">
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#aa01bb448e1cdd8513799d6a23a11c06e">   99</a></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#aa01bb448e1cdd8513799d6a23a11c06e">HasShortenedId</a></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                <span class="keywordflow">return</span> _hasShortenedId;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        }</div>
 </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
-<div class="ttc" id="aa00122_html"><div class="ttname"><a href="../../df/dc8/a00122.html">WGetNET</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/dad/a00005_source.html#l00007">WinGetInfoEntry.cs:8</a></div></div>
-<div class="ttc" id="aa00122_html_a6463096e9a46a5fca424de0c0639f69d"><div class="ttname"><a href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">WGetNET.PinType</a></div><div class="ttdeci">PinType</div><div class="ttdoc">Enum of winget pin types.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d89/a00071_source.html#l00010">PinType.cs:11</a></div></div>
-<div class="ttc" id="aa00214_html"><div class="ttname"><a href="../../d3/dd1/a00214.html">WGetNET.WinGetPackage</a></div><div class="ttdoc">Represents a winget package.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d2e/a00056_source.html#l00014">WinGetPackage.cs:15</a></div></div>
-<div class="ttc" id="aa00214_html_ad965f10addf3cb5644ab0b102e598409"><div class="ttname"><a href="../../d3/dd1/a00214.html#ad965f10addf3cb5644ab0b102e598409">WGetNET.WinGetPackage.Version</a></div><div class="ttdeci">Version Version</div><div class="ttdoc">Gets the version of the package.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d2e/a00056_source.html#l00052">WinGetPackage.cs:53</a></div></div>
-<div class="ttc" id="aa00218_html"><div class="ttname"><a href="../../dc/d9a/a00218.html">WGetNET.WinGetPinnedPackage</a></div><div class="ttdoc">Represents a winget pinned package.</div><div class="ttdef"><b>Definition</b> <a href="#l00012">WinGetPinnedPackage.cs:13</a></div></div>
-<div class="ttc" id="aa00218_html_a170ae01252d46e2d62faee453759b550"><div class="ttname"><a href="../../dc/d9a/a00218.html#a170ae01252d46e2d62faee453759b550">WGetNET.WinGetPinnedPackage.Clone</a></div><div class="ttdeci">override object Clone()</div><div class="ttdef"><b>Definition</b> <a href="#l00085">WinGetPinnedPackage.cs:85</a></div></div>
-<div class="ttc" id="aa00218_html_a87b9793ff80822e5435f3ad88121b469"><div class="ttname"><a href="../../dc/d9a/a00218.html#a87b9793ff80822e5435f3ad88121b469">WGetNET.WinGetPinnedPackage.PinTypeString</a></div><div class="ttdeci">string PinTypeString</div><div class="ttdoc">Gets the pin type of the package as a System.String.</div><div class="ttdef"><b>Definition</b> <a href="#l00017">WinGetPinnedPackage.cs:18</a></div></div>
-<div class="ttc" id="aa00218_html_ae439038be7b34612b0e4c58ae3b79ef2"><div class="ttname"><a href="../../dc/d9a/a00218.html#ae439038be7b34612b0e4c58ae3b79ef2">WGetNET.WinGetPinnedPackage.PinnedVersion</a></div><div class="ttdeci">string PinnedVersion</div><div class="ttdoc">Gets the pinned version or version range.</div><div class="ttdef"><b>Definition</b> <a href="#l00028">WinGetPinnedPackage.cs:29</a></div></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="foldopen" id="foldopen00114" data-start="{" data-end="};">
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#af362695f57830eecd1842b942aa2841e">  114</a></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#af362695f57830eecd1842b942aa2841e">HasNoId</a></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(_id))</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        }</div>
+</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="foldopen" id="foldopen00130" data-start="{" data-end="};">
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a2662fe30e8ed9a3e0691bc43261d127b">  130</a></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#a2662fe30e8ed9a3e0691bc43261d127b">HasUpgrade</a></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                <span class="keywordflow">if</span> (_availableVersion &gt; _version)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        }</div>
+</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="foldopen" id="foldopen00150" data-start="{" data-end="};">
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a2e52f2a27eecc0d0053d08c40f70b22d">  150</a></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code hl_property" href="../../d5/ddf/a00224.html#a2e52f2a27eecc0d0053d08c40f70b22d">IsEmpty</a></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <span class="keyword">get</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(_id) &amp;&amp; <span class="keywordtype">string</span>.IsNullOrWhiteSpace(_name))</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        }</div>
+</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="comment">// \cond PRIVATE</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keyword">private</span> <span class="keyword">protected</span> readonly <span class="keywordtype">string</span> _name;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="keyword">private</span> <span class="keyword">protected</span> readonly <span class="keywordtype">string</span> _id;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keyword">private</span> <span class="keyword">protected</span> readonly <span class="keywordtype">string</span> _versionString;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keyword">private</span> <span class="keyword">protected</span> readonly <a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a> _version;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <span class="keyword">private</span> <span class="keyword">protected</span> readonly <span class="keywordtype">string</span> _availableVersionString;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="keyword">private</span> <span class="keyword">protected</span> readonly <a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a> _availableVersion;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keyword">private</span> <span class="keyword">protected</span> readonly <span class="keywordtype">string</span> _sourceName;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keyword">private</span> <span class="keyword">protected</span> readonly <span class="keywordtype">bool</span> _hasShortenedId = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="comment">// \endcond</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keyword">internal</span> <a class="code hl_class" href="../../d5/ddf/a00224.html">WinGetPackage</a>(</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            <span class="keywordtype">string</span> name,</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            <span class="keywordtype">string</span> <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <span class="keywordtype">string</span> versionString,</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            <a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a> version,</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            <span class="keywordtype">string</span> availableVersionString,</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            <a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a> availableVersion,</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            <span class="keywordtype">string</span> sourceName,</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <span class="keywordtype">bool</span> hasShortenedId)</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            _name = name;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            _id = id;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            _versionString = versionString;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            _version = version;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            _availableVersionString = availableVersionString;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            _availableVersion = availableVersion;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            _sourceName = sourceName;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            _hasShortenedId = hasShortenedId;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="foldopen" id="foldopen00225" data-start="{" data-end="}">
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a74e7c910d40aa429f7f4b4bb3b17b5bf">  225</a></span>        <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_class" href="../../d5/ddf/a00224.html">WinGetPackage</a> <a class="code hl_function" href="../../d5/ddf/a00224.html#a74e7c910d40aa429f7f4b4bb3b17b5bf">Create</a>(<span class="keywordtype">string</span> name, <span class="keywordtype">string</span> <span class="keywordtype">id</span>, <span class="keywordtype">string</span> version, <span class="keywordtype">string</span> sourceName = <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        {</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, <span class="stringliteral">&quot;name&quot;</span>);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(<span class="keywordtype">id</span>, <span class="stringliteral">&quot;id&quot;</span>);</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, <span class="stringliteral">&quot;version&quot;</span>);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            ArgsHelper.ThrowIfObjectIsNull(sourceName, <span class="stringliteral">&quot;sourceName&quot;</span>);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            WinGetPackageBuilder builder = <span class="keyword">new</span>();</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            builder.AddName(name);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            builder.AddId(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            builder.AddVersion(version);</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            builder.AddSourceName(sourceName);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            <span class="keywordflow">return</span> builder.GetInstance();</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        }</div>
+</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="foldopen" id="foldopen00259" data-start="{" data-end="}">
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a83314122f8ea12402c45617763450f97">  259</a></span>        <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_class" href="../../d5/ddf/a00224.html">WinGetPackage</a> <a class="code hl_function" href="../../d5/ddf/a00224.html#a83314122f8ea12402c45617763450f97">Create</a>(<span class="keywordtype">string</span> name, <span class="keywordtype">string</span> <span class="keywordtype">id</span>, <span class="keywordtype">string</span> version, <span class="keywordtype">string</span> availableVersion, <span class="keywordtype">string</span> sourceName = <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        {</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, <span class="stringliteral">&quot;name&quot;</span>);</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(<span class="keywordtype">id</span>, <span class="stringliteral">&quot;id&quot;</span>);</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, <span class="stringliteral">&quot;version&quot;</span>);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(availableVersion, <span class="stringliteral">&quot;availableVersion&quot;</span>);</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            ArgsHelper.ThrowIfObjectIsNull(sourceName, <span class="stringliteral">&quot;sourceName&quot;</span>);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            WinGetPackageBuilder builder = <span class="keyword">new</span>();</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            builder.AddName(name);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            builder.AddId(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            builder.AddVersion(version);</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            builder.AddAvailableVersion(availableVersion);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            builder.AddSourceName(sourceName);</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            <span class="keywordflow">return</span> builder.GetInstance();</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        }</div>
+</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+<div class="foldopen" id="foldopen00294" data-start="{" data-end="}">
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a00bce3b437ae694aee6e77267266bedb">  294</a></span>        <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_class" href="../../d5/ddf/a00224.html">WinGetPackage</a> <a class="code hl_function" href="../../d5/ddf/a00224.html#a00bce3b437ae694aee6e77267266bedb">Create</a>(<span class="keywordtype">string</span> name, <span class="keywordtype">string</span> <span class="keywordtype">id</span>, <a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a> version, <span class="keywordtype">string</span> sourceName = <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        {</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, <span class="stringliteral">&quot;name&quot;</span>);</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(<span class="keywordtype">id</span>, <span class="stringliteral">&quot;id&quot;</span>);</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>            ArgsHelper.ThrowIfObjectIsNull(version, <span class="stringliteral">&quot;version&quot;</span>);</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            ArgsHelper.ThrowIfObjectIsNull(sourceName, <span class="stringliteral">&quot;sourceName&quot;</span>);</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            WinGetPackageBuilder builder = <span class="keyword">new</span>();</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>            builder.AddName(name);</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>            builder.AddId(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>            builder.AddVersion(version);</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>            builder.AddSourceName(sourceName);</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>            <span class="keywordflow">return</span> builder.GetInstance();</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        }</div>
+</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="foldopen" id="foldopen00328" data-start="{" data-end="}">
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a4f73db35fa14ba18f0c4098cc723454a">  328</a></span>        <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_class" href="../../d5/ddf/a00224.html">WinGetPackage</a> <a class="code hl_function" href="../../d5/ddf/a00224.html#a4f73db35fa14ba18f0c4098cc723454a">Create</a>(<span class="keywordtype">string</span> name, <span class="keywordtype">string</span> <span class="keywordtype">id</span>, <a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a> version, <a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a> availableVersion, <span class="keywordtype">string</span> sourceName = <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>        {</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, <span class="stringliteral">&quot;name&quot;</span>);</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(<span class="keywordtype">id</span>, <span class="stringliteral">&quot;id&quot;</span>);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>            ArgsHelper.ThrowIfObjectIsNull(version, <span class="stringliteral">&quot;version&quot;</span>);</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            ArgsHelper.ThrowIfObjectIsNull(availableVersion, <span class="stringliteral">&quot;availableVersion&quot;</span>);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>            ArgsHelper.ThrowIfObjectIsNull(sourceName, <span class="stringliteral">&quot;sourceName&quot;</span>);</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>            WinGetPackageBuilder builder = <span class="keyword">new</span>();</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            builder.AddName(name);</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>            builder.AddId(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>            builder.AddVersion(version);</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>            builder.AddAvailableVersion(availableVersion);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>            builder.AddSourceName(sourceName);</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>            <span class="keywordflow">return</span> builder.GetInstance();</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        }</div>
+</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
+<div class="foldopen" id="foldopen00359" data-start="{" data-end="}">
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a7cab9e77ffadeb57c8017b01d2a12b81">  359</a></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="../../d5/ddf/a00224.html#a7cab9e77ffadeb57c8017b01d2a12b81">SamePackage</a>(<a class="code hl_class" href="../../d5/ddf/a00224.html">WinGetPackage</a> other, <span class="keywordtype">bool</span> sameVersion = <span class="keyword">false</span>)</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        {</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            <span class="keywordflow">if</span> (other == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            {</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>            }</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span> </div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>            <span class="keywordflow">if</span> (ReferenceEquals(<span class="keyword">this</span>, other))</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>            {</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            }</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>            <span class="keywordflow">if</span> (_id.Equals(other.<a class="code hl_property" href="../../d5/ddf/a00224.html#a45b8861e8baff1792ea278e396bafdfd">Id</a>) &amp;&amp; _sourceName.Equals(other.<a class="code hl_property" href="../../d5/ddf/a00224.html#a80d528912eff3dbcb9d09add2670a657">SourceName</a>) &amp;&amp;</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>                (!sameVersion || (_versionString.Equals(other.<a class="code hl_property" href="../../d5/ddf/a00224.html#a1a261df7051f6497f7c10a214a28968f">VersionString</a>) &amp;&amp; _version.Equals(other.<a class="code hl_property" href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">Version</a>))))</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>            {</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>            }</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> </div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        }</div>
+</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
+<div class="foldopen" id="foldopen00381" data-start="{" data-end="}">
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a3e14f766d0a45e76880dc7f48c3df11f">  381</a></span>        <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keywordtype">object</span> <a class="code hl_function" href="../../d5/ddf/a00224.html#a3e14f766d0a45e76880dc7f48c3df11f">Clone</a>()</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        {</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="../../d5/ddf/a00224.html">WinGetPackage</a>(</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>                    _name,</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>                    _id,</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>                    _versionString,</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>                    _version,</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>                    _availableVersionString,</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>                    _availableVersion,</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>                    _sourceName,</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>                    _hasShortenedId</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>                );</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        }</div>
+</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span> </div>
+<div class="foldopen" id="foldopen00396" data-start="{" data-end="}">
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno"><a class="line" href="../../d5/ddf/a00224.html#a41b32294924a603c5a263cb71cd65743">  396</a></span>        <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">string</span> <a class="code hl_function" href="../../d5/ddf/a00224.html#a41b32294924a603c5a263cb71cd65743">ToString</a>()</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        {</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>            <span class="keywordflow">return</span> $<span class="stringliteral">&quot;{_name} {_versionString}&quot;</span>;</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        }</div>
+</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>    }</div>
+</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>}</div>
+<div class="ttc" id="aa00128_html"><div class="ttname"><a href="../../d1/d88/a00128.html">WGetNET</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/dad/a00005_source.html#l00007">WinGetInfoEntry.cs:8</a></div></div>
+<div class="ttc" id="aa00130_html"><div class="ttname"><a href="../../d6/db3/a00130.html">WGetNET.Builder</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d45/a00011_source.html#l00007">WinGetAdminSettingBuilder.cs:8</a></div></div>
+<div class="ttc" id="aa00135_html"><div class="ttname"><a href="../../d5/d5b/a00135.html">WGetNET.Helper</a></div><div class="ttdef"><b>Definition</b> <a href="../../d9/d77/a00095_source.html#l00008">ArgsHelper.cs:9</a></div></div>
+<div class="ttc" id="aa00224_html"><div class="ttname"><a href="../../d5/ddf/a00224.html">WGetNET.WinGetPackage</a></div><div class="ttdoc">Represents a winget package.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">WinGetPackage.cs:15</a></div></div>
+<div class="ttc" id="aa00224_html_a00bce3b437ae694aee6e77267266bedb"><div class="ttname"><a href="../../d5/ddf/a00224.html#a00bce3b437ae694aee6e77267266bedb">WGetNET.WinGetPackage.Create</a></div><div class="ttdeci">static WinGetPackage Create(string name, string id, Version version, string sourceName=&quot;&quot;)</div><div class="ttdoc">Creates a new instance of the WGetNET.WinGetPackage class and returns it.</div><div class="ttdef"><b>Definition</b> <a href="#l00294">WinGetPackage.cs:294</a></div></div>
+<div class="ttc" id="aa00224_html_a1a261df7051f6497f7c10a214a28968f"><div class="ttname"><a href="../../d5/ddf/a00224.html#a1a261df7051f6497f7c10a214a28968f">WGetNET.WinGetPackage.VersionString</a></div><div class="ttdeci">string VersionString</div><div class="ttdoc">Gets the version of the package.</div><div class="ttdef"><b>Definition</b> <a href="#l00041">WinGetPackage.cs:42</a></div></div>
+<div class="ttc" id="aa00224_html_a2662fe30e8ed9a3e0691bc43261d127b"><div class="ttname"><a href="../../d5/ddf/a00224.html#a2662fe30e8ed9a3e0691bc43261d127b">WGetNET.WinGetPackage.HasUpgrade</a></div><div class="ttdeci">bool HasUpgrade</div><div class="ttdoc">Gets if the package can be upgraded.</div><div class="ttdef"><b>Definition</b> <a href="#l00130">WinGetPackage.cs:131</a></div></div>
+<div class="ttc" id="aa00224_html_a2e52f2a27eecc0d0053d08c40f70b22d"><div class="ttname"><a href="../../d5/ddf/a00224.html#a2e52f2a27eecc0d0053d08c40f70b22d">WGetNET.WinGetPackage.IsEmpty</a></div><div class="ttdeci">bool IsEmpty</div><div class="ttdoc">Gets if the object is empty.</div><div class="ttdef"><b>Definition</b> <a href="#l00150">WinGetPackage.cs:151</a></div></div>
+<div class="ttc" id="aa00224_html_a3e14f766d0a45e76880dc7f48c3df11f"><div class="ttname"><a href="../../d5/ddf/a00224.html#a3e14f766d0a45e76880dc7f48c3df11f">WGetNET.WinGetPackage.Clone</a></div><div class="ttdeci">virtual object Clone()</div><div class="ttdef"><b>Definition</b> <a href="#l00381">WinGetPackage.cs:381</a></div></div>
+<div class="ttc" id="aa00224_html_a41b32294924a603c5a263cb71cd65743"><div class="ttname"><a href="../../d5/ddf/a00224.html#a41b32294924a603c5a263cb71cd65743">WGetNET.WinGetPackage.ToString</a></div><div class="ttdeci">override string ToString()</div><div class="ttdef"><b>Definition</b> <a href="#l00396">WinGetPackage.cs:396</a></div></div>
+<div class="ttc" id="aa00224_html_a45b8861e8baff1792ea278e396bafdfd"><div class="ttname"><a href="../../d5/ddf/a00224.html#a45b8861e8baff1792ea278e396bafdfd">WGetNET.WinGetPackage.Id</a></div><div class="ttdeci">string Id</div><div class="ttdoc">Gets the id of the package.</div><div class="ttdef"><b>Definition</b> <a href="#l00030">WinGetPackage.cs:31</a></div></div>
+<div class="ttc" id="aa00224_html_a4f73db35fa14ba18f0c4098cc723454a"><div class="ttname"><a href="../../d5/ddf/a00224.html#a4f73db35fa14ba18f0c4098cc723454a">WGetNET.WinGetPackage.Create</a></div><div class="ttdeci">static WinGetPackage Create(string name, string id, Version version, Version availableVersion, string sourceName=&quot;&quot;)</div><div class="ttdoc">Creates a new instance of the WGetNET.WinGetPackage class and returns it.</div><div class="ttdef"><b>Definition</b> <a href="#l00328">WinGetPackage.cs:328</a></div></div>
+<div class="ttc" id="aa00224_html_a7281f82c71873c28eb79d7ff5e3b2bf1"><div class="ttname"><a href="../../d5/ddf/a00224.html#a7281f82c71873c28eb79d7ff5e3b2bf1">WGetNET.WinGetPackage.Name</a></div><div class="ttdeci">string Name</div><div class="ttdoc">Gets the name of the package.</div><div class="ttdef"><b>Definition</b> <a href="#l00019">WinGetPackage.cs:20</a></div></div>
+<div class="ttc" id="aa00224_html_a74e7c910d40aa429f7f4b4bb3b17b5bf"><div class="ttname"><a href="../../d5/ddf/a00224.html#a74e7c910d40aa429f7f4b4bb3b17b5bf">WGetNET.WinGetPackage.Create</a></div><div class="ttdeci">static WinGetPackage Create(string name, string id, string version, string sourceName=&quot;&quot;)</div><div class="ttdoc">Creates a new instance of the WGetNET.WinGetPackage class and returns it.</div><div class="ttdef"><b>Definition</b> <a href="#l00225">WinGetPackage.cs:225</a></div></div>
+<div class="ttc" id="aa00224_html_a796d89fefad310ee4c6b8a6ab5283daa"><div class="ttname"><a href="../../d5/ddf/a00224.html#a796d89fefad310ee4c6b8a6ab5283daa">WGetNET.WinGetPackage.AvailableVersionString</a></div><div class="ttdeci">string AvailableVersionString</div><div class="ttdoc">Gets the newest available version of the package.</div><div class="ttdef"><b>Definition</b> <a href="#l00063">WinGetPackage.cs:64</a></div></div>
+<div class="ttc" id="aa00224_html_a7cab9e77ffadeb57c8017b01d2a12b81"><div class="ttname"><a href="../../d5/ddf/a00224.html#a7cab9e77ffadeb57c8017b01d2a12b81">WGetNET.WinGetPackage.SamePackage</a></div><div class="ttdeci">bool SamePackage(WinGetPackage other, bool sameVersion=false)</div><div class="ttdoc">Checks if two packages are the same and optionally if they also have the same version.</div><div class="ttdef"><b>Definition</b> <a href="#l00359">WinGetPackage.cs:359</a></div></div>
+<div class="ttc" id="aa00224_html_a80d528912eff3dbcb9d09add2670a657"><div class="ttname"><a href="../../d5/ddf/a00224.html#a80d528912eff3dbcb9d09add2670a657">WGetNET.WinGetPackage.SourceName</a></div><div class="ttdeci">string SourceName</div><div class="ttdoc">Gets the source name for the package.</div><div class="ttdef"><b>Definition</b> <a href="#l00085">WinGetPackage.cs:86</a></div></div>
+<div class="ttc" id="aa00224_html_a83314122f8ea12402c45617763450f97"><div class="ttname"><a href="../../d5/ddf/a00224.html#a83314122f8ea12402c45617763450f97">WGetNET.WinGetPackage.Create</a></div><div class="ttdeci">static WinGetPackage Create(string name, string id, string version, string availableVersion, string sourceName=&quot;&quot;)</div><div class="ttdoc">Creates a new instance of the WGetNET.WinGetPackage class and returns it.</div><div class="ttdef"><b>Definition</b> <a href="#l00259">WinGetPackage.cs:259</a></div></div>
+<div class="ttc" id="aa00224_html_a97a8e0c4a4eeac5e3ed0471920ed1a3c"><div class="ttname"><a href="../../d5/ddf/a00224.html#a97a8e0c4a4eeac5e3ed0471920ed1a3c">WGetNET.WinGetPackage.AvailableVersion</a></div><div class="ttdeci">Version AvailableVersion</div><div class="ttdoc">Gets the newest available version of the package.</div><div class="ttdef"><b>Definition</b> <a href="#l00074">WinGetPackage.cs:75</a></div></div>
+<div class="ttc" id="aa00224_html_aa01bb448e1cdd8513799d6a23a11c06e"><div class="ttname"><a href="../../d5/ddf/a00224.html#aa01bb448e1cdd8513799d6a23a11c06e">WGetNET.WinGetPackage.HasShortenedId</a></div><div class="ttdeci">bool HasShortenedId</div><div class="ttdoc">Gets if id of the package is shortened.</div><div class="ttdef"><b>Definition</b> <a href="#l00099">WinGetPackage.cs:100</a></div></div>
+<div class="ttc" id="aa00224_html_ad965f10addf3cb5644ab0b102e598409"><div class="ttname"><a href="../../d5/ddf/a00224.html#ad965f10addf3cb5644ab0b102e598409">WGetNET.WinGetPackage.Version</a></div><div class="ttdeci">Version Version</div><div class="ttdoc">Gets the version of the package.</div><div class="ttdef"><b>Definition</b> <a href="#l00052">WinGetPackage.cs:53</a></div></div>
+<div class="ttc" id="aa00224_html_af362695f57830eecd1842b942aa2841e"><div class="ttname"><a href="../../d5/ddf/a00224.html#af362695f57830eecd1842b942aa2841e">WGetNET.WinGetPackage.HasNoId</a></div><div class="ttdeci">bool HasNoId</div><div class="ttdoc">Gets if the package does not provide an id.</div><div class="ttdef"><b>Definition</b> <a href="#l00114">WinGetPackage.cs:115</a></div></div>
+<div class="ttc" id="aa00284_html"><div class="ttname"><a href="../../db/dc3/a00284.html">WGetNET.IWinGetObject</a></div><div class="ttdoc">Interface for all winget related objects.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d00/a00113_source.html#l00010">IWinGetObject.cs:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath custom-footer-container">

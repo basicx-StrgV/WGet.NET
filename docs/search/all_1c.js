@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📦_20nuget_20package_0',['📦 NuGet Package',['../index.html#autotoc_md5',1,'']]]
+  ['📓_20documentation_0',['📓 Documentation',['../index.html#autotoc_md3',1,'']]]
 ];

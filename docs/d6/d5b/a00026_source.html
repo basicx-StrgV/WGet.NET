@@ -59,7 +59,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../WGet.NET_Icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.3.1</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.4.0</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -137,16 +137,16 @@ $(function(){initNavTree('d6/d5b/a00026_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// https://github.com/basicx-StrgV/                 //</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//--------------------------------------------------//</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using </span>System;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using </span><a class="code hl_namespace" href="../../d7/d06/a00131.html">WGetNET.Parser</a>;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using </span><a class="code hl_namespace" href="../../de/d36/a00123.html">WGetNET.Abstractions</a>;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using </span><a class="code hl_namespace" href="../../d9/d47/a00129.html">WGetNET.Abstractions</a>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using </span><a class="code hl_namespace" href="../../d2/df5/a00137.html">WGetNET.Parser</a>;</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../da/d72/a00124.html">WGetNET.Builder</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../d6/db3/a00130.html">WGetNET.Builder</a></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">internal</span> <span class="keyword">class </span>WinGetPinnedPackageBuilder : WinGetObjectBuilder&lt;WinGetPinnedPackage&gt;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    {</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> _pinTypeString = <span class="keywordtype">string</span>.Empty;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> _pinnedVersionString = <span class="keywordtype">string</span>.Empty;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keyword">private</span> <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a> _pinType = <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keyword">private</span> <a class="code hl_enumeration" href="../../d1/d88/a00128.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a> _pinType = <a class="code hl_enumeration" href="../../d1/d88/a00128.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> _name = <span class="keywordtype">string</span>.Empty;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">private</span> <span class="keywordtype">string</span> _id = <span class="keywordtype">string</span>.Empty;</div>
@@ -168,10 +168,10 @@ $(function(){initNavTree('d6/d5b/a00026_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            _pinType = _pinTypeString.ToUpper() <span class="keywordflow">switch</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                <span class="stringliteral">&quot;PINNING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning,</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                <span class="stringliteral">&quot;BLOCKING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Blocking,</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                <span class="stringliteral">&quot;GATING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Gating,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                _ =&gt; <a class="code hl_enumeration" href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                <span class="stringliteral">&quot;PINNING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../d1/d88/a00128.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                <span class="stringliteral">&quot;BLOCKING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../d1/d88/a00128.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Blocking,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                <span class="stringliteral">&quot;GATING&quot;</span> =&gt; <a class="code hl_enumeration" href="../../d1/d88/a00128.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Gating,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                _ =&gt; <a class="code hl_enumeration" href="../../d1/d88/a00128.html#a6463096e9a46a5fca424de0c0639f69d">PinType</a>.Pinning,</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            };</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
@@ -191,115 +191,119 @@ $(function(){initNavTree('d6/d5b/a00026_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">if</span> (_hasShortenedId)</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            {</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                <span class="comment">// Remove the char at the end of the shortened id.</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                _id = <span class="keywordtype">id</span>.Remove(<span class="keywordtype">id</span>.Length - 1);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            {</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                _id = id;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#if NETCOREAPP3_1_OR_GREATER</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                _id = <span class="keywordtype">id</span>[..^1];</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#elif NETSTANDARD2_0</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                _id = <span class="keywordtype">id</span>.Remove(<span class="keywordtype">id</span>.Length - 1);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            }</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        }</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keyword">public</span> <span class="keywordtype">void</span> AddVersion(<span class="keywordtype">string</span> version)</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            _versionString = version;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            _version = VersionParser.Parse(version);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(_availableVersionString) || _availableVersion == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            {</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                <span class="comment">// Set the available version the current version as a default,</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                <span class="comment">// if it is not set already.</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                AddAvailableVersion(version);</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            }</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(_pinnedVersionString))</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            {</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                <span class="comment">// Set the pinned version the th current version as a default,</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <span class="comment">// if it is not set already.</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                AddPinnedVersion(version);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            }</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        }</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keyword">public</span> <span class="keywordtype">void</span> AddVersion(Version version)</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            _versionString = version.ToString();</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            _version = version;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>            <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(_availableVersionString) || _availableVersion == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            {</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                <span class="comment">// Set the available version the current version as a default,</span></div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                <span class="comment">// if it is not set already.</span></div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                AddAvailableVersion(version);</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            }</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(_pinnedVersionString))</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            {</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                <span class="comment">// Set the pinned version the th current version as a default,</span></div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                <span class="comment">// if it is not set already.</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                AddPinnedVersion(version.ToString());</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            }</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        }</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <span class="keyword">public</span> <span class="keywordtype">void</span> AddAvailableVersion(<span class="keywordtype">string</span> availableVersion)</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        {</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            _availableVersionString = availableVersion;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            _availableVersion = VersionParser.Parse(availableVersion);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        }</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keyword">public</span> <span class="keywordtype">void</span> AddAvailableVersion(Version availableVersion)</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        {</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            _availableVersionString = availableVersion.ToString();</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            _availableVersion = availableVersion;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        }</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keyword">public</span> <span class="keywordtype">void</span> AddSourceName(<span class="keywordtype">string</span> sourceName)</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        {</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            _sourceName = sourceName;</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        }</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keyword">public</span> <span class="keyword">override</span> <a class="code hl_class" href="../../dc/d9a/a00218.html">WinGetPinnedPackage</a> GetInstance()</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        {</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            <span class="keywordflow">if</span> (_version == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            {</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                _version = VersionParser.Parse(_versionString);</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            }</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <span class="keywordflow">if</span> (_availableVersion == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            {</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                _availableVersion = VersionParser.Parse(_availableVersionString);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            }</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="../../dc/d9a/a00218.html">WinGetPinnedPackage</a>(</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                _pinTypeString,</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                _pinType,</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                _pinnedVersionString,</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                _name,</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                _id,</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                _versionString,</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                _version,</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>                _availableVersionString,</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                _availableVersion,</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>                _sourceName,</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                _hasShortenedId);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        }</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> Clear()</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        {</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            _name = <span class="keywordtype">string</span>.Empty;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            _id = <span class="keywordtype">string</span>.Empty;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            _versionString = <span class="keywordtype">string</span>.Empty;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            _version = <span class="keyword">null</span>;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            _availableVersionString = <span class="keywordtype">string</span>.Empty;</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            _availableVersion = <span class="keyword">null</span>;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            _sourceName = <span class="keywordtype">string</span>.Empty;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            _hasShortenedId = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        }</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    }</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>}</div>
-<div class="ttc" id="aa00122_html_a6463096e9a46a5fca424de0c0639f69d"><div class="ttname"><a href="../../df/dc8/a00122.html#a6463096e9a46a5fca424de0c0639f69d">WGetNET.PinType</a></div><div class="ttdeci">PinType</div><div class="ttdoc">Enum of winget pin types.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d89/a00071_source.html#l00010">PinType.cs:11</a></div></div>
-<div class="ttc" id="aa00123_html"><div class="ttname"><a href="../../de/d36/a00123.html">WGetNET.Abstractions</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/dad/a00005_source.html#l00007">WinGetInfoEntry.cs:8</a></div></div>
-<div class="ttc" id="aa00124_html"><div class="ttname"><a href="../../da/d72/a00124.html">WGetNET.Builder</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d45/a00011_source.html#l00007">WinGetAdminSettingBuilder.cs:8</a></div></div>
-<div class="ttc" id="aa00131_html"><div class="ttname"><a href="../../d7/d06/a00131.html">WGetNET.Parser</a></div><div class="ttdef"><b>Definition</b> <a href="../../df/d6a/a00119_source.html#l00008">VersionParser.cs:9</a></div></div>
-<div class="ttc" id="aa00218_html"><div class="ttname"><a href="../../dc/d9a/a00218.html">WGetNET.WinGetPinnedPackage</a></div><div class="ttdoc">Represents a winget pinned package.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d8b/a00059_source.html#l00012">WinGetPinnedPackage.cs:13</a></div></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                _id = id;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keyword">public</span> <span class="keywordtype">void</span> AddVersion(<span class="keywordtype">string</span> version)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            _versionString = version;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            _version = VersionParser.Parse(version);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(_availableVersionString) || _availableVersion == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                <span class="comment">// Set the available version the current version as a default,</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                <span class="comment">// if it is not set already.</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                AddAvailableVersion(version);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(_pinnedVersionString))</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                <span class="comment">// Set the pinned version the th current version as a default,</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                <span class="comment">// if it is not set already.</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                AddPinnedVersion(version);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keyword">public</span> <span class="keywordtype">void</span> AddVersion(Version version)</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            _versionString = version.ToString();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            _version = version;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(_availableVersionString) || _availableVersion == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                <span class="comment">// Set the available version the current version as a default,</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                <span class="comment">// if it is not set already.</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                AddAvailableVersion(version);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(_pinnedVersionString))</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                <span class="comment">// Set the pinned version the th current version as a default,</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                <span class="comment">// if it is not set already.</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                AddPinnedVersion(version.ToString());</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            }</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keyword">public</span> <span class="keywordtype">void</span> AddAvailableVersion(<span class="keywordtype">string</span> availableVersion)</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            _availableVersionString = availableVersion;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            _availableVersion = VersionParser.Parse(availableVersion);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keyword">public</span> <span class="keywordtype">void</span> AddAvailableVersion(Version availableVersion)</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            _availableVersionString = availableVersion.ToString();</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            _availableVersion = availableVersion;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keyword">public</span> <span class="keywordtype">void</span> AddSourceName(<span class="keywordtype">string</span> sourceName)</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            _sourceName = sourceName;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keyword">public</span> <span class="keyword">override</span> <a class="code hl_class" href="../../de/dc2/a00228.html">WinGetPinnedPackage</a> GetInstance()</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <span class="keywordflow">if</span> (_version == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            {</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>                _version = VersionParser.Parse(_versionString);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            }</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            <span class="keywordflow">if</span> (_availableVersion == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                _availableVersion = VersionParser.Parse(_availableVersionString);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="../../de/dc2/a00228.html">WinGetPinnedPackage</a>(</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                _pinTypeString,</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                _pinType,</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                _pinnedVersionString,</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>                _name,</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                _id,</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>                _versionString,</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                _version,</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                _availableVersionString,</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                _availableVersion,</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                _sourceName,</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                _hasShortenedId);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> Clear()</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            _name = <span class="keywordtype">string</span>.Empty;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            _id = <span class="keywordtype">string</span>.Empty;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            _versionString = <span class="keywordtype">string</span>.Empty;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            _version = <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            _availableVersionString = <span class="keywordtype">string</span>.Empty;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            _availableVersion = <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            _sourceName = <span class="keywordtype">string</span>.Empty;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            _hasShortenedId = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        }</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    }</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>}</div>
+<div class="ttc" id="aa00128_html_a6463096e9a46a5fca424de0c0639f69d"><div class="ttname"><a href="../../d1/d88/a00128.html#a6463096e9a46a5fca424de0c0639f69d">WGetNET.PinType</a></div><div class="ttdeci">PinType</div><div class="ttdoc">Enum of winget pin types.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/d09/a00077_source.html#l00010">PinType.cs:11</a></div></div>
+<div class="ttc" id="aa00129_html"><div class="ttname"><a href="../../d9/d47/a00129.html">WGetNET.Abstractions</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/dad/a00005_source.html#l00007">WinGetInfoEntry.cs:8</a></div></div>
+<div class="ttc" id="aa00130_html"><div class="ttname"><a href="../../d6/db3/a00130.html">WGetNET.Builder</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d45/a00011_source.html#l00007">WinGetAdminSettingBuilder.cs:8</a></div></div>
+<div class="ttc" id="aa00137_html"><div class="ttname"><a href="../../d2/df5/a00137.html">WGetNET.Parser</a></div><div class="ttdef"><b>Definition</b> <a href="../../dc/dfe/a00125_source.html#l00008">VersionParser.cs:9</a></div></div>
+<div class="ttc" id="aa00228_html"><div class="ttname"><a href="../../de/dc2/a00228.html">WGetNET.WinGetPinnedPackage</a></div><div class="ttdoc">Represents a winget pinned package.</div><div class="ttdef"><b>Definition</b> <a href="../../df/d03/a00062_source.html#l00012">WinGetPinnedPackage.cs:13</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath custom-footer-container">

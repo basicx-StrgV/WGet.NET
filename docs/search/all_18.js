@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['❓_20what_20is_20wget_20net_0',['❓ What is WGet.NET',['../index.html#autotoc_md1',1,'']]]
+  ['✨_20version_204_200_0',['✨ Version 4.0',['../index.html#autotoc_md2',1,'']]]
 ];

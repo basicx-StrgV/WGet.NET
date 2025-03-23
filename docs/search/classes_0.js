@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['invalidjsonexception_0',['InvalidJsonException',['../dc/d55/a00226.html',1,'WGetNET::Exceptions']]],
-  ['iwingetobject_1',['IWinGetObject',['../d9/d2a/a00270.html',1,'WGetNET']]]
+  ['invalidjsonexception_0',['InvalidJsonException',['../d9/d21/a00240.html',1,'WGetNET::Exceptions']]],
+  ['iwingetobject_1',['IWinGetObject',['../db/dc3/a00284.html',1,'WGetNET']]]
 ];

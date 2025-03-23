@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sourcename_0',['SourceName',['../d3/dd1/a00214.html#a80d528912eff3dbcb9d09add2670a657',1,'WGetNET::WinGetPackage']]]
+  ['rawcontent_0',['RawContent',['../d7/d9a/a00152.html#aa99d45ad14609c66115794e0d5eadf77',1,'WGetNET::Abstractions::WinGetInfoEntry']]]
 ];

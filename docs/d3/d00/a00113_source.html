@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>WGet.NET: SettingsModel.cs Source File</title>
+<title>WGet.NET: IWinGetObject.cs Source File</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -59,7 +59,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../WGet.NET_Icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.3.1</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.4.0</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -129,41 +129,25 @@ $(function(){initNavTree('d3/d00/a00113_source.html','../../'); initResizable(tr
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">SettingsModel.cs</div></div>
+  <div class="headertitle"><div class="title">IWinGetObject.cs</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//--------------------------------------------------//</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Created by basicx-StrgV                          //</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// https://github.com/basicx-StrgV/                 //</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//--------------------------------------------------//</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using </span>System.Collections.Generic;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#if NETCOREAPP3_1_OR_GREATER</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using </span>System.Text.Json;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">using </span>System.Text.Json.Serialization;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#elif NETSTANDARD2_0</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using </span>Newtonsoft.Json;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../d6/db3/a00130.html">WGetNET.Models</a></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">internal</span> <span class="keyword">class </span>SettingsModel</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#if NETCOREAPP3_1_OR_GREATER</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        [JsonPropertyName(<span class="stringliteral">&quot;adminSettings&quot;</span>)]</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#elif NETSTANDARD2_0</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        [JsonProperty(<span class="stringliteral">&quot;adminSettings&quot;</span>)]</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keyword">public</span> Dictionary&lt;string, bool&gt; AdminSettings { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">new</span>();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#if NETCOREAPP3_1_OR_GREATER</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        [JsonPropertyName(<span class="stringliteral">&quot;userSettingsFile&quot;</span>)]</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#elif NETSTANDARD2_0</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        [JsonProperty(<span class="stringliteral">&quot;userSettingsFile&quot;</span>)]</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keyword">public</span> <span class="keywordtype">string</span> UserSettingsFile { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keywordtype">string</span>.Empty;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
-<div class="ttc" id="aa00130_html"><div class="ttname"><a href="../../d6/db3/a00130.html">WGetNET.Models</a></div><div class="ttdef"><b>Definition</b> <a href="../../d4/d81/a00110_source.html#l00007">ProcessResult.cs:8</a></div></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../d1/d88/a00128.html">WGetNET</a></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>{</div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="../../db/dc3/a00284.html">   10</a></span>    <span class="keyword">public</span> <span class="keyword">interface </span><a class="code hl_interface" href="../../db/dc3/a00284.html">IWinGetObject</a></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#abb8bacf343d16d4203e81dc2aa5f3a9d">   15</a></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code hl_property" href="../../db/dc3/a00284.html#abb8bacf343d16d4203e81dc2aa5f3a9d">IsEmpty</a> { <span class="keyword">get</span>; }</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    }</div>
+</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>}</div>
+<div class="ttc" id="aa00128_html"><div class="ttname"><a href="../../d1/d88/a00128.html">WGetNET</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/dad/a00005_source.html#l00007">WinGetInfoEntry.cs:8</a></div></div>
+<div class="ttc" id="aa00284_html"><div class="ttname"><a href="../../db/dc3/a00284.html">WGetNET.IWinGetObject</a></div><div class="ttdoc">Interface for all winget related objects.</div><div class="ttdef"><b>Definition</b> <a href="#l00010">IWinGetObject.cs:11</a></div></div>
+<div class="ttc" id="aa00284_html_abb8bacf343d16d4203e81dc2aa5f3a9d"><div class="ttname"><a href="../../db/dc3/a00284.html#abb8bacf343d16d4203e81dc2aa5f3a9d">WGetNET.IWinGetObject.IsEmpty</a></div><div class="ttdeci">bool IsEmpty</div><div class="ttdoc">Gets if the object is empty.</div><div class="ttdef"><b>Definition</b> <a href="#l00015">IWinGetObject.cs:15</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath custom-footer-container">

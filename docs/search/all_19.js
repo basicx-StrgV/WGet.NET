@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['❗_20requirements_0',['❗ Requirements',['../index.html#autotoc_md6',1,'']]]
+  ['❓_20what_20is_20wget_20net_0',['❓ What is WGet.NET',['../index.html#autotoc_md1',1,'']]]
 ];

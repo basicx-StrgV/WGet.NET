@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>WGet.NET: ArgsHelper.cs Source File</title>
+<title>WGet.NET: ArrayExtensions.cs Source File</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -59,7 +59,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../WGet.NET_Icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.3.1</span>
+   <div id="projectname">WGet.NET<span id="projectnumber">&#160;4.4.0</span>
    </div>
    <div id="projectbrief">A WinGet wrapper library for .Net.</div>
   </td>
@@ -129,7 +129,7 @@ $(function(){initNavTree('db/dab/a00089_source.html','../../'); initResizable(tr
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ArgsHelper.cs</div></div>
+  <div class="headertitle"><div class="title">ArrayExtensions.cs</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//--------------------------------------------------//</span></div>
@@ -137,61 +137,89 @@ $(function(){initNavTree('db/dab/a00089_source.html','../../'); initResizable(tr
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// https://github.com/basicx-StrgV/                 //</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//--------------------------------------------------//</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using </span>System;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using </span>System.IO;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="foldopen" id="foldopen00008" data-start="{" data-end="}">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="../../d9/d47/a00129.html">    8</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../d9/d47/a00129.html">WGetNET.Helper</a></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">internal</span> <span class="keyword">static</span> <span class="keyword">class </span>ArgsHelper</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="foldopen" id="foldopen00007" data-start="{" data-end="}">
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="../../de/d76/a00134.html">    7</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../de/d76/a00134.html">WGetNET.Extensions</a></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">internal</span> <span class="keyword">static</span> <span class="keyword">class </span>ArrayExtensions</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> ThrowIfStringIsNullOrWhiteSpace(<span class="keywordtype">string</span> arg, <span class="keywordtype">string</span> name)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keyword">public</span> <span class="keyword">static</span> T[] Add&lt;T&gt;(<span class="keyword">this</span> T[] array, T value)</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordflow">if</span> (arg == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordflow">if</span> (value is <span class="keyword">null</span>)</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentNullException(name);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                <span class="keywordflow">return</span> array;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            }</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrWhiteSpace(arg))</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException(<span class="stringliteral">&quot;Value cannot be empty.&quot;</span>, name);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            }</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> ThrowIfObjectIsNull(<span class="keywordtype">object</span> arg, <span class="keywordtype">string</span> name)</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keywordflow">if</span> (arg == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentNullException(name);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            }</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> ThrowIfWinGetObjectIsNullOrEmpty(<a class="code hl_interface" href="../../d9/d2a/a00270.html">IWinGetObject</a> arg, <span class="keywordtype">string</span> name)</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="keywordflow">if</span> (arg == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentNullException(name);</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (arg.IsEmpty)</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException(<span class="stringliteral">&quot;Object cannot be empty.&quot;</span>, name);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            Array.Resize(ref array, array.Length + 1);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="comment">//Add the new line to the new enty in the main array.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#if NETCOREAPP3_1_OR_GREATER</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            array[^1] = value;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#elif NETSTANDARD2_0</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            array[array.Length - 1] = value;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="keywordflow">return</span> array;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keyword">public</span> <span class="keyword">static</span> T[] RemoveRange&lt;T&gt;(<span class="keyword">this</span> T[] array, <span class="keywordtype">int</span> index, <span class="keywordtype">int</span> count)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordflow">if</span> (array.Length - 1 &lt; index)</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                <span class="keywordflow">return</span> array;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            }</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="comment">//Only copy the needed range of the input array to the new array.</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            T[] newArray = <span class="keyword">new</span> T[array.Length - count];</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; array.Length; i++)</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                <span class="keywordflow">if</span> (i &lt; index)</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                    newArray[i] = array[i];</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                }</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (i + count &lt; array.Length)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                    newArray[i] = array[i + count];</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                }</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            }</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        }</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> ThrowIfPathIsInvalid(<span class="keywordtype">string</span> arg)</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        {</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="comment">// This will indirectly throw other exeption.</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="keywordtype">string</span> root = Directory.GetDirectoryRoot(arg);</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <span class="comment">// Check if the path exists.</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keywordflow">if</span> (!Directory.Exists(root))</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            {</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> DirectoryNotFoundException($<span class="stringliteral">&quot;The path root &#39;{root}&#39; does not exist.&quot;</span>);</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordflow">return</span> newArray;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">int</span> GetEntryContains(<span class="keyword">this</span> <span class="keywordtype">string</span>[] array, <span class="keywordtype">string</span> value)</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keywordtype">int</span> index = -1;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; array.Length; i++)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <span class="keywordflow">if</span> (array[i].Contains(value))</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                    index = i;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            <span class="keywordflow">return</span> index;</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        }</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">string</span>[] RemoveEmptyEntries(<span class="keyword">this</span> <span class="keywordtype">string</span>[] array)</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="keywordtype">string</span>[] newArray = Array.Empty&lt;<span class="keywordtype">string</span>&gt;();</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; array.Length; i++)</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                <span class="keywordflow">if</span> (!<span class="keywordtype">string</span>.IsNullOrWhiteSpace(array[i]))</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                    newArray = newArray.Add(array[i]);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            }</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            <span class="keywordflow">return</span> newArray;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        }</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>}</div>
 </div>
-<div class="ttc" id="aa00129_html"><div class="ttname"><a href="../../d9/d47/a00129.html">WGetNET.Helper</a></div><div class="ttdef"><b>Definition</b> <a href="#l00008">ArgsHelper.cs:9</a></div></div>
-<div class="ttc" id="aa00270_html"><div class="ttname"><a href="../../d9/d2a/a00270.html">WGetNET.IWinGetObject</a></div><div class="ttdoc">Interface for all winget related objects.</div><div class="ttdef"><b>Definition</b> <a href="../../df/d98/a00107_source.html#l00010">IWinGetObject.cs:11</a></div></div>
+<div class="ttc" id="aa00134_html"><div class="ttname"><a href="../../de/d76/a00134.html">WGetNET.Extensions</a></div><div class="ttdef"><b>Definition</b> <a href="#l00007">ArrayExtensions.cs:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath custom-footer-container">
