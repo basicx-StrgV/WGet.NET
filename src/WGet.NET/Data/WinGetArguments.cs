@@ -2,6 +2,9 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using System;
+using WGetNET.Helper;
+
 namespace WGetNET
 {
     /// <summary>
@@ -319,8 +322,16 @@ namespace WGetNET
         /// <returns>
         /// The created <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public static WinGetArguments CustomCmd(string cmd)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(cmd, "cmd");
+
             cmd = cmd.ToLower().Trim();
             if (cmd.StartsWith("winget"))
             {
@@ -344,8 +355,16 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments Custom(string custom)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(custom, "custom");
+
             _arguments += $" {custom.ToLower().Trim()}";
             return this;
         }
@@ -362,8 +381,16 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments Query(string query)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(query, "query");
+
             _arguments += $" --query \"{query}\"";
             return this;
         }
@@ -377,8 +404,16 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments Source(string source)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(source, "source");
+
             _arguments += $" --source \"{source}\"";
             return this;
         }
@@ -395,8 +430,16 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments File(string file)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
+
             switch (_action)
             {
                 case WinGetAction.Hash:
@@ -425,8 +468,16 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments Directory(string directory)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(directory, "directory");
+
             // Remove backslash chars at the end of the path,
             // because they are not needed and will interfere with winget argument string by negating the last quotation mark char,
             // used for encasing the directory path.
@@ -461,8 +512,16 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments Enable(string query)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(query, "query");
+
             _arguments += $" --enable \"{query}\"";
             return this;
         }
@@ -476,8 +535,16 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments Disable(string query)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(query, "query");
+
             _arguments += $" --disable \"{query}\"";
             return this;
         }
@@ -494,8 +561,16 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments Name(string name)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(name, "name");
+
             _arguments += $" --name \"{name}\"";
             return this;
         }
@@ -512,8 +587,16 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments Arg(string arg)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(arg, "arg");
+
             _arguments += $" --arg \"{arg}\"";
             return this;
         }
@@ -530,8 +613,16 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments Type(string type)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(type, "type");
+
             _arguments += $" --type \"{type}\"";
             return this;
         }
@@ -545,9 +636,37 @@ namespace WGetNET
         /// <returns>
         /// The updated <see cref="WGetNET.WinGetArguments"/> object.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">
+        /// A provided argument is empty.
+        /// </exception>
         public WinGetArguments Version(string version)
         {
+            ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(version, "version");
+
             _arguments += $" --version \"{version}\"";
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a version query to the arguments.
+        /// </summary>
+        /// <param name="version">
+        /// A <see cref="System.Version"/> object containing the version to query.
+        /// </param>
+        /// <returns>
+        /// The updated <see cref="WGetNET.WinGetArguments"/> object.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// A provided argument is null.
+        /// </exception>
+        public WinGetArguments Version(Version version)
+        {
+            ArgsHelper.ThrowIfObjectIsNull(version, "version");
+
+            _arguments += $" --version \"{version.ToString()}\"";
             return this;
         }
 
