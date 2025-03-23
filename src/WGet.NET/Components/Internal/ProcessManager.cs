@@ -15,7 +15,7 @@ namespace WGetNET.Components.Internal
     /// The <see langword="internal"/> class <see cref="ProcessManager"/> 
     /// provides the winget process execution.
     /// </summary>
-    internal class ProcessManager
+    internal class ProcessManager : IProcessManager
     {
         private readonly ProcessStartInfo _winGetStartInfoTemplate;
 

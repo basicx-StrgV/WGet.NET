@@ -2,6 +2,7 @@
 // Created by basicx-StrgV                          //
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,18 +23,26 @@ namespace WGetNET
     /// </summary>
     public class WinGet
     {
-        private ProcessManager _processManager;
-        private string _wingetExePath;
-        private DateTime _wingetExeModificationDate;
+        private string? _wingetExePath = null;
+        private DateTime? _wingetExeModificationDate = null;
+
+        private bool _isInstalled = false;
+        private bool _isPreview = false;
+
+        private IProcessManager _processManager;
+
         private string _versionString;
         private Version _version;
-        private bool _isPreview;
 
-        private readonly bool _administratorPrivileges;
+        private readonly bool _administratorPrivileges = false;
+        private readonly bool _isRemoteClient = false;
 
         /// <summary>
         /// Gets if winget is installed on the system.
         /// </summary>
+        /// <remarks>
+        /// Will always be <see langword="false"/> for remote clients.
+        /// </remarks>
         /// <returns>
         /// <see langword="true"/> if winget is installed or <see langword="false"/> if not.
         /// </returns>
@@ -41,6 +50,12 @@ namespace WGetNET
         {
             get
             {
+                // Can't directly check for remote system, therefor return false.
+                if (_isRemoteClient)
+                {
+                    return false;
+                }
+
                 // Check if the winget executable still exist to ensure a correct result,
                 // even if winget gets removed while the application is running.
                 if (File.Exists(_wingetExePath))
@@ -50,7 +65,8 @@ namespace WGetNET
                 else
                 {
                     // Re-query installation and return the result to allow instalation of winget while the application is running.
-                    return QueryInstallation();
+                    QueryInstallation();
+                    return _isInstalled;
                 }
             }
         }
@@ -66,7 +82,8 @@ namespace WGetNET
             get
             {
                 // Check if winget got modefied or removed while the application is running.
-                if (_wingetExeModificationDate != GetLastModificationData())
+                // Always query information if system is remote.
+                if (_isRemoteClient || _wingetExeModificationDate != GetLastModificationData())
                 {
                     // Re-query installation if a change was detected.
                     QueryInstallation();
@@ -87,7 +104,8 @@ namespace WGetNET
             get
             {
                 // Check if winget got modefied or removed while the application is running.
-                if (_wingetExeModificationDate != GetLastModificationData())
+                // Always query information if system is remote.
+                if (_isRemoteClient || _wingetExeModificationDate != GetLastModificationData())
                 {
                     // Re-query installation if a change was detected.
                     QueryInstallation();
@@ -108,7 +126,8 @@ namespace WGetNET
             get
             {
                 // Check if winget got modefied or removed while the application is running.
-                if (_wingetExeModificationDate != GetLastModificationData())
+                // Always query information if system is remote.
+                if (_isRemoteClient || _wingetExeModificationDate != GetLastModificationData())
                 {
                     // Re-query installation if a change was detected.
                     QueryInstallation();
@@ -121,6 +140,9 @@ namespace WGetNET
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGet"/> class.
         /// </summary>
+        /// <remarks>
+        /// Used to for local winget handling.
+        /// </remarks>
         public WinGet()
         {
             // Check if the current process has administrator privileges
@@ -134,6 +156,63 @@ namespace WGetNET
             _version = new Version(0, 0);
 
             QueryInstallation();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WGetNET.WinGet"/> class.
+        /// </summary>
+        /// <remarks>
+        /// Used to for winget handling over ssh.
+        /// </remarks>
+        /// <param name="host">
+        /// A <see cref="System.String"/> containing the host information (Hostaname or IP).
+        /// </param>
+        /// <param name="username">
+        /// A <see cref="System.String"/> containing the ssh username.
+        /// </param>
+        /// <param name="password">
+        /// A <see cref="System.String"/> containing the ssh user password.
+        /// </param>
+        public WinGet(string host, string username, string password)
+        {
+            _isRemoteClient = true;
+
+            SshClient sshClient = new SshClient(host, username, password);
+
+            // Set inital values
+            _processManager = new SshProcessManager(sshClient);
+            _versionString = string.Empty;
+            _version = new Version(0, 0);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WGetNET.WinGet"/> class.
+        /// </summary>
+        /// <remarks>
+        /// Used to for winget handling over ssh.
+        /// </remarks>
+        /// <param name="host">
+        /// A <see cref="System.String"/> containing the host information (Hostaname or IP).
+        /// </param>
+        /// <param name="port">
+        /// The port for the ssh connection.
+        /// </param>
+        /// <param name="username">
+        /// A <see cref="System.String"/> containing the ssh username.
+        /// </param>
+        /// <param name="password">
+        /// A <see cref="System.String"/> containing the ssh user password.
+        /// </param>
+        public WinGet(string host, int port, string username, string password)
+        {
+            _isRemoteClient = true;
+
+            SshClient sshClient = new SshClient(host, port, username, password);
+
+            // Set inital values
+            _processManager = new SshProcessManager(sshClient);
+            _versionString = string.Empty;
+            _version = new Version(0, 0);
         }
 
         //---Settings Export---------------------------------------------------------------------------
@@ -856,6 +935,37 @@ namespace WGetNET
         /// </exception>
         private protected ProcessResult Execute(WinGetArguments args, bool needsAdminRights = false)
         {
+            if (_isRemoteClient)
+            {
+                return ExecuteRemote(args);
+            }
+            else
+            {
+                return ExecuteLocal(args, needsAdminRights);
+            }
+        }
+
+        /// <summary>
+        /// Exectutes a WinGet action, on the current system, from the given cmd.
+        /// </summary>
+        /// <param name="args">
+        /// A <see cref="WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
+        /// </param>
+        /// <param name="needsAdminRights">
+        /// Sets if the process that should be executed needs administrator privileges.
+        /// </param>
+        /// <returns>
+        /// The <see cref="WGetNET.Models.ProcessResult"/> for the process.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current process does not have administrator privileges. 
+        /// (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
+        /// </exception>
+        private ProcessResult ExecuteLocal(WinGetArguments args, bool needsAdminRights = false)
+        {
             ThrowIfNotInstalled();
 
             if (needsAdminRights)
@@ -863,6 +973,20 @@ namespace WGetNET
                 ThrowIfNotAdmin();
             }
 
+            return _processManager.ExecuteWingetProcess(args.Arguments);
+        }
+
+        /// <summary>
+        /// Exectutes a WinGet action, over ssh, from the given cmd.
+        /// </summary>
+        /// <param name="args">
+        /// A <see cref="WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
+        /// </param>
+        /// <returns>
+        /// The <see cref="WGetNET.Models.ProcessResult"/> for the process.
+        /// </returns>
+        private ProcessResult ExecuteRemote(WinGetArguments args)
+        {
             return _processManager.ExecuteWingetProcess(args.Arguments);
         }
 
@@ -891,6 +1015,41 @@ namespace WGetNET
         /// </exception>
         private protected async Task<ProcessResult> ExecuteAsync(WinGetArguments args, bool needsAdminRights = false, CancellationToken cancellationToken = default)
         {
+            if (_isRemoteClient)
+            {
+                return await ExecuteRemoteAsync(args, cancellationToken);
+            }
+            else
+            {
+                return await ExecuteLocalAsync(args, needsAdminRights, cancellationToken);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously exectutes a WinGet action, on the current system, from the given cmd.
+        /// </summary>
+        /// <param name="args">
+        /// A <see cref="WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
+        /// </param>
+        /// <param name="needsAdminRights">
+        /// Sets if the process that should be executed needs administrator privileges.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is the <see cref="WGetNET.Models.ProcessResult"/> for the process.
+        /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The current process does not have administrator privileges.
+        /// (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
+        /// </exception>
+        private async Task<ProcessResult> ExecuteLocalAsync(WinGetArguments args, bool needsAdminRights = false, CancellationToken cancellationToken = default)
+        {
             ThrowIfNotInstalled();
 
             if (needsAdminRights)
@@ -898,6 +1057,24 @@ namespace WGetNET
                 ThrowIfNotAdmin();
             }
 
+            return await _processManager.ExecuteWingetProcessAsync(args.Arguments, cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously exectutes a WinGet action, over ssh, from the given cmd.
+        /// </summary>
+        /// <param name="args">
+        /// A <see cref="WGetNET.WinGetArguments"/> object containing the arguments for the WinGet process.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="System.Threading.CancellationToken"/> for the <see cref="System.Threading.Tasks.Task"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
+        /// The result is the <see cref="WGetNET.Models.ProcessResult"/> for the process.
+        /// </returns>
+        private async Task<ProcessResult> ExecuteRemoteAsync(WinGetArguments args, CancellationToken cancellationToken = default)
+        {
             return await _processManager.ExecuteWingetProcessAsync(args.Arguments, cancellationToken);
         }
         // \endcond
@@ -984,31 +1161,30 @@ namespace WGetNET
         }
 
         /// <summary>
-        /// Checks the system for a winget installation.
+        /// Checks the system for a winget installation and version.
+        /// If needed the local process manager will be updated too.
         /// </summary>
-        /// <returns>
-        /// <see langword="true"/> if the installation was found and <see langword="false"/> if not.
-        /// </returns>
-        private bool QueryInstallation()
+        private void QueryInstallation()
         {
-            bool isInstalled;
-
-            _wingetExePath = SystemHelper.CheckWingetInstallation();
-
-            if (string.IsNullOrWhiteSpace(_wingetExePath))
+            if (!_isRemoteClient)
             {
-                isInstalled = false;
-                _processManager = new ProcessManager("winget");
-            }
-            else
-            {
-                isInstalled = true;
-                _processManager = new ProcessManager(_wingetExePath);
+                _wingetExePath = SystemHelper.CheckWingetInstallation();
+
+                if (string.IsNullOrWhiteSpace(_wingetExePath))
+                {
+                    _isInstalled = false;
+                    _processManager = new ProcessManager("winget");
+                }
+                else
+                {
+                    _isInstalled = true;
+                    _processManager = new ProcessManager(_wingetExePath);
+                }
+
+                _wingetExeModificationDate = GetLastModificationData();
             }
 
-            _wingetExeModificationDate = GetLastModificationData();
-
-            if (isInstalled)
+            if (_isRemoteClient || _isInstalled)
             {
                 _versionString = CheckWinGetVersion();
             }
@@ -1020,8 +1196,6 @@ namespace WGetNET
             _version = VersionParser.Parse(_versionString);
 
             _isPreview = VersionParser.CheckPreviewStatus(_versionString);
-
-            return isInstalled;
         }
         //---------------------------------------------------------------------------------------------
     }

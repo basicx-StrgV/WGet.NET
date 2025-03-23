@@ -26,9 +26,55 @@ namespace WGetNET
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
         /// </summary>
+        /// <remarks>
+        /// Used to for local winget handling.
+        /// </remarks>
         public WinGetPackageManager()
         {
             // Provide empty constructor for xlm docs
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
+        /// </summary>
+        /// <remarks>
+        /// Used to for winget handling over ssh.
+        /// </remarks>
+        /// <param name="host">
+        /// A <see cref="System.String"/> containing the host information (Hostaname or IP).
+        /// </param>
+        /// <param name="username">
+        /// A <see cref="System.String"/> containing the ssh username.
+        /// </param>
+        /// <param name="password">
+        /// A <see cref="System.String"/> containing the ssh user password.
+        /// </param>
+        public WinGetPackageManager(string host, string username, string password) : base(host, username, password)
+        {
+            // Provide constructor for ssh client.
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WGetNET.WinGetPackageManager"/> class.
+        /// </summary>
+        /// <remarks>
+        /// Used to for winget handling over ssh.
+        /// </remarks>
+        /// <param name="host">
+        /// A <see cref="System.String"/> containing the host information (Hostaname or IP).
+        /// </param>
+        /// <param name="port">
+        /// The port for the ssh connection.
+        /// </param>
+        /// <param name="username">
+        /// A <see cref="System.String"/> containing the ssh username.
+        /// </param>
+        /// <param name="password">
+        /// A <see cref="System.String"/> containing the ssh user password.
+        /// </param>
+        public WinGetPackageManager(string host, int port, string username, string password) : base(host, port, username, password)
+        {
+            // Provide constructor for ssh client.
         }
 
         //---Search------------------------------------------------------------------------------------
