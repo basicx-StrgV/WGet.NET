@@ -49,7 +49,11 @@ namespace WGetNET.Builder
             if (_hasShortenedContent)
             {
                 // Remove the char at the end of the shortened content.
+#if NETCOREAPP3_1_OR_GREATER
+                _rawContent = rawContent[..^1];
+#elif NETSTANDARD2_0
                 _rawContent = rawContent.Remove(rawContent.Length - 1);
+#endif
             }
             else
             {

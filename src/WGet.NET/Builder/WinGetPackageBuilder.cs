@@ -3,8 +3,8 @@
 // https://github.com/basicx-StrgV/                 //
 //--------------------------------------------------//
 using System;
-using WGetNET.Parser;
 using WGetNET.Abstractions;
+using WGetNET.Parser;
 
 namespace WGetNET.Builder
 {
@@ -56,7 +56,11 @@ namespace WGetNET.Builder
             if (_hasShortenedId)
             {
                 // Remove the char at the end of the shortened id.
+#if NETCOREAPP3_1_OR_GREATER
+                _id = id[..^1];
+#elif NETSTANDARD2_0
                 _id = id.Remove(id.Length - 1);
+#endif
             }
             else
             {

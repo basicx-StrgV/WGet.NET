@@ -1651,7 +1651,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackageAsync(System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackageAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Asynchronously gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.
             </summary>
@@ -1660,6 +1660,9 @@
             </remarks>
             <param name="packageId">
             The id or name of the package for the search.
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
             </param>
             <returns>
             A <see cref="T:WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
@@ -1674,7 +1677,7 @@
             A provided argument is null.
             </exception>
         </member>
-        <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackageAsync(System.String,System.String)">
+        <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackageAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Asynchronously gets a installed package, that matchs the provided id/name. If there are multiple matches, the first match will be returned.
             </summary>
@@ -1686,6 +1689,9 @@
             </param>
             <param name="sourceName">
             The name of the source for the search.
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
             </param>
             <returns>
             A <see cref="T:WGetNET.WinGetPackage"/> instances or <see langword="null"/> if no match was found.
@@ -4576,6 +4582,12 @@
             <returns>
             The created <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Custom(System.String)">
             <summary>
@@ -4587,6 +4599,12 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Query(System.String)">
             <summary>
@@ -4601,6 +4619,12 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Source(System.String)">
             <summary>
@@ -4612,6 +4636,12 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.File(System.String)">
             <summary>
@@ -4626,6 +4656,12 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Directory(System.String)">
             <summary>
@@ -4640,6 +4676,12 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Enable(System.String)">
             <summary>
@@ -4651,6 +4693,12 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Disable(System.String)">
             <summary>
@@ -4662,6 +4710,12 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Name(System.String)">
             <summary>
@@ -4676,6 +4730,12 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Arg(System.String)">
             <summary>
@@ -4690,6 +4750,12 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Type(System.String)">
             <summary>
@@ -4704,6 +4770,12 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Version(System.String)">
             <summary>
@@ -4715,6 +4787,26 @@
             <returns>
             The updated <see cref="T:WGetNET.WinGetArguments"/> object.
             </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            A provided argument is empty.
+            </exception>
+        </member>
+        <member name="M:WGetNET.WinGetArguments.Version(System.Version)">
+            <summary>
+            Adds a version query to the arguments.
+            </summary>
+            <param name="version">
+            A <see cref="T:System.Version"/> object containing the version to query.
+            </param>
+            <returns>
+            The updated <see cref="T:WGetNET.WinGetArguments"/> object.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            A provided argument is null.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetArguments.Version">
             <summary>

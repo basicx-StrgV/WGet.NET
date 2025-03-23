@@ -57,7 +57,11 @@ namespace WGetNET.Helper
 
             if (lastSeparatorIndex > -1)
             {
+#if NETCOREAPP3_1_OR_GREATER
+                return path[..lastSeparatorIndex];
+#elif NETSTANDARD2_0
                 return path.Remove(lastSeparatorIndex);
+#endif
             }
 
             return path;
