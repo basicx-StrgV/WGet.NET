@@ -554,7 +554,7 @@ namespace WGetNET
         /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
+        /// The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -596,7 +596,7 @@ namespace WGetNET
         /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
+        /// The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -640,7 +640,7 @@ namespace WGetNET
         /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
+        /// The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -686,7 +686,7 @@ namespace WGetNET
         /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
+        /// The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -726,7 +726,7 @@ namespace WGetNET
         /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
+        /// The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -768,7 +768,7 @@ namespace WGetNET
         /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
+        /// The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -812,7 +812,7 @@ namespace WGetNET
         /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
+        /// The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -858,7 +858,7 @@ namespace WGetNET
         /// A provided argument is empty.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
-        /// The current user is missing administrator privileges for this call.
+        /// The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 

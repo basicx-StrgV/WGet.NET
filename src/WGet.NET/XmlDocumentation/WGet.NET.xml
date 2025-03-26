@@ -1209,7 +1209,7 @@
             A provided argument is empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -1244,7 +1244,7 @@
             A provided argument is empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -1283,7 +1283,7 @@
             A provided argument is empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -1322,7 +1322,7 @@
             A provided argument is empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -1357,7 +1357,7 @@
             A provided argument is empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -1392,7 +1392,7 @@
             A provided argument is empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -1431,7 +1431,7 @@
             A provided argument is empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -1470,7 +1470,7 @@
             A provided argument is empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -5439,7 +5439,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -5480,7 +5480,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -5515,7 +5515,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -5547,7 +5547,7 @@
             A provided argument is empty.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -5589,7 +5589,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -5634,7 +5634,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -5673,7 +5673,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -5712,7 +5712,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -6136,7 +6136,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -6178,7 +6178,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -6207,7 +6207,7 @@
             WinGet is not installed or not found on the system.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -6240,7 +6240,7 @@
             WinGet is not installed or not found on the system.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -6275,7 +6275,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -6310,7 +6310,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -6349,7 +6349,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -6388,7 +6388,7 @@
             A provided argument is null.
             </exception>
             <exception cref="T:System.Security.SecurityException">
-            The current user is missing administrator privileges for this call.
+            The current user is missing administrator privileges for this call. (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -8194,6 +8194,30 @@
         <member name="M:WGetNET.Parser.VersionParser.CleanupNumberString(System.String)">
             <summary>
             Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
+            </summary>
+            <remarks>
+            If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>:
+            </returns>
+        </member>
+        <member name="M:WGetNET.Parser.VersionParser.RemoveAppendix(System.String)">
+            <summary>
+            Removes version appendixes from the string.
+            </summary>
+            <remarks>
+            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
+            </remarks>
+            <param name="input">The <see cref="T:System.String"/> to process.</param>
+            <returns>
+            The processed <see cref="T:System.String"/>.
+            </returns>
+        </member>
+    </members>
+</doc>
+String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
             </summary>
             <remarks>
             If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
