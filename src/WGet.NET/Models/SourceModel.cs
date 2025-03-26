@@ -158,7 +158,7 @@ namespace WGetNET.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="WGetNET.Models.SourceModel"/> class.
         /// </summary>
-        internal SourceModel()
+        public SourceModel()
         {
             // Empty constructor for JSON parsing.
         }
