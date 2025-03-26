@@ -27,7 +27,10 @@ namespace WGetNET
         private DateTime? _wingetExeModificationDate = null;
 
         private bool _isInstalled = false;
+        private bool _isInstalledRemote = false;
         private bool _isPreview = false;
+
+        private bool _remoteInit = false;
 
         private IProcessManager _processManager;
 
@@ -50,10 +53,14 @@ namespace WGetNET
         {
             get
             {
-                // Can't directly check for remote system, therefor return false.
-                if (_isRemoteClient)
+                if (_isRemoteClient && _remoteInit)
                 {
-                    return false;
+                    return _isInstalledRemote;
+                }
+                else if (_isRemoteClient && !_remoteInit)
+                {
+                    QueryInstallation();
+                    return _isInstalledRemote;
                 }
 
                 // Check if the winget executable still exist to ensure a correct result,
@@ -1089,6 +1096,12 @@ namespace WGetNET
         /// </exception>
         private void ThrowIfNotInstalled()
         {
+            // Dont throw if the client is remote and the satatus was never requested.
+            if (_isRemoteClient && !_remoteInit)
+            {
+                return;
+            }
+
             if (!IsInstalled)
             {
                 throw new WinGetNotInstalledException();
@@ -1117,8 +1130,10 @@ namespace WGetNET
         /// </returns>
         private string CheckWinGetVersion()
         {
-            if (!IsInstalled)
+            if (((_isRemoteClient && _remoteInit) || !_isRemoteClient) && !IsInstalled)
             {
+                // Only return if client is remote, the status was already requestet and is falls
+                // or if the client is local and the status is false.
                 return string.Empty;
             }
 
@@ -1168,6 +1183,7 @@ namespace WGetNET
         {
             if (!_isRemoteClient)
             {
+                // Get winget installation path for local client
                 _wingetExePath = SystemHelper.CheckWingetInstallation();
 
                 if (string.IsNullOrWhiteSpace(_wingetExePath))
@@ -1187,6 +1203,12 @@ namespace WGetNET
             if (_isRemoteClient || _isInstalled)
             {
                 _versionString = CheckWinGetVersion();
+
+                if (_isRemoteClient && !string.IsNullOrWhiteSpace(_versionString))
+                {
+                    // If client is remote and the action was successfull, set the installation status to true.
+                    _isInstalledRemote = true;
+                }
             }
             else
             {

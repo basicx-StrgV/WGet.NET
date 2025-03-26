@@ -88,19 +88,31 @@ namespace WGetNET.Components.Internal
 
             try
             {
+                // Connect client and create the command
                 _sshClient.Connect();
 
                 SshCommand command = _sshClient.CreateCommand(cmd);
 
-                command.Execute();
+                // Create a stream reader with the command stream,
+                // start command execution and start the reading of the stream.
                 StreamReader outputStream = new StreamReader(command.OutputStream);
 
+                IAsyncResult cmdResult = command.BeginExecute();
+
+                result.Output = outputStream.ReadSreamOutputByLine();
+
+                // If the command execution is not completed, wait for complition
+                if (!cmdResult.IsCompleted)
+                {
+                    cmdResult.AsyncWaitHandle.WaitOne();
+                    cmdResult.AsyncWaitHandle.Dispose();
+                }
+
+                // Get the exite code of the executed command
                 if (command.ExitStatus.HasValue)
                 {
                     result.ExitCode = command.ExitStatus.Value;
                 }
-
-                result.Output = outputStream.ReadSreamOutputByLine();
 
                 command.Dispose();
             }
@@ -148,28 +160,37 @@ namespace WGetNET.Components.Internal
 
             try
             {
-                _sshClient.Connect();
+                // Connect client and create the command
+                await _sshClient.ConnectAsync(cancellationToken);
 
                 SshCommand command = _sshClient.CreateCommand(cmd);
 
-                await command.ExecuteAsync(cancellationToken);
+                // Create a stream reader with the command stream,
+                // start command execution and start the reading of the stream.
                 StreamReader outputStream = new StreamReader(command.OutputStream);
 
+                Task cmdTask = command.ExecuteAsync(cancellationToken);
+
+                result.Output = await outputStream.ReadSreamOutputByLineAsync(cancellationToken);
+
+                await cmdTask;
+
+                // Stop if the action was canceled
                 if (cancellationToken.IsCancellationRequested)
                 {
                     command.Dispose();
+                    _sshClient.Disconnect();
 
                     result.ExitCode = -1;
 
                     return result;
                 }
 
+                // Get the exite code of the executed command
                 if (command.ExitStatus.HasValue)
                 {
                     result.ExitCode = command.ExitStatus.Value;
                 }
-
-                result.Output = await outputStream.ReadSreamOutputByLineAsync(cancellationToken);
 
                 command.Dispose();
             }
