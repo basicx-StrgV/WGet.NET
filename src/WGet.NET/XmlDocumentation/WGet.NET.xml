@@ -932,6 +932,11 @@
             A <see cref="T:System.Version"/> object.
             </returns>
         </member>
+        <member name="P:WGetNET.WinGet.IsRemoteClient">
+            <summary>
+            Gets if this instance is for a remote client
+            </summary>
+        </member>
         <member name="M:WGetNET.WinGet.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:WGetNET.WinGet"/> class.
@@ -3812,6 +3817,7 @@
             </exception>
             <exception cref="T:System.IO.FileNotFoundException">
             Unable to find the specified file.
+            (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -3844,6 +3850,7 @@
             </exception>
             <exception cref="T:System.IO.FileNotFoundException">
             Unable to find the specified file.
+            (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -3883,6 +3890,7 @@
             </exception>
             <exception cref="T:System.IO.FileNotFoundException">
             Unable to find the specified file.
+            (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -3919,6 +3927,7 @@
             </exception>
             <exception cref="T:System.IO.FileNotFoundException">
             Unable to find the specified file.
+            (Not used for remote clients, only local execution)
             </exception>
             <exception cref="T:Renci.SshNet.Common.SshConnectionException">
             The SSH connection was terminated. 
@@ -7917,27 +7926,6 @@
             A <see cref="T:System.String"/> containing the json to deserialize.
             </param>
             <returns>
-            Object of the given class type.
-            </returns>
-            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
-            The provided JSON could not be deserialized.
-            </exception>
-        </member>
-        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
-            </summary>
-            <typeparam name="T">
-            Class type the json should be deserialized to.
-            </typeparam>
-            <param name="jsonString">
-            A <see cref="T:System.String"/> containing the json to deserialize.
-            </param>
-            <param name="cancellationToken">
-            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
-            </param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             Object of the given class type.
             </returns>
             <exception cref="T:WGetNET.Exceptions.InvalidJsonException">

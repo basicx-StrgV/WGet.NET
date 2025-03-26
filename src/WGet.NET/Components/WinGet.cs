@@ -28,6 +28,7 @@ namespace WGetNET
 
         private bool _isInstalled = false;
         private bool _isInstalledRemote = false;
+
         private bool _isPreview = false;
 
         private bool _remoteInit = false;
@@ -141,6 +142,17 @@ namespace WGetNET
                 }
 
                 return _version;
+            }
+        }
+
+        /// <summary>
+        /// Gets if this instance is for a remote client
+        /// </summary>
+        public bool IsRemoteClient
+        {
+            get
+            {
+                return _isRemoteClient;
             }
         }
 

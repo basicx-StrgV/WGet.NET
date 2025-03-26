@@ -2660,6 +2660,7 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
+        /// (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -2677,7 +2678,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            if (!File.Exists(file))
+            if (!IsRemoteClient && !File.Exists(file))
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file}'");
             }
@@ -2709,6 +2710,7 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
+        /// (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -2726,7 +2728,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfObjectIsNull(file, "file");
 
-            if (!file.Exists)
+            if (!IsRemoteClient && !file.Exists)
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file.FullName}'");
             }
@@ -2758,6 +2760,7 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
+        /// (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -2775,7 +2778,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
 
-            if (!File.Exists(file))
+            if (!IsRemoteClient && !File.Exists(file))
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file}'");
             }
@@ -2811,6 +2814,7 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
+        /// (Not used for remote clients, only local execution)
         /// </exception>
         /// <exception cref="Renci.SshNet.Common.SshConnectionException">
         /// The SSH connection was terminated. 
@@ -2828,7 +2832,7 @@ namespace WGetNET
         {
             ArgsHelper.ThrowIfObjectIsNull(file, "file");
 
-            if (!file.Exists)
+            if (!IsRemoteClient && !file.Exists)
             {
                 throw new FileNotFoundException($"Unable to find the specified file. File:'{file.FullName}'");
             }
