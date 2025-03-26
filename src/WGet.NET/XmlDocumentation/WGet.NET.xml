@@ -813,6 +813,15 @@
             A <see cref="T:WGetNET.Models.ProcessResult"/> object, 
             containing the output an exit id of the process.
             </returns>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            </exception>
         </member>
         <member name="M:WGetNET.Components.Internal.SshProcessManager.ExecuteWingetProcessAsync(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -828,6 +837,15 @@
             A <see cref="T:WGetNET.Models.ProcessResult"/> object, 
             containing the output an exit id of the process.
             </returns>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            </exception>
         </member>
         <member name="M:WGetNET.Components.Internal.SshProcessManager.RunProcess(System.String)">
             <summary>
@@ -840,6 +858,15 @@
             A <see cref="T:WGetNET.Models.ProcessResult"/> object, 
             containing the output an exit id of the process.
             </returns>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            </exception>
         </member>
         <member name="M:WGetNET.Components.Internal.SshProcessManager.RunProcessAsync(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -855,6 +882,15 @@
             A <see cref="T:WGetNET.Models.ProcessResult"/> object, 
             containing the output an exit id of the process.
             </returns>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            </exception>
         </member>
         <member name="T:WGetNET.WinGet">
             <summary>
@@ -951,6 +987,18 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExportSettingsAsync(System.Threading.CancellationToken)">
             <summary>
@@ -965,6 +1013,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExportSettingsToFile(System.String)">
@@ -1005,6 +1065,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The caller does not have the required permission.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExportSettingsToFileAsync(System.String,System.Threading.CancellationToken)">
@@ -1049,6 +1121,18 @@
             <exception cref="T:System.Security.SecurityException">
             The caller does not have the required permission.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.GetAdminSettings">
             <summary>
@@ -1059,6 +1143,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.GetAdminSettingsAsync(System.Threading.CancellationToken)">
@@ -1074,6 +1170,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.EnableAdminSetting(System.String)">
@@ -1098,6 +1206,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.EnableAdminSetting(WGetNET.WinGetAdminSetting)">
             <summary>
@@ -1120,6 +1240,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.EnableAdminSettingAsync(System.String,System.Threading.CancellationToken)">
@@ -1148,6 +1280,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.EnableAdminSettingAsync(WGetNET.WinGetAdminSetting,System.Threading.CancellationToken)">
             <summary>
@@ -1175,6 +1319,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.DisableAdminSetting(System.String)">
             <summary>
@@ -1198,6 +1354,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.DisableAdminSetting(WGetNET.WinGetAdminSetting)">
             <summary>
@@ -1220,6 +1388,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.DisableAdminSettingAsync(System.String,System.Threading.CancellationToken)">
@@ -1248,6 +1428,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.DisableAdminSettingAsync(WGetNET.WinGetAdminSetting,System.Threading.CancellationToken)">
             <summary>
@@ -1275,6 +1467,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.GetInfo">
             <summary>
@@ -1285,6 +1489,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.GetInfoAsync(System.Threading.CancellationToken)">
@@ -1300,6 +1516,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExecuteCustom(WGetNET.WinGetArguments)">
@@ -1317,6 +1545,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExecuteCustom(System.String)">
@@ -1338,6 +1578,18 @@
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExecuteCustomAsync(WGetNET.WinGetArguments,System.Threading.CancellationToken)">
             <summary>
@@ -1357,6 +1609,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExecuteCustomAsync(System.String,System.Threading.CancellationToken)">
@@ -1380,6 +1644,18 @@
             </exception>
             <exception cref="T:System.ArgumentException">
             A provided argument is empty.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.CheckWinGetVersion(System.Version,System.Version)">
@@ -1415,6 +1691,18 @@
             The current process does not have administrator privileges. 
             (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExecuteLocal(WGetNET.WinGetArguments,System.Boolean)">
             <summary>
@@ -1447,6 +1735,18 @@
             <returns>
             The <see cref="T:WGetNET.Models.ProcessResult"/> for the process.
             </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExecuteAsync(WGetNET.WinGetArguments,System.Boolean,System.Threading.CancellationToken)">
             <summary>
@@ -1471,6 +1771,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current process does not have administrator privileges.
             (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGet.ExecuteLocalAsync(WGetNET.WinGetArguments,System.Boolean,System.Threading.CancellationToken)">
@@ -1512,6 +1824,18 @@
             A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
             The result is the <see cref="T:WGetNET.Models.ProcessResult"/> for the process.
             </returns>
+            <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
+            WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            </exception>
         </member>
         <member name="M:WGetNET.WinGet.ThrowIfNotInstalled">
             <summary>
@@ -1621,6 +1945,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.SearchPackage(System.String,System.String,System.Boolean)">
             <summary>
@@ -1644,6 +1980,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.SearchPackageAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
@@ -1669,6 +2017,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.SearchPackageAsync(System.String,System.String,System.Boolean,System.Threading.CancellationToken)">
@@ -1698,6 +2058,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages">
             <summary>
@@ -1708,6 +2080,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages(System.String,System.Boolean)">
@@ -1729,6 +2113,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackages(System.String,System.String,System.Boolean)">
@@ -1754,6 +2150,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync(System.Threading.CancellationToken)">
             <summary>
@@ -1768,6 +2176,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
@@ -1793,6 +2213,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetInstalledPackagesAsync(System.String,System.String,System.Boolean,System.Threading.CancellationToken)">
@@ -1822,6 +2254,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackage(System.String)">
             <summary>
@@ -1844,6 +2288,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackage(System.String,System.String)">
@@ -1871,6 +2327,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackageAsync(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -1896,6 +2364,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetExactInstalledPackageAsync(System.String,System.String,System.Threading.CancellationToken)">
@@ -1926,6 +2406,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(System.String)">
             <summary>
@@ -1943,6 +2435,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(System.String,System.Boolean)">
@@ -1963,6 +2467,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage)">
             <summary>
@@ -1980,6 +2496,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackage(WGetNET.WinGetPackage,System.Boolean)">
@@ -1999,6 +2527,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(System.String,System.Threading.CancellationToken)">
@@ -2021,6 +2561,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
@@ -2045,6 +2597,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage,System.Threading.CancellationToken)">
             <summary>
@@ -2066,6 +2630,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.InstallPackageAsync(WGetNET.WinGetPackage,System.Boolean,System.Threading.CancellationToken)">
@@ -2090,6 +2666,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(System.String)">
             <summary>
@@ -2107,6 +2695,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(System.String,System.Boolean)">
@@ -2127,6 +2727,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.WinGetPackage)">
             <summary>
@@ -2144,6 +2756,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackage(WGetNET.WinGetPackage,System.Boolean)">
@@ -2163,6 +2787,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(System.String,System.Threading.CancellationToken)">
@@ -2185,6 +2821,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
@@ -2209,6 +2857,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.WinGetPackage,System.Threading.CancellationToken)">
             <summary>
@@ -2230,6 +2890,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UninstallPackageAsync(WGetNET.WinGetPackage,System.Boolean,System.Threading.CancellationToken)">
@@ -2254,6 +2926,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackages">
             <summary>
@@ -2264,6 +2948,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetUpgradeablePackagesAsync(System.Threading.CancellationToken)">
@@ -2279,6 +2975,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(System.String)">
@@ -2297,6 +3005,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(System.String,System.Boolean)">
@@ -2317,6 +3037,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(WGetNET.WinGetPackage)">
             <summary>
@@ -2334,6 +3066,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackage(WGetNET.WinGetPackage,System.Boolean)">
@@ -2353,6 +3097,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(System.String,System.Threading.CancellationToken)">
@@ -2375,6 +3131,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
@@ -2399,6 +3167,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.WinGetPackage,System.Threading.CancellationToken)">
             <summary>
@@ -2420,6 +3200,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradePackageAsync(WGetNET.WinGetPackage,System.Boolean,System.Threading.CancellationToken)">
@@ -2444,6 +3236,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradeAllPackages">
             <summary>
@@ -2457,6 +3261,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradeAllPackages(System.Boolean)">
@@ -2472,6 +3288,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradeAllPackagesAsync(System.Threading.CancellationToken)">
@@ -2491,6 +3319,18 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.UpgradeAllPackagesAsync(System.Boolean,System.Threading.CancellationToken)">
             <summary>
@@ -2509,6 +3349,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.RepairPackage(System.String)">
@@ -2531,6 +3383,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.RepairPackage(System.String,System.Boolean)">
@@ -2555,6 +3419,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.RepairPackage(WGetNET.WinGetPackage)">
             <summary>
@@ -2576,6 +3452,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.RepairPackage(WGetNET.WinGetPackage,System.Boolean)">
@@ -2599,6 +3487,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.RepairPackageAsync(System.String,System.Threading.CancellationToken)">
@@ -2625,6 +3525,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.RepairPackageAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
@@ -2653,6 +3565,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.RepairPackageAsync(WGetNET.WinGetPackage,System.Threading.CancellationToken)">
             <summary>
@@ -2678,6 +3602,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.RepairPackageAsync(WGetNET.WinGetPackage,System.Boolean,System.Threading.CancellationToken)">
@@ -2706,6 +3642,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFile(System.String)">
             <summary>
@@ -2723,6 +3671,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ExportPackagesToFileAsync(System.String,System.Threading.CancellationToken)">
@@ -2746,6 +3706,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFile(System.String)">
             <summary>
@@ -2767,6 +3739,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ImportPackagesFromFileAsync(System.String,System.Threading.CancellationToken)">
@@ -2794,6 +3778,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Hash(System.String)">
             <summary>
@@ -2817,6 +3813,18 @@
             <exception cref="T:System.IO.FileNotFoundException">
             Unable to find the specified file.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Hash(System.IO.FileInfo)">
             <summary>
@@ -2836,6 +3844,18 @@
             </exception>
             <exception cref="T:System.IO.FileNotFoundException">
             Unable to find the specified file.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.HashAsync(System.String,System.Threading.CancellationToken)">
@@ -2864,6 +3884,18 @@
             <exception cref="T:System.IO.FileNotFoundException">
             Unable to find the specified file.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.HashAsync(System.IO.FileInfo,System.Threading.CancellationToken)">
             <summary>
@@ -2888,6 +3920,18 @@
             <exception cref="T:System.IO.FileNotFoundException">
             Unable to find the specified file.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Download(System.String,System.String)">
             <summary>
@@ -2909,6 +3953,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Download(System.String,System.IO.DirectoryInfo)">
@@ -2935,6 +3991,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.WinGetPackage,System.String)">
             <summary>
@@ -2956,6 +4024,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.Download(WGetNET.WinGetPackage,System.IO.DirectoryInfo)">
@@ -2982,6 +4062,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
@@ -3007,6 +4099,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(System.String,System.IO.DirectoryInfo,System.Threading.CancellationToken)">
@@ -3037,6 +4141,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.WinGetPackage,System.String,System.Threading.CancellationToken)">
             <summary>
@@ -3062,6 +4178,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.DownloadAsync(WGetNET.WinGetPackage,System.IO.DirectoryInfo,System.Threading.CancellationToken)">
@@ -3092,6 +4220,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetPinnedPackages">
             <summary>
@@ -3105,6 +4245,18 @@
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.GetPinnedPackagesAsync(System.Threading.CancellationToken)">
@@ -3123,6 +4275,18 @@
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAdd(System.String,System.Boolean)">
@@ -3145,6 +4309,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAdd(System.String,System.String)">
@@ -3171,6 +4347,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
@@ -3192,6 +4380,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAdd(WGetNET.WinGetPackage,System.String)">
@@ -3218,6 +4418,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
             <summary>
@@ -3243,6 +4455,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(System.String,System.String,System.Threading.CancellationToken)">
@@ -3273,6 +4497,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.WinGetPackage,System.Boolean,System.Threading.CancellationToken)">
             <summary>
@@ -3298,6 +4534,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddAsync(WGetNET.WinGetPackage,System.String,System.Threading.CancellationToken)">
@@ -3328,6 +4576,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(System.String,System.Boolean)">
             <summary>
@@ -3349,6 +4609,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(System.String,System.String)">
@@ -3375,6 +4647,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.Boolean)">
             <summary>
@@ -3396,6 +4680,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalled(WGetNET.WinGetPackage,System.String)">
@@ -3422,6 +4718,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
             <summary>
@@ -3447,6 +4755,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(System.String,System.String,System.Threading.CancellationToken)">
@@ -3477,6 +4797,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.Boolean,System.Threading.CancellationToken)">
             <summary>
@@ -3502,6 +4834,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinAddInstalledAsync(WGetNET.WinGetPackage,System.String,System.Threading.CancellationToken)">
@@ -3532,6 +4876,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemove(System.String)">
             <summary>
@@ -3553,6 +4909,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemove(WGetNET.WinGetPackage)">
             <summary>
@@ -3573,6 +4941,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveAsync(System.String,System.Threading.CancellationToken)">
@@ -3599,6 +4979,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveAsync(WGetNET.WinGetPackage,System.Threading.CancellationToken)">
             <summary>
@@ -3624,6 +5016,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalled(System.String)">
             <summary>
@@ -3645,6 +5049,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalled(WGetNET.WinGetPackage)">
             <summary>
@@ -3665,6 +5081,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalledAsync(System.String,System.Threading.CancellationToken)">
@@ -3691,6 +5119,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.PinRemoveInstalledAsync(WGetNET.WinGetPackage,System.Threading.CancellationToken)">
             <summary>
@@ -3716,6 +5156,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ResetPins">
             <summary>
@@ -3732,6 +5184,18 @@
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.ResetPinsAsync(System.Threading.CancellationToken)">
@@ -3753,6 +5217,18 @@
             </exception>
             <exception cref="T:WGetNET.Exceptions.WinGetFeatureNotSupportedException">
             This feature is not supported in the installed WinGet version.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetPackageManager.IncludeUnknownbyVersion(WGetNET.WinGetArguments)">
@@ -3827,6 +5303,18 @@
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.GetInstalledSources(System.String)">
             <summary>
@@ -3845,6 +5333,18 @@
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.GetInstalledSourcesAsync(System.Threading.CancellationToken)">
             <summary>
@@ -3859,6 +5359,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.GetInstalledSourcesAsync(System.String,System.Threading.CancellationToken)">
@@ -3881,6 +5393,18 @@
             </exception>
             <exception cref="T:System.ArgumentNullException">
             A provided argument is null.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSource(System.String,System.String)">
@@ -3907,6 +5431,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSource(System.String,System.String,System.String)">
@@ -3937,6 +5473,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSource(WGetNET.WinGetSource)">
             <summary>
@@ -3960,6 +5508,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSource(System.Collections.Generic.IEnumerable{WGetNET.WinGetSource})">
             <summary>
@@ -3979,6 +5539,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.String,System.String,System.Threading.CancellationToken)">
@@ -4009,6 +5581,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
@@ -4043,6 +5627,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(WGetNET.WinGetSource,System.Threading.CancellationToken)">
             <summary>
@@ -4069,6 +5665,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.AddSourceAsync(System.Collections.Generic.IEnumerable{WGetNET.WinGetSource},System.Threading.CancellationToken)">
@@ -4097,6 +5705,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.UpdateSources">
             <summary>
@@ -4110,6 +5730,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.UpdateSourcesAsync(System.Threading.CancellationToken)">
@@ -4128,6 +5760,18 @@
             </returns>
             <exception cref="T:WGetNET.Exceptions.WinGetNotInstalledException">
             WinGet is not installed or not found on the system.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String)">
@@ -4167,6 +5811,18 @@
             <exception cref="T:System.Security.SecurityException">
             The caller does not have the required permission.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,System.String)">
             <summary>
@@ -4205,6 +5861,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The caller does not have the required permission.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFile(System.String,WGetNET.WinGetSource)">
@@ -4248,6 +5916,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The caller does not have the required permission.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,System.Threading.CancellationToken)">
@@ -4293,6 +5973,18 @@
             <exception cref="T:System.Security.SecurityException">
             The caller does not have the required permission.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
@@ -4337,6 +6029,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The caller does not have the required permission.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ExportSourcesToFileAsync(System.String,WGetNET.WinGetSource,System.Threading.CancellationToken)">
@@ -4387,6 +6091,18 @@
             <exception cref="T:System.Security.SecurityException">
             The caller does not have the required permission.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSourcesFromJson(System.String)">
             <summary>
@@ -4412,6 +6128,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ImportSourcesFromJsonAsync(System.String,System.Threading.CancellationToken)">
@@ -4443,6 +6171,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ResetSources">
             <summary>
@@ -4459,6 +6199,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.ResetSourcesAsync(System.Threading.CancellationToken)">
@@ -4480,6 +6232,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.RemoveSources(System.String)">
@@ -4504,6 +6268,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.RemoveSources(WGetNET.WinGetSource)">
             <summary>
@@ -4526,6 +6302,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.RemoveSourcesAsync(System.String,System.Threading.CancellationToken)">
@@ -4554,6 +6342,18 @@
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
             </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
+            </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.RemoveSourcesAsync(WGetNET.WinGetSource,System.Threading.CancellationToken)">
             <summary>
@@ -4580,6 +6380,18 @@
             </exception>
             <exception cref="T:System.Security.SecurityException">
             The current user is missing administrator privileges for this call.
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshConnectionException">
+            The SSH connection was terminated. 
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:Renci.SshNet.Common.SshAuthenticationException">
+            SSH authentication failed.
+            (Not used for local execution, only for remote clients)
+            </exception>
+            <exception cref="T:System.Net.Sockets.SocketException">
+            Failed to connect to SSH server.
+            (Not used for local execution, only for remote clients)
             </exception>
         </member>
         <member name="M:WGetNET.WinGetSourceManager.SourcesToJson(System.Collections.Generic.IEnumerable{WGetNET.WinGetSource})">
@@ -6111,6 +7923,27 @@
             The provided JSON could not be deserialized.
             </exception>
         </member>
+        <member name="M:WGetNET.Helper.JsonHelper.StringToObjectAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously deserializes a given json <see cref="T:System.String"/> to a object of the given class.
+            </summary>
+            <typeparam name="T">
+            Class type the json should be deserialized to.
+            </typeparam>
+            <param name="jsonString">
+            A <see cref="T:System.String"/> containing the json to deserialize.
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for the <see cref="T:System.Threading.Tasks.Task"/>.
+            </param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/>, containing the result.
+            Object of the given class type.
+            </returns>
+            <exception cref="T:WGetNET.Exceptions.InvalidJsonException">
+            The provided JSON could not be deserialized.
+            </exception>
+        </member>
         <member name="M:WGetNET.Helper.JsonHelper.GetJson(System.Object)">
             <summary>
             Serializes a json <see cref="T:System.String"/> from the provided object.
@@ -6373,30 +8206,6 @@
         <member name="M:WGetNET.Parser.VersionParser.CleanupNumberString(System.String)">
             <summary>
             Cleans a <see cref="T:System.String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
-            </summary>
-            <remarks>
-            If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to clean up.</param>
-            <returns>
-            The processed <see cref="T:System.String"/>:
-            </returns>
-        </member>
-        <member name="M:WGetNET.Parser.VersionParser.RemoveAppendix(System.String)">
-            <summary>
-            Removes version appendixes from the string.
-            </summary>
-            <remarks>
-            An version appendix could look like this: '-preview', '-beta2' or '-pre'.
-            </remarks>
-            <param name="input">The <see cref="T:System.String"/> to process.</param>
-            <returns>
-            The processed <see cref="T:System.String"/>.
-            </returns>
-        </member>
-    </members>
-</doc>
-String"/>, with minimal version information loss, so it can be parsed to a <see cref="T:System.Int32"/>.
             </summary>
             <remarks>
             If the <see cref="T:System.String"/> looks lick this '123ABC456' it will not be cleaned, because to much information will be lost.

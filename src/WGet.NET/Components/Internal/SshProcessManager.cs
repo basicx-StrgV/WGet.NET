@@ -6,6 +6,7 @@ using Renci.SshNet;
 using Renci.SshNet.Common;
 using System;
 using System.IO;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using WGetNET.Extensions;
@@ -42,6 +43,15 @@ namespace WGetNET.Components.Internal
         /// A <see cref="ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// </exception>
         public ProcessResult ExecuteWingetProcess(string cmd)
         {
             cmd = $"winget {cmd}";
@@ -61,6 +71,15 @@ namespace WGetNET.Components.Internal
         /// A <see cref="ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// </exception>
         public async Task<ProcessResult> ExecuteWingetProcessAsync(string cmd, CancellationToken cancellationToken = default)
         {
             cmd = $"winget {cmd}";
@@ -77,6 +96,15 @@ namespace WGetNET.Components.Internal
         /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// </exception>
         private ProcessResult RunProcess(string cmd)
         {
             ProcessResult result = new();
@@ -124,6 +152,10 @@ namespace WGetNET.Components.Internal
             {
                 throw;
             }
+            catch (SocketException)
+            {
+                throw;
+            }
             catch (Exception)
             {
                 return result;
@@ -149,6 +181,15 @@ namespace WGetNET.Components.Internal
         /// A <see cref="WGetNET.Models.ProcessResult"/> object, 
         /// containing the output an exit id of the process.
         /// </returns>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// </exception>
         private async Task<ProcessResult> RunProcessAsync(string cmd, CancellationToken cancellationToken = default)
         {
             ProcessResult result = new();
@@ -199,6 +240,10 @@ namespace WGetNET.Components.Internal
                 throw;
             }
             catch (SshAuthenticationException)
+            {
+                throw;
+            }
+            catch (SocketException)
             {
                 throw;
             }

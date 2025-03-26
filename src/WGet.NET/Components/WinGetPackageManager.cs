@@ -97,6 +97,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public List<WinGetPackage> SearchPackage(string packageId, bool exact = false)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -134,6 +146,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public List<WinGetPackage> SearchPackage(string packageId, string sourceName, bool exact = false)
         {
@@ -174,6 +198,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, bool exact = false, CancellationToken cancellationToken = default)
         {
@@ -223,6 +259,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<List<WinGetPackage>> SearchPackageAsync(string packageId, string sourceName, bool exact = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -257,6 +305,18 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public List<WinGetPackage> GetInstalledPackages()
         {
             ProcessResult result = Execute(WinGetArguments.List().AcceptSourceAgreements());
@@ -282,6 +342,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public List<WinGetPackage> GetInstalledPackages(string packageId, bool exact = false)
         {
@@ -321,6 +393,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public List<WinGetPackage> GetInstalledPackages(string packageId, string sourceName, bool exact = false)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -350,6 +434,18 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(CancellationToken cancellationToken = default)
         {
@@ -386,6 +482,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, bool exact = false, CancellationToken cancellationToken = default)
         {
@@ -435,6 +543,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<List<WinGetPackage>> GetInstalledPackagesAsync(string packageId, string sourceName, bool exact = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -479,6 +599,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public WinGetPackage? GetExactInstalledPackage(string packageId)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -514,6 +646,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public WinGetPackage? GetExactInstalledPackage(string packageId, string sourceName)
         {
@@ -551,6 +695,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<WinGetPackage?> GetExactInstalledPackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
@@ -597,6 +753,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<WinGetPackage?> GetExactInstalledPackageAsync(string packageId, string sourceName, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -637,6 +805,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool InstallPackage(string packageId)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -662,6 +842,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool InstallPackage(string packageId, bool silent)
         {
@@ -695,6 +887,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool InstallPackage(WinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -723,6 +927,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool InstallPackage(WinGetPackage package, bool silent)
         {
@@ -756,6 +972,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> InstallPackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -788,6 +1016,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> InstallPackageAsync(string packageId, bool silent, CancellationToken cancellationToken = default)
         {
@@ -825,6 +1065,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> InstallPackageAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -858,6 +1110,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> InstallPackageAsync(WinGetPackage package, bool silent, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -888,6 +1152,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool UninstallPackage(string packageId)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -913,6 +1189,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool UninstallPackage(string packageId, bool silent)
         {
@@ -946,6 +1234,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool UninstallPackage(WinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -974,6 +1274,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool UninstallPackage(WinGetPackage package, bool silent)
         {
@@ -1007,6 +1319,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> UninstallPackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -1036,6 +1360,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> UninstallPackageAsync(string packageId, bool silent, CancellationToken cancellationToken = default)
         {
@@ -1074,6 +1410,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> UninstallPackageAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -1107,6 +1455,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> UninstallPackageAsync(WinGetPackage package, bool silent, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -1129,6 +1489,18 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public List<WinGetPackage> GetUpgradeablePackages()
         {
@@ -1153,6 +1525,18 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<List<WinGetPackage>> GetUpgradeablePackagesAsync(CancellationToken cancellationToken = default)
         {
@@ -1189,6 +1573,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool UpgradePackage(string packageId)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -1214,6 +1610,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool UpgradePackage(string packageId, bool silent)
         {
@@ -1247,6 +1655,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool UpgradePackage(WinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -1275,6 +1695,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool UpgradePackage(WinGetPackage package, bool silent)
         {
@@ -1308,6 +1740,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> UpgradePackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(packageId, "packageId");
@@ -1340,6 +1784,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> UpgradePackageAsync(string packageId, bool silent, CancellationToken cancellationToken = default)
         {
@@ -1377,6 +1833,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> UpgradePackageAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -1410,6 +1878,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> UpgradePackageAsync(WinGetPackage package, bool silent, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -1434,6 +1914,18 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool UpgradeAllPackages()
         {
             ProcessResult result = Execute(WinGetArguments.Upgrade().All().AcceptSourceAgreements().AcceptPackageAgreements());
@@ -1453,6 +1945,18 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool UpgradeAllPackages(bool silent)
         {
@@ -1484,6 +1988,18 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> UpgradeAllPackagesAsync(CancellationToken cancellationToken = default)
         {
             ProcessResult result =
@@ -1510,6 +2026,18 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> UpgradeAllPackagesAsync(bool silent, CancellationToken cancellationToken = default)
         {
@@ -1547,6 +2075,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool RepairPackage(string packageId)
         {
             if (!CheckWinGetVersion(_repairMinVersion))
@@ -1581,6 +2121,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool RepairPackage(string packageId, bool silent)
         {
@@ -1623,6 +2175,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool RepairPackage(WinGetPackage package)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -1655,6 +2219,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool RepairPackage(WinGetPackage package, bool silent)
         {
@@ -1691,6 +2267,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> RepairPackageAsync(string packageId, CancellationToken cancellationToken = default)
         {
@@ -1738,6 +2326,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> RepairPackageAsync(string packageId, bool silent, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_repairMinVersion))
@@ -1783,6 +2383,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> RepairPackageAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -1820,6 +2432,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> RepairPackageAsync(WinGetPackage package, bool silent, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -1850,6 +2474,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool ExportPackagesToFile(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
@@ -1878,6 +2514,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> ExportPackagesToFileAsync(string file, CancellationToken cancellationToken = default)
         {
@@ -1908,6 +2556,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool ImportPackagesFromFile(string file)
         {
@@ -1949,6 +2609,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> ImportPackagesFromFileAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
@@ -1989,6 +2661,18 @@ namespace WGetNET
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public string Hash(string file)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
@@ -2026,6 +2710,18 @@ namespace WGetNET
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public string Hash(FileInfo file)
         {
             ArgsHelper.ThrowIfObjectIsNull(file, "file");
@@ -2062,6 +2758,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<string> HashAsync(string file, CancellationToken cancellationToken = default)
         {
@@ -2104,6 +2812,18 @@ namespace WGetNET
         /// <exception cref="System.IO.FileNotFoundException">
         /// Unable to find the specified file.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<string> HashAsync(FileInfo file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(file, "file");
@@ -2137,6 +2857,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool Download(string packageId, string directory)
         {
@@ -2183,6 +2915,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool Download(string packageId, DirectoryInfo directory)
         {
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
@@ -2209,6 +2953,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool Download(WinGetPackage package, string directory)
         {
@@ -2244,6 +3000,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool Download(WinGetPackage package, DirectoryInfo directory)
         {
@@ -2281,6 +3049,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> DownloadAsync(string packageId, string directory, CancellationToken cancellationToken = default)
         {
@@ -2332,6 +3112,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> DownloadAsync(string packageId, DirectoryInfo directory, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(directory, "directory");
@@ -2362,6 +3154,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> DownloadAsync(WinGetPackage package, string directory, CancellationToken cancellationToken = default)
         {
@@ -2402,6 +3206,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> DownloadAsync(WinGetPackage package, DirectoryInfo directory, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -2428,6 +3244,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public List<WinGetPinnedPackage> GetPinnedPackages()
         {
@@ -2456,6 +3284,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<List<WinGetPinnedPackage>> GetPinnedPackagesAsync(CancellationToken cancellationToken = default)
         {
@@ -2496,6 +3336,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool PinAdd(string packageId, bool blocking = false)
         {
@@ -2541,6 +3393,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool PinAdd(string packageId, string version)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
@@ -2575,6 +3439,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool PinAdd(WinGetPackage package, bool blocking = false)
         {
@@ -2611,6 +3487,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool PinAdd(WinGetPackage package, string version)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -2646,6 +3534,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> PinAddAsync(string packageId, bool blocking = false, CancellationToken cancellationToken = default)
         {
@@ -2695,6 +3595,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> PinAddAsync(string packageId, string version, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
@@ -2733,6 +3645,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> PinAddAsync(WinGetPackage package, bool blocking = false, CancellationToken cancellationToken = default)
         {
@@ -2773,6 +3697,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> PinAddAsync(WinGetPackage package, string version, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -2804,6 +3740,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool PinAddInstalled(string packageId, bool blocking = false)
         {
@@ -2849,6 +3797,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool PinAddInstalled(string packageId, string version)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
@@ -2883,6 +3843,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool PinAddInstalled(WinGetPackage package, bool blocking = false)
         {
@@ -2919,6 +3891,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool PinAddInstalled(WinGetPackage package, string version)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -2954,6 +3938,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> PinAddInstalledAsync(string packageId, bool blocking = false, CancellationToken cancellationToken = default)
         {
@@ -3003,6 +3999,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> PinAddInstalledAsync(string packageId, string version, CancellationToken cancellationToken = default)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
@@ -3045,6 +4053,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> PinAddInstalledAsync(WinGetPackage package, bool blocking = false, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -3084,6 +4104,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> PinAddInstalledAsync(WinGetPackage package, string version, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -3117,6 +4149,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool PinRemove(string packageId)
         {
             if (!CheckWinGetVersion(_pinMinVersion))
@@ -3149,6 +4193,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool PinRemove(WinGetPackage package)
         {
@@ -3184,6 +4240,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> PinRemoveAsync(string packageId, CancellationToken cancellationToken = default)
         {
@@ -3222,6 +4290,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> PinRemoveAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -3252,6 +4332,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool PinRemoveInstalled(string packageId)
         {
@@ -3285,6 +4377,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool PinRemoveInstalled(WinGetPackage package)
         {
@@ -3320,6 +4424,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> PinRemoveInstalledAsync(string packageId, CancellationToken cancellationToken = default)
         {
@@ -3358,6 +4474,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> PinRemoveInstalledAsync(WinGetPackage package, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfWinGetObjectIsNullOrEmpty(package, "package");
@@ -3386,6 +4514,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool ResetPins()
         {
@@ -3417,6 +4557,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="WGetNET.Exceptions.WinGetFeatureNotSupportedException">
         /// This feature is not supported in the installed WinGet version.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> ResetPinsAsync(CancellationToken cancellationToken = default)
         {

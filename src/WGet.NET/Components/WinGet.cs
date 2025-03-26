@@ -232,6 +232,18 @@ namespace WGetNET
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public string ExportSettings()
         {
             ProcessResult result = Execute(WinGetArguments.SettingsExport());
@@ -251,6 +263,18 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<string> ExportSettingsAsync(CancellationToken cancellationToken = default)
         {
@@ -296,6 +320,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permission.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public void ExportSettingsToFile(string file)
         {
@@ -348,6 +384,18 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permission.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task ExportSettingsToFileAsync(string file, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(file, "file");
@@ -368,6 +416,18 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public List<WinGetAdminSetting> GetAdminSettings()
         {
@@ -411,6 +471,18 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<List<WinGetAdminSetting>> GetAdminSettingsAsync(CancellationToken cancellationToken = default)
         {
@@ -472,6 +544,18 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public bool EnableAdminSetting(string settingName)
         {
             ArgsHelper.ThrowIfStringIsNullOrWhiteSpace(settingName, "settingName");
@@ -501,6 +585,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool EnableAdminSetting(WinGetAdminSetting setting)
         {
@@ -533,6 +629,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> EnableAdminSettingAsync(string settingName, CancellationToken cancellationToken = default)
         {
@@ -568,6 +676,18 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> EnableAdminSettingAsync(WinGetAdminSetting setting, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
@@ -595,6 +715,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool DisableAdminSetting(string settingName)
         {
@@ -625,6 +757,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public bool DisableAdminSetting(WinGetAdminSetting setting)
         {
@@ -657,6 +801,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<bool> DisableAdminSettingAsync(string settingName, CancellationToken cancellationToken = default)
         {
@@ -692,6 +848,18 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current user is missing administrator privileges for this call.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<bool> DisableAdminSettingAsync(WinGetAdminSetting setting, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(setting, "setting");
@@ -709,6 +877,18 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public WinGetInfo GetInfo()
         {
@@ -743,6 +923,18 @@ namespace WGetNET
         /// </returns>
         /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
         /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<WinGetInfo> GetInfoAsync(CancellationToken cancellationToken = default)
         {
@@ -789,6 +981,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public WinGetResult ExecuteCustom(WinGetArguments args)
         {
             ArgsHelper.ThrowIfObjectIsNull(args, "args");
@@ -817,6 +1021,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public WinGetResult ExecuteCustom(string args)
         {
@@ -849,6 +1065,18 @@ namespace WGetNET
         /// <exception cref="System.ArgumentNullException">
         /// A provided argument is null.
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         public async Task<WinGetResult> ExecuteCustomAsync(WinGetArguments args, CancellationToken cancellationToken = default)
         {
             ArgsHelper.ThrowIfObjectIsNull(args, "args");
@@ -880,6 +1108,18 @@ namespace WGetNET
         /// </exception>
         /// <exception cref="System.ArgumentException">
         /// A provided argument is empty.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         public async Task<WinGetResult> ExecuteCustomAsync(string args, CancellationToken cancellationToken = default)
         {
@@ -940,6 +1180,18 @@ namespace WGetNET
         /// The current process does not have administrator privileges. 
         /// (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
         /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
         private protected ProcessResult Execute(WinGetArguments args, bool needsAdminRights = false)
         {
             if (_isRemoteClient)
@@ -992,6 +1244,18 @@ namespace WGetNET
         /// <returns>
         /// The <see cref="WGetNET.Models.ProcessResult"/> for the process.
         /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// </exception>
         private ProcessResult ExecuteRemote(WinGetArguments args)
         {
             return _processManager.ExecuteWingetProcess(args.Arguments);
@@ -1019,6 +1283,18 @@ namespace WGetNET
         /// <exception cref="System.Security.SecurityException">
         /// The current process does not have administrator privileges.
         /// (Only if <paramref name="needsAdminRights"/> is set to <see langword="true"/>)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated. 
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// (Not used for local execution, only for remote clients)
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// (Not used for local execution, only for remote clients)
         /// </exception>
         private protected async Task<ProcessResult> ExecuteAsync(WinGetArguments args, bool needsAdminRights = false, CancellationToken cancellationToken = default)
         {
@@ -1080,6 +1356,18 @@ namespace WGetNET
         /// A <see cref="System.Threading.Tasks.Task"/>, containing the result.
         /// The result is the <see cref="WGetNET.Models.ProcessResult"/> for the process.
         /// </returns>
+        /// <exception cref="WGetNET.Exceptions.WinGetNotInstalledException">
+        /// WinGet is not installed or not found on the system.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshConnectionException">
+        /// The SSH connection was terminated.
+        /// </exception>
+        /// <exception cref="Renci.SshNet.Common.SshAuthenticationException">
+        /// SSH authentication failed.
+        /// </exception>
+        /// <exception cref="System.Net.Sockets.SocketException">
+        /// Failed to connect to SSH server.
+        /// </exception>
         private async Task<ProcessResult> ExecuteRemoteAsync(WinGetArguments args, CancellationToken cancellationToken = default)
         {
             return await _processManager.ExecuteWingetProcessAsync(args.Arguments, cancellationToken);
@@ -1137,10 +1425,12 @@ namespace WGetNET
                 return string.Empty;
             }
 
-            ProcessResult result = Execute(WinGetArguments.WinGet().Version());
-
-            for (int i = 0; i < result.Output.Length; i++)
+            try
             {
+                ProcessResult result = Execute(WinGetArguments.WinGet().Version());
+
+                for (int i = 0; i < result.Output.Length; i++)
+                {
 #if NETCOREAPP3_1_OR_GREATER
                 if (result.Output[i].StartsWith('v') && result.Output[i].Length >= 2)
                 {
@@ -1148,12 +1438,17 @@ namespace WGetNET
                     return result.Output[i].Trim()[1..];
                 }
 #elif NETSTANDARD2_0
-                if (result.Output[i].StartsWith("v") && result.Output[i].Length >= 2)
-                {
-                    // Return output without the 'v' at the start.
-                    return result.Output[i].Trim().Substring(1);
-                }
+                    if (result.Output[i].StartsWith("v") && result.Output[i].Length >= 2)
+                    {
+                        // Return output without the 'v' at the start.
+                        return result.Output[i].Trim().Substring(1);
+                    }
 #endif
+                }
+            }
+            catch
+            {
+                return string.Empty;
             }
 
             return string.Empty;
@@ -1218,6 +1513,11 @@ namespace WGetNET
             _version = VersionParser.Parse(_versionString);
 
             _isPreview = VersionParser.CheckPreviewStatus(_versionString);
+
+            if (_isRemoteClient)
+            {
+                _remoteInit = true;
+            }
         }
         //---------------------------------------------------------------------------------------------
     }
